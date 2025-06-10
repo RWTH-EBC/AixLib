@@ -1,0 +1,593 @@
+
+
+
+AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/CorrectionSolarGain/CorG_VDI6007.mo
+1: Missing documentation. Affected line: import Modelica.Units.Conversions.to_deg;
+
+2: Missing documentation. Affected line: parameter Real A1=2.21*10^(-4);
+
+3: Missing documentation. Affected line: parameter Real A2=-2.75*10^(-5);
+
+4: Missing documentation. Affected line: parameter Real A3=-3.82*10^(-7);
+
+5: Missing documentation. Affected line: parameter Real A4=5.83*10^(-8);
+
+6: Missing documentation. Affected line: parameter Real A5=-1.15*10^(-9);
+
+7: Missing documentation. Affected line: parameter Real A6=4.74*10^(-12);
+
+8: Missing documentation, Name 'g_dir0' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g_dir0. Affected line: parameter Real g_dir0=0.7537; // reference value for 2 Panels window parameter Real Ta_diff = 0.84; // energetic degree of transmission for diffuse solar irradiation parameter Real Tai_diff=0.903; //Pure degree of transmission parameter Real Ta1_diff= Ta_diff*Tai_diff;
+
+9: Missing documentation, Name 'rho_T1_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_, T1_diff. Affected line: parameter Real rho_T1_diff=1-(Ta_diff);
+
+10: Missing documentation, Name 'rho_11_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_11_diff. Affected line: parameter Real rho_11_diff=rho_T1_diff/(2-(rho_T1_diff));
+
+11: Missing documentation, Name 'rho_1_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_1_diff. Affected line: parameter Real rho_1_diff= rho_11_diff+(((1-rho_11_diff)*Tai_diff)^2*rho_11_diff)/(1-(rho_11_diff*Tai_diff)^2); //degree of reflection for single panel clear glass parameter Real XN2_diff=1-rho_1_diff^2;
+
+12: Missing documentation, Name 'Ta2_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ta2_diff. Affected line: parameter Real Ta2_diff=(Ta1_diff^2)/XN2_diff;
+
+13: Missing documentation, Name 'a1_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a1_diff. Affected line: parameter Real a1_diff=1-Ta1_diff-rho_1_diff; // degree of absorption for single panel clear glass parameter Real Q21_diff=a1_diff*(1+(Ta1_diff*rho_1_diff/XN2_diff))*Uw/25;
+
+14: Missing documentation, Name 'Q22_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q22_diff. Affected line: parameter Real Q22_diff=a1_diff*(Ta1_diff/XN2_diff)*(1-(Uw/7.7));
+
+15: Missing documentation, Name 'Qsek2_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Qsek2_diff. Affected line: parameter Real Qsek2_diff=Q21_diff+Q22_diff;
+
+16: Missing documentation, Name 'CorG_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G_diff. Affected line: parameter Real CorG_diff=(Ta2_diff+Qsek2_diff)/g_dir0; // transmission coefficient correction factor for diffuse irradiations parameter Real CorG_gr=(Ta2_diff+Qsek2_diff)/g_dir0; // transmission coefficient correction factor for irradiations from ground //calculating the correction factor for direct solar radiation Real[n] theta; // solar incident angle Real[n] Ta_dir; // energetic degree of transmission for direct solar irradiation Real[n] Tai_dir; //Pure degree of transmission Real[n] Ta1_dir;
+
+
+AixLib/ThermalZones/HighOrder/Components/Examples/WindowsDoors/WindowSimple.mo
+1: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: ThermalZones.HighOrder.Components.WindowsDoors.WindowSimple windowSimple( windowarea=10, redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2002 WindowType, redeclare model CorrSolGain = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple) annotation (Placement(transformation(extent={{-24,-4},{12,28}})));
+
+2: Missing documentation, Name 'Toutside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Toutside. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Toutside(T = 273.15) annotation(Placement(transformation(extent = {{-62, 0}, {-42, 20}})));
+
+3: Missing documentation, Name 'Tinside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tinside. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside(T = 293.15) annotation(Placement(transformation(extent = {{58, 0}, {38, 20}})));
+
+4: Missing documentation, Name 'UValue' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Value. Affected line: Modelica.Blocks.Sources.RealExpression UValue(y=windowSimple.port_inside.Q_flow/(1 - windowSimple.WindowType.frameFraction)/windowSimple.windowarea/(windowSimple.port_inside.T - windowSimple.port_outside.T)) annotation(Placement(transformation(extent = {{-20, -46}, {0, -26}})));
+
+5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Sources.PrescribedSolarRad varRad( n = 1) annotation(Placement(transformation(extent = {{-66, 40}, {-46, 60}})));
+
+6: Missing documentation, Name 'SolarRadiation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Radiation. Affected line: Modelica.Blocks.Sources.Constant SolarRadiation(k = 100) annotation(Placement(transformation(extent = {{-100, 40}, {-80, 60}})));
+
+7: Missing documentation, Name 'Tinside1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tinside. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside1(T = 293.15) annotation(Placement(transformation(extent = {{58, 32}, {38, 52}})));
+
+
+AixLib/ThermalZones/HighOrder/Components/Shadow/ShadowEffect.mo
+1: Name 'lenShie' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Shie. Affected line: parameter Modelica.Units.SI.Length lenShie = 0.3 "Horizontal length of the sun shield";
+
+2: Name 'N' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N. Affected line: parameter Integer N = 100 "Number of discretisation angles to calculate the shadow factor";
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BoundaryConditions.WeatherData.Bus weaBus "Weather bus" annotation (Placement(transformation(extent={{-120,60},{-80,100}}), iconTransformation(extent={{-120,60},{-80,100}})));Utilities.Interfaces.SolarRad_in solRadIn annotation (Placement(transformation(extent={{-120,-10},{-100,10}})));Utilities.Interfaces.SolarRad_out solRadOut annotation (Placement(transformation(extent={{100,-10},{120,10}})));ShadowLength shaLen annotation (Placement(transformation(extent={{-40,-20},{0,20}})));
+
+4: Name 'gShaDir' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g. Affected line: Modelica.Units.SI.TransmissionCoefficient gShaDir(min=0,max=1) "Shadow coefficient for direct radiation: 0=full shadowed, 1=no shadow";
+
+5: Name 'gShaDif' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g. Affected line: protected Real gShaDif "Shadow coefficient for diffuse radiation: 0=full shadowed, 1=no shadow";
+
+6: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Real sum, beta, s, H, L, gShaDif_mean "Parameters for integration";
+
+
+AixLib/ThermalZones/HighOrder/Components/Sunblinds/Sunblind.mo
+1: Name 'TOutAirLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Modelica.Units.SI.Temperature TOutAirLimit "Temperature at which sunblind closes (see also Imax)";
+
+
+AixLib/ThermalZones/HighOrder/Components/Sunblinds/BaseClasses/PartialSunblind.mo
+1: Name 'gsunblind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: gsunblind. Affected line: parameter Modelica.Units.SI.TransmissionCoefficient gsunblind[n]( each min=0.0, each max=1.0) = {1,1,1,1} "Total energy transmittances if sunblind is closed";
+
+2: Name 'Imax' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Imax. Affected line: parameter Modelica.Units.SI.RadiantEnergyFluenceRate Imax "Intensity at which the sunblind closes (see also TOutAirLimit)";
+
+3: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Interfaces.SolarRad_in Rad_In[n] annotation (Placement(transformation(extent={{-100,0},{-80,20}})));
+
+4: Missing documentation, Name 'sunblindonoff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sunblindonoff. Affected line: Modelica.Blocks.Interfaces.RealOutput sunblindonoff[n] annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={0,-90}), iconTransformation( extent={{-10,-10},{10,10}}, rotation=-90, origin={0,-90})));
+
+
+AixLib/Utilities/Sources/PrescribedSolarRad.mo
+1: Missing documentation, Name 'solarRad_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar. Affected line: AixLib.Utilities.Interfaces.SolarRad_out solarRad_out[n] annotation (Placement( transformation(extent={{80,-10},{100,10}})));
+
+2: Name 'I_dir' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_dir. Affected line: Modelica.Blocks.Interfaces.RealInput I_dir[n] "radiation on surface (W/m2)" annotation (Placement(transformation(extent={{-120,30},{-80,70}}), iconTransformation(extent={{-100,40},{-80,60}})));
+
+3: Name 'I_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_diff. Affected line: Modelica.Blocks.Interfaces.RealInput I_diff[n] "radiation on surface (W/m2)" annotation (Placement(transformation(extent={{-120,-4},{-80,36}}), iconTransformation(extent={{-100,0},{-80,20}})));
+
+4: Name 'I_gr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_gr. Affected line: Modelica.Blocks.Interfaces.RealInput I_gr[n] "radiation on surface (W/m2)" annotation (Placement(transformation(extent={{-120,-38},{-80,2}}), iconTransformation(extent={{-100,-42},{-78,-20}})));
+
+5: Name 'AOI' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O. Affected line: Modelica.Blocks.Interfaces.RealInput AOI[n] "radiation on surface (W/m2)" annotation (Placement(transformation(extent={{-120,-76},{-80,-36}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
+
+
+AixLib/ThermalZones/HighOrder/Components/Shadow/RadiationTransfer.mo
+1: Missing documentation. Affected line: AixLib.Utilities.Sources.PrescribedSolarRad preSolRad annotation (Placement(transformation(extent={{40,-20},{80,20}})));
+
+2: Missing documentation. Affected line: Modelica.Blocks.Math.Add add annotation (Placement(transformation(extent={{0,40},{20,60}})));
+
+3: Missing documentation. Affected line: AixLib.BoundaryConditions.SolarIrradiation.DirectTiltedSurface hDirTil( til=1.5707963267949, azi=Modelica.Units.Conversions.from_deg(aziDeg)) annotation (Placement(transformation(extent={{-60,60},{-40,80}})));
+
+4: Missing documentation. Affected line: AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez hDifTil( til=1.5707963267949, rho=0, azi=Modelica.Units.Conversions.from_deg(aziDeg)) annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+
+5: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(transformation(extent={{-60,-20},{-40,0}})));
+
+6: Missing documentation. Affected line: AixLib.Utilities.Interfaces.SolarRad_out solRadOut annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+
+
+AixLib/BoundaryConditions/WeatherData/Old/WeatherTRY/RadiationOnTiltedSurface/RadOnTiltedSurf_Liu.mo
+1: Missing documentation. Affected line: import Modelica.Units.Conversions.from_deg;
+
+2: Name 'InBeamRadHor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Beam. Affected line: Real InBeamRadHor "beam irradiance on the horizontal surface";
+
+3: Name 'InDiffRadHor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff. Affected line: Real InDiffRadHor "diffuse irradiance on the horizontal surface";
+
+4: Missing documentation, Name 'cos_theta;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta. Affected line: Real cos_theta;
+
+5: Missing documentation, Name 'cos_theta_help;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta_help. Affected line: Real cos_theta_help;
+
+6: Missing documentation, Name 'cos_theta_z;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta_z. Affected line: Real cos_theta_z;
+
+7: Missing documentation, Name 'cos_theta_z_help;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta_z_help. Affected line: Real cos_theta_z_help;
+
+8: Missing documentation. Affected line: Real R;
+
+9: Missing documentation, Name 'R_help;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: R_help. Affected line: Real R_help;
+
+10: Missing documentation, Name 'term;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: term. Affected line: Real term;
+
+
+AixLib/BoundaryConditions/WeatherData/Old/WeatherTRY/RadiationOnTiltedSurface/RadOnTiltedSurf_Perez.mo
+1: Missing documentation. Affected line: import Modelica.Units.Conversions.to_deg;
+
+2: Missing documentation. Affected line: import Modelica.Units.Conversions.from_deg;
+
+3: Missing documentation. Affected line: import Modelica.Math.sin;
+
+4: Missing documentation. Affected line: import Modelica.Math.acos;
+
+5: Missing documentation. Affected line: import Modelica.Math.cos;
+
+6: Name 'b_rho' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: b_rho. Affected line: constant Real b_rho=0.013 "estimated on measured Albedo from NREL USA";
+
+7: Name 'c_rho' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: c_rho. Affected line: constant Real c_rho=0.2 "estimated on measured Albedo from NREL USA";
+
+8: Name 'rho_avg' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_avg. Affected line: constant Real rho_avg=1/0.27055 "factor for setting the average of rho to the value of GroundReflection";
+
+9: Missing documentation, Name 'SolarConstant' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Constant. Affected line: constant Real SolarConstant=1367;
+
+10: Name 'InDiffRadHor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff. Affected line: Real InDiffRadHor "diffuse irradiance on the horizontal surface";
+
+11: Name 'BeamRadTilt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Beam, Tilt. Affected line: Real BeamRadTilt "Beam irradiance on a tilted surface";
+
+12: Name 'DiffRadTilt' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt. Affected line: Real DiffRadTilt "Diffuse irradiance on a tilted surface";
+
+13: Name 'RadGroundRefl' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ground, Refl. Affected line: Real RadGroundRefl "Ground-reflected irradiance";
+
+14: Name 'DiffRadTiltCS' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt, S. Affected line: Real DiffRadTiltCS "circumsolar diffuse irradiance";
+
+15: Name 'DiffRadTiltHZ' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt, Z. Affected line: Real DiffRadTiltHZ "horizontal diffuse irradiance";
+
+16: Name 'DiffRadTiltDOM' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt, D, O, M. Affected line: Real DiffRadTiltDOM "sky dome diffuse irradiance";
+
+17: Missing documentation, Name 'cos_theta_help;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta_help. Affected line: Real cos_theta_help;
+
+18: Missing documentation, Name 'cos_theta;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta. Affected line: Real cos_theta;
+
+19: Missing documentation, Name 'cos_theta_z_help;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta_z_help. Affected line: Real cos_theta_z_help;
+
+20: Missing documentation, Name 'cos_theta_z;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cos_theta_z. Affected line: Real cos_theta_z;
+
+21: Missing documentation, Name 'theta_z_pos;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: theta_z_pos. Affected line: Real theta_z_pos;
+
+22: Missing documentation, Name 'theta_z;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: theta_z. Affected line: Real theta_z;
+
+23: Missing documentation, Name 'Airmass;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Airmass. Affected line: Real Airmass;
+
+24: Missing documentation, Name 'ExtraterRadHor;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Extrater. Affected line: Real ExtraterRadHor;
+
+25: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: Real a "used for determining R";
+
+26: Name 'b' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: b. Affected line: Real b "used for determining R";
+
+27: Name 'F1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: F. Affected line: Real F1 "brightness coefficient 1";
+
+28: Name 'F2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: F. Affected line: Real F2 "brightness coefficient 2";
+
+29: Name 'epsilon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: epsilon. Affected line: Real epsilon "sky-clearness parameter";
+
+30: Name 'delta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta. Affected line: Real delta "brightness parameter";
+
+31: Missing documentation, Name 'f12;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: f12. Affected line: Real f12;
+
+32: Missing documentation, Name 'f13;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: f13. Affected line: Real f13;
+
+33: Missing documentation, Name 'f21;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: f21. Affected line: Real f21;
+
+34: Missing documentation, Name 'f22;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: f22. Affected line: Real f22;
+
+35: Missing documentation, Name 'f23;' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: f23. Affected line: Real f23;
+
+36: Name 'theta_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: theta. Affected line: Modelica.Blocks.Interfaces.RealOutput theta_out "[degree] angle of incidence" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={30,-88}), iconTransformation( extent={{-6,-6},{6,6}}, rotation=270, origin={32,-84})));
+
+37: Name 'theta_z_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: theta_z. Affected line: Modelica.Blocks.Interfaces.RealOutput theta_z_out "degree value; solar zenith angle" annotation (Placement( transformation(extent={{-10,-10},{10,10}}, rotation=270, origin={6,-88}), iconTransformation( extent={{-6,-6},{6,6}}, rotation=270, origin={10,-84})));
+
+38: Name 'BeamRadTiltOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Beam, Tilt. Affected line: Modelica.Blocks.Interfaces.RealOutput BeamRadTiltOut "[W/m2] Beam irradiance on a tilted surface" annotation (Placement(transformation(extent={{72,-22},{92,-2}}), iconTransformation(extent={{70,-10},{82,2}})));
+
+39: Name 'DiffRadTiltCSOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt, S. Affected line: Modelica.Blocks.Interfaces.RealOutput DiffRadTiltCSOut "[W/m2] circumsolar diffuse irradiance" annotation (Placement(transformation(extent={{72,-62},{92,-42}}),iconTransformation(extent={{70,-52},{82,-40}})));
+
+40: Name 'DiffRadTiltHZOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt, Z. Affected line: Modelica.Blocks.Interfaces.RealOutput DiffRadTiltHZOut "[W/m2] Diffuse irradiance on a tilted surface" annotation (Placement(transformation(extent={{72,-80},{92,-60}}),iconTransformation(extent={{70,-72},{82,-60}})));
+
+41: Name 'DiffRadTiltDOMOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff, Tilt, D, O, M. Affected line: Modelica.Blocks.Interfaces.RealOutput DiffRadTiltDOMOut "[W/m2] Diffuse irradiance on a tilted surface" annotation (Placement(transformation(extent={{72,-42},{92,-22}}),iconTransformation(extent={{70,-30},{82,-18}})));
+
+42: Name 'brightness_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: brightness. Affected line: Modelica.Blocks.Interfaces.RealOutput brightness_out "dimensionless factor, which says how cloudy the sky is (see: delta)" annotation (Placement( transformation(extent={{-10,-10},{10,10}}, rotation=270, origin={52,-88}), iconTransformation( extent={{-6,-6},{6,6}}, rotation=270, origin={54,-84})));
+
+
+AixLib/Utilities/HeatTransfer/SolarRadToHeat.mo
+1: Missing documentation, Name 'heatPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort annotation(Placement(transformation(extent={{94,-10},{114,10}}), iconTransformation(extent={{80,-30},{100,-10}})));
+
+2: Missing documentation, Name 'solarRad_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar. Affected line: AixLib.Utilities.Interfaces.SolarRad_in solarRad_in annotation(Placement(transformation(extent={{-132,-20},{-90,20}}), iconTransformation(extent={{-122,-40},{-80,0}})));
+
+
+AixLib/ThermalZones/HighOrder/Components/Examples/Walls/OutsideWall.mo
+1: Missing documentation, Name 'outerWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: outer, Wall. Affected line: AixLib.ThermalZones.HighOrder.Components.Walls.Wall outerWall( energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, use_shortWaveRadOut=true, redeclare model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140 ( redeclare AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default winPaneRec), redeclare AixLib.DataBase.Walls.WSchV1984.OW.OW_WSchV1984_S wallPar, wall_length=5, wall_height=2, withWindow=true, redeclare DataBase.WindowsDoors.Simple.WindowSimple_ASHRAE140 WindowType, redeclare model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple, withSunblind=true, outside=true, calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals, Blinding=0.2, LimitSolIrr=100, TOutAirLimit=282.15, T0=289.15) annotation (Placement(transformation( extent={{-6,57},{6,-57}}, rotation=180, origin={-24,25})));
+
+2: Missing documentation, Name 'Tinside1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tinside. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside1(T = 293.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-90, 44})));
+
+3: Missing documentation, Name 'Tinside2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tinside. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Tinside2(T = 293.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, origin = {-90, 10})));
+
+4: Missing documentation, Name 'UValue' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Value. Affected line: Modelica.Blocks.Sources.RealExpression UValue(y = -Tinside2.port.Q_flow / (Tinside2.T - Toutside.T) / (outerWall.wall_length * outerWall.wall_height)) annotation(Placement(transformation(extent = {{-32, -78}, {24, -58}})));
+
+5: Missing documentation, Name 'Toutside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Toutside. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature Toutside(T = 283.15) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {30, 22})));
+
+6: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Sources.PrescribedSolarRad varRad annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {50, 80})));Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation( extent={{-10,-8},{10,8}}, rotation=180, origin={-58,26})));
+
+7: Missing documentation, Name 'WindSpeed' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wind, Speed. Affected line: Modelica.Blocks.Sources.Constant WindSpeed(k=4) annotation(Placement(transformation(extent = {{30, 48}, {12, 64}})));
+
+8: Missing documentation, Name 'Solarradiation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solarradiation. Affected line: Modelica.Blocks.Sources.Constant Solarradiation(k=0) annotation (Placement(transformation(extent={{96,70},{78,88}})));
+
+
+AixLib/ThermalZones/HighOrder/Examples/OFDHeatLoad.mo
+1: Missing documentation, Name 'nRooms' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Rooms. Affected line: parameter Integer nRooms = 11;
+
+2: Missing documentation, Name 'nHeatedRooms' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heated, Rooms. Affected line: parameter Integer nHeatedRooms = 10;
+
+3: Name 'MediumAir' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
+4: Name 'constRooms' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Rooms. Affected line: Modelica.Blocks.Sources.Constant constRooms[nHeatedRooms](k={293.15,293.15,288.15,293.15,293.15,293.15,293.15,288.15,297.15,293.15}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,-62},{-50,-42}})));
+
+5: Name 'constAirEx' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ex. Affected line: Modelica.Blocks.Sources.Constant constAirEx[nRooms](k={0.5,0.5,0,0.5,0.5,0.5,0.5,0,0.5,0.5,0}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,6},{-50,26}})));
+
+6: Missing documentation, Name 'constWind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wind. Affected line: Modelica.Blocks.Sources.Constant constWind(k=0) annotation (Placement(transformation(extent={{-70,36},{-50,56}})));
+
+7: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant constAmb(k=261.15) annotation (Placement(transformation(extent={{-70,70},{-50,90}})));
+
+8: Missing documentation, Name 'groundTemp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ground, Temp. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature groundTemp[5](T=fill( 273.15 + 8.5, 5)) annotation (Placement(transformation(extent={{-54,-96},{-42,-84}})));
+
+9: Missing documentation, Name 'prescribedTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Temperature. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature[nHeatedRooms] annotation (Placement(transformation(extent={{-36,-58},{-24,-46}})));
+
+10: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb[nRooms] annotation (Placement(transformation( extent={{8,-6},{-8,6}}, rotation=0, origin={-36,-20})));
+
+11: Missing documentation, Name 'prescribedAmbTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Temperature. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedAmbTemperature annotation (Placement(transformation(extent={{-40,58},{-28,70}})));
+
+12: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Sources.PrescribedSolarRad varRad(n=6) annotation (Placement(transformation(extent={{70,60},{50,80}})));
+
+13: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant constSun[6](k=fill(0, 6)) annotation (Placement(transformation(extent={{100,70},{80,90}})));
+
+14: Missing documentation, Name 'sumHeatLoads' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Loads. Affected line: Modelica.Blocks.Sources.RealExpression sumHeatLoads(y=-sum(prescribedTemperature[:].port.Q_flow)) annotation (Placement(transformation(extent={{42,-72},{62,-52}})));
+
+15: Missing documentation, Name 'heatLoads' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Loads. Affected line: Modelica.Blocks.Sources.RealExpression heatLoads[nHeatedRooms](y=-(prescribedTemperature[:].port.Q_flow)) annotation (Placement(transformation(extent={{42,-92},{62,-72}})));
+
+16: Missing documentation, Name 'totalHeatLoad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: total, Heat, Load. Affected line: Modelica.Blocks.Interfaces.RealOutput totalHeatLoad annotation (Placement(transformation(extent={{88,-72},{108,-52}})));
+
+17: Missing documentation, Name 'roomHeatLoads' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Loads. Affected line: Modelica.Blocks.Interfaces.RealOutput roomHeatLoads[nHeatedRooms] annotation (Placement(transformation(extent={{88,-92},{108,-72}})));
+
+18: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope wholeHouseBuildingEnvelope( redeclare DataBase.Walls.Collections.OFD.EnEV2009Heavy wallTypes, energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, T0_air=293.15, TWalls_start=292.15, redeclare model WindowModel = Components.WindowsDoors.WindowSimple, redeclare DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009 Type_Win, redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple, use_infiltEN12831=true, n50=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 or TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2002 then 3 else if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.WSchV_1995 then 4 else 6, redeclare package Medium = MediumAir, UValOutDoors=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 then 1.8 else 2.9, upperFloor_Building(Corridor(T0_air=288.15), Bath(T0_air=297.15)), groundFloor_Building(Corridor(T0_air=288.15))) annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
+
+19: Missing documentation, Name 'prescribedHeatFlowRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlowRad[nRooms] annotation (Placement(transformation(extent={{-60,-24},{-48,-12}})));
+
+20: Name 'adiabaticRadRooms' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: adiabatic, Rooms. Affected line: Modelica.Blocks.Sources.Constant adiabaticRadRooms[nRooms](k=fill(0, nRooms)) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-90,-26},{-74,-10}})));
+
+21: Missing documentation, Name 'fixedHeatFlowAttic' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fixed, Heat, Attic. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedHeatFlow fixedHeatFlowAttic[1](Q_flow={0}) annotation (Placement(transformation(extent={{-62,-34},{-52,-24}})));
+
+
+AixLib/Utilities/Interfaces/SolarRad_out.mo
+1: Name 'I_dir' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_dir. Affected line: output Modelica.Units.SI.RadiantEnergyFluenceRate I_dir "direct radiation normal to the surface";
+
+2: Name 'I_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_diff. Affected line: output Modelica.Units.SI.RadiantEnergyFluenceRate I_diff "diffuse radiation normal to the surface";
+
+3: Name 'I_gr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_gr. Affected line: output Modelica.Units.SI.RadiantEnergyFluenceRate I_gr "radiation due to the ground reflection normal to the surface";
+
+4: Name 'AOI' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O. Affected line: output Real AOI(unit = "rad") "Angle of incidence of surface";
+
+
+AixLib/ThermalZones/HighOrder/Examples/OFD_1Jan.mo
+1: Name 'MediumAir' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
+2: Missing documentation, Name 'weatherDataDay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: weather, Data. Affected line: parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
+
+3: Missing documentation, Name 'VentilationProfile' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ventilation, Profile. Affected line: parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation2perDayMean05perH();
+
+4: Missing documentation, Name 'TSetProfile' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Profile. Affected line: parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition TSetProfile = AixLib.DataBase.Profiles.SetTemperaturesVentilation2perDay();
+
+5: Missing documentation, Name 'NaturalVentilation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Natural, Ventilation. Affected line: Modelica.Blocks.Sources.CombiTimeTable NaturalVentilation( columns={2,3,4,5,7}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = VentilationProfile.Profile) annotation(Placement(transformation(extent={{-53,59},{-73,79}})));
+
+6: Missing documentation. Affected line: Modelica.Blocks.Sources.CombiTimeTable TSet(columns = {2, 3, 4, 5, 6, 7}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = TSetProfile.Profile) annotation(Placement(transformation(extent={{-94,-2},{-114,18}})));
+
+7: Documentation too short, Name 'TAirRooms' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Rooms. Affected line: Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](each unit = "degC") annotation(Placement(transformation(extent={{122,-57},{142,-37}}), iconTransformation(extent={{101,-7},{117,9}})));
+
+8: Documentation too short, Name 'Toutside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Toutside. Affected line: Modelica.Blocks.Interfaces.RealOutput Toutside(each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={106,-77}), iconTransformation(extent={{100,83},{116,99}})));
+
+9: Documentation too short, Name 'SolarRadiation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Radiation. Affected line: Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](each unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}), iconTransformation(extent={{100,63},{116,79}})));
+
+10: Missing documentation, Name 'VentilationSchedule' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ventilation, Schedule. Affected line: Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={64,-77}), iconTransformation(extent={{101,-79},{117,-63}})));
+
+11: Documentation too short, Name 'TsetValvesSchedule' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tset, Valves, Schedule. Affected line: Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={85,-77}), iconTransformation(extent={{101,-99},{117,-83}})));
+
+12: Name 'Weather' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Weather. Affected line: AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather( Latitude=49.5, Longitude=8.5, GroundReflection=0.2, tableName="wetter", extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(), Wind_dir=false, Wind_speed=true, Air_temp=true, fileName= "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt", WeatherData(tableOnFile=false, table=weatherDataDay.weatherData)) annotation (Placement(transformation(extent={{125,55},{77,87}})));
+
+13: Missing documentation, Name 'OFD' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O, F, D. Affected line: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.BuildingEnvelope.WholeHouseBuildingEnvelope OFD( redeclare DataBase.Walls.Collections.OFD.WSchV1995Heavy wallTypes, energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial, energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, T0_air=294.15, TWalls_start=292.15, redeclare model WindowModel = Components.WindowsDoors.WindowSimple, redeclare DataBase.WindowsDoors.Simple.WindowSimple_WSchV1995 Type_Win, redeclare model CorrSolarGainWin = Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple, use_infiltEN12831=true, n50=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 or TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2002 then 3 else if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.WSchV_1995 then 4 else 6, withDynamicVentilation=true, redeclare package Medium = MediumAir, UValOutDoors=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
+
+14: Missing documentation, Name 'tempOutside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Outside. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
+
+15: Missing documentation, Name 'groundFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ground, Floor. Affected line: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor groundFloor annotation (Placement(transformation(extent={{-116,-94},{-76,-63}})));
+
+16: Missing documentation, Name 'upperFloor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: upper, Floor. Affected line: AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.UpperFloor upperFloor annotation (Placement(transformation(extent={{-115,-58},{-75,-27}})));
+
+17: Missing documentation, Name 'heatStarToCombHeaters' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Star, Comb, Heaters. Affected line: AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToCombHeaters[9] annotation (Placement(transformation(extent={{-44,-23},{-58,-12}})));
+
+18: Missing documentation, Name 'tempGround' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Ground. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature tempGround[5](T=fill(273.15 + 9, 5)) annotation (Placement(transformation(extent={{-21.5,-84},{-9,-71}})));
+
+
+AixLib/Obsolete/Year2021/Electrical/PVSystem.mo
+1: Name 'TOutside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Outside. Affected line: Modelica.Blocks.Interfaces.RealInput TOutside(final quantity= "ThermodynamicTemperature", final unit="K") "Ambient temperature" annotation (Placement(transformation(extent={{-140,56},{-100,96}}), iconTransformation(extent={{-140,56},{-100,96}})));
+
+2: Name 'IcTotalRad' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ic, Total. Affected line: AixLib.Utilities.Interfaces.SolarRad_in IcTotalRad "Solar radiation in W/m2" annotation (Placement(transformation(extent={{-124,-12},{-100,14}}), iconTransformation(extent={{-136,-24},{-100,14}})));
+
+3: Missing documentation, Name 'realExpression' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Expression. Affected line: Modelica.Blocks.Sources.RealExpression realExpression(y=IcTotalRad.I) annotation (Placement(transformation(extent={{-96,-10},{-76,10}})));
+
+4: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: equation connect(TOutside, PVModuleDC.T_amb) annotation (Line(points={{-120,76},{-62, 76},{-62,66},{-15,66}}, color={0,0,127}));connect(realExpression.y, PVModuleDC.SolarIrradiationPerSquareMeter) annotation (Line(points={{-75,0},{-48,0},{-48,54.4},{-14.6,54.4}}, color={0, 0,127}));annotation ( Icon( coordinateSystem(extent={{-100,-100},{100,100}}), graphics={ Rectangle( lineColor={0,0,0}, fillColor={255,255,255}, fillPattern=FillPattern.Solid, extent={{-100,100},{100,-100}}), Text( lineColor={0,0,0}, extent={{-96,95},{97,-97}}, textString="PV")}), Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100}, {100,100}})), Documentation(info="<html><h4> <span style=\"color: #008000\">Overview</span> </h4> <p> PV model is based on manufactory data and performance factor including the NOC </p> <p> <br/> <b><span style=\"color: #008000;\">Assumptions</span></b> </p> <p> PV model is based on manufactory data and performance factor. </p> <h4> <span style=\"color: #008000\">References</span> </h4> <p> PV system data (DataBase Records) can be found: </p> <ul> <li> <a href=\"http://www.eks-solar.de/pdfs/aleo_s24.pdf\">eks-solar</a> </li> <li> <a href= \"https://www.solarelectricsupply.com/canadian-solar-cs6p-250-solar-panels-117\"> solar-electric</a> </li> <li> <a href= \"http://www.fl200.com/gourdinne/energie/Datenblatt_Kid_SME_1_Serie_DE.pdf\"> schueco</a> </li> <li> <a href= \"https://solarco.en.ec21.com/Solar_Module_SE6M60-Series--7320291_7320754.html\"> solarco</a> </li> </ul> <p> <br/> Source of literature for the calculation of the pv cell efficiency: </p> <p> <q>Thermal modelling to analyze the effect of cell temperature on PV modules energy efficiency</q> by Romary, Florian et al. </p> <h4> <span style=\"color: #008000\">Example Results</span> </h4> <p> <a href= \"AixLib.Fluid.Solar.Electric.Examples.ExamplePV\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV</a> </p> </html>", revisions=" <html><ul> <li> <i>October 20, 2017</i> ,by Larissa Kuehn:<br/> Implementation of PartialPVSystem. </li> <li> <i>October 11, 2016</i> ,by Tobias Blacha:<br/> Moved into AixLib </li> <li> <i>Februar 21, 2013</i> ,by Corinna Leonhardt:<br/> Implemented </li> </ul> </html> "));end PVSystem;
+
+5: Missing documentation, Name 'PVSystemTMY3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: System, M, Y3. Affected line: model PVSystemTMY3 extends AixLib.Obsolete.Year2021.Electrical.PVSystem.BaseClasses.PartialPVSystem;
+
+6: Name 'Latitude' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Latitude. Affected line: parameter Modelica.Units.SI.Angle Latitude=0.65798912800186 "Location's Latitude" annotation (Dialog(group="Location"));
+
+7: Missing documentation. Affected line: AixLib.BoundaryConditions.WeatherData.Bus weaBus annotation (Placement( transformation(extent={{-120,-20},{-80,20}}),iconTransformation(extent={{-110, -10},{-90,10}})));
+
+8: Name 'G' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: Modelica.Blocks.Math.Add G "Total irradiation on tilted surface" annotation (Placement(transformation(extent={{-28,12},{-8,32}})));
+
+9: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: equation connect(weaBus, HDifTil.weaBus) annotation (Line( points={{-100,0},{-70,0},{-70,28},{-62,28}}, color={255,204,51}, thickness=0.5), Text( string="%first", index=-1, extent={{-6,3},{-6,3}}));connect(weaBus, HDirTil.weaBus) annotation (Line( points={{-100,0},{-70,0},{-62,0}}, color={255,204,51}, thickness=0.5), Text( string="%first", index=-1, extent={{-6,3},{-6,3}}));connect(HDifTil.H, G.u1) annotation (Line(points={{-41,28},{-34,28},{-30,28}}, color={0,0,127}));connect(HDirTil.H, G.u2) annotation (Line(points={{-41,0},{-36,0},{-36,16}, {-30,16}}, color={0,0,127}));connect(PVModuleDC.T_amb, weaBus.TDryBul) annotation (Line(points={{-15,66},{ -88,66},{-88,4},{-88,0},{-100,0}}, color={0,0,127}));connect(G.y, PVModuleDC.SolarIrradiationPerSquareMeter) annotation (Line( points={{-7,22},{-4,22},{-4,48},{-24,48},{-24,54.4},{-14.6,54.4}}, color={0,0,127}));annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={ Rectangle( lineColor={0,0,0}, fillColor={255,255,255}, fillPattern=FillPattern.Solid, extent={{-100,100},{100,-100}}), Text( lineColor={0,0,0}, extent={{-96,95},{97,-97}}, textString="PV")}), Diagram( coordinateSystem(preserveAspectRatio=false)), Documentation(info="<html><h4> <span style=\"color: #008000\">Overview</span> </h4> <p> PV model is based on manufactory data and performance factor including the NOC </p> <p> <br/> <b><span style=\"color: #008000;\">Assumptions</span></b> </p> <p> PV model is based on manufactory data and performance factor. </p> <h4> <span style=\"color: #008000\">References</span> </h4> <p> PV system data (DataBase Records) can be found: </p> <ul> <li> <a href=\"http://www.eks-solar.de/pdfs/aleo_s24.pdf\">eks-solar</a> </li> <li> <a href= \"https://www.solarelectricsupply.com/canadian-solar-cs6p-250-solar-panels-117\"> solar-electric</a> </li> <li> <a href= \"http://www.fl200.com/gourdinne/energie/Datenblatt_Kid_SME_1_Serie_DE.pdf\"> schueco</a> </li> <li> <a href= \"https://solarco.en.ec21.com/Solar_Module_SE6M60-Series--7320291_7320754.html\"> solarco</a> </li> </ul> <p> <br/> Source of literature for the calculation of the pv cell efficiency: </p> <p> <q>Thermal modelling to analyze the effect of cell temperature on PV modules energy efficiency</q> by Romary, Florian et al. </p> <h4> <span style=\"color: #008000\">Example Results</span> </h4> <p> <a href= \"AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3\">AixLib.Fluid.Solar.Electric.Examples.ExamplePV_TMY3</a> </p> <ul> <li> <i>October 20, 2017</i> ,by Larissa Kuehn:<br/> First implementation </li> </ul> </html>"));end PVSystemTMY3;
+
+10: Missing documentation, Name 'Examples' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Examples. Affected line: package Examples extends Modelica.Icons.ExamplesPackage;
+
+11: Missing documentation, Name 'ExamplePV' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Example. Affected line: model ExamplePV extends Modelica.Icons.Example;
+
+12: Name 'Power' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power. Affected line: Modelica.Blocks.Interfaces.RealOutput Power( final quantity="Power", final unit="W") "Output Power of the PV system including the inverter" annotation (Placement(transformation(extent={{72,30},{92,50}})));
+
+13: Name 'Weather' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Weather. Affected line: AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather( Latitude=49.5, Longitude=8.5, GroundReflection=0.2, tableName="wetter", extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, Wind_dir=false, Air_temp=true, Wind_speed=false, SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_RoofN_Roof_S(), fileName=Modelica.Utilities.Files.loadResource( "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt")) "Weather data input for simulation of PV power " annotation (Placement(transformation(extent={{-93,49},{-68,66}})));
+
+14: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: PVSystem PVsystem( MaxOutputPower=4000, NumberOfPanels=5, data=AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181()) "PV system model including the inverter" annotation (Placement(transformation(extent={{-14,30},{6,50}})));equation connect(Weather.SolarRadiation_OrientedSurfaces[6], PVsystem.IcTotalRad) annotation (Line( points={{-87,48.15},{-87,39.5},{-15.8,39.5}}, color={255,128,0}, smooth=Smooth.None));connect(Weather.AirTemp, PVsystem.TOutside) annotation (Line( points={{-67.1667,60.05},{-56,60.05},{-56,47.6},{-16,47.6}}, color={0,0,127}, smooth=Smooth.None));connect(PVsystem.PVPowerW, Power) annotation (Line(points={{7,40},{82,40}}, color={0,0,127}));annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{ -100,-100},{100,100}})), experiment( StopTime=3.1536e+007, Interval=3600, __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput, Documentation(info="<html><h4> <span style=\"color:#008000\">Overview</span> </h4> <p> Simulation to test the <a href= \"AixLib.Fluid.Solar.Electric.PVSystem\">PVsystem</a> model. </p> </html>", revisions="<html><ul> <ul> <li> <i>October 11, 2016</i> by Tobias Blacha:<br/> Moved into AixLib </li> <li> <i>April 16, 2014 &#160;</i> by Ana Constantin:<br/> Formated documentation. </li> </ul> </ul> </html>"));end ExamplePV;
+
+15: Missing documentation, Name 'ExamplePVTMY3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Example, M, Y3. Affected line: model ExamplePVTMY3 extends Modelica.Icons.Example;
+
+16: Name 'Power' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power. Affected line: Modelica.Blocks.Interfaces.RealOutput Power( final quantity="Power", final unit="W") "Output Power of the PV system including the inverter" annotation (Placement(transformation(extent={{56,30},{76,50}})));
+
+17: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: PVSystemTMY3 PVsystem( MaxOutputPower=4000, NumberOfPanels=5, data=AixLib.DataBase.SolarElectric.SymphonyEnergySE6M181()) "PV system model including the inverter" annotation (Placement(transformation(extent={{-10,30},{10,50}})));
+
+18: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: equation connect(weaDat.weaBus, PVsystem.weaBus) annotation (Line( points={{-76,40},{-10,40}}, color={255,204,51}, thickness=0.5));connect(PVsystem.PVPowerW, Power) annotation (Line(points={{11,40},{11,40},{66,40}}, color={0,0,127}));annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{ -100,-100},{100,100}})), experiment( StopTime=3.1536e+007, Interval=3600, __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput, Documentation(info="<html><h4> <span style=\"color:#008000\">Overview</span> </h4> <p> Simulation to test the <a href= \"AixLib.Fluid.Solar.Electric.PVSystemTMY3\">PVsystemTMY3</a> model. </p> </html>", revisions="<html><ul> <ul> <li> <i>October 20, 2017</i> ,by Larissa Kuehn:<br/> First implementation </li> </ul> </ul> </html>"));end ExamplePVTMY3;end Examples;
+
+19: Missing documentation, Name 'BaseClasses' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Base, Classes. Affected line: package BaseClasses extends Modelica.Icons.BasesPackage;
+
+20: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: partial model PartialPVSystem "Partial model for PV System" extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
+21: Name 'NumberOfPanels' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Number, Of, Panels. Affected line: parameter Integer NumberOfPanels = 1 "Number of panels";
+
+22: Name 'data' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: data. Affected line: parameter AixLib.Obsolete.Year2021.DataBase.SolarElectric.PVBaseRecord data "PV data set" annotation (choicesAllMatching=true);
+
+23: Name 'MaxOutputPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Output, Power. Affected line: parameter Modelica.Units.SI.Power MaxOutputPower "Maximum output power for inverter";
+
+24: Name 'PVPowerW' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power, W. Affected line: Modelica.Blocks.Interfaces.RealOutput PVPowerW( final quantity="Power", final unit="W") "Output Power of the PV system including the inverter" annotation (Placement(transformation(extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,10}})));
+
+25: Name 'PVModuleDC' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Module, D. Affected line: AixLib.Obsolete.Year2021.Electrical.PVSystem.BaseClasses.PVModuleDC PVModuleDC( final Eta0=data.Eta0, final NoctTemp=data.NoctTemp, final NoctTempCell=data.NoctTempCell, final NoctRadiation=data.NoctRadiation, final TempCoeff=data.TempCoeff, final Area=NumberOfPanels*data.Area) "PV module with temperature dependent efficiency" annotation (Placement(transformation(extent={{-13,50},{7,70}})));
+
+26: Name 'PVInverterRMS' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Inverter, M, S. Affected line: AixLib.Obsolete.Year2021.Electrical.PVSystem.BaseClasses.PVInverterRMS PVInverterRMS(final uMax2=MaxOutputPower) "Inverter model including system management" annotation (Placement(transformation(extent={{40,0},{60,20}})));
+
+27: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: equation connect(PVModuleDC.DCOutputPower, PVInverterRMS.DCPowerInput) annotation ( Line(points={{8,60},{28,60},{28,10.2},{39.8,10.2}}, color={0,0,127}));connect(PVInverterRMS.PVPowerRmsW, PVPowerW) annotation (Line(points={{60,10}, {82,10},{82,0},{110,0}}, color={0,0,127}));annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={ Rectangle( lineColor={0,0,0}, fillColor={255,255,255}, fillPattern=FillPattern.Solid, extent={{-100,100},{100,-100}}), Text( lineColor={0,0,0}, extent={{-96,95},{97,-97}}, textString="PV")}), Diagram( coordinateSystem(preserveAspectRatio=false)), Documentation(revisions="<html><ul> <li> <i>October 20, 2017</i> ,by Larissa Kuehn<br/> First implementation </li> </ul> </html>"));end PartialPVSystem;
+
+28: Name 'PVInverterRMS' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Inverter, M, S. Affected line: model PVInverterRMS "Inverter model including system management" extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
+29: Name 'PVPowerRmsW' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power, W. Affected line: Modelica.Blocks.Interfaces.RealOutput PVPowerRmsW( final quantity="Power", final unit="W") "Output power of the PV system including the inverter" annotation(Placement( transformation(extent={{85,70},{105,90}}), iconTransformation( origin={100,0}, extent={{-10,-10},{10,10}})));
+
+30: Name 'DCPowerInput' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: D, Power, Input. Affected line: Modelica.Blocks.Interfaces.RealInput DCPowerInput( final quantity="Power", final unit="W") "DC output power of PV panels as input for the inverter" annotation(Placement( transformation(extent={{-80,55},{-40,95}}), iconTransformation(extent={{-122,-18},{-82,22}})));
+
+31: Name 'MaxOutputPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Output, Power. Affected line: Modelica.Blocks.Nonlinear.Limiter MaxOutputPower( uMax( final quantity="Power", final displayUnit="Nm/s")=uMax2, uMin=0) "Limitier for maximum output power" annotation(Placement(transformation(extent={{40,70},{60,90}})));
+
+32: Name 'EfficiencyConverterSunnyBoy3800' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Efficiency, Converter, Sunny, Boy3800. Affected line: Modelica.Blocks.Tables.CombiTable1Ds EfficiencyConverterSunnyBoy3800( tableOnFile=false, table=[0,0.798700;100,0.848907;200,0.899131;250,0.911689;300,0.921732;350,0.929669;400,0.935906;450,0.940718;500,0.943985;550,0.946260;600,0.947839;700,0.950638;800,0.952875;900,0.954431;1000,0.955214;1250,0.956231;1500,0.956449;2000,0.955198;2500,0.952175;3000,0.948659;3500,0.944961;3800,0.942621]) "Efficiency of the inverter for different operating points" annotation(Placement(transformation(extent={{-25,55},{-5,75}})));
+
+33: Name 'Product2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Product. Affected line: Modelica.Blocks.Math.Product Product2 "Multiplies the output power of the PV cell with the efficiency of the inverter " annotation(Placement(transformation(extent={{10,70},{30,90}})));
+
+34: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: equation connect(Product2.u2,EfficiencyConverterSunnyBoy3800.y[1]) annotation(Line( points={{8,74},{3,74},{1,74},{1,65},{-4,65}}, color={0,0,127}));connect(Product2.y,MaxOutputPower.u) annotation(Line( points={{31,80},{36,80},{33,80},{38,80}}, color={0,0,127}));connect(MaxOutputPower.y,PVPowerRmsW) annotation(Line( points={{61,80},{65,80},{90,80},{95,80}}, color={0,0,127}));connect(Product2.u1,DCPowerInput) annotation(Line( points={{8,86},{5,86},{-55,86},{-55,75},{-60,75}}, color={0,0,127}));connect(EfficiencyConverterSunnyBoy3800.u,DCPowerInput) annotation(Line( points={{-27,65},{-30,65},{-55,65},{-55,75},{-60,75}}, color={0,0,127}));annotation ( Icon( coordinateSystem(extent={{-100,-100},{100,100}}), graphics={ Rectangle( lineColor={0,0,0}, fillColor={255,255,255}, fillPattern=FillPattern.Solid, extent={{-100,100},{100,-100}}), Line( points={{-50,37},{53,37}}, color={0,0,0}), Line( points={{-48,-34},{55,-34}}, color={0,0,0})}), experiment( StopTime=1, StartTime=0), Documentation(revisions="<html><ul> <li> <i>October 11, 2016</i> by Tobias Blacha:<br/> Moved into AixLib </li> <li> <i>Februar 21, 2013</i> by Corinna Leonhardt:<br/> Implemented </li> </ul> </html>",info="<html><h4> <span style=\"color: #008000\">Overview</span> </h4> <p> The <b>PVinverterRMS</b> model represents a simple PV inverter. </p> <p> <br/> <b><span style=\"color: #008000;\">Concept</span></b> </p> <p> PVinverterRMS&#160;with&#160;reliable&#160;system&#160;manager. </p> </html>"));end PVInverterRMS;
+
+35: Name 'PVModuleDC' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Module, D. Affected line: model PVModuleDC "partial model for PV module" extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
+
+36: Name 'Area' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Area. Affected line: parameter Modelica.Units.SI.Area Area "Area of one Panel";
+
+37: Name 'NoctTemp' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Noct, Temp. Affected line: parameter Modelica.Units.SI.Temperature NoctTemp "Defined temperature";
+
+38: Name 'NoctTempCell' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Noct, Temp, Cell. Affected line: parameter Modelica.Units.SI.Temperature NoctTempCell "Meassured cell temperature";
+
+39: Name 'NoctRadiation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Noct, Radiation. Affected line: parameter Modelica.Units.SI.RadiantEnergyFluenceRate NoctRadiation "Defined radiation";
+
+40: Name 'TempCoeff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp, Coeff. Affected line: parameter Modelica.Units.SI.LinearTemperatureCoefficient TempCoeff "Temperature coeffient";
+
+41: Name 'PowerPV' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Power. Affected line: Modelica.Units.SI.Power PowerPV "Power of PV panels";
+
+42: Name 'TCell' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Cell. Affected line: Modelica.Units.SI.Temperature TCell "Cell temperature";
+
+43: Name 'DCOutputPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: D, Output, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput DCOutputPower( final quantity="Power", final unit="W") "DC output power of PV panels" annotation(Placement( transformation(extent={{100,70},{120,90}}), iconTransformation(extent={{100,-10},{120,10}})));
+
+44: Name 'T_amb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb. Affected line: Modelica.Blocks.Interfaces.RealInput T_amb(final quantity= "ThermodynamicTemperature", final unit="K") "Ambient temperature" annotation (Placement(transformation(extent={{-139,40},{-99,80}}), iconTransformation(extent={{-140,40},{-100,80}})));
+
+45: Missing documentation, Name 'SolarIrradiationPerSquareMeter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Irradiation, Square, Meter. Affected line: Modelica.Blocks.Interfaces.RealInput SolarIrradiationPerSquareMeter annotation (Placement( transformation(extent={{-140,-80},{-100,-40}}), iconTransformation( extent={{-132,-72},{-100,-40}})));
+
+
+AixLib/Obsolete/Year2020/ThermalZones/HighOrder/Components/Walls/Wall_ASHRAE140.mo
+1: Name 'wall_length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wall_length. Affected line: parameter Modelica.Units.SI.Length wall_length=2 "Length of wall" annotation (Dialog(group="Room Geometry"));
+
+2: Name 'wall_height' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wall_height. Affected line: parameter Modelica.Units.SI.Height wall_height=2 "Height of wall" annotation (Dialog(group="Room Geometry"));
+
+3: Name 'calcMethodOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: calc, Method. Affected line: parameter Integer calcMethodOut=1 "Calculation method for convectice heat transfer coeffient at outside surface" annotation (Dialog( tab="Surface Parameters", group="Outside surface", enable=outside, compact=true), choices( choice=1 "DIN 6946", choice=2 "ASHRAE Fundamentals", choice=3 "Custom hCon (constant)", radioButtons=true));
+
+4: Name 'surfaceType' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: surface, Type. Affected line: parameter AixLib.DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType = AixLib.DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation(Dialog(tab="Surface Parameters",group = "Outside surface", enable=calcMethodOut == 2 and outside), choicesAllMatching = true);
+
+5: Name 'ISOrientation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: S, Orientation. Affected line: parameter Integer ISOrientation = 1 "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true), choices(choice=1 "vertical wall", choice = 2 "floor", choice = 3 "ceiling",radioButtons = true));
+
+6: Name 'solarDistribution' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar, Distribution. Affected line: parameter Real solarDistribution(min=0.0, max=1.0) = 0.038 "Solar distribution fraction of the transmitted radiation through the window on the surface";
+
+7: Name 'Window' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Window. Affected line: replaceable model Window = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Window_ASHRAE140 constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow "Model for window" annotation(Dialog( tab="Window", enable = withWindow and outside), choicesAllMatching=true);
+
+8: Name 'WindowType' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Window, Type. Affected line: parameter AixLib.DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType= AixLib.DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Choose a window type from the database" annotation(Dialog( tab="Window", enable = withWindow and outside),choicesAllMatching= true);
+
+9: Name 'windowarea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: windowarea. Affected line: parameter Modelica.Units.SI.Area windowarea=2 "Area of window" annotation (Dialog(tab="Window", enable=withWindow and outside));
+
+10: Name 'withSunblind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with, Sunblind. Affected line: parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", enable = outside and withWindow));
+
+11: Name 'Blinding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Blinding. Affected line: parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", enable = withWindow and outside and withSunblind));
+
+12: Name 'LimitSolIrr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Real LimitSolIrr if withWindow and outside and withSunblind "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)" annotation(Dialog(tab="Window", enable=withWindow and outside and withSunblind));
+
+13: Name 'TOutAirLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Modelica.Units.SI.Temperature TOutAirLimit if withWindow and outside and withSunblind "Temperature at which sunblind closes (see also LimitSolIrr)" annotation ( Dialog(tab="Window", enable=withWindow and outside and withSunblind));
+
+14: Name 'U_door' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: U_door. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_door=1.8 "Thermal transmission coefficient of door" annotation (Dialog(tab="Door", enable=withDoor));
+
+15: Name 'eps_door' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: eps_door. Affected line: parameter Modelica.Units.SI.Emissivity eps_door=0.9 "Solar emissivity of door material" annotation (Dialog(tab="Door", enable=withDoor));
+
+16: Missing documentation, Name 'door_height' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: door_height. Affected line: parameter Modelica.Units.SI.Length door_height=2 annotation (Dialog(tab="Door", enable=withDoor));
+
+17: Missing documentation, Name 'door_width' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: door_width. Affected line: parameter Modelica.Units.SI.Length door_width=1 annotation (Dialog(tab="Door", enable=withDoor));
+
+18: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Interfaces.SolarRad_in SolarRadiationPort if outside annotation ( Placement(transformation(extent={{-116,79},{-96,99}}), iconTransformation(extent={{-36,100},{-16,120}})));
+
+19: Missing documentation, Name 'port_outside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_outside. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation (Placement(transformation(extent={{-108,-6},{-88,14}}), iconTransformation(extent={{-31,-10},{-11,10}})));
+
+20: Missing documentation, Name 'WindSpeedPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wind, Speed, Port. Affected line: Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == 1 or calcMethodOut == 2) annotation (Placement(transformation(extent={{-113,54},{-93,74}}), iconTransformation(extent={{-31,78},{-11,98}})));
+
+21: Missing documentation, Name 'Sunblind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Sunblind. Affected line: AixLib.ThermalZones.HighOrder.Components.Sunblinds.Sunblind Sunblind( final n=1, final gsunblind={Blinding}, final Imax=LimitSolIrr, final TOutAirLimit=TOutAirLimit) if outside and withWindow and withSunblind annotation (Placement(transformation(extent={{-44,-22},{-21,4}})));
+
+22: Missing documentation, Name 'Door' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Door. Affected line: AixLib.ThermalZones.HighOrder.Components.WindowsDoors.Door Door( door_area=door_height*door_width, U=U_door*2, eps=eps_door) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
+
+23: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside( A=wall_length*wall_height - clearance, calcMethod=calcMethodOut, surfaceType=surfaceType, hCon_const=hCon_const) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation( extent={{-10,8},{10,-8}}, rotation=180, origin={69,-1})));Utilities.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
+
+24: Name 'solarRadWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar. Affected line: Modelica.Blocks.Interfaces.RealInput solarRadWin "solar raditaion through window" annotation (Placement(transformation( extent={{-20,-20},{20,20}}, rotation=180, origin={101,80}), iconTransformation( extent={{-10,-10},{10,10}}, rotation=180, origin={22,88})));
+
+25: Name 'solarDistrFraction' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar, Distr, Fraction. Affected line: Modelica.Blocks.Math.Gain solarDistrFraction(k=solarDistribution) "interior solar distribution factors" annotation (Placement(transformation( extent={{-6,-6},{6,6}}, rotation=180, origin={62,80})));
+
+26: Name 'absSolarRadWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow absSolarRadWin "absorbed solar radiation through window" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=180, origin={39,80})));
+
+27: Name 'solarRadWinTrans' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar, Trans. Affected line: Modelica.Blocks.Interfaces.RealOutput solarRadWinTrans if withWindow "Output signal connector" annotation (Placement(transformation(extent={{100,-70},{120,-50}}), iconTransformation(extent={{15,-72},{35,-52}})));
+
+28: Name 'AbscoeffA' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Abscoeff. Affected line: Modelica.Blocks.Math.Gain AbscoeffA(k=solar_absorptance*(wall_height* wall_length - clearance)) if outside "multiplication withabsorbtioncoefficient and area" annotation (Placement(transformation(extent={{-49,82},{-37,94}})));
+
+29: Name 'absSolarRadWall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Wall. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow absSolarRadWall if outside "absorbed solar radiation on wall" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, origin={-20,88})));
+
+30: Missing documentation, Name 'SolarRadTotal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Total. Affected line: Modelica.Blocks.Sources.RealExpression SolarRadTotal(y=SolarRadiationPort.I) if outside annotation (Placement(transformation(extent={{-80,86},{-60,106}})));
+
+31: Name 'tempOutAirSensor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Sensor. Affected line: Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor "Outdoor air (dry bulb) temperature sensor" annotation (Placement(transformation(extent={{-66,-18},{-58,-10}})));
+
+
+AixLib/Utilities/Interfaces/SolarRad_in.mo
+1: Name 'I_dir' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_dir. Affected line: input Modelica.Units.SI.RadiantEnergyFluenceRate I_dir "direct radiation normal to the surface";
+
+2: Name 'I_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_diff. Affected line: input Modelica.Units.SI.RadiantEnergyFluenceRate I_diff "diffuse radiation normal to the surface";
+
+3: Name 'I_gr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: I_gr. Affected line: input Modelica.Units.SI.RadiantEnergyFluenceRate I_gr "radiation due to the ground reflection normal to the surface";
+
+4: Name 'AOI' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: O. Affected line: input Real AOI(unit = "rad") "Angle of incidence of surface";
+
+
+AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/CorrectionSolarGain/CorG_ASHRAE140.mo
+1: Missing documentation. Affected line: import Modelica.Units.Conversions.to_deg;
+
+2: Missing documentation. Affected line: import Modelica.Math.asin;
+
+3: Missing documentation. Affected line: import Modelica.Math.sin;
+
+4: Missing documentation. Affected line: import Modelica.Math.tan;
+
+5: Missing documentation. Affected line: import Modelica.Math.cos;
+
+6: Name 'INDRG' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: N, D, G. Affected line: parameter Real INDRG=1.526 "Index of refraction of Glass, in this case INDRG= 1.526";
+
+7: Name 'K' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: K. Affected line: parameter Real K = 0.0196 "Extintion coefficient, in this case K = 0.0196/mm";
+
+8: Name 'Rout' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Rout. Affected line: parameter Real Rout = 0.0476 "Exterior combined heat transfer coefficient";
+
+9: Name 'RairGab' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Rair. Affected line: parameter Real RairGab = 0.1588 "Heat transfer coefficient of air gap";
+
+10: Name 'Real' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Real. Affected line: Real[n] AOI " Angle of incidence";Real[n] AOI_help;Real[n] AOR "Angle of refraction";Real[n] RPERP "Perpendicular reflectance(component of polarization)";Real[n] RPAR "Parallel reflectance(component of polarization)";Real[n] R "Reflectance";Real[n] Trn "Transmittance due to reflectance losses(transmittance if there were just reflectance losses and no absorptance losses)";Real[n] Tabs "Transmittance due to absorptance losses(transmittance if there were just absorptance losses and no reflectance losses)";Real[n] L "Path length";Real[n] T "Total transmittance Tr*Tabs";Real[n] S "Inward flowing portion of the absorbed radiation in window panes";Real[n] SHGC "Solar heat gain coefficient";Modelica.Blocks.Tables.CombiTable1Ds combiTable1Ds( tableOnFile=false, table=[0,0.0643,0.0522; 20,0.0659,0.0534; 30,0.0679,0.0548; 40,0.0708,0.0566; 48,0.0738,0.058;55,0.0769,0.0587; 57,0.0779,0.0587; 60,0.0796,0.0585; 63,0.0815,0.0579; 66,0.0837,0.0568; 68,0.0852, 0.0558; 70,0.0858,0.0544; 72,0.089,0.0521; 75,0.0911,0.0492; 77.5,0.0929,0.0457; 80,0.094,0.0413;82,0.0937,0.0372; 83.5,0.0924,0.0335; 85,0.0892,0.0291; 86,0.0854,0.0254; 87,0.079,0.0205; 88,0.0671, 0.0128; 89,0.0473,0.0043; 89.5,0.0304,0.0004; 89.99,0.0011,0], smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) annotation (Placement(transformation(extent={{-16,36},{4,56}})));
+
+11: Missing documentation. Affected line: Real y;
+
+12: Missing documentation, Name 'realExpression' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Expression. Affected line: Modelica.Blocks.Sources.RealExpression realExpression(y=y) annotation (Placement(transformation(extent={{-68,38},{-48,58}})));
+
+
+AixLib/ThermalZones/HighOrder/Components/Walls/Wall.mo
+1: Name 'wall_length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wall_length. Affected line: parameter Modelica.Units.SI.Length wall_length "Length of wall" annotation (Dialog(group="Room Geometry"));
+
+2: Name 'wall_height' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wall_height. Affected line: parameter Modelica.Units.SI.Height wall_height "Height of wall" annotation (Dialog(group="Room Geometry"));
+
+3: Name 'calcMethodOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: calc, Method. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 "Calculation method for convective heat transfer coefficient at outside surface" annotation (Dialog( tab="Surface Parameters", group="Outside surface", enable=outside, compact=true));
+
+4: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation(Dialog(tab = "Surface Parameters", group = "Outside surface", enable= calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals and outside), choicesAllMatching = true);
+
+5: Name 'ISOrientation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: S, Orientation. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation ISOrientation = AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall "Inside surface orientation" annotation(Dialog(tab = "Surface Parameters", group = "Inside surface", compact = true, descriptionLabel = true));
+
+6: Name 'use_shortWaveRadIn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_short, Wave. Affected line: parameter Boolean use_shortWaveRadIn=false "Use bus connector for incoming shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+
+7: Name 'use_shortWaveRadOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_short, Wave. Affected line: parameter Boolean use_shortWaveRadOut=false "Use bus connector for outgoing shortwave radiation" annotation (Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface"));
+
+8: Name 'radLongCalcMethod' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Long, Calc, Method. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for longwave radiation heat transfer" annotation ( Evaluate=true, Dialog(tab="Surface Parameters", group="Inside surface", compact=true));
+
+9: Name 'T_ref' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_ref. Affected line: parameter Modelica.Units.SI.Temperature T_ref= Modelica.Units.Conversions.from_degC(16) "Reference temperature for optional linearization of longwave radiation" annotation (Dialog( tab="Surface Parameters", group="Inside surface", enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
+
+10: Name 'calcMethodIn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: calc, Method. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A "Calculation method of convective heat transfer coefficient at inside surface" annotation (Dialog( tab="Surface Parameters", group="Inside surface", compact=true, descriptionLabel=true));
+
+11: Name 'WindowModel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Window, Model. Affected line: replaceable model WindowModel = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow( redeclare final model CorrSolGain=CorrSolarGainWin, final T0=T0, final windowarea=windowarea, final WindowType=WindowType) "Model for window" annotation (Dialog(tab="Window", group="Window", enable=withWindow and outside), choicesAllMatching=true);
+
+12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: WindowModel windowModel if withWindow and outside annotation(Placement(transformation(extent={{-15,-48},{11,-22}})));replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType = DataBase.WindowsDoors.Simple.WindowSimple_EnEV2009() "Choose a window type from the database" annotation(Dialog(tab = "Window", group="Window", enable = withWindow and outside), choicesAllMatching = true);
+
+13: Name 'windowarea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: windowarea. Affected line: parameter Modelica.Units.SI.Area windowarea=2 "Area of window" annotation (Dialog(tab="Window", group="Window", enable=withWindow and outside));
+
+14: Name 'CorrSolarGainWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Corr, Solar. Affected line: replaceable model CorrSolarGainWin = WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG constrainedby WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab = "Window", group="Window", enable = withWindow and outside));
+
+15: Name 'withSunblind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: with, Sunblind. Affected line: parameter Boolean withSunblind = false "enable support of sunblinding?" annotation(Dialog(tab = "Window", group="Sunblind", enable = outside and withWindow));
+
+16: Name 'Blinding' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Blinding. Affected line: parameter Real Blinding = 0 "blinding factor: 0 means total blocking of solar irradiation" annotation(Dialog(tab = "Window", group="Sunblind", enable = withWindow and outside and withSunblind));
+
+17: Name 'LimitSolIrr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Real LimitSolIrr=0 "Minimum specific total solar radiation in W/m2 for blinding becoming active (see also TOutAirLimit)" annotation(Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
+
+18: Name 'TOutAirLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Modelica.Units.SI.Temperature TOutAirLimit=288.15 "Temperature at which sunblind closes (see also LimitSolIrr)" annotation ( Dialog(tab="Window", group="Sunblind", enable=withWindow and outside and withSunblind));
+
+19: Name 'lenWinShie' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Shie. Affected line: parameter Modelica.Units.SI.Length lenWinShie = 0.05 "Horizontal length of the sun shield" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+
+20: Name 'heiWinShadMin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Shad. Affected line: parameter Modelica.Units.SI.Length heiWinShadMin = 0.05 "Vertical distance from shield to upper border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+
+21: Name 'heiWinShadMax' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Shad. Affected line: parameter Modelica.Units.SI.Length heiWinShadMax = 1.10 "Vertical distance from shield to lower border of window glazing" annotation(Dialog(tab = "Window", group="Shadow", enable = withWindow and outside and withSunblind and withShield));
+
+22: Name 'U_door' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: U_door. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer U_door=1.8 "Thermal transmission coefficient of door" annotation (Dialog(tab="Door", enable=withDoor));
+
+23: Name 'eps_door' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: eps_door. Affected line: parameter Modelica.Units.SI.Emissivity eps_door=0.9 "Solar emissivity of door material" annotation (Dialog(tab="Door", enable=withDoor));
+
+24: Missing documentation, Name 'door_height' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: door_height. Affected line: parameter Modelica.Units.SI.Length door_height=2 annotation (Dialog(tab="Door", enable=withDoor));
+
+25: Missing documentation, Name 'door_width' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: door_width. Affected line: parameter Modelica.Units.SI.Length door_width=1 annotation (Dialog(tab="Door", enable=withDoor));
+
+26: Missing documentation, Name 'SolarRadiationPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar, Radiation, Port. Affected line: AixLib.Utilities.Interfaces.SolarRad_in SolarRadiationPort if outside annotation(Placement(transformation(extent = {{-116, 79}, {-96, 99}}), iconTransformation(extent = {{-36, 100}, {-16, 120}})));
+
+27: Missing documentation, Name 'port_outside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_outside. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation(Placement(transformation(extent = {{-108, -6}, {-88, 14}}), iconTransformation(extent = {{-31, -10}, {-11, 10}})));
+
+28: Missing documentation, Name 'WindSpeedPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wind, Speed, Port. Affected line: Modelica.Blocks.Interfaces.RealInput WindSpeedPort if outside and (calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals) annotation(Placement(transformation(extent = {{-113, 54}, {-93, 74}}), iconTransformation(extent = {{-31, 78}, {-11, 98}})));
+
+29: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sunblinds.Sunblind Sunblind( final n=1, final gsunblind={Blinding}, final Imax=LimitSolIrr, final TOutAirLimit=TOutAirLimit) if outside and withWindow and withSunblind annotation (Placement(transformation(extent={{-52,-44},{-36,-28}})));Shadow.ShadowEffect shadowEff(calMod=AixLib.ThermalZones.HighOrder.Components.Shadow.Types.selectorShadowEffectMode.constRedDiffAllDir, lenShie=lenWinShie, heiWinMin=heiWinShadMin, heiWinMax=heiWinShadMax, aziDeg=aziDegWin) if withWindow and outside and withShield and withSunblind annotation (Placement(transformation(extent={{-40,-20},{-20,0}})));BoundaryConditions.WeatherData.Bus weaBus if withWindow and outside and withShield and withSunblind "Weather bus" annotation (Placement(transformation(extent={{-90,-70},{-110,-50}}), iconTransformation(extent={{-30,-70},{-10,-50}})));WindowsDoors.Door Door( final door_area=door_height*door_width, final eps=eps_door, U=if outside then U_door else U_door*2, final radCalcMethod=radLongCalcMethod, final T_ref=T_ref) if withDoor annotation (Placement(transformation(extent={{-21,-102},{11,-70}})));
+
+30: Missing documentation, Name 'heatTransfer_Outside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Transfer_, Outside. Affected line: AixLib.Utilities.HeatTransfer.HeatConvOutside heatTransfer_Outside( A=wall_length*wall_height - clearance, calcMethod=calcMethodOut, surfaceType=surfaceType, hCon_const=hConOut_const) if outside annotation (Placement(transformation(extent={{-47,48},{-27,68}})));
+
+31: Missing documentation, Name 'heatStarToComb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Star, Comb. Affected line: AixLib.Utilities.Interfaces.Adaptors.ConvRadToCombPort heatStarToComb annotation (Placement(transformation( extent={{-10,8},{10,-8}}, rotation=180, origin={69,-1})));
+
+32: Missing documentation, Name 'thermStarComb_inside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: therm, Star, Comb_inside. Affected line: AixLib.Utilities.Interfaces.ConvRadComb thermStarComb_inside annotation (Placement(transformation(extent={{92,-10},{112,10}}), iconTransformation(extent={{10,-10},{30,10}})));
+
+33: Name 'tempOutAirSensor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temp, Sensor. Affected line: Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor tempOutAirSensor if outside and withWindow and withSunblind "Outdoor air (dry bulb) temperature sensor" annotation (Placement(transformation(extent={{-70,-44},{-62,-36}})));
+
+34: Name 'absSolarRadWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Solar. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow absSolarRadWin if use_shortWaveRadIn "absorbed solar radiation through window" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=180, origin={45,80})));
+
+35: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.Interfaces.ShortRadSurf shortRadWall if use_shortWaveRadIn annotation (Placement(transformation(extent={{92,66},{118,92}}), iconTransformation(extent={{7,66},{33,92}})));Utilities.Interfaces.ShortRadSurf shortRadWin if withWindow and use_shortWaveRadOut annotation (Placement(transformation(extent={{91,-72},{ 117,-46}}),iconTransformation(extent={{6,-72},{32,-46}})));
