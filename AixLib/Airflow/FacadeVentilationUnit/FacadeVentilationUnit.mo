@@ -118,8 +118,8 @@ model FacadeVentilationUnit
     redeclare package Medium = Air,
     m_flow_nominal=fVUParam.m_flow_nominal_damper,
     dpValve_nominal=fVUParam.dp_nominal_damper,
-    strokeTime,
-    use_strokeTime) "Damper that controls the air stream that is recirculated"
+    strokeTime=fVUParam.damperRiseTimeLong,
+    use_strokeTime=true) "Damper that controls the air stream that is recirculated"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
