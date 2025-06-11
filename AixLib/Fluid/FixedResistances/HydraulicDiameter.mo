@@ -21,7 +21,7 @@ model HydraulicDiameter "Fixed flow resistance with hydraulic diameter and m_flo
   parameter Modelica.Units.SI.Length roughness(min=0) = 2.5e-5
     "Absolute roughness of pipe, with a default for a smooth steel pipe (dummy if use_roughness = false)";
 
-  parameter Real fac(min=1) = 2
+  parameter Real fac = 2
     "Factor to take into account resistance of bends etc., fac=dp_nominal/dpStraightPipe_nominal";
 
   final parameter Modelica.Units.SI.PressureDifference dpStraightPipe_nominal(
