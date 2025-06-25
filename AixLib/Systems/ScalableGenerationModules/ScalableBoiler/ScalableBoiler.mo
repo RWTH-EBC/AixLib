@@ -62,20 +62,20 @@ model ScalableBoiler
   parameter Boolean hasFedBac=true "circuit has Feedback"        annotation (choices(checkBox=true), Dialog(descriptionLabel=true, group=
           "Feedback"));
   parameter Real kFedBac=1 "Gain of controller"   annotation (Dialog(enable=
-          hasFeedback,                                                                   tab="Control", group=
+          hasFedBac,                                                                   tab="Control", group=
           "Feedback"));
   parameter Modelica.Units.SI.Time TiFeedBack=0.5
-    "Time constant of Integrator block" annotation (Dialog(enable=hasFeedback, tab="Control", group = "Feedback"));
+    "Time constant of Integrator block" annotation (Dialog(enable=hasFedBac, tab="Control", group = "Feedback"));
   parameter Real yMaxFedBac=0.99 "Upper limit of output"   annotation (Dialog(enable=
-          hasFeedback,                                                                            tab="Control", group=
+          hasFedBac,                                                                            tab="Control", group=
           "Feedback"));
   parameter Real yMinFedBac=0.01 "Lower limit of output"   annotation (Dialog(enable=
-          hasFeedback,                                                                            tab="Control", group=
+          hasFedBac,                                                                            tab="Control", group=
           "Feedback"));
   parameter Modelica.Units.SI.PressureDifference dp_Valve  "Pressure Difference set in regulating valve for pressure equalization in heating system"
-    annotation (Dialog(enable = hasFeedback, group="Feedback"));
-  parameter Real Kv "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)] annotation (Dialog(enable=hasFeedback))"
-        annotation (Dialog(enable = hasFeedback, group="Feedback"));
+    annotation (Dialog(enable = hasFedBac, group="Feedback"));
+  parameter Real Kv "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)]"
+        annotation (Dialog(enable = hasFedBac, group="Feedback"));
 
   Fluid.BoilerCHP.BoilerGeneric boiGen(
     allowFlowReversal=allowFlowReversal,
