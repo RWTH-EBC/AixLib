@@ -92,7 +92,7 @@ equation
     annotation (Line(points={{-50,-70},{-50,-16}}, color={191,0,0}));
   connect(thePow.y, heater.Q_flow) annotation (Line(points={{-38,3},{-38,0},{-60,
           0},{-60,-40}}, color={0,0,127}));
-  connect(boiBus.FirRatSet, fuePow.u1) annotation (Line(
+  connect(boiBus.yFirRatSet, fuePow.u1) annotation (Line(
       points={{0,100},{0,66},{-38,66},{-38,60}},
       color={255,204,51},
       thickness=0.5), Text(
@@ -100,7 +100,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(thePow.y, boiBus.ThermalPower) annotation (Line(points={{-38,3},{-38,0},
+  connect(thePow.y, boiBus.Q_flow) annotation (Line(points={{-38,3},{-38,0},
           {-20,0},{-20,20},{0,20},{0,100}},    color={0,0,127}), Text(
       string="%second",
       index=1,

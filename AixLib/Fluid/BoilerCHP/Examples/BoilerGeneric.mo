@@ -57,7 +57,7 @@ equation
       points={{2,10},{2,22}},
       color={255,204,51},
       thickness=0.5));
-  connect(conPID.y, boiBus.FirRatSet) annotation (Line(points={{-23,68},{2,68},
+  connect(conPID.y, boiBus.yFirRatSet) annotation (Line(points={{-23,68},{2,68},
           {2,22}}, color={0,0,127}), Text(
       string="%second",
       index=1,

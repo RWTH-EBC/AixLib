@@ -104,7 +104,7 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(safCtr.isOn, firRatMinChe.isOn) annotation (Line(points={{0.4,46},{40,
           46},{40,4.2},{46,4.2}}, color={255,0,255}));
-  connect(intlFirRatCtr.FirRatSet, firRatMinChe.FirRatSet)
+  connect(intlFirRatCtr.yFirRatSet, firRatMinChe.yFirRatSet)
     annotation (Line(points={{1,16},{38,16},{38,0},{46,0}}, color={0,0,127}));
   if not TFlowByHeaCur then
     connect(boiBus.TSupSet, intlFirRatCtr.TSupSet) annotation (Line(
@@ -134,7 +134,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(firRatMinChe.FirRat, boiBus.FirRatSet) annotation (Line(points={{67,0},
+  connect(firRatMinChe.FirRat, boiBus.yFirRatSet) annotation (Line(points={{67,0},
           {76,0},{76,100},{0,100}}, color={0,0,127}), Text(
       string="%second",
       index=1,

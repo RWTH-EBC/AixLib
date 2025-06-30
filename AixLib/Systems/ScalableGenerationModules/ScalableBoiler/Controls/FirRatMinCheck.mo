@@ -3,7 +3,7 @@ model FirRatMinCheck
   "Check to prevent firing rate going below minimal firing rate"
   parameter Real FirRatMin=0.15 "Minimal firing rate";
 
-  Modelica.Blocks.Interfaces.RealInput FirRatSet "Setvalue of PLR "
+  Modelica.Blocks.Interfaces.RealInput yFirRatSet "Setvalue of PLR "
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Logical.GreaterEqualThreshold greEquThr(final threshold=
         FirRatMin)
@@ -21,7 +21,7 @@ model FirRatMinCheck
   Modelica.Blocks.Logical.And and1
     annotation (Placement(transformation(extent={{-30,-2},{-10,18}})));
 equation
-  connect(FirRatSet, greEquThr.u)
+  connect(yFirRatSet, greEquThr.u)
     annotation (Line(points={{-100,0},{-67.6,0}}, color={0,0,127}));
   connect(switch.y, FirRat) annotation (Line(points={{61,36},{72,36},{72,0},{
           110,0}}, color={0,0,127}));
@@ -31,7 +31,7 @@ equation
     annotation (Line(points={{-49.2,0},{-32,0}}, color={255,0,255}));
   connect(FirRatMinExp.y, switch.u3) annotation (Line(points={{23,22},{30,22},{
           30,28},{38,28}}, color={0,0,127}));
-  connect(FirRatSet, switch.u1) annotation (Line(points={{-100,0},{-74,0},{-74,
+  connect(yFirRatSet, switch.u1) annotation (Line(points={{-100,0},{-74,0},{-74,
           44},{38,44}}, color={0,0,127}));
   connect(and1.y, switch.u2) annotation (Line(points={{-9,8},{-6,8},{-6,36},{38,
           36}}, color={255,0,255}));

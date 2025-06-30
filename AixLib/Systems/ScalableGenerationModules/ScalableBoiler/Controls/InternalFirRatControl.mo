@@ -18,7 +18,7 @@ model InternalFirRatControl
     yMin=yMin)
             "PI Controller for controlling the valve position"
             annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
- Modelica.Blocks.Interfaces.RealOutput FirRatSet
+ Modelica.Blocks.Interfaces.RealOutput yFirRatSet
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput TSupSet(unit="K")
     "Set value for supply temperature"
@@ -27,7 +27,7 @@ model InternalFirRatControl
 equation
   connect(TFlowMea,PID. u_m) annotation (Line(points={{-120,-52},{0,-52},{0,-12}},
                  color={0,0,127}));
-  connect(PID.y, FirRatSet)
+  connect(PID.y, yFirRatSet)
     annotation (Line(points={{11,0},{110,0}}, color={0,0,127}));
   connect(PID.u_s, TSupSet)
     annotation (Line(points={{-12,0},{-120,0}}, color={0,0,127}));
