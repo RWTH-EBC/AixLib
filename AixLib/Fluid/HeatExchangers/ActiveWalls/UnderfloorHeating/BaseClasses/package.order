@@ -3,6 +3,7 @@ DiscretizedFloorTemperatureAnalysis
 Distributor
 PartialModularPort_ab
 RadiativeConvectiveHeatTransfer
+RadConvToSingle
 EN1264
 PressureLoss
 PartialUnderFloorHeating

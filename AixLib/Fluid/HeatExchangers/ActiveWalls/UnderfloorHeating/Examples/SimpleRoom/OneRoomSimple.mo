@@ -39,7 +39,7 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
   AixLib.Fluid.Sources.MassFlowSource_T boundary(
     redeclare package Medium = MediumWater,
     m_flow=underfloorHeatingSystem.m_flow_nominal,
-    T=underfloorHeatingSystem.T_Vdes,
+    T=underfloorHeatingSystem.TSup_nominal,
     nPorts=1)
     annotation (Placement(transformation(extent={{-98,-58},{-78,-38}})));
   AixLib.Fluid.Sources.Boundary_pT bou(redeclare package Medium =
@@ -57,9 +57,9 @@ model OneRoomSimple "Example for underfloor heating system with one ideal room"
         extent={{-10,-8},{10,8}},
         rotation=90,
         origin={-12,-86})));
-  RadConvToSingle radConvToSingle
+  BaseClasses.RadConvToSingle radConvToSingle
     annotation (Placement(transformation(extent={{24,12},{44,32}})));
-  RadConvToSingle radConvToSingle1
+  BaseClasses.RadConvToSingle radConvToSingle1
     annotation (Placement(transformation(extent={{46,-96},{26,-76}})));
 equation
 
@@ -68,7 +68,7 @@ equation
             {-22,-2},{-22,22},{-10,22}},
                                        color={191,0,0}));
     connect(radConvToSingle.portCon, thermalConductor[i].port_a) annotation (
-        Line(points={{24,22},{10,22},{10,-2},{-4,-2}}, color={191,0,0}));
+        Line(points={{24,28},{10,28},{10,-2},{-4,-2}}, color={191,0,0}));
   end for;
 
   for i in 1:underfloorHeatingSystem.nZones loop
@@ -103,7 +103,7 @@ equation
   connect(convRadToCombPort.portConvRadComb, radConvToSingle.heatFloor)
     annotation (Line(points={{-12,2},{62,2},{62,22},{44,22}},color={191,0,0}));
   connect(fixedHeatFlow1.port, radConvToSingle1.portCon) annotation (Line(
-        points={{38,-90},{42,-90},{42,-86},{46,-86}}, color={191,0,0}));
+        points={{38,-90},{42,-90},{42,-80},{46,-80}}, color={191,0,0}));
   connect(radConvToSingle1.heatFloor, convRadToCombPort1.portConvRadComb)
     annotation (Line(points={{26,-86},{-2,-86},{-2,-96},{-12,-96}},
                                                  color={191,0,0}));

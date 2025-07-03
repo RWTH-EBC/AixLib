@@ -1,4 +1,4 @@
-within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating;
+within AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses;
 model RadConvToSingle
 
   Utilities.Interfaces.ConvRadComb heatFloor annotation (Placement(

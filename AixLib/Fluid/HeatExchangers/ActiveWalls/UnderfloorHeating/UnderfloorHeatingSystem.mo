@@ -9,7 +9,7 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
     "Nominal mass flow rate" annotation (Dialog(group="Panel Heating"));
   parameter Integer nZones(min=1)
     "Number of zones / rooms heated with panel heating";
-  parameter Integer nZoneQMax=1;
+  parameter Integer nZoneQMax=Modelica.Math.Vectors.find(max(q_flow_nominal), q_flow_nominal);
   parameter Modelica.Units.SI.Power Q_flow_nominal[nZones]
     "Nominal heat Load for zone with panel heating";
   parameter Modelica.Units.SI.Area A[nZones] "Floor Area";
@@ -56,9 +56,10 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
   final parameter Modelica.Units.SI.TemperatureDifference dT_Vdes=dT_Hdes +
       dTMax_design/2 + dTMax_design^(2)/(12*dT_Hdes)
     "Temperature difference at flow temperature";
-  final parameter Modelica.Units.SI.Temperature T_Vdes=(TZone_nominal[nZoneQMax] - ((
-      dTMax_design + TZone_nominal[nZoneQMax]) *e^(dTMax_design/dT_Hdes)))/(1 - e^(dTMax_design/
-      dT_Hdes)) "Flow Temperature according to EN 1264";
+  final parameter Modelica.Units.SI.Temperature TSup_nominal=(TZone_nominal[
+      nZoneQMax] - ((dTMax_design + TZone_nominal[nZoneQMax])*e^(dTMax_design/
+      dT_Hdes)))/(1 - e^(dTMax_design/dT_Hdes))
+    "Nominal flow temperature according to EN 1264";
   final parameter Modelica.Units.SI.TemperatureDifference dTSupRet_nominal[
     nZones]=cat(
       1,
@@ -67,7 +68,7 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
         ufhZone[n].EN_1264.dT_H))^(0.5) - 1)) for n in 2:nZones})
     "Nominal temperature spread in rooms";
   final parameter Modelica.Units.SI.Temperature TRet_nominal[nZones]=fill(
-      T_Vdes, nZones) .- dTSupRet_nominal
+      TSup_nominal, nZones) .- dTSupRet_nominal
     "Nominal return temperature in each room";
   final parameter Modelica.Units.SI.PressureDifference dpDis_nominal=
     if sum(ufhZone.nCircuits) == 1 then 0 else
@@ -99,6 +100,7 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
         rotation=0,
         origin={-20,-20})));
   UnderfloorHeatingRoom ufhZone[nZones](
+    useMultipleCircuits=useMultipleCircuits,
     redeclare each final package Medium = Medium,
     each allowFlowReversal=false,
     each final energyDynamics=energyDynamics,
@@ -126,7 +128,7 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
     each final sheMat=sheMat,
     final dOutShe=dOutShe,
     final length=length,
-    each final TSup_nominal=T_Vdes,
+    each final TSup_nominal=TSup_nominal,
     final TRet_nominal=TRet_nominal,
     each final dis=dis,
     final spa=spa,
@@ -167,6 +169,8 @@ model UnderfloorHeatingSystem "Model for an underfloor heating system"
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a portConCei[nZones]
     "Convective heat port of ceiling"
     annotation (Placement(transformation(extent={{30,-110},{50,-90}})));
+  parameter Boolean useMultipleCircuits=true
+    "=false to only simulate one circuit per room";
 protected
   parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX(
       T=Medium.T_default,

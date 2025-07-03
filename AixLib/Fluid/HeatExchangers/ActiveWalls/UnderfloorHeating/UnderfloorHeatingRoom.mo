@@ -7,8 +7,8 @@ model UnderfloorHeatingRoom "Model for heating of one room with underfloor heati
   extends AixLib.Fluid.Interfaces.LumpedVolumeDeclarations(redeclare package
       Medium = AixLib.Media.Water "Water");
   extends AixLib.Fluid.HeatExchangers.ActiveWalls.UnderfloorHeating.BaseClasses.PartialUnderFloorHeatingParameters;
-
-  parameter Integer nCircuits(min=1)=integer(ceil(length/lengthMax))
+  parameter Boolean useMultipleCircuits=true "=false to only simulate one circuit per room";
+  parameter Integer nCircuits(min=1)=if useMultipleCircuits then integer(ceil(length/lengthMax)) else 1
     "Number of circuits in one zone";
   parameter Modelica.Units.SI.Length lengthMax=120
     "Maximum Length for one Circuit" annotation (Dialog(group="Panel Heating"));
