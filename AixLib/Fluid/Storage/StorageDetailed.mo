@@ -820,91 +820,25 @@ for i in 2:(n-1) loop
   </li>
 </ul>
 </html>",
-        info="<html><p>
-  <b><span style=\"color: #008000;\">Overview</span></b>
-</p>
-<p>
-  Detailed thermal energy storage model with optional heating rod and
-  two heating coils based on a pipe model.
-</p>
-<p>
-  <b><span style=\"color: #008000;\">Concept</span></b>
-</p>
-<p>
-  It represents a buffer storage stratified into n layers where 1
-  represents the bottom layer and n represents the top layer. The
-  layers are connected to each other allowing heat and fluid
-  transfer.The heat transfer between the layers can be selected to
-  model the conductance between the layers or different models that
-  additionally represent the buoyancy:
-</p>
-<p>
-  <b>HeatTransferOnlyConduction</b>: Model for heat transfer between
-  buffer storage layers. Models conductance of water. An effective heat
-  conductivity is therefore calculated. Used in BufferStorage model.
-</p>
-<p>
-  <b>HeatTransferLambdaSimple:</b> Model for heat transfer between
-  buffer storage layers. Models conductance of water and additional
-  effective conductivity (in case the above layer is colder than the
-  lower layer). Used in BufferStorage model.
-</p>
-<p>
-  <b>HeatTransferLambdaEff:</b> Model for heat transfer between buffer
-  storage layers. Models conductance of water and buoyancy according to
-  Viskanta et al., 1997. An effective heat conductivity is therefore
-  calculated. Used in BufferStorage model.
-</p>
-<p>
-  <b>HeatTransferLambdaEffSmooth:</b> Same as HeatTransfer_lambda_eff.
-  In addition, the <i>smooth()</i> expression is used for the
-  transition of the buoyancy model.
-</p>
-<p>
-  <b>HeatTransferLambdaEffTanh:</b> Same as HeatTransfer_lambda_eff. In
-  addition, a tanh function is used for the transition of the buoyancy
-  model (VariableTransition model). Attention: the initial value of the
-  FullTransition model is 0.5. This may lead to a mixture of the
-  storage at the beginning of the simulation.
-</p>
-<p>
-  <b>HeatTransferBuoyancyWetter:</b> Model for heat transfer between
-  buffer storage layers. Models buoyancy according to
-  Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings
-  library, cf. https://simulationresearch.lbl.gov/modelica. No
-  conduction is implemented apart from when buoyancy occurs.
-</p>
-<p>
-  The geometrical data for the storage is read by records in the
-  DataBase package. The model also includes heat losses over the
-  storage walls (wall, top and bottom). No pressure losses are
-  included. Thus external pressure loss models are required for the use
-  of the model.
-</p>
-<p>
-  <b><span style=\"color: #008000;\">Sources</span></b>
-</p>
+        info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span></b> </p>
+<p>Detailed thermal energy storage model with optional heating rod and two heating coils based on a pipe model. </p>
+<p><b><span style=\"color: #008000;\">Concept</span></b> </p>
+<p>It represents a buffer storage stratified into n layers where 1 represents the bottom layer and n represents the top layer. The layers are connected to each other allowing heat and fluid transfer.The heat transfer between the layers can be selected to model the conductance between the layers or different models that additionally represent the buoyancy: </p>
+<p><b>HeatTransferOnlyConduction</b>: Model for heat transfer between buffer storage layers. Models conductance of water. An effective heat conductivity is therefore calculated. Used in BufferStorage model. </p>
+<p><b>HeatTransferLambdaSimple:</b> Model for heat transfer between buffer storage layers. Models conductance of water and additional effective conductivity (in case the above layer is colder than the lower layer). Used in BufferStorage model. </p>
+<p><b>HeatTransferLambdaEff:</b> Model for heat transfer between buffer storage layers. Models conductance of water and buoyancy according to Viskanta et al., 1997. An effective heat conductivity is therefore calculated. Used in BufferStorage model. </p>
+<p><b>HeatTransferLambdaEffSmooth:</b> Same as HeatTransfer_lambda_eff. In addition, the <i>smooth()</i> expression is used for the transition of the buoyancy model. </p>
+<p><b>HeatTransferLambdaEffTanh:</b> Same as HeatTransfer_lambda_eff. In addition, a tanh function is used for the transition of the buoyancy model (VariableTransition model). Attention: the initial value of the FullTransition model is 0.5. This may lead to a mixture of the storage at the beginning of the simulation. </p>
+<p><b>HeatTransferBuoyancyWetter:</b> Model for heat transfer between buffer storage layers. Models buoyancy according to Buildings.Fluid.Storage.BaseClasses.Buoyancy model of Buildings library, cf. https://simulationresearch.lbl.gov/modelica. No conduction is implemented apart from when buoyancy occurs. </p>
+<p>The geometrical data for the storage is read by records in the DataBase package. The model also includes heat losses over the storage walls (wall, top and bottom). No pressure losses are included. Thus external pressure loss models are required for the use of the model. </p>
+<p><b><span style=\"color: #008000;\">Sources</span></b> </p>
 <ul>
-  <li>R. Viskanta, A. KaraIds: Interferometric observations of the
-  temperature structure in water cooled or heated from above.
-  <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69.
-  Bibtex-Key [R.VISKANTA1977]
-  </li>
+<li>R. Viskanta, A. KaraIds: Interferometric observations of the temperature structure in water cooled or heated from above. <i>Advances in Water Resources,</i> volume 1, 1977, pages 57-69. Bibtex-Key [R.VISKANTA1977] </li>
 </ul>
-<p>
-  <b><span style=\"color: #008000;\">Example Results</span></b>
-</p>
-<p>
-  <a href=
-  \"AixLib.Fluid.Storage.Examples.StorageDetailed\">AixLib.Fluid.Storage.Examples.StorageDetailed</a>
-</p>
-<p>
-  <a href=
-  \"AixLib.Fluid.Storage.Examples.StorageBoiler\">AixLib.Fluid.Storage.Examples.StorageBoiler</a>
-</p>
-<p>
-  <a href=
-  \"AixLib.Fluid.Storage.Examples.StorageSolarCollector\">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a>
-</p>
+<p><b><span style=\"color: #008000;\">Example Results</span></b> </p>
+<p><a href=\"AixLib.Fluid.Storage.Examples.StorageDetailedExample\">AixLib.Fluid.Storage.Examples.StorageDetailedExample</a> </p>
+<p><a href=\"AixLib.Fluid.Storage.Examples.StorageBoiler\">AixLib.Fluid.Storage.Examples.StorageBoiler</a> </p>
+<p><a href=\"AixLib.Fluid.Storage.Examples.StorageSolarCollector\">AixLib.Fluid.Storage.Examples.StorageSolarCollector</a> </p>
 </html>"));
 end StorageDetailed;
