@@ -44,10 +44,9 @@ equation
   connect(heater.Q_flow, Q_flow) annotation (Line(points={{-60,-40},{-60,-40},{
           -60,60},{-80,60}},
                           color={0,0,127}));
-  connect(senTCold.T,TCold)  annotation (Line(points={{-70,-69},{-70,-69},{-70,
-          86},{54,86}},
-                     color={0,0,127}));
-  connect(senTHot.T,THot)  annotation (Line(points={{40,-69},{40,-69},{40,60},{110,
+  connect(senTRet.T, TCold) annotation (Line(points={{-70,-69},{-70,-69},{-70,
+          86},{54,86}}, color={0,0,127}));
+  connect(senTSup.T,THot)  annotation (Line(points={{40,-69},{40,-69},{40,60},{110,
           60}}, color={0,0,127}));
   connect(senMasFlo.m_flow, massFlow) annotation (Line(points={{70,-69},{70,-69},
           {70,40},{110,40}}, color={0,0,127}));
