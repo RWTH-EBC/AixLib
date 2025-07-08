@@ -198,8 +198,12 @@ package AixLib
     script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.1_to_2.1.2.mos"),
   from(
     version="2.1.2",
+    to="2.2.0",
+    script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.2_to_2.2.0.mos"),
+  from(
+    version="2.2.0",
     to="3.0.0",
-    script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.1.2_to_3.0.0.mos"))),
+    script="modelica://AixLib/Resources/Scripts/ConvertAixLib_from_2.2.0_to_3.0.0.mos"))),
   Documentation(info = "<html><p>
   The free open-source <code>AixLib</code> library is being developed
   for research and teaching purposes. It aims at dynamic simulations of
