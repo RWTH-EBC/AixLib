@@ -49,7 +49,7 @@ An orifice equation is used to compute the flow for each compartment.
 In this model, the door is always open.
 Use the model
 <a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOperable\">
-Buildings.Airflow.Multizone.DoorDiscretizedOperable</a>
+AixLib.Airflow.Multizone.DoorDiscretizedOperable</a>
 for a door that can either be open or closed.
 </p>
 </html>",
@@ -79,7 +79,7 @@ as it seems to try negative values for the density during iterative solutions.
 <li>August 12, 2011 by Michael Wetter:<br/>
 Changed model to use the new function
 <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
-Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
+AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
 </li>
 <li>July 20, 2010 by Michael Wetter:<br/>
 Migrated model to Modelica 3.1 and integrated it into the Buildings library.

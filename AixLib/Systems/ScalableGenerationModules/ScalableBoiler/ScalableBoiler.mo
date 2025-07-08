@@ -77,6 +77,11 @@ model ScalableBoiler
   parameter Real Kv "Kv (metric) flow coefficient [m3/h/(bar)^(1/2)]"
         annotation (Dialog(enable = hasFedBac, group="Feedback"));
 
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab="Dynamics"), group="Conservation equations");
+  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
+    "Start value of temperature" annotation (Dialog(tab="Initialization"));
+
   Fluid.BoilerCHP.BoilerGeneric boiGen(
     allowFlowReversal=allowFlowReversal,
     final T_start=T_start,
@@ -123,22 +128,22 @@ model ScalableBoiler
     final addPowerToMedium=false) if hasPum  "Boiler Pump"
     annotation (Placement(transformation(extent={{-26,-10},{-6,10}})));
 
-  Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
+  AixLib.Fluid.Actuators.Valves.ThreeWayEqualPercentageLinear val(
     redeclare final package Medium = Medium,
     energyDynamics=energyDynamics,
     T_start=T_start,
-    use_inputFilter=false,
+    use_strokeTime=false,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
+    final dpValve_nominal=dp_Valve,
     Kv=Kv,
     final m_flow_nominal= m_flow_nominal,
     final dpFixed_nominal={10,10}) if hasFedBac
     annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
-//    final dpValve_nominal=dp_Valve,
 
   AixLib.Controls.Interfaces.BoilerControlBus boiBus
     annotation (Placement(transformation(extent={{-10,88},{10,108}})));
 
-  Controls.BoilerControl boiCtr(
+  AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Controls.BoilerControl boiCtr(
     dtWaterNom=dT_nominal,
     final FirRatMin=FirRatMin,
     kFloTem=kFloTem,
@@ -162,11 +167,6 @@ model ScalableBoiler
     final TFlowMax=TSup_max,
     final time_minOn=time_minOn) "Central control unit of boiler"
     annotation (Placement(transformation(extent={{-96,58},{-62,92}})));
-
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state" annotation (Dialog(tab="Dynamics"), group="Conservation equations");
-  parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
-    "Start value of temperature" annotation (Dialog(tab="Initialization"));
   Modelica.Blocks.Sources.Constant conPum(k=1)
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
 protected

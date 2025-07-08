@@ -118,7 +118,7 @@ the current angle of incidence.
 <p>
 This function is used in
 <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpLowRise\">
-Buildings.Fluid.Sources.Outside_CpLowRise</a>
+AixLib.Fluid.Sources.Outside_CpLowRise</a>
 which can be used directly with components of this package.
 </p>
 <h4>References</h4>

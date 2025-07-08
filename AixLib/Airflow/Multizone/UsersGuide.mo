@@ -5,7 +5,7 @@ package UsersGuide "User's Guide"
   annotation (preferredView="info",
   Documentation(info="<html>
 <p>
-The package <code>Buildings.Airflow.Multizone</code> contains models for
+The package <code>AixLib.Airflow.Multizone</code> contains models for
 multizone airflow and contaminant transport.
 </p>
 <p>
