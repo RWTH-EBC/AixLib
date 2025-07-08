@@ -1,0 +1,17 @@
+Regression tests are only run for the following package:
+  AixLib.Systems
+*** Warning: AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Examples.ScalableBoilerFeedbackNew: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
+ Old = 13
+ New = 12
+*** Warning: AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Examples.ScalableBoilerConstantSup: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
+ Old = 11
+ New = 10
+*** Warning: AixLib.Systems.ScalableGenerationModules.ScalableBoiler.Examples.ScalableBoilerHeatingCurve: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
+ Old = 11
+ New = 10
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.0 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 3 warnings and 0 errors.
+
