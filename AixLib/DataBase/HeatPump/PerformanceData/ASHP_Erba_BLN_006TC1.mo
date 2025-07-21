@@ -1,5 +1,5 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model Erba_BLN_006TC1 "Erba_BLN_006TC1"
+model ASHP_Erba_BLN_006TC1 "Erba_BLN_006TC1"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
@@ -283,4 +283,4 @@ equation
   \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_DeltaT_HK.png\">
 </p>
 </html>"));
-end Erba_BLN_006TC1;
+end ASHP_Erba_BLN_006TC1;

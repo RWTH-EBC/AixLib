@@ -1,5 +1,5 @@
 within AixLib.DataBase.HeatPump.PerformanceData;
-model Aeroheat_AH_CN_9a "Aeroheat_AH_CN_9a"
+model ASHP_Aeroheat_AH_CN_9a "Aeroheat_AH_CN_9a"
  extends
     AixLib.DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData;
 
@@ -283,4 +283,4 @@ equation
   \"modelica://AixLib/../../../Diagramme%20AixLib/WP/KennfeldScroll_DeltaT_HK.png\">
 </p>
 </html>"));
-end Aeroheat_AH_CN_9a;
+end ASHP_Aeroheat_AH_CN_9a;
