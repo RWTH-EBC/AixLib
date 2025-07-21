@@ -118,7 +118,7 @@ model ModularCHP_ElDriven
     Ti=(0.8265*P_el_nom/1000 + 7.8516)/m_flow_nominalCC,
     yMax=1,
     yMin=0)
-    annotation (Placement(transformation(extent={{-78,-68},{-58,-48}})));
+    annotation (Placement(transformation(extent={{-84,-68},{-64,-48}})));
   Modelica.Blocks.Sources.RealExpression t_cooling_setpoint(y=273.15 + 81)
     "Soll-Kühlwassertemp"
     annotation (Placement(transformation(extent={{-168,-66},{-130,-50}})));
@@ -326,8 +326,11 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(setpoint.y, fanCC.y)
     annotation (Line(points={{-53.5,-16},{-48,-16}}, color={0,0,127}));
+<<<<<<< HEAD
   connect(PID3.y, val.y)
     annotation (Line(points={{-57,-58},{-48,-58}}, color={0,0,127}));
+=======
+>>>>>>> origin/issue1147_moduleEnergySystem
   connect(TColdCoolingWater.port_b, val.port_1) annotation (Line(points={{-28,-88},
           {-36,-88},{-36,-68}}, color={0,127,255}));
   connect(fanCC.port_a, val.port_2)
@@ -356,6 +359,7 @@ equation
   connect(t_cooling_setpoint.y, gain1.u) annotation (Line(points={{-128.1,-58},
           {-122,-58},{-122,-94},{-180,-94}},
                                           color={0,0,127}));
+<<<<<<< HEAD
   connect(gain1.y, PID1.u_s) annotation (Line(points={{-203,-94},{-246,-94},{
           -246,-64},{-238,-64}},
                             color={0,0,127}));
@@ -367,6 +371,16 @@ equation
     annotation (Line(points={{4,-11},{4,-76},{-42,-76}}, color={0,0,127}));
   connect(gain3.y, PID3.u_m)
     annotation (Line(points={{-65,-76},{-68,-76},{-68,-70}}, color={0,0,127}));
+=======
+  connect(gain1.y, PID1.u_s) annotation (Line(points={{-221,-94},{-246,-94},{-246,
+          -46},{-238,-46}}, color={0,0,127}));
+  connect(gain1.y, PID3.u_s) annotation (Line(points={{-221,-94},{-220,-94},{
+          -220,-72},{-86,-72},{-86,-58}}, color={0,0,127}));
+  connect(gain.y, PID3.u_m) annotation (Line(points={{-195,-112},{-184,-112},{
+          -184,-86},{-74,-86},{-74,-70}}, color={0,0,127}));
+  connect(PID1.y, val.y) annotation (Line(points={{-215,-46},{-138,-46},{-138,
+          -50},{-48,-50},{-48,-58}}, color={0,0,127}));
+>>>>>>> origin/issue1147_moduleEnergySystem
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(
           extent={{-60,80},{60,-80}},
