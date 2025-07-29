@@ -43,17 +43,17 @@ equation
           {-2,56}}, color={0,0,127}));
   connect(hDifTil.H, add.u2) annotation (Line(points={{-39,30},{-8,30},{-8,44},{
           -2,44}}, color={0,0,127}));
-  connect(add.y, preSolRad.I[1]) annotation (Line(points={{21,50},{30,50},{30,17.8},
-          {42.2,17.8}}, color={0,0,127}));
-  connect(hDirTil.H, preSolRad.I_dir[1]) annotation (Line(points={{-39,70},{-12,
+  connect(add.y, preSolRad.H[1]) annotation (Line(points={{21,50},{30,50},{30,
+          17.8},{42.2,17.8}}, color={0,0,127}));
+  connect(hDirTil.H, preSolRad.HDir[1]) annotation (Line(points={{-39,70},{-12,
           70},{-12,10},{42,10}}, color={0,0,127}));
-  connect(hDifTil.H, preSolRad.I_diff[1]) annotation (Line(points={{-39,30},{-20,
+  connect(hDifTil.H, preSolRad.HDif[1]) annotation (Line(points={{-39,30},{-20,
           30},{-20,2},{42,2}}, color={0,0,127}));
-  connect(const.y, preSolRad.I_gr[1]) annotation (Line(points={{-39,-10},{-30,-10},
+  connect(const.y, preSolRad.HGrd[1]) annotation (Line(points={{-39,-10},{-30,-10},
           {-30,-6.2},{42.2,-6.2}}, color={0,0,127}));
-  connect(hDirTil.inc, preSolRad.AOI[1]) annotation (Line(points={{-39,66},{-26,
-          66},{-26,-14},{42,-14}}, color={0,0,127}));
-  connect(preSolRad.solarRad_out[1], solRadOut)
+  connect(hDirTil.inc, preSolRad.incAng[1]) annotation (Line(points={{-39,66},{
+          -26,66},{-26,-14},{42,-14}}, color={0,0,127}));
+  connect(preSolRad.solRadOut[1], solRadOut)
     annotation (Line(points={{78,0},{110,0}}, color={255,128,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Text(

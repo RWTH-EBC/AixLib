@@ -154,7 +154,7 @@ equation
 <p>
 This model is identical to
 <a href=\"modelica://AixLib.Airflow.Multizone.Examples.ChimneyShaftNoVolume\">
-Buildings.Airflow.Multizone.Examples.ChimneyShaftNoVolume</a>,
+AixLib.Airflow.Multizone.Examples.ChimneyShaftNoVolume</a>,
 except that the chimney model is not steady-state, but rather dynamic
 as it contains an air volume. The air volume is approximated
 as being well-mixed. (Stratified volumes could be approximated by

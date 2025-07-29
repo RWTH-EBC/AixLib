@@ -1,9 +1,9 @@
 AbsToRelHum
 AirFlowRateSplit
 AirFlowRateSum
+FlowArrayRearranging
 MoistSplitter
 MultizonePostProcessing
-FlowArrayRearranging
 PartialMultizone
 RelToAbsHum
 SumCondition

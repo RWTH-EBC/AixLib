@@ -1,0 +1,21 @@
+clear
+
+convertClear();
+
+convertElement("AixLib.Utilities.Interfaces.SolarRad_in", "I", "H");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_in", "I_dir", "HDir");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_in", "I_diff", "HDif");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_in", "I_gr", "HGrd");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_in", "AOI", "incAng");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_out", "I", "H");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_out", "I_dir", "HDir");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_out", "I_diff", "HDif");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_out", "I_gr", "HGrd");
+convertElement("AixLib.Utilities.Interfaces.SolarRad_out", "AOI", "incAng");
+convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "solarRad_out[n]", "solRadOut[n]");
+convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I[n]", "H[n]");
+convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I_dir[n]", "HDir[n]");
+convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I_diff[n]", "HDif[n]");
+convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "I_gr[n]", "HGrd[n]");
+convertElement("AixLib.Utilities.Sources.PrescribedSolarRad", "AOI[n]", "incAng[n]");
+convertElement("AixLib.ThermalZones.HighOrder.Components.Sunblinds.BaseClasses.PartialSunblind", "Imax", "H_max");

@@ -39,6 +39,6 @@ record GenericHeatPump "Partial heat pump data"
   </li>
 </ul>
 </html>
-"),Icon,
+"),Icon, 
    __Dymola_LockedEditing="Model from IBPSA");
 end GenericHeatPump;
