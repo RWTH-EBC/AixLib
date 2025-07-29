@@ -14,12 +14,11 @@ model HeatingCoil "Heating coil for heat storage model"
   parameter AixLib.DataBase.Pipes.PipeBaseDataDefinition pipeHC=
       AixLib.DataBase.Pipes.Copper.Copper_28x1() "Type of Pipe for HC";
 
-  final parameter Modelica.Units.SI.PressureDifference dpFixed_nominal=sum(pipe.res.dpStraightPipe_nominal)*fac
+  final parameter Modelica.Units.SI.PressureDifference dpFixed_nominal= if disableComputeFlowResistance then sum(pipe.res.dp_nominal) else 0
     "Pressure drop to include in valve models connected in series to this model";
-  parameter Real fac=1 "Factor to take into account flow resistance of bends etc.,
-    fac=dp_nominal/dpStraightPipe_nominal";
-  parameter Boolean computePressureLossInternally = true
-    "=false to include the pressure drop in a valve dpFixed_nominal";
+  parameter Boolean disableComputeFlowResistance = true
+    "=false to include the pressure drop in a valve dpFixed_nominal"
+    annotation(Dialog(tab="Advanced"));
 
 
   AixLib.Utilities.HeatTransfer.HeatConv convHC1Outside[disHC](each final hCon=hConHC, each final A=pipeHC.d_o*Modelica.Constants.pi*lengthHC/disHC)
@@ -47,7 +46,8 @@ model HeatingCoil "Heating coil for heat storage model"
     each final thickness=0.5*(pipeHC.d_o - pipeHC.d_i),
     each final T_start_in=TStart,
     each final T_start_out=TStart,
-    each final fac=fac_internal)   annotation (Placement(transformation(extent={{-16,-16},
+    res(disableComputeFlowResistance=disableComputeFlowResistance))
+                                     annotation (Placement(transformation(extent={{-16,-16},
             {16,16}})));
 
 protected
@@ -58,8 +58,6 @@ protected
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
       Medium.heatCapacity_cp(sta_default)
     "Specific heat capacity of Medium in default state";
-  parameter Real fac_internal = if computePressureLossInternally then fac else 0
-    "Internal value to either enable or disable HydraulicDiameters pressure drop";
 
 equation
 

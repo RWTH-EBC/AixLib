@@ -2,7 +2,7 @@ within AixLib.Fluid.FixedResistances;
 model PlugFlowPipe
   "Pipe model using spatialDistribution for temperature delay"
   extends AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowPipe(
-    redeclare final AixLib.Fluid.FixedResistances.HydraulicDiameter res(
+    redeclare AixLib.Fluid.FixedResistances.HydraulicDiameter res(
       final dh=dh,
       final from_dp=from_dp,
       final length=length,

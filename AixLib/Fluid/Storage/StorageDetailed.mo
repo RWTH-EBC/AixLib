@@ -39,6 +39,12 @@ model StorageDetailed
     constrainedby AixLib.DataBase.Storage.StorageDetailedBaseDataDefinition
     "Data record for Storage" annotation (choicesAllMatching);
 
+  replaceable model HeatTransfer =
+    AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
+  constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
+  "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=
+      true);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////CONVECTION/////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +68,35 @@ model StorageDetailed
     "Starting Temperature of wall in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
   parameter Modelica.Units.SI.Temperature TStartIns=293.15
     "Starting Temperature of insulation in K" annotation(Dialog(tab="Initialization", group="Storage specific"));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////Heating Coils //////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
+    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
+  parameter Boolean allowFlowReversal_layers=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC1=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean allowFlowReversal_HC2=true
+    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
+    annotation(Dialog(tab="Assumptions"));
+  parameter Boolean disableComputeFlowResistance=true
+    "=false to include the pressure drop in a valve dpFixed_nominal"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
+  parameter Modelica.Units.SI.PressureDifference dpHC1Fixed_nominal=heatingCoil1.dpFixed_nominal if useHeatingCoil1
+    "Pressure drop to include in valve models connected in series to this model"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
+  parameter Modelica.Units.SI.PressureDifference dpHC2Fixed_nominal=heatingCoil2.dpFixed_nominal if useHeatingCoil2
+    "Pressure drop to include in valve models connected in series to this model"
+    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////Advanced parameters/////////////////////////////////////////////////////////////////////
@@ -184,11 +219,6 @@ model StorageDetailed
     each final m_flow_nominal=m1_flow_nominal + m2_flow_nominal)
     "Layer volumes"
     annotation (Placement(transformation(extent={{-6,0},{14,20}})));
-    replaceable model HeatTransfer =
-      AixLib.Fluid.Storage.BaseClasses.HeatTransferOnlyConduction
-    constrainedby AixLib.Fluid.Storage.BaseClasses.PartialHeatTransferLayers
-    "Heat Transfer Model between fluid layers" annotation (choicesAllMatching=
-        true);
 
 ///////////////////////////////////////////////////////////////////////////////////////
 /////HEATING COILS AND RODS/////////////////////////////////////////////////////////////////////
@@ -306,8 +336,7 @@ model StorageDetailed
     allowFlowReversal=allowFlowReversal_HC1,
     final m_flow_nominal=mHC1_flow_nominal,
     TStart=sum(TStart)/n,
-    fac=fac,
-    computePressureLossInternally=computePressureLossInternally)
+    final disableComputeFlowResistance=disableComputeFlowResistance)
                           if useHeatingCoil1
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -322,39 +351,14 @@ model StorageDetailed
     redeclare package Medium = MediumHC2,
     allowFlowReversal=allowFlowReversal_HC2,
     final m_flow_nominal=mHC2_flow_nominal,
-    TStart=sum(TStart)/n) if useHeatingCoil2
+    TStart=sum(TStart)/n,
+    final disableComputeFlowResistance=disableComputeFlowResistance)
+                          if useHeatingCoil2
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=270,
         origin={-56,-39})));
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small_HC1=1E-4*abs(mHC1_flow_nominal) if useHeatingCoil1
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil1));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small_HC2=1E-4*abs(mHC2_flow_nominal) if useHeatingCoil2
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced", enable=useHeatingCoil2));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m1_flow_nominal + m2_flow_nominal)
-    "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced"));
-  parameter Boolean allowFlowReversal_layers=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal. Used only if model has two ports."
-    annotation(Dialog(tab="Assumptions"));
-  parameter Boolean allowFlowReversal_HC1=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation(Dialog(tab="Assumptions"));
-  parameter Boolean allowFlowReversal_HC2=true
-    "= false to simplify equations, assuming, but not enforcing, no flow reversal"
-    annotation(Dialog(tab="Assumptions"));
-  parameter Boolean computePressureLossInternally=true
-    "=false to include the pressure drop in a valve dpFixed_nominal"
-    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
-  parameter Real fac=1 "Factor to take into account flow resistance of bends etc.,
-    fac=dp_nominal/dpStraightPipe_nominal"
-    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
-  parameter Modelica.Units.SI.PressureDifference dpHC1Fixed_nominal=heatingCoil1.dpFixed_nominal if useHeatingCoil1
-    "Pressure drop to include in valve models connected in series to this model"
-    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
-  parameter Modelica.Units.SI.PressureDifference dpHC2Fixed_nominal=heatingCoil2.dpFixed_nominal if useHeatingCoil2
-    "Pressure drop to include in valve models connected in series to this model"
-    annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
 initial equation
    assert(data.hHC1Up<=data.hTank and data.hHC1Up>=0.0 and
      data.hHC1Low<=data.hTank and data.hHC1Low>=0.0,
