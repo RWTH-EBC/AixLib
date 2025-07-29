@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.HeatPumps.ModularReversible.Examples.BaseClasses;
+within AixLib.Fluid.HeatPumps.ModularReversible.Examples.BaseClasses;
 model OneRoomRadiatorHeatPumpControl
   "Helper model for the control of the system"
   parameter Boolean witCoo=true
