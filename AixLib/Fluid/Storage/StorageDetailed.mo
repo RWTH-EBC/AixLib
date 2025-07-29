@@ -88,7 +88,7 @@ model StorageDetailed
   parameter Boolean allowFlowReversal_HC2=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal"
     annotation(Dialog(tab="Assumptions"));
-  parameter Boolean disableComputeFlowResistance=true
+  parameter Boolean disableComputeFlowResistance=false
     "=false to include the pressure drop in a valve dpFixed_nominal"
     annotation (Dialog(tab="Heating Coils and Rod", group="Pressure losses"));
   parameter Modelica.Units.SI.PressureDifference dpHC1Fixed_nominal=heatingCoil1.dpFixed_nominal if useHeatingCoil1

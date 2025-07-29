@@ -16,7 +16,7 @@ model HeatingCoil "Heating coil for heat storage model"
 
   final parameter Modelica.Units.SI.PressureDifference dpFixed_nominal= if disableComputeFlowResistance then sum(pipe.res.dp_nominal) else 0
     "Pressure drop to include in valve models connected in series to this model";
-  parameter Boolean disableComputeFlowResistance = true
+  parameter Boolean disableComputeFlowResistance = false
     "=false to include the pressure drop in a valve dpFixed_nominal"
     annotation(Dialog(tab="Advanced"));
 
