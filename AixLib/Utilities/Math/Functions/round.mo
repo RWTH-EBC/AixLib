@@ -1,49 +1,64 @@
 within AixLib.Utilities.Math.Functions;
-function round "Rounds values"
+function round "Round real number to specified digits"
+  extends Modelica.Icons.Function;
 
-  input Real u;
-  input Integer digits;
-  output Real y;
+  input Real x "Argument to be rounded";
+  input Integer n "Number of digits being round to";
+  output Real y "Connector of Real output signal";
+
 protected
-  Real tmp "helper variable";
-  Real factor = 10^digits;
+  Real fac = 10^n "Factor used for rounding";
+
 algorithm
-  tmp:=integer(u*factor);
-  y:=if noEvent(u*factor >= tmp+0.5) then (tmp+1)/factor else (tmp)/factor;
-  annotation (Documentation(info="<html><h4>
-  <span style=\"color:#008000\">Overview</span>
-</h4>&lt;
+  y := if (x>0) then floor(x*fac + 0.5)/fac else ceil(x*fac - 0.5)/fac;
+
+annotation (
+Documentation(info="<html>
 <p>
-  This function is there to round values. Same as <b><a href=
-  \"Modelica.Blocks.Nonlinear.VariableLimiter\">Modelica.Blocks.Nonlinear.VariableLimiter</a></b>
-  but it's a function.
+Function that outputs the input after rounding it to <code>n</code> digits.
 </p>
-<h4>
-  <span style=\"color:#008000\">Known Limitations</span>
-</h4>
 <p>
-  The precision should not be set higher than 3 or 4 digits, otherwise
-  simulation time will increase significantly.
+For example,
 </p>
-<h4>
-  <span style=\"color:#008000\">Concept</span>
-</h4>
-<p>
-  Rounding real input signals to the given number of digits after the
-  decimal point. The output is a real. This function may be used in
-  conjunction with lookup tables that must not be interpolatated. The
-  table data must then be provied with the set precision.
-</p>
-</html>",
-        revisions="<html><ul>
-  <li>
-    <i>April 11, 2013&#160;</i> by Ole Odendahl:<br/>
-    Formatted documentation appropriately
-  </li>
-  <li>
-    <i>July, 2007&#160;</i> by Peter Matthes:<br/>
-    Implemented.
-  </li>
+<ul>
+<li>
+set <code>n = 0</code> to round to the nearest integer,
+</li>
+<li>
+set <code>n = 1</code> to round to the next decimal point, and
+</li>
+<li>
+set <code>n = -1</code> to round to the next multiple of ten.
+</li>
 </ul>
-</html>"));
+<p>
+Hence, the function outputs
+</p>
+<pre>
+    y = floor(x*(10^n) + 0.5)/(10^n)  for  x &gt; 0,
+    y = ceil( x*(10^n) - 0.5)/(10^n)  for  x &lt; 0.
+</pre>
+<p>
+To use this function as a block, use
+<a href=\"modelica://AixLib.Controls.OBC.CDL.Reals.Round\">
+AixLib.Controls.OBC.CDL.Reals.Round</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 30, 2024, by Michael Wetter:<br/>
+Removed wrong <code>parameter</code> declaration on a protected variable which causes an error in
+Dymola 2025x beta1.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3978\">Buildings, #3978</a>.
+</li>
+<li>
+March 2, 2020, by Michael Wetter:<br/>
+First implementation.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2170\">Buildings, #2170</a>.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end round;

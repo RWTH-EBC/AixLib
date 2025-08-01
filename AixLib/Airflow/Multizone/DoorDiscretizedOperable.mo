@@ -136,7 +136,7 @@ as it seems to try negative values for the density during iterative solutions.
 August 12, 2011 by Michael Wetter:<br/>
 Changed model to use the new function
 <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
-Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
+AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
 </li>
 <li>
 July 20, 2010 by Michael Wetter:<br/>

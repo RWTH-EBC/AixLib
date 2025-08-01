@@ -7,9 +7,6 @@ model WetCoilEffectivenessNTU
     final computeFlowResistance1=true,
     final computeFlowResistance2=true);
 
-  import con = AixLib.Fluid.Types.HeatExchangerConfiguration;
-  import flo = AixLib.Fluid.Types.HeatExchangerFlowRegime;
-
   constant Boolean use_dynamicFlowRegime = false
     "If true, flow regime is determined using actual flow rates";
   // This switch is declared as a constant instead of a parameter
@@ -18,7 +15,7 @@ model WetCoilEffectivenessNTU
   //   See discussions in https://github.com/ibpsa/modelica-ibpsa/pull/1683
 
   parameter AixLib.Fluid.Types.HeatExchangerConfiguration configuration=
-    con.CounterFlow
+    AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow
     "Heat exchanger configuration";
   parameter Real r_nominal=2/3
     "Ratio between air-side and water-side convective heat transfer coefficient";
@@ -220,9 +217,9 @@ protected
     AixLib.Fluid.HeatExchangers.BaseClasses.determineWaterIndex(
       Medium2.substanceNames)
     "Index of water";
-  parameter flo flowRegime_nominal(fixed=false)
+  parameter AixLib.Fluid.Types.HeatExchangerFlowRegime flowRegime_nominal(fixed=false)
     "Heat exchanger flow regime at nominal flow rates";
-  flo flowRegime(fixed=false, start=flowRegime_nominal)
+  AixLib.Fluid.Types.HeatExchangerFlowRegime flowRegime(fixed=false, start=flowRegime_nominal)
     "Heat exchanger flow regime";
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea
@@ -296,29 +293,29 @@ initial equation
   cp2_nominal = Medium2.specificHeatCapacityCp(sta2_default);
   C1_flow_nominal = m1_flow_nominal*cp1_nominal;
   C2_flow_nominal = m2_flow_nominal*cp2_nominal;
-  if (configuration == con.CrossFlowStream1MixedStream2Unmixed) then
+  if (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1MixedStream2Unmixed) then
     flowRegime_nominal = if (C1_flow_nominal < C2_flow_nominal)
       then
-        flo.CrossFlowCMinMixedCMaxUnmixed
+        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed
       else
-        flo.CrossFlowCMinUnmixedCMaxMixed;
-  elseif (configuration == con.CrossFlowStream1UnmixedStream2Mixed) then
+        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed;
+  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1UnmixedStream2Mixed) then
     flowRegime_nominal = if (C1_flow_nominal < C2_flow_nominal)
       then
-        flo.CrossFlowCMinUnmixedCMaxMixed
+        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed
       else
-        flo.CrossFlowCMinMixedCMaxUnmixed;
-  elseif (configuration == con.ParallelFlow) then
-    flowRegime_nominal = flo.ParallelFlow;
-  elseif (configuration == con.CounterFlow) then
-    flowRegime_nominal = flo.CounterFlow;
-  elseif (configuration == con.CrossFlowUnmixed) then
-    flowRegime_nominal = flo.CrossFlowUnmixed;
+        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed;
+  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.ParallelFlow) then
+    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.ParallelFlow;
+  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow) then
+    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.CounterFlow;
+  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowUnmixed) then
+    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed;
   else
     // Invalid flow regime. Assign a value to flowRegime_nominal, and stop with an assert
-    flowRegime_nominal = flo.CrossFlowUnmixed;
-    assert(configuration >= con.ParallelFlow and
-      configuration <= con.CrossFlowStream1UnmixedStream2Mixed,
+    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed;
+    assert(configuration >= AixLib.Fluid.Types.HeatExchangerConfiguration.ParallelFlow and
+      configuration <= AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1UnmixedStream2Mixed,
       "Invalid heat exchanger configuration.");
   end if;
 
@@ -326,33 +323,33 @@ equation
   // Assign the flow regime for the given heat exchanger configuration and
   // mass flow rates
   if use_dynamicFlowRegime then
-    if (configuration == con.ParallelFlow) then
+    if (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.ParallelFlow) then
       flowRegime = if (C1_flow*C2_flow >= 0)
         then
-          flo.ParallelFlow
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.ParallelFlow
         else
-          flo.CounterFlow;
-    elseif (configuration == con.CounterFlow) then
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.CounterFlow;
+    elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow) then
       flowRegime = if (C1_flow*C2_flow >= 0)
         then
-          flo.CounterFlow
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.CounterFlow
         else
-          flo.ParallelFlow;
-    elseif (configuration == con.CrossFlowUnmixed) then
-      flowRegime = flo.CrossFlowUnmixed;
-    elseif (configuration == con.CrossFlowStream1MixedStream2Unmixed) then
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.ParallelFlow;
+    elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowUnmixed) then
+      flowRegime = AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed;
+    elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1MixedStream2Unmixed) then
       flowRegime = if (C1_flow < C2_flow)
         then
-          flo.CrossFlowCMinMixedCMaxUnmixed
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed
         else
-          flo.CrossFlowCMinUnmixedCMaxMixed;
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed;
     else
-      // have ( configuration == con.CrossFlowStream1UnmixedStream2Mixed)
+      // have ( configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1UnmixedStream2Mixed)
       flowRegime = if (C1_flow < C2_flow)
         then
-          flo.CrossFlowCMinUnmixedCMaxMixed
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed
         else
-          flo.CrossFlowCMinMixedCMaxUnmixed;
+          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed;
     end if;
   else
     flowRegime = flowRegime_nominal;
@@ -652,6 +649,12 @@ Fuzzy identification of systems and its applications to modeling and control.
 &nbsp;IEEE transactions on systems, man, and cybernetics, (1), pp.116-132.</p>
 </html>",                    revisions="<html>
 <ul>
+<li>
+February 7, 2025, by Jelger Jansen:<br/>
+Removed <code>import</code> statement.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1961\">IBPSA, #1961</a>.
+</li>
 <li>
 February 3, 2023, by Jianjun Hu:<br/>
 Added <code>noEvent()</code> in the assertion function to avoid Optimica to not converge.<br/>

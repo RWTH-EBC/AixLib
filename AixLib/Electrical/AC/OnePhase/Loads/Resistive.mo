@@ -163,7 +163,7 @@ January 29, 2019, by Michael Wetter:<br/>
 Added <code>replaceable</code> for terminal.
 </li>
 <li>May 14, 2015, by Marco Bonvini:<br/>
-Changed parent class to <a href=\"modelica://Buildings.Electrical.Interfaces.ResistiveLoad\">
+Changed parent class to <a href=\"modelica://AixLib.Electrical.Interfaces.ResistiveLoad\">
 AixLib.Electrical.Interfaces.ResistiveLoad</a> in order
 to help openmodelica parsing the model. This fixes issue
 <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/415\">#415</a>.

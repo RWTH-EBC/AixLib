@@ -11,8 +11,8 @@ The examples illustrate
 the scope of the library. Smaller examples that typically only
 use models from a few packages can be found in the individual packages.
 For example, see
-<a href=\"modelica://Buildings.Airflow.Multizone.Examples\">
-Buildings.Airflow.Multizone.Examples</a> for examples of
+<a href=\"modelica://AixLib.Airflow.Multizone.Examples\">
+AixLib.Airflow.Multizone.Examples</a> for examples of
 multizone airflow and contaminant transport models, or
 <a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples\">
 AixLib.Fluid.HeatExchangers.Examples</a> for

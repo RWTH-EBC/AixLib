@@ -17,6 +17,6 @@ record GenericAirToWater
   <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.AirToWaterTableData2D\">
   AixLib.Fluid.HeatPumps.ModularReversible.AirToWaterTableData2D</a>.
 </p>
-</html>"),
+</html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
 end GenericAirToWater;
