@@ -189,9 +189,9 @@ public
   Modelica.Blocks.Math.Gain gain1(k=-1)
     annotation (Placement(transformation(extent={{-182,-104},{-202,-84}})));
   Modelica.Blocks.Math.Gain gain2(k=-1)
-    annotation (Placement(transformation(extent={{-108,-68},{-88,-48}})));
+    annotation (Placement(transformation(extent={{-116,-68},{-96,-48}})));
   Modelica.Blocks.Math.Gain gain3(k=-1)
-    annotation (Placement(transformation(extent={{-44,-86},{-64,-66}})));
+    annotation (Placement(transformation(extent={{-44,-92},{-64,-72}})));
 equation
 
 //   if fromKelvin1.Celsius > THotHeatCircuitMax or  fromKelvin2.Celsius > THotCoolingWaterMax then
@@ -326,78 +326,41 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(setpoint.y, fanCC.y)
     annotation (Line(points={{-53.5,-16},{-48,-16}}, color={0,0,127}));
-<<<<<<< HEAD
+  connect(t_cooling_setpoint.y, gain2.u)
+    annotation (Line(points={{-128.1,-58},{-118,-58}}, color={0,0,127}));
+  connect(PID3.u_s, gain2.y)
+    annotation (Line(points={{-86,-58},{-95,-58}}, color={0,0,127}));
   connect(PID3.y, val.y)
-    annotation (Line(points={{-57,-58},{-48,-58}}, color={0,0,127}));
-=======
->>>>>>> origin/issue1147_moduleEnergySystem
-  connect(TColdCoolingWater.port_b, val.port_1) annotation (Line(points={{-28,-88},
-          {-36,-88},{-36,-68}}, color={0,127,255}));
-  connect(fanCC.port_a, val.port_2)
-    annotation (Line(points={{-36,-26},{-36,-48}}, color={0,127,255}));
-  connect(genericCHP.port_b, THotCoolingWater.port_a) annotation (Line(points={{
-          14,0},{48,0},{48,-88},{46,-88}}, color={0,127,255}));
-  connect(genericCHP.port_b, val.port_3) annotation (Line(points={{14,0},{48,0},
-          {48,-58},{-26,-58}}, color={0,127,255}));
+    annotation (Line(points={{-63,-58},{-48,-58}}, color={0,0,127}));
+  connect(gain3.y, PID3.u_m) annotation (Line(points={{-65,-82},{-70,-82},{-70,
+          -70},{-74,-70}}, color={0,0,127}));
+  connect(TColdCoolingWater.T, gain3.u) annotation (Line(points={{-20,-79.2},{
+          -32,-79.2},{-32,-82},{-42,-82}}, color={0,0,127}));
+  connect(TColdCoolingWater.port_b, val.port_1) annotation (Line(points={{-28,
+          -88},{-32,-88},{-32,-68},{-36,-68}}, color={0,127,255}));
+  connect(THotCoolingWater.port_a, genericCHP.port_b) annotation (Line(points={
+          {46,-88},{54,-88},{54,0},{14,0}}, color={0,127,255}));
+  connect(genericCHP.port_b, val.port_3) annotation (Line(points={{14,0},{22,0},
+          {22,-2},{40,-2},{40,-58},{-26,-58}}, color={0,127,255}));
+  connect(val.port_2, fanCC.port_a)
+    annotation (Line(points={{-36,-48},{-36,-26}}, color={0,127,255}));
+  connect(max1.y, fanHC.y)
+    annotation (Line(points={{-195,-22},{-112,-22}}, color={0,0,127}));
+  connect(gain1.y, PID1.u_m) annotation (Line(points={{-203,-94},{-214,-94},{
+          -214,-76},{-226,-76}}, color={0,0,127}));
+  connect(gain.y, PID1.u_s) annotation (Line(points={{-177,-112},{-212,-112},{
+          -212,-100},{-250,-100},{-250,-64},{-238,-64}}, color={0,0,127}));
+  connect(PID1.y, max1.u2) annotation (Line(points={{-215,-64},{-208,-64},{-208,
+          -62},{-202,-62},{-202,-42},{-228,-42},{-228,-28},{-218,-28}}, color={
+          0,0,127}));
   connect(cHPControlBus.m_flow_set, max1.u1) annotation (Line(
-      points={{0,102},{-238,102},{-238,-16},{-218,-16}},
+      points={{0,102},{-118,102},{-118,94},{-236,94},{-236,-16},{-218,-16}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(max1.y, fanHC.y) annotation (Line(points={{-195,-22},{-112,-22}},
-                       color={0,0,127}));
-  connect(PID1.y, max1.u2) annotation (Line(points={{-215,-64},{-198,-64},{-198,
-          -40},{-228,-40},{-228,-28},{-218,-28}}, color={0,0,127}));
-  connect(genericCHP.THotEngine, gain.u)
-    annotation (Line(points={{4,-11},{4,-112},{-154,-112}}, color={0,0,127}));
-  connect(gain.y, PID1.u_m) annotation (Line(points={{-177,-112},{-226,-112},{
-          -226,-76}},
-                 color={0,0,127}));
-  connect(t_cooling_setpoint.y, gain1.u) annotation (Line(points={{-128.1,-58},
-          {-122,-58},{-122,-94},{-180,-94}},
-                                          color={0,0,127}));
-<<<<<<< HEAD
-  connect(gain1.y, PID1.u_s) annotation (Line(points={{-203,-94},{-246,-94},{
-          -246,-64},{-238,-64}},
-                            color={0,0,127}));
-  connect(PID3.u_s, gain2.y)
-    annotation (Line(points={{-80,-58},{-87,-58}}, color={0,0,127}));
-  connect(t_cooling_setpoint.y, gain2.u)
-    annotation (Line(points={{-128.1,-58},{-110,-58}}, color={0,0,127}));
-  connect(genericCHP.THotEngine, gain3.u)
-    annotation (Line(points={{4,-11},{4,-76},{-42,-76}}, color={0,0,127}));
-  connect(gain3.y, PID3.u_m)
-    annotation (Line(points={{-65,-76},{-68,-76},{-68,-70}}, color={0,0,127}));
-=======
-  connect(gain1.y, PID1.u_s) annotation (Line(points={{-221,-94},{-246,-94},{-246,
-          -46},{-238,-46}}, color={0,0,127}));
-  connect(gain1.y, PID3.u_s) annotation (Line(points={{-221,-94},{-220,-94},{
-          -220,-72},{-86,-72},{-86,-58}}, color={0,0,127}));
-  connect(gain.y, PID3.u_m) annotation (Line(points={{-195,-112},{-184,-112},{
-          -184,-86},{-74,-86},{-74,-70}}, color={0,0,127}));
-  connect(PID1.y, val.y) annotation (Line(points={{-215,-46},{-138,-46},{-138,
-          -50},{-48,-50},{-48,-58}}, color={0,0,127}));
->>>>>>> origin/issue1147_moduleEnergySystem
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
-                              Rectangle(
-          extent={{-60,80},{60,-80}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.VerticalCylinder,
-          fillColor={170,170,255})}),                            Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    experiment(
-      StopTime=1000,
-      Interval=1,
-      Tolerance=1e-06,
-      __Dymola_Algorithm="Dassl"),
-    Documentation(info="<html><p>
-  Model of a CHP-module with an inner cooling circuit and a control
-  unit. Heat circuit and cooling circuit are connected with a heat
-  exchanger. Further informations are given in the submodel
-  discribtion.
-</p>
-</html>"));
+  connect(THotHeatCircuit.T, gain1.u) annotation (Line(points={{100,-89},{68,
+          -89},{68,-138},{-134,-138},{-134,-94},{-180,-94}}, color={0,0,127}));
 end ModularCHP_ElDriven;
