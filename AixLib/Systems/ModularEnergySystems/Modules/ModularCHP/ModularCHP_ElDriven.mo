@@ -334,8 +334,6 @@ equation
     annotation (Line(points={{-63,-58},{-48,-58}}, color={0,0,127}));
   connect(gain3.y, PID3.u_m) annotation (Line(points={{-65,-82},{-70,-82},{-70,
           -70},{-74,-70}}, color={0,0,127}));
-  connect(TColdCoolingWater.T, gain3.u) annotation (Line(points={{-20,-79.2},{
-          -32,-79.2},{-32,-82},{-42,-82}}, color={0,0,127}));
   connect(TColdCoolingWater.port_b, val.port_1) annotation (Line(points={{-28,
           -88},{-32,-88},{-32,-68},{-36,-68}}, color={0,127,255}));
   connect(THotCoolingWater.port_a, genericCHP.port_b) annotation (Line(points={
@@ -361,6 +359,10 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(THotHeatCircuit.T, gain1.u) annotation (Line(points={{100,-89},{68,
-          -89},{68,-138},{-134,-138},{-134,-94},{-180,-94}}, color={0,0,127}));
+  connect(t_cooling_setpoint.y, gain.u) annotation (Line(points={{-128.1,-58},{
+          -132,-58},{-132,-110},{-154,-110},{-154,-112}}, color={0,0,127}));
+  connect(genericCHP.THotEngine, gain3.u) annotation (Line(points={{4,-11},{6,
+          -11},{6,-82},{-42,-82}}, color={0,0,127}));
+  connect(genericCHP.THotEngine, gain1.u)
+    annotation (Line(points={{4,-11},{4,-94},{-180,-94}}, color={0,0,127}));
 end ModularCHP_ElDriven;
