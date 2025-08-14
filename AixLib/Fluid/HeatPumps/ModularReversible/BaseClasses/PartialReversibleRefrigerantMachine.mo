@@ -375,6 +375,7 @@ partial model PartialReversibleRefrigerantMachine
         origin={110,30})));
 // To avoid using the bus, set the section below to protected
 //@modelica_select_start @remove_AixLib
+protected
 //@modelica_select_end
   RefrigerantMachineControlBus sigBus
     "Bus with model outputs and possibly inputs" annotation (Placement(transformation(
