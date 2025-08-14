@@ -221,25 +221,8 @@ package HeatPump_Sources
     AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
         Placement(transformation(extent={{-18,84},{18,116}}), iconTransformation(
             extent={{-16,88},{18,118}})));
-    AixLib.Controls.Continuous.LimPID conPID(
-      controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.1,
-      Ti=20,
-      yMax=1,
-      Td=1,
-      yMin=0.1,
-      initType=Modelica.Blocks.Types.Init.InitialOutput,
-      y_start=1)
-      annotation (Placement(transformation(extent={{-66,-68},{-46,-48}})));
-    Modelica.Blocks.Math.Add add(k2=-1)
-      annotation (Placement(transformation(extent={{-130,-68},{-110,-48}})));
-    Modelica.Blocks.Sources.RealExpression mFlowEva1(y=DeltaTEvap)
-                      "massflow heat source"
-      annotation (Placement(transformation(extent={{-172,-76},{-148,-52}})));
     Modelica.Blocks.Math.Gain gain
       annotation (Placement(transformation(extent={{-90,-90},{-78,-78}})));
-    Modelica.Blocks.Math.Gain gain1
-      annotation (Placement(transformation(extent={{-94,-64},{-82,-52}})));
     Modelica.Blocks.Math.Product product1
       annotation (Placement(transformation(extent={{-6,-48},{-26,-28}})));
     Modelica.Blocks.Sources.RealExpression zero(y=1) annotation (Placement(
@@ -269,9 +252,6 @@ package HeatPump_Sources
             {12,-32},{-4,-32}}, color={0,0,127}));
     connect(product1.y, bouEvap_a.m_flow_in) annotation (Line(points={{-27,-38},
             {-32,-38},{-32,-11.2},{13.2,-11.2}}, color={0,0,127}));
-    connect(switch1.y, add.u1) annotation (Line(points={{1,50},{16,50},{16,16},{-50,
-            16},{-50,14},{-132,14},{-132,-52}},
-                                              color={0,0,127}));
     connect(sigBus.TSourceSet, switch1.u3) annotation (Line(
         points={{0.09,100.08},{0,100.08},{0,80},{-36,80},{-36,58},{-22,58}},
         color={255,204,51},
@@ -299,14 +279,6 @@ package HeatPump_Sources
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
 
-    connect(gain.y, conPID.u_m) annotation (Line(points={{-77.4,-84},{-68,-84},
-            {-68,-86},{-56,-86},{-56,-70}}, color={0,0,127}));
-    connect(mFlowEva1.y, add.u2)
-      annotation (Line(points={{-146.8,-64},{-132,-64}}, color={0,0,127}));
-    connect(add.y, gain1.u)
-      annotation (Line(points={{-109,-58},{-95.2,-58}}, color={0,0,127}));
-    connect(gain1.y, conPID.u_s)
-      annotation (Line(points={{-81.4,-58},{-68,-58}}, color={0,0,127}));
     connect(zero.y, switch2.u1) annotation (Line(points={{-24.8,-96},{-16,-96},{-16,
             -80},{2,-80},{2,-78}}, color={0,0,127}));
     connect(zero.y, switch2.u3) annotation (Line(points={{-24.8,-96},{-12,-96},{-12,
