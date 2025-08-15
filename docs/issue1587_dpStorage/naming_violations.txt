@@ -1,6 +1,46 @@
 
 
 
+AixLib/Fluid/Storage/Examples/StorageSolarCollector.mo
+1: Missing documentation, Name 'Medium' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package Medium = AixLib.Media.Water;
+
+2: Missing documentation, Name 'bufferStorage' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: buffer, Storage. Affected line: AixLib.Fluid.Storage.StorageDetailed bufferStorage( energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial, redeclare package MediumHC1 = Medium, redeclare package MediumHC2 = Medium, m1_flow_nominal=solarThermal.m_flow_nominal, m2_flow_nominal=solarThermal.m_flow_nominal, mHC1_flow_nominal=solarThermal.m_flow_nominal, useHeatingCoil2=false, useHeatingRod=false, TStart=fill(333.15, 10), redeclare AixLib.DataBase.Storage.Generic_New_2000l data(hHC1Up=2.1), n=10, hConIn=1500, hConOut=15, redeclare package Medium = Medium, hConHC1=1500, disableComputeFlowResistance=true) annotation (Placement(transformation(extent={{-10,14},{-30,34}})));
+
+3: Missing documentation, Name 'fixedTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fixed, Temperature. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15) annotation(Placement(transformation(extent={{-60,14}, {-40,34}})));
+
+4: Missing documentation, Name 'boundary_p' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boundary. Affected line: AixLib.Fluid.Sources.Boundary_pT boundary_p(redeclare package Medium = Medium,nPorts=1) annotation(Placement(transformation(extent={{86,74}, {66,94}})));
+
+5: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.PressureDrop res1( redeclare package Medium = Medium, m_flow_nominal=solarThermal.m_flow_nominal, dp_nominal=2000) annotation(Placement(transformation(extent={{-6,-10},{14,10}})));
+
+6: Missing documentation, Name 'boundary_ph2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boundary_ph. Affected line: AixLib.Fluid.Sources.Boundary_pT boundary_ph2(nPorts=1, redeclare package Medium = Medium) annotation(Placement(transformation(extent = {{10, -10}, {-10, 10}}, rotation = 180, origin={-76,52})));
+
+7: Missing documentation. Affected line: AixLib.Fluid.FixedResistances.PressureDrop res( redeclare package Medium = Medium, allowFlowReversal=true, m_flow_nominal=solarThermal.m_flow_nominal, dp_nominal=2000) annotation(Placement(transformation(extent={{-40,-26},{-20,-6}})));
+
+8: Missing documentation, Name 'solarThermal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: solar, Thermal. Affected line: AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal( vol(T(start=298.15, fixed=true)), Collector=AixLib.DataBase.SolarThermal.FlatCollector(), A=20, redeclare package Medium = Medium, m_flow_nominal=0.04, volPip=1) annotation (Placement(transformation(extent={{24,-10},{44,10}})));
+
+9: Missing documentation, Name 'pulse' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pulse. Affected line: Modelica.Blocks.Sources.Pulse pulse(period = 3600, width=10, amplitude=0.05, offset=0) annotation(Placement(transformation(extent={{-96,-14},{-76,6}})));
+
+10: Missing documentation, Name 'valve' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: valve. Affected line: AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valve( redeclare package Medium = Medium, m_flow_nominal=solarThermal.m_flow_nominal, dpValve_nominal=2000, dpFixed_nominal=bufferStorage.dpHC1Fixed_nominal) annotation (Placement(transformation( extent={{-10,9},{10,-9}}, rotation=90, origin={69,42})));
+
+11: Missing documentation, Name 'temperatureSensor' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: temperature, Sensor. Affected line: AixLib.Fluid.Sensors.TemperatureTwoPort temperatureSensor(redeclare package Medium = Medium, m_flow_nominal=0.01) annotation(Placement(transformation(extent={{48,-10},{68,10}})));
+
+12: Missing documentation. Affected line: Modelica.Blocks.Continuous.LimPID PI(controllerType = Modelica.Blocks.Types.SimpleController.PI, k=0.005, Ti=60, yMax = 0.999, yMin = 0) annotation(Placement(transformation(extent = {{-6, 6}, {6, -6}}, rotation = 90, origin={90,14})));
+
+13: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const(k = 273.15 + 70) annotation(Placement(transformation(extent={{74,-10},{80,-4}})));
+
+14: Missing documentation. Affected line: Modelica.Blocks.Math.Add add(k2 = -1) annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation = 90, origin={88,30})));
+
+15: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant const1(k = 1) annotation(Placement(transformation(extent={{70,20},{78,28}})));
+
+16: Missing documentation, Name 'hotSummerDay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Summer. Affected line: Modelica.Blocks.Sources.CombiTimeTable hotSummerDay( extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic, table=[0,21,0; 3600,20.6,0; 7200,20.5,0; 10800,20.4,0; 14400,20,6; 18000,20.5, 106; 21600,22.4,251; 25200,24.1,402; 28800,26.3,540; 32400,28.4,657; 36000, 30,739; 39600,31.5,777; 43200,31.5,778; 46800,32.5,737; 50400,32.5,657;54000,32.5,544; 57600,32.5,407; 61200,32.5,257; 64800,31.6,60; 68400,30.8, 5; 72000,22.9,0; 75600,21.2,0; 79200,20.6,0; 82800,20.3,0], offset={273.15,0.01}) annotation (Placement(transformation(extent={{10,32},{30,52}})));
+
+17: Missing documentation, Name 'pump' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump. Affected line: AixLib.Fluid.Movers.FlowControlled_dp pump(redeclare package Medium = Medium, energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState, m_flow_nominal=solarThermal.m_flow_nominal, per(pressure(V_flow={0,solarThermal.m_flow_nominal/1000,solarThermal.m_flow_nominal /(1000*0.8)}, dp={dpPumpInput.k/0.8,dpPumpInput.k,0}))) annotation (Placement(transformation(extent={{6,60},{-14,80}})));
+
+18: Missing documentation, Name 'dpPumpInput' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pump, Input. Affected line: Modelica.Blocks.Sources.Constant dpPumpInput(k=55000) annotation (Placement(transformation(extent={{32,80},{12,100}})));
+
+19: Missing documentation, Name 'boundary' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boundary. Affected line: AixLib.Fluid.Sources.MassFlowSource_T boundary( redeclare package Medium = Medium, use_m_flow_in=true, use_T_in=false, T=283.15, nPorts=1) annotation (Placement(transformation(extent={{-68,-26},{-48,-6}})));
+
+
 AixLib/Fluid/Storage/StorageDetailed.mo
 1: Name 'MediumHC1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumHC1 = Modelica.Media.Interfaces.PartialMedium "Medium model for HC1" annotation (choicesAllMatching = true, Dialog(group="Medium"));
 
