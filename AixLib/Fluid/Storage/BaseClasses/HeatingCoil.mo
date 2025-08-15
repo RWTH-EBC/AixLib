@@ -46,7 +46,7 @@ model HeatingCoil "Heating coil for heat storage model"
     each final thickness=0.5*(pipeHC.d_o - pipeHC.d_i),
     each final T_start_in=TStart,
     each final T_start_out=TStart,
-    each res(disableComputeFlowResistance=disableComputeFlowResistance))
+    each final disableComputeFlowResistance=disableComputeFlowResistance)
                                      annotation (Placement(transformation(extent={{-16,-16},
             {16,16}})));
 
