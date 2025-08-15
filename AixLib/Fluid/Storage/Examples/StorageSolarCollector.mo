@@ -19,8 +19,9 @@ model StorageSolarCollector
     hConIn=1500,
     hConOut=15,
     redeclare package Medium = Medium,
-    hConHC1=1500)
-		annotation (Placement(transformation(extent={{-10,14},{-30,34}})));
+    hConHC1=1500,
+    disableComputeFlowResistance=true)
+  annotation (Placement(transformation(extent={{-10,14},{-30,34}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 283.15)
 	annotation(Placement(transformation(extent={{-60,14},
             {-40,34}})));
@@ -58,7 +59,9 @@ model StorageSolarCollector
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valve(
     redeclare package Medium = Medium,
     m_flow_nominal=solarThermal.m_flow_nominal,
-    dpValve_nominal=2000) annotation (Placement(transformation(
+    dpValve_nominal=2000,
+    dpFixed_nominal=bufferStorage.dpHC1Fixed_nominal)
+                          annotation (Placement(transformation(
         extent={{-10,9},{10,-9}},
         rotation=90,
         origin={69,42})));
@@ -169,6 +172,13 @@ equation
   <li>
     <i>13.12.2013</i> by Sebastian Stinner:<br/>
     implemented
+  </li>
+</ul>
+</html>", revisions="<html>
+<ul>
+  <li>April 10, 2025, by Fabian Wuellhorst:<br/>
+  Use new option to calculate pressure drops externally, for  <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1587\">#1587</a>.
   </li>
 </ul>
 </html>"));
