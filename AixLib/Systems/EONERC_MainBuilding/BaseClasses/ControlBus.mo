@@ -22,6 +22,7 @@ expandable connector ControlBus "Generation bus"
   SI.Temperature T_Gen_Set;
   SI.Temperature T_room_heat_Set;
   SI.Temperature T_room_cool_Set;
+  Real CO2_Set;
 
 
   annotation (
