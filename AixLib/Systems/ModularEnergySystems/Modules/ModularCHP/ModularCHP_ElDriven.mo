@@ -37,10 +37,7 @@ model ModularCHP_ElDriven
     dp1_nominal=2500,
     dp2_nominal=2500,
     configuration=AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow,
-    use_Q_flow_nominal=true,
-    Q_flow_nominal=Q_flow_nom,
-    T_a1_nominal=359.41,
-    T_a2_nominal=TColdNom,
+    use_Q_flow_nominal=false,
     eps_nominal=0.9,
     r_nominal=1)
     annotation (Placement(transformation(extent={{18,-104},{-4,-84}})));
@@ -192,6 +189,11 @@ public
     annotation (Placement(transformation(extent={{-116,-68},{-96,-48}})));
   Modelica.Blocks.Math.Gain gain3(k=-1)
     annotation (Placement(transformation(extent={{-44,-92},{-64,-72}})));
+  Fluid.Sensors.MassFlowRate senMasFloCHP(redeclare package Medium =
+        AixLib.Media.Water "Water") annotation (Placement(transformation(
+        extent={{8,8},{-8,-8}},
+        rotation=180,
+        origin={72,-100})));
 equation
 
 //   if fromKelvin1.Celsius > THotHeatCircuitMax or  fromKelvin2.Celsius > THotCoolingWaterMax then
@@ -222,9 +224,6 @@ equation
     annotation (Line(points={{-12,-88},{-4,-88}},  color={0,127,255}));
   connect(TColdHeatCircuit.port_b, hex.port_a2)
     annotation (Line(points={{-74,-100},{-4,-100}},color={0,127,255}));
-  connect(hex.port_b2, THotHeatCircuit.port_a)
-    annotation (Line(points={{18,-100},{90,-100}},
-                                                 color={0,127,255}));
   connect(genericCHP.maxThermalPower, cHPControlBus.maxTermalPower) annotation (
      Line(points={{10.8,11.8},{10.8,34},{18,34},{18,78},{0,78},{0,102}}, color={
           0,0,127}), Text(
@@ -365,4 +364,14 @@ equation
           -11},{6,-82},{-42,-82}}, color={0,0,127}));
   connect(genericCHP.THotEngine, gain1.u)
     annotation (Line(points={{4,-11},{4,-94},{-180,-94}}, color={0,0,127}));
+  connect(hex.port_b2, senMasFloCHP.port_a)
+    annotation (Line(points={{18,-100},{64,-100}}, color={0,127,255}));
+  connect(senMasFloCHP.port_b, THotHeatCircuit.port_a)
+    annotation (Line(points={{80,-100},{90,-100}}, color={0,127,255}));
+  connect(senMasFloCHP.m_flow, cHPControlBus.m_flow) annotation (Line(points={{
+          72,-91.2},{72,-46},{0,-46},{0,102}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,6},{-3,6}},
+      horizontalAlignment=TextAlignment.Right));
 end ModularCHP_ElDriven;
