@@ -1,15 +1,16 @@
 within AixLib.Utilities.Interfaces;
 connector SolarRad_in
-  "Scalar total radiation connector (input) with additional direct, diffuse and from ground reflected radiation"
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I
-    "total radiation normal to the surface";
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I_dir
-    "direct radiation normal to the surface";
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I_diff
-    "diffuse radiation normal to the surface";
-  input Modelica.Units.SI.RadiantEnergyFluenceRate I_gr
-    "radiation due to the ground reflection normal to the surface";
-  input Real  AOI(unit = "rad") "Angle of incidence of surface";
+  "Scalar total radiation connector (input) with additional direct, diffuse and 
+  from ground reflected radiation"
+  input Modelica.Units.SI.RadiantEnergyFluenceRate H
+    "Total solar radiation normal to the surface";
+  input Modelica.Units.SI.RadiantEnergyFluenceRate HDir
+    "Direct solar radiation normal to the surface";
+  input Modelica.Units.SI.RadiantEnergyFluenceRate HDif
+    "Diffuse solar radiation";
+  input Modelica.Units.SI.RadiantEnergyFluenceRate HGrd
+    "Ground reflected solar radiation";
+  input Modelica.Units.SI.Angle incAng "Solar incidence angle";
   annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-20, 58}, {96, -58}}, lineColor = {255, 128, 0}), Rectangle(extent = {{52, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
             fillPattern =                                                                                                    FillPattern.Solid), Line(points = {{38, 62}, {38, 80}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{-24, 0}, {-78, 0}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{-6, 44}, {-46, 80}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{-20, 22}, {-72, 40}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{14, 58}, {2, 80}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{14, -58}, {2, -80}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{-8, -44}, {-46, -80}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{-20, -22}, {-74, -40}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Line(points = {{38, -80}, {38, -62}}, color = {255, 128, 0}, smooth = Smooth.Bezier), Polygon(points = {{0, 6}, {0, 28}, {0, 28}, {52, 0}, {0, -26}, {0, -26}, {0, -6}, {0, 6}}, lineColor = {0, 0, 0}, fillColor = {255, 0, 0},
             fillPattern =                                                                                                    FillPattern.Solid)}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-20, 58}, {96, -58}}, lineColor = {255, 128, 0}), Rectangle(extent = {{52, 100}, {100, -100}}, lineColor = {0, 0, 0}, fillColor = {215, 215, 215},
@@ -37,7 +38,7 @@ connector SolarRad_in
   <li>radiation reflected from the ground (as part of the total
   radiation)
   </li>
-  <li>angle of incidence on the surface
+  <li>incidence angle on the surface
   </li>
 </ul>
 <p>
@@ -47,23 +48,28 @@ connector SolarRad_in
   sure to write the appropriate equations for all the connector's
   components.
 </p>
+</html>", revisions="<html>
 <ul>
-  <li>
-    <i>February 22, 2015&#160;</i> by Ana Constantin:<br/>
-    Added the components of the total radiation
-  </li>
-  <li>
-    <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
-    Uses components from MSL and respects the naming conventions
-  </li>
-  <li>
-    <i>April 01, 2014</i> by Moritz Lauster:<br/>
-    Renamed
-  </li>
-  <li>
-    <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
-    Formatted documentation appropriately
-  </li>
+<li>
+  March 13, 2025, by Jun Jiang:<br/>
+  Change variable names (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1525\">issue 1525</a>)
+</li>
+<li>
+  <i>February 22, 2015&#160;</i> by Ana Constantin:<br/>
+  Added the components of the total radiation
+</li>
+<li>
+  <i>Mai 19, 2014&#160;</i> by Ana Constantin:<br/>
+  Uses components from MSL and respects the naming conventions
+</li>
+<li>
+  <i>April 01, 2014</i> by Moritz Lauster:<br/>
+  Renamed
+</li>
+<li>
+  <i>April 10, 2013&#160;</i> by Ole Odendahl:<br/>
+  Formatted documentation appropriately
+</li>
 </ul>
 </html>"));
 end SolarRad_in;

@@ -206,7 +206,7 @@ The choices are between a null current or the linearized model.
 <li>
 November 8, 2016, by Michael Wetter:<br/>
 Added <code>replaceable</code> to terminal redeclaration as they are redeclared by
-<a href=\"modelica://Buildings.Electrical.AC.ThreePhasesBalanced.Loads.Inductive\">
+<a href=\"modelica://AixLib.Electrical.AC.ThreePhasesBalanced.Loads.Inductive\">
 AixLib.Electrical.AC.ThreePhasesBalanced.Loads.Inductive</a>.
 </li>
 <li>

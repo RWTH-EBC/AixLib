@@ -113,7 +113,7 @@ model ThermalZone "Thermal zone containing moisture balance"
   corG corGMod(
     final n=zoneParam.nOrientations,
     final UWin=zoneParam.UWin)
- if sum(zoneParam.ATransparent) > 0 "Correction factor for solar transmission"
+    "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{-16,43},{-4,55}})));
   replaceable EquivalentAirTemperature.VDI6007WithWindow eqAirTempWall(
     withLongwave=true,
@@ -230,7 +230,6 @@ model ThermalZone "Thermal zone containing moisture balance"
     final nOrientations=zoneParam.nOrientations,
     final maxIrrs=zoneParam.maxIrr,
     final gValues=zoneParam.shadingFactor)
- if sum(zoneParam.ATransparent) > 0
     annotation (Placement(transformation(extent={{4,44},{10,50}})));
 
   // Air Exchange
@@ -743,8 +742,8 @@ equation
   end if;
 
   if sum(zoneParam.AIze) > 0 then
-    connect(ROM.ize, izeHeaFlow) annotation (Line(points={{83.5,91.8},{80,91.8},
-            {80,96},{104,96}}, color={191,0,0}));
+    connect(ROM.ize, izeHeaFlow) annotation (Line(points={{80.5,92},{80,92},{80,
+            96},{104,96}},     color={191,0,0}));
   end if;
 
 if use_NaturalAirExchange and not use_MechanicalAirExchange then

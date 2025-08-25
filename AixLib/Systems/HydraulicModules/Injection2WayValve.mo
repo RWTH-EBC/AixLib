@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model Injection2WayValve
   "Injection circuit with pump and two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
@@ -8,18 +8,16 @@ model Injection2WayValve
     annotation (Dialog(tab="Advanced"));
 
 
-  Fluid.Actuators.Valves.TwoWayTable  valve(
+  Fluid.Actuators.Valves.TwoWayTable valve(
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final allowFlowReversal=allowFlowReversal,
     Kv=Kv,
-    order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     y_start=0,
-    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear())
-           annotation (Dialog(enable=true, group="Actuators"), Placement(
-        transformation(
+    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear()) annotation (
+      Dialog(enable=true, group="Actuators"), Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=0,
         origin={-42,-60})));
