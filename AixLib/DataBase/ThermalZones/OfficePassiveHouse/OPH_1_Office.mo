@@ -86,16 +86,16 @@ record OPH_1_Office "Office zone of office building"
     heaLoadFacGrd=0,
     KRCool=1000,
     TNCool=1,
-    CoolerOn=false,
+    CoolerOn=true,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false,
-    traSysHeatK=1,
-    traSysHeatT=1,
-    traSysCoolK=1,
-    traSysCoolT=1,
-    traSysFraHeaRad=0,
-    traSysFraCooRad=0);
+    traSysHeatK=1000,
+    traSysHeatT=60,
+    traSysCoolK=1000,
+    traSysCoolT=60,
+    traSysFraHeaRad=0.5,
+    traSysFraCooRad=0.5);
 
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>

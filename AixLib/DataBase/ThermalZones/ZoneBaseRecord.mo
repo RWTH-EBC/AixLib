@@ -182,20 +182,13 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Minimum specific air flow supplied by the AHU";
   parameter Real maxAHU(unit="m3/(h.m2)")
     "Maximum specific air flow supplied by the AHU";
-  parameter Real shadingFactor[nOrientations] "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds.";
-  parameter Real maxIrr[nOrientations](unit="W/m2")        "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature.";
+
+  // Heating
   parameter Real hHeat "Upper limit controller output";
   parameter Real lHeat "Lower limit controller output";
   parameter Real KRHeat "Gain of the controller";
   parameter Modelica.Units.SI.Time TNHeat "Time constant of the controller";
   parameter Boolean HeaterOn "Use heater component";
-  parameter Real hCool "Upper limit controller output";
-  parameter Real lCool "Lower limit controller output";
-  parameter Modelica.Units.SI.ThermalConductance heaLoadFacOut "Factor for heat load calculation (part 1) , needs to be multiplied with (indoor set temperature - nominal outside temperature)";
-  parameter Modelica.Units.SI.ThermalConductance heaLoadFacGrd "Factor for heat load calculation, (part 2), needs to be multiplied with (indoor set temperature - nominal ground temperature)";
-  parameter Real KRCool "Gain of the controller";
-  parameter Modelica.Units.SI.Time TNCool "Time constant of the controller";
-  parameter Boolean CoolerOn "Use chiller component";
   parameter Modelica.Units.SI.Temperature TThresholdHeater
     "Threshold temperature below ideal heater is used" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true and withIdealThresholds==true));
 
@@ -211,8 +204,7 @@ record ZoneBaseRecord "Base record definition for zone records"
 
   // Heating & Cooling
   parameter Boolean withIdealThresholds=false
-    "Sets if the threshold temperatures for ideal heater and cooler should be used"; annotation(Documentation(info="<html><p>
-        be used";
+    "Sets if the threshold temperatures for ideal heater and cooler should be used";
   parameter Real traSysHeatK "Gain for PT1 for damped heating transfer";
   parameter Modelica.Units.SI.Time traSysHeatT
     "Time Constant for PT1 for damped heating transfer";
@@ -224,7 +216,9 @@ record ZoneBaseRecord "Base record definition for zone records"
 
   // Initialization
   parameter Modelica.Units.SI.Temperature T_start "Initial temperature" annotation(Dialog(tab="Initialization"));
-   annotation(Documentation(info="<html><p>
+                                                                                     annotation(Documentation(info="<html><p>
+        be used"),
+              Documentation(info="<html><p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
   It aggregates all parameters at one record to enhance usability,
@@ -275,4 +269,6 @@ record ZoneBaseRecord "Base record definition for zone records"
   </li>
 </ul>
 </html>"));
+
+
 end ZoneBaseRecord;
