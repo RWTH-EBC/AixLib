@@ -1,0 +1,267 @@
+
+
+
+AixLib/Fluid/DistrictHeatingCooling/Pipes/PlugFlowPipeZeta.mo
+1: Name 'use_zeta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_zeta. Affected line: parameter Boolean use_zeta=false "= true HydraulicResistance is implemented, zeta value has to be given next" annotation(Dialog(group="Additional pressurelosses"));
+
+2: Name 'dh' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dh. Affected line: parameter Modelica.Units.SI.Length dh=sqrt(4*m_flow_nominal/rho_default/ v_nominal/Modelica.Constants.pi) "Hydraulic diameter (assuming a round cross section area)" annotation (Dialog(group="Material"));
+
+3: Name 'v_nominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v. Affected line: parameter Modelica.Units.SI.Velocity v_nominal=1.5 "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)" annotation (Dialog(group="Nominal condition"));
+
+4: Name 'roughness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: roughness. Affected line: parameter Modelica.Units.SI.Height roughness=2.5e-5 "Average height of surface asperities (default: smooth steel pipe)" annotation (Dialog(group="Material"));
+
+5: Name 'length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: length. Affected line: parameter Modelica.Units.SI.Length length "Pipe length" annotation (Dialog(group="Material"));
+
+6: Name 'm_flow_small' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal) "Small mass flow rate for regularization of zero flow" annotation (Dialog(tab="Advanced"));
+
+7: Name 'kIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k. Affected line: parameter Modelica.Units.SI.ThermalConductivity kIns "Heat conductivity of pipe insulation, used to compute R" annotation (Dialog(group="Thermal resistance"));
+
+8: Name 'thickness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thickness. Affected line: parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness" annotation (Dialog(group="Material"));
+
+9: Name 'T_start_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)= Medium.T_default "Initialization temperature at pipe inlet" annotation (Dialog(tab="Initialization"));
+
+10: Name 'T_start_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)= T_start_in "Initialization temperature at pipe outlet" annotation (Dialog(tab="Initialization"));
+
+11: Name 'initDelay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: init, Delay. Affected line: parameter Boolean initDelay(start=false) = false "Initialize delay for a constant mass flow rate if true, otherwise start from 0" annotation (Dialog(tab="Initialization"));
+
+12: Name 'm_flow_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe" annotation (Dialog(tab="Initialization", enable=initDelay));
+
+13: Name 'sum_zetas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_zetas. Affected line: parameter Real sum_zetas=0 "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc." annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
+
+14: Name 'v_med' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v_med. Affected line: Modelica.Units.SI.Velocity v_med "Velocity of the medium in the pipe";
+
+15: Name 'heatPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)" annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
+16: Name 'plugFlowCore' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: plug, Core. Affected line: AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowCore plugFlowCore( redeclare final package Medium = Medium, final dh=dh, final v_nominal=v_nominal, final length=length, final C=C, final R=R, final m_flow_small=m_flow_small, final m_flow_nominal=m_flow_nominal, final T_start_in=T_start_in, final T_start_out=T_start_out, final m_flow_start=m_flow_start, final initDelay=initDelay, final from_dp=from_dp, final fac=if not use_zeta then fac else 1.0, final ReC=ReC, final thickness=thickness, final roughness=roughness, final allowFlowReversal=allowFlowReversal, final homotopyInitialization=homotopyInitialization, final linearized=linearized) "Describing the pipe behavior" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+17: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX( T=Medium.T_default, p=Medium.p_default, X=Medium.X_default) "Default medium state";
+
+18: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default= Medium.specificHeatCapacityCp(state=sta_default) "Heat capacity of medium";
+
+19: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( p=Medium.p_default, T=Medium.T_default, X=Medium.X_default) "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)" annotation (Dialog(group="Advanced"));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Pipes/PlugFlowPipeEmbedded.mo
+1: Name 'use_zeta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_zeta. Affected line: parameter Boolean use_zeta=false "= true HydraulicResistance is implemented, zeta value has to be given next" annotation(Dialog(group="Additional pressurelosses"));
+
+2: Name 'dh' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dh. Affected line: parameter Modelica.Units.SI.Length dh=sqrt(4*m_flow_nominal/rho_default/ v_nominal/Modelica.Constants.pi) "Hydraulic diameter (assuming a round cross section area)" annotation (Dialog(group="Material"));
+
+3: Name 'v_nominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v. Affected line: parameter Modelica.Units.SI.Velocity v_nominal=1.5 "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)" annotation (Dialog(group="Nominal condition"));
+
+4: Name 'roughness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: roughness. Affected line: parameter Modelica.Units.SI.Height roughness=2.5e-5 "Average height of surface asperities (default: smooth steel pipe)" annotation (Dialog(group="Material"));
+
+5: Name 'length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: length. Affected line: parameter Modelica.Units.SI.Length length "Pipe length" annotation (Dialog(group="Material"));
+
+6: Name 'm_flow_small' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal) "Small mass flow rate for regularization of zero flow" annotation (Dialog(tab="Advanced"));
+
+7: Name 'kIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k. Affected line: parameter Modelica.Units.SI.ThermalConductivity kIns "Heat conductivity of pipe insulation, used to compute R" annotation (Dialog(group="Thermal resistance"));
+
+8: Name 'thickness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thickness. Affected line: parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness" annotation (Dialog(group="Material"));
+
+9: Name 'T_start_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)= Medium.T_default "Initialization temperature at pipe inlet" annotation (Dialog(tab="Initialization"));
+
+10: Name 'T_start_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)= T_start_in "Initialization temperature at pipe outlet" annotation (Dialog(tab="Initialization"));
+
+11: Name 'initDelay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: init, Delay. Affected line: parameter Boolean initDelay(start=false) = false "Initialize delay for a constant mass flow rate if true, otherwise start from 0" annotation (Dialog(tab="Initialization"));
+
+12: Name 'm_flow_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe" annotation (Dialog(tab="Initialization", enable=initDelay));
+
+13: Name 'sum_zetas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_zetas. Affected line: parameter Real sum_zetas=0 "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc." annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
+
+14: Name 'thickness_soi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thickness_soi. Affected line: parameter Modelica.Units.SI.Length thickness_soi=0.6 "thickness of soil layer for heat loss calulcation" annotation (Dialog(tab="Soil"));
+
+15: Name 'nParallel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Parallel. Affected line: final parameter Integer nParallel = 1 "Number of identical parallel pipes" annotation(Dialog(tab="Soil"));
+
+16: Name 'v_med' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v_med. Affected line: Modelica.Units.SI.Velocity v_med "Velocity of the medium in the pipe";
+
+17: Missing documentation, Name 'plugFlowPipeZeta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: plug, Pipe, Zeta. Affected line: AixLib.Fluid.DistrictHeatingCooling.Pipes.PlugFlowPipeZeta plugFlowPipeZeta( redeclare final package Medium = Medium, final dh=dh, final v_nominal=v_nominal, final ReC=ReC, final roughness=roughness, final length=length, final m_flow_nominal=m_flow_nominal, final dIns=dIns, final kIns=kIns, final cPip=cPip, final rhoPip=rhoPip, final thickness=thickness, final R=R, final fac=fac, final sum_zetas=sum_zetas, final use_zeta=true) annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+18: Name 'heatPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)" annotation (Placement(transformation(extent={{-10,94},{10,114}}), iconTransformation(extent={{-10,94},{10,114}})));
+
+19: Missing documentation, Name 'cylindricHeatTransfer_1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cylindric, Heat, Transfer_. Affected line: AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_1( final energyDynamics=energyDynamics, final rho=rho_soi, final c=c, final d_in=dh + 2*thickness, final d_out=d_in + thickness_soi/3, final length=length, final lambda=lambda, T0=283.15) annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+
+20: Missing documentation, Name 'cylindricHeatTransfer_2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cylindric, Heat, Transfer_. Affected line: AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_2( final energyDynamics=energyDynamics, final rho=rho_soi, final c=c, final d_in=dh + 2*thickness + thickness_soi/3, final d_out=d_in + 2*thickness_soi/3, final length=length, final lambda=lambda, T0=283.15) annotation (Placement(transformation(extent={{-10,46},{10,66}})));
+
+21: Missing documentation, Name 'cylindricHeatTransfer_3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cylindric, Heat, Transfer_3. Affected line: AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylindricHeatTransfer_3( final energyDynamics=energyDynamics, final rho=rho_soi, final c=c, final d_in=dh + 2*thickness + 2*thickness_soi/3, final d_out=d_in + thickness_soi, final length=length, final lambda=lambda, T0=283.15) annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+
+22: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX( T=Medium.T_default, p=Medium.p_default, X=Medium.X_default) "Default medium state";
+
+23: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default= Medium.specificHeatCapacityCp(state=sta_default) "Heat capacity of medium";
+
+24: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( p=Medium.p_default, T=Medium.T_default, X=Medium.X_default) "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)" annotation (Dialog(group="Advanced"));
+
+
+AixLib/Fluid/Storage/Examples/TwoPhaseSeparator.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.MassFlowSource_h source( redeclare package Medium = Medium, m_flow=0.5, use_h_in=true, nPorts=1) "Source of constant mass flow and variable temperature" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-30,50})));
+
+2: Name 'twoPhaseSeperator' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Phase, Seperator. Affected line: AixLib.Fluid.Storage.TwoPhaseSeparator twoPhaseSeperator( redeclare package Medium = Medium, pTan0=pInl, show_T=true, show_V_flow=true, useHeatLoss=true, show_tankPropertiesDetailed=true, steSta=false, show_heatLosses=true, VTanInn=10e-3) "Model of a two-phase tank loacted after condenser" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sources.Boundary_ph sink( redeclare package Medium = Medium, use_p_in=true, h=hOut, nPorts=1) "Sink of constant temperature and variable pressure" annotation ( Placement(transformation( extent={{-10,10},{10,-10}}, rotation=180, origin={30,-50})));
+
+4: Name 'rampPOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ramp. Affected line: Modelica.Blocks.Sources.Ramp rampPOut( duration=500, height=pOut - pInl, offset=pInl, startTime=300) "Ramp to provide pressure at tank's outlet" annotation (Placement(transformation(extent={{90,-90},{70,-70}})));
+
+5: Name 'fixedTemperature' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fixed, Temperature. Affected line: Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T=275.15) "Fixed ambient temperature to simulate heat losses to ambient" annotation (Placement(transformation(extent={{90,-10},{70,10}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Pipes/StaticPipe.mo
+1: Name 'use_zeta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_zeta. Affected line: parameter Boolean use_zeta=false "= true HydraulicResistance is implemented, zeta value has to be given next" annotation(Dialog(group="Additional pressurelosses"));
+
+2: Name 'dh' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dh. Affected line: parameter Modelica.Units.SI.Length dh=sqrt(4*m_flow_nominal/rho_default/ v_nominal/Modelica.Constants.pi) "Hydraulic diameter (assuming a round cross section area)" annotation (Dialog(group="Material"));
+
+3: Name 'v_nominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v. Affected line: parameter Modelica.Units.SI.Velocity v_nominal=1.5 "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)" annotation (Dialog(group="Nominal condition"));
+
+4: Name 'roughness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: roughness. Affected line: parameter Modelica.Units.SI.Height roughness=2.5e-5 "Average height of surface asperities (default: smooth steel pipe)" annotation (Dialog(group="Material"));
+
+5: Name 'length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: length. Affected line: parameter Modelica.Units.SI.Length length "Pipe length" annotation (Dialog(group="Material"));
+
+6: Name 'm_flow_small' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal) "Small mass flow rate for regularization of zero flow" annotation (Dialog(tab="Advanced"));
+
+7: Name 'kIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k. Affected line: parameter Modelica.Units.SI.ThermalConductivity kIns "Heat conductivity of pipe insulation, used to compute R" annotation (Dialog(group="Thermal resistance"));
+
+8: Name 'thickness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thickness. Affected line: parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness" annotation (Dialog(group="Material"));
+
+9: Name 'T_start_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)= Medium.T_default "Initialization temperature at pipe inlet" annotation (Dialog(tab="Initialization"));
+
+10: Name 'T_start_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)= T_start_in "Initialization temperature at pipe outlet" annotation (Dialog(tab="Initialization"));
+
+11: Name 'initDelay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: init, Delay. Affected line: parameter Boolean initDelay(start=false) = false "Initialize delay for a constant mass flow rate if true, otherwise start from 0" annotation (Dialog(tab="Initialization"));
+
+12: Name 'm_flow_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe" annotation (Dialog(tab="Initialization", enable=initDelay));
+
+13: Name 'sum_zetas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_zetas. Affected line: parameter Real sum_zetas=0 "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc." annotation(Dialog(group="Additional pressurelosses", enable=use_zeta));
+
+14: Name 'v_med' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v_med. Affected line: Modelica.Units.SI.Velocity v_med "Velocity of the medium in the pipe";
+
+15: Name 'heatPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)" annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
+16: Name 'staticCore' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: static, Core. Affected line: AixLib.Fluid.DistrictHeatingCooling.Pipes.BaseClassesStatic.StaticCore staticCore( redeclare final package Medium = Medium, final dh=dh, final v_nominal=v_nominal, final length=length, final C=C, final R=R, final m_flow_small=m_flow_small, final m_flow_nominal=m_flow_nominal, final T_start_in=T_start_in, final T_start_out=T_start_out, final m_flow_start=m_flow_start, final initDelay=initDelay, final from_dp=from_dp, final fac=fac, final ReC=ReC, final thickness=thickness, final roughness=roughness, final allowFlowReversal=allowFlowReversal, final homotopyInitialization=homotopyInitialization, final linearized=linearized) "Describing the pipe behavior" annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+17: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX( T=Medium.T_default, p=Medium.p_default, X=Medium.X_default) "Default medium state";
+
+18: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default= Medium.specificHeatCapacityCp(state=sta_default) "Heat capacity of medium";
+
+19: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( p=Medium.p_default, T=Medium.T_default, X=Medium.X_default) "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)" annotation (Dialog(group="Advanced"));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/BaseClasses/PartialReversibleRefrigerantMachine.mo
+1: Name 'MediumEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumEva = Modelica.Media.Interfaces.PartialMedium "Medium on evaporator side" annotation (choicesAllMatching=true);
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable PartialModularRefrigerantCycle refCyc constrainedby PartialModularRefrigerantCycle(final use_rev=use_rev) "Model of the refrigerant cycle" annotation (Placement(transformation( extent={{-18,-18},{18,18}}, rotation=90)));
+
+3: Name 'RefrigerantCycleInertia' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Refrigerant, Cycle, Inertia. Affected line: replaceable model RefrigerantCycleInertia = AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.NoInertia constrainedby AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Inertias.BaseClasses.PartialInertia "Inertia between the refrigerant cycle outputs and the heat exchangers." annotation (choicesAllMatching=true, Dialog(group="Inertia"));
+
+4: Name 'allowDifferentDeviceIdentifiers' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Different, Device, Identifiers. Affected line: parameter Boolean allowDifferentDeviceIdentifiers=false "if use_rev=true, device data for cooling and heating need to entered. Set allowDifferentDeviceIdentifiers=true to allow different device identifiers devIde" annotation(Dialog(tab="Advanced", enable=use_rev));
+
+5: Name 'GConOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConOut=0 "Outer thermal conductance for condenser heat loss calculations" annotation (Dialog( group="Heat Losses", tab="Condenser", enable=use_conCap));
+
+6: Name 'GConIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GConIns=0 "Inner thermal conductance for condenser heat loss calculations" annotation (Dialog( group="Heat Losses", tab="Condenser", enable=use_conCap));
+
+7: Name 'GEvaOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaOut=0 "Outer thermal conductance for evaporator heat loss calculations" annotation ( Dialog( group="Heat Losses", tab="Evaporator", enable=use_evaCap));
+
+8: Name 'GEvaIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GEvaIns=0 "Inner thermal conductance for evaporator heat loss calculations" annotation ( Dialog( group="Heat Losses", tab="Evaporator", enable=use_evaCap));
+
+9: Name 'allowFlowReversalCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: allow, Reversal. Affected line: parameter Boolean allowFlowReversalCon=true "= false to simplify equations, assuming, but not enforcing, no flow reversal" annotation (Dialog(group="Condenser", tab="Assumptions"));
+
+10: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: RefrigerantCycleInertia refCycIneCon "Inertia model for condenser side" annotation(Placement(transformation( extent={{-10,-10},{10,10}}, rotation=90, origin={0,50})));RefrigerantCycleInertia refCycIneEva "Inertia model for evaporator side" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={0,-50})));
+
+
+AixLib/Fluid/Storage/TwoPhaseSeparator.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Medium.MassFlowRate m_flow_start_a = 0.1 "Guess value of port_a.m_flow" annotation(Dialog(tab="Advanced",group="Medium Initialisation"));parameter Medium.MassFlowRate m_flow_start_b = 0.1 "Guess value of port_b.m_flow" annotation(Dialog(tab="Advanced",group="Medium Initialisation"));
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Medium.MassFlowRate m_flow_small = 1e-6*m_flow_nominal "Small mass flow rate for regularization of zero flow" annotation(Dialog(tab="Advanced",group="Numeric limitations"));
+
+3: Name 'show_V_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: show_. Affected line: parameter Boolean show_V_flow = false "= true, if volume flow rate at port_a and port_b are computed" annotation(Dialog(tab="Advanced",group="Diagnostics"));
+
+4: Name 'show_tankProperties' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: show_tank, Properties. Affected line: parameter Boolean show_tankProperties = true "= true, if tank properties are included as summary record" annotation(Dialog(tab="Advanced",group="Diagnostics"));
+
+5: Name 'show_tankPropertiesDetailed' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: show_tank, Properties, Detailed. Affected line: parameter Boolean show_tankPropertiesDetailed = false "= true, if more detailed tank properties are included as summary record" annotation(Dialog(tab="Advanced",group="Diagnostics"));
+
+6: Name 'show_heatLosses' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: show_heat, Losses. Affected line: parameter Boolean show_heatLosses = false "= true, if heat losses are included as summary record" annotation(Dialog(tab="Advanced",group="Diagnostics"));
+
+7: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: record TankProperties "Record that contains properties of the tank" Modelica.Units.SI.AbsolutePressure pTan "Mean pressure of the medium in the tank";
+
+8: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: record TankPropertiesDetailed "Record that contains detailed properties of the tank" Modelica.Units.SI.Mass mXi[Medium.nXi] "Masses of independent components in the fluid";
+
+9: Name 'dMTan' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: M. Affected line: Modelica.Units.SI.MassFlowRate dMTan "Change in tank's mass wrt. time";
+
+10: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Medium.DerDensityByEnthalpy ddhp "Density derivative w.r.t. specific enthalpy";Medium.DerDensityByPressure ddph "Density derivative w.r.t. pressure";
+
+11: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: record HeatLosses "Record that contains properties of calculated heat losses" Modelica.Units.SI.ThermalConductance G "Thermal conductance of the tank's sheat";
+
+12: Name 'GShe' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: Modelica.Units.SI.ThermalConductance GShe "Thermal conductance of the tank's sheat";
+
+13: Name 'GTopBot' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: Modelica.Units.SI.ThermalConductance GTopBot "Thermal conductance of the tank's top and bottom";
+
+14: Name 'Q_flow_loss' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q_flow_loss. Affected line: Modelica.Units.SI.Power Q_flow_loss "Heat losses from tank to ambient";
+
+15: Name 'heatPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if useHeatLoss "Heat port for heat losses if losses are computed" annotation(Placement(transformation(extent={{72,-10},{92,10}}), iconTransformation(extent={{-10,-10},{10,10}}, rotation=0, origin={82,0})));
+
+16: Name 'port_b_V_flow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_b_. Affected line: Modelica.Units.SI.VolumeFlowRate port_b_V_flow=port_b.m_flow/ Modelica.Fluid.Utilities.regStep( port_b.m_flow, Medium.density(Medium.setState_phX( p=port_b.p, h=inStream(port_b.h_outflow), X=inStream(port_b.Xi_outflow))), Medium.density(Medium.setState_phX( p=port_a.p, h=inStream(port_a.h_outflow), X=inStream(port_a.Xi_outflow))), m_flow_small) if show_V_flow "Volume flow rate at port_b (positive when flow from port_a to port_b)";
+
+17: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Medium.Temperature port_a_T= Modelica.Fluid.Utilities.regStep(port_a.m_flow, Medium.temperature( Medium.setState_phX( p = port_a.p, h = inStream(port_a.h_outflow), X = inStream(port_a.Xi_outflow))), Medium.temperature( Medium.setState_phX( p = port_a.p, h = port_a.h_outflow, X = port_a.Xi_outflow)), m_flow_small) if show_T "Temperature close to port_a, if show_T = true";
+
+18: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Medium.Temperature port_b_T= Modelica.Fluid.Utilities.regStep(port_b.m_flow, Medium.temperature( Medium.setState_phX( p = port_b.p, h = inStream(port_b.h_outflow), X = inStream(port_b.Xi_outflow))), Medium.temperature( Medium.setState_phX( p = port_b.p, h = port_b.h_outflow, X = port_b.Xi_outflow)), m_flow_small) if show_T "Temperature close to port_b, if show_T = true";
+
+19: Name 'G' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: protected parameter Modelica.Units.SI.ThermalConductance G=GShe + 2*GTopBot "Thermal conductance of the tank's sheat" annotation (Dialog( tab="Heat losses", group="Properties", enable=false));
+
+20: Name 'GShe' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GShe=2*Modelica.Constants.pi* hTanInn/(1/(alpInn*(dTanInn/2)) + 1/lamIns*log(1 + sIns/(dTanInn/2)) + 1/ (alpOut*(dTanInn/2 + sIns))) "Thermal conductance of the tank's sheat" annotation (Dialog( tab="Heat losses", group="Properties", enable=false));
+
+21: Name 'GTopBot' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance GTopBot=ATanInn/(1/alpInn + sIns/lamIns + 1/alpOut) "Thermal conductance of the tank's top and bottom" annotation (Dialog( tab="Heat losses", group="Properties", enable=false));
+
+22: Name 'mXi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Xi. Affected line: Modelica.Units.SI.Mass mXi[Medium.nXi] "Masses of independent components in the fluid";
+
+23: Name 'heaTran' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tran. Affected line: Modelica.Thermal.HeatTransfer.Components.ThermalConductor heaTran(G=G) if useHeatLoss "Model to calculate heat losses" annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
+
+AixLib/Fluid/DistrictHeatingCooling/Pipes/DHCPipe.mo
+1: Name 'use_zeta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_zeta. Affected line: parameter Boolean use_zeta=false "= true HydraulicResistance is implemented, zeta value has to be given next" annotation(Dialog(group="Additional pressurelosses"));
+
+2: Name 'use_soil' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_soil. Affected line: parameter Boolean use_soil=false "= true 3 cylindric heat transfers are implemented, representing the soil around the pipe, otherwise direct heat throughzeta value has to be given next" annotation(Dialog(group="Soil"));
+
+3: Name 'dh' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: dh. Affected line: parameter Modelica.Units.SI.Length dh=sqrt(4*m_flow_nominal/rho_default/ v_nominal/Modelica.Constants.pi) "Hydraulic diameter (assuming a round cross section area)" annotation (Dialog(group="Material"));
+
+4: Name 'v_nominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v. Affected line: parameter Modelica.Units.SI.Velocity v_nominal=1.5 "Velocity at m_flow_nominal (used to compute default value for hydraulic diameter dh)" annotation (Dialog(group="Nominal condition"));
+
+5: Name 'roughness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: roughness. Affected line: parameter Modelica.Units.SI.Height roughness=2.5e-5 "Average height of surface asperities (default: smooth steel pipe)" annotation (Dialog(group="Material"));
+
+6: Name 'length' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: length. Affected line: parameter Modelica.Units.SI.Length length "Pipe length" annotation (Dialog(group="Material"));
+
+7: Name 'm_flow_small' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal) "Small mass flow rate for regularization of zero flow" annotation (Dialog(tab="Advanced"));
+
+8: Name 'kIns' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: k. Affected line: parameter Modelica.Units.SI.ThermalConductivity kIns "Heat conductivity of pipe insulation, used to compute R" annotation (Dialog(group="Thermal resistance"));
+
+9: Name 'thickness' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thickness. Affected line: parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness" annotation (Dialog(group="Material"));
+
+10: Name 'T_start_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)= Medium.T_default "Initialization temperature at pipe inlet" annotation (Dialog(tab="Initialization"));
+
+11: Name 'T_start_out' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_start. Affected line: parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)= T_start_in "Initialization temperature at pipe outlet" annotation (Dialog(tab="Initialization"));
+
+12: Name 'initDelay' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: init, Delay. Affected line: parameter Boolean initDelay(start=false) = false "Initialize delay for a constant mass flow rate if true, otherwise start from 0" annotation (Dialog(tab="Initialization"));
+
+13: Name 'm_flow_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: m_flow. Affected line: parameter Modelica.Units.SI.MassFlowRate m_flow_start=0 "Initial value of mass flow rate through pipe" annotation (Dialog(tab="Initialization", enable=initDelay));
+
+14: Name 'sum_zetas' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: sum_zetas. Affected line: parameter Real sum_zetas=0 "Sum of all zeta values. Takes into account additional pressure drops due to bends/valves/etc. if use_zeta" annotation (Dialog(group="Additional pressurelosses", enable=use_zeta));
+
+15: Name 'thickness_soi' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thickness_soi. Affected line: parameter Modelica.Units.SI.Length thickness_soi=0.6 "thickness of soil layer for heat loss calulcation" annotation (Dialog(tab="Soil", enable=use_soil));
+
+16: Name 'heatPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: heat, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort "Heat transfer to or from surroundings (heat loss from pipe results in a positive heat flow)" annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
+17: Missing documentation. Affected line: AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra1( final energyDynamics=energyDynamics, final rho=rho_soi, final c=c, final d_in=dh + 2*thickness, final d_out=d_in + thickness_soi/3, final length=length, final lambda=lambda, T0=283.15) if use_soil annotation (Placement(transformation(extent={{-10,20},{10,40}})));
+
+18: Missing documentation. Affected line: AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra2( final energyDynamics=energyDynamics, final rho=rho_soi, final c=c, final d_in=dh + 2*thickness + thickness_soi/3, final d_out=d_in + 2*thickness_soi/3, final length=length, final lambda=lambda, T0=283.15) if use_soil annotation (Placement(transformation(extent={{-10,46},{10,66}})));
+
+19: Missing documentation. Affected line: AixLib.Utilities.HeatTransfer.CylindricHeatTransfer cylHeaTra3( final energyDynamics=energyDynamics, final rho=rho_soi, final c=c, final d_in=dh + 2*thickness + 2*thickness_soi/3, final d_out=d_in + thickness_soi, final length=length, final lambda=lambda, T0=283.15) if use_soil annotation (Placement(transformation(extent={{-10,72},{10,92}})));
+
+20: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter Medium.ThermodynamicState sta_default=Medium.setState_pTX( T=Medium.T_default, p=Medium.p_default, X=Medium.X_default) "Default medium state";
+
+21: Name 'cp_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: cp_default. Affected line: parameter Modelica.Units.SI.SpecificHeatCapacity cp_default= Medium.specificHeatCapacityCp(state=sta_default) "Heat capacity of medium";
+
+22: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( p=Medium.p_default, T=Medium.T_default, X=Medium.X_default) "Default density (e.g., rho_liquidWater = 995, rho_air = 1.2)" annotation (Dialog(group="Advanced"));
+
+23: Name 'v_med' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: v_med. Affected line: Modelica.Units.SI.Velocity v_med "Velocity of the medium in the pipe";
+
+24: Name 'Q_los' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q_los. Affected line: Modelica.Units.SI.Heat Q_los(start=0.0, fixed=true) "Integrated heat loss of the pipe";
+
+25: Name 'Q_gai' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q_gai. Affected line: Modelica.Units.SI.Heat Q_gai(start=0.0, fixed=true) "Integrated heat gain of the pipe";
+
+26: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: public FixedResistances.HydraulicResistance hydRes( diameter=dh, m_flow_nominal=m_flow_nominal, redeclare package Medium = Medium, zeta=sum_zetas, allowFlowReversal=allowFlowReversal, from_dp=from_dp, homotopyInitialization=homotopyInitialization, linearized=linearized, m_flow_start=m_flow_start) if use_zeta annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
