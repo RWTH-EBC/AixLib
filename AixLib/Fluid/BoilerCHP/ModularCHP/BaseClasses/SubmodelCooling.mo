@@ -11,7 +11,7 @@ model SubmodelCooling
     CHPEngineModel=DataBase.CHP.ModularCHPEngineData.CHP_ECPowerXRGI15()
     "CHP engine data for calculations"
     annotation (choicesAllMatching=true, Dialog(group="Unit properties"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate m_flow=
+  parameter Modelica.Units.SI.MassFlowRate m_flow=
       CHPEngineModel.m_floCooNominal
     "Nominal mass flow rate of coolant inside the engine cooling circle" annotation (Dialog(tab="Engine Cooling Circle"));
   parameter Modelica.Units.SI.ThermalConductance GEngToCoo=45
@@ -21,7 +21,7 @@ model SubmodelCooling
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
+  parameter Modelica.Units.SI.MassFlowRate
     mCool_flow_small=0.0001
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
@@ -46,14 +46,14 @@ model SubmodelCooling
     "Signal bus of the cooling circuit components"    annotation (Placement(
         transformation(extent={{-28,26},{28,80}}), iconTransformation(extent=
             {{-28,26},{30,82}})));
-  Movers.FlowControlled_m_flow                coolantPump(
+  AixLib.Fluid.Movers.FlowControlled_m_flow coolantPump(
     m_flow_small=mCool_flow_small,
     redeclare package Medium = Medium_Coolant,
     dp_nominal=CHPEngineModel.dp_Coo,
     allowFlowReversal=allowFlowReversalCoolant,
     addPowerToMedium=false,
     m_flow_nominal=m_flow,
-    use_inputFilter=false) "Model of a fluid pump or fan"
+    use_riseTime=false) "Model of a fluid pump or fan"
     annotation (Placement(transformation(extent={{-30,-12},{-10,12}})));
   AixLib.Utilities.Logical.SmoothSwitch switch1 annotation (Placement(
         transformation(

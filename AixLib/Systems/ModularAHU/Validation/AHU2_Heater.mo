@@ -65,19 +65,24 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
       length=1,
       Kv=6.3,
       valveCharacteristic=
-          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
-          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.14,0.24,0.43,0.68,
-          0.81,0.93,0.96,1.0}, phi={0.0,0.001,0.002,0.02,0.1,0.25,0.76,0.98,1.0}),
-          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0.0,0.02,0.05,0.08,
-          0.27,0.6,0.95,1.0}, phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
-      valve(use_inputFilter=false),
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
+          a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+            y={0.0,0.14,0.24,0.43,0.68,0.81,0.93,0.96,1.0},
+            phi={0.0,0.001,0.002,0.02,0.1,0.25,0.76,0.98,1.0}),
+          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
+            y={0.0,0.02,0.05,0.08,0.27,0.6,0.95,1.0},
+            phi={0.0,0.001,0.002,0.01,0.3,0.9,0.97,1.0})),
+      valve(use_strokeTime=false),
       pipe1(length=2.8, fac=9),
       pipe2(length=0.63, parameterPipe=
             AixLib.DataBase.Pipes.Copper.Copper_35x1_5()),
-      pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=1.85),
-      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=0.4),
+      pipe3(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            1.85),
+      pipe4(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_35x1_5(), length=
+            0.4),
       pipe5(length=3.2, fac=10),
-      pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=0.82),
+      pipe6(parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_16x1(), length=
+            0.82),
       redeclare
         AixLib.Systems.HydraulicModules.BaseClasses.PumpInterface_PumpSpeedControlled
         PumpInterface(pumpParam=
@@ -103,6 +108,8 @@ model AHU2_Heater "Heating register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-90,34},{-78,46}})));
   Modelica.Blocks.Sources.Constant const(k=1)
     annotation (Placement(transformation(extent={{-104,32},{-96,40}})));
+  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
+    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Celsius, combiTimeTable.y[2]) annotation (Line(points={{-80,-92},
           {-106,-92},{-106,70},{-58,70},{-58,90},{-79,90}}, color={0,0,127}));
@@ -153,6 +160,9 @@ equation
           -72,40},{-72,36}},          color={0,0,127}));
   connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
           36.4},{-91.2,36.4}}, color={0,0,127}));
+  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation (
+    Line(points={{-69,-24},{-37.95,-24},{-37.95,10.05}},
+                                                       color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
@@ -166,10 +176,9 @@ equation
 </ul>
 </html>"),
     experiment(
-      StopTime=4320,
-      __Dymola_fixedstepsize=1,
-      __Dymola_Algorithm="Dassl"),
+      StopTime=4320,Tolerance=1e-06,
+      Interval=1),
     __Dymola_Commands(file(ensureSimulated=true)=
-        "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Heater.mos"
+        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Heater.mos"
         "Simulate and Plot"));
 end AHU2_Heater;

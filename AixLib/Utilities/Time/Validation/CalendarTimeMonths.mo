@@ -12,24 +12,24 @@ equation
         "Simulate and plot"),
   Documentation(
     info="<html>
- <p>
- This model validates the use of the
- <a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
- AixLib.Utilities.Time.CalendarTime</a>
- block for a period of a couple of months.
- This shorter simulation time has been selected to
- store the reference results that are used in the regression tests
- at a resulation that makes sense for the minute and hour outputs.
- </p>
- </html>",
+<p>
+This model validates the use of the
+<a href=\"modelica://AixLib.Utilities.Time.CalendarTime\">
+AixLib.Utilities.Time.CalendarTime</a>
+block for a period of a couple of months.
+This shorter simulation time has been selected to
+store the reference results that are used in the regression tests
+at a resulation that makes sense for the minute and hour outputs.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- September 9, 2016, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-    experiment(StartTime=172800, Tolerance=1e-6, StopTime=345600),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 9, 2016, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
+    experiment(StartTime=172800, Tolerance=1e-6, StopTime=345600), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CalendarTimeMonths;

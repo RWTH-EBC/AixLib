@@ -9,12 +9,12 @@ model Chiller
   Components.Chiller.Chiller chiller(
     use_revChi=true,
     redeclare model PerDataMainChi =
-        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
-          dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D (
+          dataTable=AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     redeclare model PerDataRevChi =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
           smoothness=Modelica.Blocks.Types.Smoothness.LinearSegments, dataTable=
-           AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+           AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     refIneFre_constant=1,
@@ -123,6 +123,9 @@ model Chiller
     annotation (Placement(transformation(extent={{46,-82},{34,-70}})));
   Modelica.Blocks.Logical.LogicalSwitch logicalSwitch
     annotation (Placement(transformation(extent={{10,-78},{0,-88}})));
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus1
+    annotation (Placement(transformation(extent={{18,-28},{30,-16}}),
+        iconTransformation(extent={{18,-28},{30,-16}})));
 equation
   connect(dotm_sink.y, fluidSource.dotm) annotation (Line(points={{-77,-72},{-64,
           -72},{-64,-36.6},{-48,-36.6}}, color={0,0,127}));
@@ -146,9 +149,6 @@ equation
     annotation (Line(points={{-30,-33},{-5,-33},{-5,-15}}, color={176,0,0}));
   connect(vessel_ev.enthalpyPort_a, chiller.enthalpyPort_b) annotation (Line(
         points={{-27.3,57},{-20,57},{-20,18},{-5,18},{-5,11}}, color={176,0,0}));
-  connect(iceFac.y, chiller.iceFac_in) annotation (Line(points={{29.4,-12},{
-          26.75,-12},{26.75,-11.88},{21.1333,-11.88}},
-                                                 color={0,0,127}));
   connect(hysHeating.y,not2. u)
     annotation (Line(points={{33.4,-76},{28.8,-76}}, color={255,0,255}));
   connect(logicalSwitch.y,booleanToReal. u) annotation (Line(points={{-0.5,-83},
@@ -170,6 +170,19 @@ equation
           -54},{12,-36},{5.4,-36},{5.4,-17.08}}, color={255,0,255}));
   connect(chiller.nSet, booleanToReal.y) annotation (Line(points={{0.333333,-17.08},
           {0.333333,-38},{-3,-38},{-3,-45.3}}, color={0,0,127}));
+  connect(chiller.sigBus, sigBus1) annotation (Line(
+      points={{8.2,-14.87},{8.2,-22},{24,-22}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(iceFac.y, sigBus1.iceFacMea) annotation (Line(points={{29.6,-14},{
+          24.03,-14},{24.03,-21.97}},
+                          color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
+  connect(iceFac.y, chiller.iceFac_in) annotation (Line(points={{29.4,-12},{
+          25.2667,-12},{25.2667,-11.88},{21.1333,-11.88}}, color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}),      graphics={
         Rectangle(
@@ -190,7 +203,7 @@ equation
 </h4>
 <p>
   Example Setup is based on fluid example of <a href=
-  \"modelica://AixLib.Fluid.Chillers.Examples.Chiller\">AixLib.Fluid.Chillers.Examples.Chiller</a>
+  \"modelica://AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller\">AixLib.Obsolete.Year2024.Fluid.Chillers.Examples.Chiller</a>
 </p>
 </html>",
   revisions="<html><ul>

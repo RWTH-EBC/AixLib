@@ -87,78 +87,78 @@ equation
           fillColor={238,46,47},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
- <p>
- Component that calculates the heat losses at the end of a plug flow pipe
- when the flow goes in the design direction.
- </p>
- <h4>Main equations</h4>
- <p>
- The governing equations are
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- T<sub>out</sub> = T<sub>b</sub> + (T<sub>in</sub> - T<sub>b</sub>)
- exp((t<sub>out</sub> - t<sub>in</sub>)/tau<sub>char</sub>)
- </p>
- <p>
- with
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- tau<sub>char</sub> = R C
- </p>
- <h4>Assumptions and limitations</h4>
- <p>
- This model is based on the following assumptions:
- </p>
- <ul>
- <li>The water temperature is uniform in the cross section.</li>
- <li>There is no axial heat transfer in the water or surrounding.</li>
- <li>The boundary temperature along the pipe is uniform.</li>
- <li>Heat losses are steady-state.</li>
- </ul>
- <h4>Implementation</h4>
- <p>
- Heat losses are only considered in design flow direction.
- For heat loss consideration in both directions, use one of these models at
- both ends of a
- <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">
- AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow</a> model.
- The outlet temperature is calculated as in the equation above,
- using the inlet temperature at <code>port_a</code> and the instantaneous
- time delay and boundary temperature.
- The boundary temperature can be either the air temperature
- or the undisturbed ground temperature, depending on the definition of the
- thermal resistance <i>R</i>.
- </p>
- <p>
- This component requires the delay time and the instantaneous ambient temperature
- as an input.
- This component is to be used in single pipes or in more advanced configurations
- where no influence from other pipes is considered.</p>
- </html>",
+<p>
+Component that calculates the heat losses at the end of a plug flow pipe
+when the flow goes in the design direction.
+</p>
+<h4>Main equations</h4>
+<p>
+The governing equations are
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+T<sub>out</sub> = T<sub>b</sub> + (T<sub>in</sub> - T<sub>b</sub>)
+exp((t<sub>out</sub> - t<sub>in</sub>)/tau<sub>char</sub>)
+</p>
+<p>
+with
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+tau<sub>char</sub> = R C
+</p>
+<h4>Assumptions and limitations</h4>
+<p>
+This model is based on the following assumptions:
+</p>
+<ul>
+<li>The water temperature is uniform in the cross section.</li>
+<li>There is no axial heat transfer in the water or surrounding.</li>
+<li>The boundary temperature along the pipe is uniform.</li>
+<li>Heat losses are steady-state.</li>
+</ul>
+<h4>Implementation</h4>
+<p>
+Heat losses are only considered in design flow direction.
+For heat loss consideration in both directions, use one of these models at
+both ends of a
+<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">
+AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow</a> model.
+The outlet temperature is calculated as in the equation above,
+using the inlet temperature at <code>port_a</code> and the instantaneous
+time delay and boundary temperature.
+The boundary temperature can be either the air temperature
+or the undisturbed ground temperature, depending on the definition of the
+thermal resistance <i>R</i>.
+</p>
+<p>
+This component requires the delay time and the instantaneous ambient temperature
+as an input.
+This component is to be used in single pipes or in more advanced configurations
+where no influence from other pipes is considered.</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- December 6, 2017, by Michael Wetter:<br/>
- Reformulated call to medium function.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/869\">
- issue 869</a>.
- </li>
- <li>
- October 20, 2017, by Michael Wetter:<br/>
- Revised implementation to avoid graphical and textual modeling.
- Revised variable names and documentation to follow guidelines.
- </li>
- <li>
- November 6, 2015 by Bram van der Heijde:<br/>
- Make time delay input instead of calculation inside this model.
- </li>
- <li>
- September, 2015 by Marcus Fuchs:<br/>
- First implementation.</li>
- </ul>
- </html>"),
+<ul>
+<li>
+December 6, 2017, by Michael Wetter:<br/>
+Reformulated call to medium function.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/869\">
+issue 869</a>.
+</li>
+<li>
+October 20, 2017, by Michael Wetter:<br/>
+Revised implementation to avoid graphical and textual modeling.
+Revised variable names and documentation to follow guidelines.
+</li>
+<li>
+November 6, 2015 by Bram van der Heijde:<br/>
+Make time delay input instead of calculation inside this model.
+</li>
+<li>
+September, 2015 by Marcus Fuchs:<br/>
+First implementation.</li>
+</ul>
+</html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-            100}})),
-  __Dymola_LockedEditing="Model from IBPSA");
+            100}})), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowHeatLoss;

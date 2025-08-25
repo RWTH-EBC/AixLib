@@ -32,6 +32,7 @@ model Analytic_20Years
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse groTemRes(
     tLoaAgg=3600,
     nCel=5,
+    nSeg=12,
     borFieDat=borFieDat,
     forceGFunCalc=true) "Ground temperature response of borehole"
     annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
@@ -91,30 +92,30 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/Validation/Analytic_20Years.mos"
         "Simulate and plot"),
 Documentation(info="<html>
- <p>
- This validation case applies the asymetrical synthetic load profile developed
- by Pinel (2003) over a 20 year period by directly injecting the heat at the
- borehole wall in the ground temperature response model. The difference between
- the resulting borehole wall temperature and the same temperature precalculated
- by using a fast Fourier transform is calculated with the <code>add</code>
- component. The fast Fourier transform calculation was done using the same
- g-function as was calculated by
- <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction\">
- AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction</a>.
- </p>
- <h4>References</h4>
- <p>
- Pinel, P. 2003. <i>Am&eacute;lioration, validation et implantation d’un algorithme de calcul
- pour &eacute;valuer le transfert thermique dans les puits verticaux de syst&egrave;mes de pompes &agrave; chaleur g&eacute;othermiques</i>,
- M.A.Sc. Thesis, &Eacute;cole Polytechnique de Montréal.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 5, 2018, by Alex Laferri&egrave;re:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This validation case applies the asymetrical synthetic load profile developed
+by Pinel (2003) over a 20 year period by directly injecting the heat at the
+borehole wall in the ground temperature response model. The difference between
+the resulting borehole wall temperature and the same temperature precalculated
+by using a fast Fourier transform is calculated with the <code>add</code>
+component. The fast Fourier transform calculation was done using the same
+g-function as was calculated by
+<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction\">
+AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction</a>.
+</p>
+<h4>References</h4>
+<p>
+Pinel, P. 2003. <i>Am&eacute;lioration, validation et implantation d&#8217;un algorithme de calcul
+pour &eacute;valuer le transfert thermique dans les puits verticaux de syst&egrave;mes de pompes &agrave; chaleur g&eacute;othermiques</i>,
+M.A.Sc. Thesis, &Eacute;cole Polytechnique de Montr&eacute;al.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 5, 2018, by Alex Laferri&egrave;re:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end Analytic_20Years;

@@ -3,15 +3,12 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
 
   extends Modelica.Icons.Example;
 
-  parameter Integer TIR=3 "Thermal Insulation Regulation" annotation (Dialog(
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation TIR=AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.WSchV_1995 "Thermal Insulation Regulation" annotation (Dialog(
       group="Construction parameters",
       compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
+      descriptionLabel=true));
+
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
 
   parameter AixLib.DataBase.Weather.TRYWeatherBaseDataDefinition weatherDataDay = AixLib.DataBase.Weather.TRYWinterDay();
   parameter AixLib.DataBase.Profiles.ProfileBaseDataDefinition VentilationProfile = AixLib.DataBase.Profiles.Ventilation2perDayMean05perH();
@@ -19,11 +16,11 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
   Modelica.Blocks.Sources.CombiTimeTable NaturalVentilation(
     columns={2,3,4,5,7},                                                               extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = VentilationProfile.Profile) annotation(Placement(transformation(extent={{-53,59},{-73,79}})));
   Modelica.Blocks.Sources.CombiTimeTable TSet(columns = {2, 3, 4, 5, 6, 7}, extrapolation = Modelica.Blocks.Types.Extrapolation.Periodic, tableOnFile = false, table = TSetProfile.Profile) annotation(Placement(transformation(extent={{-94,-2},{-114,18}})));
-  Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](unit = "degC") annotation(Placement(transformation(extent={{122,-57},{142,-37}}),    iconTransformation(extent={{101,-7},{117,9}})));
-  Modelica.Blocks.Interfaces.RealOutput Toutside(unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={106,-77}),     iconTransformation(extent={{100,83},{116,99}})));
-  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}),     iconTransformation(extent={{100,63},{116,79}})));
+  Modelica.Blocks.Interfaces.RealOutput TAirRooms[10](each unit = "degC") annotation(Placement(transformation(extent={{122,-57},{142,-37}}),    iconTransformation(extent={{101,-7},{117,9}})));
+  Modelica.Blocks.Interfaces.RealOutput Toutside(each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={106,-77}),     iconTransformation(extent={{100,83},{116,99}})));
+  Modelica.Blocks.Interfaces.RealOutput SolarRadiation[6](each unit = "W/m2") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={127,-77}),     iconTransformation(extent={{100,63},{116,79}})));
   Modelica.Blocks.Interfaces.RealOutput VentilationSchedule[4] annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={64,-77}),      iconTransformation(extent={{101,-79},{117,-63}})));
-  Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={85,-77}),      iconTransformation(extent={{101,-99},{117,-83}})));
+  Modelica.Blocks.Interfaces.RealOutput TsetValvesSchedule[5](each unit = "degC") annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={85,-77}),      iconTransformation(extent={{101,-99},{117,-83}})));
   AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.Weather Weather(
     Latitude=49.5,
     Longitude=8.5,
@@ -50,9 +47,10 @@ model OFD_1Jan "OFD with TMC, TIR and TRY"
     redeclare model CorrSolarGainWin =
         Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
-    n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
+    n50=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 or TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2002 then 3 else if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.WSchV_1995 then 4 else 6,
     withDynamicVentilation=true,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
+    redeclare package Medium = MediumAir,
+    UValOutDoors=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 then 1.8 else 2.9) annotation (Placement(transformation(extent={{-35,-49},{60,46}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature tempOutside
     annotation (Placement(transformation(extent={{-4,53},{-16.5,66}})));
   AixLib.ThermalZones.HighOrder.House.OFD_MiddleInnerLoadWall.EnergySystem.IdealHeaters.GroundFloor
@@ -89,12 +87,12 @@ equation
   TsetValvesSchedule[5] =Modelica.Units.Conversions.to_degC(TSet.y[5]);
   Toutside =Modelica.Units.Conversions.to_degC(Weather.AirTemp);
   //SolarRadiation
-  SolarRadiation[1] = Weather.SolarRadiation_OrientedSurfaces[1].I;
-  SolarRadiation[2] = Weather.SolarRadiation_OrientedSurfaces[2].I;
-  SolarRadiation[3] = Weather.SolarRadiation_OrientedSurfaces[3].I;
-  SolarRadiation[4] = Weather.SolarRadiation_OrientedSurfaces[4].I;
-  SolarRadiation[5] = Weather.SolarRadiation_OrientedSurfaces[5].I;
-  SolarRadiation[6] = Weather.SolarRadiation_OrientedSurfaces[6].I;
+  SolarRadiation[1] =Weather.SolarRadiation_OrientedSurfaces[1].H;
+  SolarRadiation[2] =Weather.SolarRadiation_OrientedSurfaces[2].H;
+  SolarRadiation[3] =Weather.SolarRadiation_OrientedSurfaces[3].H;
+  SolarRadiation[4] =Weather.SolarRadiation_OrientedSurfaces[4].H;
+  SolarRadiation[5] =Weather.SolarRadiation_OrientedSurfaces[5].H;
+  SolarRadiation[6] =Weather.SolarRadiation_OrientedSurfaces[6].H;
   connect(Weather.WindSpeed, OFD.WindSpeedPort) annotation (Line(points={{75.4,80.6},{-48,80.6},{-48,32},{-39.75,32},{-39.75,31.75}},
                                                           color={0,0,127}));
   connect(tempOutside.port, OFD.thermOutside) annotation (Line(points={{-16.5,59.5},{-35,59.5},{-35,45.05}},
@@ -102,21 +100,20 @@ equation
   connect(tempOutside.T, Weather.AirTemp) annotation (Line(points={{-2.75,59.5},
           {22,59.5},{22,75.8},{75.4,75.8}}, color={0,0,127}));
   connect(Weather.SolarRadiation_OrientedSurfaces[1], OFD.North) annotation (
-      Line(points={{113.48,53.4},{113.48,12.75},{62.85,12.75}},
+      Line(points={{113.48,53.4},{113.48,16.55},{62.85,16.55}},
                                                               color={255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[2], OFD.East) annotation (
-      Line(points={{113.48,53.4},{113.48,-1.5},{62.85,-1.5}},   color={255,128,0}));
+      Line(points={{113.48,53.4},{113.48,4.2},{62.85,4.2}},     color={255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[3], OFD.South) annotation (
-      Line(points={{113.48,53.4},{113.48,-15.75},{62.85,-15.75}},
-                                                                color={255,128,0}));
+      Line(points={{113.48,53.4},{113.48,-8.15},{62.85,-8.15}}, color={255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[4], OFD.West) annotation (
-      Line(points={{113.48,53.4},{113.48,-30},{62.85,-30}},       color={255,128,
+      Line(points={{113.48,53.4},{113.48,-19.55},{62.85,-19.55}}, color={255,128,
           0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[5], OFD.SolarRadiationPort_RoofN)
     annotation (Line(points={{113.48,53.4},{113.48,41.25},{62.85,41.25}}, color=
          {255,128,0}));
   connect(Weather.SolarRadiation_OrientedSurfaces[6], OFD.SolarRadiationPort_RoofS)
-    annotation (Line(points={{113.48,53.4},{113.48,27},{62.85,27}},       color=
+    annotation (Line(points={{113.48,53.4},{113.48,28.9},{62.85,28.9}},   color=
          {255,128,0}));
   connect(NaturalVentilation.y[1], OFD.AirExchangePort[1]) annotation (Line(
         points={{-74,69},{-78,69},{-78,20.0909},{-39.75,20.0909}},   color={0,0,

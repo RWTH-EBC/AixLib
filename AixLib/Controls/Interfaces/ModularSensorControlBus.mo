@@ -33,7 +33,7 @@ expandable connector ModularSensorControlBus
   Modelica.Units.SI.MassFlowRate meaMasFloVal[nValSen]
     "Array of measured mass flow rates at expansion valves' outlets"
     annotation (Dialog(tab="Measurements", group="Expansion Valves"));
-  Real meaPhaVal[nValSen](unit="1")
+  Real meaPhaVal[nValSen](each unit="1")
     "Array of measured phases at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Expansion Valves"));
 
@@ -48,7 +48,7 @@ expandable connector ModularSensorControlBus
   Modelica.Units.SI.MassFlowRate meaMasFloEva[nEvaSen]
     "Array of measured mass flow rates at evaporators' outlets"
     annotation (Dialog(tab="Measurements", group="Evaporators"));
-  Real meaPhaEva[nEvaSen](unit="1")
+  Real meaPhaEva[nEvaSen](each unit="1")
     "Array of measured phases at evaporators' outlets"
     annotation(Dialog(tab="Measurements",group="Evaporators"));
 
@@ -63,7 +63,7 @@ expandable connector ModularSensorControlBus
   Modelica.Units.SI.MassFlowRate meaMasFloCom[nComSen]
     "Array of measured mass flow rates at compressors' outlets"
     annotation (Dialog(tab="Measurements", group="Compressors"));
-  Real meaPhaCom[nComSen](unit="1")
+  Real meaPhaCom[nComSen](each unit="1")
     "Array of measured phases at compressors' outlets"
     annotation(Dialog(tab="Measurements",group="Compressors"));
 
@@ -78,7 +78,7 @@ expandable connector ModularSensorControlBus
   Modelica.Units.SI.MassFlowRate meaMasFloCon[nConSen]
     "Array of measured mass flow rates at expansion valves' outlets"
     annotation (Dialog(tab="Measurements", group="Condensers"));
-  Real meaPhaCon[nConSen](unit="1")
+  Real meaPhaCon[nConSen](each unit="1")
     "Array of measured phases at expansion valves' outlets"
     annotation(Dialog(tab="Measurements",group="Condensers"));
 

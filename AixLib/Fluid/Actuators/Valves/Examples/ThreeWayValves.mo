@@ -8,7 +8,7 @@ model ThreeWayValves "Three way valves with different opening characteristics"
     redeclare package Medium = Medium,
     l={0.05,0.05},
     m_flow_nominal=2,
-    use_inputFilter=false,
+    use_strokeTime=false,
     dpValve_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     "Valve model, linear opening characteristics"
@@ -39,7 +39,7 @@ model ThreeWayValves "Three way valves with different opening characteristics"
     redeclare package Medium = Medium,
     R=10,
     m_flow_nominal=2,
-    use_inputFilter=false,
+    use_strokeTime=false,
     dpValve_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
@@ -53,7 +53,7 @@ model ThreeWayValves "Three way valves with different opening characteristics"
   AixLib.Fluid.Actuators.Valves.ThreeWayTable valTab(
     redeclare package Medium = Medium,
     m_flow_nominal=2,
-    use_inputFilter=false,
+    use_strokeTime=false,
     dpValve_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     flowCharacteristics1=AixLib.Fluid.Actuators.Valves.Data.Linear(),
@@ -107,29 +107,29 @@ equation
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/ThreeWayValves.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Test model for three way valves. Note that the
- leakage flow rate has been set to a large value
- and the rangeability to a small value
- for better visualization of the valve characteristics.
- To use common values, use the default values.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 17, 2019, by Alexander Kümpel:<br/>
- Added <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ThreeWayTable\">AixLib.Fluid.Actuators.Valves.ThreeWayTable</a>
- to example.
- </li>
- <li>
- February 28, 2013, by Michael Wetter:<br/>
- Added default value for <code>dpValve_nominal</code>.
- </li>
- <li>
- June 16, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for three way valves. Note that the
+leakage flow rate has been set to a large value
+and the rangeability to a small value
+for better visualization of the valve characteristics.
+To use common values, use the default values.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 17, 2019, by Alexander Kümpel:<br/>
+Added <a href=\"modelica://AixLib.Fluid.Actuators.Valves.ThreeWayTable\">AixLib.Fluid.Actuators.Valves.ThreeWayTable</a>
+to example.
+</li>
+<li>
+February 28, 2013, by Michael Wetter:<br/>
+Added default value for <code>dpValve_nominal</code>.
+</li>
+<li>
+June 16, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end ThreeWayValves;

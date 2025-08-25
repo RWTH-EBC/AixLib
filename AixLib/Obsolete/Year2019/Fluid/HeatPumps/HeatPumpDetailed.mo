@@ -44,16 +44,16 @@ model HeatPumpDetailed
   parameter SI.Volume volume_con=0.004
     "External medium volume in heat exchanger"
     annotation (Dialog(tab="Evaporator, Condenser", group="Condenser"));
-  parameter AixLib.DataBase.HeatPump.HeatPumpBaseDataDefinition
-    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()
+  parameter AixLib.Obsolete.Year2024.DataBase.HeatPump.HeatPumpBaseDataDefinition
+    dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113()
     "Look-up table data for on/off heat pump according to EN255 or EN14511"
     annotation (choicesAllMatching=true, Dialog(enable=HPctrlType and (
           capCalcType == 2), group="Capacity data"));
 
   replaceable function data_poly =
-      AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
+      AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
+    AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics for inverter heat pump" annotation (
       choicesAllMatching=true, Dialog(enable=(capCalcType == 1), group="Capacity data"));
 
@@ -68,9 +68,9 @@ model HeatPumpDetailed
       group="Initialization",
       enable=initCondenserVol));
   replaceable function Corr_icing =
-      AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel
+      AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.DefrostCorrection.NoModel
     constrainedby
-    AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+    AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)" annotation (
       choicesAllMatching=true, Dialog(
       enable=(capCalcType == 1),
@@ -451,7 +451,7 @@ equation
   connect(hydRes_eva.port_b, T_evaOut.port_a) annotation (Line(points={{-130,-30},
           {-130,-33},{-130,-36}}, color={0,127,255}));
   annotation (
-    Diagram(obsolete = "Obsolete model - use AixLib.Fluid.HeatPumps.HeatPump instead", coordinateSystem(preserveAspectRatio=false, extent={{-150,-100},{150,
+    Diagram(obsolete = "Obsolete model - use AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump instead", coordinateSystem(preserveAspectRatio=false, extent={{-150,-100},{150,
             100}})),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-150,-100},{150,100}}),
         graphics={
@@ -609,7 +609,7 @@ equation
 </h4>
 <p>
   See <a href=
-  \"AixLib.Fluid.HeatPumps.Examples.HeatPumpDetailed\">AixLib.Fluid.HeatPumps.Examples.HeatPumpDetailed</a>
+  \"AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPumpDetailed\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPumpDetailed</a>
 </p>
 <ul>
   <li>

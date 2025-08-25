@@ -46,24 +46,24 @@ equation
 experiment(Tolerance=1e-6, StopTime=1.0),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/BaseClasses/Examples/PowerLawFixedM.mos"
         "Simulate and plot"), Documentation(info="<html>
- <p>
- This examples demonstrates the
- <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLaw\">
- Buildings.Airflow.Multizone.BaseClasses.powerLaw</a>
- and
- <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
- Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>
- functions.
- They need to return the same function value.
- This is verified by an <code>assert</code> statement.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 12, 2011, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This examples demonstrates the
+<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLaw\">
+AixLib.Airflow.Multizone.BaseClasses.powerLaw</a>
+and
+<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
+AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM</a>
+functions.
+They need to return the same function value.
+This is verified by an <code>assert</code> statement.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 12, 2011, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PowerLawFixedM;

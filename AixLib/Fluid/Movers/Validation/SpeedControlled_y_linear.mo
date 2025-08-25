@@ -25,7 +25,7 @@ model SpeedControlled_y_linear
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     per(pressure(V_flow=2/1000*{0,m_flow_nominal}, dp={2*dp_nominal,0})),
-    use_inputFilter=false) "Pump with fixed pressure raise"
+    use_riseTime=false) "Pump with fixed pressure raise"
     annotation (Placement(transformation(extent={{40,80},{60,100}})));
 
   AixLib.Fluid.Sources.Boundary_pT sou1(
@@ -50,7 +50,7 @@ model SpeedControlled_y_linear
     redeclare package Medium = Medium,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     per(pressure(V_flow=2/1000*{0,m_flow_nominal}, dp={2*dp_nominal,0})),
-    use_inputFilter=false) "Pump with fixed mass flow rate"
+    use_riseTime=false) "Pump with fixed mass flow rate"
     annotation (Placement(transformation(extent={{40,40},{60,60}})));
   AixLib.Fluid.Sources.Boundary_pT sou3(
     redeclare package Medium = Medium,
@@ -89,38 +89,38 @@ experiment(Tolerance=1e-06, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/SpeedControlled_y_linear.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This example demonstrates and tests the use of a flow machine whose speed is reduced to zero.
- In the top model, the pressure drop across the pump is constant, and in the bottom model,
- the mass flow rate across the pump is constant.
- In the top model, a small flow resistance has been added since a pump with zero speed cannot
- produce a non-zero pressure raise. For this operating region, the pressure drop ensures that
- the model is non-singular.
- </p>
- <p>
- The fans have been configured as steady-state models.
- This ensures that the actual speed is equal to the input signal.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>February 20, 2016, by Ruben Baetens:<br/>
- Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
- </li>
- <li>
- January 22, 2016, by Michael Wetter:<br/>
- Corrected type declaration of pressure difference.
- This is
- for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
- </li>
- <li>
- February 14, 2012, by Michael Wetter:<br/>
- Added filter for start-up and shut-down transient.
- </li>
- <li>
- March 24 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This example demonstrates and tests the use of a flow machine whose speed is reduced to zero.
+In the top model, the pressure drop across the pump is constant, and in the bottom model,
+the mass flow rate across the pump is constant.
+In the top model, a small flow resistance has been added since a pump with zero speed cannot
+produce a non-zero pressure raise. For this operating region, the pressure drop ensures that
+the model is non-singular.
+</p>
+<p>
+The fans have been configured as steady-state models.
+This ensures that the actual speed is equal to the input signal.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>February 20, 2016, by Ruben Baetens:<br/>
+Removal of <code>dynamicBalance</code> as parameter for <code>massDynamics</code> and <code>energyDynamics</code>.
+</li>
+<li>
+January 22, 2016, by Michael Wetter:<br/>
+Corrected type declaration of pressure difference.
+This is
+for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+</li>
+<li>
+February 14, 2012, by Michael Wetter:<br/>
+Added filter for start-up and shut-down transient.
+</li>
+<li>
+March 24 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end SpeedControlled_y_linear;

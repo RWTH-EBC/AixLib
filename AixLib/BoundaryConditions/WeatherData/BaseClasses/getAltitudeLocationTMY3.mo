@@ -21,18 +21,18 @@ algorithm
     unsigned=false);
 
   annotation (Documentation(info="<html>
- This function returns the altitude of the TMY3 weather data file.
- </html>",revisions="<html>
- <ul>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Added <code>impure</code> declaration for MSL 4.0.0.
- </li>
- <li>
- May 2, 2021, by Ettore Zanetti:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+This function returns the altitude of the TMY3 weather data file.
+</html>", revisions="<html>
+<ul>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Added <code>impure</code> declaration for MSL 4.0.0.
+</li>
+<li>
+May 2, 2021, by Ettore Zanetti:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end getAltitudeLocationTMY3;

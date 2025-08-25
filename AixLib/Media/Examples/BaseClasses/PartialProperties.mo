@@ -48,7 +48,7 @@ protected
     extends Modelica.Icons.Function;
     input Medium.ThermodynamicState state1 "Medium state";
     input Medium.ThermodynamicState state2 "Medium state";
-    input Real errAbs=errAbs "Absolute error threshold";
+    input Real errAbs "Absolute error threshold";
     input String message "Message for error reporting";
 
   protected   Real TErrAbs=abs(Medium.temperature(state1)-Medium.temperature(state2))
@@ -94,43 +94,49 @@ equation
 
    annotation (
 Documentation(info="<html>
- <p>
- This example checks thermophysical properties of the medium.
- </p>
- </html>",
+<p>
+This example checks thermophysical properties of the medium.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- March 24, 2020, by Kathryn Hinkelman:<br/>
- Expand error message for checkState and added absolute error as input.
- </li>
- <li>
- September 16, 2019, by Yangyang Fu:<br/>
- Reconstruct the implementation structure to avoid duplicated codes for different media.
- This fixes <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1206\">#1206</a>.
- </li>
- <li>
- June 6, 2015, by Michael Wetter:<br/>
- Changed type of <code>T</code> from
- <code>Modelica.Units.SI.Temperature</code> to <code>Medium.Temperature</code>.
- Otherwise, it has a different start value than <code>BaseProperties.T</code>, which
- causes an error if
- <a href=\"AixLib.Media.Examples.WaterProperties\">
- AixLib.Media.Examples.WaterProperties</a>
- is translated in pedantic mode.
- This fixes
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
- </li>
- <li>
- October 16, 2014, by Michael Wetter:<br/>
- Removed call to <code>setState_dTX</code> as this
- function is physically not defined for incompressible media.
- </li>
- <li>
- December 19, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+May 5, 2023 by Hongxiang Fu:<br/>
+Removed a self-dependent input binding in the function <code>checkState</code>.
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3384\">#3384</a>.
+</li>
+<li>
+March 24, 2020, by Kathryn Hinkelman:<br/>
+Expand error message for checkState and added absolute error as input.
+</li>
+<li>
+September 16, 2019, by Yangyang Fu:<br/>
+Reconstruct the implementation structure to avoid duplicated codes for different media.
+This fixes <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1206\">#1206</a>.
+</li>
+<li>
+June 6, 2015, by Michael Wetter:<br/>
+Changed type of <code>T</code> from
+<code>Modelica.Units.SI.Temperature</code> to <code>Medium.Temperature</code>.
+Otherwise, it has a different start value than <code>BaseProperties.T</code>, which
+causes an error if
+<a href=\"modelica://AixLib.Media.Examples.WaterProperties\">
+AixLib.Media.Examples.WaterProperties</a>
+is translated in pedantic mode.
+This fixes
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+</li>
+<li>
+October 16, 2014, by Michael Wetter:<br/>
+Removed call to <code>setState_dTX</code> as this
+function is physically not defined for incompressible media.
+</li>
+<li>
+December 19, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end PartialProperties;

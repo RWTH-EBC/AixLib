@@ -1,6 +1,7 @@
 UsersGuide
 Actuators
 BoilerCHP
+CHPs
 Chillers
 Delays
 DistrictHeatingCooling
@@ -13,8 +14,10 @@ Humidifiers
 MassExchangers
 MixingVolumes
 Movers
+Pools
 Sensors
 Solar
+SolarCollectors
 Sources
 Storage
 Types

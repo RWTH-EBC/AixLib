@@ -17,25 +17,25 @@ equation
 annotation (
 defaultComponentName="cheEqu",
 Documentation(info="<html>
- <p>
- Block that outputs <i>0</i> if the difference
- <i>|u1-u2| &lt; threShold</i>,
- or else it outputs <i>u2-u1</i>.
- </p>
- </html>",
+<p>
+Block that outputs <i>0</i> if the difference
+<i>|u1-u2| &lt; threShold</i>,
+or else it outputs <i>u2-u1</i>.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- January 13, 2017, by Michael Wetter:<br/>
- Revised implementation to output difference rather than the absolute
- value of the difference.
- </li>
- <li>
- January 12, 2017, by Thiery S. Nouidui:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+January 13, 2017, by Michael Wetter:<br/>
+Revised implementation to output difference rather than the absolute
+value of the difference.
+</li>
+<li>
+January 12, 2017, by Thiery S. Nouidui:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(graphics={
         Text(
           extent={{-84,108},{90,-28}},
@@ -44,6 +44,6 @@ revisions="<html>
         Text(
           extent={{-62,-38},{54,-68}},
           textColor={0,0,255},
-          textString="%threShold")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="%threShold")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end CheckEquality;

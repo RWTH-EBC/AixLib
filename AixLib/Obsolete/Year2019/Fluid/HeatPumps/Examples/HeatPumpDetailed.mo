@@ -68,10 +68,10 @@ model HeatPumpDetailed
     amplitude=3000,
     offset=3000)
     annotation (Placement(transformation(extent={{76,26},{84,34}})));
-  AixLib.Fluid.Movers.SpeedControlled_Nrpm pumSou(
+  AixLib.Obsolete.Year2024.Fluid.Movers.SpeedControlled_Nrpm pumSou(
     redeclare final package Medium = Medium_sin,
-    redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8
-      per,
+    redeclare final AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to8 per,
+
     final allowFlowReversal=true,
     final addPowerToMedium=false) "Fan or pump at source side of HP"
     annotation (Placement(transformation(
@@ -165,7 +165,7 @@ equation
 <p>
   Besides using the default simple table data, the user should also
   test tabulated data from <a href=
-  \"modelica://AixLib.DataBase.HeatPump\">AixLib.DataBase.HeatPump</a> or
+  \"modelica://AixLib.Obsolete.Year2024.DataBase.HeatPump\">AixLib.Obsolete.Year2024.DataBase.HeatPump</a> or
   polynomial functions.
 </p>
 </html>",

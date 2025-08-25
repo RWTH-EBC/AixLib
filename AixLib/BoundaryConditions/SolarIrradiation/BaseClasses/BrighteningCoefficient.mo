@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.SolarIrradiation.BaseClasses;
 block BrighteningCoefficient "Circumsolar and horizon brightening coefficients"
   extends Modelica.Blocks.Icons.Block;
-  import H = AixLib.Utilities.Math.Functions.regStep;
   Modelica.Blocks.Interfaces.RealInput zen(
     quantity="Angle",
     unit="rad",
@@ -42,43 +41,42 @@ protected
   Real b7;
   Real b8;
 equation
-  b1 = H(
+  b1 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=1.065 - skyCle,
     x_small=d);
-  b2 = H(
+  b2 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=1.23 - skyCle,
     x_small=d);
-  b3 = H(
+  b3 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=1.50 - skyCle,
     x_small=d);
-  b4 = H(
+  b4 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=1.95 - skyCle,
     x_small=d);
-  b5 = H(
+  b5 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=2.80 - skyCle,
     x_small=d);
-
-  b6 = H(
+  b6 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=4.50 - skyCle,
     x_small=d);
-  b7 = H(
+  b7 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=6.20 - skyCle,
     x_small=d);
-  b8 = H(
+  b8 = AixLib.Utilities.Math.Functions.regStep(
     y1=1,
     y2=0,
     x=skyCle - 6.20,
@@ -113,29 +111,35 @@ equation
   annotation (
     defaultComponentName="briCoe",
     Documentation(info="<html>
- <p>
- This component computes the circumsolar and horizon brightening coefficients.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- April 27, 2018, by Michael Wetter:<br/>
- Corrected <code>displayUnit</code>.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Replaced <code>spliceFunction</code> with <code>regStep</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
- </li>
- <li>
- May 25, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+This component computes the circumsolar and horizon brightening coefficients.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 7, 2025, by Jelger Jansen:<br/>
+Removed <code>import</code> statement.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1961\">IBPSA, #1961</a>.
+</li>
+<li>
+April 27, 2018, by Michael Wetter:<br/>
+Corrected <code>displayUnit</code>.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/912\">IBPSA, issue 912</a>.
+</li>
+<li>
+March 15, 2016, by Michael Wetter:<br/>
+Replaced <code>spliceFunction</code> with <code>regStep</code>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+</li>
+<li>
+May 25, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
@@ -161,6 +165,6 @@ equation
         Text(
           extent={{60,-30},{104,-52}},
           textColor={0,0,127},
-          textString="F2")}),
-  __Dymola_LockedEditing="Model from IBPSA");
+          textString="F2")}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end BrighteningCoefficient;

@@ -140,7 +140,7 @@ model TestCase650 "Test case 650"
     columns={2,3,4},
     tableName="Table",
     fileName=Modelica.Utilities.Files.loadResource(
-    "modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.mat"))
+    "modelica://AixLib/Resources/WeatherData/WeatherData_Ashrae140_LOM.txt"))
     "Weather data"
     annotation (Placement(transformation(extent={{-136,74},{-116,94}})));
   Modelica.Blocks.Math.Add add(k2=-1)
@@ -155,7 +155,7 @@ model TestCase650 "Test case 650"
     tableName="Table",
     columns={2,3},
     fileName=Modelica.Utilities.Files.loadResource(
-    "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.mat"))
+    "modelica://AixLib/Resources/WeatherData/Weatherdata_ASHARE140.txt"))
     "Solar radiation data"
     annotation (Placement(transformation(extent={{-136,4},{-116,24}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow coo "Ideal cooler"

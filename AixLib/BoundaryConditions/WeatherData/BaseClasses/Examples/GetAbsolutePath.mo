@@ -16,31 +16,31 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/BaseClasses/Examples/GetAbsolutePath.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- This model tests the function that gets the absolute path of a URI.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- December 11, 2021, by Michael Wetter:<br/>
- Added <code>loadResource</code> call.
- </li>
- <li>
- November 18, 2016, by Michael Wetter:<br/>
- Removed tests that assumed that the regression test is run
- from the library root directory.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/596\">#596</a>.
- </li>
- <li>
- October 9, 2013, by Michael Wetter:<br/>
- Removed incorrect call to <code>Modelica.Utilities.Files.exist</code>.
- </li>
- <li>
- May 9, 2013, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model tests the function that gets the absolute path of a URI.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+December 11, 2021, by Michael Wetter:<br/>
+Added <code>loadResource</code> call.
+</li>
+<li>
+November 18, 2016, by Michael Wetter:<br/>
+Removed tests that assumed that the regression test is run
+from the library root directory.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/596\">#596</a>.
+</li>
+<li>
+October 9, 2013, by Michael Wetter:<br/>
+Removed incorrect call to <code>Modelica.Utilities.Files.exist</code>.
+</li>
+<li>
+May 9, 2013, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end GetAbsolutePath;

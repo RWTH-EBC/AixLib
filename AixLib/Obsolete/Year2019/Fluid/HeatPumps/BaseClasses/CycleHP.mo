@@ -11,7 +11,7 @@ model CycleHP
         "Polynomial", choice = 2 "Table (only on/off heat pump)",   radioButtons = true));
 
   parameter DataBase.HeatPump.HeatPumpBaseDataDefinition
-    dataTable=AixLib.DataBase.HeatPump.EN255.Vitocal350BWH113()
+    dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN255.Vitocal350BWH113()
     "Look-up table data for on/off heat pump according to EN255/EN14511"
     annotation (choicesAllMatching=true, Dialog(enable=HPctrlType and (
           capCalcType == 2), group="Capacity data"));
@@ -20,15 +20,15 @@ protected
   final parameter Real tableP_ele[:,:]= dataTable.tableP_ele;
 public
   replaceable function data_poly =
-  AixLib.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
+  AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.ConstantQualityGrade
     constrainedby
-    AixLib.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
+    AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.Characteristics.PartialBaseFct
     "Polynomial heat pump characteristics"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Capacity data"));
 
   replaceable function Corr_icing =
-  AixLib.DataBase.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby
-    AixLib.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
+  AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.DefrostCorrection.NoModel   constrainedby
+    AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.DefrostCorrection.PartialBaseFct
     "Frost/Defrost model (only air-to-water heat pumps)"
    annotation(choicesAllMatching = true,Dialog(enable=(capCalcType==1),group="Defrosting/Icing correction",tab="Advanced"));
 parameter SI.Temperature T_conMax=338.15 "Maximum condenser outlet temperature"   annotation(Dialog(group="Heat Pump cycle"));
@@ -426,7 +426,7 @@ end if;
       color={0,0,127},
       smooth=Smooth.None));
   annotation (
-    obsolete = "Obsolete model - This heat pump model is deprecated. Please use AixLib.Fluid.HeatPumps.HeatPump instead.",
+    obsolete = "Obsolete model - This heat pump model is deprecated. Please use AixLib.Obsolete.Year2024.Fluid.HeatPumps.HeatPump instead.",
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-150,-100},
             {150,100}})),           Icon(coordinateSystem(preserveAspectRatio=true,
           extent={{-150,-100},{150,100}}), graphics={

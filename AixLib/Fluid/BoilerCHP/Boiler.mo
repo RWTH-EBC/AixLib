@@ -1,8 +1,8 @@
 within AixLib.Fluid.BoilerCHP;
 model Boiler "Boiler with internal and external control"
-  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.pressureDrop,
-                                      vol(energyDynamics=energyDynamics,
-                                          V=paramBoiler.volume));
+  extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=paramBoiler.a,
+                                      n=paramBoiler.n,
+                                      vol(V=paramBoiler.volume));
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
     paramBoiler
@@ -34,9 +34,6 @@ model Boiler "Boiler with internal and external control"
   parameter Real FA=0.2 "Increment for increased set temperature"
     annotation(Dialog(tab="External Control"));
 
-  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
-    "Type of energy balance: dynamic (3 initialization options) or steady state"
-    annotation (Dialog(tab="Dynamics"));
   Modelica.Blocks.Interfaces.BooleanInput isOn
     "Switches Controler on and off"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
@@ -77,27 +74,29 @@ model Boiler "Boiler with internal and external control"
 equation
   connect(internalControl.QflowHeater, heater.Q_flow) annotation (Line(points={
           {-49.95,3.9},{-40,3.9},{-40,-20},{-60,-20},{-60,-40}}, color={0,0,127}));
-  connect(senTCold.T, internalControl.TFlowCold) annotation (Line(points={{-70,
-          -69},{-70,-69},{-70,-20},{-80,-20},{-80,-1.625},{-70.075,-1.625}},
-        color={0,0,127}));
-  connect(senTHot.T, internalControl.TFlowHot) annotation (Line(points={{40,-69},
+  connect(senTRet.T, internalControl.TFlowCold) annotation (Line(points={{-70,-69},
+          {-70,-69},{-70,-20},{-80,-20},{-80,-1.625},{-70.075,-1.625}}, color={
+          0,0,127}));
+  connect(senTSup.T, internalControl.TFlowHot) annotation (Line(points={{40,-69},
           {40,-18},{-82,-18},{-82,1.6},{-70,1.6}}, color={0,0,127}));
   connect(senMasFlo.m_flow, internalControl.mFlow) annotation (Line(points={{70,-69},
           {70,-69},{70,-22},{-78,-22},{-78,-4.925},{-70.075,-4.925}},
         color={0,0,127}));
-  connect(PLR, qSetPoint.u2) annotation (Line(points={{-126,60},{-84,60},{-84,
-          58},{-64,58}}, color={0,0,127}));
-  connect(tColdNom.y, qSetPoint.u1) annotation (Line(points={{-85,80},{-80,80},
-          {-80,70},{-64,70}}, color={0,0,127}));
-  connect(qSetPoint.y, add1.u1) annotation (Line(points={{-41,64},{-28,64},{-28,
-          62},{-8,62}}, color={0,0,127}));
-  connect(tColdNom1.y, add1.u2) annotation (Line(points={{-139,28},{-88,28},{
-          -88,50},{-8,50}}, color={0,0,127}));
-  connect(add1.y, internalControl.Tflow_set) annotation (Line(points={{15,56},{
-          28,56},{28,40},{42,40},{42,26},{-62.0375,26},{-62.0375,10.1125}},
-        color={0,0,127}));
-  connect(isOn, internalControl.isOn) annotation (Line(points={{30,100},{30,18},
-          {-57.525,18},{-57.525,10.275}}, color={255,0,255}));
+  connect(isOn, myExternalControl.isOn) annotation (Line(points={{30,100},{30,76},
+          {-20,76},{-20,50},{-9.9,50},{-9.9,50.25}}, color={255,0,255}));
+  connect(senTSup.T, myExternalControl.TFlowIs) annotation (Line(points={{40,-69},
+          {40,-69},{40,-18},{6.5,-18},{6.5,38.8}}, color={0,0,127}));
+  connect(myExternalControl.isOn_final, internalControl.isOn) annotation (Line(
+        points={{10.2,49.8},{20,49.8},{20,20},{-57.525,20},{-57.525,10.275}},
+        color={255,0,255}));
+  connect(myExternalControl.TFlowSet, internalControl.Tflow_set) annotation (
+      Line(points={{10.2,52.8},{18,52.8},{18,22},{-62.0375,22},{-62.0375,
+          10.1125}}, color={0,0,127}));
+  connect(TAmbient,myExternalControl.TOutside)  annotation (Line(points={{-80,60},
+          {-22,60},{-22,44.4},{-9.725,44.4}}, color={0,0,127}));
+  connect(myExternalControl.switchToNightMode,switchToNightMode)  annotation (
+      Line(points={{-9.95,53.625},{-16.975,53.625},{-16.975,30},{-80,30}},
+        color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Polygon(
           points={{-18.5,-23.5},{-26.5,-7.5},{-4.5,36.5},{3.5,10.5},{25.5,14.5},

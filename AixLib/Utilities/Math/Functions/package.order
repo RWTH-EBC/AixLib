@@ -12,6 +12,7 @@ exponentialIntegralE1
 factorial
 fallingFactorial
 integerReplicator
+interpolate
 inverseXRegularized
 isMonotonic
 linearInterpolation
@@ -24,6 +25,7 @@ regStep
 round
 smoothExponential
 smoothHeaviside
+smoothInterpolation
 smoothLimit
 smoothMax
 smoothMin

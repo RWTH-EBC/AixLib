@@ -132,62 +132,62 @@ equation
       file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/Validation/BESTEST/WD100.mos" "Simulate and plot"),
     Documentation(
       info="<html>
- <h4>WD100: Base Case</h4>
- <p>Weather data file : WD100.epw</p>
- <p><i>Table 1: Site Data for Weather file WD100.epw</i></p>
- <table summary=\"Site Data for Weather file WD100.epw\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
- <td><p>Latitude</p></td>
- <td><p>39.833&deg; north</p></td>
- </tr>
- <tr>
- <td><p>Longitude</p></td>
- <td><p>104.65&deg; west</p></td>
- </tr>
- <tr>
- <td><p>Altitude</p></td>
- <td><p>1650 m</p></td>
- </tr>
- <tr>
- <td><p>Time Zone</p></td>
- <td><p>-7</p></td>
- </tr>
- </table>
- <p>This model is a template for all the other test cases.
- It allows to extrapolate all the weather data from the Reader TMY3 for a specific location, incliation and azimuth.
- The model
- <a href=\"modelica://AixLib.BoundaryConditions.Validation.IsotropicAndPerezDiffuseRadiation\">AixLib.BoundaryConditions.Validation.IsotropicAndPerezDiffuseRadiation</a>
- outputs radiation data using the available Isotropic and Perez methodlogies.
- The sky temperature is calculated using both the Horizontal radiation model,
- from data reader weaBusHorRad and the dew point temperature plus sky cover model from the datareader weaBusSkyCovDewTem.</p>
- </html>",
+<h4>WD100: Base Case</h4>
+<p>Weather data file : WD100.epw</p>
+<p><i>Table 1: Site Data for Weather file WD100.epw</i></p>
+<table summary=\"Site Data for Weather file WD100.epw\" cellspacing=\"2\" cellpadding=\"0\" border=\"1\"><tr>
+<td><p>Latitude</p></td>
+<td><p>39.833&deg; north</p></td>
+</tr>
+<tr>
+<td><p>Longitude</p></td>
+<td><p>104.65&deg; west</p></td>
+</tr>
+<tr>
+<td><p>Altitude</p></td>
+<td><p>1650 m</p></td>
+</tr>
+<tr>
+<td><p>Time Zone</p></td>
+<td><p>-7</p></td>
+</tr>
+</table>
+<p>This model is a template for all the other test cases.
+It allows to extrapolate all the weather data from the Reader TMY3 for a specific location, incliation and azimuth.
+The model
+<a href=\"modelica://AixLib.BoundaryConditions.Validation.IsotropicAndPerezDiffuseRadiation\">AixLib.BoundaryConditions.Validation.IsotropicAndPerezDiffuseRadiation</a>
+outputs radiation data using the available Isotropic and Perez methodlogies.
+The sky temperature is calculated using both the Horizontal radiation model,
+from data reader weaBusHorRad and the dew point temperature plus sky cover model from the datareader weaBusSkyCovDewTem.</p>
+</html>",
       revisions="<html>
- <ul>
- <li>
- September 6, 2021, by Ettore Zanetti:<br/>
- Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- <li>
- March 11, 2020, by Ettore Zanetti:<br/>
- First implementation.
- </li>
- <li>
- April 14, 2020, by Ettore Zanetti:<br/>
- Rework after comments from pull request
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1339\">#1339</a>.
- </li>
- <li>
- May 2, 2021, by Ettore Zanetti:<br/>
- Updated weather file as explained in <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1478\">#1478</a>.
- </li>
- <li>
- May 2, 2021, by Ettore Zanetti:<br/>
- Added altitude to parameters.<br/>
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<ul>
+<li>
+September 6, 2021, by Ettore Zanetti:<br/>
+Removed parameter <code>lat</code> as it is now obtained from the weather data bus.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+<li>
+March 11, 2020, by Ettore Zanetti:<br/>
+First implementation.
+</li>
+<li>
+April 14, 2020, by Ettore Zanetti:<br/>
+Rework after comments from pull request
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/pull/1339\">#1339</a>.
+</li>
+<li>
+May 2, 2021, by Ettore Zanetti:<br/>
+Updated weather file as explained in <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1478\">#1478</a>.
+</li>
+<li>
+May 2, 2021, by Ettore Zanetti:<br/>
+Added altitude to parameters.<br/>
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end WD100;

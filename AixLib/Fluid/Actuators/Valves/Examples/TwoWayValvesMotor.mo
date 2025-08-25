@@ -8,7 +8,7 @@ model TwoWayValvesMotor
     redeclare package Medium = Medium,
     l=0.05,
     m_flow_nominal=2,
-    use_inputFilter=false,
+    use_strokeTime=false,
     dpValve_nominal=6000) "Valve model, linear opening characteristics"
     annotation (Placement(transformation(extent={{0,50},{20,70}})));
   AixLib.Fluid.Sources.Boundary_pT sou(             redeclare package Medium =
@@ -31,7 +31,7 @@ model TwoWayValvesMotor
     redeclare package Medium = Medium,
     l=0.05,
     m_flow_nominal=2,
-    use_inputFilter=false,
+    use_strokeTime=false,
     dpValve_nominal=6000) "Valve model, quick opening characteristics"
     annotation (Placement(transformation(extent={{0,10},{20,30}})));
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valEqu(
@@ -40,7 +40,7 @@ model TwoWayValvesMotor
     R=10,
     delta0=0.1,
     m_flow_nominal=2,
-    use_inputFilter=false,
+    use_strokeTime=false,
     dpValve_nominal=6000)
     "Valve model, equal percentage opening characteristics"
     annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
@@ -56,7 +56,7 @@ model TwoWayValvesMotor
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=10000,
-    use_inputFilter=false,
+    use_strokeTime=false,
     l=0.05,
     l2=0.01) annotation (Placement(transformation(extent={{0,-64},{20,-44}})));
 equation
@@ -106,35 +106,35 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValvesMotor.mos"
         "Simulate and plot"),
     Documentation(info="<html>
- <p>
- Test model for two way valves. Note that the
- leakage flow rate has been set to a large value
- and the rangeability to a small value
- for better visualization of the valve characteristics.
- To use common values, use the default values.
- </p>
- <p>
- All valves are connected to a model of a motor with
- hysteresis. A more efficient implementation that approximates
- a motor but lacks hysteresis would be to
- set the valve parameter <code>use_inputFilter=true</code> instead
- of using the motor model.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 29, 2015, by Filip Jorissen:<br/>
- Added pressure-independent valve.
- </li>
- <li>
- February 28, 2013, by Michael Wetter:<br/>
- Added default value for <code>dpValve_nominal</code>.
- </li>
- <li>
- June 16, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+Test model for two way valves. Note that the
+leakage flow rate has been set to a large value
+and the rangeability to a small value
+for better visualization of the valve characteristics.
+To use common values, use the default values.
+</p>
+<p>
+All valves are connected to a model of a motor with
+hysteresis. A more efficient implementation that approximates
+a motor but lacks hysteresis would be to
+set the valve parameter <code>use_strokeTime=true</code> instead
+of using the motor model.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+January 29, 2015, by Filip Jorissen:<br/>
+Added pressure-independent valve.
+</li>
+<li>
+February 28, 2013, by Michael Wetter:<br/>
+Added default value for <code>dpValve_nominal</code>.
+</li>
+<li>
+June 16, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValvesMotor;

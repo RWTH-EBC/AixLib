@@ -18,44 +18,44 @@ algorithm
     Modelica.Math.log(T));
   annotation (
     Documentation(info="<html>
- <p>
- Dew point temperature calculation for moist air above freezing temperature.
- </p>
- <p>
- The correlation used in this model is valid for dew point temperatures between
- <i>0</i>&deg;C and <i>200</i>&deg;C. It is the correlation from 2005
- ASHRAE Handbook, p. 6.2. In an earlier version of this model, the equation from
- Peppers has been used, but this equation yielded about <i>15</i> Kelvin lower dew point
- temperatures.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- March 9, 2012 by Michael Wetter:<br/>
- Added <code>smoothOrder=99</code> and <code>displayUnit</code> for pressure.
- </li>
- <li>
- February 17, 2010 by Michael Wetter:<br/>
- Renamed function from <code>dewPointTemperature</code> to <code>pW_TDewPoi</code>.
- </li>
- <li>
- February 6, 2010 by Michael Wetter:<br/>
- Fixed derivative implementation.
- </li>
- <li>
- September 4, 2008 by Michael Wetter:<br/>
- Changed from causal to acausal ports, needed, for example, for
- <a href=\"modelica://AixLib.Fluid.Examples.MixingVolumeMoistAir\">
- AixLib.Fluid.Examples.MixingVolumeMoistAir</a>.
- </li>
- <li>
- August 7, 2008 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<p>
+Dew point temperature calculation for moist air above freezing temperature.
+</p>
+<p>
+The correlation used in this model is valid for dew point temperatures between
+<i>0</i>&deg;C and <i>200</i>&deg;C. It is the correlation from 2005
+ASHRAE Handbook, p. 6.2. In an earlier version of this model, the equation from
+Peppers has been used, but this equation yielded about <i>15</i> Kelvin lower dew point
+temperatures.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+March 9, 2012 by Michael Wetter:<br/>
+Added <code>smoothOrder=99</code> and <code>displayUnit</code> for pressure.
+</li>
+<li>
+February 17, 2010 by Michael Wetter:<br/>
+Renamed function from <code>dewPointTemperature</code> to <code>pW_TDewPoi</code>.
+</li>
+<li>
+February 6, 2010 by Michael Wetter:<br/>
+Fixed derivative implementation.
+</li>
+<li>
+September 4, 2008 by Michael Wetter:<br/>
+Changed from causal to acausal ports, needed, for example, for
+<a href=\"modelica://AixLib.Fluid.Examples.MixingVolumeMoistAir\">
+AixLib.Fluid.Examples.MixingVolumeMoistAir</a>.
+</li>
+<li>
+August 7, 2008 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Inline=true,
     smoothOrder=99,
-    derivative=BaseClasses.der_pW_TDewPoi,
-  __Dymola_LockedEditing="Model from IBPSA");
+    derivative=BaseClasses.der_pW_TDewPoi, 
+   __Dymola_LockedEditing="Model from IBPSA");
 end pW_TDewPoi;

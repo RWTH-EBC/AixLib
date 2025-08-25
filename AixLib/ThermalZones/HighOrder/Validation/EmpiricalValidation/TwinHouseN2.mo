@@ -1,12 +1,15 @@
 within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model TwinHouseN2
    extends Modelica.Icons.Example;
+   replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
+
   Rooms.RoomEmpiricalValidation.RoomTwinHouseN2 roomTwinHouseN2(
     energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    redeclare package Medium = MediumAir,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T0_air=303.15,
     TWalls_start=303.15,
-    calcMethodIn=1,
+    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
     redeclare model WindowModel = Components.WindowsDoors.Window_ASHRAE140,
     redeclare DataBase.WindowsDoors.Simple.WindowSimple_TwinHouses Type_Win,
     redeclare model CorrSolarGainWin =
@@ -36,7 +39,7 @@ model TwinHouseN2
   Modelica.Blocks.Sources.CombiTimeTable TempCellar(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.txt"),
     columns={4})
     annotation (Placement(transformation(extent={{-20,-160},{0,-140}})));
   Modelica.Blocks.Interfaces.RealOutput roomTemp
@@ -50,7 +53,7 @@ model TwinHouseN2
   Modelica.Blocks.Sources.CombiTimeTable TempAttic(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.txt"),
     columns={2,3})
     annotation (Placement(transformation(extent={{-96,26},{-76,46}})));
   Modelica.Blocks.Math.Add add
@@ -60,7 +63,7 @@ model TwinHouseN2
   Modelica.Blocks.Sources.CombiTimeTable HeatInput(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.txt"),
     columns={20,21,22,23,24,25,26}) "Heat input for every room"
     annotation (Placement(transformation(extent={{-94,-100},{-74,-80}})));
   Modelica.Blocks.Math.Sum sum1(nin=7)
@@ -68,7 +71,7 @@ model TwinHouseN2
   Modelica.Blocks.Sources.CombiTimeTable VentilationRate(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.txt"),
     columns={31}) "Ventilation rate caused by mechanical ventilation system"
     annotation (Placement(transformation(extent={{-96,-12},{-80,4}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature Temp3
@@ -82,7 +85,7 @@ model TwinHouseN2
   Modelica.Blocks.Sources.CombiTimeTable VentTemp(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.txt"),
     columns={29}) "Temperature for mechanical ventilation rate"
     annotation (Placement(transformation(extent={{-96,-40},{-80,-24}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC annotation(Placement(transformation(extent={{-14,34},
@@ -104,7 +107,7 @@ model TwinHouseN2
   Modelica.Blocks.Sources.CombiTimeTable MeasuredTemperatures(
     tableOnFile=true,
     tableName="measurement",
-    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.mat"),
+    fileName=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/ThermalZones/HighOrder/Validation/EmpiricalValidation/TwinHouseN2.txt"),
     columns={5,6,7,8,9,10,11,12,13})
     "Measured temperatures for every roo, on the ground floor"
     annotation (Placement(transformation(extent={{104,32},{124,52}})));

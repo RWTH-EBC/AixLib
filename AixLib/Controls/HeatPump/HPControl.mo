@@ -3,7 +3,8 @@ model HPControl
   "Control block which makes sure the desired temperature is supplied by the HP"
   //General
   replaceable model TSetToNSet =
-      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
+      AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet constrainedby
+    AixLib.Controls.HeatPump.BaseClasses.PartialTSetToNSet(
     final use_secHeaGen=use_secHeaGen) annotation(choicesAllMatching=true);
 
   parameter Boolean use_secHeaGen=false "True to choose a bivalent system" annotation(choices(checkBox=true));
@@ -15,8 +16,8 @@ model HPControl
       choice=false "Function",
       radioButtons=true));
   replaceable function HeatingCurveFunction =
-      SetPoints.Functions.HeatingCurveFunction constrainedby SetPoints.Functions.PartialBaseFct
-                                       annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
+      SetPoints.Functions.HeatingCurveFunction constrainedby
+    SetPoints.Functions.PartialBaseFct annotation (Dialog(group="Heating Curve - Data", enable = not use_tableData),choicesAllMatching=true);
   parameter
     AixLib.DataBase.Boiler.DayNightMode.HeatingCurvesDayNightBaseDataDefinition
     heatingCurveRecord=
@@ -60,9 +61,9 @@ model HPControl
     final zerTim=zerTim)
                     if use_antLeg
     annotation (Placement(transformation(extent={{-26,-14},{14,26}})));
-  Interfaces.VapourCompressionMachineControlBus sigBusHP
+  AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantMachineControlBus sigBusHP
     annotation (Placement(transformation(extent={{-116,-72},{-88,-44}})));
-  Modelica.Blocks.Interfaces.RealOutput nOut
+  Modelica.Blocks.Interfaces.RealOutput yOut "Relative compressor speed"
     annotation (Placement(transformation(extent={{100,6},{128,34}})));
   Modelica.Blocks.Interfaces.RealInput T_oda "Outdoor air temperature"
     annotation (Placement(transformation(extent={{-128,-14},{-100,14}}),
@@ -70,24 +71,27 @@ model HPControl
   Modelica.Blocks.Interfaces.RealOutput ySecHeaGen if use_secHeaGen
                                                    "Relative power of second heat generator, from 0 to 1"
     annotation (Placement(transformation(
-        extent={{-10,-10},{10,10}},
+        extent={{-17,-17},{17,17}},
         rotation=-90,
-        origin={-4,-104})));
+        origin={1,-117}), iconTransformation(
+        extent={{-14,-14},{14,14}},
+        rotation=-90,
+        origin={-1.77636e-15,-108})));
   Modelica.Blocks.Interfaces.RealOutput y_sou
     annotation (Placement(transformation(extent={{14,-14},{-14,14}},
         rotation=90,
-        origin={-64,-100})));
+        origin={-60,-114})));
   Modelica.Blocks.Interfaces.RealOutput y_sin annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
         rotation=90,
-        origin={56,-100})));
+        origin={60,-114})));
   Modelica.Blocks.Sources.Constant        constHeating1(final k=1)
     "If you want to include chilling, please insert control blocks first"
     annotation (Placement(transformation(extent={{10,-10},{-10,10}},
         rotation=90,
         origin={-12,-72})));
 
-  SetPoints.HeatingCurve heatCurve(
+  AixLib.Controls.SetPoints.HeatingCurve heatCurve(
     final TOffset=0,
     final use_dynTRoom=false,
     final zerTim=zerTim,
@@ -110,7 +114,7 @@ model HPControl
   Modelica.Blocks.Sources.BooleanConstant constHeating(final k=true)
     "If you want to include chilling, please insert control blocks first"
     annotation (Placement(transformation(extent={{82,-26},{94,-14}})));
-  Modelica.Blocks.Interfaces.BooleanOutput modeOut
+  Modelica.Blocks.Interfaces.BooleanOutput hea "Heating mode"
     annotation (Placement(transformation(extent={{100,-34},{128,-6}})));
   Modelica.Blocks.Interfaces.RealInput TSup "Supply temperature" annotation (
       Placement(transformation(extent={{-128,46},{-100,74}}),
@@ -118,8 +122,8 @@ model HPControl
 
 equation
 
-  connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{-90,
-          1.77636e-15},{-90,-57.93},{-101.93,-57.93}},
+  connect(T_oda, sigBusHP.T_oda) annotation (Line(points={{-114,1.77636e-15},{
+          -90,1.77636e-15},{-90,-58},{-102,-58}},
                                          color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -137,11 +141,11 @@ equation
       color={0,0,127},
       pattern=LinePattern.Dash));
 
-  connect(ConvTSetToNSet.nOut, nOut) annotation (Line(points={{77.6,9},{88.8,9},{88.8,20},
+  connect(ConvTSetToNSet.nOut,yOut)  annotation (Line(points={{77.6,9},{88.8,9},{88.8,20},
           {114,20}},          color={0,0,127}));
 
   connect(sigBusHP,ConvTSetToNSet. sigBusHP) annotation (Line(
-      points={{-102,-58},{24,-58},{24,4.41},{42.88,4.41}},
+      points={{-102,-58},{24,-58},{24,3.73},{42.88,3.73}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -157,27 +161,27 @@ equation
       points={{6.8,46},{26,46},{26,19.2},{41.44,19.2}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-  connect(modeOut, constHeating.y) annotation (Line(points={{114,-20},{94.6,-20}},
-                              color={255,0,255}));
+  connect(hea, constHeating.y)
+    annotation (Line(points={{114,-20},{94.6,-20}}, color={255,0,255}));
   connect(TSup, antiLegionella.TSupAct) annotation (Line(points={{-114,60},{-82,
           60},{-82,6},{-30,6}}, color={0,0,127}));
 
-  connect(TSup,ConvTSetToNSet. TAct) annotation (Line(points={{-114,60},{-82,60},{-82,-22},
+  connect(TSup,ConvTSetToNSet.TMea)  annotation (Line(points={{-114,60},{-82,60},{-82,-22},
           {30,-22},{30,-4.6},{41.44,-4.6}},          color={0,0,127}));
 
   connect(ConvTSetToNSet.ySecHeaGen, ySecHeaGen) annotation (Line(
-      points={{61.92,-9.36},{61.92,-14},{46,-14},{46,-44},{22,-44},{22,-90},{-4,
-          -90},{-4,-104}},
+      points={{60,-9.7},{60,-12},{36,-12},{36,-88},{1,-88},{1,-117}},
       color={0,0,127},
       pattern=LinePattern.Dash));
   connect(ySecHeaGen, ySecHeaGen)
-    annotation (Line(points={{-4,-104},{-4,-104}},
+    annotation (Line(points={{1,-117},{1,-117}},
                                                color={0,0,127}));
   connect(constHeating1.y, y_sou)
-    annotation (Line(points={{-12,-83},{-12,-84},{-64,-84},{-64,-100}},
+    annotation (Line(points={{-12,-83},{-12,-96},{-60,-96},{-60,-114}},
                                                            color={0,0,127}));
-  connect(constHeating1.y, y_sin) annotation (Line(points={{-12,-83},{56,-83},{56,
-          -100}},           color={0,0,127}));
+  connect(constHeating1.y, y_sin) annotation (Line(points={{-12,-83},{-12,-92},
+          {60,-92},{60,-114}},
+                            color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,80}}),                                   graphics={
         Rectangle(
@@ -222,7 +226,7 @@ equation
 </p>
 <p>
   Looking at the <a href=
-  \"modelica://AixLib.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>,
+  \"modelica://AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.HeatPumpSystem\">HeatPumpSystem</a>,
   the task of the control block is also to control the pumps or fans
   and second heat generator if necessary.
 </p>

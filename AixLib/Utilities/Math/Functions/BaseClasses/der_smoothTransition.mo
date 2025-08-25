@@ -33,29 +33,29 @@ algorithm
           zeroDerivative=e,
           zeroDerivative=f)=AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition,
 Documentation(info="<html>
- <p>
- This function is the 1st order derivative of
- <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.smoothTransition\">
- AixLib.Utilities.Math.Functions.BaseClasses.smoothTransition</a>.
- </p>
- <h4>Implementation</h4>
- <p>
- For efficiency, the polynomial coefficients
- <code>a, b, c, d, e, f</code> and
- the inverse of the smoothing parameter <code>deltaInv</code>
- are exposed as arguments to this function.
- Also,
- its derivative is provided in
- <a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
- AixLib.Utilities.Math.Functions.BaseClasses.der_2__smoothTransition</a>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 11, 2015, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function is the 1st order derivative of
+<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.smoothTransition\">
+AixLib.Utilities.Math.Functions.BaseClasses.smoothTransition</a>.
+</p>
+<h4>Implementation</h4>
+<p>
+For efficiency, the polynomial coefficients
+<code>a, b, c, d, e, f</code> and
+the inverse of the smoothing parameter <code>deltaInv</code>
+are exposed as arguments to this function.
+Also,
+its derivative is provided in
+<a href=\"modelica://AixLib.Utilities.Math.Functions.BaseClasses.der_2_smoothTransition\">
+AixLib.Utilities.Math.Functions.BaseClasses.der_2__smoothTransition</a>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 11, 2015, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end der_smoothTransition;

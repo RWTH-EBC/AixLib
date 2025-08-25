@@ -2,7 +2,7 @@ within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model PlugFlowPipeEmbedded
   "Embedded pipe model using spatialDistribution for temperature delay"
 
-  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=true);
 
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
@@ -135,7 +135,6 @@ model PlugFlowPipeEmbedded
     final R=R,
     final fac=fac,
     final sum_zetas=sum_zetas,
-    nPorts=nPorts,
     final use_zeta=true)
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
@@ -215,7 +214,7 @@ equation
     annotation (Line(points={{0,90.8},{0,104}}, color={191,0,0}));
   connect(port_a, plugFlowPipeZeta.port_a)
     annotation (Line(points={{-100,0},{-10,0}}, color={0,127,255}));
-  connect(plugFlowPipeZeta.ports_b, ports_b) annotation (Line(points={{10,0},{56,
+  connect(plugFlowPipeZeta.port_b, port_b) annotation (Line(points={{10,0},{56,
           0},{56,0},{100,0}}, color={0,127,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(

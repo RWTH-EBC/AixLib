@@ -16,16 +16,16 @@ algorithm
   result := result - f[1] - f[N];
   result := result*deltaX/2;
   annotation (Documentation(info="<html>
- <p>
- This function computes a definite integral using the trapezoidal rule.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- August 23, 2010, by Wangda Zuo:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function computes a definite integral using the trapezoidal rule.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 23, 2010, by Wangda Zuo:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end trapezoidalIntegration;

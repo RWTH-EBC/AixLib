@@ -1,6 +1,7 @@
 AbsToRelHum
 AirFlowRateSplit
 AirFlowRateSum
+FlowArrayRearranging
 MoistSplitter
 MultizonePostProcessing
 PartialMultizone

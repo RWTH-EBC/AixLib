@@ -5,15 +5,12 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
   parameter Integer nRooms = 11;
   parameter Integer nHeatedRooms = 10;
 
-  parameter Integer TIR=1 "Thermal Insulation Regulation" annotation (Dialog(
+  parameter AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation TIR=AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 "Thermal Insulation Regulation" annotation (Dialog(
       group="Construction parameters",
       compact=true,
-      descriptionLabel=true), choices(
-      choice=1 "EnEV_2009",
-      choice=2 "EnEV_2002",
-      choice=3 "WSchV_1995",
-      choice=4 "WSchV_1984",
-      radioButtons=true));
+      descriptionLabel=true));
+
+  replaceable package MediumAir = AixLib.Media.Air "Medium within the room";
 
 
   Modelica.Blocks.Sources.Constant constRooms[nHeatedRooms](k={293.15,293.15,288.15,293.15,293.15,293.15,293.15,288.15,297.15,293.15}) "1: LivingRoom_GF, 2: Hobby_GF, 3: Corridor_GF, 4: WC_Storage_GF, 5: Kitchen_GF, 6: Bedroom_UF, 7: Child1_UF, 8: Corridor_UF, 9: Bath_UF, 10: Child2_UF, 11: Attic" annotation (Placement(transformation(extent={{-70,-62},{-50,-42}})));
@@ -55,8 +52,9 @@ model OFDHeatLoad "Test environment to determine OFD's nominal heat load"
     redeclare model CorrSolarGainWin =
         Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorGSimple,
     use_infiltEN12831=true,
-    n50=if TIR == 1 or TIR == 2 then 3 else if TIR == 3 then 4 else 6,
-    UValOutDoors=if TIR == 1 then 1.8 else 2.9,
+    n50=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 or TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2002 then 3 else if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.WSchV_1995 then 4 else 6,
+    redeclare package Medium = MediumAir,
+    UValOutDoors=if TIR == AixLib.ThermalZones.HighOrder.Components.Types.ThermalInsulationRegulation.EnEV_2009 then 1.8 else 2.9,
     upperFloor_Building(Corridor(T0_air=288.15), Bath(T0_air=297.15)),
     groundFloor_Building(Corridor(T0_air=288.15)))
                                                 annotation (Placement(transformation(extent={{-14,-10},{42,46}})));
@@ -72,23 +70,23 @@ equation
       points={{-49,80},{-46,80},{-46,64},{-41.2,64}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I) annotation (Line(
+  connect(constSun.y,varRad.H)  annotation (Line(
       points={{79,80},{74,80},{74,78.9},{68.9,78.9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I_dir) annotation (Line(
+  connect(constSun.y, varRad.HDir) annotation (Line(
       points={{79,80},{74,80},{74,75},{69,75}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I_diff) annotation (Line(
+  connect(constSun.y, varRad.HDif) annotation (Line(
       points={{79,80},{74,80},{74,71},{69,71}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. I_gr) annotation (Line(
+  connect(constSun.y,varRad.HGrd)  annotation (Line(
       points={{79,80},{74,80},{74,66.9},{68.9,66.9}},
       color={0,0,127},
       smooth=Smooth.None));
-  connect(constSun.y,varRad. AOI) annotation (Line(
+  connect(constSun.y, varRad.incAng) annotation (Line(
       points={{79,80},{74,80},{74,63},{69,63}},
       color={0,0,127},
       smooth=Smooth.None));
@@ -108,24 +106,23 @@ equation
     annotation (Line(points={{-28,64},{-14,64},{-14,45.44}},    color={191,0,0}));
   connect(groundTemp.port, wholeHouseBuildingEnvelope.groundTemp)
     annotation (Line(points={{-42,-90},{14,-90},{14,-10}}, color={191,0,0}));
-  connect(varRad.solarRad_out[1], wholeHouseBuildingEnvelope.North) annotation (
-     Line(points={{51,69.5833},{48,69.5833},{48,26.4},{43.68,26.4}},  color={
+  connect(varRad.solRadOut[1], wholeHouseBuildingEnvelope.North) annotation (
+      Line(points={{51,69.5833},{48,69.5833},{48,28.64},{43.68,28.64}}, color={
           255,128,0}));
-  connect(varRad.solarRad_out[2], wholeHouseBuildingEnvelope.East) annotation (
-      Line(points={{51,69.75},{48,69.75},{48,18},{43.68,18}},    color={255,128,
-          0}));
-  connect(varRad.solarRad_out[3], wholeHouseBuildingEnvelope.South) annotation (
-     Line(points={{51,69.9167},{48,69.9167},{48,9.6},{43.68,9.6}},  color={255,
+  connect(varRad.solRadOut[2], wholeHouseBuildingEnvelope.East) annotation (
+      Line(points={{51,69.75},{48,69.75},{48,21.36},{43.68,21.36}}, color={255,
           128,0}));
-  connect(varRad.solarRad_out[4], wholeHouseBuildingEnvelope.West) annotation (
-      Line(points={{51,70.0833},{48,70.0833},{48,1.2},{43.68,1.2}},  color={255,
-          128,0}));
-  connect(varRad.solarRad_out[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
+  connect(varRad.solRadOut[3], wholeHouseBuildingEnvelope.South) annotation (
+      Line(points={{51,69.9167},{48,69.9167},{48,14.08},{43.68,14.08}}, color={
+          255,128,0}));
+  connect(varRad.solRadOut[4], wholeHouseBuildingEnvelope.West) annotation (
+      Line(points={{51,70.0833},{48,70.0833},{48,7.36},{43.68,7.36}}, color={
+          255,128,0}));
+  connect(varRad.solRadOut[5], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofN)
     annotation (Line(points={{51,70.25},{48,70.25},{48,43.2},{43.68,43.2}},
-                                                                         color=
-          {255,128,0}));
-  connect(varRad.solarRad_out[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
-    annotation (Line(points={{51,70.4167},{48,70.4167},{48,34.8},{43.68,34.8}},
+        color={255,128,0}));
+  connect(varRad.solRadOut[6], wholeHouseBuildingEnvelope.SolarRadiationPort_RoofS)
+    annotation (Line(points={{51,70.4167},{48,70.4167},{48,35.92},{43.68,35.92}},
         color={255,128,0}));
   connect(heatStarToComb.portConvRadComb, wholeHouseBuildingEnvelope.heatingToRooms) annotation (Line(points={{-28,-20},{-26,-20},{-26,10},{-14,10},{-14,10.16}},        color={191,0,0}));
   connect(constAirEx.y, wholeHouseBuildingEnvelope.AirExchangePort) annotation (

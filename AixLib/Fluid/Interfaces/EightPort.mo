@@ -4,9 +4,9 @@ partial model EightPort "Partial model with eight ports"
   replaceable package Medium1 =
     Modelica.Media.Interfaces.PartialMedium "Medium 1 in the component"
       annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
+        choice(redeclare package Medium1 = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium1 = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium1 =
             AixLib.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15,
           X_a=0.40)
@@ -14,9 +14,9 @@ partial model EightPort "Partial model with eight ports"
   replaceable package Medium2 =
     Modelica.Media.Interfaces.PartialMedium "Medium 2 in the component"
       annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
+        choice(redeclare package Medium2 = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium2 = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium2 =
             AixLib.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15,
           X_a=0.40)
@@ -24,9 +24,9 @@ partial model EightPort "Partial model with eight ports"
   replaceable package Medium3 =
     Modelica.Media.Interfaces.PartialMedium "Medium 3 in the component"
       annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
+        choice(redeclare package Medium3 = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium3 = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium3 =
             AixLib.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15,
           X_a=0.40)
@@ -34,9 +34,9 @@ partial model EightPort "Partial model with eight ports"
   replaceable package Medium4 =
     Modelica.Media.Interfaces.PartialMedium "Medium 4 in the component"
       annotation (choices(
-        choice(redeclare package Medium = AixLib.Media.Air "Moist air"),
-        choice(redeclare package Medium = AixLib.Media.Water "Water"),
-        choice(redeclare package Medium =
+        choice(redeclare package Medium4 = AixLib.Media.Air "Moist air"),
+        choice(redeclare package Medium4 = AixLib.Media.Water "Water"),
+        choice(redeclare package Medium4 =
             AixLib.Media.Antifreeze.PropyleneGlycolWater (
           property_T=293.15,
           X_a=0.40)
@@ -144,20 +144,25 @@ partial model EightPort "Partial model with eight ports"
   annotation (
     preferredView="info",
     Documentation(info="<html>
- <p>This model defines an interface for components with eight ports. The parameters <code>allowFlowReversal1,
- </code> <code>allowFlowReversal2</code>, <code>allowFlowReversal3</code> and <code>allowFlowReversal4</code> 
- may be used by models that extend this model to treat flow reversal. </p>
- <p>This model is identical to <a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">Modelica.Fluid.Interfaces.PartialTwoPort</a>, except that it has eight ports. </p>
- </html>",revisions="<html>
- <ul>
- <li>
- January 18, 2019, by Jianjun Hu:<br/>
- Limited the media choice.
- See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
- </li>
- <li>July 2014, by Damien Picard:<br/>First implementation. </li>
- </ul>
- </html>"),
+<p>This model defines an interface for components with eight ports. The parameters <code>allowFlowReversal1,
+</code> <code>allowFlowReversal2</code>, <code>allowFlowReversal3</code> and <code>allowFlowReversal4</code> 
+may be used by models that extend this model to treat flow reversal. </p>
+<p>This model is identical to <a href=\"modelica://Modelica.Fluid.Interfaces.PartialTwoPort\">Modelica.Fluid.Interfaces.PartialTwoPort</a>, except that it has eight ports. </p>
+</html>", revisions="<html>
+<ul>
+<li>
+August 27, 2024, by Jianjun Hu:<br/>
+Corrected dropdown media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1924\">IBPSA #1924</a>.
+</li>
+<li>
+January 18, 2019, by Jianjun Hu:<br/>
+Limited the media choice.
+See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">IBPSA #1050</a>.
+</li>
+<li>July 2014, by Damien Picard:<br/>First implementation. </li>
+</ul>
+</html>"),
     Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}},
@@ -169,6 +174,6 @@ partial model EightPort "Partial model with eight ports"
           textString="%name")}),
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
-                    graphics),
-  __Dymola_LockedEditing="Model from IBPSA");
+                    graphics), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end EightPort;

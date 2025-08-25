@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Examples;
 model PumpSpeedControlled "Testing the pump speed controlled model."
   extends Modelica.Icons.Example;
 
@@ -37,8 +37,18 @@ model PumpSpeedControlled "Testing the pump speed controlled model."
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-36,20})));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=1
-    "Nominal mass flow rate";
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=0.1 "Nominal mass flow rate";
+  Modelica.Blocks.Sources.BooleanPulse    PumpOn1(period=600, width=500/600*100,
+    startTime=0)
+    annotation (Placement(transformation(extent={{-70,30},{-50,50}})));
+  Modelica.Blocks.Sources.Ramp rampPumpDp(
+    height=2,
+    offset=2,
+    duration(displayUnit="s") = 100,
+    startTime(displayUnit="s") = 100)
+    annotation (Placement(transformation(extent={{46,30},{26,50}})));
+  BaseClasses.PumpBus                                          pumpBus
+    annotation (Placement(transformation(extent={{-10,30},{10,50}})));
   Actuators.Valves.TwoWayLinear             simpleValve(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
@@ -66,14 +76,16 @@ equation
     annotation (Line(points={{-30,-42},{-30,-60},{-21,-60}}, color={0,0,127}));
   connect(pump.port_b, simpleValve.port_a) annotation (Line(points={{10,10},{40,
           10},{40,-30},{-20,-30}}, color={0,127,255}));
-  connect(simpleValve.port_b, vessle.ports[1]) annotation (Line(points={{-40,-30},
-          {-60,-30},{-60,10},{-34,10}}, color={0,127,255}));
-  connect(vessle.ports[2], pump.port_a)
-    annotation (Line(points={{-38,10},{-10,10}}, color={0,127,255}));
+  connect(vessle.ports[1], pump.port_a)
+    annotation (Line(points={{-37,10},{-10,10}}, color={0,127,255}));
+  connect(simpleValve.port_b, vessle.ports[2]) annotation (Line(points={{-40,-30},
+          {-60,-30},{-60,10},{-35,10}}, color={0,127,255}));
+  connect(rampValvePosition.y, simpleValve.y)
+    annotation (Line(points={{-21,-60},{-30,-60},{-30,-42}}, color={0,0,127}));
   annotation (
     experiment(Tolerance=1e-6,StopTime=600),
     Documentation(revisions="<html><ul>
-  <li>2019-09-18 by Alexander Kümpel:<br/>
+  <li>2019-09-18 by Alexander Kuempel:<br/>
     Renaming and restructuring.
   </li>
   <li>2018-05-08 by Peter Matthes:<br/>

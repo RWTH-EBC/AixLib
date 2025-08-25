@@ -36,57 +36,57 @@ equation
   annotation (
 defaultComponentName="tab",
 Documentation(info="<html>
- <p>
- This block can be used to schedule a set-point by using piecewise linear functions.
- For example, the instances
- </p>
- <pre>
- AixLib.Controls.SetPoints.Table tabLinExt(constantExtrapolation=false,
-                                              table=[20, 0.0;
-                                                     22, 0.5;
-                                                     25, 0.5;
-                                                     26, 1.0]);
- AixLib.Controls.SetPoints.Table tabConExt(constantExtrapolation=true,
-                                              table=[20, 0.0;
-                                                     22, 0.5;
-                                                     25, 0.5;
-                                                     26, 1.0]);
- </pre>
- <p>
- will cause the following output:
- </p>
- <p>
- <img src=\"modelica://AixLib/Resources/Images/Controls/SetPoints/Table.png\" border=\"1\" alt=\"Table output.\"/>
- </p>
- <p>
- For the default setting <code>constantExtrapolation=true</code>, the
- block outputs
- <code>y=y1+offset</code> for <code>u &le; u1</code>, and
- <code>y=yMax+offset</code> for <code>u &ge; uMax</code>.
- Otherwise, the table is linearly extrapolated with a constant derivative.
- </p>
- <p>
- Note that the first column must be strictly increasing.
- </p>
- </html>",
+<p>
+This block can be used to schedule a set-point by using piecewise linear functions.
+For example, the instances
+</p>
+<pre>
+AixLib.Controls.SetPoints.Table tabLinExt(constantExtrapolation=false,
+                                             table=[20, 0.0;
+                                                    22, 0.5;
+                                                    25, 0.5;
+                                                    26, 1.0]);
+AixLib.Controls.SetPoints.Table tabConExt(constantExtrapolation=true,
+                                             table=[20, 0.0;
+                                                    22, 0.5;
+                                                    25, 0.5;
+                                                    26, 1.0]);
+</pre>
+<p>
+will cause the following output:
+</p>
+<p>
+<img src=\"modelica://AixLib/Resources/Images/Controls/SetPoints/Table.png\" border=\"1\" alt=\"Table output.\"/>
+</p>
+<p>
+For the default setting <code>constantExtrapolation=true</code>, the
+block outputs
+<code>y=y1+offset</code> for <code>u &le; u1</code>, and
+<code>y=yMax+offset</code> for <code>u &ge; uMax</code>.
+Otherwise, the table is linearly extrapolated with a constant derivative.
+</p>
+<p>
+Note that the first column must be strictly increasing.
+</p>
+</html>",
 revisions="<html>
- <ul>
- <li>
- August 30, 2016, by Michael Wetter:<br/>
- Changed protected final parameter <code>nCol</code> to <code>nRow</code>.<br/>
- This is for
- <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/555\">issue 555</a>.
- </li>
- <li>
- April 5, 2011, by Michael Wetter:<br/>
- Fixed wrong table declaration.
- </li>
- <li>
- July 13, 2010, by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
+<ul>
+<li>
+August 30, 2016, by Michael Wetter:<br/>
+Changed protected final parameter <code>nCol</code> to <code>nRow</code>.<br/>
+This is for
+<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/555\">issue 555</a>.
+</li>
+<li>
+April 5, 2011, by Michael Wetter:<br/>
+Fixed wrong table declaration.
+</li>
+<li>
+July 13, 2010, by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),
     Icon(graphics={
     Text(
       extent={{-78,-45},{-40,-56}},
@@ -134,6 +134,6 @@ revisions="<html>
     Line(
       points={{26,24},{77,24}},
       color={0,0,255},
-      thickness=0.5)}),
-  __Dymola_LockedEditing="Model from IBPSA");
+      thickness=0.5)}), 
+   __Dymola_LockedEditing="Model from IBPSA");
 end Table;

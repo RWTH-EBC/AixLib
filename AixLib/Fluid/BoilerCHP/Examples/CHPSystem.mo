@@ -2,21 +2,26 @@ within AixLib.Fluid.BoilerCHP.Examples;
 model CHPSystem "Example that illustrates use of CHP model"
   extends Modelica.Icons.Example;
 
-  CHP combinedHeatPower(
+  AixLib.Fluid.BoilerCHP.CHP combinedHeatPower(
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.02,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyStateInitial,
     TSetIn=true,
     minCapacity=20,
     delayTime=300,
-    param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP"
+    param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK(),
+    Kc=0.02,
+    Tc=100,
+    elControl(initType=Modelica.Blocks.Types.Init.InitialOutput))
+                                                       "CHP"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(
     redeclare package Medium =
         Media.Specialized.Water.TemperatureDependentDensity,
     use_T_in=true,
     nPorts=1,
-    m_flow=0.5)
+    m_flow=0.1)
     "Source"
     annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   Modelica.Fluid.Sources.Boundary_pT sink(
@@ -38,7 +43,7 @@ model CHPSystem "Example that illustrates use of CHP model"
   Modelica.Blocks.Sources.BooleanConstant on
     "CHP is always on"
     annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
-  Modelica.Blocks.Sources.Constant TSet(k=80 + 273.15)
+  Modelica.Blocks.Sources.Constant TSet(k=80 + 273.15, y(unit="K"))
     "Set temperature"
     annotation (Placement(transformation(extent={{-40,20},{-20,40}})));
 
@@ -82,5 +87,7 @@ equation
   </li>
 </ul>
 </html>"),
-experiment(StopTime=35000, Interval=60));
+experiment(Tolerance=1e-6, StopTime=1200, Interval=60), __Dymola_Commands(file=
+          "modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystem.mos"
+        "Simulate and Plot"));
 end CHPSystem;

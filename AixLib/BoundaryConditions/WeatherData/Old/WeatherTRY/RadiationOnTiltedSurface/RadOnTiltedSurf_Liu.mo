@@ -48,26 +48,27 @@ equation
   R = R_help;
 
   // conversion of direct and diffuse horizontal radiation
-  if WeatherFormat == 1 then // TRY
+  if not WeatherFormat then // TRY
     InBeamRadHor = solarInput1;
     InDiffRadHor = solarInput2;
-  else  // WeatherFormat == 2 , TMY then
+  else  // WeatherFormat == true , TMY then
     InBeamRadHor = solarInput1 * cos_theta_z;
     InDiffRadHor = max(solarInput2-InBeamRadHor, 0);
   end if;
 
   // calculation of total radiation on tilted surface according to model of Liu and Jordan
   // according to [Dissertation Nytsch-Geusen, p.98]
-  OutTotalRadTilted.I = max(0, R*InBeamRadHor + 0.5*(1 + cos(from_deg(
+  OutTotalRadTilted.H = max(0, R*InBeamRadHor + 0.5*(1 + cos(from_deg(
     Tilt)))*InDiffRadHor + GroundReflection*(InBeamRadHor + InDiffRadHor)
     *((1 - cos(from_deg(Tilt)))/2));
 
   // Setting the outputs of direct. diffuse and ground reflection radiation on tilted surface and the angle of incidence
-  OutTotalRadTilted.I_dir = R*InBeamRadHor;
-  OutTotalRadTilted.I_diff = 0.5*(1 + cos(from_deg(Tilt)))*InDiffRadHor;
-  OutTotalRadTilted.I_gr = GroundReflection*(InBeamRadHor + InDiffRadHor)*((1 - cos(from_deg(Tilt)))/2);
+  OutTotalRadTilted.HDir = R*InBeamRadHor;
+  OutTotalRadTilted.HDif = 0.5*(1 + cos(from_deg(Tilt)))*InDiffRadHor;
+  OutTotalRadTilted.HGrd = GroundReflection*(InBeamRadHor + InDiffRadHor)*((1 - cos(from_deg(Tilt)))/2);
 
-  OutTotalRadTilted.AOI = Modelica.Math.acos(cos_theta); // in rad
+  OutTotalRadTilted.incAng = Modelica.Math.acos(cos_theta);
+                                                         // in rad
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},

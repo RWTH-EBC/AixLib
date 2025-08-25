@@ -3,7 +3,7 @@ model SolarThermal "Model of a solar thermal panel"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(
     vol(final V=volPip),
     a=pressureDropCoeff,
-    dp_start=pressureDropCoeff*(m_flow_start *
+    dp_start=pressureDropCoeff*(m_flow_start /
       Medium.density(Medium.setState_pTX(
                        p_start,
                        T_start,
@@ -42,9 +42,9 @@ equation
           69.08},{-50.2,78},{0,78},{0,100}},                                                                             color = {0, 0, 127}));
   connect(convertRelHeatFlow2absHeatFlow.y, heater.Q_flow) annotation (Line(
         points={{-3.4,50},{12,50},{12,-30},{-60,-30},{-60,-40}}, color={0,0,127}));
-  connect(senTCold.T, calcTempMean.u1) annotation (Line(points={{-70,-69},{-70,-66},
+  connect(senTRet.T, calcTempMean.u1) annotation (Line(points={{-70,-69},{-70,-66},
           {-78,-66},{-78,-10},{-54,-10},{-54,-3}}, color={0,0,127}));
-  connect(senTHot.T, calcTempMean.u2) annotation (Line(points={{40,-69},{32,-69},
+  connect(senTSup.T, calcTempMean.u2) annotation (Line(points={{40,-69},{32,-69},
           {32,-10},{-48,-10},{-48,-3}}, color={0,0,127}));
   connect(calcTempMean.y, solarThermalEfficiency.T_col) annotation (Line(points={{-51,8.5},
           {-51,18},{-61,18},{-61,30.92}},          color={0,0,127}));

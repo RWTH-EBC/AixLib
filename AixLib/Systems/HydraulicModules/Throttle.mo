@@ -2,18 +2,17 @@ within AixLib.Systems.HydraulicModules;
 model Throttle "Throttle circuit with two way valve"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
-  Fluid.Actuators.Valves.TwoWayTable         valve(
+  Fluid.Actuators.Valves.TwoWayTable valve(
     redeclare package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     final allowFlowReversal=allowFlowReversal,
     Kv=Kv,
-    order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     y_start=0,
-    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear())
-           annotation (Dialog(enable=true, group="Actuators"), Placement(
-        transformation(extent={{-12,10},{8,30}})));
+    flowCharacteristics=Fluid.Actuators.Valves.Data.Linear()) annotation (
+      Dialog(enable=true, group="Actuators"), Placement(transformation(extent={
+            {-12,10},{8,30}})));
   Fluid.FixedResistances.GenericPipe  pipe1(
     redeclare package Medium = Medium,
     pipeModel=pipeModel,

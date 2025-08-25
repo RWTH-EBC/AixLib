@@ -27,11 +27,11 @@ model HeatPump
     TCon_start(displayUnit="K"),
     TEva_start(displayUnit="K"),
     redeclare model PerDataHea =
-        AixLib.DataBase.HeatPump.PerformanceData.LookUpTable2D (
-         dataTable=AixLib.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
+        AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.Obsolete.Year2024.DataBase.HeatPump.EN14511.Vitocal200AWO201()),
     redeclare model PerDataChi =
-        AixLib.DataBase.Chiller.PerformanceData.LookUpTable2D (
-         dataTable=AixLib.DataBase.Chiller.EN14511.Vitocal200AWO201()),
+        AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.LookUpTable2D (
+         dataTable=AixLib.Obsolete.Year2024.DataBase.Chiller.EN14511.Vitocal200AWO201()),
     Q_useNominal=0,
     use_autoCalc=false,
     TAmbCon_nominal=288.15) annotation (Placement(transformation(
@@ -191,7 +191,7 @@ equation
 </h4>
 <p>
   Example Setup is based on fluid example of <a href=
-  \"modelica://AixLib.Fluid.HeatPumps.Examples.HeatPump\">AixLib.Fluid.HeatPumps.Examples.HeatPump</a>
+  \"modelica://AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump\">AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples.HeatPump</a>
 </p>
 </html>",
   revisions="<html><ul>

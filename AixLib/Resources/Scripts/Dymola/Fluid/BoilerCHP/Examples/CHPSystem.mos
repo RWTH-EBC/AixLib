@@ -1,0 +1,2 @@
+﻿simulateModel("AixLib.Fluid.BoilerCHP.Examples.CHPSystem", tolerance=1e-06, stopTime=1200, method="dassl",  resultFile="CHPSystem");
+createPlot(id=1, position={15, 10, 1039, 644}, y={"TSet.y", "combinedHeatPower.senTSup.T"}, range={0.0, 300.0, -0.2, 1.2000000000000002}, grid=true, filename="CHPSystem.mat", colors={{238,46,47},{28,108,200}});

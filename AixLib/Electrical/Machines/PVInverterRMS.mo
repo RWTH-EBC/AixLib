@@ -1,7 +1,7 @@
 within AixLib.Electrical.Machines;
 model PVInverterRMS "Inverter model including system management"
 
-  parameter Modelica.Units.SI.Power uMax2
+  parameter Modelica.Units.SI.Power uMax2=3800
     "Upper limits of input signals (MaxOutputPower)";
  Modelica.Blocks.Interfaces.RealOutput PVPowerRmsW(
   final quantity="Power",
@@ -66,9 +66,6 @@ equation
      Line(
       points={{-48,-34},{55,-34}},
       color={0,0,0})}),
-   experiment(
-    StopTime=1,
-    StartTime=0),
      Documentation(revisions="<html><ul>
   <li>
     <i>October 11, 2016</i> by Tobias Blacha:<br/>

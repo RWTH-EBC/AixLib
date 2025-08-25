@@ -68,115 +68,115 @@ algorithm
 annotation (
 smoothOrder=1,
 Documentation(info="<html>
- <p>
- This function computes the wind pressure coefficient for
- low-rise buildings with rectangular shape.
- The correlation is the data fit from Swami and Chandra (1987),
- who fitted a function to various wind pressure coefficients from the literature.
- The same correlation is also implemented in CONTAM (Persily and Ivy, 2001).
- </p>
- <p>
- The wind pressure coefficient is computed based on the
- natural logarithm of the side ratio of the walls, which is defined as
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- G = ln(x &frasl; y)
- </p>
- <p>
- where <i>x</i> is the length of the wall that will be connected to
- this model, and <i>y</i> is the length of the adjacent wall as shown
- in the figure below.
- </p>
- <p align=\"center\">
- <img src=\"modelica://AixLib/Resources/Images/Airflow/Multizone/BaseClasses/windPressureLowRise.png\" border=\"1\" alt=\"Definition of the aspect ratio.\"/>
- </p>
- <p>
- Based on the wind incidence angle <i>&alpha;</i> and the side ratio
- of the walls, the model computes how much the wind pressure
- is attenuated compared to the reference wind pressure <code>Cp0</code>.
- The reference wind pressure <code>Cp0</code> is a user-defined parameter,
- and must be equal to the wind pressure at zero wind incidence angle, i.e.,
- <i>&alpha; = 0</i>.
- Swami and Chandra (1987) recommend <i>C<sub>p0</sub> = 0.6</i> for
- all low-rise buildings as this represents the average of
- various values reported in the literature.
- The attenuation factor is
- </p>
- <p align=\"center\" style=\"font-style:italic;\">
- C<sub>p</sub> &frasl; C<sub>p0</sub> = ln(1.248 - 0.703 sin(&alpha; &frasl; 2)
-       - 1.175 sin<sup>2</sup>(&alpha;)
-       - 0.131 sin<sup>3</sup>(2 &alpha; G)
-       + 0.769 cos(&alpha; &frasl; 2)
-        +0.071 G<sup>2</sup> * sin<sup>2</sup>(&alpha; &frasl; 2)
-        + 0.717 cos<sup>2</sup>(&alpha; &frasl; 2)),
- </p>
- <p>
- where
- <i>C<sub>p</sub></i> is the wind pressure coefficient for
- the current angle of incidence.
- </p>
- <p>
- This function is used in
- <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpLowRise\">
- Buildings.Fluid.Sources.Outside_CpLowRise</a>
- which can be used directly with components of this package.
- </p>
- <h4>References</h4>
- <ul>
- <li>
- Muthusamy V. Swami and
- Subrato Chandra.
- <i>
- <a href=\"http://www.fsec.ucf.edu/en/publications/pdf/FSEC-CR-163-86.pdf\">
- Procedures for
- Calculating Natural
- Ventilation Airflow
- Rates in Buildings.</a></i>
- Florida Solar Energy Center, FSEC-CR-163-86. March, 1987.
- Cape Canaveral, Florida.
- </li>
- <li>
- Andrew K. Persily and Elizabeth M. Ivy.
- <i>
- <a href=\"http://ws680.nist.gov/publication/get_pdf.cfm?pub_id=860831\">
- Input Data for Multizone Airflow and IAQ Analysis.</a></i>
- NIST, NISTIR 6585.
- January, 2001.
- Gaithersburg, MD.
- </li>
- </ul>
- <h4>Implementation</h4>
- <p>
- Symmetry requires that the first derivative of the wind pressure coefficient
- with respect to the incidence angle is zero for incidence angles of zero and &pi;.
- However, the correlation of Swami and Chandra has non-zero derivatives at these values.
- In this implementation, the original function is therefore slightly modified for incidence angles
- between 0 and 5 degree, and between 175 and 180 degree.
- This leads to a model that is differentiable in the incidence angle,
- which generally leads to better numeric performance.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- February 16, 2022, by Michael Wetter:<br/>
- Changed argment name to <code>alpha</code> for consistency with figure.
- </li>
- <li>
- March 15, 2016, by Michael Wetter:<br/>
- Replaced <code>spliceFunction</code> with <code>regStep</code>.
- This is for
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
- </li>
- <li>
- January 26, 2016, by Michael Wetter:<br/>
- Removed <code>constant</code> keyword for <code>a180</code> as its value
- depends on the input of the function.
- </li>
- <li>
- October 27, 2011 by Michael Wetter:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This function computes the wind pressure coefficient for
+low-rise buildings with rectangular shape.
+The correlation is the data fit from Swami and Chandra (1987),
+who fitted a function to various wind pressure coefficients from the literature.
+The same correlation is also implemented in CONTAM (Persily and Ivy, 2001).
+</p>
+<p>
+The wind pressure coefficient is computed based on the
+natural logarithm of the side ratio of the walls, which is defined as
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+G = ln(x &frasl; y)
+</p>
+<p>
+where <i>x</i> is the length of the wall that will be connected to
+this model, and <i>y</i> is the length of the adjacent wall as shown
+in the figure below.
+</p>
+<p align=\"center\">
+<img src=\"modelica://AixLib/Resources/Images/Airflow/Multizone/BaseClasses/windPressureLowRise.png\" border=\"1\" alt=\"Definition of the aspect ratio.\"/>
+</p>
+<p>
+Based on the wind incidence angle <i>&alpha;</i> and the side ratio
+of the walls, the model computes how much the wind pressure
+is attenuated compared to the reference wind pressure <code>Cp0</code>.
+The reference wind pressure <code>Cp0</code> is a user-defined parameter,
+and must be equal to the wind pressure at zero wind incidence angle, i.e.,
+<i>&alpha; = 0</i>.
+Swami and Chandra (1987) recommend <i>C<sub>p0</sub> = 0.6</i> for
+all low-rise buildings as this represents the average of
+various values reported in the literature.
+The attenuation factor is
+</p>
+<p align=\"center\" style=\"font-style:italic;\">
+C<sub>p</sub> &frasl; C<sub>p0</sub> = ln(1.248 - 0.703 sin(&alpha; &frasl; 2)
+      - 1.175 sin<sup>2</sup>(&alpha;)
+      - 0.131 sin<sup>3</sup>(2 &alpha; G)
+      + 0.769 cos(&alpha; &frasl; 2)
+       +0.071 G<sup>2</sup> * sin<sup>2</sup>(&alpha; &frasl; 2)
+       + 0.717 cos<sup>2</sup>(&alpha; &frasl; 2)),
+</p>
+<p>
+where
+<i>C<sub>p</sub></i> is the wind pressure coefficient for
+the current angle of incidence.
+</p>
+<p>
+This function is used in
+<a href=\"modelica://AixLib.Fluid.Sources.Outside_CpLowRise\">
+AixLib.Fluid.Sources.Outside_CpLowRise</a>
+which can be used directly with components of this package.
+</p>
+<h4>References</h4>
+<ul>
+<li>
+Muthusamy V. Swami and
+Subrato Chandra.
+<i>
+<a href=\"http://www.fsec.ucf.edu/en/publications/pdf/FSEC-CR-163-86.pdf\">
+Procedures for
+Calculating Natural
+Ventilation Airflow
+Rates in Buildings.</a></i>
+Florida Solar Energy Center, FSEC-CR-163-86. March, 1987.
+Cape Canaveral, Florida.
+</li>
+<li>
+Andrew K. Persily and Elizabeth M. Ivy.
+<i>
+<a href=\"http://ws680.nist.gov/publication/get_pdf.cfm?pub_id=860831\">
+Input Data for Multizone Airflow and IAQ Analysis.</a></i>
+NIST, NISTIR 6585.
+January, 2001.
+Gaithersburg, MD.
+</li>
+</ul>
+<h4>Implementation</h4>
+<p>
+Symmetry requires that the first derivative of the wind pressure coefficient
+with respect to the incidence angle is zero for incidence angles of zero and &pi;.
+However, the correlation of Swami and Chandra has non-zero derivatives at these values.
+In this implementation, the original function is therefore slightly modified for incidence angles
+between 0 and 5 degree, and between 175 and 180 degree.
+This leads to a model that is differentiable in the incidence angle,
+which generally leads to better numeric performance.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+February 16, 2022, by Michael Wetter:<br/>
+Changed argment name to <code>alpha</code> for consistency with figure.
+</li>
+<li>
+March 15, 2016, by Michael Wetter:<br/>
+Replaced <code>spliceFunction</code> with <code>regStep</code>.
+This is for
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/300\">issue 300</a>.
+</li>
+<li>
+January 26, 2016, by Michael Wetter:<br/>
+Removed <code>constant</code> keyword for <code>a180</code> as its value
+depends on the input of the function.
+</li>
+<li>
+October 27, 2011 by Michael Wetter:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end windPressureLowRise;

@@ -33,7 +33,7 @@ model NumberOfBeams
     m_flow_nominal=0.094,
     addPowerToMedium=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    use_inputFilter=false,
+    use_riseTime=false,
     nominalValuesDefineDefaultPressureCurve=true) "Pump for hot water"
     annotation (Placement(transformation(extent={{-60,30},{-40,50}})));
   AixLib.Fluid.Sources.Boundary_pT sou_2(
@@ -49,7 +49,7 @@ model NumberOfBeams
     m_flow_nominal=0.094,
     addPowerToMedium=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    use_inputFilter=false,
+    use_riseTime=false,
     nominalValuesDefineDefaultPressureCurve=true) "Pump for chilled water"
     annotation (Placement(transformation(extent={{-60,70},{-40,90}})));
   AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating beaCooHea(
@@ -81,7 +81,7 @@ model NumberOfBeams
     addPowerToMedium=false,
     m_flow_nominal=0.094*nBeams,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    use_inputFilter=false,
+    use_riseTime=false,
     nominalValuesDefineDefaultPressureCurve=true) "Pump for hot water"
     annotation (Placement(transformation(extent={{-60,-90},{-40,-70}})));
 
@@ -90,7 +90,7 @@ model NumberOfBeams
     addPowerToMedium=false,
     m_flow_nominal=0.094*nBeams,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    use_inputFilter=false,
+    use_riseTime=false,
     nominalValuesDefineDefaultPressureCurve=true) "Pump for chilled water"
     annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
 
@@ -184,34 +184,34 @@ equation
    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/ActiveBeams/Validation/NumberOfBeams.mos"
         "Simulate and plot"),
      Documentation(info="<html>
- <p>
- This model validates the scaling of the heat tranfer and pressure drop for
- <code>nBeams &gt; 1</code>.
- </p>
- <p>
- It uses two instances of
- <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
- AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>,
- one with
- <code>nBeams = 1</code> and one with
- <code>nBeams = 10</code>.
- </p>
- </html>",revisions="<html>
- <ul>
- <li>
- May 15, 2019, by Jianjun Hu:<br/>
- Replaced fluid source. This is for 
- <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
- </li>
- <li>
- June 14, 2016, by Michael Wetter:<br/>
- Revised implementation.
- </li>
- <li>
- May 20, 2016, by Alessandro Maccarini:<br/>
- First implementation.
- </li>
- </ul>
- </html>"),
-  __Dymola_LockedEditing="Model from IBPSA");
+<p>
+This model validates the scaling of the heat tranfer and pressure drop for
+<code>nBeams &gt; 1</code>.
+</p>
+<p>
+It uses two instances of
+<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating\">
+AixLib.Fluid.HeatExchangers.ActiveBeams.CoolingAndHeating</a>,
+one with
+<code>nBeams = 1</code> and one with
+<code>nBeams = 10</code>.
+</p>
+</html>", revisions="<html>
+<ul>
+<li>
+May 15, 2019, by Jianjun Hu:<br/>
+Replaced fluid source. This is for 
+<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+</li>
+<li>
+June 14, 2016, by Michael Wetter:<br/>
+Revised implementation.
+</li>
+<li>
+May 20, 2016, by Alessandro Maccarini:<br/>
+First implementation.
+</li>
+</ul>
+</html>"),  
+   __Dymola_LockedEditing="Model from IBPSA");
 end NumberOfBeams;

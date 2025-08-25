@@ -23,11 +23,11 @@ model Chiller "Base model of FastHVAC Chiller"
     "Nominal usable heat flow of the vapour compression machine (HP: Heating; Chiller: Cooling)"
     annotation (Dialog(enable=use_autoCalc));
   replaceable model PerDataMainChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in cooling mode"
     annotation (Diagram(obsolete = "Obsolete model - FastHVAC is not maintained anymore but can still be used."),choicesAllMatching=true);
   replaceable model PerDataRevChi =
-      AixLib.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
+      AixLib.Obsolete.Year2024.DataBase.Chiller.PerformanceData.BaseClasses.PartialPerformanceData
     "Performance data of chiller in heating mode"
     annotation (Dialog(enable=use_revHP),choicesAllMatching=true);
   parameter Real scalingFactor=1 "Scaling-factor of chiller";
@@ -68,7 +68,7 @@ model Chiller "Base model of FastHVAC Chiller"
       group="Heat Losses",
       tab="Condenser",
       enable=use_ConCap));
-  parameter Modelica.Units.SI.ThermalConductance GConIns
+  parameter Modelica.Units.SI.ThermalConductance GConIns=0
     "Constant thermal conductance of condenser material" annotation (Evaluate=
         true, Dialog(
       group="Heat Losses",
@@ -101,7 +101,7 @@ model Chiller "Base model of FastHVAC Chiller"
       group="Heat Losses",
       tab="Evaporator",
       enable=use_EvaCap));
-  parameter Modelica.Units.SI.ThermalConductance GEvaIns
+  parameter Modelica.Units.SI.ThermalConductance GEvaIns=0
     "Constant thermal conductance of Evaporator material" annotation (Evaluate=
         true, Dialog(
       group="Heat Losses",
@@ -247,10 +247,10 @@ model Chiller "Base model of FastHVAC Chiller"
   Modelica.Blocks.Interfaces.RealInput nSet if not useBusConnectorOnly
     "Input signal speed for compressor relative between 0 and 1" annotation (Placement(
         transformation(extent={{-132,4},{-100,36}})));
-  Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
+  Year2024.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (Placement(
         transformation(extent={{-120,-60},{-90,-26}}), iconTransformation(
           extent={{-108,-52},{-90,-26}})));
-  AixLib.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
+  AixLib.Obsolete.Year2024.Fluid.Chillers.BaseClasses.InnerCycle_Chiller innerCycle(
     redeclare final model PerDataMainChi = PerDataMainChi,
     redeclare final model PerDataRevChi = PerDataRevChi,
     final use_rev=use_revChi,
@@ -381,12 +381,6 @@ equation
           -16,-86},{-30,-86},{-30,-86.1},{-43.2,-86.1}}, color={176,0,0}));
   connect(senT_b2.enthalpyPort_b, enthalpyPort_b1) annotation (Line(points={{-61,
           -86.1},{-82,-86.1},{-82,-60},{-100,-60}}, color={176,0,0}));
-  connect(iceFac_in, sigBus.iceFacMeas) annotation (Line(points={{-76,-136},{-76,-43},
-          {-105,-43}},         color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{-3,6},{-3,6}},
-      horizontalAlignment=TextAlignment.Right));
   connect(innerCycle.QEva, realPassThroughnSetEva.u) annotation (Line(points={{0,
           -30.7},{0,-40},{16,-40},{16,-44.8}}, color={0,0,127}));
   connect(innerCycle.QEva, heatFlowIneEva.u) annotation (Line(points={{0,-30.7},
