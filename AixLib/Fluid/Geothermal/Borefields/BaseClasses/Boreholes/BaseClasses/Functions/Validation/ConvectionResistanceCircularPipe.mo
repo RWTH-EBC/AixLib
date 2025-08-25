@@ -41,23 +41,23 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/BaseClasses/Functions/Validation/ConvectionResistanceCircularPipe.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example validates the implementation of
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.convectionResistanceCircularPipe\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.convectionResistanceCircularPipe</a>
-for the evaluation of the convection thermal resistance in circular pipes.
-</p>
-<p>
-In this validation case, the fluid mass flow rate increases with time so that
-<i>Re = t</i>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 21, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example validates the implementation of
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.convectionResistanceCircularPipe\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.convectionResistanceCircularPipe</a>
+ for the evaluation of the convection thermal resistance in circular pipes.
+ </p>
+ <p>
+ In this validation case, the fluid mass flow rate increases with time so that
+ <i>Re = t</i>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 21, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ConvectionResistanceCircularPipe;

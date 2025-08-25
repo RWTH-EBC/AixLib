@@ -2,7 +2,7 @@ within AixLib.DataBase.Walls;
 record WallBaseDataDefinition "Wall base data definition"
   extends Modelica.Icons.Record;
 
-  parameter Integer n(min = 1)=1
+  parameter Integer n(min = 1)
     "Number of wall layers"
     annotation(Dialog(tab = "Wall", group = "Wall parameters"));
   parameter Modelica.Units.SI.Length d[n] "Thickness of wall layers"

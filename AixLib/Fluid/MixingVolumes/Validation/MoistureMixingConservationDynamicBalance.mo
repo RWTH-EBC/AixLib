@@ -192,50 +192,50 @@ equation
                                                             color={0,0,127}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-120,
             -280},{180,120}})),           Documentation(info="<html>
-<p>
-This model verifies if mass and energy are conserved,
-using a dynamic balance.
-Two air streams with different mass flow rate are humidified
-by a mixing volume with two different vapor mass flow rates.
-These flows are then mixed.
-Boundary integrals are used to verify if air mass,
-vapour mass and internal energy are conserved.
-</p>
-<p>
-Note, however, that there is some approximation error because
-in its default configuration, the conservation balance
-models simplify the treatment of the water that is added
-to the fluid.
-See <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
-AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
-and
-<a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
-AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
-for a discussion.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 24, 2017, by Michael Wetter:<br/>
-Removed enthalpy of liquid from <code>entIn</code>.<br/>
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings, #704</a>.
-</li>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Changed assertions to blocks that compute the difference,
-and added the difference to the regression results.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
-</li>
-<li>
-May 22 2015 by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model verifies if mass and energy are conserved,
+ using a dynamic balance.
+ Two air streams with different mass flow rate are humidified
+ by a mixing volume with two different vapor mass flow rates.
+ These flows are then mixed.
+ Boundary integrals are used to verify if air mass,
+ vapour mass and internal energy are conserved.
+ </p>
+ <p>
+ Note, however, that there is some approximation error because
+ in its default configuration, the conservation balance
+ models simplify the treatment of the water that is added
+ to the fluid.
+ See <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+ AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.Interfaces.ConservationEquation\">
+ AixLib.Fluid.Interfaces.StaticTwoPortConservationEquation</a>
+ for a discussion.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 24, 2017, by Michael Wetter:<br/>
+ Removed enthalpy of liquid from <code>entIn</code>.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings, #704</a>.
+ </li>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Changed assertions to blocks that compute the difference,
+ and added the difference to the regression results.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+ </li>
+ <li>
+ May 22 2015 by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MoistureMixingConservationDynamicBalance.mos"
-        "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MoistureMixingConservationDynamicBalance;

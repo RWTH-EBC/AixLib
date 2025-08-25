@@ -30,29 +30,29 @@ experiment(StartTime=-2,
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/BaseClasses/FlowModels/Validation/BasicFlowFunction_m_flow_DerivativeCheck.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model validates the implementation of
-<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
-AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>
-and its first order derivative
-<a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der\">
-AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der</a>.
-If the derivative implementation is wrong, the simulation will stop with an error.
-</p>
-</html>",
+ <p>
+ This model validates the implementation of
+ <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow\">
+ AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow</a>
+ and its first order derivative
+ <a href=\"modelica://AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der\">
+ AixLib.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow_der</a>.
+ If the derivative implementation is wrong, the simulation will stop with an error.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-July 29, 2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ July 29, 2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BasicFlowFunction_m_flow_DerivativeCheck;

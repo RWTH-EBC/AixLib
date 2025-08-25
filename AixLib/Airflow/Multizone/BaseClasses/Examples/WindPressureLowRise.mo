@@ -16,19 +16,19 @@ equation
 experiment(StartTime=-2, Tolerance=1e-6, StopTime=2),
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/BaseClasses/Examples/WindPressureLowRise.mos"
         "Simulate and plot"), Documentation(info="<html>
-<p>
-This examples demonstrates the
-<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise\">
-AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise</a>
-function.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 27, 2011, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This examples demonstrates the
+ <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise\">
+ AixLib.Airflow.Multizone.BaseClasses.windPressureLowRise</a>
+ function.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 27, 2011, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end WindPressureLowRise;

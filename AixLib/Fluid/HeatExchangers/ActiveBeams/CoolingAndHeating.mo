@@ -110,34 +110,34 @@ equation
         Line(points={{-112,0},{-66,0},{-82,10}}, color={255,0,0}),
         Line(points={{-66,0},{-82,-8}}, color={255,0,0})}),
           Documentation(info="<html>
-<p>
-This model is identical to
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Cooling\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.Cooling</a>,
-except that an additional water stream and convector is added to allow for heating
-in addition to cooling.
-</p>
-<p>
-For a description of the equations, see the
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide\">
-User's Guide</a>.
-</p>
-<p>
-Performance data are available from
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Data\">
-AixLib.Fluid.HeatExchangers.ActiveBeams.Data</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 14, 2016, by Michael Wetter:<br/>
-Revised implementation.
-</li>
-<li>
-May 20, 2016, by Alessandro Maccarini:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model is identical to
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Cooling\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.Cooling</a>,
+ except that an additional water stream and convector is added to allow for heating
+ in addition to cooling.
+ </p>
+ <p>
+ For a description of the equations, see the
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.UsersGuide\">
+ User's Guide</a>.
+ </p>
+ <p>
+ Performance data are available from
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.ActiveBeams.Data\">
+ AixLib.Fluid.HeatExchangers.ActiveBeams.Data</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 14, 2016, by Michael Wetter:<br/>
+ Revised implementation.
+ </li>
+ <li>
+ May 20, 2016, by Alessandro Maccarini:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CoolingAndHeating;

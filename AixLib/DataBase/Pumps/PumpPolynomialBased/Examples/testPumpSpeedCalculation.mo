@@ -54,13 +54,13 @@ model testPumpSpeedCalculation
 //   Modelica.Blocks.Sources.RealExpression speed(y=speedFlowHeadFunc(
 //         param.cNQH,
 //         volumeFlowTable.y,
-//         headTable.y)) if sum(abs(param.cNQH)) > 0
+//         headTable.y)) if sum(abs(param.cNQH)) <> 0
 //     annotation (Placement(transformation(extent={{-20,10},{0,30}})));
   Modelica.Blocks.Sources.RealExpression speedABC(y=speedFlowHeadFuncABC(
         {param.cHQN[3,1], param.cHQN[2,2], param.cHQN[1,3]},
         volumeFlowTable.y,
         headTable.y)) if sum(abs({param.cHQN[3,1], param.cHQN[2,2],
-          param.cHQN[1,3]})) > 0
+          param.cHQN[1,3]})) <> 0
     annotation (Placement(transformation(extent={{-20,-30},{0,-10}})));
 
   annotation (

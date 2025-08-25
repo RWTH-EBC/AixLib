@@ -183,9 +183,9 @@ equation
     connect(constSetpoint.y,thControl.setpoint);
   end if;
 
-  connect(senTRet.T, ctrlSwitch.u3) annotation (Line(points={{-70,-69},{-70,-36},
+  connect(senTCold.T, ctrlSwitch.u3) annotation (Line(points={{-70,-69},{-70,-36},
           {-8,-36},{-8,-12}}, color={0,0,127}));
-  connect(senTSup.T, ctrlSwitch.u1) annotation (Line(points={{40,-69},{40,-69},
+  connect(senTHot.T, ctrlSwitch.u1) annotation (Line(points={{40,-69},{40,-69},
           {40,-36},{40,-34},{8,-34},{8,-12}}, color={0,0,127}));
   connect(booleanConstant.y, ctrlSwitch.u2) annotation (Line(points={{-13.4,-48},
           {0,-48},{0,-12}}, color={255,0,255}));

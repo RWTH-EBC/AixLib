@@ -1,8 +1,0 @@
-clear
-
-convertClear();
-
-convertElement("AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator", "senTCold", "senTRet");
-convertElement("AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator", "senTHot", "senTSup");
-convertElement("AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator", "pressureDrop", "preDro");
-

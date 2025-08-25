@@ -6,9 +6,6 @@
 #define GETTIMESPAN_C_
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "ModelicaUtilities.h"
 
 #include "getTimeSpan.h"
@@ -27,7 +24,7 @@
 char *concat(const char *s1, const char *s2) {
   const size_t len1 = strlen(s1);
   const size_t len2 = strlen(s2);
-  char *result = (char *)malloc((len1 + len2 + 1) * sizeof(char));
+  char *result = malloc(len1 + len2 + 1);
   if (result == NULL) {
     ModelicaError("Failed to allocate memory in getTimeSpan.c");
   }

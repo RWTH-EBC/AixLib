@@ -7,7 +7,7 @@ annotation (preferredView="info", Documentation(info="<html>
 <p>
 This package contains examples for the use of models that can be found in
 <a href=\"modelica://AixLib.Airflow.Multizone\">
-AixLib.Airflow.Multizone</a>.
+Buildings.Airflow.Multizone</a>.
 </p>
 </html>"));
 end Examples;

@@ -12,7 +12,7 @@ block IdealSource_m_flow "Declaration of an FMU that exports a mass flow source 
 equation
   assert(abs(inlet.m_flow-outlet.m_flow) < 1E-2,
   "The mass flow rate of port_a and port_b is not conserved.
-  This indicates a wrong configuration of your system model.");
+   This indicates a wrong configuration of your system model.");
   outlet.m_flow = m_flow_in;
 
   // We use connect statements
@@ -27,22 +27,22 @@ equation
 
   annotation (
   Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU that sets the mass flow rate.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 24, 2015 by Michael Wetter:<br/>
-Changed assignment of pressure to a <code>connect</code> statement
-because the pressure can be conditionally removed.
-</li>
-<li>
-November 3, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU that sets the mass flow rate.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 24, 2015 by Michael Wetter:<br/>
+ Changed assignment of pressure to a <code>connect</code> statement
+ because the pressure can be conditionally removed.
+ </li>
+ <li>
+ November 3, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/IdealSource_m_flow.mos"
         "Export FMU"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
@@ -66,6 +66,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           lineColor={0,0,0},
           pattern=LinePattern.None,
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={255,255,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          fillColor={255,255,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end IdealSource_m_flow;

@@ -18,7 +18,7 @@ model Carnot_TEva_2ndLaw
 
   final parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal=-
       m2_flow_nominal/dTCon_nominal*dTEva_nominal
-    "Nominal mass flow rate at condenser water side";
+    "Nominal mass flow rate at condeser water side";
 
   Modelica.Blocks.Sources.Constant TEvaIn(k=273.15 + 20)
     "Evaporator inlet temperature"
@@ -63,7 +63,7 @@ protected
     parameter Modelica.Units.SI.HeatFlowRate QEva_flow_nominal
       "Evaporator heat flow rate";
     parameter Modelica.Units.SI.MassFlowRate m1_flow_nominal
-      "Nominal mass flow rate at condenser water side";
+      "Nominal mass flow rate at condeser water side";
     parameter Modelica.Units.SI.MassFlowRate m2_flow_nominal
       "Nominal mass flow rate at chilled water side";
 
@@ -88,6 +88,7 @@ protected
       QEva_flow_nominal=QEva_flow_nominal,
       allowFlowReversal1=false,
       allowFlowReversal2=false,
+      etaCarnot_nominal=0.3,
       dp1_nominal=0,
       dp2_nominal=0,
       energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
@@ -149,8 +150,8 @@ protected
           origin={152,-46})));
   equation
     assert(SGen_flow > 0, "Entropy generated is zero or negative, which violates the 2nd law.
-  This is because the model is configured to use the inlet temperatures
-  to compute the Carnot efficiency, which can lead to non-physical results.",
+   This is because the model is configured to use the inlet temperatures
+   to compute the Carnot efficiency, which can lead to non-physical results.",
     level = AssertionLevel.warning);
     connect(SIn_flow.y, dS_flow.u1)
       annotation (Line(points={{81,50},{88,50},{88,46},{98,46}},
@@ -218,37 +219,31 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_2ndLaw.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example verifies that the 2nd law of thermodynamics is not violated
-despite of a very small temperature lift.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 10, 2023, by Michael Wetter:<br/>
-Removed binding of parameter with same value as the default.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1692\">#1692</a>.
-</li>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-January 9, 2017, by Michael Wetter:<br/>
-Renamed internal protected class <code>Chiller</code> to be upper-case.
-</li>
-<li>
-January 3, 2017, by Michael Wetter:<br/>
-Updated model because the option to use the inlet temperatures to compute the COP
-has been removed.
-</li>
-<li>
-November 18, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example verifies that the 2nd law of thermodynamics is not violated
+ despite of a very small temperature lift.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ January 9, 2017, by Michael Wetter:<br/>
+ Renamed internal protected class <code>Chiller</code> to be upper-case.
+ </li>
+ <li>
+ January 3, 2017, by Michael Wetter:<br/>
+ Updated model because the option to use the inlet temperatures to compute the COP
+ has been removed.
+ </li>
+ <li>
+ November 18, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TEva_2ndLaw;

@@ -26,7 +26,7 @@ model TwoWayValveTable
         transformation(extent={{72,10},{52,30}})));
   Valves.TwoWayTable valTab(
     redeclare package Medium = Medium,
-    use_strokeTime=false,
+    use_inputFilter=false,
     from_dp=true,
     flowCharacteristics=datVal,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
@@ -91,50 +91,50 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValveTable.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Test model for a two way valve in which a table is used to specify the
-opening characteristics.
-The valve has the following opening characteristics, which is taken from a test case
-of the IEA EBC Annex 60 project.
-</p>
-<table summary=\"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"border-collapse:collapse;\">
-<tr><td><i>y</i></td>
-  <td>0</td>  <td>0.1667</td>  <td>0.3333</td>  <td>0.5</td>  <td>0.6667</td>  <td>1</td>
-</tr>
-<tr><td><i>K<sub>v</sub></i></td>
-  <td>0</td>  <td>0.19</td>  <td>0.35</td>  <td>0.45</td>  <td>0.5</td>  <td>0.65</td>       </tr>
-</table>
-<p>
-The <i>K<sub>v</sub></i> value is the volume flow rate in m<sup>3</sup>/h at a pressure difference
-of 1 bar.
-Hence, the <i>K<sub>v</sub></i> value of the fully open valve is <i>K<sub>v</sub>=0.65</i>.
-</p>
-<p>
-Plotting the variables <code>kv.y</code> versus <code>y.y</code> shows that the valve
-reproduces the <i>K<sub>v</sub></i> values shown in the above table.
-</p>
-<p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Actuators/Valves/Examples/TwoWayValveTable_kv.png\"/>
-</p>
-<p>
-The parameter <code>filterOpening</code> is set to <code>false</code>,
-as this model is used to plot the flow at different opening signals
-without taking into account the travel time of the actuator.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 12, 2014 by Michael Wetter:<br/>
-Added <code>parameter</code> keyword to <code>datVal</code>,
-as this is needed to asssign <code>datVal</code> to a parameter
-in the instance <code>valTab</code>.
-This also avoids an error in OpenModelica.
-</li>
-<li>
-April 2, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Test model for a two way valve in which a table is used to specify the
+ opening characteristics.
+ The valve has the following opening characteristics, which is taken from a test case
+ of the IEA EBC Annex 60 project.
+ </p>
+ <table summary=\"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\" style=\"border-collapse:collapse;\">
+ <tr><td><i>y</i></td>
+   <td>0</td>  <td>0.1667</td>  <td>0.3333</td>  <td>0.5</td>  <td>0.6667</td>  <td>1</td>
+ </tr>
+ <tr><td><i>K<sub>v</sub></i></td>
+   <td>0</td>  <td>0.19</td>  <td>0.35</td>  <td>0.45</td>  <td>0.5</td>  <td>0.65</td>       </tr>
+ </table>
+ <p>
+ The <i>K<sub>v</sub></i> value is the volume flow rate in m<sup>3</sup>/h at a pressure difference
+ of 1 bar.
+ Hence, the <i>K<sub>v</sub></i> value of the fully open valve is <i>K<sub>v</sub>=0.65</i>.
+ </p>
+ <p>
+ Plotting the variables <code>kv.y</code> versus <code>y.y</code> shows that the valve
+ reproduces the <i>K<sub>v</sub></i> values shown in the above table.
+ </p>
+ <p align=\"center\">
+ <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Actuators/Valves/Examples/TwoWayValveTable_kv.png\"/>
+ </p>
+ <p>
+ The parameter <code>filterOpening</code> is set to <code>false</code>,
+ as this model is used to plot the flow at different opening signals
+ without taking into account the travel time of the actuator.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 12, 2014 by Michael Wetter:<br/>
+ Added <code>parameter</code> keyword to <code>datVal</code>,
+ as this is needed to asssign <code>datVal</code> to a parameter
+ in the instance <code>valTab</code>.
+ This also avoids an error in OpenModelica.
+ </li>
+ <li>
+ April 2, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValveTable;

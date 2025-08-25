@@ -3,7 +3,11 @@ expandable connector BoilerControlBus
   "Standard data bus with boiler information"
   extends Modelica.Icons.SignalBus;
 
-
+Boolean isOn "Switches Controller on and off";
+  Modelica.Units.SI.Temperature TAmbient "Ambient air temperature";
+Boolean switchToNightMode "Switches the boiler to night mode";
+  Modelica.Units.SI.Power chemicalEnergyFlowRate
+    "Flow of primary (chemical) energy into boiler";
 
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false)),
@@ -13,9 +17,6 @@ expandable connector BoilerControlBus
   points that appear in every boiler.
 </p>
 <ul>
-  <li>June 06, 2023, by David Jansen:<br/>
-    Remove variables from expandable connector.
-  </li>
   <li>March 31, 2017, by Marc Baranski:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/371\">issue 371</a>).

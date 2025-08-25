@@ -104,23 +104,23 @@ experiment(
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Examples/PowerLaw.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model demonstrates the use of the 4 PowerLaw models present in the multizone package.
-The input data is fit so that all models have equivalent output.
-
-The pressure difference across the models changes
-between <i>-1</i> Pascal and <i>+1</i> Pascal, which
-causes air to flow through the orifice.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 3, 2021 by Klaas De Jonge:<br/>
-Added example for the four 'Powerlaw' models in the Multizone package.
-</li>
-
-</ul>
-</html>"),
-    Diagram(coordinateSystem(extent={{-120,-120},{120,100}})), 
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model demonstrates the use of the 4 PowerLaw models present in the multizone package.
+ The input data is fit so that all models have equivalent output.
+ 
+ The pressure difference across the models changes
+ between <i>-1</i> Pascal and <i>+1</i> Pascal, which
+ causes air to flow through the orifice.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 3, 2021 by Klaas De Jonge:<br/>
+ Added example for the four 'Powerlaw' models in the Multizone package.
+ </li>
+ 
+ </ul>
+ </html>"),
+    Diagram(coordinateSystem(extent={{-120,-120},{120,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PowerLaw;

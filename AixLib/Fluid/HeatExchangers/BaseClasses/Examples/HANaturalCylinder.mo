@@ -34,10 +34,10 @@ equation
         "Simulate and plot"),
         experiment(Tolerance=1e-6, StopTime=250),
         Documentation(info="<html>
-        <p>
-        Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
-        AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
-        </p>
-        </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+         <p>
+         Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
+         AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
+         </p>
+         </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HANaturalCylinder;

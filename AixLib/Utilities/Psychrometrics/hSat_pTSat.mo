@@ -45,17 +45,17 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2017, by Michael O'Keefe:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Block to compute the enthalpy of saturated
-air given the saturation temperature and fluid pressure.
-</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ March 17, 2017, by Michael O'Keefe:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Block to compute the enthalpy of saturated
+ air given the saturation temperature and fluid pressure.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end hSat_pTSat;

@@ -1,6 +1,0 @@
-clear
-
-convertClear();
-// rename senTCold and senTHold in AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator
-convertElement("AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator", "senTCold", "senTRet");
-convertElement("AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator", "senTHot", "senTSup");

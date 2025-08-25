@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.RC;
 model ThreeElements "Thermal Zone with three elements for exterior walls,
-  interior walls and floor plate"
+   interior walls and floor plate"
     extends TwoElements(AArray={ATotExt,ATotWin,AInt,AFloor});
 
   parameter Modelica.Units.SI.Area AFloor "Area of floor plate"
@@ -178,52 +178,52 @@ equation
     textColor={0,0,0},
     textString="3")}),
     Documentation(revisions="<html>
-<ul>
-<li>
-March 7, 2022, by Michael Wetter:<br/>
-Removed <code>massDynamics</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
-</li>
-<li>
-December 9, 2019, by Moritz Lauster:<br/>
-Changes <code>nExt</code> to <code>nFloor</code> for
-<code>RFloor</code> and <code>CFloor</code>
-</li>
-<li>
-July 11, 2019, by Katharina Brinkmann:<br/>
-Renamed <code>alphaFloor</code> to <code>hConFloor</code>,
-<code>alphaFloorConst</code> to <code>hConFloor_const</code>
-</li>
-<li>
-August 31, 2018 by Moritz Lauster:<br/>
-Updated schema in documentation to fix
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/997\">
-issue 997</a>.
-</li>
-<li>
-July 15, 2015 by Moritz Lauster:<br/>
-First Implementation.
-</li>
-</ul>
-</html>",   info="<html>
-  <p>This model adds one further element for
-  the floor plate. Long-term effects dominate the excitation of the floor plate
-  and thus the excitation fundamentally differs from excitation of outer walls.
-  Adding an extra element for the floor plate leads to a finer resolution of the
-  dynamic behaviour but increases calculation times. The floor plate is
-  parameterized via the length of the RC-chain <code>nFloor</code>,
-  the vector of the capacities
-  <code>CFloor[nFloor]</code>, the vector of the resistances
-  <code>RFloor[nFloor]</code>
-  and the remaining resistance <code>RFloorRem</code>.
-  </p>
-  <p>
-  The image below shows the RC-network of this model.
-  </p>
-  <p align=\"center\">
-  <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/ThreeElements.png\" alt=\"image\"/>
-  </p>
-  </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ December 9, 2019, by Moritz Lauster:<br/>
+ Changes <code>nExt</code> to <code>nFloor</code> for
+ <code>RFloor</code> and <code>CFloor</code>
+ </li>
+ <li>
+ July 11, 2019, by Katharina Brinkmann:<br/>
+ Renamed <code>alphaFloor</code> to <code>hConFloor</code>,
+ <code>alphaFloorConst</code> to <code>hConFloor_const</code>
+ </li>
+ <li>
+ August 31, 2018 by Moritz Lauster:<br/>
+ Updated schema in documentation to fix
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/997\">
+ issue 997</a>.
+ </li>
+ <li>
+ July 15, 2015 by Moritz Lauster:<br/>
+ First Implementation.
+ </li>
+ </ul>
+ </html>",  info="<html>
+   <p>This model adds one further element for
+   the floor plate. Long-term effects dominate the excitation of the floor plate
+   and thus the excitation fundamentally differs from excitation of outer walls.
+   Adding an extra element for the floor plate leads to a finer resolution of the
+   dynamic behaviour but increases calculation times. The floor plate is
+   parameterized via the length of the RC-chain <code>nFloor</code>,
+   the vector of the capacities
+   <code>CFloor[nFloor]</code>, the vector of the resistances
+   <code>RFloor[nFloor]</code>
+   and the remaining resistance <code>RFloorRem</code>.
+   </p>
+   <p>
+   The image below shows the RC-network of this model.
+   </p>
+   <p align=\"center\">
+   <img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/ThreeElements.png\" alt=\"image\"/>
+   </p>
+   </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ThreeElements;

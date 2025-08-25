@@ -14,33 +14,33 @@ algorithm
     inverse(X_w=X_pTphi(p,T,phi)),
     smoothOrder=1,
     Documentation(info="<html>
-<p>
-Relative humidity of air for given
-pressure, temperature and water vapor mass fraction.
-</p>
-<p>
-Note that the water vapor mass fraction must be in <i>kg/kg</i>
-total air, and not dry air.
-</p>
-</html>",
+ <p>
+ Relative humidity of air for given
+ pressure, temperature and water vapor mass fraction.
+ </p>
+ <p>
+ Note that the water vapor mass fraction must be in <i>kg/kg</i>
+ total air, and not dry air.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-April 4, 2019 by Filip Jorissen:<br/>
-Added inverse annotation
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1110\">#1110</a>.
-</li>
-<li>
-November 17, 2014 by Michael Wetter:<br/>
-Removed test that constrains the saturation pressure to be
-lower than <code>p</code>.
-I do not see any numerical problems without this test.
-</li>
-<li>
-November 13, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ April 4, 2019 by Filip Jorissen:<br/>
+ Added inverse annotation
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1110\">#1110</a>.
+ </li>
+ <li>
+ November 17, 2014 by Michael Wetter:<br/>
+ Removed test that constrains the saturation pressure to be
+ lower than <code>p</code>.
+ I do not see any numerical problems without this test.
+ </li>
+ <li>
+ November 13, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end phi_pTX;

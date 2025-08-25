@@ -17,17 +17,17 @@ protected
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>
-Parameters that are required for the components that implement a power law resistance.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 26, 2021, by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>
-"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Parameters that are required for the components that implement a power law resistance.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 26, 2021, by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>
+ "),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PowerLawResistanceParameters;

@@ -26,24 +26,24 @@ equation
         "Simulate and plot"),
   Documentation(
     info="<html>
-<p>
-This model validates the use of the
-<a href=\"modelica://AixLib.Utilities.Diagnostics.CheckEquality\">
-AixLib.Utilities.Diagnostics.CheckEquality</a>.
-</p>
-</html>",
+ <p>
+ This model validates the use of the
+ <a href=\"modelica://AixLib.Utilities.Diagnostics.CheckEquality\">
+ AixLib.Utilities.Diagnostics.CheckEquality</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 17, 2017, by Michael Wetter:<br/>
-Updated example to also test negative difference.
-</li>
-<li>
-January 17, 2017, by Thierry S. Nouidui:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
-    experiment(Tolerance=1e-6, StopTime=1), 
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ January 17, 2017, by Michael Wetter:<br/>
+ Updated example to also test negative difference.
+ </li>
+ <li>
+ January 17, 2017, by Thierry S. Nouidui:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+    experiment(Tolerance=1e-6, StopTime=1),
+  __Dymola_LockedEditing="Model from IBPSA");
 end CheckEquality;

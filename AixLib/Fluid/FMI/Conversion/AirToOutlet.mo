@@ -48,7 +48,7 @@ block AirToOutlet
     if allowFlowReversal
     "Temperature of the backward flowing medium in the connector outlet"
     annotation (Placement(
-        visible=allowFlowReversal,
+        visible=allowFloWReserval,
         transformation(extent={{20,20},{-20,-20}},
         rotation=90,
         origin={-60,-120}),
@@ -61,7 +61,7 @@ block AirToOutlet
     if Medium.nXi > 0 and allowFlowReversal
     "Water mass fraction per total air mass of the backward flowing medium in the connector outlet"
     annotation (Placement(
-        visible=allowFlowReversal,
+        visible=allowFloWReserval,
         transformation(extent={{20,20},{-20,-20}},
         rotation=90,
         origin={0,-120}),
@@ -74,7 +74,7 @@ block AirToOutlet
     if allowFlowReversal
     "Trace substances of the backward flowing medium in the connector outlet"
     annotation (Placement(
-        visible=allowFlowReversal,
+        visible=allowFloWReserval,
         transformation(extent={{20,20},{-20,-20}},
         rotation=90,
         origin={60,-120}),
@@ -93,7 +93,7 @@ protected
     "Internal connector for water vapor concentration in kg/kg total air";
 
    // Conditional connectors for the backward flowing medium
-  output AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
+  AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
     redeclare final package Medium = Medium)
     "Internal connector for fluid properties for back flow";
 
@@ -159,40 +159,35 @@ equation
   connect(outlet.backward, bacPro_internal);
   annotation (defaultComponentName = "con",
     Documentation(info="<html>
-<p>
-Block that takes real inputs for properties of an air-based HVAC
-system and converts them to an outlet connector of type
-<a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Outlet\">
-AixLib.Fluid.FMI.Interfaces.Outlet</a>.
-</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
-AixLib.Fluid.FMI.Adaptors.HVAC</a>
-for its usage.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 1, 2024, by Michael Wetter:<br/>
-Added causality.<br/>
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1829\">#1829</a>.
-</li>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-November 8, 2016, by Michael Wetter:<br/>
-Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
-</li>
-<li>
-April 20, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block that takes real inputs for properties of an air-based HVAC
+ system and converts them to an outlet connector of type
+ <a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Outlet\">
+ AixLib.Fluid.FMI.Interfaces.Outlet</a>.
+ </p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
+ AixLib.Fluid.FMI.Adaptors.HVAC</a>
+ for its usage.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ November 8, 2016, by Michael Wetter:<br/>
+ Corrected wrong argument type in function call of <code>Medium.temperature_phX</code>.
+ </li>
+ <li>
+ April 20, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
         Text(
           extent={{-98,52},{-66,26}},
@@ -232,6 +227,6 @@ First implementation.
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid,
           origin={-4,-58},
-          rotation=270)}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          rotation=270)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end AirToOutlet;

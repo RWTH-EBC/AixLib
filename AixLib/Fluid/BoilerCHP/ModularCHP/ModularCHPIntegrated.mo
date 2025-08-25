@@ -98,11 +98,11 @@ model ModularCHPIntegrated
   parameter Boolean allowFlowReversalCoolant=true
     "= false to simplify equations, assuming, but not enforcing, no flow reversal for coolant medium"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Units.SI.MassFlowRate
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
     mExh_flow_small=0.001
     "Small exhaust mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));
-  parameter Modelica.Units.SI.MassFlowRate
+  parameter Modelica.Media.Interfaces.PartialMedium.MassFlowRate
     mCool_flow_small=0.005
     "Small coolant mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced", group="Assumptions"));

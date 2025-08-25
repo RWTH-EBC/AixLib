@@ -10,24 +10,24 @@ algorithm
         //John Wiley & Sons, 1996
 
 annotation(Documentation(info = "<html>
-<p>
-This function is used to identify the Prandtl number of water at a given temperature.
-The function used is a fourth order polynomial fit to data from Incropera and Dewitt
-(1996).
-</p>
-<h4>References</h4>
-<p>
-Fundamentals of Heat and Mass Transfer (Fourth Edition), Frank Incropera and David P.
-Dewitt, John Wiley &amp; Sons, 1996
-</p>
-</html>",
+ <p>
+ This function is used to identify the Prandtl number of water at a given temperature.
+ The function used is a fourth order polynomial fit to data from Incropera and Dewitt
+ (1996).
+ </p>
+ <h4>References</h4>
+ <p>
+ Fundamentals of Heat and Mass Transfer (Fourth Edition), Frank Incropera and David P.
+ Dewitt, John Wiley &amp; Sons, 1996
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 7, 2013 by Peter Grant:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ May 7, 2013 by Peter Grant:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end prandtlNumberWater;

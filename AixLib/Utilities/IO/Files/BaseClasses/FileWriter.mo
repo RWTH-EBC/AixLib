@@ -92,34 +92,34 @@ algorithm
           textString="%samplePeriod")}),                         Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<ul>
-<li>
-October 17, 2019 by Filip Jorissen:<br/>
-Avoiding overflow of string buffer in dymola.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1219\">#1219</a>.
-</li>
-<li>
-October 8, 2018 by Filip Jorissen:<br/>
-Added implementation for the parameter <code>significantDigits</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1041\">#1041</a>.
-</li>
-<li>
-September 6, 2018 by Filip Jorissen:<br/>
-Improved comment of <code>samplePeriod</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1010\">#1010</a>.
-</li>
-<li>
-May 10, 2018 by Filip Jorissen:<br/>
-First implementation.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
-</li>
-</ul>
-</html>",
+ <ul>
+ <li>
+ October 17, 2019 by Filip Jorissen:<br/>
+ Avoiding overflow of string buffer in dymola.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1219\">#1219</a>.
+ </li>
+ <li>
+ October 8, 2018 by Filip Jorissen:<br/>
+ Added implementation for the parameter <code>significantDigits</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1041\">#1041</a>.
+ </li>
+ <li>
+ September 6, 2018 by Filip Jorissen:<br/>
+ Improved comment of <code>samplePeriod</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1010\">#1010</a>.
+ </li>
+ <li>
+ May 10, 2018 by Filip Jorissen:<br/>
+ First implementation.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/924\">#924</a>.
+ </li>
+ </ul>
+ </html>",
         info="<html>
-<p>
-Base class for a file writer.        
-See extending classes.
-</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Base class for a file writer.        
+ See extending classes.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FileWriter;

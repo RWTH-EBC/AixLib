@@ -2,73 +2,73 @@ within AixLib.ThermalZones.ReducedOrder.SolarGain.BaseClasses;
 partial model PartialCorrectionGTaue
   "Partial model for correction of the solar gain factor and for the
   translucence"
-  parameter Integer n(min = 1)=1 "Number of windows"
+  parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
     annotation (dialog(group="window"));
   parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
     "Elevation angle";
-  parameter Modelica.Units.SI.Angle[n] til(each displayUnit="degree")
+  parameter Modelica.Units.SI.Angle[n] til(displayUnit="degree")
     "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for roof"
     annotation (dialog(group="window"));
 
   Modelica.Blocks.Interfaces.RealOutput[n] corG_Dir(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Transmission coefficient correction factor for direct radiation"
     annotation (Placement(transformation(extent={{80,-30},{100,-10}}),
     iconTransformation(extent={{80,-30},{100,-10}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corG_DifCle(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
      clear sky"
     annotation (Placement(transformation(extent={{80,-50},{100,-30}}),
     iconTransformation(extent={{80,-50},{100,-30}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corG_DifCov(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Transmission coefficient correction factor for diffuse radiation while
      covered sky"
     annotation (Placement(transformation(extent={{80,-70},{100,-50}}),
     iconTransformation(extent={{80,-70},{100,-50}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corG_Gro(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Transmission coefficient correction factor for ground reflection radiation"
     annotation (Placement(transformation(extent={{80,-90},{100,-70}}),
     iconTransformation(extent={{80,-90},{100,-70}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corTaue_Dir(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Correction value for translucence for direct irradiation"
     annotation (Placement(transformation(extent={{80,10},{100,30}}),
     iconTransformation(extent={{80,10},{100,30}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corTaue_DifCle(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Correction value for translucence for diffuse irradiation during clear sky"
     annotation (Placement(transformation(extent={{80,30},{100,50}}),
     iconTransformation(extent={{80,30},{100,50}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corTaue_DifCov(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Correction value for translucence for diffuse irradiation during covered
      sky"
     annotation (Placement(transformation(extent={{80,50},{100,70}}),
     iconTransformation(extent={{80,50},{100,70}})));
   Modelica.Blocks.Interfaces.RealOutput[n] corTaue_Gro(
-    each final quantity="TransmissionCoefficient",
-    each final unit="1")
+    final quantity="TransmissionCoefficient",
+    final unit="1")
     "Correction value for translucence for ground reflection radiation"
     annotation (Placement(transformation(extent={{80,70},{100,90}}),
     iconTransformation(extent={{80,70},{100,90}})));
 
   Modelica.Blocks.Interfaces.RealInput incAng[n](
-    each final quantity="Angle",
-    each final unit="rad",
-    each displayUnit="degree")
+    final quantity="Angle",
+    final unit="rad",
+    displayUnit="degree")
     "Incidence angles of the sun beam on a tilted surface"
     annotation (Placement(transformation(extent={{-120,-10},{-80,30}}),
     iconTransformation(extent={{-100,10},{-80,30}})));

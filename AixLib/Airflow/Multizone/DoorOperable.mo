@@ -86,108 +86,108 @@ equation
 
   annotation (defaultComponentName="doo",
 Documentation(info="<html>
-<p>
-Model for bi-directional air flow through a large opening such as a door which can be opened or closed
-based on the control input signal <i>y</i>.
-</p>
-<p>
-For the control input signal <i>y=1</i>, this model is identical to
-<a href=\"modelica://AixLib.Airflow.Multizone.DoorOpen\">
-AixLib.Airflow.Multizone.DoorOpen</a>, and for
-<i>y=0</i>, the door is assumed to be closed and the air flow rate is
-set to the air flow rate through the crack posed by the open door, <i>V&#775;<sub>clo</sub></i>.
-<p>
-The air flow rate for the closed door is computed as
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-    V&#775;<sub>clo</sub> = C<sub>clo</sub> &Delta;p<sup>mClo</sup>,
-</p>
-<p>
-where
-<i>V&#775;<sub>clo</sub></i> is the volume flow rate,
-<i>C<sub>clo</sub></i> is a flow coefficient and
-<i>mClo</i> is the flow exponent.
-The flow coefficient is
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-C<sub>clo</sub> = L<sub>clo</sub> C<sub>DCloRat</sub> &Delta;p<sub>Rat</sub><sup>(0.5-mClo</sup>) (2/&rho;<sub>0</sub>)<sup>0.5</sup>,
-</p>
-<p>
-where
-<i>L<sub>clo</sub></i> is the effective air leakage area,
-<i>C<sub>DCloRat</sub></i> is the discharge coefficient at the reference condition,
-<i>&Delta;p<sub>Rat</sub></i> is the pressure drop at the rating condition, and
-<i>&rho;<sub>0</sub></i> is the mass density at the medium default pressure, temperature and humidity.
-</p>
-<p>
-The effective air leakage area <i>L<sub>clo</sub></i> can be obtained, for example,
-from the ASHRAE fundamentals (ASHRAE, 1997, p. 25.18). In
-the ASHRAE fundamentals, the effective air leakage area is
-based on a reference pressure difference of <i>&Delta;p<sub>Rat</sub> = 4</i> Pa and a discharge
-coefficient of <i>C<sub>DCloRat</sub> = 1</i>.
-A similar model is also used in the CONTAM software (Dols and Walton, 2002).
-Dols and Walton (2002) recommend to use for the flow exponent
-<i>mClo=0.6</i> to <i>mClo=0.7</i> if the flow exponent is not
-reported with the test results.
-</p>
-<p>
-For the open door, the air flow rate
-<i>V&#775;<sub>ope</sub></i> is computed as described in
-<a href=\"modelica://AixLib.Airflow.Multizone.DoorOpen\">
-AixLib.Airflow.Multizone.DoorOpen</a>
-with the parameters <code>CDOpe</code> and <code>mOpe</code>.
-</p>
-<p>
-The actual air flow rate is computed as
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-V&#775;<sub>clo</sub> = (y-1) V&#775;<sub>clo</sub> + y V&#775;<sub>ope</sub>,
-</p>
-<p>
-where <i>y &isin; [0, 1]</i> is the control signal.
-Note that for values of <i>y</i> that are different from <i>0</i> and
-<i>1</i>, the model simply interpolates the air flow rate between a fully open
-and a fully closed door. In practice, the air flow rate would likely increase quickly if the
-door is slightly opened, and hence we do not claim that the model is accurate for
-values other than <i>y = 0</i> and <i>y = 1</i>.
-</p>
-<h4>References</h4>
-<ul>
-<li>
-ASHRAE.
-<i>ASHRAE Fundamentals</i>,
-American Society of Heating, Refrigeration and Air-Conditioning
-Engineers, 1997.
-</li>
-<li>
-Dols and Walton.
-W. Stuart Dols and George N. Walton, <i>CONTAMW 2.0 User Manual,
-Multizone Airflow and Contaminant Transport Analysis Software</i>,
-Building and Fire Research Laboratory,
-National Institute of Standards and Technology,
-Tech. Report NISTIR 6921,
-November, 2002.
-</li>
-</ul>
-</html>",
+ <p>
+ Model for bi-directional air flow through a large opening such as a door which can be opened or closed
+ based on the control input signal <i>y</i>.
+ </p>
+ <p>
+ For the control input signal <i>y=1</i>, this model is identical to
+ <a href=\"modelica://AixLib.Airflow.Multizone.DoorOpen\">
+ AixLib.Airflow.Multizone.DoorOpen</a>, and for
+ <i>y=0</i>, the door is assumed to be closed and the air flow rate is
+ set to the air flow rate through the crack posed by the open door, <i>V&#775;<sub>clo</sub></i>.
+ <p>
+ The air flow rate for the closed door is computed as
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+     V&#775;<sub>clo</sub> = C<sub>clo</sub> &Delta;p<sup>mClo</sup>,
+ </p>
+ <p>
+ where
+ <i>V&#775;<sub>clo</sub></i> is the volume flow rate,
+ <i>C<sub>clo</sub></i> is a flow coefficient and
+ <i>mClo</i> is the flow exponent.
+ The flow coefficient is
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ C<sub>clo</sub> = L<sub>clo</sub> C<sub>DCloRat</sub> &Delta;p<sub>Rat</sub><sup>(0.5-mClo</sup>) (2/&rho;<sub>0</sub>)<sup>0.5</sup>,
+ </p>
+ <p>
+ where
+ <i>L<sub>clo</sub></i> is the effective air leakage area,
+ <i>C<sub>DCloRat</sub></i> is the discharge coefficient at the reference condition,
+ <i>&Delta;p<sub>Rat</sub></i> is the pressure drop at the rating condition, and
+ <i>&rho;<sub>0</sub></i> is the mass density at the medium default pressure, temperature and humidity.
+ </p>
+ <p>
+ The effective air leakage area <i>L<sub>clo</sub></i> can be obtained, for example,
+ from the ASHRAE fundamentals (ASHRAE, 1997, p. 25.18). In
+ the ASHRAE fundamentals, the effective air leakage area is
+ based on a reference pressure difference of <i>&Delta;p<sub>Rat</sub> = 4</i> Pa and a discharge
+ coefficient of <i>C<sub>DCloRat</sub> = 1</i>.
+ A similar model is also used in the CONTAM software (Dols and Walton, 2002).
+ Dols and Walton (2002) recommend to use for the flow exponent
+ <i>mClo=0.6</i> to <i>mClo=0.7</i> if the flow exponent is not
+ reported with the test results.
+ </p>
+ <p>
+ For the open door, the air flow rate
+ <i>V&#775;<sub>ope</sub></i> is computed as described in
+ <a href=\"modelica://AixLib.Airflow.Multizone.DoorOpen\">
+ AixLib.Airflow.Multizone.DoorOpen</a>
+ with the parameters <code>CDOpe</code> and <code>mOpe</code>.
+ </p>
+ <p>
+ The actual air flow rate is computed as
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ V&#775;<sub>clo</sub> = (y-1) V&#775;<sub>clo</sub> + y V&#775;<sub>ope</sub>,
+ </p>
+ <p>
+ where <i>y &isin; [0, 1]</i> is the control signal.
+ Note that for values of <i>y</i> that are different from <i>0</i> and
+ <i>1</i>, the model simply interpolates the air flow rate between a fully open
+ and a fully closed door. In practice, the air flow rate would likely increase quickly if the
+ door is slightly opened, and hence we do not claim that the model is accurate for
+ values other than <i>y = 0</i> and <i>y = 1</i>.
+ </p>
+ <h4>References</h4>
+ <ul>
+ <li>
+ ASHRAE.
+ <i>ASHRAE Fundamentals</i>,
+ American Society of Heating, Refrigeration and Air-Conditioning
+ Engineers, 1997.
+ </li>
+ <li>
+ Dols and Walton.
+ W. Stuart Dols and George N. Walton, <i>CONTAMW 2.0 User Manual,
+ Multizone Airflow and Contaminant Transport Analysis Software</i>,
+ Building and Fire Research Laboratory,
+ National Institute of Standards and Technology,
+ Tech. Report NISTIR 6921,
+ November, 2002.
+ </li>
+ </ul>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 11, 2021, by Michael Wetter:<br/>
-Removed duplicate declaration of <code>VABp_flow</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1496\">#1496</a>.
-</li>
-<li>
-January 22, 2020, by Michael Wetter:<br/>
-Revised buoyancy-driven flow.
-</li>
-<li>
-October 6, 2020, by Michael Wetter:<br/>
-First implementation for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1353\">#1353</a>.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ June 11, 2021, by Michael Wetter:<br/>
+ Removed duplicate declaration of <code>VABp_flow</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1496\">#1496</a>.
+ </li>
+ <li>
+ January 22, 2020, by Michael Wetter:<br/>
+ Revised buoyancy-driven flow.
+ </li>
+ <li>
+ October 6, 2020, by Michael Wetter:<br/>
+ First implementation for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1353\">#1353</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DoorOperable;

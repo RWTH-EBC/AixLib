@@ -66,24 +66,24 @@ equation
       color={191,0,0}));
   annotation (Documentation(
         info="<html>
-<p>
-This model demonstrates the use of the mixing volume with a prescribed heat flow rate.
-The mixing volume is configured as a steady-state model.
-The heat flow rate is set to a very small value. This model is used to test
-convergence for the case the prescribed heat flow rate should be zero,
-but due to numerical solutions, it may have a small error that causes the signal to be
-non-zero.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 12, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model demonstrates the use of the mixing volume with a prescribed heat flow rate.
+ The mixing volume is configured as a steady-state model.
+ The heat flow rate is set to a very small value. This model is used to test
+ convergence for the case the prescribed heat flow rate should be zero,
+ but due to numerical solutions, it may have a small error that causes the signal to be
+ non-zero.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 12, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(Tolerance=1E-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Examples/MixingVolumePrescribedHeatFlowRate.mos"
-        "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumePrescribedHeatFlowRate;

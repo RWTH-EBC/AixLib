@@ -17,20 +17,20 @@ equation
   __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/IO/SignalExchange/Examples/WeatherStation.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example uses the weather station signal exchange block,
-<a href=\"modelica://AixLib.Utilities.IO.SignalExchange.WeatherStation\">
-AixLib.Utilities.IO.SignalExchange.WeatherStation</a>
-along with a TMY weather data reader.
-</p>
-</html>",
+ <p>
+ This example uses the weather station signal exchange block,
+ <a href=\"modelica://AixLib.Utilities.IO.SignalExchange.WeatherStation\">
+ AixLib.Utilities.IO.SignalExchange.WeatherStation</a>
+ along with a TMY weather data reader.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-September 29, 2020, by David Blum:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ September 29, 2020, by David Blum:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end WeatherStation;

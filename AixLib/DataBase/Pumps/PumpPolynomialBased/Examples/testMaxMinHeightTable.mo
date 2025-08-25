@@ -26,7 +26,7 @@ model testMaxMinHeightTable
     annotation (Placement(transformation(extent={{-11,-10},{9,10}}, rotation=0)));
 initial equation
   assert(
-    (sum(abs(param.maxMinHeight)) > 0),
+    (sum(abs(param.maxMinHeight)) <> 0),
     "In a pump model parameter record
     parameter matrix 'maxMinHeight' was all zero.",
     level=AssertionLevel.error);

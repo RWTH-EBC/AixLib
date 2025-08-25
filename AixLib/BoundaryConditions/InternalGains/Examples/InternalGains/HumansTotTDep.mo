@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.InternalGains.Examples.InternalGains;
 model HumansTotTDep "Simulation to check the human models"
-  extends Modelica.Icons.Example;
-  extends AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.BaseClasses.PartialHumansExample(redeclare Humans.HumanTotalHeatTemperatureDependent humanIntGains, sumQ_flows(nu=3));
+  extends AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.BaseClasses.Humans(redeclare Humans.HumanTotalHeatTemperatureDependent humanIntGains, sumQ_flows(nu=3));
 equation
 
   connect(humanIntGains.QLat_flow, sumQ_flows.u[3]) annotation (Line(points={{9.48,11.4},{14,11.4},{14,-64},{34,-64}}, color={0,0,127}));

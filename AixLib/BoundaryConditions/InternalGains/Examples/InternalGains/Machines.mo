@@ -41,8 +41,10 @@ Documentation(info="<html><h4>
 <p>
   The simulation consists of the following models:
 </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
-  <caption>Models</caption>
+<table>
+  <caption>
+    \"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td bgcolor=\"#DCDCDC\">
       <p>
@@ -64,8 +66,8 @@ Documentation(info="<html><h4>
     <td>
       <p>
         <a href=
-        \"AixLib.BoundaryConditions.InternalGains.Machines.MachinesAreaSpecific\">
-        MachinesAreaSpecific</a>
+        \"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_simple\">
+        Machines_simple</a>
       </p>
     </td>
   </tr>
@@ -78,8 +80,8 @@ Documentation(info="<html><h4>
     <td>
       <p>
         <a href=
-        \"AixLib.BoundaryConditions.InternalGains.Machines.MachinesDIN18599\">
-        MachinesDIN18599</a>
+        \"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_DIN18599\">
+        Machines_DIN18599</a>
       </p>
     </td>
   </tr>
@@ -92,8 +94,8 @@ Documentation(info="<html><h4>
     <td>
       <p>
         <a href=
-        \"AixLib.BoundaryConditions.InternalGains.Machines.MachinesRelToMaxValue\">
-        MachinesRelToMaxValue</a>
+        \"AixLib.Building.Components.Sources.InternalGains.Machines.Machines_Avar\">
+        Machines_Avar</a>
       </p>
     </td>
   </tr>

@@ -55,20 +55,20 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (
   Documentation(info="<html>
-<p>
-This example computes the zenith angle,
-which is the angle between the earth surface normal and the sun's beam.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 17, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example computes the zenith angle,
+ which is the angle between the earth surface normal and the sun's beam.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 17, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 experiment(StartTime=100000, Tolerance=1e-6, StopTime=300000),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/ZenithAngle.mos"
-        "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ZenithAngle;

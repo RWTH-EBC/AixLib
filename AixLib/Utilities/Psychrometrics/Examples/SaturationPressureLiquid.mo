@@ -19,14 +19,14 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Examples/SaturationPressureLiquid.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This examples is a unit test for the saturation pressure computation of liquid water.
-</html>", revisions="<html>
-<ul>
-<li>
-October 2, 2012 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ This examples is a unit test for the saturation pressure computation of liquid water.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 2, 2012 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SaturationPressureLiquid;

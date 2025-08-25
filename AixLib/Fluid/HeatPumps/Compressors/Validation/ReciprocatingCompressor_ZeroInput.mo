@@ -40,20 +40,20 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=100),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of the ReciprocatingCompressor model.
-</p>
-<p>
-The compressor power, condenser heat transfer rate and evaporator heat transfer
-rate are calculated for zero control input to compressor.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 5, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Model that demonstrates the use of the ReciprocatingCompressor model.
+ </p>
+ <p>
+ The compressor power, condenser heat transfer rate and evaporator heat transfer
+ rate are calculated for zero control input to compressor.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 5, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReciprocatingCompressor_ZeroInput;

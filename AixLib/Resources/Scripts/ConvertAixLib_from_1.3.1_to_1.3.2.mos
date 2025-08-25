@@ -1,6 +1,0 @@
-clear
-
-convertClear();
-
-// add the parameters heaLoadFacOut and heaLoadFacGrd for dynamic heat load calculation with dummy values of zero
-convertElement("AixLib.Fluid.DistrictHeatingCooling.Pipes.DHCPipe", "pipCor", "floPip");

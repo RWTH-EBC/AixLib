@@ -130,33 +130,33 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatExchangers/Examples/DryCoilEffectivenessNTUPControl.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This model demonstrates the use of
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>.
-The valve on the water-side is regulated to track a setpoint temperature
-for the air outlet.
-</p>
-</html>",
+ <p>
+ This model demonstrates the use of
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>.
+ The valve on the water-side is regulated to track a setpoint temperature
+ for the air outlet.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-July 3, 2014, by Michael Wetter:<br/>
-Changed pressure sink to mass flow rate sink to avoid an overdetermined
-by consistent set of initial conditions.
-</li>
-<li>
-March 1, 2013, by Michael Wetter:<br/>
-Added nominal pressure drop for valve as
-this parameter no longer has a default value.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ July 3, 2014, by Michael Wetter:<br/>
+ Changed pressure sink to mass flow rate sink to avoid an overdetermined
+ by consistent set of initial conditions.
+ </li>
+ <li>
+ March 1, 2013, by Michael Wetter:<br/>
+ Added nominal pressure drop for valve as
+ this parameter no longer has a default value.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DryCoilEffectivenessNTUPControl;

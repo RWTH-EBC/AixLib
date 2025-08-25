@@ -2,6 +2,5 @@ FileWriter
 FileWriterObject
 JSONWriterObject
 OutputTime
-WeeklyScheduleObject
 cacheVals
 writeJSON

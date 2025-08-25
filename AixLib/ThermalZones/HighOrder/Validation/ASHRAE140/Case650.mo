@@ -24,6 +24,8 @@ model Case650
 
   Modelica.Blocks.Sources.RealExpression HeatingPower(y=0)
     annotation (Placement(transformation(extent={{43,58},{63,78}})));
+  Modelica.Blocks.Sources.RealExpression CoolingPower(y=idealHeaterCooler.coolingPower)
+    annotation (Placement(transformation(extent={{43,42},{63,62}})));
   Modelica.Blocks.Sources.CombiTimeTable AirExchangeRate(
     columns={2},
     tableOnFile=false,
@@ -48,14 +50,14 @@ equation
           -47.5}}, color={0,0,127}));
   connect(HeatingPower.y, integratorHeat.u)
     annotation (Line(points={{64,68},{70.9,68}}, color={0,0,127}));
+  connect(CoolingPower.y, integratorCool.u)
+    annotation (Line(points={{64,52},{70.9,52}}, color={0,0,127}));
   connect(idealHeaterCooler.heatCoolRoom, Room.thermRoom) annotation (Line(
         points={{3,-59},{21,-59},{21,-19},{-2,-19},{-2,35},{-2.92,35}}, color={
           191,0,0}));
   connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
   connect(Room.transShoWaveRadWin, integrator2.u) annotation (Line(points={{17.8,5.3},{17.8,-0.75},{74,-0.75}}, color={0,0,127}));
-  connect(idealHeaterCooler.coolingPower, integratorCool.u) annotation (Line(
-        points={{4,-55.6},{48,-55.6},{48,52},{70.9,52}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

@@ -29,23 +29,23 @@ equation
       color={0,0,127}));
   annotation (
   Documentation(info="<html>
-<p>This model validates the computation of the solar declination, which is the angle between the equatorial plane and the solar beam. The time table <code><span style=\"font-family: Courier New,courier;\">solDecNOAA</span></code> outputs the solar declination according to the computation of the National Oceanic and Atmospheric Administration (NOAA), using their yearly calculator from <a href=\"http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html\">http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html</a>. The values differ slightly because the equation in <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination</a> is an approximation. </p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 6, 2015, by Michael Wetter:<br/>
-Updated documentation and added validation.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/382\">issue 382</a>.
-</li>
-<li>
-May 17, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>This model validates the computation of the solar declination, which is the angle between the equatorial plane and the solar beam. The time table <code><span style=\"font-family: Courier New,courier;\">solDecNOAA</span></code> outputs the solar declination according to the computation of the National Oceanic and Atmospheric Administration (NOAA), using their yearly calculator from <a href=\"http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html\">http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html</a>. The values differ slightly because the equation in <a href=\"modelica://AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination\">AixLib.BoundaryConditions.SolarGeometry.BaseClasses.Declination</a> is an approximation. </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 6, 2015, by Michael Wetter:<br/>
+ Updated documentation and added validation.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/382\">issue 382</a>.
+ </li>
+ <li>
+ May 17, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
   experiment(Tolerance=1e-6, StopTime=3.1536e+007),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/Declination.mos"
-        "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Declination;

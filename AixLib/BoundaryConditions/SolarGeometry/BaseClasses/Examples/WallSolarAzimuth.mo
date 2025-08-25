@@ -47,21 +47,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarGeometry/BaseClasses/Examples/WallSolarAzimuth.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example calculates the wall solar azimuth angle.
-</p>
-</html>",
+ <p>
+ This example calculates the wall solar azimuth angle.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-Feb 27, 2012, by Michael Wetter:<br/>
-Simplified example by using zenith angle from weather data bus.
-</li>
-<li>
-Feb 01, 2012, by Kaustubh Phalak<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ Feb 27, 2012, by Michael Wetter:<br/>
+ Simplified example by using zenith angle from weather data bus.
+ </li>
+ <li>
+ Feb 01, 2012, by Kaustubh Phalak<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end WallSolarAzimuth;

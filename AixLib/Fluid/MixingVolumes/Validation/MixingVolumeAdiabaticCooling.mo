@@ -43,38 +43,38 @@ equation
           {66,-2},{58,-2},{58,-48},{30,-48},{30,-38}}, color={0,127,255}));
 annotation (Documentation(
         info="<html>
-<p>
-This model validates the use of the mixing volume with adiabatic cooling.
-Water in liquid form at room temperature is added to the volume,
-which decreases its temperature.
-The instance <code>volSim</code> uses a simplified implementation of the
-mass balance that ignores the mass of the water added to the volume,
-whereas the instance <code>volExa</code> uses the exact formulation.
-The output of the instance <code>relErr</code>
-shows that the relative error on the temperature difference between these
-two options is less than <i>0.1%</i>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for 
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-April 12, 2017, by Michael Wetter:<br/>
-Removed temperature connection that is no longer needed.<br/>
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
-</li>
-<li>
-May 2, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model validates the use of the mixing volume with adiabatic cooling.
+ Water in liquid form at room temperature is added to the volume,
+ which decreases its temperature.
+ The instance <code>volSim</code> uses a simplified implementation of the
+ mass balance that ignores the mass of the water added to the volume,
+ whereas the instance <code>volExa</code> uses the exact formulation.
+ The output of the instance <code>relErr</code>
+ shows that the relative error on the temperature difference between these
+ two options is less than <i>0.1%</i>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ April 12, 2017, by Michael Wetter:<br/>
+ Removed temperature connection that is no longer needed.<br/>
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+ </li>
+ <li>
+ May 2, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
  __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Validation/MixingVolumeAdiabaticCooling.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=10), 
-   __Dymola_LockedEditing="Model from IBPSA");
+    experiment(Tolerance=1e-6, StopTime=10),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeAdiabaticCooling;

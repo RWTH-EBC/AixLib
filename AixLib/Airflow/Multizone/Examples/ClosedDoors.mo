@@ -108,40 +108,40 @@ experiment(Tolerance=1e-006, StopTime=7200),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Airflow/Multizone/Examples/ClosedDoors.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model consists of three volumes that are connected among
-each other through three doors that all have the same geometry.
-All doors are closed, but they are not air-tight.
-Heat is added and removed from <code>volB</code> which induces
-a small air flow through the doors.
-</p>
-<p>
-This model uses
-<a href=\"modelica://AixLib.Media.Specialized.Air.PerfectGas\">
-AixLib.Media.Specialized.Air.PerfectGas</a>
-as the medium because
-<a href=\"modelica://AixLib.Media.Air\">
-AixLib.Media.Air</a>
-does not account for expansion if air the air is heated.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model consists of three volumes that are connected among
+ each other through three doors that all have the same geometry.
+ All doors are closed, but they are not air-tight.
+ Heat is added and removed from <code>volB</code> which induces
+ a small air flow through the doors.
+ </p>
+ <p>
+ This model uses
+ <a href=\"modelica://AixLib.Media.Specialized.Air.PerfectGas\">
+ Buildings.Media.Specialized.Air.PerfectGas</a>
+ as the medium because
+ <a href=\"modelica://AixLib.Media.Air\">
+ Buildings.Media.Air</a>
+ does not account for expansion if air the air is heated.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ClosedDoors;

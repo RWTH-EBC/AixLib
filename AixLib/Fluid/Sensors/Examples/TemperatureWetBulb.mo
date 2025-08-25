@@ -56,23 +56,23 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/TemperatureWetBulb.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example tests the wet bulb temperature sensor.
-The problem setup is such that the moisture concentration and
-the dry bulb temperature are varied simultaneously in such a way
-that the wet bulb temperature remains close to a constant value.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 4, 2011 by Michael Wetter:<br/>
-Adjusted parameters and simulation stop time since the sensor was changed to a dynamic sensor.
-</li>
-<li>
-May 6, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example tests the wet bulb temperature sensor.
+ The problem setup is such that the moisture concentration and
+ the dry bulb temperature are varied simultaneously in such a way
+ that the wet bulb temperature remains close to a constant value.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 4, 2011 by Michael Wetter:<br/>
+ Adjusted parameters and simulation stop time since the sensor was changed to a dynamic sensor.
+ </li>
+ <li>
+ May 6, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureWetBulb;

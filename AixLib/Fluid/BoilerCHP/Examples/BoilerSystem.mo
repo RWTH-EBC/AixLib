@@ -6,7 +6,7 @@ model BoilerSystem "Example that illustrates use of boiler model"
     use_m_flow_in=false,
     nPorts=1,
     redeclare package Medium =
-        AixLib.Media.Specialized.Water.TemperatureDependentDensity,
+        Media.Specialized.Water.TemperatureDependentDensity,
     m_flow=0.05,
     T=293.15)
     "Source"
@@ -15,7 +15,7 @@ model BoilerSystem "Example that illustrates use of boiler model"
     length=1,
     diameter=0.025,
     redeclare package Medium =
-        AixLib.Media.Specialized.Water.TemperatureDependentDensity)
+        Media.Specialized.Water.TemperatureDependentDensity)
     "Pressure drop"
     annotation (Placement(transformation(extent={{30,-10},{50,10}})));
   inner Modelica.Fluid.System system(p_start=system.p_ambient,
@@ -24,9 +24,8 @@ model BoilerSystem "Example that illustrates use of boiler model"
     annotation (Placement(transformation(extent={{80,80},{100,100}})));
   Boiler boiler(
     redeclare package Medium =
-        AixLib.Media.Specialized.Water.TemperatureDependentDensity,
+        Media.Specialized.Water.TemperatureDependentDensity,
     m_flow_nominal=0.03,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare model ExtControl =
         BaseClasses.Controllers.ExternalControlNightDayHC,
     declination=1.2,
@@ -38,7 +37,7 @@ model BoilerSystem "Example that illustrates use of boiler model"
     "Boiler"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.Boundary_pT sink(nPorts=1, redeclare package Medium =
-    AixLib.Media.Specialized.Water.TemperatureDependentDensity)
+    Media.Specialized.Water.TemperatureDependentDensity)
     "Sink"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
   Modelica.Blocks.Sources.BooleanConstant on

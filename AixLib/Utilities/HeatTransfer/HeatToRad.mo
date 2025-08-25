@@ -10,9 +10,15 @@ model HeatToRad "Adaptor for approximative longwave radiation exchange with vari
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));
   parameter Modelica.Units.SI.Area A=-1 "Fixed value of prescribed area"
     annotation (Dialog(enable=not use_A_in));
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for radiation heat transfer" annotation (
+  parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
-    Dialog(group = "Radiation exchange equation", compact=true));
+    Dialog(group = "Radiation exchange equation", compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort
     "Heat port for convective or conductive heat flow"
     annotation (Placement(transformation(extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
@@ -35,11 +41,11 @@ equation
  convPort.Q_flow + radPort.Q_flow = 0;
   // To prevent negative solutions for T, the max() expression is used.
   // Negative solutions also occur when using max(T,0), therefore, 1 K is used.
-  if radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx then
+  if radCalcMethod == 1 then
     convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*(max(convPort.T, 1)*max(convPort.T, 1)*max(convPort.T, 1)*max(convPort.T, 1) - max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1)*max(radPort.T, 1));
-  elseif radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_wall_temp then
+  elseif radCalcMethod == 2 then
     convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*convPort.T*convPort.T*convPort.T*(convPort.T - radPort.T);
-  elseif radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_rad_temp then
+  elseif radCalcMethod == 3 then
     convPort.Q_flow = Modelica.Constants.sigma*eps*A_in_internal*4*radPort.T*radPort.T*radPort.T*(convPort.T - radPort.T);
   else
     convPort.Q_flow =Modelica.Constants.sigma*eps*A_in_internal*4*T_ref*T_ref*T_ref*(convPort.T - radPort.T);

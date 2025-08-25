@@ -9,28 +9,28 @@ record Generic "Generic record for valve parameters"
 defaultComponentName="datVal",
 defaultComponentPrefixes="parameter",
 Documentation(info="<html>
-<p>
-This is a generic record for the normalized volume flow
-rates for different valve opening positions.
-See the documentation of
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.Data\">
-AixLib.Fluid.Actuators.Valves.Data</a>
-for how to use this record.
-</p>
-</html>",
+ <p>
+ This is a generic record for the normalized volume flow
+ rates for different valve opening positions.
+ See the documentation of
+ <a href=\"modelica://AixLib.Fluid.Actuators.Valves.Data\">
+ AixLib.Fluid.Actuators.Valves.Data</a>
+ for how to use this record.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 12, 2014, by Michael Wetter:<br/>
-Added annotation <code>defaultComponentPrefixes=\"parameter\"</code>
-so that the <code>parameter</code> keyword is added when dragging
-the record into a model.
-</li>
-<li>
-March 27, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ December 12, 2014, by Michael Wetter:<br/>
+ Added annotation <code>defaultComponentPrefixes=\"parameter\"</code>
+ so that the <code>parameter</code> keyword is added when dragging
+ the record into a model.
+ </li>
+ <li>
+ March 27, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

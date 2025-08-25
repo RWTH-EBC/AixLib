@@ -35,24 +35,24 @@ equation
   annotation (__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/Outside_CpData_Specification.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model validates the specification of the wind pressure profile
-in the information section of the model
-<a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">AixLib.Fluid.Sources.Outside_CpData</a>.
-The surface is configured to be facing North.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 11, 2022, by Michael Wetter:<br/>
-First implementation.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model validates the specification of the wind pressure profile
+ in the information section of the model
+ <a href=\"modelica://AixLib.Fluid.Sources.Outside_CpData\">AixLib.Fluid.Sources.Outside_CpData</a>.
+ The surface is configured to be facing North.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 11, 2022, by Michael Wetter:<br/>
+ First implementation.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StopTime=86400,
-      Tolerance=1e-06), 
-   __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData_Specification;

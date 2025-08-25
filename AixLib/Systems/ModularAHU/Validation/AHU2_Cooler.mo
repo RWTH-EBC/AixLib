@@ -65,14 +65,12 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
       Kv=10,
       T_start=294.75,
       valveCharacteristic=
-          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
-          a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
-            y={0,0.07,0.12,0.45,0.65,0.89,0.93,0.96,1},
-            phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
-          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
-            y={0,0.1,0.2,0.26,0.52,0.8,0.9,0.95,1},
-            phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
-      valve(use_strokeTime=false),
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
+          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.07,0.12,0.45,0.65,
+          0.89,0.93,0.96,1}, phi={0,0.001,0.002,0.08,0.29,0.75,0.94,0.98,1}),
+          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,0.26,
+          0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.05,0.45,0.96,0.98,0.99,1})),
+      valve(use_inputFilter=false),
       pipe1(
         T_start=283.15,
         parameterPipe=AixLib.DataBase.Pipes.Copper.Copper_54x2(),
@@ -110,8 +108,6 @@ model AHU2_Cooler "Cooling register of ahu 2 in E.ON ERC testhall"
     annotation (Placement(transformation(extent={{-90,34},{-78,46}})));
   Modelica.Blocks.Sources.Constant const(k=-0.5)
     annotation (Placement(transformation(extent={{-104,32},{-96,40}})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
-    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
@@ -162,8 +158,6 @@ equation
           -72,40},{-72,36}},          color={0,0,127}));
   connect(const.y, add.u2) annotation (Line(points={{-95.6,36},{-94,36},{-94,
           36.4},{-91.2,36.4}}, color={0,0,127}));
-  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation (
-    Line(points={{-69,-24},{-37.95,-24},{-37.95,10.05}}, color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
@@ -171,9 +165,6 @@ equation
 </p>
 </html>", revisions="<html>
 <ul>
-  <li>December 06, 2022, by EBC-Modelica group:<br/>
-    Fixes to increase compatability to OpenModelica <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1378\">#1378</a>.
-  </li>
   <li>November 4, 2019, by Alexander Kümpel:<br/>
     First implementation.
   </li>
@@ -181,8 +172,9 @@ equation
 </html>"),
     experiment(
       StopTime=2700,
-      Interval=1,Tolerance=1e-06),
-    __Dymola_Commands(file=
-        "modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Cooler.mos"
+      __Dymola_fixedstepsize=1,
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Cooler.mos"
         "Simulate and Plot"));
 end AHU2_Cooler;

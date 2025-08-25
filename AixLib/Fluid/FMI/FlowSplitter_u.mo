@@ -44,10 +44,10 @@ protected
   final parameter Modelica.Units.SI.MassFlowRate mAve_flow_nominal=sum(
       m_flow_nominal)/nout "Average nominal mass flow rate";
 protected
-  input AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
+  AixLib.Fluid.FMI.Interfaces.FluidProperties bacPro_internal(
     redeclare final package Medium = Medium)
     "Internal connector for fluid properties for back flow";
-  output AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w_out_internal = 0
+  AixLib.Fluid.FMI.Interfaces.MassFractionConnector X_w_out_internal = 0
     "Internal connector for mass fraction of backward flow properties";
 
 initial equation
@@ -127,65 +127,60 @@ Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
           fillPattern=FillPattern.HorizontalCylinder)}),
     Documentation(
 info="<html>
-<p>
-Block that takes as an input the inflowing fluid at the port <code>inlet</code>
-and a vector of control signals for the mass flow rates <code>u</code>.
-The mass flow of all outlet ports <code>i</code>
-is set to the value of <code>u[i] m_flow_nominal[i]</code>.
-If the inflowing mass flow rate at the port <code>inlet</code> is not equal
-to the sum of <code>u[i] m_flow_in[i]</code>, the simulation stops with an assert.
-</p>
-<h4>Assumptions and limitations</h4>
-<p>
-The mass flow rates at all outlet ports must be non-negative.
-Reverse flow is not yet implemented.
-If either of these limitations are violated, then
-the model stops with an error.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 18, 2024, by Michael Wetter:<br/>
-Added causality.<br/>
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1853\">IBPSA, #1853</a>.
-</li>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-June 9, 2016, by Thierry S. Nouidui:<br/>
-Removed <code>assert()</code> statement which was triggered
-when the model was exported as an FMU
-depending on the execution sequence of the master algorithm.
-</li>
-<li>
-May 27, 2016, by Michael Wetter:<br/>
-Replaced <code>outlet[i].forward = inlet.forward;</code>
-with a <code>connect</code> statement as
-accesses to composite components other than records are not allowed.
-This was done for JModelica compliance.
-</li>
-<li>
-July 28, 2015, by Thierry S. Nouidui:<br/>
-Corrected wrong <code>assert</code> statement.
-</li>
-<li>
-April 29, 2015, by Michael Wetter:<br/>
-Redesigned to conditionally remove the pressure connector
-if <code>use_p_in=false</code>.
-</li>
-<li>
-April 15, 2015 by Michael Wetter:<br/>
-Changed connector variable to be temperature instead of
-specific enthalpy.
-</li>
-<li>
-November 20, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Block that takes as an input the inflowing fluid at the port <code>inlet</code>
+ and a vector of control signals for the mass flow rates <code>u</code>.
+ The mass flow of all outlet ports <code>i</code>
+ is set to the value of <code>u[i] m_flow_nominal[i]</code>.
+ If the inflowing mass flow rate at the port <code>inlet</code> is not equal
+ to the sum of <code>u[i] m_flow_in[i]</code>, the simulation stops with an assert.
+ </p>
+ <h4>Assumptions and limitations</h4>
+ <p>
+ The mass flow rates at all outlet ports must be non-negative.
+ Reverse flow is not yet implemented.
+ If either of these limitations are violated, then
+ the model stops with an error.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ June 9, 2016, by Thierry S. Nouidui:<br/>
+ Removed <code>assert()</code> statement which was triggered
+ when the model was exported as an FMU
+ depending on the execution sequence of the master algorithm.
+ </li>
+ <li>
+ May 27, 2016, by Michael Wetter:<br/>
+ Replaced <code>outlet[i].forward = inlet.forward;</code>
+ with a <code>connect</code> statement as
+ accesses to composite components other than records are not allowed.
+ This was done for JModelica compliance.
+ </li>
+ <li>
+ July 28, 2015, by Thierry S. Nouidui:<br/>
+ Corrected wrong <code>assert</code> statement.
+ </li>
+ <li>
+ April 29, 2015, by Michael Wetter:<br/>
+ Redesigned to conditionally remove the pressure connector
+ if <code>use_p_in=false</code>.
+ </li>
+ <li>
+ April 15, 2015 by Michael Wetter:<br/>
+ Changed connector variable to be temperature instead of
+ specific enthalpy.
+ </li>
+ <li>
+ November 20, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FlowSplitter_u;

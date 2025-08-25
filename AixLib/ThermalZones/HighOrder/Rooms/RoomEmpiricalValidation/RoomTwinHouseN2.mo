@@ -35,24 +35,24 @@ model RoomTwinHouseN2 "N2"
       redeclare final DataBase.Walls.EmpiricalValidation.OW_E_TwinHouses
         wallPar,
       final solar_absorptance=0.23,
-      final calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-      final calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
+      final calcMethodOut=1,
+      final calcMethodIn=1,
       final withWindow=true,
       final windowarea=1.89),
     wallWest(
       redeclare final DataBase.Walls.EmpiricalValidation.OW_W_TwinHouses
         wallPar,
       final solar_absorptance=0.23,
-      final calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-      final calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
+      final calcMethodOut=1,
+      final calcMethodIn=1,
       final withWindow=true,
       final windowarea=3.78),
     wallSouth(
       redeclare final DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses
         wallPar,
       final solar_absorptance=0.23,
-      final calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-      final calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
+      final calcMethodOut=1,
+      final calcMethodIn=1,
       final withWindow=true,
       final windowarea=9.66,
       final withSunblind=true,
@@ -63,8 +63,8 @@ model RoomTwinHouseN2 "N2"
       redeclare final DataBase.Walls.EmpiricalValidation.OW_S_N_TwinHouses
         wallPar,
       final solar_absorptance=0.23,
-      final calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-      final calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
+      final calcMethodOut=1,
+      final calcMethodIn=1,
       final withWindow=true,
       final windowarea=1.89,
       final withDoor=true,
@@ -72,17 +72,17 @@ model RoomTwinHouseN2 "N2"
     floor(
       final outside=false,
       redeclare DataBase.Walls.EmpiricalValidation.FL_TwinHouses wallPar,
-      final ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor,
+      final ISOrientation=2,
       final withWindow=false,
       final withDoor=false),
     ceiling(
       outside=false,
       redeclare DataBase.Walls.EmpiricalValidation.CE_TwinHouses wallPar,
-      final ISOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling,
+      final ISOrientation=3,
       final withWindow=false,
       final withDoor=false,
-      final calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-      final calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A));
+      final calcMethodOut=1,
+      final calcMethodIn=1));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a Therm_ground
     annotation (Placement(transformation(extent={{-36,-102},{-28,-94}}),
@@ -116,8 +116,8 @@ model RoomTwinHouseN2 "N2"
     final WindowType=Type_Win,
     wall_length=2.6,
     wall_height=12.4,
-    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
+    calcMethodOut=1,
+    calcMethodIn=1,
     T0=TWalls_start)
     annotation (Placement(transformation(extent={{26,16},{30,40}})));
   Components.Walls.Wall IW1(
@@ -131,8 +131,8 @@ model RoomTwinHouseN2 "N2"
     final WindowType=Type_Win,
     wall_length=2.6,
     wall_height=11.6,
-    calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946,
-    calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A,
+    calcMethodOut=1,
+    calcMethodIn=1,
     T0=TWalls_start)
     annotation (Placement(transformation(extent={{40,-2},{44,22}})));
 equation

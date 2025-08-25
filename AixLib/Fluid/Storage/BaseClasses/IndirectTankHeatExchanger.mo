@@ -169,7 +169,7 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(vol[1].ports[1],senMasFlo.port_b) annotation (Line(
-      points={{-23,-40},{-23,-50},{-60,-50}},
+      points={{-24,-40},{-24,-50},{-60,-50}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(cap.port,HexToTan.solid) annotation (Line(
@@ -185,7 +185,7 @@ equation
       color={191,0,0},
       smooth=Smooth.None));
   connect(temSenHex.T, hAPipIns.T)     annotation (Line(
-      points={{-9,-70},{0,-70},{0,-76},{9,-76}},
+      points={{-10,-70},{0,-70},{0,-76},{9,-76}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(hAPipIns.hA, htfToHex.Gc)     annotation (Line(
@@ -202,12 +202,12 @@ equation
       smooth=Smooth.None));
   connect(temSenSur.T, hANatCyl.TSur)
                                      annotation (Line(
-      points={{20,53},{20,70},{-40,70},{-40,114},{-2,114}},
+      points={{20,52},{20,70},{-40,70},{-40,114},{-2,114}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(hANatCyl.TFlu, temSenWat.T)
                                      annotation (Line(
-      points={{-2,106},{-36,106},{-36,76},{68,76},{68,51}},
+      points={{-2,106},{-36,106},{-36,76},{68,76},{68,50}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(port_a, senMasFlo.port_a) annotation (Line(
@@ -215,7 +215,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(vol[nSeg].ports[2], res.port_a) annotation (Line(
-      points={{-21,-40},{-21,-50},{46,-50}},
+      points={{-20,-40},{-20,-50},{46,-50}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(res.port_b, port_b) annotation (Line(
@@ -238,7 +238,7 @@ equation
             -150},{100,150}}), graphics), Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-150},{100,150}}), graphics={
         Rectangle(
-          extent={{-70,64},{70,-96}},
+          extent={{-66,64},{74,-96}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={95,95,95},
@@ -250,126 +250,126 @@ equation
           fillColor={0,0,255},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-70,-12},{70,-18}},
+          extent={{-66,-12},{74,-18}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-40,64},{-36,-96}},
+          extent={{-36,64},{-32,-96}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{-2,64},{2,-96}},
+          extent={{2,64},{6,-96}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid),
         Rectangle(
-          extent={{36,64},{40,-96}},
+          extent={{40,64},{44,-96}},
           lineColor={0,0,255},
           pattern=LinePattern.None,
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
           defaultComponentName="indTanHex",
         Documentation(info = "<html>
-          <p>
-          This model is a heat exchanger with a moving fluid on one side and a stagnant fluid on the other.
-          It is intended for use when a heat exchanger is submerged in a stagnant fluid.
-          For example, the heat exchanger in a storage tank which is part of a solar thermal system.
-          </p>
-          <p>
-          This component models the fluid in the heat exchanger, convection between the fluid and
-          the heat exchanger, and convection from the heat exchanger to the surrounding fluid.
-          </p>
-          <p>
-          The model is based on <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
-          AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside</a> and
-          <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
-          AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
-          </p>
-          <p>
-          The fluid ports are intended to be connected to a circulated heat transfer fluid
-          while the heat port is intended to be connected to a stagnant fluid.
-          </p>
-          </html>",
+           <p>
+           This model is a heat exchanger with a moving fluid on one side and a stagnant fluid on the other.
+           It is intended for use when a heat exchanger is submerged in a stagnant fluid.
+           For example, the heat exchanger in a storage tank which is part of a solar thermal system.
+           </p>
+           <p>
+           This component models the fluid in the heat exchanger, convection between the fluid and
+           the heat exchanger, and convection from the heat exchanger to the surrounding fluid.
+           </p>
+           <p>
+           The model is based on <a href=\"AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside\">
+           AixLib.Fluid.HeatExchangers.BaseClasses.HACoilInside</a> and
+           <a href=\"AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder\">
+           AixLib.Fluid.HeatExchangers.BaseClasses.HANaturalCylinder</a>.
+           </p>
+           <p>
+           The fluid ports are intended to be connected to a circulated heat transfer fluid
+           while the heat port is intended to be connected to a stagnant fluid.
+           </p>
+           </html>",
           revisions="<html>
-<ul>
-<li>
-March 7, 2022, by Michael Wetter:<br/>
-Set <code>final massDynamics=energyDynamics</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
-</li>
-<li>
-April 9, 2021, by Michael Wetter:<br/>
-Corrected placement of <code>each</code> keyword.<br/>
-See <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/2440\">Buildings, PR #2440</a>.
-</li>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
-</li>
-<li>
-June 7, 2018 by Filip Jorissen:<br/>
-Copied model from Buildings and update the model accordingly.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
-</li>
-<li>
-January 7, 2016, by Filip Jorissen:<br/>
-Propagated <code>flowDependent</code> and <code>temperatureDependent</code>
-in <code>hAPipIns</code>.
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/454\">#454</a>.
-</li>
-<li>
-September 24, 2015 by Michael Wetter:<br/>
-Set <code>fixed</code> attribute in <code>cap.T</code> to avoid
-unspecified initial conditions.
-</li>
-<li>
-July 2, 2015, by Michael Wetter:<br/>
-Set <code>prescribedHeatFlowRate=false</code> in control volume.
-</li>
-<li>
-July 1, 2015, by Filip Jorissen:<br/>
-Added parameter <code>energyDynamicsSolid</code>.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">
-#434</a>.
-</li>
-<li>
-March 28, 2015, by Filip Jorissen:<br/>
-Propagated <code>allowFlowReversal</code>.
-</li>
-          <li>
-          August 29, 2014, by Michael Wetter:<br/>
-          Introduced <code>MediumTan</code> for the tank medium, and assigned <code>Medium</code>
-          to be equal to <code>MediumHex</code>.
-          This is to correct issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">
-          #271</a>.
-          </li>
-          <li>
-          June 18, 2014, by Michael Wetter:<br/>
-          Set initial equations for <code>cap</code>, and renamed this instance from
-          <code>Cap</code> to <code>cap</code>.
-          This was done to avoid a warning during translation, and to comply with
-          the coding convention.
-          </li>
-          <li>
-          October 8, 2013, by Michael Wetter:<br/>
-          Removed parameter <code>show_V_flow</code>.
-          </li>
-          <li>
-          January 29, 2013, by Peter Grant:<br/>
-          First implementation.
-          </li>
-          </ul>
-          </html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Set <code>final massDynamics=energyDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ April 9, 2021, by Michael Wetter:<br/>
+ Corrected placement of <code>each</code> keyword.<br/>
+ See <a href=\"https://github.com/lbl-srg/modelica-buildings/pull/2440\">Buildings, PR #2440</a>.
+ </li>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ June 7, 2018 by Filip Jorissen:<br/>
+ Copied model from Buildings and update the model accordingly.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/314\">#314</a>.
+ </li>
+ <li>
+ January 7, 2016, by Filip Jorissen:<br/>
+ Propagated <code>flowDependent</code> and <code>temperatureDependent</code>
+ in <code>hAPipIns</code>.
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/454\">#454</a>.
+ </li>
+ <li>
+ September 24, 2015 by Michael Wetter:<br/>
+ Set <code>fixed</code> attribute in <code>cap.T</code> to avoid
+ unspecified initial conditions.
+ </li>
+ <li>
+ July 2, 2015, by Michael Wetter:<br/>
+ Set <code>prescribedHeatFlowRate=false</code> in control volume.
+ </li>
+ <li>
+ July 1, 2015, by Filip Jorissen:<br/>
+ Added parameter <code>energyDynamicsSolid</code>.
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/434\">
+ #434</a>.
+ </li>
+ <li>
+ March 28, 2015, by Filip Jorissen:<br/>
+ Propagated <code>allowFlowReversal</code>.
+ </li>
+           <li>
+           August 29, 2014, by Michael Wetter:<br/>
+           Introduced <code>MediumTan</code> for the tank medium, and assigned <code>Medium</code>
+           to be equal to <code>MediumHex</code>.
+           This is to correct issue <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/271\">
+           #271</a>.
+           </li>
+           <li>
+           June 18, 2014, by Michael Wetter:<br/>
+           Set initial equations for <code>cap</code>, and renamed this instance from
+           <code>Cap</code> to <code>cap</code>.
+           This was done to avoid a warning during translation, and to comply with
+           the coding convention.
+           </li>
+           <li>
+           October 8, 2013, by Michael Wetter:<br/>
+           Removed parameter <code>show_V_flow</code>.
+           </li>
+           <li>
+           January 29, 2013, by Peter Grant:<br/>
+           First implementation.
+           </li>
+           </ul>
+           </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end IndirectTankHeatExchanger;

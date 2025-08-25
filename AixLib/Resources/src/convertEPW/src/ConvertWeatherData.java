@@ -53,7 +53,7 @@ public class ConvertWeatherData{
     simtime = 60 * (simtime+time[3]); // hours to minutes
     simtime = 60 * (simtime+time[4]);// minutes to seconds
 
-    // if sub hourly data ara available flag becomes true
+    // if sub hourly data ara avaible flag becomes true
     if (minuteFlag) {
       simtime = simtime - 3600;
     }
@@ -132,23 +132,20 @@ public class ConvertWeatherData{
     *@param inData Inputed data from .epw file
 		*@param preData Data read in previous line
 		*@param missData Missing value for this field
-    *@param description Description of the data
     *@param lineNum Line number
     */
-  static private String checkdata(String inData, String preData, String missData, ArrayList<String> description, int lineNum, int i)
+  static private String checkdata(String inData, String preData, String missData, int lineNum, int i)
   {
 		if (inData.equals(missData)) {
 			if (lineNum == 9) {
-				final String des = description.get(i);
-				i = i + 6; // 6 is added because epw has different representation of time and the code column
-				System.out.println("The data at line 9 column " + i + " (" + des + ") in .epw file is equal to '" + missData + "', indicating it is missing. You need to fix it before the convert.");
+				i = i + 6;
+				System.out.println("The data at line 9 column " + i + " in .epw file is missing. You need to fix it before the convert.");
 			  System.exit (0);
 			}
 			else {
 				lineNum = lineNum + 32;
-				final String des = description.get(i);
 				i = i + 1;
-				System.out.println("Correct the missing data in line " + lineNum + " column " + i + " (" + des + ")");
+				System.out.println("Correct the missing data in line " + lineNum + " column " + i);
 				return preData;
 			}
 		}
@@ -175,7 +172,6 @@ public class ConvertWeatherData{
     String timeString;
     String[] preData = new String[30];
 		String[] missData = new String[30];
-    ArrayList<String> description = new ArrayList<String>();
     int lineNum;    // line number in .epw file
     int[] time = new int[5];
     int[] timeTemp = new int[5];
@@ -183,7 +179,7 @@ public class ConvertWeatherData{
     boolean minuteFlag;
 
  		missData[1] = "99.9";
- 		missData[2] = "99.9";
+    missData[2] = "99.9";
 		missData[3] = "999";
 		missData[4] = "999999";
 		missData[5] = "9999";
@@ -210,8 +206,6 @@ public class ConvertWeatherData{
 		missData[26] = "99";
 
 
-
-
     console = new Scanner(new File(filename));
     lineChecker = new Scanner(new File(filename));
     minuteFlag = false;
@@ -230,13 +224,6 @@ public class ConvertWeatherData{
 
     // add comments for weather data
     myArr = addcomments(myArr);
-
-    // build description strings that are used in error messages
-    description = addcomments(description);
-    for(i=0; i < 30; i++){
-      final String tmpDes = description.get(i);
-      description.set(i, tmpDes.substring(tmpDes.indexOf(' ')).trim());
-    }
 
     // read weather data
     while (console.hasNextLine()) {
@@ -268,7 +255,7 @@ public class ConvertWeatherData{
           minuteFlag = false;
         }
         lineChecker.close();
-        lineTokenizerTemp.close();
+        lineTokenizerTemp.close(); 
        }
 
       // convert the time in seconds
@@ -287,7 +274,7 @@ public class ConvertWeatherData{
 	    for(i=1; i<=4; i++){
 				if (lineTokenizer.hasNext()) {
 					tmp2 = lineTokenizer.next();
-					tmp2 = checkdata(tmp2, preData[i], missData[i], description, lineNum, i);
+					tmp2 = checkdata(tmp2, preData[i], missData[i], lineNum, i);
 		      tmp = tmp + tmp2 + "\t";
 					preData[i] = tmp2;
 		    }
@@ -310,7 +297,7 @@ public class ConvertWeatherData{
 			i = 8;
 			if (lineTokenizer.hasNext()) {
 				tmp2 = lineTokenizer.next();
-				tmp2 = checkdata(tmp2, preData[i], missData[i], description, lineNum, i);
+				tmp2 = checkdata(tmp2, preData[i], missData[i], lineNum, i);
 	      tmp = tmp + tmp2 + "\t";
 				preData[i] = tmp2;
 	    }
@@ -331,7 +318,7 @@ public class ConvertWeatherData{
 			i = 10;
 			if (lineTokenizer.hasNext()) {
 				tmp2 = lineTokenizer.next();
-				tmp2 = checkdata(tmp2, preData[i], missData[i], description, lineNum, i);
+				tmp2 = checkdata(tmp2, preData[i], missData[i], lineNum, i);
 	      tmp = tmp + tmp2 + "\t";
 				preData[i] = tmp2;
 	    }
@@ -353,7 +340,7 @@ public class ConvertWeatherData{
 			for(i=17; i<=18; i++){
 				if (lineTokenizer.hasNext()) {
 					tmp2 = lineTokenizer.next();
-					tmp2 = checkdata(tmp2, preData[i], missData[i], description, lineNum, i);
+					tmp2 = checkdata(tmp2, preData[i], missData[i], lineNum, i);
 		      tmp = tmp + tmp2 + "\t";
 					preData[i] = tmp2;
 		    }
@@ -375,7 +362,7 @@ public class ConvertWeatherData{
 			i = 20;
 			if (lineTokenizer.hasNext()) {
 				tmp2 = lineTokenizer.next();
-				tmp2 = checkdata(tmp2, preData[i], missData[i], description, lineNum, i);
+				tmp2 = checkdata(tmp2, preData[i], missData[i], lineNum, i);
 		    if (tmp2.equals("88888") || tmp2.equals("77777") || tmp2.equals("99999"))
 		      tmp2 = "2000";
 				tmp = tmp + tmp2 + "\t";

@@ -93,7 +93,7 @@ model SimpleRoomTwoElements
         86400,0,0,0],
     columns={2,3,4},
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
-    (convective)"
+     (convective)"
     annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
   Modelica.Blocks.Sources.Constant const[2](each k=0)
     "Sets sunblind signal to zero (open)"
@@ -231,56 +231,56 @@ equation
     annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
     0,127}));
   annotation ( Documentation(info="<html>
-  <p>This example shows the application of
-  <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.RC.TwoElements\">
-  AixLib.ThermalZones.ReducedOrder.RC.TwoElements</a>
-  in combination with
-  <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">
- AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a>
-  and
-  <a href=\"modelica://AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane\">
-  AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane</a>.
-  Solar radiation on tilted surface is calculated using models of
-  AixLib. The thermal zone is a simple room defined in Guideline
-  VDI 6007 Part 1 (VDI, 2012). All models, parameters and inputs
-  except sunblinds, separate handling of heat transfer through
-  windows and solar radiation are similar to the ones defined for
-  the guideline&apos;s test room. For solar radiation, the example
-  relies on the standard weather file in AixLib.</p>
-  <p>The idea of the example is to show a typical application of
-  all sub-models and to use the example in unit tests. The results
-  are reasonable, but not related to any real use case or
-  measurement data.</p>
-  <h4>References</h4>
-  <p>VDI. German Association of Engineers Guideline VDI
-  6007-1 March 2012. Calculation of transient thermal response of
-  rooms and buildings - modelling of rooms.</p>
-  </html>", revisions="<html>
-  <ul>
-  <li>
-  September 6, 2021, by Ettore Zanetti:<br/>
-  Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
-  This is for
-  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
-  </li>
-  <li>
-  July 11, 2019, by Katharina Brinkmann:<br/>
-  Renamed <code>alphaWall</code> to <code>hConWall</code>,
-  <code>alphaWin</code> to <code>hConWin</code>
-  </li>
-  <li>
-  April 27, 2016, by Michael Wetter:<br/>
-  Removed call to <code>Modelica.Utilities.Files.loadResource</code>
-  as this did not work for the regression tests.
-  </li>
-  <li>February 25, 2016, by Moritz Lauster:<br/>
-  Implemented.
-  </li>
-  </ul>
-  </html>"),
+   <p>This example shows the application of
+   <a href=\"AixLib.ThermalZones.ReducedOrder.RC.TwoElements\">
+   AixLib.ThermalZones.ReducedOrder.RC.TwoElements</a>
+   in combination with
+   <a href=\"AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow\">
+  AixLib.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow</a>
+   and
+   <a href=\"AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane\">
+   AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane</a>.
+   Solar radiation on tilted surface is calculated using models of
+   AixLib. The thermal zone is a simple room defined in Guideline
+   VDI 6007 Part 1 (VDI, 2012). All models, parameters and inputs
+   except sunblinds, separate handling of heat transfer through
+   windows and solar radiation are similar to the ones defined for
+   the guideline&apos;s test room. For solar radiation, the example
+   relies on the standard weather file in AixLib.</p>
+   <p>The idea of the example is to show a typical application of
+   all sub-models and to use the example in unit tests. The results
+   are reasonable, but not related to any real use case or
+   measurement data.</p>
+   <h4>References</h4>
+   <p>VDI. German Association of Engineers Guideline VDI
+   6007-1 March 2012. Calculation of transient thermal response of
+   rooms and buildings - modelling of rooms.</p>
+   </html>",revisions="<html>
+   <ul>
+   <li>
+   September 6, 2021, by Ettore Zanetti:<br/>
+   Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
+   This is for
+   <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+   </li>
+   <li>
+   July 11, 2019, by Katharina Brinkmann:<br/>
+   Renamed <code>alphaWall</code> to <code>hConWall</code>,
+   <code>alphaWin</code> to <code>hConWin</code>
+   </li>
+   <li>
+   April 27, 2016, by Michael Wetter:<br/>
+   Removed call to <code>Modelica.Utilities.Files.loadResource</code>
+   as this did not work for the regression tests.
+   </li>
+   <li>February 25, 2016, by Moritz Lauster:<br/>
+   Implemented.
+   </li>
+   </ul>
+   </html>"),
   experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/SimpleRoomTwoElements.mos"
-        "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SimpleRoomTwoElements;

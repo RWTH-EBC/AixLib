@@ -46,7 +46,7 @@ model EvaporatorCondenser
 protected
   parameter Modelica.Units.SI.SpecificHeatCapacity cp_default=
       Medium.specificHeatCapacityCp(sta_default)
-    "Specific heat capacity";
+    "Density, used to compute fluid volume";
 
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heaFlo
     "Heat flow sensor"
@@ -93,53 +93,53 @@ equation
           textString="Q_flow")}),
 defaultComponentName="evaCon",
 Documentation(info="<html>
-<p>
-Model for a constant temperature evaporator or condenser based on a &epsilon;-NTU
-heat exchanger model.
-</p>
-<p>
-The heat exchanger effectiveness is calculated from the number of transfer units
-(NTU):
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-&epsilon; = 1 - exp(- UA &frasl; (m&#775; c<sub>p</sub>))
-</p>
-<p>
-Optionally, this model can have a flow resistance.
-If no flow resistance is requested, set <code>dp_nominal=0</code>.
-</p>
-<h4>Limitations</h4>
-<p>
-This model does not consider any superheating or supercooling on the refrigerant
-side. The refrigerant is considered to exchange heat at a constant temperature
-throughout the heat exchanger.
-</p>
-</html>",
+ <p>
+ Model for a constant temperature evaporator or condenser based on a &epsilon;-NTU
+ heat exchanger model.
+ </p>
+ <p>
+ The heat exchanger effectiveness is calculated from the number of transfer units
+ (NTU):
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ &epsilon; = 1 - exp(UA &frasl; (m&#775; c<sub>p</sub>))
+ </p>
+ <p>
+ Optionally, this model can have a flow resistance.
+ If no flow resistance is requested, set <code>dp_nominal=0</code>.
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ This model does not consider any superheating or supercooling on the refrigerant
+ side. The refrigerant is considered to exchange heat at a constant temperature
+ throughout the heat exchanger.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-March 7, 2022, by Michael Wetter:<br/>
-Removed <code>massDynamics</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
-</li>
-<li>
-May 27, 2017, by Filip Jorissen:<br/>
-Regularised heat transfer around zero flow.<br/>
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
-</li>
-<li>
-April 12, 2017, by Michael Wetter:<br/>
-Corrected invalid syntax for computing the specific heat capacity.<br/>
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/707\">#707</a>.
-</li>
-<li>
-October 11, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ March 7, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">#1542</a>.
+ </li>
+ <li>
+ May 27, 2017, by Filip Jorissen:<br/>
+ Regularised heat transfer around zero flow.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/769\">#769</a>.
+ </li>
+ <li>
+ April 12, 2017, by Michael Wetter:<br/>
+ Corrected invalid syntax for computing the specific heat capacity.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/707\">#707</a>.
+ </li>
+ <li>
+ October 11, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EvaporatorCondenser;

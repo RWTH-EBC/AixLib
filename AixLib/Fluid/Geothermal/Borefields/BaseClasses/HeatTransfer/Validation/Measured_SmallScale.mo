@@ -10,7 +10,6 @@ model Measured_SmallScale
 
   AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.GroundTemperatureResponse groTemRes(
     nCel=5,
-    nSeg=12,
     borFieDat=borFieDat,
     forceGFunCalc=true,
     tLoaAgg=360000) "Ground temperature response of borehole"
@@ -57,42 +56,42 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/Validation/Measured_SmallScale.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This validation case simulates the experiment of Cimmino and Bernier (2015).
-The experiment consists in the injection of heat at an average rate of 8.67 W
-in a 0.40 m long borehole over a period of 168 h. Borehole wall tempratures
-were measured by a series of 22 thermocouples welded to the stainless steel
-pipe that contains the borehole and acts as the borehole wall.
-</p>
-<p>
-Since the model is not adapted to the simulation of small scale boreholes, the
-borehole dimensions are multiplied by a factor 375 to obtain a scaled-up 150.0 m
-long borehole. The time values of the experimental data are then multiplied by a
-factor 375<sup>2</sup>. The predicted borehole wall temperature is compared to
-the experimental data.
-</p>
-<p>
-A sharp increase in the rate of change of the borehole wall temperature is
-observed at <i>t=500 years</i>. This is caused by a sudden change in the rate
-of heat injected to the fluid at the same moment. The simulated borehole wall
-temperature is more affected the measured borehole wall temperature since the
-validation model does not consider the dynamics of the borehole and the fluid,
-and that heat is directly injected at the borehole wall. In the experiment, the
-sudden change in heat injection rate was dampened by the circulating fluid, the
-borehole filling material, and the measurement apparatus.
-</p>
-<h4>References</h4>
-<p>
-Cimmino, M. and Bernier, M. 2015. <i>Experimental determination of the
-g-functions of a small-scale geothermal borehole</i>. Geothermics 56: 60-71.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 18, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This validation case simulates the experiment of Cimmino and Bernier (2015).
+ The experiment consists in the injection of heat at an average rate of 8.67 W
+ in a 0.40 m long borehole over a period of 168 h. Borehole wall tempratures
+ were measured by a series of 22 thermocouples welded to the stainless steel
+ pipe that contains the borehole and acts as the borehole wall.
+ </p>
+ <p>
+ Since the model is not adapted to the simulation of small scale boreholes, the
+ borehole dimensions are multiplied by a factor 375 to obtain a scaled-up 150.0 m
+ long borehole. The time values of the experimental data are then multiplied by a
+ factor 375<sup>2</sup>. The predicted borehole wall temperature is compared to
+ the experimental data.
+ </p>
+ <p>
+ A sharp increase in the rate of change of the borehole wall temperature is
+ observed at <i>t=500 years</i>. This is caused by a sudden change in the rate
+ of heat injected to the fluid at the same moment. The simulated borehole wall
+ temperature is more affected the measured borehole wall temperature since the
+ validation model does not consider the dynamics of the borehole and the fluid,
+ and that heat is directly injected at the borehole wall. In the experiment, the
+ sudden change in heat injection rate was dampened by the circulating fluid, the
+ borehole filling material, and the measurement apparatus.
+ </p>
+ <h4>References</h4>
+ <p>
+ Cimmino, M. and Bernier, M. 2015. <i>Experimental determination of the
+ g-functions of a small-scale geothermal borehole</i>. Geothermics 56: 60-71.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 18, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Measured_SmallScale;

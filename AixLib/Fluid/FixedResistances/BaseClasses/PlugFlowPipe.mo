@@ -13,11 +13,11 @@ model PlugFlowPipe
 
   parameter Boolean have_pipCap=true
     "= true, a mixing volume is added that corresponds
-    to the heat capacity of the pipe wall"
+     to the heat capacity of the pipe wall"
     annotation (Dialog(tab="Advanced"));
   parameter Boolean have_symmetry=true
     "= false, the mixing volume is only on port_b,
-    which improve performances, but reduces dynamic accuracy."
+     which improve performances, but reduces dynamic accuracy."
     annotation (Dialog(tab="Advanced", enable=have_pipCap));
 
   parameter Modelica.Units.SI.Length dh=sqrt(4*m_flow_nominal/rho_default/
@@ -58,11 +58,11 @@ model PlugFlowPipe
   parameter Modelica.Units.SI.Length thickness=0.0035 "Pipe wall thickness"
     annotation (Dialog(group="Material"));
 
-  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default) =
+  parameter Modelica.Units.SI.Temperature T_start_in(start=Medium.T_default)=
     Medium.T_default "Initialization temperature at pipe inlet"
     annotation (Dialog(tab="Initialization"));
-  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)
-     = T_start_in "Initialization temperature at pipe outlet"
+  parameter Modelica.Units.SI.Temperature T_start_out(start=Medium.T_default)=
+       T_start_in "Initialization temperature at pipe outlet"
     annotation (Dialog(tab="Initialization"));
   parameter Boolean initDelay = false
     "Initialize delay for a constant mass flow rate if true, otherwise start from 0"
@@ -78,7 +78,7 @@ model PlugFlowPipe
 
   parameter Real fac=1
     "Factor to take into account flow resistance of bends etc.,
-    fac=dp_nominal/dpStraightPipe_nominal";
+     fac=dp_nominal/dpStraightPipe_nominal";
 
   parameter Boolean linearized = false
     "= true, use linear relation between m_flow and dp for any flow rate"
@@ -206,7 +206,7 @@ protected
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac=if rho_default > 500 then 1 else 10) if have_pipCap
     "Control volume connected to port_b.
-    Represents equivalent pipe wall thermal capacity."
+     Represents equivalent pipe wall thermal capacity."
     annotation (Placement(transformation(extent={{70,20},{90,40}})));
   LosslessPipe noMixPip_b(
     redeclare final package Medium = Medium,
@@ -225,7 +225,7 @@ protected
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac=if rho_default > 500 then 1 else 10) if have_pipCap_a
     "Control volume connected to port_a.
-    Represents equivalent pipe wall thermal capacity."
+     Represents equivalent pipe wall thermal capacity."
     annotation (Placement(transformation(extent={{-90,20},{-70,40}})));
   LosslessPipe noMixPip_a(
     redeclare final package Medium = Medium,
@@ -233,13 +233,13 @@ protected
     final m_flow_small=m_flow_small,
     final allowFlowReversal=allowFlowReversal) if not have_pipCap_a
     "Lossless pipe for connecting the outlet port when have_pipCap=false
-    or have_symmetry=false"
+     or have_symmetry=false"
     annotation (Placement(transformation(extent={{-90,-30},{-70,-10}})));
 
 initial equation
   assert(homotopyInitialization, "In " + getInstanceName() +
     ": The constant homotopyInitialization has been modified from its default
-    value. This constant will be removed in future releases.",
+     value. This constant will be removed in future releases.",
     level = AssertionLevel.warning);
 
 equation
@@ -338,158 +338,158 @@ equation
           textColor={0,0,0},
           textString="L = %length")}),
     Documentation(revisions="<html>
-<ul>
-<li>
-October 15, 2021, by Michael Wetter:<br/>
-Moved model to <code>BaseClasses</code>. This allows
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>
-to redeclare the resistance as final, thereby avoiding that a GUI presents this instance
-to users as a replaceable class.
-</li>
-<li>
-October 05, 2021, by Baptiste Ravache:<br/>
-Made model symmetrical and extends from
-<a href=\"modelica://AixLib.Fluid.Interfaces.PartialTwoPortInterface\">
-AixLib.Fluid.Interfaces.PartialTwoPortInterface</a>.
-</li>
-<li>
-September 14, 2021, by Michael Wetter:<br/>
-Made most instances protected and exposed main variables of interest.
-</li>
-<li>
-July 9, 2021, by Baptiste Ravache:<br/>
-Replaced the vectorized outlet port <code>ports_b</code> with
-a single outlet port <code>port_b</code>.<br/>
-Expanded the core pipe model that was previously a component.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1494\">IBPSA, #1494</a>.<br/>
-This change is not backward compatible.<br/>
-The previous classes definitions were moved to
-<a href=\"modelica://AixLib.Obsolete.Fluid.FixedResistances.PlugFlowPipe\">
-AixLib.Obsolete.Fluid.FixedResistances.PlugFlowPipe</a>.
-<a href=\"modelica://AixLib.Obsolete.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">
-AixLib.Obsolete.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>.
-</li>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-Changed <code>homotopyInitialization</code> to a constant.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
-</li>
-<li>
-March 6, 2020, by Jelger Jansen:<br/>
-Revised calculation of thermal resistance <code>R</code>
-by using correct radiuses.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1310\">#1310</a>.
-</li>
-<li>
-October 23, 2017, by Michael Wetter:<br/>
-Revised variable names and documentation to follow guidelines.
-Corrected malformed hyperlinks.
-</li>
-<li>
-July 4, 2016 by Bram van der Heijde:<br/>
-Introduce <code>pipVol</code>.
-</li>
-<li>
-October 10, 2015 by Marcus Fuchs:<br/>
-Copy Icon from KUL implementation and rename model.
-Replace resistance and temperature delay by an adiabatic pipe.
-</li>
-<li>September, 2015 by Marcus Fuchs:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Pipe with heat loss using the time delay based heat losses and transport
-of the fluid using a plug flow model, applicable for simulation of long
-pipes such as in district heating and cooling systems.</p>
-<p>
-This model takes into account transport delay along the pipe length idealized
-as a plug flow.
-The model also includes thermal inertia of the pipe wall.
-</p>
-<h4>Implementation</h4>
-<p>
-The
-<code>spatialDistribution</code> operator is used for the temperature wave propagation
-through the length of the pipe. This operator is contained in
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">
-AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow</a>.
-</p>
-<p>
-The model
-<a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
-AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a>
-implements a heat loss in design direction, but leaves the enthalpy unchanged
-in opposite flow direction. Therefore it is used in front of and behind the time delay.
-</p>
-<p>
-The pressure drop is implemented using
-<a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">
-AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
-This instance is replaceable to allow
-<a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized\">
-AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized</a>
-to compute the pressure drop only once rather than for each segment.
-</p>
-<p>
-The thermal capacity of the pipe wall is implemented as a mixing volume
-of the fluid in the pipe, of which the thermal capacity is equal to that
-of the pipe wall material.
-In addition, this mixing volume allows the hydraulic separation of subsequent pipes.
-<br/>
-The mixing volume is either split between the inlet and outlet ports
-(port_a and port_b) or lumped in at the outlet (port_b)
-if <code>have_symmetry</code> is set to false.
-This mixing volume can be removed from this model with the Boolean parameter
-<code>have_pipCap</code>, in cases where the pipe wall heat capacity
-is negligible and a state is not needed at the pipe outlet
-(see the note below about numerical Jacobians).
-</p>
-<p>
-Note that in order to model a branched network it is recommended to use
-<a href=\"modelica://AixLib.Fluid.FixedResistances.Junction\">
-AixLib.Fluid.FixedResistances.Junction</a> at each junction and to configure
-that junction model with a state
-(<code>energyDynamics &lt;&gt; Modelica.Fluid.Types.Dynamics.SteadyState</code>),
-see for instance
-<a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT\">
-AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT</a>.
-This will avoid the numerical Jacobian that is otherwise created when
-the inlet ports of two instances of the plug flow model are connected together.
-</p>
-<h4>Assumptions</h4>
-<ul>
-<li>
-Heat losses are for steady-state operation.
-</li>
-<li>
-The axial heat diffusion in the fluid, the pipe wall and the ground are neglected.
-</li>
-<li>
-The boundary temperature is uniform.
-</li>
-<li>
-The thermal inertia of the pipe wall material is lumped on the side of the pipe
-that is connected to <code>port_b</code>.
-</li>
-</ul>
-<h4>References</h4>
-<p>
-Full details on the model implementation and experimental validation can be found
-in:
-</p>
-<p>
-van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K.,
-Basciotti, D., M&uuml;ller, D., Nytsch-Geusen, C., Wetter, M. and Helsen, L.
-(2017).<br/>
-Dynamic equation-based thermo-hydraulic pipe model for district heating and
-cooling systems.<br/>
-<i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
-<a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
-10.1016/j.enconman.2017.08.072</a>.</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ October 15, 2021, by Michael Wetter:<br/>
+ Moved model to <code>BaseClasses</code>. This allows
+ <a href=\"AixLib.Fluid.FixedResistances.PlugFlowPipe\">AixLib.Fluid.FixedResistances.PlugFlowPipe</a>
+ to redeclare the resistance as final, thereby avoiding that a GUI presents this instance
+ to users as a replaceable class.
+ </li>
+ <li>
+ October 05, 2021, by Baptiste Ravache:<br/>
+ Made model symmetrical and extends from
+ <a href=\"AixLib.Fluid.Interfaces.PartialTwoPortInterface\">
+ AixLib.Fluid.Interfaces.PartialTwoPortInterface</a>.
+ </li>
+ <li>
+ September 14, 2021, by Michael Wetter:<br/>
+ Made most instances protected and exposed main variables of interest.
+ </li>
+ <li>
+ July 9, 2021, by Baptiste Ravache:<br/>
+ Replaced the vectorized outlet port <code>ports_b</code> with
+ a single outlet port <code>port_b</code>.<br/>
+ Expanded the core pipe model that was previously a component.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1494\">IBPSA, #1494</a>.<br/>
+ This change is not backward compatible.<br/>
+ The previous classes definitions were moved to
+ <a href=\"modelica://AixLib.Obsolete.Fluid.FixedResistances.PlugFlowPipe\">
+ AixLib.Obsolete.Fluid.FixedResistances.PlugFlowPipe</a>.
+ <a href=\"modelica://AixLib.Obsolete.Fluid.FixedResistances.BaseClasses.PlugFlowCore\">
+ AixLib.Obsolete.Fluid.FixedResistances.BaseClasses.PlugFlowCore</a>.
+ </li>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ Changed <code>homotopyInitialization</code> to a constant.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1341\">IBPSA, #1341</a>.
+ </li>
+ <li>
+ March 6, 2020, by Jelger Jansen:<br/>
+ Revised calculation of thermal resistance <code>R</code>
+ by using correct radiuses.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1310\">#1310</a>.
+ </li>
+ <li>
+ October 23, 2017, by Michael Wetter:<br/>
+ Revised variable names and documentation to follow guidelines.
+ Corrected malformed hyperlinks.
+ </li>
+ <li>
+ July 4, 2016 by Bram van der Heijde:<br/>
+ Introduce <code>pipVol</code>.
+ </li>
+ <li>
+ October 10, 2015 by Marcus Fuchs:<br/>
+ Copy Icon from KUL implementation and rename model.
+ Replace resistance and temperature delay by an adiabatic pipe.
+ </li>
+ <li>September, 2015 by Marcus Fuchs:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Pipe with heat loss using the time delay based heat losses and transport
+ of the fluid using a plug flow model, applicable for simulation of long
+ pipes such as in district heating and cooling systems.</p>
+ <p>
+ This model takes into account transport delay along the pipe length idealized
+ as a plug flow.
+ The model also includes thermal inertia of the pipe wall.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ The
+ <code>spatialDistribution</code> operator is used for the temperature wave propagation
+ through the length of the pipe. This operator is contained in
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow\">
+ AixLib.Fluid.FixedResistances.BaseClasses.PlugFlow</a>.
+ </p>
+ <p>
+ The model
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss\">
+ AixLib.Fluid.FixedResistances.BaseClasses.PlugFlowHeatLoss</a>
+ implements a heat loss in design direction, but leaves the enthalpy unchanged
+ in opposite flow direction. Therefore it is used in front of and behind the time delay.
+ </p>
+ <p>
+ The pressure drop is implemented using
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.HydraulicDiameter\">
+ AixLib.Fluid.FixedResistances.HydraulicDiameter</a>.
+ This instance is replaceable to allow
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized\">
+ AixLib.Fluid.FixedResistances.PlugFlowPipeDiscretized</a>
+ to compute the pressure drop only once rather than for each segment.
+ </p>
+ <p>
+ The thermal capacity of the pipe wall is implemented as a mixing volume
+ of the fluid in the pipe, of which the thermal capacity is equal to that
+ of the pipe wall material.
+ In addition, this mixing volume allows the hydraulic separation of subsequent pipes.
+ <br/>
+ The mixing volume is either split between the inlet and outlet ports
+ (port_a and port_b) or lumped in at the outlet (port_b)
+ if <code>have_symmetry</code> is set to false.
+ This mixing volume can be removed from this model with the Boolean parameter
+ <code>have_pipCap</code>, in cases where the pipe wall heat capacity
+ is negligible and a state is not needed at the pipe outlet
+ (see the note below about numerical Jacobians).
+ </p>
+ <p>
+ Note that in order to model a branched network it is recommended to use
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.Junction\">
+ AixLib.Fluid.FixedResistances.Junction</a> at each junction and to configure
+ that junction model with a state
+ (<code>energyDynamics &lt;&gt; Modelica.Fluid.Types.Dynamics.SteadyState</code>),
+ see for instance
+ <a href=\"modelica://AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT\">
+ AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.PlugFlowAIT</a>.
+ This will avoid the numerical Jacobian that is otherwise created when
+ the inlet ports of two instances of the plug flow model are connected together.
+ </p>
+ <h4>Assumptions</h4>
+ <ul>
+ <li>
+ Heat losses are for steady-state operation.
+ </li>
+ <li>
+ The axial heat diffusion in the fluid, the pipe wall and the ground are neglected.
+ </li>
+ <li>
+ The boundary temperature is uniform.
+ </li>
+ <li>
+ The thermal inertia of the pipe wall material is lumped on the side of the pipe
+ that is connected to <code>port_b</code>.
+ </li>
+ </ul>
+ <h4>References</h4>
+ <p>
+ Full details on the model implementation and experimental validation can be found
+ in:
+ </p>
+ <p>
+ van der Heijde, B., Fuchs, M., Ribas Tugores, C., Schweiger, G., Sartor, K.,
+ Basciotti, D., M&uuml;ller, D., Nytsch-Geusen, C., Wetter, M. and Helsen, L.
+ (2017).<br/>
+ Dynamic equation-based thermo-hydraulic pipe model for district heating and
+ cooling systems.<br/>
+ <i>Energy Conversion and Management</i>, vol. 151, p. 158-169.
+ <a href=\"https://doi.org/10.1016/j.enconman.2017.08.072\">doi:
+ 10.1016/j.enconman.2017.08.072</a>.</p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PlugFlowPipe;

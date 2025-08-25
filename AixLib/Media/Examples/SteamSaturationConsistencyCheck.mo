@@ -101,22 +101,22 @@ equation
   Icon(coordinateSystem(preserveAspectRatio=false)),
   Diagram(coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<ul>
-<li>
-November 8, 2020, by Kathryn Hinkelman:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-This example checks the consistency of satuated property functions across the steam and liquid water mediums. 
-It also checks if the inversion of saturated temperature and saturated pressure is implemented correctly 
-for the steam model.
-</p>
-<p>
-Errors are presented as percent differences between the standard property functions - 
-e.g medium.specificEnthalpy(saturatedState) - and the IF97 saturated property functions as the baseline.
-</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ November 8, 2020, by Kathryn Hinkelman:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ This example checks the consistency of satuated property functions across the steam and liquid water mediums. 
+ It also checks if the inversion of saturated temperature and saturated pressure is implemented correctly 
+ for the steam model.
+ </p>
+ <p>
+ Errors are presented as percent differences between the standard property functions - 
+ e.g medium.specificEnthalpy(saturatedState) - and the IF97 saturated property functions as the baseline.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SteamSaturationConsistencyCheck;

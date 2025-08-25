@@ -12,17 +12,17 @@ equation
   annotation (  experiment(Tolerance=1e-6, StartTime=0.01, StopTime=3.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/ExponentialIntegralE1.mos"
         "Simulate and plot"), Documentation(info="<html>
-<p>
-This model tests the implementation of
-<a href=\"modelica://AixLib.Utilities.Math.ExponentialIntegralE1\">
-AixLib.Utilities.Math.ExponentialIntegralE1</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 17, 2018, by Massimo Cimmino:<br/>First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model tests the implementation of
+ <a href=\"modelica://AixLib.Utilities.Math.ExponentialIntegralE1\">
+ AixLib.Utilities.Math.ExponentialIntegralE1</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 17, 2018, by Massimo Cimmino:<br/>First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ExponentialIntegralE1;

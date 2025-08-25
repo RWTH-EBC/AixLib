@@ -44,26 +44,7 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     wfRoof=fill(Modelica.Constants.eps/nOrientationsRoof, nOrientationsRoof),
     aRoof=Modelica.Constants.eps,
     aExt=Modelica.Constants.eps,
-    nIze=1,
-    AIze=fill(Modelica.Constants.inf, nIze),
-    hConIze=fill(Modelica.Constants.eps, nIze),
-    nIzeRC=1,
-    RIze=fill(
-        Modelica.Constants.inf,
-        nIze,
-        nIzeRC),
-    RIzeRem=fill(Modelica.Constants.inf, nIze),
-    CIze=fill(
-        Modelica.Constants.inf,
-        nIze,
-        nIzeRC),
-    othZoneInd=fill(1, nIze),
-    zoneInd=1,
     TSoil=Modelica.Constants.eps,
-    TSoiDatSou=AixLib.BoundaryConditions.GroundTemperature.DataSourceGroTem.Constant,
-    TSoiOffTim=Modelica.Constants.eps,
-    TSoiAmp=Modelica.Constants.eps,
-    TSoiFil="NoName",
     hConWallOut=Modelica.Constants.eps,
     hRadWall=Modelica.Constants.eps,
     hConWinOut=Modelica.Constants.eps,
@@ -101,23 +82,19 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     HeaterOn=false,
     hCool=-1*Modelica.Constants.eps,
     lCool=-2*Modelica.Constants.eps,
-    heaLoadFacOut=Modelica.Constants.eps,
-    heaLoadFacGrd=Modelica.Constants.eps,
     KRCool=Modelica.Constants.eps,
     TNCool=Modelica.Constants.eps,
     CoolerOn=false,
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
     withIdealThresholds=false);
-
   annotation (Documentation(revisions="<html><ul>
-  <li>May 5, 2023, by Philip Groesdonk:<br/>
-    Additional soil temperature and neighboured zone border parameters.
-  </li><i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
-  <a href=
-  \"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>Implement
-  dummy zone record to assign this record as default parameter value,
-  where unavoidable.
+  <li>
+    <i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
+    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>
+    Implement dummy zone record to assign this record as default
+    parameter value, where unavoidable.
+  </li>
 </ul>
 </html>"));
 end ZoneRecordDummy;

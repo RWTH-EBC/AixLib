@@ -48,7 +48,7 @@ model testPumpPowerCalculation
   Modelica.Blocks.Sources.RealExpression power(y=headFlowSpeedFuncNew(
         param.cPQN,
         volumeFlowTable.y,
-        speedTable.y)) if sum(abs(param.cPQN)) > 0
+        speedTable.y)) if sum(abs(param.cPQN)) <> 0
     annotation (Placement(transformation(extent={{-20,10},{0,30}})));
 
   annotation (

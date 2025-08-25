@@ -22,17 +22,17 @@ initial equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=1.0),
     Documentation(info="<html>
-<p>
-This example demonstrates the construction of vector of geometrically expanding
-time values.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 17, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example demonstrates the construction of vector of geometrically expanding
+ time values.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 17, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TimeGeometric;

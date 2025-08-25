@@ -168,57 +168,57 @@ experiment(Tolerance=1e-6, StopTime=1),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/ReverseFlowHumidifier.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This model tests whether the results for a humidifer are
-identical for forward flow and reverse flow.
-</html>", revisions="<html>
-<ul>
-<li>
-September 20, 2020, by Michael Wetter:<br/>
-Updated model to use one port temperature sensor from Modelica Standard Library.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1399\"> #1399</a>.
-</li>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-April 12, 2017, by Michael Wetter:<br/>
-Removed temperature connection that is no longer needed.<br/>
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
-</li>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Changed assertions to blocks that compute the difference,
-and added the difference to the regression results.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
-</li>
-<li>
-October 9, 2013, by Michael Wetter:<br/>
-Replaced
-<code>Modelica.Fluid.Sources.FixedBoundary</code>
-with
-<code>AixLib.Fluid.Sources.FixedBoundary</code>
-as otherwise, the pedantic model check fails in
-Dymola 2014 FD01 beta3.
-</li>
-<li>
-July 5, 2013, by Michael Wetter:<br/>
-Changed one instance of <code>Modelica.Fluid.Sources.MassFlowSource_T</code>,
-that was connected to the two fluid streams,
-to two instances, each having half the mass flow rate.
-This is required for the model to work with Modelica 3.2.1 due to the
-change introduced in
-ticket <a href=\"https://trac.modelica.org/Modelica/ticket/739\">#739</a>.
-</li>
-<li>
-August 19, 2010, by Michael Wetter:<br/>
-First implementation based on a model from Giuliano Fontanella.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ This model tests whether the results for a humidifer are
+ identical for forward flow and reverse flow.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 20, 2020, by Michael Wetter:<br/>
+ Updated model to use one port temperature sensor from Modelica Standard Library.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1399\"> #1399</a>.
+ </li>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ April 12, 2017, by Michael Wetter:<br/>
+ Removed temperature connection that is no longer needed.<br/>
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+ </li>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Changed assertions to blocks that compute the difference,
+ and added the difference to the regression results.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+ </li>
+ <li>
+ October 9, 2013, by Michael Wetter:<br/>
+ Replaced
+ <code>Modelica.Fluid.Sources.FixedBoundary</code>
+ with
+ <code>AixLib.Fluid.Sources.FixedBoundary</code>
+ as otherwise, the pedantic model check fails in
+ Dymola 2014 FD01 beta3.
+ </li>
+ <li>
+ July 5, 2013, by Michael Wetter:<br/>
+ Changed one instance of <code>Modelica.Fluid.Sources.MassFlowSource_T</code>,
+ that was connected to the two fluid streams,
+ to two instances, each having half the mass flow rate.
+ This is required for the model to work with Modelica 3.2.1 due to the
+ change introduced in
+ ticket <a href=\"https://trac.modelica.org/Modelica/ticket/739\">#739</a>.
+ </li>
+ <li>
+ August 19, 2010, by Michael Wetter:<br/>
+ First implementation based on a model from Giuliano Fontanella.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReverseFlowHumidifier;

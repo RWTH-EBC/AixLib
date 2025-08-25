@@ -35,17 +35,17 @@ equation
     Diagram(coordinateSystem(extent={{-140,-100},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
     Documentation(info="<html>
-<p>
-This model validates that the RC network model starts at and remains at exactly <i>20</i>&deg;C
-if there is no solar radiation and constant outdoor conditions.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 14, 2020, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model validates that the RC network model starts at and remains at exactly <i>20</i>&deg;C
+ if there is no solar radiation and constant outdoor conditions.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 14, 2020, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end RoomSteadyState;

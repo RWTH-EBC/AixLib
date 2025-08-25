@@ -13,6 +13,7 @@ model OneUTube "Single U-tube borehole heat exchanger"
     each final deltaM1=deltaM,
     each final deltaM2=deltaM,
     each final energyDynamics=energyDynamics,
+    each final dynFil=dynFil,
     each final mSenFac=mSenFac,
     final dp1_nominal={if i == 1 then dp_nominal else 0 for i in 1:nSeg},
     each final dp2_nominal=0,
@@ -89,41 +90,35 @@ equation
           textColor={0,0,255},
           textString="")}),
     Documentation(info="<html>
-<p>
-Model of a single U-tube borehole heat exchanger.
-The borehole heat exchanger is vertically discretized into
-<i>n<sub>seg</sub></i> elements of height
-<i>h=h<sub>Bor</sub>&frasl;n<sub>seg</sub></i>.
-Each segment contains a model for the heat transfer in the borehole,
-with a uniform borehole wall boundary temperature given by the
-<code>port_wall</code> port.
-</p>
-<p>
-The heat transfer in the borehole is computed using a convective heat transfer
-coefficient that depends on the fluid velocity, a heat resistance between the
-two pipes, and a heat resistance between the pipes and the borehole wall.
-The heat capacity of the fluid and the heat capacity of the grout are taken
-into account. The vertical heat flow is assumed to be zero.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 17, 2024, by Michael Wetter:<br/>
-Updated model due to removal of parameter <code>dynFil</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1885\">IBPSA, #1885</a>.
-</li>
-<li>
-July 2018, by Alex Laferri&egrave;re:<br/>
-Following major changes to the structure of the AixLib.Fluid.HeatExchangers.Ground package,
-the documentation has been changed to reflect the new role of this model.
-Additionally, this model now extends a partial borehole model.
-</li>
-<li>
-July 2014, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Model of a single U-tube borehole heat exchanger. 
+ The borehole heat exchanger is vertically discretized into
+ <i>n<sub>seg</sub></i> elements of height
+ <i>h=h<sub>Bor</sub>&frasl;n<sub>seg</sub></i>.
+ Each segment contains a model for the heat transfer in the borehole, 
+ with a uniform borehole wall boundary temperature given by the
+ <code>port_wall</code> port.
+ </p>
+ <p>
+ The heat transfer in the borehole is computed using a convective heat transfer
+ coefficient that depends on the fluid velocity, a heat resistance between the
+ two pipes, and a heat resistance between the pipes and the borehole wall.
+ The heat capacity of the fluid and the heat capacity of the grout are taken
+ into account. The vertical heat flow is assumed to be zero.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 2018, by Alex Laferri&egrave;re:<br/>
+ Following major changes to the structure of the AixLib.Fluid.HeatExchangers.Ground package,
+ the documentation has been changed to reflect the new role of this model.
+ Additionally, this model now extends a partial borehole model.
+ </li>
+ <li>
+ July 2014, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end OneUTube;

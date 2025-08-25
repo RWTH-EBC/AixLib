@@ -30,17 +30,17 @@ equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StartTime=0.01, StopTime=15.0),
     Documentation(info="<html>
-<p>
-This example demonstrates the evaluation of the
-finite line source integrand function.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 17, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example demonstrates the evaluation of the
+ finite line source integrand function.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 17, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FiniteLineSource_Integrand;

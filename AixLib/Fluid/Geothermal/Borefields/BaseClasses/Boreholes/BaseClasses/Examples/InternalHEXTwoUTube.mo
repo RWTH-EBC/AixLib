@@ -18,6 +18,7 @@ model InternalHEXTwoUTube
     dp2_nominal=10,
     dp3_nominal=10,
     dp4_nominal=10,
+    dynFil=true,
     borFieDat=borFieDat,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     TGro_start(displayUnit="K") = 285.15,
@@ -115,25 +116,19 @@ equation
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/Boreholes/BaseClasses/Examples/InternalHEXTwoUTube.mos"
         "Simulate and plot"),
             Documentation(info="<html>
-This example simulates the interior thermal behavior of a double U-tube borehole segment.
-</html>", revisions="<html>
-<ul>
-<li>
-May 17, 2024, by Michael Wetter:<br/>
-Updated model due to removal of parameter <code>dynFil</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1885\">IBPSA, #1885</a>.
-</li>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source FixedBoundary with Boundary_pT. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-June 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ This example simulates the interior thermal behavior of a double U-tube borehole segment.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source FixedBoundary with Boundary_pT. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ June 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InternalHEXTwoUTube;

@@ -15,9 +15,9 @@ record SurfaceOrientationData_N_E_S_W_RoofN_Roof_S
 <p>
   Data in this set:
 </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
+<table>
   <caption>
-    Data
+    \"Data\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
   </caption>
   <tr>
     <td style=\"background-color: #dcdcdc\">

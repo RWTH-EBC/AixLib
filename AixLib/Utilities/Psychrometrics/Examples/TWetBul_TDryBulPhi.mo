@@ -104,37 +104,37 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Examples/TWetBul_TDryBulPhi.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This examples is a unit test for the wet bulb computation.
-The model on the top uses the accurate computation of the
-wet bulb temperature, whereas the model below uses the approximate
-computation of the wet bulb temperature.
-</p>
-<p>
-The model contains an assert that validates the model based on a single operating point from Example 17.1 in
-Ananthanarayanan (2013).
-</p>
-<h4>References</h4>
-<p>
-Ananthanarayanan, P. N. Basic refrigeration and air conditioning. Tata McGraw-Hill Education, 2013.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 23, 2016, by Michael Wetter:<br/>
-Changed graphical annotation.
-</li>
-<li>
-May 24, 2016, by Filip Jorissen:<br/>
-Updated example with validation data.
-See  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/474\">#474</a>
-for a discussion.
-</li>
-<li>
-October 1, 2012 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This examples is a unit test for the wet bulb computation.
+ The model on the top uses the accurate computation of the
+ wet bulb temperature, whereas the model below uses the approximate
+ computation of the wet bulb temperature.
+ </p>
+ <p>
+ The model contains an assert that validates the model based on a single operating point from Example 17.1 in
+ Ananthanarayanan (2013).
+ </p>
+ <h4>References</h4>
+ <p>
+ Ananthanarayanan, P. N. Basic refrigeration and air conditioning. Tata McGraw-Hill Education, 2013.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 23, 2016, by Michael Wetter:<br/>
+ Changed graphical annotation.
+ </li>
+ <li>
+ May 24, 2016, by Filip Jorissen:<br/>
+ Updated example with validation data.
+ See  <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/474\">#474</a>
+ for a discussion.
+ </li>
+ <li>
+ October 1, 2012 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TWetBul_TDryBulPhi;

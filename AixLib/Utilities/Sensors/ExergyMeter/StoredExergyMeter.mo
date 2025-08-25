@@ -74,10 +74,10 @@ model StoredExergyMeter
         origin={0,0})));
 
   Modelica.Blocks.Interfaces.RealInput T[n](
-    each final unit="K",
-    each displayUnit="degC",
-    each final quantity="ThermodynamicTemperature",
-    each min=0) "Actual temperature"
+    final unit="K",
+    displayUnit="degC",
+    final quantity="ThermodynamicTemperature",
+    min=0) "Actual temperature"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,
         origin={0,-108}), iconTransformation(
@@ -138,16 +138,16 @@ model StoredExergyMeter
         rotation=180,
         origin={27,-32})));
   Modelica.Blocks.Interfaces.RealInput X_ref[Medium.nX](
-  each final quantity="MassFraction", each final unit="1", each min=0, each max=1)
+  final quantity="MassFraction", final unit="1", min=0, max=1)
     "Reference composition"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=0,
         origin={-100,-70})));
   Modelica.Blocks.Interfaces.RealInput X[Medium.nX](
-    each final quantity="MassFraction",
-    each final unit="1",
-    each min=0,
-    each max=1) "Actual composition"    annotation (Placement(transformation(
+    final quantity="MassFraction",
+    final unit="1",
+    min=0,
+    max=1) "Actual composition"    annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={50,-108})));

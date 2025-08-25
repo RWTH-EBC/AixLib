@@ -5,3 +5,4 @@ ModularCompressorControlBus
 ModularExpansionValveControlBus
 ModularHeatPumpControlBus
 ModularSensorControlBus
+VapourCompressionMachineControlBus

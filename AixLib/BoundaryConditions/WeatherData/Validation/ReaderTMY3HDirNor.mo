@@ -41,19 +41,19 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/WeatherData/Validation/ReaderTMY3HDirNor.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the calculation of the direct normal radiation.
-The instance <code>weaDatInpCon</code> obtains the global horizontal and
-the diffuse horizontal solar radiation from its inputs connectors.
-</p>
-</html>",
+ <p>
+ This model tests the calculation of the direct normal radiation.
+ The instance <code>weaDatInpCon</code> obtains the global horizontal and
+ the diffuse horizontal solar radiation from its inputs connectors.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 06, 2016, by Thierry S. Nouidui:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ December 06, 2016, by Thierry S. Nouidui:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReaderTMY3HDirNor;

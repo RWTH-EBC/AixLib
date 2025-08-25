@@ -282,59 +282,59 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfa
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-400,-200},{200,
             200}})),
     Documentation(info="<html>
-<p>
-This model tests whether the results for a mass exchanger are
-identical for forward flow and reverse flow.
-</p>
-<p>
-Note that if the latent heat transfer effectiveness is non-zero, then
-the results will differ. The reason is that the maximum capacity stream
-is computed using the mass flow rates at <code>port_a1</code>
-and <code>port_a2</code>. For reverse flow, they are not equal if
-moisture is added to the mass flow rate. Using an average mass flow rate
-in computing the heat and moisture transfer would lead to identical results,
-but it would introduce additional nonlinear equations that need to be solved.
-Therefore, the model uses the mass flow rates at <code>port_a1</code>
-and <code>port_a2</code>.
-</p>
-<p>
-<b>Note:</b> This problem fails to translate in Dymola 2012 due to an error in Dymola's support
-of stream connector. This bug will be corrected in future versions of Dymola.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 20, 2020, by Michael Wetter:<br/>
-Updated model to use one port temperature sensor from Modelica Standard Library.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1399\"> #1399</a>.
-</li>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Changed assertions to blocks that compute the difference,
-and added the difference to the regression results.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
-</li>
-<li>
-October 9, 2013, by Michael Wetter:<br/>
-Replaced
-<code>Modelica.Fluid.Sources.FixedBoundary</code>
-with
-<code>AixLib.Fluid.Sources.FixedBoundary</code>
-as otherwise, the pedantic model check fails in
-Dymola 2014 FD01 beta3.
-</li>
-<li>
-August 19, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model tests whether the results for a mass exchanger are
+ identical for forward flow and reverse flow.
+ </p>
+ <p>
+ Note that if the latent heat transfer effectiveness is non-zero, then
+ the results will differ. The reason is that the maximum capacity stream
+ is computed using the mass flow rates at <code>port_a1</code>
+ and <code>port_a2</code>. For reverse flow, they are not equal if
+ moisture is added to the mass flow rate. Using an average mass flow rate
+ in computing the heat and moisture transfer would lead to identical results,
+ but it would introduce additional nonlinear equations that need to be solved.
+ Therefore, the model uses the mass flow rates at <code>port_a1</code>
+ and <code>port_a2</code>.
+ </p>
+ <p>
+ <b>Note:</b> This problem fails to translate in Dymola 2012 due to an error in Dymola's support
+ of stream connector. This bug will be corrected in future versions of Dymola.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 20, 2020, by Michael Wetter:<br/>
+ Updated model to use one port temperature sensor from Modelica Standard Library.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1399\"> #1399</a>.
+ </li>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Changed assertions to blocks that compute the difference,
+ and added the difference to the regression results.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+ </li>
+ <li>
+ October 9, 2013, by Michael Wetter:<br/>
+ Replaced
+ <code>Modelica.Fluid.Sources.FixedBoundary</code>
+ with
+ <code>AixLib.Fluid.Sources.FixedBoundary</code>
+ as otherwise, the pedantic model check fails in
+ Dymola 2014 FD01 beta3.
+ </li>
+ <li>
+ August 19, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ReverseFlowMassExchanger;

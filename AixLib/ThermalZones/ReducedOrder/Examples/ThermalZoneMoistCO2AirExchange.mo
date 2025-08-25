@@ -6,10 +6,13 @@ model ThermalZoneMoistCO2AirExchange
 
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     use_moisture_balance=true,
+    ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(thermCapInt(
+            each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package Medium = Medium,
     T_start=293.15,
-    redeclare AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler zoneParam,
+    zoneParam=
+        DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler(),
     internalGainsMode=3,
     recOrSep=true,
     use_C_flow=true,
@@ -200,11 +203,8 @@ equation
   connect(humRat.X_w, thermalZone.ventHum) annotation (Line(points={{-23,-20},{
           -20,-20},{-20,-7.1},{-9.5,-7.1}},  color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-        experiment(Tolerance=1e-6, StopTime=3.1536e+007, Interval=3600),
-        __Dymola_Commands(file=
-  "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/ThermalZoneMoistCO2AirExchange.mos"
-        "Simulate and plot"),
+        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=
+          3.1536e+007, Interval=3600),
     Documentation(info="<html><p>
   This example illustrates the use of <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneMoistAirEquipped\">

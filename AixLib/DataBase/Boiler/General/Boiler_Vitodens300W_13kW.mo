@@ -4,8 +4,7 @@ record Boiler_Vitodens300W_13kW
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitodens300W_13kW",
     volume=0.0076,
-    a=1.3819E+10,
-    n=2.0330,
+    pressureDrop=10218000000.0,
     Q_nom=16700,
     Q_min=3600,
     eta=[0.3,1.061; 1.0,0.954]);

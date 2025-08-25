@@ -261,51 +261,52 @@ equation
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{240,160}})),
                       Documentation(info="<html>
-  <p>Test Case 11 of the VDI 6007 Part 1: Calculation of heat load
-  excited with a given radiative heat source and a setpoint profile
-  for room version S. It is based on Test Case 7, but with a cooling ceiling for
-  cooling purposes instead of a pure convective ideal cooler.</p>
-  <h4>Boundary conditions</h4>
-  <ul>
-  <li>constant outdoor air temperature 22&deg;C</li>
-  <li>no solar or short-wave radiation on the exterior wall</li>
-  <li>no solar or short-wave radiation through the windows</li>
-  <li>no long-wave radiation exchange between exterior wall, windows and ambient
-  environment</li>
-  </ul>
-  <p>This test validates implementation of cooling ceiling or
-  floor heating.</p>
-  </html>", revisions="<html>
-  <ul>
-  <li>
-  November 4, 2021, by Michael Wetter:<br/>
-  Increased solver tolerance so that the model passes the assertion in OpenModelica
-  after applying <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2713\">Buildings, #2713</a>.
-  </li>
-  <li>
-  July 11, 2019, by Katharina Brinkmann:<br/>
-  Renamed <code>alphaWall</code> to <code>hConWall</code>
-  </li>
-  <li>
-  January 25, 2019, by Michael Wetter:<br/>
-  Added start value to avoid warning in JModelica.
-  </li>
-  <li>
-  July 7, 2016, by Moritz Lauster:<br/>
-  Added automatic check against validation thresholds and changes threshold to hysteresis.
-  </li>
-  <li>
-  July 6, 2016, by Michael Wetter:<br/>
-  Simplified implementation of validation test versus reference data.
-  </li>
-  <li>
-  January 11, 2016, by Moritz Lauster:<br/>
-  Implemented.
-  </li>
-  </ul>
-  </html>"),experiment(Tolerance=1e-7, StopTime=5.184e+006, Interval=60),
+   <p>Test Case 11 of the VDI 6007 Part 1: Calculation of heat load
+   excited with a given radiative heat source and a setpoint profile
+   for room version S. It is based on Test Case 7, but with a cooling ceiling for
+   cooling purposes instead of a pure convective ideal cooler.</p>
+   <h4>Boundary conditions</h4>
+   <ul>
+   <li>constant outdoor air temperature 22&deg;C</li>
+   <li>no solar or short-wave radiation on the exterior wall</li>
+   <li>no solar or short-wave radiation through the windows</li>
+   <li>no long-wave radiation exchange between exterior wall, windows and ambient
+   environment</li>
+   </ul>
+   <p>This test validates implementation of cooling ceiling or
+   floor heating.</p>
+   </html>",revisions="<html>
+   <ul>
+   <li>
+   November 4, 2021, by Michael Wetter:<br/>
+   Increased solver tolerance so that the model passes the assertion in OpenModelica
+   after applying <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2713\">Buildings, #2713</a>.
+   </li>
+   <li>
+   July 11, 2019, by Katharina Brinkmann:<br/>
+   Renamed <code>alphaWall</code> to <code>hConWall</code>
+   </li>
+   <li>
+   January 25, 2019, by Michael Wetter:<br/>
+   Added start value to avoid warning in JModelica.
+   </li>
+   <li>
+   July 7, 2016, by Moritz Lauster:<br/>
+   Added automatic check against validation thresholds and changes threshold to hysteresis.
+   </li>
+   <li>
+   July 6, 2016, by Michael Wetter:<br/>
+   Simplified implementation of validation test versus reference data.
+   </li>
+   <li>
+   January 11, 2016, by Moritz Lauster:<br/>
+   Implemented.
+   </li>
+   </ul>
+   </html>"),
+            experiment(Tolerance=1e-7, StopTime=5.184e+006, Interval=60),
   __Dymola_Commands(file=
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/VDI6007/TestCase11.mos"
-        "Simulate and plot"), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        "Simulate and plot"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TestCase11;

@@ -8,14 +8,14 @@ model SpeedControlled_y
       redeclare package Medium = Medium,
       per(pressure(V_flow={0,m_flow_nominal,2*m_flow_nominal}/1.2,
                     dp={2*dp_nominal,dp_nominal,0})),
-      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-      use_riseTime=false),
+      use_inputFilter=false,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState),
     redeclare AixLib.Fluid.Movers.SpeedControlled_y floMacDyn(
       redeclare package Medium = Medium,
       per(pressure(V_flow={0,m_flow_nominal,2*m_flow_nominal}/1.2,
                     dp={2*dp_nominal,dp_nominal,0})),
-      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-      use_riseTime=false));
+      use_inputFilter=false,
+      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
 equation
   connect(gain.y, floMacDyn.y) annotation (Line(
@@ -31,24 +31,24 @@ experiment(Tolerance=1e-08, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Validation/SpeedControlled_y.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
-</p>
-<p>
-The fans have been configured as steady-state models.
-This ensures that the actual speed is equal to the input signal.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 14, 2012, by Michael Wetter:<br/>
-Added filter for start-up and shut-down transient.
-</li>
-<li>
-March 24 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example demonstrates and tests the use of a flow machine whose mass flow rate is reduced to zero.
+ </p>
+ <p>
+ The fans have been configured as steady-state models.
+ This ensures that the actual speed is equal to the input signal.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 14, 2012, by Michael Wetter:<br/>
+ Added filter for start-up and shut-down transient.
+ </li>
+ <li>
+ March 24 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SpeedControlled_y;

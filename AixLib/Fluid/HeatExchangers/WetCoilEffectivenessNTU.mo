@@ -7,15 +7,11 @@ model WetCoilEffectivenessNTU
     final computeFlowResistance1=true,
     final computeFlowResistance2=true);
 
-  constant Boolean use_dynamicFlowRegime = false
-    "If true, flow regime is determined using actual flow rates";
-  // This switch is declared as a constant instead of a parameter
-  //   as users typically need not to change this setting,
-  //   and setting it true may generate events.
-  //   See discussions in https://github.com/ibpsa/modelica-ibpsa/pull/1683
+  import con = AixLib.Fluid.Types.HeatExchangerConfiguration;
+  import flo = AixLib.Fluid.Types.HeatExchangerFlowRegime;
 
   parameter AixLib.Fluid.Types.HeatExchangerConfiguration configuration=
-    AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow
+    con.CounterFlow
     "Heat exchanger configuration";
   parameter Real r_nominal=2/3
     "Ratio between air-side and water-side convective heat transfer coefficient";
@@ -76,7 +72,6 @@ model WetCoilEffectivenessNTU
 
   Real dryFra(final unit="1", min=0, max=1) = dryWetCalcs.dryFra
     "Dry fraction, 0.3 means condensation occurs at 30% heat exchange length from air inlet";
-
 protected
   final parameter Modelica.Units.SI.MassFraction X_w_a2_nominal=w_a2_nominal/(1
        + w_a2_nominal)
@@ -217,9 +212,9 @@ protected
     AixLib.Fluid.HeatExchangers.BaseClasses.determineWaterIndex(
       Medium2.substanceNames)
     "Index of water";
-  parameter AixLib.Fluid.Types.HeatExchangerFlowRegime flowRegime_nominal(fixed=false)
+  parameter flo flowRegime_nominal(fixed=false)
     "Heat exchanger flow regime at nominal flow rates";
-  AixLib.Fluid.Types.HeatExchangerFlowRegime flowRegime(fixed=false, start=flowRegime_nominal)
+  flo flowRegime(fixed=false, start=flowRegime_nominal)
     "Heat exchanger flow regime";
 
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow preHea
@@ -233,12 +228,12 @@ protected
       m1_flow_small)
     else 1
     "Fraction of incoming state taken from port a2
-    (used to avoid excessive calls to regStep)";
+     (used to avoid excessive calls to regStep)";
   Real fra_b1(min=0, max=1) = if allowFlowReversal1
     then 1-fra_a1
     else 0
     "Fraction of incoming state taken from port b2
-    (used to avoid excessive calls to regStep)";
+     (used to avoid excessive calls to regStep)";
   Real fra_a2(min=0, max=1) = if allowFlowReversal2
     then Modelica.Fluid.Utilities.regStep(
       m2_flow,
@@ -247,12 +242,12 @@ protected
       m2_flow_small)
     else 1
     "Fraction of incoming state taken from port a2
-    (used to avoid excessive calls to regStep)";
+     (used to avoid excessive calls to regStep)";
   Real fra_b2(min=0, max=1) = if allowFlowReversal2
     then 1-fra_a2
     else 0
     "Fraction of incoming state taken from port b2
-    (used to avoid excessive calls to regStep)";
+     (used to avoid excessive calls to regStep)";
 
   Modelica.Units.SI.ThermalConductance C1_flow=abs(m1_flow)*(if
       allowFlowReversal1 then fra_a1*Medium1.specificHeatCapacityCp(
@@ -282,87 +277,66 @@ protected
      X=Medium2.X_default[1:Medium2.nXi]) "Default state for medium 2";
 
 initial equation
-  assert(m1_flow_nominal > Modelica.Constants.eps,
-    "m1_flow_nominal must be positive, m1_flow_nominal = " + String(
-    m1_flow_nominal));
-  assert(m2_flow_nominal > Modelica.Constants.eps,
-    "m2_flow_nominal must be positive, m2_flow_nominal = " + String(
-    m2_flow_nominal));
-
   cp1_nominal = Medium1.specificHeatCapacityCp(sta1_default);
   cp2_nominal = Medium2.specificHeatCapacityCp(sta2_default);
   C1_flow_nominal = m1_flow_nominal*cp1_nominal;
   C2_flow_nominal = m2_flow_nominal*cp2_nominal;
-  if (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1MixedStream2Unmixed) then
+  if (configuration == con.CrossFlowStream1MixedStream2Unmixed) then
     flowRegime_nominal = if (C1_flow_nominal < C2_flow_nominal)
       then
-        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed
+        flo.CrossFlowCMinMixedCMaxUnmixed
       else
-        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed;
-  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1UnmixedStream2Mixed) then
+        flo.CrossFlowCMinUnmixedCMaxMixed;
+  elseif (configuration == con.CrossFlowStream1UnmixedStream2Mixed) then
     flowRegime_nominal = if (C1_flow_nominal < C2_flow_nominal)
       then
-        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed
+        flo.CrossFlowCMinUnmixedCMaxMixed
       else
-        AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed;
-  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.ParallelFlow) then
-    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.ParallelFlow;
-  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow) then
-    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.CounterFlow;
-  elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowUnmixed) then
-    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed;
+        flo.CrossFlowCMinMixedCMaxUnmixed;
+  elseif (configuration == con.ParallelFlow) then
+    flowRegime_nominal = flo.ParallelFlow;
+  elseif (configuration == con.CounterFlow) then
+    flowRegime_nominal = flo.CounterFlow;
+  elseif (configuration == con.CrossFlowUnmixed) then
+    flowRegime_nominal = flo.CrossFlowUnmixed;
   else
     // Invalid flow regime. Assign a value to flowRegime_nominal, and stop with an assert
-    flowRegime_nominal = AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed;
-    assert(configuration >= AixLib.Fluid.Types.HeatExchangerConfiguration.ParallelFlow and
-      configuration <= AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1UnmixedStream2Mixed,
+    flowRegime_nominal = flo.CrossFlowUnmixed;
+    assert(configuration >= con.ParallelFlow and
+      configuration <= con.CrossFlowStream1UnmixedStream2Mixed,
       "Invalid heat exchanger configuration.");
   end if;
 
 equation
   // Assign the flow regime for the given heat exchanger configuration and
   // mass flow rates
-  if use_dynamicFlowRegime then
-    if (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.ParallelFlow) then
-      flowRegime = if (C1_flow*C2_flow >= 0)
-        then
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.ParallelFlow
-        else
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.CounterFlow;
-    elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CounterFlow) then
-      flowRegime = if (C1_flow*C2_flow >= 0)
-        then
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.CounterFlow
-        else
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.ParallelFlow;
-    elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowUnmixed) then
-      flowRegime = AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowUnmixed;
-    elseif (configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1MixedStream2Unmixed) then
-      flowRegime = if (C1_flow < C2_flow)
-        then
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed
-        else
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed;
-    else
-      // have ( configuration == AixLib.Fluid.Types.HeatExchangerConfiguration.CrossFlowStream1UnmixedStream2Mixed)
-      flowRegime = if (C1_flow < C2_flow)
-        then
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinUnmixedCMaxMixed
-        else
-          AixLib.Fluid.Types.HeatExchangerFlowRegime.CrossFlowCMinMixedCMaxUnmixed;
-    end if;
+  if (configuration == con.ParallelFlow) then
+    flowRegime = if (C1_flow*C2_flow >= 0)
+      then
+        flo.ParallelFlow
+      else
+        flo.CounterFlow;
+  elseif (configuration == con.CounterFlow) then
+    flowRegime = if (C1_flow*C2_flow >= 0)
+      then
+        flo.CounterFlow
+      else
+        flo.ParallelFlow;
+  elseif (configuration == con.CrossFlowUnmixed) then
+    flowRegime = flo.CrossFlowUnmixed;
+  elseif (configuration == con.CrossFlowStream1MixedStream2Unmixed) then
+    flowRegime = if (C1_flow < C2_flow)
+      then
+        flo.CrossFlowCMinMixedCMaxUnmixed
+      else
+        flo.CrossFlowCMinUnmixedCMaxMixed;
   else
-    flowRegime = flowRegime_nominal;
-    assert(noEvent(m1_flow > -0.1 * m1_flow_nominal)
-       and noEvent(m2_flow > -0.1 * m2_flow_nominal),
-"*** Warning in " + getInstanceName() +
-      ": The flow direction reversed.
-      However, because the constant use_dynamicFlowRegime is set to false,
-      the model does not change equations based on the actual flow regime.
-      To switch equations based on the actual flow regime during the simulation,
-      set the constant use_dynamicFlowRegime=true.
-      Note that this can lead to slow simulation because of events.",
-      level = AssertionLevel.warning);
+    // have ( configuration == con.CrossFlowStream1UnmixedStream2Mixed)
+    flowRegime = if (C1_flow < C2_flow)
+      then
+        flo.CrossFlowCMinUnmixedCMaxMixed
+      else
+        flo.CrossFlowCMinMixedCMaxUnmixed;
   end if;
 
   connect(heaCoo.port_b, port_b1) annotation (Line(points={{80,60},{80,60},{100,60}},color={0,127,255},
@@ -534,157 +508,125 @@ equation
           horizontalAlignment=TextAlignment.Left,
           textString="Air Side")}),
     Documentation(info="<html>
-<p>
-This model describes a cooling coil applicable for fully-dry,
-partially-wet, and fully-wet regimes.
-The model is developed for counter flow heat exchangers but is also applicable
-for the cross-flow configuration, although in the latter case it is recommended
-to have more than four tube rows (Elmahdy and Mitalas, 1977 and Braun, 1988).
-The model can also be used for a heat exchanger which acts as both heating coil
-(for some period of time) and cooling coil (for the others).
-However, it is not recommended to use this model for heating coil only or for
-cooling coil with no water condensation because for these situations,
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
-computes faster.
-</p>
-<h4>Main equations</h4>
-<p>
-The coil model consists of two-equation sets, one for the fully-dry mode and
-the other for the fully-wet mode. For the fully-dry mode, the <i>&epsilon;-NTU</i>
-approach (Elmahdy and Mitalas, 1977) is used.
-For the fully-wet mode, equations from Braun (1988) and Mitchell and Braun (2012a and b),
-which are essentially the extension of the <i>&epsilon;-NTU</i> approach to simultaneous sensible
-and latent heat transfer, are utilized.
-The equation sets are switched depending on the switching criteria described below
-that determines the right mode based on a coil surface temperature and dew-point
-temperature for the air at the inlet of the coil.
-The transition regime between the two modes, which represents the partially-wet and
-partially-dry coil, is approximated by employing a fuzzy modeling approach,
-so-called Takagi-Sugeno fuzzy modeling (Takagi and Sugeno, 1985), which provides a
-continuously differentiable model that can cover all fully-dry, partially-wet,
-and fully-wet regimes.
-</p>
-<p>The switching rules are:</p>
-<ul>
-<li>R1: If the coil surface temperature at the air inlet is lower than the
-dew-point temperature of air at inlet, then the cooling coil surface is fully-wet.
-</li>
-<li>
-R2: If the coil surface temperature at the air outlet is higher than the
-dew-point temperature of air at inlet, then the cooling coil surface is fully-dry.
-</li>
-<li>
-R3: If any of the conditions in R1 or R2 is not satisfied, then the cooling coil
-surface is partially wet.
-</li>
-</ul>
-<p>
-For more detailed descriptions of the fully-wet coil model and the fuzzy modeling approach,
-see
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilWetRegime\">
-AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilWetRegime</a>.
-and
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilDryWetRegime\">
-AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilDryWetRegime</a>.
-</p>
-<h4>Assumptions and limitations</h4>
-<p>This model contains the following assumptions and limitations:</p>
-<p>Medium 2 must be air due to the use of various psychrometric functions.</p>
-<p>
-When parameterizing this model with rated conditions (with the parameter
-<code>use_UA_nominal</code> set to <code>false</code>), those should
-correspond to a fully-dry or a fully-wet coil regime, because
-the model uncertainty yielded by partially-wet rated conditions
-has not been assessed yet.
-</p>
-<p>The model uses steady-state physics. That is, no dynamics associated
-with water and coil materials are considered.</p>
-<p>The Lewis number, which relates the mass transfer coefficient to the heat transfer
-coefficient, is assumed to be <i>1</i>.</p>
-<p>The model is not suitable for a cross-flow heat exchanger of which the number
-of passes is less than four.</p>
-<p>
-By default, the flow regime, such as counter flow or parallel flow,
-is kept constant based on the parameter value <code>configuration</code>.
-If a flow reverses direction, it is not changed, e.g.,
-a heat exchanger does not change from counter flow to parallel flow
-if one flow changes direction.
-To dynamically change the flow regime,
-set the constant <code>use_dynamicFlowRegime</code> to
-<code>true</code>.
-However, <code>use_dynamicFlowRegime=true</code>
-can cause slower simulation due to events.
-</p>
-<h4>Validation</h4>
-<p>Validation results can be found in
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU</a>.
-<h4>References</h4>
-<p>Braun, James E. 1988.
-&quot;Methodologies for the Design and Control of
-Central Cooling Plants&quot;.
-PhD Thesis. University of Wisconsin - Madison.
-Available
-<a href=\"https://minds.wisconsin.edu/handle/1793/46694\">
-online</a>.
-</p>
-<p>Mitchell, John W., and James E. Braun. 2012a.
-Principles of heating, ventilation, and air conditioning in buildings.
-Hoboken, N.J.: Wiley.</p>
-<p>Mitchell, John W., and James E. Braun. 2012b.
-&quot;Supplementary Material Chapter 2: Heat Exchangers for Cooling Applications&quot;.
-Excerpt from Principles of heating, ventilation, and air conditioning in buildings.
-Hoboken, N.J.: Wiley.
-Available
-<a href=\"http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185\">
-online</a>.
-</p>
-<p>Elmahdy, A.H. and Mitalas, G.P. 1977.
-&quot;A Simple Model for Cooling and Dehumidifying Coils for Use
-In Calculating Energy Requirements for Buildings&quot;.
-ASHRAE Transactions. Vol.83. Part 2. pp. 103-117.</p>
-<p>Takagi, T. and Sugeno, M., 1985.
-Fuzzy identification of systems and its applications to modeling and control.
-&nbsp;IEEE transactions on systems, man, and cybernetics, (1), pp.116-132.</p>
-</html>",                    revisions="<html>
-<ul>
-<li>
-February 7, 2025, by Jelger Jansen:<br/>
-Removed <code>import</code> statement.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1961\">IBPSA, #1961</a>.
-</li>
-<li>
-February 3, 2023, by Jianjun Hu:<br/>
-Added <code>noEvent()</code> in the assertion function to avoid Optimica to not converge.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1690\">issue 1690</a>.
-</li>
-<li>
-January 24, 2023, by Hongxiang Fu:<br/>
-Set <code>flowRegime</code> to be equal to <code>flowRegime_nominal</code>
-by default. Added an assertion warning to inform the user about how to change
-this behaviour if the flow direction does need to change.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1682\">issue 1682</a>.
-</li>
-<li>
-March 3, 2022, by Michael Wetter:<br/>
-Removed <code>massDynamics</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
-</li>
-<li>
-November 2, 2021, by Michael Wetter:<br/>
-Corrected unit assignment during the model instantiation.<br/>
-This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2710\">issue 2710</a>.
-</li>
-<li>
-Jan 21, 2021, by Donghun Kim:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model describes a cooling coil applicable for fully-dry,
+ partially-wet, and fully-wet regimes.
+ The model is developed for counter flow heat exchangers but is also applicable
+ for the cross-flow configuration, although in the latter case it is recommended
+ to have more than four tube rows (Elmahdy and Mitalas, 1977 and Braun, 1988).
+ The model can also be used for a heat exchanger which acts as both heating coil
+ (for some period of time) and cooling coil (for the others).
+ However, it is not recommended to use this model for heating coil only or for
+ cooling coil with no water condensation because for these situations,
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+ computes faster.
+ </p>
+ <h4>Main equations</h4>
+ <p>
+ The coil model consists of two-equation sets, one for the fully-dry mode and
+ the other for the fully-wet mode. For the fully-dry mode, the <i>&epsilon;-NTU</i>
+ approach (Elmahdy and Mitalas, 1977) is used.
+ For the fully-wet mode, equations from Braun (1988) and Mitchell and Braun (2012a and b),
+ which are essentially the extension of the <i>&epsilon;-NTU</i> approach to simultaneous sensible
+ and latent heat transfer, are utilized.
+ The equation sets are switched depending on the switching criteria described below
+ that determines the right mode based on a coil surface temperature and dew-point
+ temperature for the air at the inlet of the coil.
+ The transition regime between the two modes, which represents the partially-wet and
+ partially-dry coil, is approximated by employing a fuzzy modeling approach,
+ so-called Takagi-Sugeno fuzzy modeling (Takagi and Sugeno, 1985), which provides a
+ continuously differentiable model that can cover all fully-dry, partially-wet,
+ and fully-wet regimes.
+ </p>
+ <p>The switching rules are:</p>
+ <ul>
+ <li>R1: If the coil surface temperature at the air inlet is lower than the
+ dew-point temperature of air at inlet, then the cooling coil surface is fully-wet.
+ </li>
+ <li>
+ R2: If the coil surface temperature at the air outlet is higher than the
+ dew-point temperature of air at inlet, then the cooling coil surface is fully-dry.
+ </li>
+ <li>
+ R3: If any of the conditions in R1 or R2 is not satisfied, then the cooling coil
+ surface is partially wet.
+ </li>
+ </ul>
+ <p>
+ For more detailed descriptions of the fully-wet coil model and the fuzzy modeling approach,
+ see
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilWetRegime\">
+ AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilWetRegime</a>.
+ and
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilDryWetRegime\">
+ AixLib.Fluid.HeatExchangers.BaseClasses.WetCoilDryWetRegime</a>.
+ </p>
+ <h4>Assumptions and limitations</h4>
+ <p>This model contains the following assumptions and limitations:</p>
+ <p>Medium 2 must be air due to the use of various psychrometric functions.</p>
+ <p>
+ When parameterizing this model with rated conditions (with the parameter
+ <code>use_UA_nominal</code> set to <code>false</code>), those should
+ correspond to a fully-dry or a fully-wet coil regime, because
+ the model uncertainty yielded by partially-wet rated conditions
+ has not been assessed yet.
+ </p>
+ <p>The model uses steady-state physics. That is, no dynamics associated
+ with water and coil materials are considered.</p>
+ <p>The Lewis number, which relates the mass transfer coefficient to the heat transfer
+ coefficient, is assumed to be <i>1</i>.</p>
+ <p>The model is not suitable for a cross-flow heat exchanger of which the number
+ of passes is less than four.</p>
+ <h4>Validation</h4>
+ <p>Validation results can be found in
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU</a>.
+ <h4>References</h4>
+ <p>Braun, James E. 1988.
+ &quot;Methodologies for the Design and Control of
+ Central Cooling Plants&quot;.
+ PhD Thesis. University of Wisconsin - Madison.
+ Available
+ <a href=\"https://minds.wisconsin.edu/handle/1793/46694\">
+ online</a>.
+ </p>
+ <p>Mitchell, John W., and James E. Braun. 2012a.
+ Principles of heating, ventilation, and air conditioning in buildings.
+ Hoboken, N.J.: Wiley.</p>
+ <p>Mitchell, John W., and James E. Braun. 2012b.
+ &quot;Supplementary Material Chapter 2: Heat Exchangers for Cooling Applications&quot;.
+ Excerpt from Principles of heating, ventilation, and air conditioning in buildings.
+ Hoboken, N.J.: Wiley.
+ Available
+ <a href=\"http://bcs.wiley.com/he-bcs/Books?action=index&amp;itemId=0470624574&amp;bcsId=7185\">
+ online</a>.
+ </p>
+ <p>Elmahdy, A.H. and Mitalas, G.P. 1977.
+ &quot;A Simple Model for Cooling and Dehumidifying Coils for Use
+ In Calculating Energy Requirements for Buildings&quot;.
+ ASHRAE Transactions. Vol.83. Part 2. pp. 103-117.</p>
+ <p>Takagi, T. and Sugeno, M., 1985.
+ Fuzzy identification of systems and its applications to modeling and control.
+ &nbsp;IEEE transactions on systems, man, and cybernetics, (1), pp.116-132.</p>
+ </html>",                   revisions="<html>
+ <ul>
+ <li>
+ March 3, 2022, by Michael Wetter:<br/>
+ Removed <code>massDynamics</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1542\">issue 1542</a>.
+ </li>
+ <li>
+ November 2, 2021, by Michael Wetter:<br/>
+ Corrected unit assignment during the model instantiation.<br/>
+ This is for <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2710\">issue 2710</a>.
+ </li>
+ <li>
+ Jan 21, 2021, by Donghun Kim:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilEffectivenessNTU;

@@ -27,34 +27,34 @@ equation
     ddTp = Medium.density_derT_p(state_pTX);
     dddX   = Medium.density_derX(state_pTX);
    annotation (Documentation(info="<html>
-<p>
-This example checks thermophysical properties of the medium.
-</p>
-</html>",
+ <p>
+ This example checks thermophysical properties of the medium.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 6, 2015, by Michael Wetter:<br/>
-Changed type of <code>T</code> from
-<code>Modelica.Units.SI.Temperature</code> to <code>Medium.Temperature</code>.
-Otherwise, it has a different start value than <code>BaseProperties.T</code>, which
-causes an error if
-<a href=\"modelica://AixLib.Media.Examples.WaterProperties\">
-AixLib.Media.Examples.WaterProperties</a>
-is translated in pedantic mode.
-This fixes
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
-</li>
-<li>
-October 16, 2014, by Michael Wetter:<br/>
-Removed call to <code>setState_dTX</code> as this
-function is physically not defined for incompressible media.
-</li>
-<li>
-December 19, 2013, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ June 6, 2015, by Michael Wetter:<br/>
+ Changed type of <code>T</code> from
+ <code>Modelica.Units.SI.Temperature</code> to <code>Medium.Temperature</code>.
+ Otherwise, it has a different start value than <code>BaseProperties.T</code>, which
+ causes an error if
+ <a href=\"AixLib.Media.Examples.WaterProperties\">
+ AixLib.Media.Examples.WaterProperties</a>
+ is translated in pedantic mode.
+ This fixes
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+ </li>
+ <li>
+ October 16, 2014, by Michael Wetter:<br/>
+ Removed call to <code>setState_dTX</code> as this
+ function is physically not defined for incompressible media.
+ </li>
+ <li>
+ December 19, 2013, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end FluidProperties;

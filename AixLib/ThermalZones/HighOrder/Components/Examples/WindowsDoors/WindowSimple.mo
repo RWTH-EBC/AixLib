@@ -17,18 +17,22 @@ model WindowSimple
 equation
   connect(Toutside.port, windowSimple.port_outside) annotation(Line(points = {{-42, 10}, {-34, 10}, {-34, 10.4}, {-22.2, 10.4}}, color = {191, 0, 0}));
   connect(windowSimple.port_inside, Tinside.port) annotation(Line(points = {{10.2, 10.4}, {24, 10.4}, {24, 10}, {38, 10}}, color = {191, 0, 0}));
-  connect(varRad.solRadOut[1], windowSimple.solarRad_in) annotation (Line(
-        points={{-47,50},{-32,50},{-32,21.6},{-22.2,21.6}}, color={255,128,0}));
-  connect(SolarRadiation.y, varRad.H[1]) annotation (Line(points={{-79,50},{-74,
-          50},{-74,58.9},{-64.9,58.9}}, color={0,0,127}));
-  connect(SolarRadiation.y, varRad.HDir[1]) annotation (Line(points={{-79,50},{
-          -74,50},{-74,55},{-65,55}}, color={0,0,127}));
-  connect(SolarRadiation.y, varRad.HDif[1]) annotation (Line(points={{-79,50},{
-          -76,50},{-76,48},{-74,48},{-74,51},{-65,51}}, color={0,0,127}));
-  connect(SolarRadiation.y, varRad.HGrd[1]) annotation (Line(points={{-79,50},{
-          -74,50},{-74,46.9},{-64.9,46.9}}, color={0,0,127}));
-  connect(SolarRadiation.y, varRad.incAng[1]) annotation (Line(points={{-79,50},
-          {-74,50},{-74,43},{-65,43}}, color={0,0,127}));
+  connect(varRad.solarRad_out[1], windowSimple.solarRad_in) annotation(Line(points = {{-47, 50}, {-32, 50}, {-32, 21.6}, {-22.2, 21.6}}, color = {255, 128, 0}));
+  connect(SolarRadiation.y, varRad.I[1]) annotation (Line(
+      points={{-79,50},{-74,50},{-74,58.9},{-64.9,58.9}},
+      color={0,0,127}));
+  connect(SolarRadiation.y, varRad.I_dir[1]) annotation (Line(
+      points={{-79,50},{-74,50},{-74,55},{-65,55}},
+      color={0,0,127}));
+  connect(SolarRadiation.y, varRad.I_diff[1]) annotation (Line(
+      points={{-79,50},{-76,50},{-76,48},{-74,48},{-74,51},{-65,51}},
+      color={0,0,127}));
+  connect(SolarRadiation.y, varRad.I_gr[1]) annotation (Line(
+      points={{-79,50},{-74,50},{-74,46.9},{-64.9,46.9}},
+      color={0,0,127}));
+  connect(SolarRadiation.y, varRad.AOI[1]) annotation (Line(
+      points={{-79,50},{-74,50},{-74,43},{-65,43}},
+      color={0,0,127}));
   connect(Tinside1.port, windowSimple.radPort) annotation (Line(points={{38,42},{26,42},{26,21.6},{10.2,21.6}}, color={191,0,0}));
   annotation (experiment(StopTime = 3600, Interval = 60, Algorithm = "Lsodar"),Documentation(info = "<html><h4>
   <span style=\"color:#008000\">Overview</span>

@@ -26,6 +26,7 @@ model Carnot_y "Test model for chiller based on Carnot_y efficiency"
     dTEva_nominal=dTEva_nominal,
     dTCon_nominal=dTCon_nominal,
     use_eta_Carnot_nominal=true,
+    etaCarnot_nominal=0.3,
     dp1_nominal=6000,
     dp2_nominal=6000,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -110,43 +111,37 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Examples/Carnot_y.mos"
         "Simulate and plot"),
     Documentation(revisions="<html>
-<ul>
-<li>
-February 10, 2023, by Michael Wetter:<br/>
-Removed binding of parameter with same value as the default.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1692\">#1692</a>.
-</li>
-<li>
-May 15, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-November 25, 2015 by Michael Wetter:<br/>
-Changed sign of <code>dTEva_nominal</code> to be consistent.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-March 26, 2013 by Michael Wetter:<br/>
-Removed assignment of parameter that had attribute <code>fixed=false</code>.
-</li>
-<li>
-March 3, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-Example that simulates a chiller whose efficiency is scaled based on the
-Carnot cycle.
-The chiller control signal is the compressor speed.
-</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ May 15, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for 
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ November 25, 2015 by Michael Wetter:<br/>
+ Changed sign of <code>dTEva_nominal</code> to be consistent.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ March 26, 2013 by Michael Wetter:<br/>
+ Removed assignment of parameter that had attribute <code>fixed=false</code>.
+ </li>
+ <li>
+ March 3, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ Example that simulates a chiller whose efficiency is scaled based on the
+ Carnot cycle.
+ The chiller control signal is the compressor speed.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y;

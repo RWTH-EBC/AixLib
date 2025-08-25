@@ -50,28 +50,28 @@ equation
   annotation (
   defaultComponentName="vol",
 Documentation(info="<html>
-<p>
-This example demonstrates how to export an FMU with a
-control volume.
-The FMU has an instance of
-<a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
-AixLib.Fluid.MixingVolumes.MixingVolume</a>.
-</p>
-<p>
-The mass dynamics has been set to
-<code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
-See the
-<a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
-for the rationale.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 21, 2014 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to export an FMU with a
+ control volume.
+ The FMU has an instance of
+ <a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolume\">
+ AixLib.Fluid.MixingVolumes.MixingVolume</a>.
+ </p>
+ <p>
+ The mass dynamics has been set to
+ <code>massDynamics=Modelica.Fluid.Types.Dynamics.SteadyState</code>.
+ See the
+ <a href=\"modelica://AixLib.Fluid.FMI.UsersGuide\">user's guide</a>
+ for the rationale.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 21, 2014 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/ExportContainers/Examples/FMUs/MixingVolume.mos"
         "Export FMU"),
     Icon(graphics={
@@ -84,6 +84,6 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Exp
           extent={{-26,30},{40,-36}},
           lineColor={0,0,0},
           fillPattern=FillPattern.Sphere,
-          fillColor={170,213,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          fillColor={170,213,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolume;

@@ -9,23 +9,23 @@ model Sunblind "Reduces beam at Imax and TOutAirLimit"
     "Outdoor air (dry bulb) temperature"
     annotation (Placement(transformation(extent={{-112,-56},{-80,-24}}), iconTransformation(extent={{-100,-40},{-80,-20}})));
 equation
-  for i in 1:n loop
-    if (Rad_In[i].H > H_max and TOutAir > TOutAirLimit) then
-      Rad_Out[i].H = Rad_In[i].H*gsunblind[i];
-      Rad_Out[i].HDir = Rad_In[i].HDir*gsunblind[i];
-      Rad_Out[i].HDif = Rad_In[i].HDif*gsunblind[i];
-      Rad_Out[i].HGrd = Rad_In[i].HGrd*gsunblind[i];
-      Rad_Out[i].incAng = Rad_In[i].incAng;
-      sunblindonoff[i] = 1 - gsunblind[i];
-    else // quantity of solar radiation remains unchanged
-      Rad_Out[i].H = Rad_In[i].H;
-      Rad_Out[i].HDir = Rad_In[i].HDir;
-      Rad_Out[i].HDif = Rad_In[i].HDif;
-      Rad_Out[i].HGrd = Rad_In[i].HGrd;
-      Rad_Out[i].incAng = Rad_In[i].incAng;
-      sunblindonoff[i]=0;
-    end if;
-  end for;
+   for i in 1:n loop
+     if (Rad_In[i].I>Imax and TOutAir > TOutAirLimit) then
+       Rad_Out[i].I=Rad_In[i].I*gsunblind[i];
+       Rad_Out[i].I_dir=Rad_In[i].I_dir*gsunblind[i];
+       Rad_Out[i].I_diff=Rad_In[i].I_diff*gsunblind[i];
+       Rad_Out[i].I_gr=Rad_In[i].I_gr*gsunblind[i];
+       Rad_Out[i].AOI=Rad_In[i].AOI;
+       sunblindonoff[i]=1-gsunblind[i];
+     else // quantity of solar radiation remains unchanged
+       Rad_Out[i].I=Rad_In[i].I;
+       Rad_Out[i].I_dir=Rad_In[i].I_dir;
+       Rad_Out[i].I_diff=Rad_In[i].I_diff;
+       Rad_Out[i].I_gr=Rad_In[i].I_gr;
+       Rad_Out[i].AOI=Rad_In[i].AOI;
+       sunblindonoff[i]=0;
+     end if;
+     end for;
             annotation ( Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-80,-80},{80,80}}),
                                                 graphics={
@@ -190,10 +190,6 @@ equation
 </p>
 </html>",
         revisions="<html><ul>
-  <li>
-    May 12, 2025, by Jun Jiang:<br/>
-    Change variable names (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1525\">issue 1525</a>)
-  </li>
   <li>
     <i>January 16, 2015&#160;</i> by Ana Constantin:<br/>
     Implemented as extending from PartialSunblind and using the new

@@ -11,52 +11,46 @@ partial model TestTemperatureEnthalpyInversion
 equation
     h = Medium.specificEnthalpy_pTX(p=101325, T=T0, X=Xi);
     T = Medium.temperature_phX(p=101325, h=h,  X=Xi);
-    if (time>=0.1) then
+    if (time>0.1) then
     assert(abs(T-T0)<tol, "Error in implementation of functions.\n"
        + "   T0 = " + String(T0) + "\n"
        + "   T  = " + String(T) + "\n"
        + "   Absolute error: " + String(abs(T-T0)) + " K");
     end if;
     annotation (preferredView="info", Documentation(info="<html>
-This model computes <code>h=f(T0)</code> and
-<code>T=g(h)</code>. It then checks whether <code>T=T0</code>.
-Hence, it checks whether the function <code>T_phX</code> is
-implemented correctly.
-</html>", revisions="<html>
-<ul>
-<li>
-November 14, 2022, by Michael Wetter:<br/>
-Reformulated <code>if</code>-expression to avoid warning about state event.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1657\">#1657</a>.
-</li>
-<li>
-March 24, 2020 by Kathryn Hinkelman:<br/>
-Expanded the assert message to include absolute error value.
-</li>
-<li>
-September 16, 2019 by Yangyang Fu:<br/>
-Added a parameter <code>tol</code> to control numerical errors.
-</li>
-<li>
-June 6, 2015 by Michael Wetter:<br/>
-Changed <code>Medium</code> base class to avoid a translation error
-in Dymola 2016 using pedantic mode.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
-</li>
-<li>
-February 12, 2015 by Michael Wetter:<br/>
-Replaced <code>h_pTX</code> with <code>specificEnthalpy_pTX</code>
-and
-<code>T_phX</code> with <code>temperature_phX</code>
-as the old names are not present in all media.
-</li>
-<li>
-January 21, 2010 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ This model computes <code>h=f(T0)</code> and
+ <code>T=g(h)</code>. It then checks whether <code>T=T0</code>.
+ Hence, it checks whether the function <code>T_phX</code> is
+ implemented correctly.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 24, 2020 by Kathryn Hinkelman:<br/>
+ Expanded the assert message to include absolute error value.
+ </li>
+ <li>
+ September 16, 2019 by Yangyang Fu:<br/>
+ Added a parameter <code>tol</code> to control numerical errors.
+ </li>
+ <li>
+ June 6, 2015 by Michael Wetter:<br/>
+ Changed <code>Medium</code> base class to avoid a translation error
+ in Dymola 2016 using pedantic mode.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/266\">#266</a>.
+ </li>
+ <li>
+ February 12, 2015 by Michael Wetter:<br/>
+ Replaced <code>h_pTX</code> with <code>specificEnthalpy_pTX</code>
+ and
+ <code>T_phX</code> with <code>temperature_phX</code>
+ as the old names are not present in all media.
+ </li>
+ <li>
+ January 21, 2010 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TestTemperatureEnthalpyInversion;

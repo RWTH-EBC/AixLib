@@ -18,23 +18,23 @@ record Template
   defaultComponentName="filDat",
 Documentation(
 info="<html>
-<p>This record is a template for the records in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.Data.Filling\">
-AixLib.Fluid.Geothermal.Borefields.Data.Filling</a>.</p>
-</html>",
+ <p>This record is a template for the records in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.Data.Filling\">
+ AixLib.Fluid.Geothermal.Borefields.Data.Filling</a>.</p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-July 15, 2018, by Michael Wetter:<br/>
-Revised implementation, added <code>defaultComponentPrefixes</code> and
-<code>defaultComponentName</code>.
-Corrected check of real variable against zero which is not allowed in Modelica.
-</li>
-<li>
-June 28, 2018, by Damien Picard:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ July 15, 2018, by Michael Wetter:<br/>
+ Revised implementation, added <code>defaultComponentPrefixes</code> and
+ <code>defaultComponentName</code>.
+ Corrected check of real variable against zero which is not allowed in Modelica.
+ </li>
+ <li>
+ June 28, 2018, by Damien Picard:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Template;

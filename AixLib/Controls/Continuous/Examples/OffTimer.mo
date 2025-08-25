@@ -26,26 +26,26 @@ __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Cont
         "Simulate and plot"),
     Documentation(
 info="<html>
-<p>
-Example that demonstrates the use of the model
-<a href=\"modelica://AixLib.Controls.Continuous.OffTimer\">
-AixLib.Controls.Continuous.OffTimer</a>.
-The input to the two timers are alternating boolean values.
-Whenever the input becomes <code>false(=0)</code>, the timer is reset.
-The figures below show the input and output of the blocks.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/OffTimer1.png\" border=\"1\" alt=\"Input and output of the OffTimer offTim1.\"/><br/>
-<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/OffTimer2.png\" border=\"1\" alt=\"Input and output of the OffTimer offTim1.\"/>
-</p>
-</html>",
+ <p>
+ Example that demonstrates the use of the model
+ <a href=\"modelica://AixLib.Controls.Continuous.OffTimer\">
+ AixLib.Controls.Continuous.OffTimer</a>.
+ The input to the two timers are alternating boolean values.
+ Whenever the input becomes <code>false(=0)</code>, the timer is reset.
+ The figures below show the input and output of the blocks.
+ </p>
+ <p align=\"center\">
+ <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/OffTimer1.png\" border=\"1\" alt=\"Input and output of the OffTimer offTim1.\"/><br/>
+ <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/OffTimer2.png\" border=\"1\" alt=\"Input and output of the OffTimer offTim1.\"/>
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-November 21, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ November 21, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end OffTimer;

@@ -15,24 +15,24 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_TEva_HighTemperature.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example extends from
-<a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">
-AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>
-but increases the set point for the leaving evaporator temperature
-to be above its inlet temperature, in which case the model provides no cooling.
-Towards the end of the simulation, the inlet temperature of the evaporator is increased
-to be above the condenser temperature. In this domain, the model requires cooling
-again. While this is not a meaningful operating point for the model, the example
-verifies that it robustly simulates this regime.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 10, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example extends from
+ <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_TEva\">
+ AixLib.Fluid.Chillers.Examples.Carnot_TEva</a>
+ but increases the set point for the leaving evaporator temperature
+ to be above its inlet temperature, in which case the model provides no cooling.
+ Towards the end of the simulation, the inlet temperature of the evaporator is increased
+ to be above the condenser temperature. In this domain, the model requires cooling
+ again. While this is not a meaningful operating point for the model, the example
+ verifies that it robustly simulates this regime.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 10, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_TEva_HighTemperature;

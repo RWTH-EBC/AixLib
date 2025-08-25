@@ -50,19 +50,19 @@ experiment(StartTime=1.82304e+07, Tolerance=1e-6, StopTime=1.83168e+07),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/BoundaryConditions/SolarIrradiation/Examples/DirectTiltedSurface.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the direct solar irradiation received on a ceiling, a wall and a floor.
-The assert statement will stop the simulation if the floor receives
-any direct solar irradiation.
-</p>
-</html>",
+ <p>
+ This model tests the direct solar irradiation received on a ceiling, a wall and a floor.
+ The assert statement will stop the simulation if the floor receives
+ any direct solar irradiation.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 24, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ May 24, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DirectTiltedSurface;

@@ -78,7 +78,7 @@ public
         extent={{10,10},{-10,-10}},
         rotation=180,
         origin={-90,50})));
-  Modelica.Blocks.Math.Gain gain(k(unit="J/(kg.K)")=cp_default, y(unit="J/(kg.K)"))
+  Modelica.Blocks.Math.Gain gain(k=cp_default)
     annotation (Placement(transformation(extent={{-32,40},{-12,60}})));
   Modelica.Blocks.Math.Division hea2MasFlo annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},

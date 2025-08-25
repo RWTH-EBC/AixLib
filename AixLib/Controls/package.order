@@ -3,7 +3,6 @@ Continuous
 Discrete
 HVACAgentBasedControl
 HeatPump
-OBC
 SetPoints
 VentilationController
 Types

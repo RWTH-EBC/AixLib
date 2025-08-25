@@ -79,19 +79,19 @@ equation
           fillPattern=FillPattern.Solid)}), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html>
-<ul>
-<li>
-Jan 21, 2021, by Donghun Kim:<br/>First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>This model implements the calculation for a 100% dry coil.</p>
-<p>
-See
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
-for documentation.
-</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ Jan 21, 2021, by Donghun Kim:<br/>First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>This model implements the calculation for a 100% dry coil.</p>
+ <p>
+ See
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+ for documentation.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilDryRegime;

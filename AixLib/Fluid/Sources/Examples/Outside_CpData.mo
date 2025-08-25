@@ -60,32 +60,32 @@ equation
   annotation (__Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/Outside_CpData.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model demonstrates the use of a source for ambient conditions that computes
-the wind pressure on a facade of a building using a user-defined wind pressure profile.
-Weather data are used for San Francisco, for a period of a week
-where the wind blows primarily from North-West.
-The plot shows that the wind pressure on the north- and west-facing
-facade is positive,
-whereas it is negative for the south- and east-facing facades.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 2, 2022, by Michael Wetter:<br/>
-Revised implementation.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
-</li>
-<li>
-Jun 28, 2021 by Klaas De Jonge:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model demonstrates the use of a source for ambient conditions that computes
+ the wind pressure on a facade of a building using a user-defined wind pressure profile.
+ Weather data are used for San Francisco, for a period of a week
+ where the wind blows primarily from North-West.
+ The plot shows that the wind pressure on the north- and west-facing
+ facade is positive,
+ whereas it is negative for the south- and east-facing facades.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 2, 2022, by Michael Wetter:<br/>
+ Revised implementation.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1436\">IBPSA, #1436</a>.
+ </li>
+ <li>
+ Jun 28, 2021 by Klaas De Jonge:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     experiment(
       StartTime=1.728e+07,
       StopTime=1.78848e+07,
-      Tolerance=1e-6), 
-   __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-6),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Outside_CpData;

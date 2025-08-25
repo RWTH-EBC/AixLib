@@ -13,7 +13,6 @@ model TemperatureResponseMatrix
       aSoi=1e-6,
       kSoi=3,
       nSeg=12,
-      nClu=1,
       nTimSho=26,
       nTimLon=50,
       nTimTot=26 + 50,
@@ -29,19 +28,19 @@ annotation (experiment(StopTime=31536000,Tolerance=1e-6),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/LoadAggregation/Validation/TemperatureResponseMatrix.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This validation case calculates the g-function for a defined single borehole, turns it
-into a temperature step response, saves it as &#34;TemperatureResponseMatrix_validationTStep.mat&#34;,
-reads this .mat file and shows the evolution of the temperature step reponse over
-the course of the first year.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 18, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This validation case calculates the g-function for a defined single borehole, turns it
+ into a temperature step response, saves it as &#34;TemperatureResponseMatrix_validationTStep.mat&#34;,
+ reads this .mat file and shows the evolution of the temperature step reponse over
+ the course of the first year.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 18, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TemperatureResponseMatrix;

@@ -23,6 +23,10 @@ model Case600
     annotation (Placement(transformation(extent={{-38,-82},{-27,-71}})));
   Modelica.Blocks.Sources.Constant TSet_Heater(final k=TsetHeater)
     annotation (Placement(transformation(extent={{30,-81},{19,-70}})));
+  Modelica.Blocks.Sources.RealExpression HeatingPower(y=idealHeaterCooler.heatingPower)
+    annotation (Placement(transformation(extent={{43,58},{63,78}})));
+  Modelica.Blocks.Sources.RealExpression CoolingPower(y=idealHeaterCooler.coolingPower)
+    annotation (Placement(transformation(extent={{43,42},{63,62}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC
     annotation (Placement(transformation(extent={{-20,-82},{-9,-71}})));
   Modelica.Blocks.Math.UnitConversions.From_degC from_degC1 annotation (
@@ -43,6 +47,10 @@ equation
     annotation (Line(points={{18.45,-75.5},{13.1,-75.5}}, color={0,0,127}));
   connect(from_degC1.y, idealHeaterCooler.setPointHeat) annotation (Line(points={{0.45,
           -75.5},{-2.8,-75.5},{-2.8,-62.2}},        color={0,0,127}));
+  connect(HeatingPower.y, integratorHeat.u)
+    annotation (Line(points={{64,68},{70.9,68}}, color={0,0,127}));
+  connect(CoolingPower.y, integratorCool.u) annotation (Line(points={{64,52},{
+          68,52},{68,52},{70.9,52}}, color={0,0,127}));
   connect(Room.AirExchangePort, AirExchangeRate.y) annotation (Line(points={{
           -29.8,53.765},{-47,53.765},{-47,-33},{-20,-33},{-20,-49.5},{-24.35,
           -49.5}}, color={0,0,127}));
@@ -52,12 +60,6 @@ equation
   connect(to_kWhHeat.y, checkResultsAccordingToASHRAEHeatingOrTempMax.modelResults) annotation (Line(points={{102.5,68},{112,68},{112,-39},{94,-39},{94,-52.15},{97.95,-52.15}}, color={0,0,127}));
   connect(to_kWhCool.y, checkResultsAccordingToASHRAECoolingOrTempMin.modelResults) annotation (Line(points={{102.5,52},{111,52},{111,-37},{93,-37},{93,-73.15},{97.95,-73.15}}, color={0,0,127}));
   connect(Room.transShoWaveRadWin, integrator2.u) annotation (Line(points={{17.8,5.3},{17.8,-0.75},{74,-0.75}}, color={0,0,127}));
-  connect(idealHeaterCooler.heatingPower, integratorHeat.u) annotation (Line(
-        points={{5,-51},{31.05,-51},{31.05,-10.5},{55.05,-10.5},{55.05,68},{
-          70.9,68}}, color={0,0,127}));
-  connect(idealHeaterCooler.coolingPower, integratorCool.u) annotation (Line(
-        points={{5,-55.6},{36.05,-55.6},{36.05,-14.2},{60.05,-14.2},{60.05,52},
-          {70.9,52}}, color={0,0,127}));
   annotation (
     experiment(StopTime=31539600, Tolerance=1e-06),
     __Dymola_Commands(file=

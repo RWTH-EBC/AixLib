@@ -274,94 +274,94 @@ equation
 annotation (
   defaultComponentName="damPreInd",
   Documentation(info="<html>
-<p>
-Model for an air damper whose airflow is proportional to the input signal, assuming
-that at <code>y = 1</code>, <code>m_flow = m_flow_nominal</code>. This is unless the pressure difference
-<code>dp</code> is too low,
-in which case a <code>kDam = m_flow_nominal/sqrt(dp_nominal)</code> characteristic is used.
-</p>
-<p>
-The model is similar to
-<a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent\">
-AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent</a>,
-except for adaptations for damper parameters.
-Please see that documentation for more information.
-</p>
-<h4>Computation of the damper opening</h4>
-<p>
-The fractional opening of the damper is computed by
-</p>
-<ul>
-<li>
-inverting the quadratic flow function to compute the flow coefficient
-from the flow rate and the pressure drop values (under the assumption
-of a turbulent flow regime);
-</li>
-<li>
-inverting the exponential characteristics to compute the fractional opening
-from the loss coefficient value (directly derived from the flow coefficient).
-</li>
-</ul>
-<p>
-The quadratic interpolation used outside the exponential domain in the function
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.exponentialDamper\">
-AixLib.Fluid.Actuators.BaseClasses.exponentialDamper</a>
-yields a local extremum.
-Therefore, the formal inversion of the function is not possible.
-A cubic spline is used instead to fit the inverse of the damper characteristics.
-The central domain of the characteritics having a monotonous exponential profile, its
-inverse can be properly approximated with three equidistant support points.
-However, the quadratic functions used outside of the exponential domain can have
-various profiles depending on the damper coefficients.
-Therefore, five linearly distributed support points are used on each side domain to
-ensure a good fit of the inverse.
-</p>
-<p>
-Note that below a threshold value of the input control signal (fixed at 0.02),
-the fractional opening is forced to zero and no more related to the actual
-flow coefficient of the damper.
-This avoids steep transients of the computed opening while transitioning from reverse flow.
-This is to be considered as a modeling workaround (avoiding the introduction of
-an additional state variable) to prevent control chattering during
-shut off operation where the pressure difference at the damper boundaries
-can vary between slightly positive and negative values due to outdoor pressure
-variations.
-</p>
-</html>",
+ <p>
+ Model for an air damper whose airflow is proportional to the input signal, assuming
+ that at <code>y = 1</code>, <code>m_flow = m_flow_nominal</code>. This is unless the pressure difference
+ <code>dp</code> is too low,
+ in which case a <code>kDam = m_flow_nominal/sqrt(dp_nominal)</code> characteristic is used.
+ </p>
+ <p>
+ The model is similar to
+ <a href=\"modelica://AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent\">
+ AixLib.Fluid.Actuators.Valves.TwoWayPressureIndependent</a>,
+ except for adaptations for damper parameters.
+ Please see that documentation for more information.
+ </p>
+ <h4>Computation of the damper opening</h4>
+ <p>
+ The fractional opening of the damper is computed by
+ </p>
+ <ul>
+ <li>
+ inverting the quadratic flow function to compute the flow coefficient
+ from the flow rate and the pressure drop values (under the assumption
+ of a turbulent flow regime);
+ </li>
+ <li>
+ inverting the exponential characteristics to compute the fractional opening
+ from the loss coefficient value (directly derived from the flow coefficient).
+ </li>
+ </ul>
+ <p>
+ The quadratic interpolation used outside the exponential domain in the function
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.exponentialDamper\">
+ AixLib.Fluid.Actuators.BaseClasses.exponentialDamper</a>
+ yields a local extremum.
+ Therefore, the formal inversion of the function is not possible.
+ A cubic spline is used instead to fit the inverse of the damper characteristics.
+ The central domain of the characteritics having a monotonous exponential profile, its
+ inverse can be properly approximated with three equidistant support points.
+ However, the quadratic functions used outside of the exponential domain can have
+ various profiles depending on the damper coefficients.
+ Therefore, five linearly distributed support points are used on each side domain to
+ ensure a good fit of the inverse.
+ </p>
+ <p>
+ Note that below a threshold value of the input control signal (fixed at 0.02),
+ the fractional opening is forced to zero and no more related to the actual
+ flow coefficient of the damper.
+ This avoids steep transients of the computed opening while transitioning from reverse flow.
+ This is to be considered as a modeling workaround (avoiding the introduction of
+ an additional state variable) to prevent control chattering during
+ shut off operation where the pressure difference at the damper boundaries
+ can vary between slightly positive and negative values due to outdoor pressure
+ variations.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-August 11, 2021, by Michael Wetter:<br/>
-Reformulated initial equation section to avoid warning in OPTIMICA about
-variable array index.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1513\">IBPSA #1513</a>.
-</li>
-<li>
-June 10, 2021, by Michael Wetter:<br/>
-Changed implementation of the filter and changed the parameter <code>order</code> to a constant
-as most users need not change this value.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA #1498</a>.
-</li>
-<li>
-April 6, 2020, by Antoine Gautier:<br/>
-Added the computation of the damper opening.
-</li>
-<li>
-December 23, 2019 by Antoine Gautier:<br/>
-Refactored as the model can now extend directly
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
-AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">IBPSA #1188</a>.
-</li>
-<li>
-March 21, 2017 by David Blum:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ August 11, 2021, by Michael Wetter:<br/>
+ Reformulated initial equation section to avoid warning in OPTIMICA about
+ variable array index.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1513\">IBPSA #1513</a>.
+ </li>
+ <li>
+ June 10, 2021, by Michael Wetter:<br/>
+ Changed implementation of the filter and changed the parameter <code>order</code> to a constant
+ as most users need not change this value.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1498\">IBPSA #1498</a>.
+ </li>
+ <li>
+ April 6, 2020, by Antoine Gautier:<br/>
+ Added the computation of the damper opening.
+ </li>
+ <li>
+ December 23, 2019 by Antoine Gautier:<br/>
+ Refactored as the model can now extend directly
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialDamperExponential</a>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1188\">IBPSA #1188</a>.
+ </li>
+ <li>
+ March 21, 2017 by David Blum:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
    Icon(graphics={Line(
          points={{0,100},{0,-24}}),
         Rectangle(
@@ -373,6 +373,6 @@ First implementation.
           extent={{-100,22},{100,-24}},
           lineColor={0,0,0},
           fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          fillColor={0,127,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PressureIndependent;

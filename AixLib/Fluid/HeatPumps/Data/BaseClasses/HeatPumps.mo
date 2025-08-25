@@ -26,18 +26,18 @@ partial record HeatPumps
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
-<p>
-This is the base record for heat pump models.
-</p>
-</html>",
+ <p>
+ This is the base record for heat pump models.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 6, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ December 6, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={
         Text(
           extent={{-95,53},{-12,-2}},
@@ -50,6 +50,6 @@ First implementation.
         Text(
           extent={{-95,-49},{-12,-104}},
           textColor={0,0,255},
-          textString="dTSup")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          textString="dTSup")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HeatPumps;

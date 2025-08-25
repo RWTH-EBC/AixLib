@@ -9,7 +9,6 @@ HeatingCoil
 IndirectTankHeatExchanger
 PartialHeatTransferLayers
 PartialStratified
-PartialTwoPortInterface
 StorageCover
 StorageMantle
 ThirdOrderStratifier

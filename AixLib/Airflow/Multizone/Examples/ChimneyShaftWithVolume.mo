@@ -151,40 +151,40 @@ equation
       StopTime=3600,
       Tolerance=1e-06),
     Documentation(info="<html>
-<p>
-This model is identical to
-<a href=\"modelica://AixLib.Airflow.Multizone.Examples.ChimneyShaftNoVolume\">
-AixLib.Airflow.Multizone.Examples.ChimneyShaftNoVolume</a>,
-except that the chimney model is not steady-state, but rather dynamic
-as it contains an air volume. The air volume is approximated
-as being well-mixed. (Stratified volumes could be approximated by
-using multiple instances of the model <code>sha</code> that are
-connected in series.)
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
-</li>
-<li>
-January 8, 2019, by Michael Wetter:<br/>
-Removed parameter assignment for <code>sha.m_flow_nominal</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/970\">#970</a>.
-</li>
-<li>
-December 22, 2014 by Michael Wetter:<br/>
-Removed <code>Modelica.Fluid.System</code>
-to address issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
-</li>
-<li>
-November 10, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model is identical to
+ <a href=\"modelica://AixLib.Airflow.Multizone.Examples.ChimneyShaftNoVolume\">
+ Buildings.Airflow.Multizone.Examples.ChimneyShaftNoVolume</a>,
+ except that the chimney model is not steady-state, but rather dynamic
+ as it contains an air volume. The air volume is approximated
+ as being well-mixed. (Stratified volumes could be approximated by
+ using multiple instances of the model <code>sha</code> that are
+ connected in series.)
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ January 8, 2019, by Michael Wetter:<br/>
+ Removed parameter assignment for <code>sha.m_flow_nominal</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/970\">#970</a>.
+ </li>
+ <li>
+ December 22, 2014 by Michael Wetter:<br/>
+ Removed <code>Modelica.Fluid.System</code>
+ to address issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/311\">#311</a>.
+ </li>
+ <li>
+ November 10, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ChimneyShaftWithVolume;

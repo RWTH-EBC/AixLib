@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Windows;
 model Window "Calculation of solar energy transmitted through windows"
   parameter Modelica.Units.SI.Angle lat "Latitude";
-  parameter Integer n(min = 1)=1 "Number of windows"
+  parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
     "Thermal transmission coefficient of whole window"
@@ -24,22 +24,22 @@ model Window "Calculation of solar energy transmitted through windows"
   parameter Modelica.Units.SI.RadiantEnergyFluenceRate lim
     "Limit for the sunscreen to become active"
     annotation (dialog(group="sunscreen"));
-  parameter Modelica.Units.SI.Angle xi(displayUnit="deg") = 0
+  parameter Modelica.Units.SI.Angle xi(displayUnit="degree") = 0
     "Elevation angle";
-  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+  parameter Modelica.Units.SI.Angle til[n](displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
     roof" annotation (Dialog(group="window"));
   parameter Modelica.Units.SI.Angle azi[n] "Surface azimuth"
     annotation (Dialog(group="window"));
   extends Modelica.Blocks.Icons.Block;
   Modelica.Blocks.Interfaces.RealOutput HVis[n](
-    each final quantity="RadiantEnergyFluenceRate",
-    each final unit="W/m2") "Solar energy entering the room in the visible area"
+    final quantity="RadiantEnergyFluenceRate",
+    final unit="W/m2") "Solar energy entering the room in the visible area"
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{100,30},{120,50}})));
 
   Modelica.Blocks.Interfaces.RealOutput HWin[n](
-    each final quantity="RadiantEnergyFluenceRate",
-    each final unit="W/m2")
+    final quantity="RadiantEnergyFluenceRate",
+    final unit="W/m2")
     "Solar radiation transmitted through aggregated window"
     annotation (Placement(transformation(extent={{100,-50},{120,-30}}),
         iconTransformation(extent={{100,-50},{120,-30}})));

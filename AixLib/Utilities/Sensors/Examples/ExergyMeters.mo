@@ -18,7 +18,7 @@ model ExergyMeters
     each offset=3000,
     each amplitude=3000) "Sine wave to vary heat generation and demand"
     annotation (Placement(transformation(extent={{-12,-14},{8,6}})));
-  AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter exergyStorageMeterMedium(
+  ExergyMeter.StoredExergyMeter exergyStorageMeterMedium(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
     T_start=T_start,
@@ -36,7 +36,7 @@ model ExergyMeters
   inner Modelica.Fluid.System system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial)
                                      "Basic parameters"
     annotation (Placement(transformation(extent={{80,-100},{100,-80}})));
-  AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter exHeatSec
+  ExergyMeter.HeatExergyMeter exHeatSec
     "Exergy content of the heat flux on secondary side"
     annotation (Placement(transformation(extent={{74,5},{94,25}})));
   AixLib.Fluid.Movers.FlowControlled_m_flow pumpPrim(
@@ -46,10 +46,9 @@ model ExergyMeters
     redeclare package Medium = Medium,
     T_start=T_start,
     m_flow_nominal=0.5,
-    m_flow_small=0.001,
-    dp_nominal=10000 + sum(bufferStorageHeatingcoils.heatingCoil1.pipe.res.dp_nominal))
+    m_flow_small=0.001)
     annotation (Placement(transformation(extent={{-64,76},{-44,96}})));
-  AixLib.Fluid.Storage.StorageDetailed bufferStorageHeatingcoils(
+  Fluid.Storage.BufferStorage  bufferStorageHeatingcoils(
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     redeclare package MediumHC1 = Medium,
     redeclare package MediumHC2 = Medium,
@@ -59,7 +58,7 @@ model ExergyMeters
     useHeatingCoil1=true,
     useHeatingCoil2=false,
     useHeatingRod=false,
-    TStart=fill(T_start, 10),
+    TStart=T_start,
     redeclare DataBase.Storage.Generic_New_2000l data(
       hTank=1,
       hUpperPortDemand=0.95,
@@ -78,7 +77,7 @@ model ExergyMeters
     n=10)
          "Storage tank" annotation (Placement(transformation(extent={{-2,54},{26,
             88}})));
-  AixLib.Fluid.FixedResistances.PressureDrop      pipePrim(
+  Fluid.FixedResistances.PressureDrop      pipePrim(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
     dp_nominal=10000) "Main resistance in primary circuit"
@@ -86,12 +85,10 @@ model ExergyMeters
         extent={{-7,-7.5},{7,7.5}},
         rotation=180,
         origin={-53,56.5})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exPrimIn(redeclare
-      package Medium =                                                                     Medium)
+  ExergyMeter.FlowExergyMeter exPrimIn(redeclare package Medium = Medium)
     "Exergy content of medium flow entering the storage on primary side"
     annotation (Placement(transformation(extent={{-36,76},{-14,96}})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exPrimOut(redeclare
-      package Medium =                                                                      Medium)
+  ExergyMeter.FlowExergyMeter exPrimOut(redeclare package Medium = Medium)
     "Exergy content of medium flow exiting the storage on primary side"
     annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
@@ -115,10 +112,9 @@ model ExergyMeters
     redeclare package Medium = Medium,
     T_start=T_start,
     m_flow_nominal=0.5,
-    m_flow_small=0.001,
-    dp_nominal=10000)   "Pump in secondary circuit"
+    m_flow_small=0.001) "Pump in secondary circuit"
     annotation (Placement(transformation(extent={{60,72},{80,92}})));
-  AixLib.Fluid.FixedResistances.PressureDrop      pipeSec(
+  Fluid.FixedResistances.PressureDrop      pipeSec(
     redeclare package Medium = Medium,
     m_flow_nominal=0.5,
     dp_nominal=10000) "Main resistance in secondary circuit"
@@ -138,12 +134,10 @@ model ExergyMeters
         extent={{10,-10},{-10,10}},
         rotation=270,
         origin={96,70})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exSecOut(redeclare
-      package Medium =                                                                     Medium)
+  ExergyMeter.FlowExergyMeter exSecOut(redeclare package Medium = Medium)
     "Exergy content of medium flow entering the storage on secondary side"
     annotation (Placement(transformation(extent={{34,72},{56,92}})));
-  AixLib.Utilities.Sensors.ExergyMeter.FlowExergyMeter exSecIn(redeclare
-      package Medium =                                                                    Medium)
+  ExergyMeter.FlowExergyMeter exSecIn(redeclare package Medium = Medium)
     "Exergy content of medium flow exiting the storage on secondary side"
     annotation (Placement(transformation(
         extent={{-11,10},{11,-10}},
@@ -159,7 +153,7 @@ model ExergyMeters
   Modelica.Blocks.Math.Gain gain(k=-1)
     "Negative sign to switch the direction of the heat flux"
     annotation (Placement(transformation(extent={{28,18},{40,30}})));
-  AixLib.Utilities.Sensors.ExergyMeter.HeatExergyMeter exHeatPrim
+  ExergyMeter.HeatExergyMeter exHeatPrim
     "Exergy content of the heat flux on primary side"
                                          annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -206,7 +200,7 @@ model ExergyMeters
     annotation (Placement(transformation(extent={{-6,-6},{6,6}},
         rotation=180,
         origin={66,-4})));
-  AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter exergyStorageMeterConsumer(
+  ExergyMeter.StoredExergyMeter exergyStorageMeterConsumer(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
     T_start=T_start,
@@ -215,7 +209,7 @@ model ExergyMeters
     mass=1)
     "Outputs the exergy content and rate of change of the consumer volume"
     annotation (Placement(transformation(extent={{-50,-56},{-30,-36}})));
-  AixLib.Utilities.Sensors.ExergyMeter.StoredExergyMeter exergyStorageMeterHeater(
+  ExergyMeter.StoredExergyMeter exergyStorageMeterHeater(
     redeclare package Medium = Medium,
     T_ref_start=T_ref.k,
     T_start=T_start,

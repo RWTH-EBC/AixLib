@@ -1,8 +1,3 @@
-CalcMethodConvectiveHeatTransfer
-CalcMethodConvectiveHeatTransferInsideSurface
-CalcMethodRadiativeHeatTransfer
-InsideSurfaceOrientation
-ThermalInsulationRegulation
 selectorCoefficients
 CoeffTableEastWestWindow
 CoeffTableSouthWindow

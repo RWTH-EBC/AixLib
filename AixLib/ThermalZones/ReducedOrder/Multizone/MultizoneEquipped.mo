@@ -110,11 +110,11 @@ model MultizoneEquipped
     annotation (
     Placement(transformation(extent={{-52,10},{18,40}})));
 
-  Modelica.Blocks.Interfaces.RealOutput CO2Con[numZones] if use_C_flow
+  Modelica.Blocks.Interfaces.RealOutput CO2Con[size(zone, 1)] if use_C_flow
     "CO2 concentration in the thermal zone in ppm"
     annotation (Placement(transformation(extent={{100,10},{120,30}})));
 protected
-  parameter Real zoneFactor[numZones,1](each fixed=false)
+  parameter Real zoneFactor[numZones,1](fixed=false)
     "Calculated zone factors";
   parameter Real VAirRes(fixed=false)
     "Resulting air volume in zones supplied by the AHU";

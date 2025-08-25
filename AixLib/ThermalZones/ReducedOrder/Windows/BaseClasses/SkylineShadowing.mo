@@ -3,9 +3,9 @@ model SkylineShadowing
   "Calculation of the limit elevation angle for shadowing by a skyline
    (for direct solar irradiation)"
   extends Modelica.Blocks.Icons.Block;
-  parameter Integer n(min = 1)=1 "Number of corner points"
+  parameter Integer n(min = 1) "Number of corner points"
       annotation(dialog(group="skyline"));
-  parameter Modelica.Units.SI.Angle[n] alpha(each displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
+  parameter Modelica.Units.SI.Angle[n] alpha(displayUnit="deg") "Azimuth of corner points, sorted from north to east to south to west,
      azi=-90 degree if surface outward unit normal points toward east;
      azi=0 if it points toward south" annotation (dialog(group="skyline"));
   parameter Modelica.Units.SI.Height[n] deltaH
@@ -34,12 +34,12 @@ model SkylineShadowing
 protected
   Modelica.Units.SI.Angle[n - 1] X "Calculation factor to simplify equations";
   Modelica.Units.SI.Angle[n - 1] Y "Calculation factor to simplify equations";
-  Modelica.Units.SI.Angle altLimi[n - 1](each displayUnit="deg")
+  Modelica.Units.SI.Angle altLimi[n - 1](displayUnit="deg")
     "Limit elevation angle for shadowing by a skyline for point i and i+1";
   Modelica.Units.SI.Angle gamma[n](
-    each min=0,
-    each max=Modelica.Constants.pi/2,
-    each displayUnit="deg") "Elevation angle of the obstruction for point i";
+    min=0,
+    max=Modelica.Constants.pi/2,
+    displayUnit="deg") "Elevation angle of the obstruction for point i";
 equation
   //Calculating gamma
   for i in 1:n loop

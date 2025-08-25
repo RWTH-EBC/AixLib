@@ -26,12 +26,11 @@ Documentation(info="<html><p>
   </li>
 </ul>
 </html>", revisions="<html><ul>
-  <ul>
-    <li>
-      <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
-      Implemented
-    </li>
-  </ul>
+<ul>
+  <li>
+    <i>July 1, 2020</i> by Konstantina Xanthopoulou:<br/>
+    Implemented
+  </li>
 </ul>
 </html>"));
 end Case940;

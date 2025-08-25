@@ -28,17 +28,17 @@ connector PressureOutput =
       extent={{30.0,60.0},{30.0,110.0}},
       textString="%name")}),
   Documentation(info="<html>
-<p>
-Connector with one output signal of type <code>Modelica.Units.SI.AbsolutePressure</code>.
-This connector has been implemented to conditionally remove
-the pressure if no pressure drop calculation is requested.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 29,2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Connector with one output signal of type <code>Modelica.Units.SI.AbsolutePressure</code>.
+ This connector has been implemented to conditionally remove
+ the pressure if no pressure drop calculation is requested.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 29,2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

@@ -19,7 +19,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
 
   parameter Modelica.Units.SI.PressureDifference dp_nominal(
     min=0,
-    displayUnit="Pa") = if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_riseTime=true,
+    displayUnit="Pa") = if rho_default < 500 then 500 else 10000 "Nominal pressure raise, used to normalized the filter if use_inputFilter=true,
         to set default values of constantHead and heads, and
         and for default pressure curve if not specified in record per"
     annotation (Dialog(group="Nominal condition"));
@@ -56,7 +56,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
           massDynamics <> Modelica.Fluid.Types.Dynamics.SteadyState));
 
   // Classes used to implement the filtered speed
-  parameter Boolean use_riseTime=true
+  parameter Boolean use_inputFilter=true
     "= true, if speed is filtered with a 2nd order CriticalDamping filter"
     annotation(Dialog(tab="Dynamics", group="Filtered speed"));
   parameter Modelica.Units.SI.Time riseTime=30
@@ -64,20 +64,20 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
       Dialog(
       tab="Dynamics",
       group="Filtered speed",
-      enable=use_riseTime));
+      enable=use_inputFilter));
   parameter Modelica.Blocks.Types.Init init=Modelica.Blocks.Types.Init.InitialOutput
     "Type of initialization (no init/steady state/initial state/initial output)"
-    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_riseTime));
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
   parameter Real y_start(min=0, max=1, unit="1")=0
     "Initial value of speed"
-    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_riseTime));
+    annotation(Dialog(tab="Dynamics", group="Filtered speed",enable=use_inputFilter));
 
   // Sensor parameters
   parameter Modelica.Units.SI.PressureDifference dp_start=0
     "Initial value of pressure raise" annotation (Dialog(
       tab="Dynamics",
       group="Filtered speed",
-      enable=use_riseTime));
+      enable=use_inputFilter));
   parameter Modelica.Units.SI.Time tauSen=0
     "Time constant at nominal flow rate (use tau=0 for steady-state sensor, but see user guide for potential problems)"
     annotation (Dialog(tab="Sensor"));
@@ -100,7 +100,7 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
   Modelica.Blocks.Interfaces.RealInput dpMea(
     final quantity="PressureDifference",
     final displayUnit="Pa",
-    final unit="Pa") if prescribeSystemPressure
+    final unit="Pa")=gain.u if prescribeSystemPressure
     "Measurement of pressure difference between two points where the set point should be obtained"
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
@@ -159,18 +159,17 @@ model DpControlled_dp "Pump or fan including pressure control (constant or varia
     final per=per,
     final inputType=AixLib.Fluid.Types.InputType.Continuous,
     final addPowerToMedium=addPowerToMedium,
-    final nominalValuesDefineDefaultPressureCurve=
-        nominalValuesDefineDefaultPressureCurve,
+    final nominalValuesDefineDefaultPressureCurve=nominalValuesDefineDefaultPressureCurve,
     final tau=tauMov,
+    final use_inputFilter=use_inputFilter,
     final riseTime=riseTime,
     final init=init,
     final dp_start=dp_start,
     final dp_nominal=dp_nominal,
     final constantHead=dp_nominal,
-    final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(
-        per.speeds, 1)},
-    final prescribeSystemPressure=prescribeSystemPressure,
-    final use_riseTime=use_riseTime) "Mover: pump or fan"
+    final heads=dp_nominal*{(per.speeds[i]/per.speeds[end])^2 for i in 1:size(per.speeds, 1)},
+    final prescribeSystemPressure=prescribeSystemPressure)
+    "Mover: pump or fan"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
 
   Modelica.Blocks.Interfaces.RealOutput P(final quantity="Power", final unit="W")
@@ -319,19 +318,19 @@ equation
           color={0,0,0},
           smooth=Smooth.None),
         Rectangle(
-          visible=use_riseTime,
+          visible=use_inputFilter,
           extent={{-32,40},{34,100}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Ellipse(
-          visible=use_riseTime,
+          visible=use_inputFilter,
           extent={{-32,100},{34,40}},
           lineColor={0,0,0},
           fillColor={135,135,135},
           fillPattern=FillPattern.Solid),
         Text(
-          visible=use_riseTime,
+          visible=use_inputFilter,
           extent={{-20,92},{22,46}},
           lineColor={0,0,0},
           fillColor={135,135,135},
@@ -417,8 +416,7 @@ equation
 </p>
 <p>
   <img height=\"300\" src=
-  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\"
-  alt=\"1\">
+  \"modelica://AixLib/Resources/Images/Fluid/Movers/DpControlledMovers/CurveTypes.jpg\">
 </p>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
   <tr>
@@ -541,7 +539,8 @@ equation
   \"https://www.esmagazine.com/ext/resources/images/WhitePapers/CBS-US-Whitepaper.pdf\">
   Link to PDF</a>.
 </p>
-</html>", revisions="<html><ul>
+</html>", revisions="<html>
+<ul>
   <li>October 28, 2021, by Philipp Mehrfeld:<br/>
     <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1151\">#1151</a>
     Added model to library.

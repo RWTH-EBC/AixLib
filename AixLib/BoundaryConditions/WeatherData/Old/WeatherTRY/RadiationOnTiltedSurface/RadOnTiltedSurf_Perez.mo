@@ -192,10 +192,10 @@ equation
       R = a / b;
 
   // conversion of direct and diffuse horizontal radiation
-  if not WeatherFormat then // TRY
+  if WeatherFormat == 1 then // TRY
     InBeamRadHor = solarInput1;
     InDiffRadHor = solarInput2;
-  else  // WeatherFormat == true , TMY then
+  else  // WeatherFormat == 2 , TMY then
     InBeamRadHor = solarInput1 * cos_theta_z;
     InDiffRadHor = max(solarInput2-InBeamRadHor, 0);
   end if;
@@ -255,15 +255,14 @@ equation
     DiffRadTilt = DiffRadTiltHZ + DiffRadTiltDOM + DiffRadTiltCS
     "total diffuse irradiation on a tilted Surface";
 
-  OutTotalRadTilted.H   = max(0, BeamRadTilt + DiffRadTilt + RadGroundRefl)
+    OutTotalRadTilted.I = max(0, BeamRadTilt + DiffRadTilt + RadGroundRefl)
     "output connector for the total Irradiation on a tilted Surface";
 
   // calculation of direct. diffuse and ground reflection radiation on tilted surface
-  OutTotalRadTilted.HDir = BeamRadTilt;
-  OutTotalRadTilted.HDif = DiffRadTilt;
-  OutTotalRadTilted.HGrd = RadGroundRefl;
-  OutTotalRadTilted.incAng = Modelica.Math.acos(cos_theta);
-                                                         // in rad
+  OutTotalRadTilted.I_dir = BeamRadTilt;
+  OutTotalRadTilted.I_diff = DiffRadTilt;
+  OutTotalRadTilted.I_gr = RadGroundRefl;
+  OutTotalRadTilted.AOI = Modelica.Math.acos(cos_theta); // in rad
 
 //Output
   BeamRadTilt=BeamRadTiltOut;

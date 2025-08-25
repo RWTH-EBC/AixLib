@@ -199,71 +199,71 @@ equation
           textString="%name")}),
     defaultComponentName="lay",
     Documentation(info="<html>
-<p>
-Model for radial heat transfer in a hollow cylinder.
-</p>
-<p>
-If the heat capacity of the material is non-zero, then this model computes transient heat conduction, i.e., it
-computes a numerical approximation to the solution of the heat equation
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-   &rho; c ( &part; T(r,t) &frasl; &part;t ) = 
-    k ( &part;&sup2; T(r,t) &frasl; &part;r&sup2; + 1 &frasl; r &nbsp;  &part; T(r,t) &frasl; &part;r ),
-</p>
-<p>
-where 
-<i>&rho;</i>
-is the mass density,
-<i>c</i>
-is the specific heat capacity per unit mass,
-<i>T</i>
-is the temperature at location <i>r</i> and time <i>t</i> and
-<i>k</i> is the heat conductivity. 
-At the locations <i>r=r<sub>a</sub></i> and <i>r=r<sub>b</sub></i>, 
-the temperature and heat flow rate are equal to the 
-temperature and heat flow rate of the heat ports.
-</p>
-<p>
-If the heat capacity of the material is set to zero, then steady-state heat flow is computed using
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-   Q = 2 &pi; k (T<sub>a</sub>-T<sub>b</sub>)&frasl; ln(r<sub>a</sub> &frasl; r<sub>b</sub>),
-</p>
-<p>
-where
-<i>r<sub>a</sub></i> is the internal radius,
-<i>r<sub>b</sub></i> is the external radius,
-<i>T<sub>a</sub></i> is the temperature at port a and
-<i>T<sub>b</sub></i> is the temperature at port b.
-</p>
-<h4>Implementation</h4>
-<p>
-To spatially discretize the heat equation, the construction is 
-divided into compartments with <code>nSta &ge; 1</code> state variables. 
-The state variables are connected to each other through thermal conductors. 
-There is also a thermal conductor
-between the surfaces and the outermost state variables. Thus, to obtain
-the surface temperature, use <code>port_a.T</code> (or <code>port_b.T</code>)
-and not the variable <code>T[1]</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January, 2014, by Damien Picard:<br/>
-Modify the discretization of the cilindrical layer so that the first three layers have an equal thickness the following an exponentionally growing thickness.
-This follows the guidelines of Eskilson (P. Eskilson. Thermal analysis of heat extraction
-boreholes. PhD thesis, Dep. of Mathematical
-Physics, University of Lund, Sweden, 1987).
-</li>
-<li>
-March 9, 2012, by Michael Wetter:<br/>
-Removed protected variable <code>der_T</code> as it is not required.
-</li>
-<li>
-April 14 2011, by Pierre Vigouroux:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Model for radial heat transfer in a hollow cylinder.
+ </p>
+ <p>
+ If the heat capacity of the material is non-zero, then this model computes transient heat conduction, i.e., it
+ computes a numerical approximation to the solution of the heat equation
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+    &rho; c ( &part; T(r,t) &frasl; &part;t ) = 
+     k ( &part;&sup2; T(r,t) &frasl; &part;r&sup2; + 1 &frasl; r &nbsp;  &part; T(r,t) &frasl; &part;r ),
+ </p>
+ <p>
+ where 
+ <i>&rho;</i>
+ is the mass density,
+ <i>c</i>
+ is the specific heat capacity per unit mass,
+ <i>T</i>
+ is the temperature at location <i>r</i> and time <i>t</i> and
+ <i>k</i> is the heat conductivity. 
+ At the locations <i>r=r<sub>a</sub></i> and <i>r=r<sub>b</sub></i>, 
+ the temperature and heat flow rate are equal to the 
+ temperature and heat flow rate of the heat ports.
+ </p>
+ <p>
+ If the heat capacity of the material is set to zero, then steady-state heat flow is computed using
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+    Q = 2 &pi; k (T<sub>a</sub>-T<sub>b</sub>)&frasl; ln(r<sub>a</sub> &frasl; r<sub>b</sub>),
+ </p>
+ <p>
+ where
+ <i>r<sub>a</sub></i> is the internal radius,
+ <i>r<sub>b</sub></i> is the external radius,
+ <i>T<sub>a</sub></i> is the temperature at port a and
+ <i>T<sub>b</sub></i> is the temperature at port b.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ To spatially discretize the heat equation, the construction is 
+ divided into compartments with <code>nSta &ge; 1</code> state variables. 
+ The state variables are connected to each other through thermal conductors. 
+ There is also a thermal conductor
+ between the surfaces and the outermost state variables. Thus, to obtain
+ the surface temperature, use <code>port_a.T</code> (or <code>port_b.T</code>)
+ and not the variable <code>T[1]</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January, 2014, by Damien Picard:<br/>
+ Modify the discretization of the cilindrical layer so that the first three layers have an equal thickness the following an exponentionally growing thickness.
+ This follows the guidelines of Eskilson (P. Eskilson. Thermal analysis of heat extraction
+ boreholes. PhD thesis, Dep. of Mathematical
+ Physics, University of Lund, Sweden, 1987).
+ </li>
+ <li>
+ March 9, 2012, by Michael Wetter:<br/>
+ Removed protected variable <code>der_T</code> as it is not required.
+ </li>
+ <li>
+ April 14 2011, by Pierre Vigouroux:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Cylindrical;

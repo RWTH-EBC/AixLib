@@ -1,27 +1,32 @@
 within AixLib.Utilities.HeatTransfer;
 model HeatConvOutside "Model for heat transfer at outside surfaces. Choice between multiple models"
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals "Calculation method for convective heat transfer coefficient" annotation (
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (
     Evaluate=true,
     Dialog(
       group="Computational Models",
       compact=true,
-      descriptionLabel=true));
+      descriptionLabel=true),
+    choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals (convective + radiative)",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
   parameter Modelica.Units.SI.Area A(min=0) "Area of surface"
     annotation (Dialog(group="Surface properties", descriptionLabel=true));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=25
     "Custom convective heat transfer coeffient" annotation (Dialog(
       group="Surface properties",
       descriptionLabel=true,
-      enable=calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.Custom_hCon));
+      enable=calcMethod == 3));
   parameter
     DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook         surfaceType = DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster()
     "Surface type"                                                                                                     annotation(Dialog(group = "Surface properties", descriptionLabel = true, enable=
-          calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals),                                                                                                                                                                                           choicesAllMatching = true);
+          calcMethod == 2),                                                                                                                                                                                           choicesAllMatching = true);
   // Variables
   Modelica.Units.SI.CoefficientOfHeatTransfer hCon
     "Convection heat transfer coeffient";
-  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 or calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals              annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
+  Modelica.Blocks.Interfaces.RealInput WindSpeedPort if calcMethod == 1 or calcMethod == 2              annotation(Placement(transformation(extent = {{-102, -82}, {-82, -62}}), iconTransformation(extent={{-100,-80},{-80,-60}})));
 
 protected
   Modelica.Blocks.Interfaces.RealInput WindSpeed_internal(unit="m/s");
@@ -30,9 +35,9 @@ equation
   port_a.Q_flow =hCon*A*(port_a.T - port_b.T);
 
   //Determine convection heat transfer coefficient hCon
-  if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 then
+  if calcMethod == 1 then
     hCon = (4 + 4*WindSpeed_internal);
-  elseif calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals then
+  elseif calcMethod == 2 then
     hCon = surfaceType.D + surfaceType.E*WindSpeed_internal + surfaceType.F*(WindSpeed_internal^2);
   else
     hCon = hCon_const;

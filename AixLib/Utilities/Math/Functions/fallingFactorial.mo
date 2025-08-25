@@ -18,22 +18,22 @@ algorithm
   end if;
 
 annotation (Documentation(info="<html>
-<p>
-Function that evaluates the falling factorial \"k-permutations of n\".
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 22, 2019, by Michael Wetter:<br/>
-Changed upper limit for <code>maxInt</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1145\">issue 1145</a>.
-</li>
-<li>
-February 9, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Function that evaluates the falling factorial \"k-permutations of n\".
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 22, 2019, by Michael Wetter:<br/>
+ Changed upper limit for <code>maxInt</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1145\">issue 1145</a>.
+ </li>
+ <li>
+ February 9, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end fallingFactorial;

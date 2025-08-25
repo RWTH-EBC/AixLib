@@ -37,58 +37,58 @@ equation
 
   annotation (defaultComponentName="doo",
 Documentation(info="<html>
-<p>
-This model describes the bi-directional air flow through an open door.
-</p>
-<p>
-To compute the bi-directional flow,
-the door is discretize along the height coordinate.
-An orifice equation is used to compute the flow for each compartment.
-</p>
-<p>
-In this model, the door is always open.
-Use the model
-<a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOperable\">
-AixLib.Airflow.Multizone.DoorDiscretizedOperable</a>
-for a door that can either be open or closed.
-</p>
-</html>",
+ <p>
+ This model describes the bi-directional air flow through an open door.
+ </p>
+ <p>
+ To compute the bi-directional flow,
+ the door is discretize along the height coordinate.
+ An orifice equation is used to compute the flow for each compartment.
+ </p>
+ <p>
+ In this model, the door is always open.
+ Use the model
+ <a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOperable\">
+ Buildings.Airflow.Multizone.DoorDiscretizedOperable</a>
+ for a door that can either be open or closed.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 8, 2019, by Michael Wetter:<br/>
-Moved parameter <code>CD</code> from
-<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized\">
-AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized</a>
-to
-<a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOpen\">
-AixLib.Airflow.Multizone.DoorDiscretizedOpen</a>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/971\">#971</a>.
-</li>
-<li>
-December 14, 2012 by Michael Wetter:<br/>
-Renamed protected parameters for consistency with the naming conventions.
-</li>
-<li>December 6, 2011 by Michael Wetter:<br/>
-Changed the computation of the discharge coefficient to use the
-nominal density instead of the actual density.
-Computing <code>sqrt(2/rho)</code> sometimes causes warnings from the solver,
-as it seems to try negative values for the density during iterative solutions.
-</li>
-<li>August 12, 2011 by Michael Wetter:<br/>
-Changed model to use the new function
-<a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
-AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
-</li>
-<li>July 20, 2010 by Michael Wetter:<br/>
-Migrated model to Modelica 3.1 and integrated it into the Buildings library.
-</li>
-<li>
-February 10, 2005 by Michael Wetter:<br/>
-Released first version.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ January 8, 2019, by Michael Wetter:<br/>
+ Moved parameter <code>CD</code> from
+ <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized\">
+ AixLib.Airflow.Multizone.BaseClasses.DoorDiscretized</a>
+ to
+ <a href=\"modelica://AixLib.Airflow.Multizone.DoorDiscretizedOpen\">
+ AixLib.Airflow.Multizone.DoorDiscretizedOpen</a>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/971\">#971</a>.
+ </li>
+ <li>
+ December 14, 2012 by Michael Wetter:<br/>
+ Renamed protected parameters for consistency with the naming conventions.
+ </li>
+ <li>December 6, 2011 by Michael Wetter:<br/>
+ Changed the computation of the discharge coefficient to use the
+ nominal density instead of the actual density.
+ Computing <code>sqrt(2/rho)</code> sometimes causes warnings from the solver,
+ as it seems to try negative values for the density during iterative solutions.
+ </li>
+ <li>August 12, 2011 by Michael Wetter:<br/>
+ Changed model to use the new function
+ <a href=\"modelica://AixLib.Airflow.Multizone.BaseClasses.powerLawFixedM\">
+ Buildings.Airflow.Multizone.BaseClasses.powerLawFixedM</a>.
+ </li>
+ <li>July 20, 2010 by Michael Wetter:<br/>
+ Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+ </li>
+ <li>
+ February 10, 2005 by Michael Wetter:<br/>
+ Released first version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DoorDiscretizedOpen;

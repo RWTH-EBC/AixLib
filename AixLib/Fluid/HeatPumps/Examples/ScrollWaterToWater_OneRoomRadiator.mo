@@ -74,9 +74,9 @@ model ScrollWaterToWater_OneRoomRadiator
     m_flow_start=0.85,
     T_start=TRadSup_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
-    use_riseTime=false,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
-    "Pump for radiator side" annotation (Placement(transformation(
+    use_inputFilter=false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState) "Pump for radiator side"
+    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-70,-110})));
@@ -128,7 +128,7 @@ model ScrollWaterToWater_OneRoomRadiator
     m_flow_start=0.85,
     m_flow_nominal=mHeaPum_flow_nominal,
     nominalValuesDefineDefaultPressureCurve=true,
-    use_riseTime=false,
+    use_inputFilter=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState)
     "Pump for heat pump source side" annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -287,46 +287,46 @@ equation
   connect(preSou.ports[1], temRet.port_b) annotation (Line(points={{70,-120},{60,
           -120},{60,-30}}, color={0,127,255}));
   annotation (Documentation(info="<html>
-<p>
-Example that simulates one room equipped with a radiator. Hot water is produced
-by a <i>24</i> kW nominal capacity heat pump. The source side water temperature to the
-heat pump is constant at <i>10</i>&deg;C.
-</p>
-<p>
-The heat pump is turned on when the room temperature falls below
-<i>19</i>&deg;C and turned
-off when the room temperature rises above <i>21</i>&deg;C.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 22, 2021, by Michael Wetter:<br/>
-Removed assignments <code>pumHeaPum(y_start=1)</code> and <code>pumHeaPumSou(y_start=1)</code>.<br/>
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1498\">#1498</a>.
-</li>
-<li>
-April 21, 2021, by Michael Wetter:<br/>
-Corrected error in calculation of design mass flow rate.<br/>
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2458\">#2458</a>.
-</li>
-<li>
-May 2, 2019, by Jianjun Hu:<br/>
-Replaced fluid source. This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
-</li>
-<li>
-March 3, 2017, by Michael Wetter:<br/>
-Changed mass flow test to use a hysteresis as a threshold test
-can cause chattering.
-</li>
-<li>
-January 27, 2017, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Example that simulates one room equipped with a radiator. Hot water is produced
+ by a <i>24</i> kW nominal capacity heat pump. The source side water temperature to the
+ heat pump is constant at <i>10</i>&deg;C.
+ </p>
+ <p>
+ The heat pump is turned on when the room temperature falls below
+ <i>19</i>&deg;C and turned
+ off when the room temperature rises above <i>21</i>&deg;C.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 22, 2021, by Michael Wetter:<br/>
+ Removed assignments <code>pumHeaPum(y_start=1)</code> and <code>pumHeaPumSou(y_start=1)</code>.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/1498\">#1498</a>.
+ </li>
+ <li>
+ April 21, 2021, by Michael Wetter:<br/>
+ Corrected error in calculation of design mass flow rate.<br/>
+ This is for
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/2458\">#2458</a>.
+ </li>
+ <li>
+ May 2, 2019, by Jianjun Hu:<br/>
+ Replaced fluid source. This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1072\"> #1072</a>.
+ </li>
+ <li>
+ March 3, 2017, by Michael Wetter:<br/>
+ Changed mass flow test to use a hysteresis as a threshold test
+ can cause chattering.
+ </li>
+ <li>
+ January 27, 2017, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-240,-220},{100,
             100}})),
     __Dymola_Commands(file=
@@ -334,6 +334,6 @@ First implementation.
         "Simulate and plot"),
     experiment(
       StopTime=172800,
-      Tolerance=1e-08), 
-   __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-08),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ScrollWaterToWater_OneRoomRadiator;

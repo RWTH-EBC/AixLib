@@ -3,10 +3,10 @@ model CHPSystemNoControl "Example that illustrates use of CHPNoControl model"
   extends Modelica.Icons.Example;
   package Medium = AixLib.Media.Water
     annotation (choicesAllMatching=true);
-  AixLib.Fluid.BoilerCHP.CHPNoControl combinedHeatPower(
+  CHPNoControl
+      combinedHeatPower(
     redeclare package Medium = Medium,
     m_flow_nominal=0.02,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     param=DataBase.CHP.CHPDataSimple.CHP_FMB_65_GSK()) "CHP"
     annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
   Modelica.Fluid.Sources.MassFlowSource_T source(
@@ -62,6 +62,6 @@ equation
 </html>"),
 experiment(Tolerance=1e-6, StopTime=300, Interval=60),
     __Dymola_Commands(file=
-          "modelica://AixLib/Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos"
+          "Resources/Scripts/Dymola/Fluid/BoilerCHP/Examples/CHPSystemNoControl.mos"
         "Simulate and Plot"));
 end CHPSystemNoControl;

@@ -48,45 +48,45 @@ equation
                "ACS = %ACS")}),
 defaultComponentName="floExc",
 Documentation(info="<html>
-<p>
-This model computes the air exchange between volumes.
-</p>
-<p>
-Input is the air change per seconds. The volume flow rate is computed as
-</p>
-<pre>
-  V_flow = ACS * V
-</pre>
-<p>
-where <code>ACS</code> is an input and the volume <code>V</code> is a parameter.
-</p>
-</html>",
+ <p>
+ This model computes the air exchange between volumes.
+ </p>
+ <p>
+ Input is the air change per seconds. The volume flow rate is computed as
+ </p>
+ <pre>
+   V_flow = ACS * V
+ </pre>
+ <p>
+ where <code>ACS</code> is an input and the volume <code>V</code> is a parameter.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-August 18, 2014, by Michael Wetter:<br/>
-Removed parameter <code>forceErrorControlOnFlow</code> as it was not used.
-Changed message of assert statement to avoid an error in OpenModelica.
-</li>
-<li>
-October 8, 2013 by Michael Wetter:<br/>
-Changed the parameter <code>useConstantDensity</code> to
-<code>useDefaultProperties</code> to use consistent names within this package.
-A conversion script can be used to update this parameter.
-</li>
-<li>
-December 14, 2012 by Michael Wetter:<br/>
-Renamed protected parameters for consistency with the naming conventions.
-</li>
-<li>
-July 20, 2010 by Michael Wetter:<br/>
-Migrated model to Modelica 3.1 and integrated it into the Buildings library.
-</li>
-<li>
-January 4, 2006 by Michael Wetter:<br/>
-Implemented first version.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ August 18, 2014, by Michael Wetter:<br/>
+ Removed parameter <code>forceErrorControlOnFlow</code> as it was not used.
+ Changed message of assert statement to avoid an error in OpenModelica.
+ </li>
+ <li>
+ October 8, 2013 by Michael Wetter:<br/>
+ Changed the parameter <code>useConstantDensity</code> to
+ <code>useDefaultProperties</code> to use consistent names within this package.
+ A conversion script can be used to update this parameter.
+ </li>
+ <li>
+ December 14, 2012 by Michael Wetter:<br/>
+ Renamed protected parameters for consistency with the naming conventions.
+ </li>
+ <li>
+ July 20, 2010 by Michael Wetter:<br/>
+ Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+ </li>
+ <li>
+ January 4, 2006 by Michael Wetter:<br/>
+ Implemented first version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ZonalFlow_ACS;

@@ -119,74 +119,74 @@ equation
           fillPattern=FillPattern.Solid,
           pattern=LinePattern.None)}),
     Documentation(info="<html>
-<p>
-This is a partial model for models that describe the bi-directional
-air flow through large openings.
-</p>
-<p>
-Models that extend this model need to compute
-<code>mAB_flow</code> and <code>mBA_flow</code>,
-or alternatively <code>VAB_flow</code> and <code>VBA_flow</code>,
-and the face area <code>area</code>.
-The face area is a variable to allow this partial model to be used
-for doors that can be open or closed as a function of an input signal.
-</p>
-</html>",
+ <p>
+ This is a partial model for models that describe the bi-directional
+ air flow through large openings.
+ </p>
+ <p>
+ Models that extend this model need to compute
+ <code>mAB_flow</code> and <code>mBA_flow</code>,
+ or alternatively <code>VAB_flow</code> and <code>VBA_flow</code>,
+ and the face area <code>area</code>.
+ The face area is a variable to allow this partial model to be used
+ for doors that can be open or closed as a function of an input signal.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 12, 2020, by Michael Wetter:<br/>
-Changed assignment of <code>m1_flow_small</code> and
-<code>m2_flow_small</code> to <code>final</code>.
-These quantities are not used in this model and models that extend from it.
-Hence there is no need for the user to change the value.
-</li>
-<li>
-January 18, 2019, by Jianjun Hu:<br/>
-Limited the media choice to moist air only.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-September 13, 2018, by Michael Wetter:<br/>
-Set <code>allowFlowReversal=true</code> as the flow can be slightly negative
-due to the regularization, in which case the <code>m_flow(min=0)</code>
-that is set in the base class
-<a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
-AixLib.Fluid.Interfaces.PartialFourPort</a>
-is violated.<br/>
-See
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/937\">#937</a>.
-</li>
-<li>
-November 3, 2016, by Michael Wetter:<br/>
-Removed start values for inflowing density
-to simplify the parameter window, and because this can usually
-be computed from the state variables.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/552\">#552</a>.
-</li>
-<li>
-February 24, 2015 by Michael Wetter:<br/>
-Changed model to use
-<a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
-AixLib.Utilities.Psychrometrics.Functions.density_pTX</a>
-for the density computation
-as
-<a href=\"modelica://AixLib.Media.Air.density\">
-AixLib.Media.Air.density</a>
-does not depend on temperature.
-</li>
-<li>June 18, 2014 by Michael Wetter:<br/>
-Added start values and <code>fixed=true</code> attribute for
-<code>mExcAB</code> and <code>mExcBA</code>.
-This avoids a warning during translation.
-</li>
-<li>July 20, 2010 by Michael Wetter:<br/>
-       Migrated model to Modelica 3.1 and integrated it into the Buildings library.
-</li>
-<li>February 4, 2005 by Michael Wetter:<br/>
-       Released first version.
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ May 12, 2020, by Michael Wetter:<br/>
+ Changed assignment of <code>m1_flow_small</code> and
+ <code>m2_flow_small</code> to <code>final</code>.
+ These quantities are not used in this model and models that extend from it.
+ Hence there is no need for the user to change the value.
+ </li>
+ <li>
+ January 18, 2019, by Jianjun Hu:<br/>
+ Limited the media choice to moist air only.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ September 13, 2018, by Michael Wetter:<br/>
+ Set <code>allowFlowReversal=true</code> as the flow can be slightly negative
+ due to the regularization, in which case the <code>m_flow(min=0)</code>
+ that is set in the base class
+ <a href=\"modelica://AixLib.Fluid.Interfaces.PartialFourPort\">
+ AixLib.Fluid.Interfaces.PartialFourPort</a>
+ is violated.<br/>
+ See
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/937\">#937</a>.
+ </li>
+ <li>
+ November 3, 2016, by Michael Wetter:<br/>
+ Removed start values for inflowing density
+ to simplify the parameter window, and because this can usually
+ be computed from the state variables.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/552\">#552</a>.
+ </li>
+ <li>
+ February 24, 2015 by Michael Wetter:<br/>
+ Changed model to use
+ <a href=\"modelica://AixLib.Utilities.Psychrometrics.Functions.density_pTX\">
+ Buildings.Utilities.Psychrometrics.Functions.density_pTX</a>
+ for the density computation
+ as
+ <a href=\"modelica://AixLib.Media.Air.density\">
+ Buildings.Media.Air.density</a>
+ does not depend on temperature.
+ </li>
+ <li>June 18, 2014 by Michael Wetter:<br/>
+ Added start values and <code>fixed=true</code> attribute for
+ <code>mExcAB</code> and <code>mExcBA</code>.
+ This avoids a warning during translation.
+ </li>
+ <li>July 20, 2010 by Michael Wetter:<br/>
+        Migrated model to Modelica 3.1 and integrated it into the Buildings library.
+ </li>
+ <li>February 4, 2005 by Michael Wetter:<br/>
+        Released first version.
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayFlowElement;

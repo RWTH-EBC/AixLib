@@ -8,7 +8,6 @@ package Steam
     reducedX=true,
     fixedX=true,
     FluidConstants={Modelica.Media.IdealGases.Common.FluidData.H2O},
-    ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.pTX,
     reference_T=273.15,
     reference_p=101325,
     reference_X={1},
@@ -45,11 +44,11 @@ redeclare replaceable function extends density
 algorithm
   d := rho_pT(state.p, state.T);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Density is computed from temperature and pressure using the
-IAPWS-IF97 relationship via the Gibbs free energy for region 2.
-</p>
-</html>"));
+ <p>
+ Density is computed from temperature and pressure using the
+ IAPWS-IF97 relationship via the Gibbs free energy for region 2.
+ </p>
+ </html>"));
 end density;
 
 redeclare replaceable function extends dynamicViscosity
@@ -60,11 +59,11 @@ algorithm
           T=state.T,
           p=state.p);
     annotation (Inline=true, Documentation(info="<html>
-<p>
-Dynamic viscosity is computed from density, temperature and pressure
-using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Dynamic viscosity is computed from density, temperature and pressure
+ using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end dynamicViscosity;
 
 redeclare replaceable function extends molarMass
@@ -72,10 +71,10 @@ redeclare replaceable function extends molarMass
 algorithm
   MM := steam.MM;
     annotation (Documentation(info="<html>
-<p>
-Returns the molar mass.
-</p>
-</html>"));
+ <p>
+ Returns the molar mass.
+ </p>
+ </html>"));
 end molarMass;
 
 redeclare function extends pressure
@@ -83,10 +82,10 @@ redeclare function extends pressure
 algorithm
   p := state.p;
     annotation (Documentation(info="<html>
-<p>
-Pressure is returned from the thermodynamic state record input as a simple assignment.
-</p>
-</html>"));
+ <p>
+ Pressure is returned from the thermodynamic state record input as a simple assignment.
+ </p>
+ </html>"));
 end pressure;
 
 replaceable function saturationPressure
@@ -97,11 +96,11 @@ replaceable function saturationPressure
 algorithm
    psat := Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.psat(Tsat);
  annotation (Inline=true, Documentation(info="<html>
-<p>
-Saturation pressure is computed from temperature
-using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Saturation pressure is computed from temperature
+ using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end saturationPressure;
 
 replaceable function saturationTemperature
@@ -111,11 +110,11 @@ replaceable function saturationTemperature
 algorithm
     Tsat := Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.tsat(psat);
     annotation (Inline=true, Documentation(info="<html>
-<p>
-Saturation temperature is computed from pressure
-using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Saturation temperature is computed from pressure
+ using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end saturationTemperature;
 
 redeclare replaceable function extends specificEnthalpy
@@ -126,41 +125,41 @@ redeclare replaceable function extends specificEnthalpy
     constant Temperature TMean =  4.15555698340926E+02 "Mean temperature";
     constant Real pSD = 1.13236055019318E+05 "Normalization value";
     constant Real TSD = 1.32971013463839E+01 "Normalization value";
-    Modelica.Units.SI.PressureDifference pHat;
-    Modelica.Units.SI.TemperatureDifference THat;
+    AbsolutePressure pHat;
+    Temperature THat;
 algorithm
   pHat := (state.p - pMean)/pSD;
   THat := (state.T - TMean)/TSD;
   h := a[1] + a[2]*pHat + a[3]*THat;
 annotation (Inline=true,smoothOrder=2,
     Documentation(info="<html>
-<p>
-Returns the specific enthalpy.
-</p>
-<h4>Implementation</h4>
-<p>
-The function is based on
-<a href=\"modelica://Modelica.Media.Water.WaterIF97_base.specificEnthalpy_pT\">
-Modelica.Media.Water.WaterIF97_base.specificEnthalpy_pT</a>.
-However, for the typical range of temperatures and pressures
-encountered in building and district energy applications,
-a linear function sufficies. This implementation is therefore a linear
-surface fit of the IF97 formulation <i>h(p,T)</i> in the ranges of
-<i>100&deg;C &le; T &le; 160&deg;C</i> and
-<i>100 kPa &le; p &le; 550</i> kPa. The fit is scaled by the dataset's
-mean and standard deviation values to improve conditioning.
-The largest error of this linearization is  <i>2.42 kJ/kg</i> (<i>0.09</i>%),
-which occurs at <i>100.6&deg;C</i> and <i>100 kPa</i>.
-The root mean square error (RMSE) is <i>0.76 kJ/kg</i>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 30, 2020, by Kathryn Hinkelman:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Returns the specific enthalpy.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ The function is based on
+ <a href=\"modelica://Modelica.Media.Water.WaterIF97_base.specificEnthalpy_pT\">
+ Modelica.Media.Water.WaterIF97_base.specificEnthalpy_pT</a>.
+ However, for the typical range of temperatures and pressures
+ encountered in building and district energy applications,
+ a linear function sufficies. This implementation is therefore a linear
+ surface fit of the IF97 formulation <i>h(p,T)</i> in the ranges of
+ <i>100&deg;C &le; T &le; 160&deg;C</i> and
+ <i>100 kPa &le; p &le; 550</i> kPa. The fit is scaled by the dataset's
+ mean and standard deviation values to improve conditioning.
+ The largest error of this linearization is  <i>2.42 kJ/kg</i> (<i>0.09</i>%),
+ which occurs at <i>100.6&deg;C</i> and <i>100 kPa</i>.
+ The root mean square error (RMSE) is <i>0.76 kJ/kg</i>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 30, 2020, by Kathryn Hinkelman:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"));
 end specificEnthalpy;
 
 redeclare replaceable function extends specificEntropy
@@ -171,35 +170,35 @@ redeclare replaceable function extends specificEntropy
     constant Temperature TMean =  4.15555698340926E+02 "Mean temperature";
     constant Real pSD = 1.13236055019318E+05 "Normalization value";
     constant Real TSD = 1.32971013463839E+01 "Normalization value";
-    Modelica.Units.SI.PressureDifference pHat;
-    Modelica.Units.SI.TemperatureDifference THat;
+    AbsolutePressure pHat;
+    Temperature THat;
 algorithm
   pHat := (state.p - pMean)/pSD;
   THat := (state.T - TMean)/TSD;
   s := a[1] + a[2]*pHat + a[3]*THat + pHat*(a[4]*pHat + a[5]*THat);
 annotation (Inline=true,smoothOrder=2,
     Documentation(info="<html>
-<p>
-Returns the specific entropy.
-</p>
-<h4>Implementation</h4>
-<p>
-The function is based on
-<a href=\"modelica://Modelica.Media.Water.WaterIF97_base.specificEntropy\">
-Modelica.Media.Water.WaterIF97_base.specificEntropy</a>.
-However, for the typical range of temperatures and pressures
-encountered in building and district energy applications,
-an invertible polynomial fit sufficies. This implementation is therefore
-a polynomial fit (quadratic in pressure, linear in temperature) of the
-IF97 formulation <i>s(p,T)</i> in the ranges of
-<i>100&deg;C &le; T &le; 160&deg;C</i> and
-<i>100 kPa &le; p &le; 550 kPa</i>. The fit is scaled by the dataset's
-mean and standard deviation values to improve conditioning.
-The largest error of this approximation is <i>0.047 kJ/kg-K</i> (<i>0.70</i>%),
-which occurs at <i>160&deg;C</i> and <i>550 kPa</i>.
-The root mean square error (RMSE) is <i>12.56 J/kg-K</i>.
-</p>
-</html>"));
+ <p>
+ Returns the specific entropy.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ The function is based on
+ <a href=\"modelica://Modelica.Media.Water.WaterIF97_base.specificEntropy\">
+ Modelica.Media.Water.WaterIF97_base.specificEntropy</a>.
+ However, for the typical range of temperatures and pressures
+ encountered in building and district energy applications,
+ an invertible polynomial fit sufficies. This implementation is therefore
+ a polynomial fit (quadratic in pressure, linear in temperature) of the
+ IF97 formulation <i>s(p,T)</i> in the ranges of
+ <i>100&deg;C &le; T &le; 160&deg;C</i> and
+ <i>100 kPa &le; p &le; 550 kPa</i>. The fit is scaled by the dataset's
+ mean and standard deviation values to improve conditioning.
+ The largest error of this approximation is <i>0.047 kJ/kg-K</i> (<i>0.70</i>%),
+ which occurs at <i>160&deg;C</i> and <i>550 kPa</i>.
+ The root mean square error (RMSE) is <i>12.56 J/kg-K</i>.
+ </p>
+ </html>"));
 end specificEntropy;
 
 redeclare replaceable function extends specificInternalEnergy
@@ -207,10 +206,10 @@ redeclare replaceable function extends specificInternalEnergy
 algorithm
   u := specificEnthalpy(state) - state.p/density(state);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Returns the specific internal energy for a given state.
-</p>
-</html>"));
+ <p>
+ Returns the specific internal energy for a given state.
+ </p>
+ </html>"));
 end specificInternalEnergy;
 
 redeclare replaceable function extends specificHeatCapacityCp
@@ -229,12 +228,12 @@ algorithm
     smoothOrder=2,
     Inline=true,
       Documentation(info="<html>
-<p>
-Specific heat at constant pressure is computed from temperature and
-pressure using the IAPWS-IF97 relationship via the Gibbs
-free energy for region 2.
-</p>
-</html>"));
+ <p>
+ Specific heat at constant pressure is computed from temperature and
+ pressure using the IAPWS-IF97 relationship via the Gibbs
+ free energy for region 2.
+ </p>
+ </html>"));
 end specificHeatCapacityCp;
 
 redeclare replaceable function extends specificHeatCapacityCv
@@ -255,24 +254,24 @@ algorithm
     Inline=true,
     LateInline = true,
       Documentation(info="<html>
-<p>
-Specific heat at constant volume is computed from temperature and
-pressure using the IAPWS-IF97 relationship via the Gibbs
-free energy for region 2.
-</p>
-</html>",
+ <p>
+ Specific heat at constant volume is computed from temperature and
+ pressure using the IAPWS-IF97 relationship via the Gibbs
+ free energy for region 2.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 6, 2020, by Michael Wetter:<br/>
-Added <code>LateInline=true</code>.
-This is required for OCT-r17595_JM-r14295, otherwise
-<a href=\"modelica://AixLib.Media.Examples.SteamDerivativeCheck\">
-AixLib.Media.Examples.SteamDerivativeCheck</a>
-does not translate.
-</li>
-</ul>
-</html>"));
+ <ul>
+ <li>
+ December 6, 2020, by Michael Wetter:<br/>
+ Added <code>LateInline=true</code>.
+ This is required for OCT-r17595_JM-r14295, otherwise
+ <a href=\"modelica://AixLib.Media.Examples.SteamDerivativeCheck\">
+ AixLib.Media.Examples.SteamDerivativeCheck</a>
+ does not translate.
+ </li>
+ </ul>
+ </html>"));
 end specificHeatCapacityCv;
 
 redeclare replaceable function extends specificGibbsEnergy
@@ -287,10 +286,10 @@ redeclare replaceable function extends specificHelmholtzEnergy
 algorithm
   f := specificEnthalpy(state) - steam.R*state.T - state.T*specificEntropy(state);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Returns the specific Helmholtz energy for a given state.
-</p>
-</html>"));
+ <p>
+ Returns the specific Helmholtz energy for a given state.
+ </p>
+ </html>"));
 end specificHelmholtzEnergy;
 
 redeclare replaceable function extends setState_dTX
@@ -299,11 +298,11 @@ algorithm
   state := ThermodynamicState(p=pressure_dT(d,T), T=T);
 annotation (Inline=true,
       Documentation(info="<html>
-<p>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
-is computed from density <code>d</code> and temperature <code>T</code>.
-</p>
-</html>"));
+ <p>
+ The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
+ is computed from density <code>d</code> and temperature <code>T</code>.
+ </p>
+ </html>"));
 end setState_dTX;
 
 redeclare replaceable function extends setState_pTX
@@ -312,11 +311,11 @@ algorithm
   state := ThermodynamicState(p=p, T=T);
 annotation (Inline=true,smoothOrder=2,
     Documentation(info="<html>
-<p>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
-is computed from pressure <code>p</code> and temperature <code>T</code>.
-</p>
-</html>"));
+ <p>
+ The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
+ is computed from pressure <code>p</code> and temperature <code>T</code>.
+ </p>
+ </html>"));
 end setState_pTX;
 
 redeclare replaceable function extends setState_phX
@@ -325,11 +324,11 @@ algorithm
   state := ThermodynamicState(p=p, T=temperature_ph(p,h));
 annotation (Inline=true,smoothOrder=2,
       Documentation(info="<html>
-<p>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
-is computed from pressure <code>p</code> and specific enthalpy <code>h</code>.
-</p>
-</html>"));
+ <p>
+ The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
+ is computed from pressure <code>p</code> and specific enthalpy <code>h</code>.
+ </p>
+ </html>"));
 end setState_phX;
 
 redeclare replaceable function extends setState_psX
@@ -338,11 +337,11 @@ algorithm
   state := ThermodynamicState(p=p, T=temperature_ps(p,s));
 annotation (Inline=true,smoothOrder=2,
     Documentation(info="<html>
-<p>
-The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
-is computed from pressure <code>p</code> and specific entropy <code>s</code>.
-</p>
-</html>"));
+ <p>
+ The <a href=\"modelica://Modelica.Media.Interfaces.PartialMixtureMedium.ThermodynamicState\">thermodynamic state record</a>
+ is computed from pressure <code>p</code> and specific entropy <code>s</code>.
+ </p>
+ </html>"));
 end setState_psX;
 
 redeclare function extends temperature
@@ -350,10 +349,10 @@ redeclare function extends temperature
 algorithm
   T := state.T;
     annotation (Documentation(info="<html>
-<p>
-Temperature is returned from the thermodynamic state record input as a simple assignment.
-</p>
-</html>"));
+ <p>
+ Temperature is returned from the thermodynamic state record input as a simple assignment.
+ </p>
+ </html>"));
 end temperature;
 
 redeclare replaceable function extends thermalConductivity
@@ -364,11 +363,11 @@ algorithm
         state.T,
         state.p);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Thermal conductivity is computed from density, temperature and pressure
-using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Thermal conductivity is computed from density, temperature and pressure
+ using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end thermalConductivity;
 
 redeclare function extends density_derh_p
@@ -380,11 +379,11 @@ algorithm
         phase = 1,
         region = 2);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Returns the partial derivative of density with respect
-to specific enthalpy at constant pressure using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Returns the partial derivative of density with respect
+ to specific enthalpy at constant pressure using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end density_derh_p;
 
 redeclare function extends density_derp_h
@@ -396,11 +395,11 @@ algorithm
         phase = 1,
         region = 2);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Returns the partial derivative of density with respect
-to pressure at constant specific enthalpy using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Returns the partial derivative of density with respect
+ to pressure at constant specific enthalpy using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end density_derp_h;
 
 redeclare replaceable function extends isentropicExponent
@@ -411,11 +410,11 @@ algorithm
         T = state.T,
         region = 2);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Isentropic exponent is computed from temperature and pressure
-using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Isentropic exponent is computed from temperature and pressure
+ using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end isentropicExponent;
 
 redeclare replaceable function extends isothermalCompressibility
@@ -426,11 +425,11 @@ algorithm
         T = state.T,
         region = 2);
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Isothermal compressibility is computed from temperature and pressure
-using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Isothermal compressibility is computed from temperature and pressure
+ using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end isothermalCompressibility;
 
 redeclare replaceable function extends isobaricExpansionCoefficient
@@ -441,11 +440,11 @@ algorithm
         T = state.T,
         region = 2);
     annotation (Documentation(info="<html>
-<p>
-Isobaric expansion coefficient is computed from temperature and
-pressure using the IAPWS-IF97 formulation.
-</p>
-</html>"));
+ <p>
+ Isobaric expansion coefficient is computed from temperature and
+ pressure using the IAPWS-IF97 formulation.
+ </p>
+ </html>"));
 end isobaricExpansionCoefficient;
 
 redeclare replaceable function extends isentropicEnthalpy
@@ -456,17 +455,17 @@ algorithm
         s = specificEntropy(refState),
         phase = 0); // phase 0 means unknown
   annotation (Inline=true, Documentation(info="<html>
-<p>
-Isentropic enthalpy is computed using the IAPWS-IF97 formulation:
-</p>
-<ol>
-<li> A medium is in a particular state, <code>refState</code>.</li>
-<li> The enthalpy at another state <code>h_is</code> shall be computed
-     under the assumption that the state transformation from <code>refState</code> to <code>h_is</code>
-     is performed with a change of specific entropy <i>ds = 0</i> and the pressure of state <code>h_is</code>
-     is <code>p_downstream</code> and the composition <code>X</code> upstream and downstream is assumed to be the same.</li>
-</ol>
-</html>"));
+ <p>
+ Isentropic enthalpy is computed using the IAPWS-IF97 formulation:
+ </p>
+ <ol>
+ <li> A medium is in a particular state, <code>refState</code>.</li>
+ <li> The enthalpy at another state <code>h_is</code> shall be computed
+      under the assumption that the state transformation from <code>refState</code> to <code>h_is</code>
+      is performed with a change of specific entropy <i>ds = 0</i> and the pressure of state <code>h_is</code>
+      is <code>p_downstream</code> and the composition <code>X</code> upstream and downstream is assumed to be the same.</li>
+ </ol>
+ </html>"));
 end isentropicEnthalpy;
 //////////////////////////////////////////////////////////////////////
 // Protected classes
@@ -685,36 +684,36 @@ algorithm
     1.02325742818280e-7 + o[44])*tau2)));
 annotation(smoothOrder = 2,
 Documentation(info="<html>
-<p>
-This function is identical to
-<a href=\"modelica://Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2\">
-Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2</a>
-except that
-</p>
-<ul>
-<li>it contains the <code>smoothOrder</code> annotation, and
-</li>
-<li>
-it removes the assertions on the temperature and pressure because the applicability of
-this medium is steam heating which has medium states that are inside these values.
-</li>
-</ul>
-<p>
-The <code>smoothOrder</code> is needed for Optimica to differentiate the specific heat capacity,
-which is used in
-<a href=\"modelica://AixLib.Media.Examples.SteamDerivativeCheck\">
-AixLib.Media.Examples.SteamDerivativeCheck</a>.
-The function is differentiable except at <code>p=0</code>, which is far away from the state for which
-this function is used.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 11, 2021, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ This function is identical to
+ <a href=\"modelica://Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2\">
+ Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2</a>
+ except that
+ </p>
+ <ul>
+ <li>it contains the <code>smoothOrder</code> annotation, and
+ </li>
+ <li>
+ it removes the assertions on the temperature and pressure because the applicability of
+ this medium is steam heating which has medium states that are inside these values.
+ </li>
+ </ul>
+ <p>
+ The <code>smoothOrder</code> is needed for Optimica to differentiate the specific heat capacity,
+ which is used in
+ <a href=\"modelica://AixLib.Media.Examples.SteamDerivativeCheck\">
+ AixLib.Media.Examples.SteamDerivativeCheck</a>.
+ The function is differentiable except at <code>p=0</code>, which is far away from the state for which
+ this function is used.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 11, 2021, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"));
 end g2;
 
 function temperature_ph
@@ -729,38 +728,38 @@ function temperature_ph
     constant Temperature TMean =  4.15555698340926E+02 "Mean temperature";
     constant Real pSD = 1.13236055019318E+05 "Normalization value";
     constant Real TSD = 1.32971013463839E+01 "Normalization value";
-    Modelica.Units.SI.PressureDifference pHat;
+    AbsolutePressure pHat;
 algorithm
   pHat := (p - pMean)/pSD;
   T := b[1] + b[2]*pHat + b[3]*h;
 annotation (Inline=true,smoothOrder=2,
       Documentation(info="<html>
-<p>
-Returns temperature from specific enthalpy and pressure.
-</p>
-<h4>Implementation</h4>
-<p>
-This linear approximation is the inverse or backward function of
-<a href=\"modelica://AixLib.Media.Steam.specificEnthalpy\">
-AixLib.Media.Steam.specificEnthalpy</a> and is numerically
-consistent with that forward function.
-</p>
-<p>
-The largest error of this linearization is  <i>1.17&deg;C</i> (<i>0.31</i>%),
-which occurs at <i>100&deg;C</i> and <i>100 kPa</i>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 13, 2021, by Kathryn Hinkelman:<br/>
-Added pressure as a variable.
-</li>
-<li>
-October 30, 2020, by Kathryn Hinkelman:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Returns temperature from specific enthalpy and pressure.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ This linear approximation is the inverse or backward function of
+ <a href=\"modelica://AixLib.Media.Steam.specificEnthalpy\">
+ AixLib.Media.Steam.specificEnthalpy</a> and is numerically
+ consistent with that forward function.
+ </p>
+ <p>
+ The largest error of this linearization is  <i>1.17&deg;C</i> (<i>0.31</i>%),
+ which occurs at <i>100&deg;C</i> and <i>100 kPa</i>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 13, 2021, by Kathryn Hinkelman:<br/>
+ Added pressure as a variable.
+ </li>
+ <li>
+ October 30, 2020, by Kathryn Hinkelman:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"));
 end temperature_ph;
 
 function temperature_ps
@@ -774,40 +773,40 @@ function temperature_ps
     constant Temperature TMean =  4.15555698340926E+02 "Mean temperature";
     constant Real pSD = 1.13236055019318E+05 "Normalization value";
     constant Real TSD = 1.32971013463839E+01 "Normalization value";
-    Modelica.Units.SI.PressureDifference pHat;
-    Modelica.Units.SI.TemperatureDifference THat;
+    AbsolutePressure pHat;
+    Temperature THat;
 algorithm
   pHat := (p - pMean)/pSD;
   THat := (s - a[1] - pHat*(a[2] + a[4]*pHat))/(a[3] + a[5]*pHat);
   T := THat*TSD + TMean;
 annotation (Inline=true,smoothOrder=2,
     Documentation(info="<html>
-<p>
-Returns temperature from specific entropy and pressure.
-</p>
-<h4>Implementation</h4>
-<p>
-This polynomial approximation is the inverse or backward function of
-<a href=\"modelica://AixLib.Media.Steam.specificEntropy\">
-AixLib.Media.Steam.specificEntropy</a> and is numerically
-consistent with that forward function.
-</p>
-<p>
-The largest error of this linearization is  <i>7.70&deg;C</i> (<i>1.86</i>%),
-which occurs at <i>137.4&deg;C</i> and <i>100 kPa</i>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 13, 2021, by Kathryn Hinkelman:<br/>
-Added pressure as a variable.
-</li>
-<li>
-October 30, 2020, by Kathryn Hinkelman:<br/>
-First implementation.
-</li>
-</ul>
-</html>"));
+ <p>
+ Returns temperature from specific entropy and pressure.
+ </p>
+ <h4>Implementation</h4>
+ <p>
+ This polynomial approximation is the inverse or backward function of
+ <a href=\"modelica://AixLib.Media.Steam.specificEntropy\">
+ AixLib.Media.Steam.specificEntropy</a> and is numerically
+ consistent with that forward function.
+ </p>
+ <p>
+ The largest error of this linearization is  <i>7.70&deg;C</i> (<i>1.86</i>%),
+ which occurs at <i>137.4&deg;C</i> and <i>100 kPa</i>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 13, 2021, by Kathryn Hinkelman:<br/>
+ Added pressure as a variable.
+ </li>
+ <li>
+ October 30, 2020, by Kathryn Hinkelman:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"));
 end temperature_ps;
 
 function rho_pT "Density as function of temperature and pressure"
@@ -819,24 +818,20 @@ function rho_pT "Density as function of temperature and pressure"
   Modelica.Media.Common.GibbsDerivs g
     "Dimensionless Gibbs function and derivatives w.r.t. pi and tau";
   SpecificHeatCapacity R "Specific gas constant of water vapor";
-  function g2_smooth
-    extends Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2;
-    annotation(smoothOrder=2);
-  end g2_smooth;
 algorithm
   R := Modelica.Media.Water.IF97_Utilities.BaseIF97.data.RH2O;
   // Region 2 properties
-  g := g2_smooth(p, T);
+  g := Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2(p, T);
   rho := p/(R*T*g.pi*g.gpi);
   annotation (
     Inline=true,
     smoothOrder=2,
     Documentation(info="<html>
-<p>
-Density is computed from temperature and pressure using the
-IAPWS-IF97 relationship via the Gibbs free energy for region 2.
-</p>
-</html>"));
+ <p>
+ Density is computed from temperature and pressure using the
+ IAPWS-IF97 relationship via the Gibbs free energy for region 2.
+ </p>
+ </html>"));
 end rho_pT;
 
 function pressure_dT
@@ -852,6 +847,7 @@ algorithm
         region=2);
   annotation (Inline=true);
 end pressure_dT;
+
   annotation (Icon(graphics={
       Line(
         points={{50,30},{30,10},{50,-10},{30,-30}},
@@ -865,104 +861,71 @@ end pressure_dT;
         points={{-30,30},{-50,10},{-30,-10},{-50,-30}},
         color={0,0,0},
         smooth=Smooth.Bezier)}), Documentation(info="<html>
-<p>
-This medium package models water vapor (pure steam, region 2, quality=1).
-</p>
-<p>
-Thermodynamic properties are calculated primarily in terms of pressure
-and temperature.
-For thermodynamic property functions, the IAPWS-IF97 formulations are adapted,
-and approximate relationships are provided for commonly used functions to improve
-computational efficiency and provide backward compatability.
-</p>
-<p>
-Detailed functions from <a href=\"modelica://Modelica.Media.Water.WaterIF97_R2pT\">
-Modelica.Media.Water.WaterIF97_R2pT</a> are generally used, except for
-<a href=\"modelica://AixLib.Media.Steam.specificEnthalpy\">AixLib.Media.Steam.specificEnthalpy</a> and
-<a href=\"modelica://AixLib.Media.Steam.specificEntropy\">AixLib.Media.Steam.specificEntropy</a>
-(both \"forward\" functions), as well as their \"backward\" inverse functions
-<a href=\"modelica://AixLib.Media.Steam.temperature_ph\">AixLib.Media.Steam.temperature_ph</a> and
-<a href=\"modelica://AixLib.Media.Steam.temperature_ps\">AixLib.Media.Steam.temperature_ps</a>,
-which are numerically consistent with the forward functions.
-The following modifications were made relative to the
-<a href=\"modelica://Modelica.Media.Water.WaterIF97_R2pT\">
-Modelica.Media.Water.WaterIF97_R2pT</a> medium package:
-</p>
-<ol>
-<li>Analytic expressions for the derivatives are provided for all thermodynamic property functions.</li>
-<li>The implementation is generally simpler in order to increase the likelihood
-of more efficient simulations. </li>
-</ol>
-<h4>Limitations </h4>
-<ul>
-<li>
-The valid temperature range is <i>100&deg;C &le; T &le; 160&deg;C</i>, and the valid
-pressure range is <i>100 kPa &le; p &le; 550 kPa</i>.
-</li>
-<li>When phase change is required, this model is to be used in combination with
-<a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>
-for the liquid phase (quality=0). Please note that the maximum temperature for liquid
-water is <code>T_max=130&deg;C</code>. This is suitable for real-world condensate
-return and boiler feedwater systems, which are typically vented to the atmosphere
-with steam contained via steam traps (thus, <code>T_max=100&deg;C</code> for the
-condensate or feedwater in properly functioning systems).</li>
-</ul>
-<h4>Applications </h4>
-<p>
-This model is intended for first generation district heating systems and other
-steam heating processes involving low and medium pressure steam.
-</p>
-<h4>References </h4>
-<p>W. Wagner et al., &ldquo;The IAPWS industrial formulation 1997 for the thermodynamic
-properties of water and steam,&rdquo; <i>J. Eng. Gas Turbines Power</i>, vol. 122, no.
-1, pp. 150&ndash;180, 2000.
-</p>
-<p>
-Kathryn Hinkelman, Saranya Anbarasu, Michael Wetter, Antoine Gautier, Wangda Zuo. 2022.
-&ldquo;A Fast and Accurate Modeling Approach for Water and Steam
-Thermodynamics with Practical Applications in District Heating System Simulation,&rdquo;
-<i>Energy</i>, 254(A), pp. 124227.
-<a href=\"https://doi.org/10.1016/j.energy.2022.124227\">10.1016/j.energy.2022.124227</a>
-</p>
-<p>
-Kathryn Hinkelman, Saranya Anbarasu, Michael Wetter, Antoine Gautier, Baptiste Ravache, Wangda Zuo 2022.
-&ldquo;Towards Open-Source Modelica Models For Steam-Based District Heating Systems.&rdquo;
-<i>Proc. of the 1st International Workshop On Open Source Modelling And Simulation Of
-Energy Systems (OSMSES 2022)</i>, Aachen, German, April 4-5, 2022.
-<a href=\"https://doi.org/10.1109/OSMSES54027.2022.9769121\">10.1109/OSMSES54027.2022.9769121</a>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 29, 2023, by Kathryn Hinkelman:<br/>
-Added publication references.
-</li>
-<li>
-March 10, 2023, by Saranya Anbarasu:<br/>
-Changed the variable type definition of <code>pHat</code> and <code>THat</code>
-from absolute to <code>Modelica.Units.SI.PressureDifference</code> and
-<code>Modelica.Units.SI.TemperatureDifference</code> to prevent min/max
-assertion errors during initilization.
-</li>
-<li>
-May 9, 2022, by David Blum:<br/>
-In function <code>rho_pT</code>, created and used new function extending
-<code>Modelica.Media.Water.IF97_Utilities.BaseIF97.Basic.g2</code> with an
-annotation <code>smoothOrder=2</code>. This is to specifically pass on the
-<code>smoothOrder=2</code> annotion placed on <code>rho_pT</code> to
-the <code>g2</code> function.
-</li>
-<li>
-April 13, 2021, by Kathryn Hinkelman:<br/>
-Changed pressure from constant to variable and reduced applicable
-pressure-temperature range to improve accuracy of polynomial approximations.
-</li>
-<li>
-October 30, 2020, by Kathryn Hinkelman:<br/>
-Complete new reimplementation to eliminate numerical inefficiencies
-and improve accuracy of property function calculations.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This medium package models water vapor (pure steam, region 2, quality=1).
+ </p>
+ <p>
+ Thermodynamic properties are calculated primarily in terms of pressure
+ and temperature.
+ For thermodynamic property functions, the IAPWS-IF97 formulations are adapted,
+ and approximate relationships are provided for commonly used functions to improve
+ computational efficiency and provide backward compatability.
+ </p>
+ <p>
+ Detailed functions from <a href=\"modelica://Modelica.Media.Water.WaterIF97_R2pT\">
+ Modelica.Media.Water.WaterIF97_R2pT</a> are generally used, expect for
+ <a href=\"modelica://AixLib.Media.Steam.specificEnthalpy\">AixLib.Media.Steam.specificEnthalpy</a> and
+ <a href=\"modelica://AixLib.Media.Steam.specificEntropy\">AixLib.Media.Steam.specificEntropy</a>
+ (both \"forward\" functions), as well as their \"backward\" inverse functions
+ <a href=\"modelica://AixLib.Media.Steam.temperature_ph\">AixLib.Media.Steam.temperature_ph</a> and
+ <a href=\"modelica://AixLib.Media.Steam.temperature_ps\">AixLib.Media.Steam.temperature_ps</a>,
+ which are numerically consistent with the forward functions.
+ The following modifications were made relative to the
+ <a href=\"modelica://Modelica.Media.Water.WaterIF97_R2pT\">
+ Modelica.Media.Water.WaterIF97_R2pT</a> medium package:
+ </p>
+ <ol>
+ <li>Analytic expressions for the derivatives are provided for all thermodynamic property functions.</li>
+ <li>The implementation is generally simplier in order to increase the likelyhood
+ of more efficient simulations. </li>
+ </ol>
+ <h4>Limitations </h4>
+ <ul>
+ <li>
+ The valid temperature range is <i>100&deg;C &le; T &le; 160&deg;C</i>, and the valid
+ pressure range is <i>100 kPa &le; p &le; 550 kPa</i>.
+ </li>
+ <li>When phase change is required, this model is to be used in combination with
+ <a href=\"modelica://AixLib.Media.Water\">AixLib.Media.Water</a>
+ for the liquid phase (quality=0). Please note that the maximum temperature for liquid
+ water is <code>T_max=130&deg;C</code>. This is suitable for real-world condensate
+ return and boiler feedwater systems, which are typically vented to the atmosphere
+ with steam contained via steam traps (thus, <code>T_max=100&deg;C</code> for the
+ condensate or feedwater in properly functioning systems).</li>
+ </ul>
+ <h4>Applications </h4>
+ <p>
+ This model is intended for first generation district heating systems and other
+ steam heating processes involving low and medium pressure steam.
+ </p>
+ <h4>References </h4>
+ <p>W. Wagner et al., &ldquo;The IAPWS industrial formulation 1997 for the thermodynamic
+ properties of water and steam,&rdquo; <i>J. Eng. Gas Turbines Power</i>, vol. 122, no.
+ 1, pp. 150&ndash;180, 2000.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 13, 2021, by Kathryn Hinkelman:<br/>
+ Changed pressure from constant to variable and reduced applicable
+ pressure-temperature range to improve accuracy of polynomial approximations.
+ </li>
+ <li>
+ October 30, 2020, by Kathryn Hinkelman:<br/>
+ Complete new reimplementation to eliminate numerical inefficiencies
+ and improve accuracy of property function calculations.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Steam;

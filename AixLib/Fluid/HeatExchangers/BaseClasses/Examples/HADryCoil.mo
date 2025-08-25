@@ -77,17 +77,17 @@ equation
   experiment(StopTime=80.0,
              Tolerance=1E-6),
   Documentation(info="<html>
-<p>
-Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HADryCoil\">
-AixLib.Fluid.HeatExchangers.BaseClasses.HADryCoil</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 9, 2017, by Michael Wetter:<br/>
-First version.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Test model for <a href=\"modelica://AixLib.Fluid.HeatExchangers.BaseClasses.HADryCoil\">
+ AixLib.Fluid.HeatExchangers.BaseClasses.HADryCoil</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 9, 2017, by Michael Wetter:<br/>
+ First version.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HADryCoil;

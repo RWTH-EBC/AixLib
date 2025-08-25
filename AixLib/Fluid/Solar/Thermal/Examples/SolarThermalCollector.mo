@@ -23,7 +23,6 @@ model SolarThermalCollector
       m_flow_nominal=system.m_flow_nominal)
     annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
   AixLib.Fluid.Solar.Thermal.SolarThermal solarThermal(
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     A=2,
     redeclare package Medium = Medium,
     m_flow_nominal=system.m_flow_nominal,
@@ -73,7 +72,8 @@ equation
   connect(hotSummerDay.y[2], solarThermal.Irradiation)
     annotation (Line(points={{-5,72},{10,72},{10,10}},   color={0,0,127}));
   annotation (
-    experiment(StopTime=82600, Interval=3600, Tolerance=1e-6),
+    experiment(StopTime=82600, Interval=3600),
+    __Dymola_experimentSetupOutput(events=false),
     Documentation(info="<html><p>
   <b><span style=\"color: #008000;\">Overview</span></b>
 </p>
@@ -118,6 +118,6 @@ equation
   </li>
 </ul>
 </html>"),
-    __Dymola_Commands(file=
-        "Resources/Scripts/Dymola/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mos" "Simulate and plot"));
+    __Dymola_Commands(file(ensureSimulated=true)=
+        "Resources/Scripts/Dymola/Fluid/Solar/Thermal/Examples/SolarThermalCollector.mos"));
 end SolarThermalCollector;

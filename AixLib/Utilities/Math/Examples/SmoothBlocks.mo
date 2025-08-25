@@ -47,21 +47,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Math/Examples/SmoothBlocks.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests the implementation of blocks that approximate non-differentiable functions
-by smooth functions.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 12, 2013, by Michael Wetter:<br/>
-Added missing parameter value for <code>sine1.freqHz</code>.
-</li>
-<li>
-August 15, 2008, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model tests the implementation of blocks that approximate non-differentiable functions
+ by smooth functions.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 12, 2013, by Michael Wetter:<br/>
+ Added missing parameter value for <code>sine1.freqHz</code>.
+ </li>
+ <li>
+ August 15, 2008, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SmoothBlocks;

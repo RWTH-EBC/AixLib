@@ -26,30 +26,30 @@ equation
   annotation (
     defaultComponentName="skyBri",
     Documentation(info="<html>
-<p>
-This component computes the sky brightness.
-</p>
-<h4>References</h4>
-<p>
-R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
-<i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
-Solar Energy, 44(5):271-289.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 6, 2021, by Ettore Zanetti:<br/>
-Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
-Added input connector <code>solTim</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
-</li>
-<li>
-July 07, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component computes the sky brightness.
+ </p>
+ <h4>References</h4>
+ <p>
+ R. Perez, P. Ineichen, R. Seals, J. Michalsky and R. Stewart (1990).
+ <i>Modeling Dyalight Availability and Irradiance Componets From Direct and Global Irradiance</i>,
+ Solar Energy, 44(5):271-289.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 6, 2021, by Ettore Zanetti:<br/>
+ Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
+ Added input connector <code>solTim</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
+ <li>
+ July 07, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={
         Text(
@@ -67,6 +67,6 @@ First implementation.
         Text(
           extent={{-46,-66},{-98,-54}},
           textColor={0,0,127},
-          textString="solTim")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          textString="solTim")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SkyBrightness;

@@ -6,7 +6,7 @@ model Damper
 
   AixLib.Fluid.Actuators.Dampers.Exponential res(
     redeclare package Medium = Medium,
-    use_strokeTime=false,
+    use_inputFilter=false,
     dpDamper_nominal=10,
     m_flow_nominal=1,
     k1=0.45) "A damper with quadratic relationship between m_flow and dp"
@@ -33,7 +33,7 @@ model Damper
         transformation(extent={{94,-10},{74,10}})));
 
   AixLib.Fluid.Actuators.Dampers.PressureIndependent preIndDpFixed_nominal(
-    use_strokeTime=false,
+    use_inputFilter=false,
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dpFixed_nominal=5,
@@ -42,7 +42,7 @@ model Damper
     annotation (Placement(transformation(extent={{0,-90},{20,-70}})));
 
   AixLib.Fluid.Actuators.Dampers.PressureIndependent preIndFrom_dp(
-    use_strokeTime=false,
+    use_inputFilter=false,
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dpFixed_nominal=0,
@@ -55,7 +55,7 @@ model Damper
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     dpDamper_nominal=10,
-    use_strokeTime=false)
+    use_inputFilter=false)
     "A damper with a mass flow proportional to the input signal"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
 
@@ -92,22 +92,22 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Dampers/Examples/Damper.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-Test model for exponential and linear air dampers.
-The air dampers are connected to models for constant inlet and outlet
-pressures. The control signal of the dampers is a ramp.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 21, 2017 by David Blum:<br/>
-Added Linear damper models <code>lin</code>, <code>preIndFrom_dp</code>, and <code>preInd</code>.
-</li>
-<li>
-July 20, 2007 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Test model for exponential and linear air dampers.
+ The air dampers are connected to models for constant inlet and outlet
+ pressures. The control signal of the dampers is a ramp.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 21, 2017 by David Blum:<br/>
+ Added Linear damper models <code>lin</code>, <code>preIndFrom_dp</code>, and <code>preInd</code>.
+ </li>
+ <li>
+ July 20, 2007 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Damper;

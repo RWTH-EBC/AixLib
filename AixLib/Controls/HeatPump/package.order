@@ -1,8 +1,7 @@
 AntiLegionella
-DefrostControl
 HPControl
-InverterControlledHP
-TwoPointControlledHP
+HPControllerOnOff
 ModularHeatPumps
+SafetyControls
 Examples
 BaseClasses

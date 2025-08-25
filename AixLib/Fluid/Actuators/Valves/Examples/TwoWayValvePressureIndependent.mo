@@ -27,7 +27,7 @@ model TwoWayValvePressureIndependent
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    use_strokeTime=false,
+    use_inputFilter=false,
     l=0.05,
     from_dp=true,
     dpFixed_nominal=0,
@@ -44,7 +44,7 @@ model TwoWayValvePressureIndependent
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    use_strokeTime=false,
+    use_inputFilter=false,
     l=0.05,
     dpFixed_nominal=5000,
     from_dp=true,
@@ -55,7 +55,7 @@ model TwoWayValvePressureIndependent
     redeclare package Medium = Medium,
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
-    use_strokeTime=false,
+    use_inputFilter=false,
     l=0.05,
     from_dp=false,
     dpFixed_nominal=0,
@@ -98,15 +98,15 @@ __Dymola_Commands(file=
           "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValvePressureIndependent.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>Test model for pressure independent valves. Note that the leakage at full mass flow rate (<code>l2</code>) has been set to a large value for better visualization of the valve characteristics. To use common values, use the default values. </p>
-<p>The parameter <code>filterOpening</code> is set to <code>false</code>, as this model is used to plot the flow at different opening signals without taking into account the travel time of the actuator. </p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 29, 2015 by Filip Jorissen:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>Test model for pressure independent valves. Note that the leakage at full mass flow rate (<code>l2</code>) has been set to a large value for better visualization of the valve characteristics. To use common values, use the default values. </p>
+ <p>The parameter <code>filterOpening</code> is set to <code>false</code>, as this model is used to plot the flow at different opening signals without taking into account the travel time of the actuator. </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 29, 2015 by Filip Jorissen:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValvePressureIndependent;

@@ -13,7 +13,7 @@ model TraceSubstancesFlowSource
   parameter String substanceName = "CO2" "Name of trace substance";
   parameter Boolean use_m_flow_in = false
     "Get the trace substance mass flow rate from the input connector"
-    annotation(Evaluate=true);
+    annotation(Evaluate=true, HideResult=true);
 
   parameter Modelica.Units.SI.MassFlowRate m_flow=0
     "Fixed mass flow rate going out of the fluid port"
@@ -53,11 +53,11 @@ initial equation
   // Only one connection allowed to a port to avoid unwanted ideal mixing
   for i in 1:nPorts loop
     assert(cardinality(ports[i]) <= 1,"
-Each ports[i] of boundary shall at most be connected to one component.
-If two or more connections are present, ideal mixing takes
-place in these connections, which is usually not the intention
-of the modeller. Increase nPorts to add an additional port.
-");
+ Each ports[i] of boundary shall at most be connected to one component.
+ If two or more connections are present, ideal mixing takes
+ place in these connections, which is usually not the intention
+ of the modeller. Increase nPorts to add an additional port.
+ ");
   end for;
 
 equation
@@ -81,90 +81,84 @@ equation
   annotation (
 defaultComponentName="souTraSub",
 Documentation(info="<html>
-<p>
-This model can be used to inject trace substances into a system.
-The model adds a mass flow rate to its port with a
-trace substance concentration of <i>1</i>.
-</p>
-<h4>Typical use and important parameters</h4>
-<p>
-A typical use of this model is to add carbon dioxide to room air, since the
-carbon dioxide concentration is typically so small that it need not be
-added to the room mass balance, and since the mass flow rate can be
-made small compared to the room volume if the medium that leaves this
-component has a carbon dioxide concentration of <i>1</i>.
-The parameter <code>substanceName</code> must be set to the name of the substance
-that is injected into the fluid.
-</p>
-<p>
-Note however that mixing volumes from the package
-<a href=\"modelica://AixLib.Fluid.MixingVolumes\">AixLib.Fluid.MixingVolumes</a>
-allow to directly add a trace substance mass flow rate,
-which is more efficient than using this model.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 11, 2024, by Michael Wetter:<br/>
-Corrected use of <code>HideResult</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1850\">#1850</a>.
-</li>
-<li>
-November 14, 2019, by Michael Wetter:<br/>
-Rewrote assignment of <code>C_in_internal</code> to avoid an initial algorithm section.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1250\">#1250</a>.
-</li>
-<li>
-January 23, 2019, by Michael Wetter:<br/>
-Refactored implementation to provide default medium choice.
-This refactoring removes the dependency of the base class but is
-compatible with the previous implementation.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
-</li>
-<li>
-January 26, 2016, by Michael Wetter:<br/>
-Added <code>unit</code> and <code>quantity</code> attributes.
-</li>
-<li>
-January 19, 2016, by Michael Wetter:<br/>
-Updated documentation due to the addition of an input for trace substance
-in the mixing volume.
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">
-issue 372</a>.
-</li>
-<li>
-October 30, 2015, by Matthis Thorade:<br/>
-Removed <code>nPorts=1</code> in extension of the base class
-as the default must be <i>0</i>.
-This avoids a warning in the pedantic model check of Dymola 2016.
-</li>
-<li>
-May 29, 2014, by Michael Wetter:<br/>
-Removed undesirable annotation <code>Evaluate=true</code>.
-</li>
-<li>
-September 10, 2013, by Michael Wetter:<br/>
-Added missing <code>each</code> in declaration of
-<code>C_in_internal</code>.
-This eliminates a compilation error in OpenModelica.
-</li>
-<li>
-March 27, 2013, by Michael Wetter:<br/>
-Removed binding for <code>C_in_internal</code> to allow pedantic check in Dymola 2014.
-</li>
-<li>
-February 22, by Michael Wetter:<br/>
-Improved code that searches for the index of the trace substance in the medium model.
-</li>
-<li>
-September 18, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),                       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+ <p>
+ This model can be used to inject trace substances into a system.
+ The model adds a mass flow rate to its port with a
+ trace substance concentration of <i>1</i>.
+ </p>
+ <h4>Typical use and important parameters</h4>
+ <p>
+ A typical use of this model is to add carbon dioxide to room air, since the
+ carbon dioxide concentration is typically so small that it need not be
+ added to the room mass balance, and since the mass flow rate can be
+ made small compared to the room volume if the medium that leaves this
+ component has a carbon dioxide concentration of <i>1</i>.
+ The parameter <code>substanceName</code> must be set to the name of the substance
+ that is injected into the fluid.
+ </p>
+ <p>
+ Note however that mixing volumes from the package
+ <a href=\"modelica://AixLib.Fluid.MixingVolumes\">AixLib.Fluid.MixingVolumes</a>
+ allow to directly add a trace substance mass flow rate,
+ which is more efficient than using this model.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 14, 2019, by Michael Wetter:<br/>
+ Rewrote assignment of <code>C_in_internal</code> to avoid an initial algorithm section.<br/>
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1250\">#1250</a>.
+ </li>
+ <li>
+ January 23, 2019, by Michael Wetter:<br/>
+ Refactored implementation to provide default medium choice.
+ This refactoring removes the dependency of the base class but is
+ compatible with the previous implementation.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1050\">#1050</a>.
+ </li>
+ <li>
+ January 26, 2016, by Michael Wetter:<br/>
+ Added <code>unit</code> and <code>quantity</code> attributes.
+ </li>
+ <li>
+ January 19, 2016, by Michael Wetter:<br/>
+ Updated documentation due to the addition of an input for trace substance
+ in the mixing volume.
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/372\">
+ issue 372</a>.
+ </li>
+ <li>
+ October 30, 2015, by Matthis Thorade:<br/>
+ Removed <code>nPorts=1</code> in extension of the base class
+ as the default must be <i>0</i>.
+ This avoids a warning in the pedantic model check of Dymola 2016.
+ </li>
+ <li>
+ May 29, 2014, by Michael Wetter:<br/>
+ Removed undesirable annotation <code>Evaluate=true</code>.
+ </li>
+ <li>
+ September 10, 2013, by Michael Wetter:<br/>
+ Added missing <code>each</code> in declaration of
+ <code>C_in_internal</code>.
+ This eliminates a compilation error in OpenModelica.
+ </li>
+ <li>
+ March 27, 2013, by Michael Wetter:<br/>
+ Removed binding for <code>C_in_internal</code> to allow pedantic check in Dymola 2014.
+ </li>
+ <li>
+ February 22, by Michael Wetter:<br/>
+ Improved code that searches for the index of the trace substance in the medium model.
+ </li>
+ <li>
+ September 18, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),                      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
         Rectangle(
           extent={{20,60},{100,-60}},
@@ -213,6 +207,6 @@ First implementation.
         Text(
           extent={{-150,110},{150,150}},
           textString="%name",
-          textColor={0,0,255})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          textColor={0,0,255})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TraceSubstancesFlowSource;

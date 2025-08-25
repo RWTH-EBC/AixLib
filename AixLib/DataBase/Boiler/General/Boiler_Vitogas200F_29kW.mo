@@ -3,8 +3,7 @@ record Boiler_Vitogas200F_29kW "Gas-fired boiler Viessmann Vitogas200-F 29kW"
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitogas200F_29kW",
     volume=0.0117,
-    a=3.3262E+9,
-    n=1.9265,
+    pressureDrop=6411000000.0,
     Q_nom=32000,
     Q_min=9600,
     eta=[0.3,0.93; 1.0,0.93]);
@@ -27,7 +26,7 @@ record Boiler_Vitogas200F_29kW "Gas-fired boiler Viessmann Vitogas200-F 29kW"
   </li>
   <li>Manufacturer: Viessmann
   </li>
-  <li>Broschure: Vitogas 200-F; 4/2014; 541039
+  <li>Broschure: Vitogas 200-F; 5/2010
   </li>
 </ul>
 </html>"));

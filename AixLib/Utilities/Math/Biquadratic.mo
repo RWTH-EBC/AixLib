@@ -9,23 +9,23 @@ equation
           textColor={160,160,164},
           textString="biquadratic()")}),
 Documentation(info="<html>
-<p>
-This block computes
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-  y =   a<sub>1</sub> + a<sub>2</sub>  x<sub>1</sub>
-        + a<sub>3</sub>  x<sub>1</sub><sup>2</sup>
-        + a<sub>4</sub>  x<sub>2</sub> + a<sub>5</sub>  x<sub>2</sub><sup>2</sup>
-        + a<sub>6</sub>  x<sub>1</sub>  x<sub>2</sub>
-</p>
-</html>",
+ <p>
+ This block computes
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+   y =   a<sub>1</sub> + a<sub>2</sub>  x<sub>1</sub>
+         + a<sub>3</sub>  x<sub>1</sub><sup>2</sup>
+         + a<sub>4</sub>  x<sub>2</sub> + a<sub>5</sub>  x<sub>2</sub><sup>2</sup>
+         + a<sub>6</sub>  x<sub>1</sub>  x<sub>2</sub>
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-Sep. 8, 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ Sep. 8, 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Biquadratic;

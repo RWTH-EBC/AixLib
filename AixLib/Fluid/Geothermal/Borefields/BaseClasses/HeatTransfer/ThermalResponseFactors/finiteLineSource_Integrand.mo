@@ -46,22 +46,22 @@ algorithm
 
 annotation (
 Documentation(info="<html>
-<p>
-Integrand of the finite line source solution for use in
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 23, 2018 by Michael Wetter:<br/>
-Reformulated function to use <code>sum</code>.
-</li>
-<li>
-March 22, 2018 by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Integrand of the cylindrical heat source solution for use in
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.finiteLineSource</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 23, 2018 by Michael Wetter:<br/>
+ Reformulated function to use <code>sum</code>.
+ </li>
+ <li>
+ March 22, 2018 by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end finiteLineSource_Integrand;

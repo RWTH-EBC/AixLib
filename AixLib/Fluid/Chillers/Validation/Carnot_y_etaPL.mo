@@ -7,19 +7,19 @@ model Carnot_y_etaPL
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Chillers/Validation/Carnot_y_etaPL.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This example extends from
-<a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_y\">
-AixLib.Fluid.Chillers.Examples.Carnot_y</a>
-but uses a part load efficiency curve that is different from <i>1</i>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-February 10, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example extends from
+ <a href=\"modelica://AixLib.Fluid.Chillers.Examples.Carnot_y\">
+ AixLib.Fluid.Chillers.Examples.Carnot_y</a>
+ but uses a part load efficiency curve that is different from <i>1</i>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ February 10, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Carnot_y_etaPL;

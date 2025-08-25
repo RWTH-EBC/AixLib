@@ -39,7 +39,6 @@ model BoilerNoControlSystem
   BoilerNoControl boilerNoControl(
     redeclare package Medium = Medium,
     m_flow_nominal=0.2,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     paramBoiler=DataBase.Boiler.General.Boiler_Vitogas200F_18kW())
     annotation (Placement(transformation(extent={{-24,-14},{2,14}})));
   Modelica.Blocks.Sources.Ramp ramp1(

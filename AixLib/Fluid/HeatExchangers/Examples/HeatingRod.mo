@@ -3,7 +3,7 @@ model HeatingRod "Example for the usage of the heating rod model"
   extends Modelica.Icons.Example;
   extends AixLib.Fluid.HeatExchangers.Examples.BaseClasses.Heater(
     redeclare package Medium = AixLib.Media.Water,
-    m_flow_nominal=V*rhoWat/3600,
+    m_flow_nominal=V*heatingRod.rho_default/3600,
     Q_flow_nominal=100,
     conPI(k=10),
     vol(V=V/1000),
@@ -23,10 +23,6 @@ model HeatingRod "Example for the usage of the heating rod model"
   Modelica.Blocks.Interfaces.RealOutput Pel
     "Electrical power used to provide current heat flow"
     annotation (Placement(transformation(extent={{120,-70},{140,-50}})));
-
-protected
-  parameter Modelica.Units.SI.Density rhoWat=1000 "Density of water";
-
 equation
   connect(mov.port_b, heatingRod.port_a)
     annotation (Line(points={{-50,-40},{-30,-40}}, color={0,127,255}));

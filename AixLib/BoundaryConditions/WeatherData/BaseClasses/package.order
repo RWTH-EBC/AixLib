@@ -22,7 +22,6 @@ LimiterTotalSkyCover
 LimiterWindDirection
 LimiterWindSpeed
 LocalCivilTime
-PartialConvertTime
 PartialLimiter
 PartialLimiterMin
 SolarTime

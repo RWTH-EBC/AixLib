@@ -35,37 +35,37 @@ equation
   annotation (
     defaultComponentName="zen",
     Documentation(info="<html>
-<p>
-This component computes the zenith angle,
-which is the angle between the earth surface normal and the sun beam.
-For a definition of the parameters, see the User's Guide
-<a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">
-AixLib.BoundaryConditions.UsersGuide</a>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 6, 2021, by Ettore Zanetti:<br/>
-Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
-</li>
-<li>
-February 25, 2012, by Michael Wetter:<br/>
-Changed model to get declination angle and
-solar hour angle from weather bus.
-</li>
-<li>
-May 17, 2010, by Wangda Zuo:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This component computes the zenith angle,
+ which is the angle between the earth surface normal and the sun beam.
+ For a definition of the parameters, see the User's Guide
+ <a href=\"modelica://AixLib.BoundaryConditions.UsersGuide\">
+ AixLib.BoundaryConditions.UsersGuide</a>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 6, 2021, by Ettore Zanetti:<br/>
+ Changed <code>lat</code> from being a parameter to an input from weather bus.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1477\">IBPSA, #1477</a>.
+ </li>
+ <li>
+ February 25, 2012, by Michael Wetter:<br/>
+ Changed model to get declination angle and
+ solar hour angle from weather bus.
+ </li>
+ <li>
+ May 17, 2010, by Wangda Zuo:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
             100}}), graphics={Text(
           extent={{-150,110},{150,150}},
           textString="%name",
           textColor={0,0,255}), Bitmap(extent={{-90,-90},{90,90}}, fileName=
-              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/ZenithAngle.png")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+              "modelica://AixLib/Resources/Images/BoundaryConditions/SolarGeometry/BaseClasses/ZenithAngle.png")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ZenithAngle;

@@ -102,30 +102,30 @@ equation
       StopTime=1,
       Tolerance=1e-06),
     Documentation(info="<html>
-<p>
-This model validates the door model that takes as an input a signal
-that determines whether the door is open or closed.
-In this validation, the instance <code>dooOpeClo</code> is either open or closed,
-depending on its input signal <code>y</code>.
-If the door is open, its air flow rate is identical to the air flow rate of the
-instance <code>doo</code>.
-If the door is closed, its air flow rate is identical to the air flow rate of the
-instance <code>lea</code>.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2021 by Michael Wetter:<br/>
-Updated comments for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
-</li>
-<li>
-October 12, 2020 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This model validates the door model that takes as an input a signal
+ that determines whether the door is open or closed.
+ In this validation, the instance <code>dooOpeClo</code> is either open or closed,
+ depending on its input signal <code>y</code>.
+ If the door is open, its air flow rate is identical to the air flow rate of the
+ instance <code>doo</code>.
+ If the door is closed, its air flow rate is identical to the air flow rate of the
+ instance <code>lea</code>.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ March 26, 2021 by Michael Wetter:<br/>
+ Updated comments for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/515\">IBPSA, #515</a>.
+ </li>
+ <li>
+ October 12, 2020 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(extent={{-100,-100},{100,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{80,100}})), 
-   __Dymola_LockedEditing="Model from IBPSA");
+    Icon(coordinateSystem(extent={{-100,-100},{80,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end DoorOpenClosed;

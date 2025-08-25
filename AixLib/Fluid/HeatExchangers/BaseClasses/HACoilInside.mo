@@ -55,24 +55,24 @@ equation
 
 annotation (                    defaultComponentName="HASin",
 Documentation(info="<html>
-<p>
-Model for convective heat transfer coefficients inside a coil.
-Optionally, the convective heat transfer coefficient can
-be computed as a function of temperature and mass flow rate.
-</p>
-</html>",
+ <p>
+ Model for convective heat transfer coefficients inside a coil.
+ Optionally, the convective heat transfer coefficient can
+ be computed as a function of temperature and mass flow rate.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-May 10, 2013, by Michael Wetter:<br/>
-Revised and simplified the implementation.
-</li>
-<li>
-February 26, 2013, by Peter Grant:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <ul>
+ <li>
+ May 10, 2013, by Michael Wetter:<br/>
+ Revised and simplified the implementation.
+ </li>
+ <li>
+ February 26, 2013, by Peter Grant:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
             100}}), graphics={            Text(
           extent={{-66,88},{60,-2}},
@@ -91,6 +91,6 @@ First implementation.
           fillColor={255,255,255},
           fillPattern=FillPattern.Solid),
         Line(points={{-52,-40},{56,-40},{44,-32}}, color={175,175,175}),
-        Line(points={{56,-40},{44,-48}}, color={175,175,175})}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+        Line(points={{56,-40},{44,-48}}, color={175,175,175})}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end HACoilInside;

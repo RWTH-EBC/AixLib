@@ -67,21 +67,21 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/Density.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example tests the density sensors.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 10, 2013 by Michael Wetter:<br/>
-Changed initialization of volume to fixed initial values to avoid
-a translation warning in OpenModelica.
-</li>
-<li>
-August 31, 2013 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example tests the density sensors.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 10, 2013 by Michael Wetter:<br/>
+ Changed initialization of volume to fixed initial values to avoid
+ a translation warning in OpenModelica.
+ </li>
+ <li>
+ August 31, 2013 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Density;

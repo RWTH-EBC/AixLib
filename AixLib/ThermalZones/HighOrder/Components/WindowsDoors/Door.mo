@@ -7,13 +7,19 @@ model Door "Simple door"
   parameter Modelica.Units.SI.Emissivity eps=0.9 "Emissivity of door material"
     annotation (Dialog(group="Radiation"));
 
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for radiation heat transfer" annotation (
+  parameter Integer radCalcMethod=1 "Calculation method for radiation heat transfer" annotation (
     Evaluate=true,
-    Dialog(group = "Radiation", compact=true));
+    Dialog(group = "Radiation", compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
   parameter Modelica.Units.SI.Temperature T_ref=
       Modelica.Units.Conversions.from_degC(16)
     "Reference temperature for optional linearization"
-    annotation (Dialog(group="Radiation", enable=radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
+    annotation (Dialog(group="Radiation", enable=radCalcMethod == 4));
 
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(Placement(transformation(extent = {{-100, -10}, {-80, 10}})));

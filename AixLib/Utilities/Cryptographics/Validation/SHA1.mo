@@ -46,44 +46,44 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Cryptographics/Validation/SHA1.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This validation function tests the C implementation of the SHA1 encryption for
-the following strings:
-</p>
-<ul>
-<li>
-<code>&#34;abc&#34;</code>
-</li>
-<li>
-<code>&#34;&#34;</code> <i>(an empty string)</i>
-</li>
-<li>
-<code>&#34;abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq&#34;</code>
-</li>
-<li>
-<code>&#34;1.23e+4&#34;</code>
-</li>
-<li>
-<code>&#34;a&#34;</code> repeated <i>509</i> times.
-</li>
-</ul>
-<p>
-If the encrypted strings are identical to the expected (known) encryption
-results, the <code>cmpAll</code> boolean variable will be <code>true</code>.
-</p>
-</html>",
+ <p>
+ This validation function tests the C implementation of the SHA1 encryption for
+ the following strings:
+ </p>
+ <ul>
+ <li>
+ <code>&#34;abc&#34;</code>
+ </li>
+ <li>
+ <code>&#34;&#34;</code> <i>(an empty string)</i>
+ </li>
+ <li>
+ <code>&#34;abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq&#34;</code>
+ </li>
+ <li>
+ <code>&#34;1.23e+4&#34;</code>
+ </li>
+ <li>
+ <code>&#34;a&#34;</code> repeated <i>509</i> times.
+ </li>
+ </ul>
+ <p>
+ If the encrypted strings are identical to the expected (known) encryption
+ results, the <code>cmpAll</code> boolean variable will be <code>true</code>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-January 13, 2019, by Michael Wetter:<br/>
-Reduced string length for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1081\">issue 1081</a>.
-</li>
-<li>
-May 30, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ January 13, 2019, by Michael Wetter:<br/>
+ Reduced string length for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1081\">issue 1081</a>.
+ </li>
+ <li>
+ May 30, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SHA1;

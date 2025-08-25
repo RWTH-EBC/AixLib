@@ -20,17 +20,17 @@ record Generic "Record for scroll water to water heat pump"
     defaultComponentName="datHeaPum",
     preferredView="info",
   Documentation(info="<html>
-<p>
-This is the base record for scroll water to water heat pump models.
-</p>
-</html>",
+ <p>
+ This is the base record for scroll water to water heat pump models.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-December 6, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ December 6, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Generic;

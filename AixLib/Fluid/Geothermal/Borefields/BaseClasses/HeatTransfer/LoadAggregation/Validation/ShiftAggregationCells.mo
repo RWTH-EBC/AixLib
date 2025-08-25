@@ -24,25 +24,25 @@ annotation (experiment(StartTime=3.5,StopTime=5.5,Tolerance=1e-6),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/LoadAggregation/Validation/ShiftAggregationCells.mos"
         "Simulate and plot"),
 Documentation(info="<html>
-<p>
-This validation case replicates the load-shifting procedure illustred in the figure below by Cimmino (2014).
-</p>
-<p align=\"center\">
-<img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_01.png\" />
-</p>
-<h4>References</h4>
-<p>
-Cimmino, M. 2014. <i>D&eacute;veloppement et validation exp&eacute;rimentale de facteurs de r&eacute;ponse
-thermique pour champs de puits g&eacute;othermiques</i>,
-Ph.D. Thesis, &Eacute;cole Polytechnique de Montr&eacute;al.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 18, 2018, by Alex Laferri&egrave;re:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This validation case replicates the load-shifting procedure illustred in the figure below by Cimmino (2014).
+ </p>
+ <p align=\"center\">
+ <img alt=\"image\" src=\"modelica://AixLib/Resources/Images/Fluid/Geothermal/Borefields/LoadAggregation_01.png\" />
+ </p>
+ <h4>References</h4>
+ <p>
+ Cimmino, M. 2014. <i>D&eacute;veloppement et validation exp&eacute;rimentale de facteurs de r&eacute;ponse
+ thermique pour champs de puits g&eacute;othermiques</i>,
+ Ph.D. Thesis, &Eacute;cole Polytechnique de Montr&eacute;al.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 18, 2018, by Alex Laferri&egrave;re:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ShiftAggregationCells;

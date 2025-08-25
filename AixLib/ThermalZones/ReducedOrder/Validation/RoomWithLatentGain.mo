@@ -14,13 +14,11 @@ model RoomWithLatentGain
       startTime3=0,
       endTime3=0));
   Fluid.Sensors.RelativeHumidity senRelHum(
-    redeclare package Medium = Medium,
-    warnAboutOnePortConnection = false)
+    redeclare package Medium = Medium)
     "Relative humidity of room air"
     annotation (Placement(transformation(extent={{110,-20},{130,0}})));
   Fluid.Sensors.MassFraction senMasFra(
-    redeclare package Medium = Medium,
-    warnAboutOnePortConnection = false)
+    redeclare package Medium = Medium)
     "Absolute humidity of room air in kg/kg total air"
     annotation (Placement(transformation(extent={{110,-50},{130,-30}})));
 equation
@@ -31,28 +29,22 @@ equation
   connect(intGai.y[2], thermalZoneTwoElements.QLat_flow) annotation (Line(
         points={{22.8,-52},{32,-52},{32,4},{43,4},{43,4}}, color={0,0,127}));
   annotation (Documentation(info="<html>
-<p>
-Test Case 12 of the VDI 6007 Part 1: Calculation of indoor air temperature
-excited by a radiative and convective heat source for room version S.</p>
-<h4>Boundary conditions</h4>
-<p>
-This test case changes the medium to moist air, and adds latent heat gain.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2024, by Michael Wetter:<br/>
-Configured the sensor parameter to suppress the warning about being a one-port connection.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1857\">IBPSA, #1857</a>.
-</li>
-<li>
-October 9, 2019, by Michael Wetter:<br/>
-First implementation.<br/>
-This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
-</li>
-</ul>
-</html>"),
+ <p>
+ Test Case 12 of the VDI 6007 Part 1: Calculation of indoor air temperature
+ excited by a radiative and convective heat source for room version S.</p>
+ <h4>Boundary conditions</h4>
+ <p>
+ This test case changes the medium to moist air, and adds latent heat gain.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 9, 2019, by Michael Wetter:<br/>
+ First implementation.<br/>
+ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1209\">IBPSA, issue 1209</a>.
+ </li>
+ </ul>
+ </html>"),
 experiment(
       StopTime=604800,
       Tolerance=1e-06),
@@ -60,6 +52,6 @@ experiment(
   "modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Validation/RoomWithLatentGain.mos"
   "Simulate and plot"),
     Diagram(coordinateSystem(extent={{-140,-100},{140,100}})),
-    Icon(coordinateSystem(extent={{-100,-100},{100,100}})), 
-   __Dymola_LockedEditing="Model from IBPSA");
+    Icon(coordinateSystem(extent={{-100,-100},{100,100}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end RoomWithLatentGain;

@@ -61,24 +61,24 @@ equation
     Diagram(coordinateSystem(preserveAspectRatio=true,
       extent={{-100, -100},{200,200}})),
     Documentation(revisions="<html>
-<ul>
-<li>
-March 17, 2017, by Michael O'Keefe:<br/>
-First implementation.
-</li>
-</ul>
-</html>", info="<html>
-<p>
-This example is similar to
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.DryCoilEffectivenessNTUMassFlow\">
-AixLib.Fluid.HeatExchangers.Examples.DryCoilEffectivenessNTUMassFlow</a>
-except that the coil model
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
-is replaced here by
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU\">
-AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU</a>.
-</p>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ March 17, 2017, by Michael O'Keefe:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>",info="<html>
+ <p>
+ This example is similar to
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.Examples.DryCoilEffectivenessNTUMassFlow\">
+ AixLib.Fluid.HeatExchangers.Examples.DryCoilEffectivenessNTUMassFlow</a>
+ except that the coil model
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.DryCoilEffectivenessNTU</a>
+ is replaced here by
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU\">
+ AixLib.Fluid.HeatExchangers.WetCoilEffectivenessNTU</a>.
+ </p>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end WetCoilEffectivenessNTUMassFlow;

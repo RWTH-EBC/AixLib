@@ -14,7 +14,7 @@ model ThermalZoneHVACWithExhaust
     dp_nominal=1200,
     inputType=AixLib.Fluid.Types.InputType.Constant,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-    use_riseTime=false,
+    use_inputFilter=false,
     m_flow_nominal=0.1*m_flow_nominal) "Constant air exhaust"
     annotation (Placement(transformation(extent={{-70,-70},{-90,-50}})));
 equation
@@ -28,31 +28,31 @@ equation
 
  annotation (
     Documentation(info="<html>
-<p>
-This example demonstrates how to
-use the adaptors
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
-AixLib.Fluid.FMI.Adaptors.HVAC</a>
-and
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.ThermalZone\">
-AixLib.Fluid.FMI.Adaptors.ThermalZone</a>
-</p>
-<p>
-It is identical to
-<a href=\"modelica://AixLib.Fluid.FMI.Adaptors.Examples.ThermalZoneHVACNoExhaust\">
-AixLib.Fluid.FMI.Adaptors.Examples.ThermalZoneHVACNoExhaust</a>
-except that it adds a forced exhaust air stream.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-June 29, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example demonstrates how to
+ use the adaptors
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.HVAC\">
+ AixLib.Fluid.FMI.Adaptors.HVAC</a>
+ and
+ <a href=\"modelica://AixLib.Fluid.FMI.Adaptors.ThermalZone\">
+ AixLib.Fluid.FMI.Adaptors.ThermalZone</a>
+ </p>
+ <p>
+ It is identical to
+ <a href=\"AixLib.Fluid.FMI.Adaptors.Examples.ThermalZoneHVACNoExhaust\">
+ AixLib.Fluid.FMI.Adaptors.Examples.ThermalZoneHVACNoExhaust</a>
+ except that it adds a forced exhaust air stream.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 29, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FMI/Adaptors/Examples/ThermalZoneHVACWithExhaust.mos"
         "Simulate and plot"),
-    experiment(Tolerance=1e-6, StopTime=172800), 
-   __Dymola_LockedEditing="Model from IBPSA");
+    experiment(Tolerance=1e-6, StopTime=172800),
+  __Dymola_LockedEditing="Model from IBPSA");
 end ThermalZoneHVACWithExhaust;

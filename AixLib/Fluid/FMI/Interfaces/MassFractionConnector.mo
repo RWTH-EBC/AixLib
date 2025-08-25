@@ -18,25 +18,25 @@ connector MassFractionConnector =
       extent={{-10.0,60.0},{-10.0,85.0}},
       textString="%name")}),
   Documentation(info="<html>
-<p>
-Connector with variable of type <code>Modelica.Units.SI.MassFraction</code>.
-Note that the mass fraction is in kg water vapor per total mass
-of air, rathern than per kg of dry air.
-</p>
-<p>
-This connector has been implemented to conditionally remove
-the mass fraction if the medium has only one species.
-While this could have been done using a vector of mass fractions
-with zero length, as is used in fluid connectors,
-this implemantation uses a scalar to avoid vectorized inputs
-and outputs of FMUs.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 29,2015, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Connector with variable of type <code>Modelica.Units.SI.MassFraction</code>.
+ Note that the mass fraction is in kg water vapor per total mass
+ of air, rathern than per kg of dry air.
+ </p>
+ <p>
+ This connector has been implemented to conditionally remove
+ the mass fraction if the medium has only one species.
+ While this could have been done using a vector of mass fractions
+ with zero length, as is used in fluid connectors,
+ this implemantation uses a scalar to avoid vectorized inputs
+ and outputs of FMUs.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ April 29,2015, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");

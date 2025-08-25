@@ -26,17 +26,10 @@ package UsersGuide "User's Guide"
   rectangular geometry, 48 m2 floor area and 12 m2 of south-facing
   windows.
 </p>
-<p>
-  When calling the simulate and plot script, the simulation is
-  only performed for ten days and not the full year to avoid time-out errors
-  in the CI. To see if the models are valid compared to ASHRAE, you have to
-  simulate the full year (with stopTime=31539600). 
-  When the change was performed, all models, except those listed below,
-  were valid and any change in model structure should be catched in 
-  the first ten days in CI.
-</p>
 <table>
   <caption>
+    \"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+    style=\"border-collapse:collapse;\"&gt;
     <table>
       <tr>
         <th>
@@ -105,6 +98,8 @@ package UsersGuide "User's Guide"
     </p>
     <table>
       <caption>
+        \"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+        style=\"border-collapse:collapse;\"&gt;
         <table>
           <tr>
             <th>
@@ -874,6 +869,8 @@ package UsersGuide "User's Guide"
         </p>
         <table>
           <caption>
+            \"summary\" border=\"1\" cellspacing=\"0\" cellpadding=\"2\"
+            style=\"border-collapse:collapse;\"&gt;
             <table>
               <tr>
                 <th>
@@ -1049,13 +1046,9 @@ package UsersGuide "User's Guide"
 </table>
 </html>", revisions="<html><ul>
 <ul>
-  <li>January 22, 2025, by Fabian Wuellhorst:<br/>
-  Adjust simulation time in CI, see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1573\">Issue 1573</a>
-  </li>
   <li>January 1, 2021, by Konstantina Xanthopoulou:<br/>
     Implemented
   </li>
-  </ul>
 </ul>
 </html>"));
 

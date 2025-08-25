@@ -58,8 +58,7 @@ initial equation
       kMed=kMed,
       muMed=muMed,
       cpMed=cpMed,
-      m_flow_nominal=m_flow_nominal,
-      instanceName=getInstanceName());
+      m_flow_nominal=m_flow_nominal);
 
   annotation (
     __Dymola_Commands(file=
@@ -67,32 +66,25 @@ initial equation
         "Simulate and plot"),
     experiment(Tolerance=1e-6, StopTime=1.0),
     Documentation(info="<html>
-<p>
-This example validates the implementation of
-<a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesTwoUTube\">
-AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesTwoUTube</a>
-for the evaluation of the internal thermal resistances of a double U-tube
-borehole.
-</p>
-<p>
-In this case, the shank spacing is defined such that the pipes are close to the
-borehole wall, rendering the short-circuit thermal resistances negative. The
-capacity location <code>x</code> is then automatically set to zero.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 22, 2023, by Michael Wetter:<br/>
-Corrected use of <code>getInstanceName()</code> which was called inside a function which
-is not allowed.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1814\">IBPSA, #1814</a>.
-</li>
-<li>
-June 21, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example validates the implementation of
+ <a href=\"modelica://AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesTwoUTube\">
+ AixLib.Fluid.Geothermal.Borefields.BaseClasses.Boreholes.BaseClasses.Functions.internalResistancesTwoUTube</a>
+ for the evaluation of the internal thermal resistances of a double U-tube
+ borehole.
+ </p>
+ <p>
+ In this case, the shank spacing is defined such that the pipes are close to the
+ borehole wall, rendering the short-circuit thermal resistances negative. The
+ capacity location <code>x</code> is then automatically set to zero.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ June 21, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InternalResistancesTwoUTubeNegative;

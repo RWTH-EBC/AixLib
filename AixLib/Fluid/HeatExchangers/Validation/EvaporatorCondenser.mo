@@ -68,24 +68,24 @@ equation
     experiment(
       Tolerance=1e-6, StopTime=100),
     Documentation(info="<html>
-<p>
-Model that demonstrates the use of the
-<a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenser\">
-AixLib.Fluid.HeatExchangers.EvaporatorCondenser</a> model.
-</p>
-<p>
-The fluid flow rate is increased from <i>m&#775; = 0.01 kg/s</i> to
-<i>m&#775; = 0.10 kg/s</i> over 100 seconds. As a result, the heat exchanger
-effectiveness and the fluid temperature difference in the heat exchanger
-decrease.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 11, 2016, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Model that demonstrates the use of the
+ <a href=\"modelica://AixLib.Fluid.HeatExchangers.EvaporatorCondenser\">
+ AixLib.Fluid.HeatExchangers.EvaporatorCondenser</a> model.
+ </p>
+ <p>
+ The fluid flow rate is increased from <i>m&#775; = 0.01 kg/s</i> to
+ <i>m&#775; = 0.10 kg/s</i> over 100 seconds. As a result, the heat exchanger
+ effectiveness and the fluid temperature difference in the heat exchanger
+ decrease.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 11, 2016, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EvaporatorCondenser;

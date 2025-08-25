@@ -164,40 +164,40 @@ experiment(StopTime=600,
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/MixingVolumes/Examples/MixingVolumeMoistAir.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests
-<a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir\">
-AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir</a>.
-After an initial transient, the temperature and humidity of the volume
-stabilizes.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-January 11, 2019 by Michael Wetter:<br/>
-Removed <code>each</code> statement.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1079\">#1079</a>.
-</li>
-<li>
-April 11, 2017, by Michael Wetter:<br/>
-Renamed variable used in result processing.<br/>
-This is for issue
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
-</li>
-<li>
-February 11, 2014 by Michael Wetter:<br/>
-Changed
-<code>HWat_flow(y=vol1.HWat_flow)</code> to
-<code>QLat_flow(y=vol1.QLat_flow.y)</code>
-and
-<code>QWat</code> to <code>QLat</code>.
-</li>
-<li>
-October 12, 2009 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model tests
+ <a href=\"modelica://AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir\">
+ AixLib.Fluid.MixingVolumes.MixingVolumeMoistAir</a>.
+ After an initial transient, the temperature and humidity of the volume
+ stabilizes.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ January 11, 2019 by Michael Wetter:<br/>
+ Removed <code>each</code> statement.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1079\">#1079</a>.
+ </li>
+ <li>
+ April 11, 2017, by Michael Wetter:<br/>
+ Renamed variable used in result processing.<br/>
+ This is for issue
+ <a href=\"https://github.com/lbl-srg/modelica-buildings/issues/704\">Buildings #704</a>.
+ </li>
+ <li>
+ February 11, 2014 by Michael Wetter:<br/>
+ Changed
+ <code>HWat_flow(y=vol1.HWat_flow)</code> to
+ <code>QLat_flow(y=vol1.QLat_flow.y)</code>
+ and
+ <code>QWat</code> to <code>QLat</code>.
+ </li>
+ <li>
+ October 12, 2009 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end MixingVolumeMoistAir;

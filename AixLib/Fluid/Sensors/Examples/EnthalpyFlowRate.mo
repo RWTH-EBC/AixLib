@@ -33,7 +33,7 @@ model EnthalpyFlowRate "Test model for the enthalpy flow rate sensors"
     m_flow_nominal=2,
     tau=0)            "Specific enthalpy sensor"
                 annotation (Placement(transformation(extent={{0,-20},{20,0}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(
+  AixLib.Fluid.Sensors.MassFlowRate senM_flow(
     redeclare package Medium = Medium) "Mass flow rate sensor"
                 annotation (Placement(transformation(extent={{28,-20},{48,0}})));
   Modelica.Blocks.Math.Add cheEqu(k2=-1)
@@ -51,10 +51,10 @@ equation
   connect(senH_flow.port_b, senH.port_a) annotation (Line(
       points={{-10,-10},{-5.55112e-16,-10}},
       color={0,127,255}));
-  connect(senH.port_b, senMasFlo.port_a) annotation (Line(
+  connect(senH.port_b, senM_flow.port_a) annotation (Line(
       points={{20,-10},{28,-10}},
       color={0,127,255}));
-  connect(senMasFlo.port_b, sin.ports[1]) annotation (Line(
+  connect(senM_flow.port_b, sin.ports[1]) annotation (Line(
       points={{48,-10},{60,-10}},
       color={0,127,255}));
   connect(senH_flow.H_flow,cheEqu. u1) annotation (Line(
@@ -63,7 +63,7 @@ equation
   connect(senH.h_out, pro.u1) annotation (Line(
       points={{10,1},{10,28},{-14,28},{-14,70},{-2,70}},
       color={0,0,127}));
-  connect(senMasFlo.m_flow, pro.u2) annotation (Line(
+  connect(senM_flow.m_flow, pro.u2) annotation (Line(
       points={{38,1},{38,36},{-10,36},{-10,58},{-2,58}},
       color={0,0,127}));
   connect(pro.y,cheEqu. u2) annotation (Line(
@@ -73,32 +73,32 @@ equation
 experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/EnthalpyFlowRate.mos"
         "Simulate and plot"),    Documentation(info="<html>
-<p>
-This example tests the enthalpy flow rate sensor and the
-specific enthalpy sensor.
-The model compares the output of the enthalpy flow rate sensor with
-the product of the output of the enthalpy and the mass flow rate sensor.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-November 2, 2016, by Michael Wetter:<br/>
-Changed assertions to blocks that compute the difference,
-and added the difference to the regression results.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
-</li>
-<li>
-August 31, 2013, by Michael Wetter:<br/>
-Change <code>tau=0</code> to <code>tau=1</code> for sensors.
-Changed source model to use temperature instead of specific enthalpy
-as a parameter.
-</li>
-<li>
-September 29, 2009, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example tests the enthalpy flow rate sensor and the
+ specific enthalpy sensor.
+ The model compares the output of the enthalpy flow rate sensor with
+ the product of the output of the enthalpy and the mass flow rate sensor.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 2, 2016, by Michael Wetter:<br/>
+ Changed assertions to blocks that compute the difference,
+ and added the difference to the regression results.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/564\">issue 564</a>.
+ </li>
+ <li>
+ August 31, 2013, by Michael Wetter:<br/>
+ Change <code>tau=0</code> to <code>tau=1</code> for sensors.
+ Changed source model to use temperature instead of specific enthalpy
+ as a parameter.
+ </li>
+ <li>
+ September 29, 2009, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EnthalpyFlowRate;

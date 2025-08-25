@@ -249,7 +249,7 @@ The model
 <a href=\"modelica://AixLib.Fluid.Movers.FlowControlled_m_flow\">
 AixLib.Fluid.Movers.FlowControlled_m_flow</a>
 cannot be exported as an FMU.
-This is because it assigns the mass flow rate.
+This is because it assignes the mass flow rate.
 However, the input connector
 <a href=\"modelica://AixLib.Fluid.FMI.Interfaces.Inlet\">
 AixLib.Fluid.FMI.Interfaces.Inlet</a>

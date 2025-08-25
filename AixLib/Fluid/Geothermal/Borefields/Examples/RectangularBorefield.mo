@@ -73,8 +73,7 @@ model RectangularBorefield "Example model of a rectangular borefield"
   AixLib.Fluid.Movers.FlowControlled_m_flow pum(
     redeclare package Medium = Medium,
     addPowerToMedium=false,
-    nominalValuesDefineDefaultPressureCurve=true,
-    use_riseTime=false,
+    use_inputFilter=false,
     energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     inputType=AixLib.Fluid.Types.InputType.Constant,
     m_flow_nominal=borFieDat.conDat.mBorFie_flow_nominal,
@@ -105,37 +104,30 @@ equation
   connect(pum.port_a, bou.ports[1])
     annotation (Line(points={{0,0},{0,-60},{-40,-60}}, color={0,127,255}));
   annotation (Documentation(info="<html>
-<p>
-This example model illustrates how to configure the layout
-of the boreholes for a rectangular borefield.
-The configuration is
-</p>
-<pre>
-cooBor = {{dBorHol*mod((i-1),nXBorHol), dBorHol*floor((i-1)/nXBorHol)} for i in 1:nBorHol}
-</pre>
-<p>
-where <code>dBorHol</code> is the distance between the boreholes,
-<code>nXBorHol</code> is the number of boreholes in the x-direction, and
-<code>nBorHol</code> is the total number of boreholes.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-April 9, 2024, by Hongxiang Fu:<br/>
-Specified <code>nominalValuesDefineDefaultPressureCurve=true</code>
-in the mover component to suppress a warning.
-This is for
-<a href=\"https://github.com/lbl-srg/modelica-buildings/issues/3819\">#3819</a>.
-</li>
-<li>
-September 10, 2018, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ This example model illustrates how to configure the layout
+ of the boreholes for a rectangular borefield.
+ The configuration is
+ </p>
+ <pre>
+ cooBor = {{dBorHol*mod((i-1),nXBorHol), dBorHol*floor((i-1)/nXBorHol)} for i in 1:nBorHol}
+ </pre>
+ <p>
+ where <code>dBorHol</code> is the distance between the boreholes,
+ <code>nXBorHol</code> is the number of boreholes in the x-direction, and
+ <code>nBorHol</code> is the total number of boreholes.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 10, 2018, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/Examples/RectangularBorefield.mos"
         "Simulate and plot"),
   experiment(
-      StopTime=2678400,Tolerance=1e-6), 
-   __Dymola_LockedEditing="Model from IBPSA");
+      StopTime=2678400,Tolerance=1e-6),
+  __Dymola_LockedEditing="Model from IBPSA");
 end RectangularBorefield;

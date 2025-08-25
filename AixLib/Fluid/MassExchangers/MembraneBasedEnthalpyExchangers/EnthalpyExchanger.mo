@@ -9,7 +9,7 @@ model EnthalpyExchanger
         choice(redeclare package Medium = AixLib.Media.AirIncompressible "Moist air incompressible")));
 
   // General parameter
-  parameter Integer n(min=2)=2
+  parameter Integer n(min=2)
     "number of discrecete volumes in flow direction";
   parameter Integer nParallel(min=1)
     "number of parallel membranes";

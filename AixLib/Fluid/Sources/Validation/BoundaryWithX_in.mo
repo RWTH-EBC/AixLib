@@ -42,25 +42,25 @@ equation
   connect(X_2.y, bouMoiAirCO2.X_in) annotation (Line(points={{1,76},{10,76},{10,
           40},{18,40}}, color={0,0,127}));
   annotation (Documentation(info="<html>
-<p>
-Validation model for <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
-AixLib.Fluid.Sources.Boundary_pT</a>
-for different media and with mass fraction <code>X</code> prescribed by an input.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 13, 2019 by Michael Wetter:<br/>
-First implementation.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
-</li>
-</ul>
-</html>"),
+ <p>
+ Validation model for <a href=\"modelica://AixLib.Fluid.Sources.Boundary_pT\">
+ AixLib.Fluid.Sources.Boundary_pT</a>
+ for different media and with mass fraction <code>X</code> prescribed by an input.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 13, 2019 by Michael Wetter:<br/>
+ First implementation.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1205\">IBPSA, #1205</a>.
+ </li>
+ </ul>
+ </html>"),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Validation/BoundaryWithX_in.mos"
         "Simulate and plot"),
 experiment(
       StopTime=1,
-      Tolerance=1e-06), 
-   __Dymola_LockedEditing="Model from IBPSA");
+      Tolerance=1e-06),
+  __Dymola_LockedEditing="Model from IBPSA");
 end BoundaryWithX_in;

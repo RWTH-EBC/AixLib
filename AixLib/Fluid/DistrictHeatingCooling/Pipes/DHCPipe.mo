@@ -1,6 +1,6 @@
 within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
-  extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=true);
+  extends AixLib.Fluid.Interfaces.PartialTwoPortVector(show_T=true);
 
   parameter Boolean use_zeta=false
     "= true HydraulicResistance is implemented, zeta value has to be given next"
@@ -177,11 +177,11 @@ model DHCPipe "Generic pipe model for DHC applications"
   // See also AixLib.Fluid.FixedResistances.Validation.PlugFlowPipes.TransportWaterAir
   // for why mSenFac is 10 and not 1000, as this gives more reasonable
   // temperature step response
-  AixLib.Fluid.MixingVolumes.MixingVolume vol(
+  Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final V=if rho_default > 500 then VEqu else VEqu/1000,
-    final nPorts=2,
+    final nPorts=nPorts + 1,
     final T_start=T_start_out,
     final energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     final mSenFac = if rho_default > 500 then 1 else 10)
@@ -284,9 +284,11 @@ equation
   der(Q_los) = min(0, pipCor.heatPort.Q_flow);
   der(Q_gai) = max(0, pipCor.heatPort.Q_flow);
 
-  connect(vol.ports[2], port_b)
-    annotation (Line(points={{71,20},{72,20},{72,6},{72,0},{100,0}},
+  for i in 1:nPorts loop
+    connect(vol.ports[i + 1], ports_b[i])
+    annotation (Line(points={{70,20},{72,20},{72,6},{72,0},{100,0}},
         color={0,127,255}));
+  end for;
 
   connect(pipCor.port_b, vol.ports[1])
     annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));

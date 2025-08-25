@@ -23,23 +23,23 @@ equation
 experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Utilities/Psychrometrics/Functions/Examples/X_pSatpphi.mos"
         "Simulate and plot"), Documentation(info="<html>
-<p>
-This example computes the water content of air for a relative humidity between
-<i>0</i> and <i>100%</i>,
-a temperature of <i>20&deg;C</i>
-and atmospheric pressure.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 4, 2014, by Michael Wetter:<br/>
-Added conversion factor to avoid a unit error.
-</li>
-<li>
-August 21, 2012, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example computes the water content of air for a relative humidity between
+ <i>0</i> and <i>100%</i>,
+ a temperature of <i>20&deg;C</i>
+ and atmospheric pressure.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 4, 2014, by Michael Wetter:<br/>
+ Added conversion factor to avoid a unit error.
+ </li>
+ <li>
+ August 21, 2012, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end X_pSatpphi;

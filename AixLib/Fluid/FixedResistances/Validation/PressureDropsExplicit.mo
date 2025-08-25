@@ -230,16 +230,16 @@ experiment(StartTime=-1, Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/FixedResistances/Validation/PressureDropsExplicit.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This model tests multiple flow resistances in series.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 20, 2007 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This model tests multiple flow resistances in series.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 20, 2007 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PressureDropsExplicit;

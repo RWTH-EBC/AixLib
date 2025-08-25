@@ -1,7 +1,6 @@
 within AixLib.BoundaryConditions.InternalGains.Examples.InternalGains;
 model HumansSenTIndep "Simulation to check the human models"
-  extends Modelica.Icons.Example;
-  extends AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.BaseClasses.PartialHumansExample(redeclare Humans.HumanSensibleHeatTemperatureIndependent humanIntGains);
+  extends AixLib.BoundaryConditions.InternalGains.Examples.InternalGains.BaseClasses.Humans(redeclare Humans.HumanSensibleHeatTemperatureIndependent humanIntGains);
 equation
 
   annotation (experiment(StartTime = 0, StopTime = 86400, Tolerance=1e-6, Algorithm="dassl"),

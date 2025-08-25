@@ -23,41 +23,41 @@ equation
   annotation (
 defaultComponentName="humRat",
     Documentation(info="<html>
-<p>
-Block to compute the humidity ratio for a given water vapor partial pressure.
-</p>
-<p>If <code>use_p_in</code> is false (default option), the <code>p</code> parameter
-is used as atmospheric pressure,
-and the <code>p_in</code> input connector is disabled;
-if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
-and the value provided by the input connector is used instead.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-September 16, 2013 by Michael Wetter:<br/>
-Added attributes to variable <code>p_w</code>.
-</li>
-<li>
-February 17, 2010 by Michael Wetter:<br/>
-Renamed block from <code>HumidityRatio_pWat</code> to <code>X_pW</code>.
-</li>
-<li>
-April 14, 2009 by Michael Wetter:<br/>
-Converted model to block because <code>RealInput</code> are obsolete in Modelica 3.0.
-</li>
-<li>
-August 7, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Block to compute the humidity ratio for a given water vapor partial pressure.
+ </p>
+ <p>If <code>use_p_in</code> is false (default option), the <code>p</code> parameter
+ is used as atmospheric pressure,
+ and the <code>p_in</code> input connector is disabled;
+ if <code>use_p_in</code> is true, then the <code>p</code> parameter is ignored,
+ and the value provided by the input connector is used instead.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ September 16, 2013 by Michael Wetter:<br/>
+ Added attributes to variable <code>p_w</code>.
+ </li>
+ <li>
+ February 17, 2010 by Michael Wetter:<br/>
+ Renamed block from <code>HumidityRatio_pWat</code> to <code>X_pW</code>.
+ </li>
+ <li>
+ April 14, 2009 by Michael Wetter:<br/>
+ Converted model to block because <code>RealInput</code> are obsolete in Modelica 3.0.
+ </li>
+ <li>
+ August 7, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Icon(graphics={Text(
           extent={{-92,52},{-36,-40}},
           textColor={0,0,0},
           textString="pW"), Text(
           extent={{46,44},{94,-24}},
           textColor={0,0,0},
-          textString="X")}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+          textString="X")}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end X_pW;

@@ -11,13 +11,11 @@ model TraceSubstancesFlowSource
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial) "Mixing volume"
                           annotation (Placement(transformation(extent={{100,120},
             {120,140}})));
-  Sources.TraceSubstancesFlowSource sou(
-    redeclare package Medium = Medium,
-    use_m_flow_in=true,
+  Sources.TraceSubstancesFlowSource sou(redeclare package Medium = Medium,
+      use_m_flow_in=true,
     nPorts=1)
     annotation (Placement(transformation(extent={{-46,110},{-26,130}})));
-  Modelica.Blocks.Sources.Step step(
-    startTime=0.5,
+  Modelica.Blocks.Sources.Step step(          startTime=0.5,
     height=-2,
     offset=2)
     annotation (Placement(transformation(extent={{-92,30},{-72,50}})));
@@ -108,24 +106,16 @@ model TraceSubstancesFlowSource
     "Resistance, used to check if species are transported between ports"
     annotation (Placement(transformation(extent={{-28,-80},{-6,-60}})));
 
-  Sensors.TraceSubstances C(
-    redeclare package Medium = Medium,
-    warnAboutOnePortConnection = false)
+  Sensors.TraceSubstances C(redeclare package Medium = Medium)
     "Trace substance sensor"
     annotation (Placement(transformation(extent={{120,134},{140,154}})));
-  Sensors.TraceSubstances C1(
-    redeclare package Medium = Medium,
-    warnAboutOnePortConnection = false)
+  Sensors.TraceSubstances C1(redeclare package Medium = Medium)
     "Trace substance sensor"
     annotation (Placement(transformation(extent={{120,90},{140,110}})));
-  Sensors.TraceSubstances C2(
-    redeclare package Medium = Medium,
-    warnAboutOnePortConnection = false)
+  Sensors.TraceSubstances C2(redeclare package Medium = Medium)
     "Trace substance sensor"
     annotation (Placement(transformation(extent={{168,6},{188,26}})));
-  Sensors.TraceSubstances C3(
-    redeclare package Medium = Medium,
-    warnAboutOnePortConnection = false)
+  Sensors.TraceSubstances C3(redeclare package Medium = Medium)
     "Trace substance sensor"
     annotation (Placement(transformation(extent={{188,-50},{208,-30}})));
   FixedResistances.PressureDrop res4(
@@ -252,47 +242,41 @@ equation
              __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sources/Examples/TraceSubstancesFlowSource.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-This model demonstrates the use of trace substances that are added
-to a volume of air.
-The source is a step function of <i>2</i> kg/s CO<sub>2</sub> from <i>t=0</i> second
-to <i>t=0.5</i> second.
-The sensors <code>C</code> and <code>C1</code> measure the same concentration that initially increases
-and then remains constant as there is no flow through the volumes <code>vol</code> and <code>vol1</code>.
-The sensors
-<code>C2</code> and
-<code>C3</code> first meaure an increase in concentration, which then decays to zero
-as there is a mass flow rate with zero CO<sub>2</sub> from the source <code>bou</code> to the sink <code>sin</code>.
-</html>", revisions="<html>
-<ul>
-<li>
-March 26, 2024, by Michael Wetter:<br/>
-Configured the sensor parameter to suppress the warning about being a one-port connection.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1857\">IBPSA, #1857</a>.
-</li>
-<li>
-November 27, 2013 by Michael Wetter:<br/>
-Added pressure boundary condition to model.
-This is required for the new air model,
-which is incompressible. Otherwise, there will be no pressure reference
-in the system.
-</li>
-<li>
-September 19, 2013, by Michael Wetter:<br/>
-Simplified example.
-</li>
-<li>
-April 29, 2013, by Michael Wetter:<br/>
-Changed the initialization of the medium volumes from free initial conditions
-to <code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
-This was required for <code>vol</code> and <code>vol1</code> to have the same
-computations for the initial states.
-</li>
-<li>
-September 18, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ This model demonstrates the use of trace substances that are added
+ to a volume of air.
+ The source is a step function of <i>2</i> kg/s CO<sub>2</sub> from <i>t=0</i> second
+ to <i>t=0.5</i> second.
+ The sensors <code>C</code> and <code>C1</code> measure the same concentration that initially increases
+ and then remains constant as there is no flow through the volumes <code>vol</code> and <code>vol1</code>.
+ The sensors
+ <code>C2</code> and
+ <code>C3</code> first meaure an increase in concentration, which then decays to zero
+ as there is a mass flow rate with zero CO<sub>2</sub> from the source <code>bou</code> to the sink <code>sin</code>.
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ November 27, 2013 by Michael Wetter:<br/>
+ Added pressure boundary condition to model.
+ This is required for the new air model,
+ which is incompressible. Otherwise, there will be no pressure reference
+ in the system.
+ </li>
+ <li>
+ September 19, 2013, by Michael Wetter:<br/>
+ Simplified example.
+ </li>
+ <li>
+ April 29, 2013, by Michael Wetter:<br/>
+ Changed the initialization of the medium volumes from free initial conditions
+ to <code>Modelica.Fluid.Types.Dynamics.FixedInitial</code>.
+ This was required for <code>vol</code> and <code>vol1</code> to have the same
+ computations for the initial states.
+ </li>
+ <li>
+ September 18, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TraceSubstancesFlowSource;

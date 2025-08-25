@@ -69,8 +69,6 @@ success
 funnel_comp
 
 #Ignore files create by HTML Check
-HTML_correct_log.txt
-HTML_error_log.txt
+HTML-logfile.txt
 #Ignore Dymola License log
 Log_NO_DYM_STANDARD_LIC_AVAILABLE.txt
-dymolatemp.lic

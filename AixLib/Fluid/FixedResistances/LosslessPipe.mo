@@ -31,32 +31,32 @@ equation
           fillColor={217,236,255})}),
 defaultComponentName="pip",
     Documentation(info="<html>
-<p>
-Model of a pipe with no flow resistance, no heat loss and no transport delay.
-This model can be used to replace a <code>replaceable</code> pipe model
-in flow legs in which no friction should be modeled.
-This is for example done in the outlet port of the
-base class for three way valves,
-<a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve\">
-AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve</a>.
-</p>
-</html>",
+ <p>
+ Model of a pipe with no flow resistance, no heat loss and no transport delay.
+ This model can be used to replace a <code>replaceable</code> pipe model
+ in flow legs in which no friction should be modeled.
+ This is for example done in the outlet port of the
+ base class for three way valves,
+ <a href=\"modelica://AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve\">
+ AixLib.Fluid.Actuators.BaseClasses.PartialThreeWayValve</a>.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 23, 2018, by Filip Jorissen:<br/>
-Implementation is now more efficient for <code>allowFlowReversal=false</code>.
-See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/949\">#949</a>.
-</li>
-<li>
-October 8, 2013, by Michael Wetter:<br/>
-Removed parameter <code>show_V_flow</code>.
-</li>
-<li>
-June 13, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ June 23, 2018, by Filip Jorissen:<br/>
+ Implementation is now more efficient for <code>allowFlowReversal=false</code>.
+ See <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/949\">#949</a>.
+ </li>
+ <li>
+ October 8, 2013, by Michael Wetter:<br/>
+ Removed parameter <code>show_V_flow</code>.
+ </li>
+ <li>
+ June 13, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end LosslessPipe;

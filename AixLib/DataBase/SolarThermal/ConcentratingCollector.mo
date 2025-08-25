@@ -14,7 +14,7 @@ record ConcentratingCollector "Properties of a CRC collector"
 </h4>
 <p>
   Record is used in model <a href=
-  \"AixLib.Fluid.Solar.Thermal.SolarThermal\">AixLib.Fluid.Solar.Thermal.SolarThermal</a>.
+  \"AixLib.Fluid.Solar.Thermal.SolarThermal\">AAixLib.Fluid.Solar.Thermal.SolarThermal</a>.
 </p>
 <p>
   October 2013, Marcus Fuchs

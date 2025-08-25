@@ -63,14 +63,13 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
       length=1,
       Kv=10,
       valveCharacteristic=
-          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(
-          a_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
-            y={0,0.13,0.205,0.566,0.813,0.88,0.91,0.95,1},
-            phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,1}),
-          b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(
-            y={0,0.1,0.2,0.25,0.52,0.8,0.9,0.95,1},
-            phi={0,0.001,0.002,0.022,0.53,0.96,0.98,0.99,1})),
-      valve(use_strokeTime=false),
+          AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage(a_ab=
+          AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.13,0.205,0.566,
+          0.813,0.88,0.91,0.95,1}, phi={0,0.001,0.002,0.176,0.60,0.75,0.97,0.98,
+          1}), b_ab=AixLib.Fluid.Actuators.Valves.Data.Generic(y={0,0.1,0.2,
+          0.25,0.52,0.8,0.9,0.95,1}, phi={0,0.001,0.002,0.022,0.53,0.96,0.98,
+          0.99,1})),
+      valve(use_inputFilter=false),
       pipe1(length=1.53),
       pipe2(length=0.54),
       pipe3(length=1.06),
@@ -99,8 +98,6 @@ model AHU2_Preheater "Heating register of ahu 2 in E.ON ERC testhall"
 
   BaseClasses.RegisterBus registerBus1
     annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-  Modelica.Blocks.Sources.BooleanConstant pumpOn annotation (
-    Placement(visible = true, transformation(origin = {-80, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
   connect(toKelvin.Kelvin, boundaryWaterSource.T_in)
     annotation (Line(points={{-57,-92},{-16,-92}}, color={0,0,127}));
@@ -146,9 +143,6 @@ equation
   connect(boundaryWaterSource.ports[1], registerModule.port_a2) annotation (
       Line(points={{-20,-70},{-22,-70},{-22,0.461538},{-22,0.461538}}, color={0,
           127,255}));
-  connect(pumpOn.y, registerBus1.hydraulicBus.pumpBus.onSet) annotation (
-    Line(points={{-69,-24},{-37.95,-24},{-37.95,10.05}},
-                                                       color = {255, 0, 255}));
   annotation (Documentation(info="<html><p>
   This example compares the simulated behavior with measured data. The
   input filter of the valve is deactivated because the measured actual
@@ -163,7 +157,8 @@ equation
 </html>"),
     experiment(
       StopTime=7200,
-      Interval=1,Tolerance=1e-06),
-    __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Systems/ModularAHU/Validation/AHU2_Preheater.mos"
+      __Dymola_fixedstepsize=1,
+      __Dymola_Algorithm="Dassl"),
+    __Dymola_Commands(file(ensureSimulated=true) = "Resources/Scripts/Dymola/Systems/ModularAHU/Validation/Preheater.mos"
         "Simulate and Plot"));
 end AHU2_Preheater;

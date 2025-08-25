@@ -116,90 +116,90 @@ equation
           fillPattern=FillPattern.Solid)}),
 defaultComponentName="hum",
 Documentation(info="<html>
-<p>
-Model for a spray air washer with a prescribed outlet water vapor mass fraction
-in kg/kg total air.
-</p>
-<p>
-This model forces the outlet water mass fraction at <code>port_b</code> to be
-no lower than the
-input signal <code>X_wSet</code>, subject to optional limits on the
-maximum water vapor mass flow rate that is added, as
-described by the parameter <code>mWatMax_flow</code>.
-By default, the model has unlimited capacity.
-</p>
-<p>
-The output signal <code>mWat_flow &ge; 0</code> is the moisture added
-to the medium if the flow rate is from <code>port_a</code> to <code>port_b</code>.
-If the flow is reversed, then <code>mWat_flow = 0</code>.
-The outlet specific enthalpy at <code>port_b</code> is increased by
-the enthalpy of liquid water at <i>10</i>&deg;C times the mass of water that was added.
-Therefore, the temperature of the leaving fluid is below the inlet temperature.
-</p>
-<p>
-The outlet conditions at <code>port_a</code> are not affected by this model,
-other than for a possible pressure difference due to flow friction.
-</p>
-<p>
-If the parameter <code>energyDynamics</code> is different from
-<code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
-the component models the dynamic response using a first order differential equation.
-The time constant of the component is equal to the parameter <code>tau</code>.
-This time constant is adjusted based on the mass flow rate using
-</p>
-<p align=\"center\" style=\"font-style:italic;\">
-&tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
-</p>
-<p>
-where
-<i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
-<i>m&#775;</i> and
-<i>&tau;</i> is the time constant at the nominal mass flow rate
-<i>m&#775;<sub>nom</sub></i>.
-This type of dynamics is equal to the dynamics that a completely mixed
-control volume would have.
-</p>
-<p>
-Optionally, this model can have a flow resistance.
-Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
-</p>
-<p>
-For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
-this with the nominal water mass flow rate, use
-<a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
-AixLib.Fluid.Humidifiers.Humidifier_u</a>
-
-</p>
-<h4>Limitations</h4>
-<p>
-This model only adds water vapor for the flow from
-<code>port_a</code> to <code>port_b</code>.
-The water vapor of the reverse flow is not affected by this model.
-</p>
-<p>
-This model does not affect the enthalpy of the air. Therefore,
-if water is added, the temperature will decrease, e.g., the humidification
-is adiabatic.
-</p>
-</html>",
+ <p>
+ Model for a spray air washer with a prescribed outlet water vapor mass fraction
+ in kg/kg total air.
+ </p>
+ <p>
+ This model forces the outlet water mass fraction at <code>port_b</code> to be
+ no lower than the
+ input signal <code>X_wSet</code>, subject to optional limits on the
+ maximum water vapor mass flow rate that is added, as
+ described by the parameter <code>mWatMax_flow</code>.
+ By default, the model has unlimited capacity.
+ </p>
+ <p>
+ The output signal <code>mWat_flow &ge; 0</code> is the moisture added
+ to the medium if the flow rate is from <code>port_a</code> to <code>port_b</code>.
+ If the flow is reversed, then <code>mWat_flow = 0</code>.
+ The outlet specific enthalpy at <code>port_b</code> is increased by
+ the enthalpy of liquid water at <i>10</i>&deg;C times the mass of water that was added.
+ Therefore, the temperature of the leaving fluid is below the inlet temperature.
+ </p>
+ <p>
+ The outlet conditions at <code>port_a</code> are not affected by this model,
+ other than for a possible pressure difference due to flow friction.
+ </p>
+ <p>
+ If the parameter <code>energyDynamics</code> is different from
+ <code>Modelica.Fluid.Types.Dynamics.SteadyState</code>,
+ the component models the dynamic response using a first order differential equation.
+ The time constant of the component is equal to the parameter <code>tau</code>.
+ This time constant is adjusted based on the mass flow rate using
+ </p>
+ <p align=\"center\" style=\"font-style:italic;\">
+ &tau;<sub>eff</sub> = &tau; |m&#775;| &frasl; m&#775;<sub>nom</sub>
+ </p>
+ <p>
+ where
+ <i>&tau;<sub>eff</sub></i> is the effective time constant for the given mass flow rate
+ <i>m&#775;</i> and
+ <i>&tau;</i> is the time constant at the nominal mass flow rate
+ <i>m&#775;<sub>nom</sub></i>.
+ This type of dynamics is equal to the dynamics that a completely mixed
+ control volume would have.
+ </p>
+ <p>
+ Optionally, this model can have a flow resistance.
+ Set <code>dp_nominal = 0</code> to disable the flow friction calculation.
+ </p>
+ <p>
+ For a model that uses a control signal <i>u &isin; [0, 1]</i> and multiplies
+ this with the nominal water mass flow rate, use
+ <a href=\"modelica://AixLib.Fluid.Humidifiers.Humidifier_u\">
+ AixLib.Fluid.Humidifiers.Humidifier_u</a>
+ 
+ </p>
+ <h4>Limitations</h4>
+ <p>
+ This model only adds water vapor for the flow from
+ <code>port_a</code> to <code>port_b</code>.
+ The water vapor of the reverse flow is not affected by this model.
+ </p>
+ <p>
+ This model does not affect the enthalpy of the air. Therefore,
+ if water is added, the temperature will decrease, e.g., the humidification
+ is adiabatic.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-March 8, 2022, by Michael Wetter:<br/>
-Renamed parameter <code>massDynamics</code> to <code>energyDynamics</code> for consistency with other models.
-</li>
-<li>
-December 14, 2018, by Michael Wetter:<br/>
-Restricted base class for medium to one that implements
-the function <code>enthalpyOfLiquid</code>.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1057\">#1057</a>.
-</li>
-<li>
-May 3, 2017, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ March 8, 2022, by Michael Wetter:<br/>
+ Renamed parameter <code>massDynamics</code> to <code>energyDynamics</code> for consistency with other models.
+ </li>
+ <li>
+ December 14, 2018, by Michael Wetter:<br/>
+ Restricted base class for medium to one that implements
+ the function <code>enthalpyOfLiquid</code>.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1057\">#1057</a>.
+ </li>
+ <li>
+ May 3, 2017, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SprayAirWasher_X;

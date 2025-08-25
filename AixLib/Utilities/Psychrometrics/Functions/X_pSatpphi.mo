@@ -18,17 +18,17 @@ algorithm
     smoothOrder=99,
     Inline=true,
     Documentation(info="<html>
-<p>
-Function to compute the water vapor concentration based on
-saturation pressure, absolute pressure and relative humidity.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-August 21, 2012 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Function to compute the water vapor concentration based on
+ saturation pressure, absolute pressure and relative humidity.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ August 21, 2012 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end X_pSatpphi;

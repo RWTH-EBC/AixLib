@@ -143,7 +143,7 @@ model PVRadiationHorizontal "PV radiation and absorptance model - input: total i
   AixLib.BoundaryConditions.SolarGeometry.BaseClasses.ZenithAngle zenAng(
    lat=lat) "Zenith angle";
 
-  AixLib.Utilities.Time.ModelTime modTim "Block that outputs simulation time";
+  Utilities.Time.ModelTime modTim "Block that outputs simulation time";
 
 
   Modelica.Blocks.Interfaces.RealOutput radTil(final quantity="Irradiance",

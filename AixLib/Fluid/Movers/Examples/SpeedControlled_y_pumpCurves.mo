@@ -14,12 +14,13 @@ model SpeedControlled_y_pumpCurves
     "Nominal pressure";
 
    model pumpModel = AixLib.Fluid.Movers.SpeedControlled_y (
-      redeclare package Medium = Medium,
-      use_riseTime=false,
-      energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
-      per(pressure(
-        V_flow=2/1000*m_flow_nominal*{0.2,0.4,0.6,0.8},
-        dp=dp_nominal*{0.9,0.85,0.6,0.2})))
+    redeclare package Medium = Medium,
+    use_inputFilter=
+                  false,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
+    per(
+      pressure(V_flow=2/1000*m_flow_nominal*{0.2, 0.4, 0.6, 0.8},
+               dp=dp_nominal*{0.9, 0.85, 0.6, 0.2})))
     "Declaration of pump model";
 
   pumpModel pum(
@@ -65,27 +66,27 @@ model SpeedControlled_y_pumpCurves
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=0.01*dp_nominal,
-    use_strokeTime=false) "Pressure drop"
+    use_inputFilter=false) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,80},{0,100}})));
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear dp2(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=0.01*dp_nominal,
-    use_strokeTime=false) "Pressure drop"
+    use_inputFilter=false) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,38},{0,58}})));
 
   AixLib.Fluid.Actuators.Valves.TwoWayLinear dp3(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=0.01*dp_nominal,
-    use_strokeTime=false) "Pressure drop"
+    use_inputFilter=false) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   AixLib.Fluid.Actuators.Valves.TwoWayLinear dp4(
     redeclare package Medium = Medium,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=0.01*dp_nominal,
-    use_strokeTime=false) "Pressure drop"
+    use_inputFilter=false) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
 equation
   connect(dp1.port_b, pum.port_a)      annotation (Line(
@@ -93,7 +94,7 @@ equation
       color={0,127,255},
       smooth=Smooth.None));
   connect(dp1.port_a, sou.ports[1]) annotation (Line(
-      points={{-20,90},{-31,90},{-31,86.5},{-50,86.5}},
+      points={{-20,90},{-31,90},{-31,91},{-50,91}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(y.y, dp1.y) annotation (Line(
@@ -109,7 +110,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(sou.ports[2], dp2.port_a) annotation (Line(
-      points={{-50,87.5},{-32,87.5},{-32,48},{-20,48}},
+      points={{-50,89},{-32,89},{-32,48},{-20,48}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(dp3.port_b, pum2.port_a)     annotation (Line(
@@ -122,7 +123,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(dp3.port_a, sou.ports[3]) annotation (Line(
-      points={{-20,0},{-28,0},{-36,0},{-36,86},{-50,86},{-50,88.5}},
+      points={{-20,6.10623e-16},{-28,0},{-36,0},{-36,86},{-50,86},{-50,87}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(dp4.port_b, pum3.port_a)     annotation (Line(
@@ -134,24 +135,24 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(dp4.port_a, sou.ports[4]) annotation (Line(
-      points={{-20,-50},{-38,-50},{-38,89.5},{-50,89.5}},
+      points={{-20,-50},{-38,-50},{-38,85},{-50,85}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(pum3.port_b, sou1.ports[1]) annotation (Line(
-      points={{60,-50},{110,-50},{110,89.5},{118,89.5}},
+      points={{60,-50},{110,-50},{110,85},{118,85}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(pum2.port_b, sou1.ports[2]) annotation (Line(
-      points={{60,0},{80,0},{80,0},{106,0},{106,88.5},{118,88.5}},
+      points={{60,6.10623e-16},{80,6.10623e-16},{80,0},{106,0},{106,87},{118,87}},
       color={0,127,255},
       smooth=Smooth.None));
 
   connect(pum1.port_b, sou1.ports[3]) annotation (Line(
-      points={{60,48},{104,48},{104,87.5},{118,87.5}},
+      points={{60,48},{104,48},{104,89},{118,89}},
       color={0,127,255},
       smooth=Smooth.None));
   connect(pum.port_b, sou1.ports[4]) annotation (Line(
-      points={{60,90},{89,90},{89,86.5},{118,86.5}},
+      points={{60,90},{89,90},{89,91},{118,91}},
       color={0,127,255},
       smooth=Smooth.None));
   annotation (
@@ -161,41 +162,41 @@ experiment(Tolerance=1e-6, StopTime=1.0),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Movers/Examples/SpeedControlled_y_pumpCurves.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-This example demonstrates how the pump curves changes for different (constant) input
-signal <code>y</code>.
-If <code>y &ge; delta = 0.05</code>, the pump curves are polynomials.
-For <code>y &lt; delta = 0.05</code>, the pump curves convert to linear functions to
-avoid a singularity at the origin.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-December 2, 2016, by Michael Wetter:<br/>
-Changed the valve opening signal to not take on zero as otherwise <code>pum.port_a.p</code>
-is negative, violating the <code>min</code> attribute on the pressure variable.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
-</li>
-<li>
-March 11, 2016, by Michael Wetter:<br/>
-Reformulated model for OpenModelica.
-</li>
-<li>
-January 22, 2016, by Michael Wetter:<br/>
-Corrected type declaration of pressure difference.
-This is
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
-</li>
-<li>
-June 14, 2015, by Filip Jorissen:<br/>
-Set constant speed for pump using a <code>parameter</code>
-instead of a <code>realInput</code>.
-</li>
-<li>March 24 2010, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example demonstrates how the pump curves changes for different (constant) input
+ signal <code>y</code>.
+ If <code>y &ge; delta = 0.05</code>, the pump curves are polynomials.
+ For <code>y &lt; delta = 0.05</code>, the pump curves convert to linear functions to
+ avoid a singularity at the origin.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ December 2, 2016, by Michael Wetter:<br/>
+ Changed the valve opening signal to not take on zero as otherwise <code>pum.port_a.p</code>
+ is negative, violating the <code>min</code> attribute on the pressure variable.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/606\">#606</a>.
+ </li>
+ <li>
+ March 11, 2016, by Michael Wetter:<br/>
+ Reformulated model for OpenModelica.
+ </li>
+ <li>
+ January 22, 2016, by Michael Wetter:<br/>
+ Corrected type declaration of pressure difference.
+ This is
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/404\">#404</a>.
+ </li>
+ <li>
+ June 14, 2015, by Filip Jorissen:<br/>
+ Set constant speed for pump using a <code>parameter</code>
+ instead of a <code>realInput</code>.
+ </li>
+ <li>March 24 2010, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SpeedControlled_y_pumpCurves;

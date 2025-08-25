@@ -5,7 +5,7 @@ model FlowExergyMeter
   extends Modelica.Icons.RoundSensor;
 
   Modelica.Blocks.Interfaces.RealInput X_ref[Medium.nX](
-  each final quantity="MassFraction", each final unit="1", each min=0, each max=1)
+  final quantity="MassFraction", final unit="1", min=0, max=1)
     "Reference composition"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},
         rotation=90,

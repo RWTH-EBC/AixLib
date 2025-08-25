@@ -111,18 +111,18 @@ equation
           fillColor={0,0,0},
           fillPattern=FillPattern.Solid)}),
     Documentation(info="<html>
-<p>
-This is a partial model for the bi-directional air flow through a door.
-</p>
-</html>",
+ <p>
+ This is a partial model for the bi-directional air flow through a door.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-October 6, 2020, by Michael Wetter:<br/>
-First implementation for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1353\">#1353</a>.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ October 6, 2020, by Michael Wetter:<br/>
+ First implementation for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1353\">#1353</a>.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end Door;

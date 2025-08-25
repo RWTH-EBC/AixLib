@@ -24,25 +24,25 @@ equation
 __Dymola_Commands(file= "modelica://AixLib/Resources/Scripts/Dymola/Fluid/Interfaces/Examples/PrescribedOutlet_TSetOnly.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Model that demonstrates
-<a href=\"modelica://AixLib.Fluid.Interfaces.PrescribedOutlet\">
-AixLib.Fluid.Interfaces.PrescribedOutlet</a>
-with temperature setpoint.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-May 3, 2017, by Michael Wetter:<br/>
-Refactored model to allow <code>X_wSet</code> as an input.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
-</li>
-<li>
-November 11, 2014, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Model that demonstrates
+ <a href=\"modelica://AixLib.Fluid.Interfaces.PrescribedOutlet\">
+ AixLib.Fluid.Interfaces.PrescribedOutlet</a>
+ with temperature setpoint.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ May 3, 2017, by Michael Wetter:<br/>
+ Refactored model to allow <code>X_wSet</code> as an input.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/763\">#763</a>.
+ </li>
+ <li>
+ November 11, 2014, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end PrescribedOutlet_TSetOnly;

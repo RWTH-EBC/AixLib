@@ -20,10 +20,10 @@ model Window_ASHRAE140
       Placement(transformation(extent={{-10,-20},{10,0}})));
   Utilities.HeatTransfer.HeatConvOutside heatConv_outside(
     final A=windowarea,
-    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals,
+    calcMethod=2,
     surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));
   Utilities.HeatTransfer.HeatConvInside heatConv_inside(
-    calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck,
+    calcMethod=2,
     hCon_const=2,
     final A=windowarea)
                   annotation (Placement(transformation(extent={{68,-20},{48,2}})));
@@ -42,8 +42,8 @@ model Window_ASHRAE140
     final energyDynamics=energyDynamics)
     annotation (Placement(transformation(extent={{18,-18},{38,2}})));
   Modelica.Blocks.Sources.Constant constFixShoRadPar[6](k={WindowType.g,1 -
-        WindowType.g,0,sqrt(windowarea),sqrt(windowarea),0}) if
-    use_solarRadWinTrans
+        WindowType.g,0,sqrt(windowarea),sqrt(windowarea),0})
+ if use_solarRadWinTrans
     "Parameteres used for the short radiaton models. See connections to check which array corresponds to which parameter"
     annotation (Placement(transformation(extent={{68,96},{78,106}})));
 equation

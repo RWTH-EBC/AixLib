@@ -23,8 +23,8 @@ block AirFlowRateSplit
     "VolumeFlowRate", final unit="m3/s") "Aggregated air flow rate"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
     iconTransformation(extent={{-140,-20},{-100,20}})));
-  Modelica.Blocks.Interfaces.RealOutput airFlowOut[dimension](each final quantity=
-    "VolumeFlowRate", each final unit="1/h") "Splitted air flow rate"
+  Modelica.Blocks.Interfaces.RealOutput airFlowOut[dimension](final quantity=
+    "VolumeFlowRate", final unit="1/h") "Splitted air flow rate"
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
     iconTransformation(extent={{100,-20},{140,20}})));
 

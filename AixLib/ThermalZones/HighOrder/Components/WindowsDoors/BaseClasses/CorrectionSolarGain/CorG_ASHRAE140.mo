@@ -45,10 +45,8 @@ model CorG_ASHRAE140
 equation
   for i in 1:n loop
     // Snell's Law
-    AOI[i] =SR_input[i].incAng;
-                              // in rad
-    AOI_help[i] =to_deg(SR_input[i].incAng);
-                                           // angle of solar incidence in deg
+    AOI[i] = SR_input[i].AOI; // in rad
+    AOI_help[i] = to_deg(SR_input[i].AOI); // angle of solar incidence in deg
     y=AOI_help[i];
 
     AOR[i] = asin(sin(AOI[i])/INDRG); //  Angle of refraction in deg
@@ -75,8 +73,7 @@ equation
     SHGC[i]= T[i]+S[i];
 
     //Solar radiation transmitted through window
-    solarRadWinTrans[i]=(SR_input[i].HDif + SR_input[i].HDir + SR_input[i].HGrd)
-      *SHGC[i];
+    solarRadWinTrans[i]= (SR_input[i].I_diff + SR_input[i].I_dir + SR_input[i].I_gr) * SHGC[i];
 
   end for;
 

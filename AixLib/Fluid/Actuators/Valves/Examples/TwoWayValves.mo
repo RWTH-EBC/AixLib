@@ -7,7 +7,7 @@ model TwoWayValves "Two way valves with different opening characteristics"
     redeclare package Medium = Medium,
     l=0.05,
     m_flow_nominal=2,
-    use_strokeTime=false,
+    use_inputFilter=false,
     dpValve_nominal=6000) "Valve model, linear opening characteristics"
     annotation (Placement(transformation(extent={{0,70},{20,90}})));
     Modelica.Blocks.Sources.Ramp y(
@@ -32,7 +32,7 @@ model TwoWayValves "Two way valves with different opening characteristics"
     redeclare package Medium = Medium,
     l=0.05,
     m_flow_nominal=2,
-    use_strokeTime=false,
+    use_inputFilter=false,
     dpValve_nominal=6000) "Valve model, quick opening characteristics"
     annotation (Placement(transformation(extent={{0,30},{20,50}})));
   AixLib.Fluid.Actuators.Valves.TwoWayEqualPercentage valEqu(
@@ -41,7 +41,7 @@ model TwoWayValves "Two way valves with different opening characteristics"
     R=10,
     delta0=0.1,
     m_flow_nominal=2,
-    use_strokeTime=false,
+    use_inputFilter=false,
     dpValve_nominal=6000)
     "Valve model, equal percentage opening characteristics"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
@@ -51,7 +51,7 @@ model TwoWayValves "Two way valves with different opening characteristics"
     m_flow_nominal=1,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint,
     dpValve_nominal=10000,
-    use_strokeTime=false,
+    use_inputFilter=false,
     l=0.05,
     l2=0.01) annotation (Placement(transformation(extent={{0,-50},{20,-30}})));
   TwoWayPolynomial valPol(
@@ -59,7 +59,7 @@ model TwoWayValves "Two way valves with different opening characteristics"
     l=0.05,
     m_flow_nominal=1,
     dpValve_nominal=10000,
-    use_strokeTime=false,
+    use_inputFilter=false,
     redeclare package Medium = Medium,
     CvData=AixLib.Fluid.Types.CvTypes.OpPoint)
     "Valve with polynomial opening characteristic"
@@ -67,7 +67,7 @@ model TwoWayValves "Two way valves with different opening characteristics"
   TwoWayButterfly valBut(
     redeclare package Medium = Medium,
     Kvs=1492,
-    use_strokeTime=false,
+    use_inputFilter=false,
     m_flow_nominal=1,
     l=0.05) "Butterfly valve"
     annotation (Placement(transformation(extent={{0,-120},{20,-100}})));
@@ -124,40 +124,40 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Actuators/Valves/Examples/TwoWayValves.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Test model for two way valves. Note that the
-leakage flow rate has been set to a large value
-and the rangeability to a small value
-for better visualization of the valve characteristics.
-To use common values, use the default values.
-</p>
-<p>
-The parameter <code>filterOpening</code> is set to <code>false</code>,
-as this model is used to plot the flow at different opening signals
-without taking into account the travel time of the actuator.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 8, 2018, by Filip Jorissen:<br/>
-Added butterfly valve
-for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/975\">#975</a>.
-</li>
-<li>
-January 29, 2015, by Filip Jorissen:<br/>
-Added pressure-independent valve.
-</li>
-<li>
-February 28, 2013, by Michael Wetter:<br/>
-Added default value for <code>dpValve_nominal</code>.
-</li>
-<li>
-June 16, 2008 by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),
+ <p>
+ Test model for two way valves. Note that the
+ leakage flow rate has been set to a large value
+ and the rangeability to a small value
+ for better visualization of the valve characteristics.
+ To use common values, use the default values.
+ </p>
+ <p>
+ The parameter <code>filterOpening</code> is set to <code>false</code>,
+ as this model is used to plot the flow at different opening signals
+ without taking into account the travel time of the actuator.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 8, 2018, by Filip Jorissen:<br/>
+ Added butterfly valve
+ for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/975\">#975</a>.
+ </li>
+ <li>
+ January 29, 2015, by Filip Jorissen:<br/>
+ Added pressure-independent valve.
+ </li>
+ <li>
+ February 28, 2013, by Michael Wetter:<br/>
+ Added default value for <code>dpValve_nominal</code>.
+ </li>
+ <li>
+ June 16, 2008 by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
     Diagram(coordinateSystem(extent={{-100,-140},{100,120}})),
-    Icon(coordinateSystem(extent={{-100,-140},{100,120}})), 
-   __Dymola_LockedEditing="Model from IBPSA");
+    Icon(coordinateSystem(extent={{-100,-140},{100,120}})),
+  __Dymola_LockedEditing="Model from IBPSA");
 end TwoWayValves;

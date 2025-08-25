@@ -1,4 +1,0 @@
-﻿simulateModel("AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Examples.PhotovoltaicThermal", tolerance=1e-6, startTime=10368000, stopTime=10540800, method="CVode", resultFile="PhotovoltaicThermal");
-createPlot(id=2, position={15, 15, 592, 372}, y={"pvt.PEle"}, grid=true, subPlot=101, colors={{28,108,200}}, timeUnit="s", displayUnits={"kW"});
-createPlot(id=2, position={15, 15, 592, 372}, y={"pvt.vol[1].T", "pvt.vol[2].T", "pvt.vol[3].T"}, grid=true, subPlot=102, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s", displayUnits={"degC", "degC", "degC"});
-createPlot(id=2, position={15, 15, 592, 372}, y={"pvt.vol[1].heatPort.Q_flow", "pvt.vol[2].heatPort.Q_flow", "pvt.vol[3].heatPort.Q_flow"}, grid=true, subPlot=103, colors={{28,108,200}, {238,46,47}, {0,140,72}}, timeUnit="s", displayUnits={"kW", "kW", "kW"});

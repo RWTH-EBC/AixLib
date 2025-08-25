@@ -42,30 +42,30 @@ equation
  annotation(defaultComponentName = "intWalRC",Diagram(coordinateSystem(
   preserveAspectRatio=false,   extent={{-100,-100},{100,120}})),
   Documentation(info="<html>
-  <p><code>InteriorWall</code> represents heat storage within walls. It links a
-  variable number <code>n</code> of thermal resistances and capacities to a
-  series connection. <code>n</code> thus defines the spatial discretization of
-  thermal effects within the wall. All effects are considered as one-dimensional
-  normal to the wall&apos;s surface. This model is thought for interior wall
-  elements that only serve as heat storage elements. The RC-chain is defined via
-  a vector of capacities <code>CInt[n]</code> and a vector of resistances
-  <code>RInt[n]</code>.
-  Resistances and capacities are connected alternately, starting with the first
-  resistance <code>RInt[1]</code>, from heat <code>port_a</code> into the wall.
-  </p>
-  <p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/BaseClasses/IntMassVarRC/IntMassVarRC.png\" alt=\"image\"/> </p>
-  </html>",  revisions="<html>
-  <ul>
-  <li>
-  April 27, 2016, by Michael Wetter:<br/>
-  Added graphical connections.
-  </li>
-  <li>
-  April 17, 2015, by Moritz Lauster:<br/>
-  Implemented.
-  </li>
-  </ul>
-  </html>"),  Icon(coordinateSystem(preserveAspectRatio = true, extent=
+   <p><code>InteriorWall</code> represents heat storage within walls. It links a
+   variable number <code>n</code> of thermal resistances and capacities to a
+   series connection. <code>n</code> thus defines the spatial discretization of
+   thermal effects within the wall. All effects are considered as one-dimensional
+   normal to the wall&apos;s surface. This model is thought for interior wall
+   elements that only serve as heat storage elements. The RC-chain is defined via
+   a vector of capacities <code>CInt[n]</code> and a vector of resistances
+   <code>RInt[n]</code>.
+   Resistances and capacities are connected alternately, starting with the first
+   resistance <code>RInt[1]</code>, from heat <code>port_a</code> into the wall.
+   </p>
+   <p align=\"center\"><img src=\"modelica://AixLib/Resources/Images/ThermalZones/ReducedOrder/RC/BaseClasses/IntMassVarRC/IntMassVarRC.png\" alt=\"image\"/> </p>
+   </html>", revisions="<html>
+   <ul>
+   <li>
+   April 27, 2016, by Michael Wetter:<br/>
+   Added graphical connections.
+   </li>
+   <li>
+   April 17, 2015, by Moritz Lauster:<br/>
+   Implemented.
+   </li>
+   </ul>
+   </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent=
   {{-100, -100}, {100, 120}}), graphics={  Rectangle(extent=
   {{-86, 60}, {-34, 26}}, fillColor = {255, 213, 170},
    fillPattern = FillPattern.Solid, lineColor = {175, 175, 175}),
@@ -118,6 +118,6 @@ equation
    Line(points = {{18, -32}, {-20, -32}}, color = {0, 0, 0}, thickness = 0.5,
    smooth = Smooth.None),
    Line(points = {{14, -44}, {-15, -44}}, color = {0, 0, 0}, thickness = 0.5,
-   smooth = Smooth.None)}), 
-   __Dymola_LockedEditing="Model from IBPSA");
+   smooth = Smooth.None)}),
+  __Dymola_LockedEditing="Model from IBPSA");
 end InteriorWall;

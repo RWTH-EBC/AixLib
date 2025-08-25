@@ -37,8 +37,10 @@ Documentation(info="<html><h4>
 <p>
   The simulation consists of the following models:
 </p>
-<table cellspacing=\"2\" cellpadding=\"0\" border=\"0\">
-  <caption>Models</caption>
+<table>
+  <caption>
+    \"Models\" cellspacing=\"2\" cellpadding=\"0\" border=\"0\
+  </caption>
   <tr>
     <td bgcolor=\"#DCDCDC\">
       <p>
@@ -60,8 +62,8 @@ Documentation(info="<html><h4>
     <td>
       <p>
         <a href=
-        \"AixLib.BoundaryConditions.InternalGains.Lights.LightsAreaSpecific\">
-        LightsAreaSpecific</a>
+        \"AixLib.Building.Components.Sources.InternalGains.Lights.Lights_simple\">
+        Lights_simple</a>
       </p>
     </td>
   </tr>
@@ -74,8 +76,22 @@ Documentation(info="<html><h4>
     <td>
       <p>
         <a href=
-        \"AixLib.BoundaryConditions.InternalGains.Lights.LightsRelToMaxValue\">
-        LightsRelToMaxValue</a>
+        \"AixLib.Building.Components.Sources.InternalGains.Lights.Lights_relative\">
+        Lights_relative</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        3
+      </p>
+    </td>
+    <td>
+      <p>
+        <a href=
+        \"AixLib.Building.Components.Sources.InternalGains.Lights.Lights_Avar\">
+        Lights_Avar</a>
       </p>
     </td>
   </tr>

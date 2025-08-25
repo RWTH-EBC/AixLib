@@ -1,7 +1,11 @@
 within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
+
+
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
+
+
 
   parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam=
       AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record"
@@ -34,7 +38,8 @@ model PumpHeadControlled
     annotation (Dialog(tab="Nominal design point", group=
           "Design point of pump. Used for start value calculation."));
 
-// Parameters
+
+ // Parameters
   // Initialization
   parameter Modelica.Units.SI.Height Hstart=Hnom "
       Start value of pump head. Will be used to initialize criticalDamping."
@@ -44,14 +49,14 @@ model PumpHeadControlled
   parameter Modelica.Media.Interfaces.Types.Temperature T_start=Medium.T_default
     "Start value of temperature" annotation (Dialog(tab="Initialization", group="Temperature"));
 
-// Dynamics
+  // Dynamics
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"
     annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
   parameter Modelica.Fluid.Types.Dynamics massDynamics=energyDynamics
     "Type of mass balance: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab = "Dynamics", group="Equations"));
 
-// Assumptions
+  // Assumptions
   parameter Modelica.Units.SI.Volume V=0 "Volume inside the pump"
     annotation (Dialog(tab="Assumptions"), Evaluate=true);
 
@@ -61,7 +66,7 @@ model PumpHeadControlled
       T=Medium.T_default,
       X=Medium.X_default) "Default medium density";
 
-// Power and Efficiency
+  // Power and Efficiency
   parameter Boolean calculatePower=true "calc. power consumption?" annotation (
      Dialog(tab="General", group="Power and Efficiency"));
   parameter Boolean calculateEfficiency=false
@@ -78,7 +83,7 @@ model PumpHeadControlled
       group="Power and Efficiency",
       enable=calculate_Efficiency), choicesAllMatching=true);
 
-// Variables
+  // Variables
   Modelica.Units.SI.Pressure dp_pump "Pressure increase";
   Modelica.Blocks.Interfaces.RealOutput head(
     quantity="Length",
@@ -98,7 +103,6 @@ model PumpHeadControlled
 
   Modelica.Blocks.Tables.CombiTable1Dv maxMinTable(
     columns={2,3},
-    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     table=pumpParam.maxMinHeight,
     tableName="NoName",
     tableOnFile=false)
@@ -132,13 +136,11 @@ protected
     "implements a connectable object that can be cuppled with pumpBus."
     annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
   Modelica.Blocks.Continuous.CriticalDamping
-    criticalDamping(
-      f=1/5,
-      initType=Modelica.Blocks.Types.Init.InitialOutput,
-      n=1,
-      y_start=Hstart)
+                                    criticalDamping(
+    y_start=Hstart,
+    f=1/5,
+    initType=Modelica.Blocks.Types.Init.InitialOutput)
     annotation (Placement(transformation(extent={{50,-20},{70,0}})));
-
 public
   Modelica.Blocks.Logical.Switch onOff
     annotation (Placement(transformation(extent={{48,10},{68,30}})));
@@ -175,7 +177,7 @@ equation
 
   head = criticalDamping.y "safe head after limiting and other checks.";
   dp_pump = head * rho_default * Modelica.Constants.g_n;
-//Calculate power and Efficiency
+  //Calculate power and Efficiency
   if pumpBus.onSet and head >
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D(
       pumpParam.cHQN,
@@ -270,9 +272,9 @@ equation
   connect(idealSource.port_a, port_a) annotation (Line(points={{-31,-80},{-81,-80},
           {-81,0},{-100,0}}, color={0,127,255}));
   connect(idealSource.port_b,vol. ports[1])
-    annotation (Line(points={{-11,-80},{32,-80}}, color={0,127,255}));
+    annotation (Line(points={{-11,-80},{31,-80}}, color={0,127,255}));
   connect(vol.ports[2], port_b)
-    annotation (Line(points={{34,-80},{100,-80},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{35,-80},{100,-80},{100,0}}, color={0,127,255}));
   connect(onOff.y, criticalDamping.u) annotation (Line(points={{69,20},{70,20},{
           70,5},{41,5},{41,-10},{48,-10}}, color={0,0,127}));
   annotation (
@@ -429,11 +431,7 @@ equation
   Describe whether the validation was done using analytical validation,
   comparative model validation or empirical validation.
 </p>
-</html>", revisions="<html>
 <ul>
-  <li>2022-10-13 by Martin Kremer:<br/>
-    Changed extrapolation in look-up table to 'hold last point'. Changed filter to first order.
-  </li>
   <li>2019-09-18 by Alexander Kümpel:<br/>
     Renaming, restructuring and bug fixes.
   </li>

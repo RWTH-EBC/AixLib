@@ -7,7 +7,7 @@ annotation (preferredView="info", Documentation(info="<html>
 <p>
 This package contains validation models for the classes in
 <a href=\"modelica://AixLib.Airflow.Multizone\">
-AixLib.Airflow.Multizone</a>.
+Buildings.Airflow.Multizone</a>.
 </p>
 <p>
 Note that most validation models contain simple input data

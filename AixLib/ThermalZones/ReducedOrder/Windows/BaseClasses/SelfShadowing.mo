@@ -1,7 +1,7 @@
 within AixLib.ThermalZones.ReducedOrder.Windows.BaseClasses;
 block SelfShadowing
   "Self-shadowing due to projections for direct radiation"
-  parameter Integer n(min = 1)=1 "Number of windows"
+  parameter Integer n(min = 1) "Number of windows"
     annotation(dialog(group="window"));
   extends Modelica.Blocks.Icons.Block;
   parameter Modelica.Units.SI.Length b[n] "Width of window"
@@ -28,16 +28,16 @@ block SelfShadowing
   parameter Modelica.Units.SI.Length dBel[n]
     "Distance between projection (below) and window"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.Units.SI.Angle azi[n](each displayUnit="deg") "Surface azimuth. azi=-90 degree if surface outward unit normal points
+  parameter Modelica.Units.SI.Angle azi[n](displayUnit="degree") "Surface azimuth. azi=-90 degree if surface outward unit normal points
      toward east; azi=0 if it points toward south"
     annotation (Dialog(group="Window parameter"));
-  parameter Modelica.Units.SI.Angle til[n](each displayUnit="deg") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
+  parameter Modelica.Units.SI.Angle til[n](displayUnit="degree") "Surface tilt. til=90 degree for walls; til=0 for ceilings; til=180 for
     roof" annotation (Dialog(group="Window parameter"));
 
    Modelica.Blocks.Interfaces.RealInput incAng[n](
-    each final quantity="Angle",
-    each final unit="rad",
-    each displayUnit="deg")
+    final quantity="Angle",
+    final unit="rad",
+    displayUnit="degree")
     "Incidence angle of the sun beam on a tilted surface"
     annotation (Placement(transformation(extent={{-140,-100},{-100,-60}}),
         iconTransformation(extent={{-120,-80},{-100,-60}})));
@@ -53,20 +53,20 @@ block SelfShadowing
     displayUnit="deg") "Solar altitude angle"
     annotation (Placement(transformation(extent={{-140,-30},{-100,10}}),
         iconTransformation(extent={{-120,-10},{-100,10}})));
-  Modelica.Blocks.Interfaces.RealOutput x_As[n](each min=0,
-    each final unit="1") "Not shaded percentage of window area"
+  Modelica.Blocks.Interfaces.RealOutput x_As[n](min=0,
+    final unit="1") "Not shaded percentage of window area"
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
         iconTransformation(extent={{100,-8},{118,10}})));
 
 protected
   Real e_hn[n] "Horizontal calculation factor";
   Real e_vn[n] "Vertical calculation factor";
-  Modelica.Units.SI.Length x1[n] "Auxiliary variable for shadow from left";
-  Modelica.Units.SI.Length x2[n] "Auxiliary variable for shadow from right";
-  Modelica.Units.SI.Length x3[n] "Auxiliary variable for shadow from above";
-  Modelica.Units.SI.Length x4[n] "Auxiliary variable for shadow from below";
-  Modelica.Units.SI.Length s_h[n] "Horizontal reduction of window";
-  Modelica.Units.SI.Length s_v[n] "Vertical reduction of window";
+  Modelica.Units.SI.Distance x1[n] "Auxiliary variable for shadow from left";
+  Modelica.Units.SI.Distance x2[n] "Auxiliary variable for shadow from right";
+  Modelica.Units.SI.Distance x3[n] "Auxiliary variable for shadow from above";
+  Modelica.Units.SI.Distance x4[n] "Auxiliary variable for shadow from below";
+  Modelica.Units.SI.Distance s_h[n] "Horizontal reduction of window";
+  Modelica.Units.SI.Distance s_v[n] "Vertical reduction of window";
   Modelica.Units.SI.Area A_S[n] "Auxiliary variable for effective area";
   Modelica.Units.SI.Area A_s[n] "Effective windowarea";
 equation

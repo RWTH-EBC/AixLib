@@ -33,7 +33,7 @@ model EntropyFlowRate "Test model for the entropy flow rate sensors"
     m_flow_nominal=2,
     tau=0)            "Specific entropy sensor"
                 annotation (Placement(transformation(extent={{0,-20},{20,0}})));
-  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(
+  AixLib.Fluid.Sensors.MassFlowRate senM_flow(
     redeclare package Medium = Medium) "Mass flow rate sensor"
                 annotation (Placement(transformation(extent={{28,-20},{48,0}})));
   AixLib.Utilities.Diagnostics.AssertEquality assEqu
@@ -51,13 +51,13 @@ equation
   connect(senS_flow.port_b,senS. port_a) annotation (Line(
       points={{-10,-10},{-5.55112e-16,-10}},
       color={0,127,255}));
-  connect(senS.port_b, senMasFlo.port_a) annotation (Line(
+  connect(senS.port_b, senM_flow.port_a) annotation (Line(
       points={{20,-10},{28,-10}},
       color={0,127,255}));
-  connect(senMasFlo.port_b, sin.ports[1]) annotation (Line(
+  connect(senM_flow.port_b, sin.ports[1]) annotation (Line(
       points={{48,-10},{60,-10}},
       color={0,127,255}));
-  connect(senMasFlo.m_flow, pro.u2) annotation (Line(
+  connect(senM_flow.m_flow, pro.u2) annotation (Line(
       points={{38,1},{38,36},{-10,36},{-10,58},{-2,58}},
       color={0,0,127}));
   connect(pro.y, assEqu.u2) annotation (Line(
@@ -71,19 +71,19 @@ equation
 experiment(Tolerance=1e-6, StopTime=60),
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Sensors/Examples/EntropyFlowRate.mos"
         "Simulate and plot"),    Documentation(info="<html>
-<p>
-This example tests the entropy flow rate sensor and the
-specific entropy sensor.
-The model compares the output of the entropy flow rate sensor with
-the product of the output of the entropy and the mass flow rate sensor.
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-July 29, 2016, by Michael Wetter:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ This example tests the entropy flow rate sensor and the
+ specific entropy sensor.
+ The model compares the output of the entropy flow rate sensor with
+ the product of the output of the entropy and the mass flow rate sensor.
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ July 29, 2016, by Michael Wetter:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end EntropyFlowRate;

@@ -1,7 +1,0 @@
-simulateModel("AixLib.Fluid.Storage.Examples.StorageSimpleExample", tolerance=1e-6, stopTime=38200, method="dassl", resultFile="StorageSimple");
-createPlot(id=1, position={104, 0, 742, 420}, y={"storageSimple.layer[1].T","storageSimple.layer[2].T","storageSimple.layer[3].T"}, 
-grid=true, filename="StorageSimple.mat", subPlot=1, colors={{28,108,200},{100,108,150},{50,70,20}});
-createPlot(id=1, position={104, 0, 742, 420}, y={"heatingRod.Pel"}, 
-grid=true, filename="StorageSimple.mat", subPlot=2, colors={{28,108,200}});
-createPlot(id=1, position={104, 0, 742, 420}, y={"simpleConsumer.Q_flow"}, 
-grid=true, filename="StorageSimple.mat", subPlot=3, colors={{28,108,200}});

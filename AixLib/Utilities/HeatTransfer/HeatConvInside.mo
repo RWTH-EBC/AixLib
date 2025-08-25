@@ -5,22 +5,33 @@ model HeatConvInside
   */
   extends Modelica.Thermal.HeatTransfer.Interfaces.Element1D;
 
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck "Calculation method for convective heat transfer coefficient" annotation (
+  parameter Integer calcMethod=2 "Calculation method for convective heat transfer coefficient" annotation (
     Dialog(descriptionLabel=true),
+    choices(
+      choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+      choice=2 "By Bernd Glueck",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
+      radioButtons=true),
     Evaluate=true);
 
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hCon_const=2.5
     "Custom convective heat transfer coefficient" annotation (Dialog(
-        descriptionLabel=true, enable=if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon then true else false));
+        descriptionLabel=true, enable=if calcMethod == 3 then true else false));
 
   parameter Modelica.Units.SI.TemperatureDifference dT_small=0.1
     "Linearized function around dT = 0 K +/-" annotation (Dialog(
-        descriptionLabel=true, enable=if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A or calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck or
-          calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017 then true else false));
+        descriptionLabel=true, enable=if calcMethod == 1 or calcMethod == 2 or
+          calcMethod == 4 then true else false));
 
   // which orientation of surface?
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation surfaceOrientation=AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.vertical_wall "Surface orientation" annotation (
-      Dialog(descriptionLabel=true, enable=if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon then false else true),
+  parameter Integer surfaceOrientation "Surface orientation" annotation (
+      Dialog(descriptionLabel=true, enable=if calcMethod == 3 then false else true),
+      choices(
+      choice=1 "vertical",
+      choice=2 "horizontal facing up",
+      choice=3 "horizontal facing down",
+      radioButtons=true),
       Evaluate=true);
   parameter Modelica.Units.SI.Area A(min=Modelica.Constants.eps)
     "Area of surface";
@@ -39,10 +50,10 @@ equation
 
   // ++++++++++++++++EN ISO 6946 Appendix A >>Flat Surfaces<<++++++++++++++++
   // upward heat flow: hCon = 5, downward heat flow: hCon = 0.7, horizontal heat flow: hCon = 2.5
-  if calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A then
+  if calcMethod == 1 then
 
     // floor (horizontal facing up)
-    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor then
+    if surfaceOrientation == 2 then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=5,
@@ -50,7 +61,7 @@ equation
         x_small=dT_small);
 
     // ceiling (horizontal facing down)
-    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling then
+    elseif surfaceOrientation == 3 then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=0.7,
@@ -67,11 +78,11 @@ equation
   // upward heat flow: hCon = 2*(posDiff^0.31)          - equation 1.27, page 26
   // downward heat flow: hCon = 0.54*(posDiff^0.31)     - equation 1.28, page 26
   // horizontal heat flow: hCon = 0.1.6*(posDiff^0.31)  - equation 1.26, page 26
-  elseif calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck then
+  elseif calcMethod == 2 then
 
     // floor (horizontal facing up)
 
-    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor then
+    if surfaceOrientation == 2 then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=2*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
@@ -80,7 +91,7 @@ equation
 
 
     // ceiling (horizontal facing down)
-    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling then
+    elseif surfaceOrientation == 3 then
        hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=0.54*AixLib.Utilities.Math.Functions.regNonZeroPower(posDiff, 0.31, dT_small),
@@ -96,18 +107,18 @@ equation
     // ++++++++++++++++hCon_const++++++++++++++++
 
 
-  elseif calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon then
+  elseif calcMethod == 3 then
     hCon = hCon_const;
 
 
 
     // ++++++++++++++++ASHRAE140-2017++++++++++++++++
     // upward heat flow: hCon = 4.13, downward heat flow: hCon = 1, horizontal heat flow: hCon = 3.16
-   elseif calcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.ASHRAE140_2017 then
+   elseif calcMethod == 4 then
 
 
     // floor (horizontal facing up)
-    if surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.floor then
+    if surfaceOrientation == 2 then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=4.13,
@@ -115,7 +126,7 @@ equation
         x_small=dT_small);
 
       // ceiling (horizontal facing down)
-    elseif surfaceOrientation == AixLib.ThermalZones.HighOrder.Components.Types.InsideSurfaceOrientation.ceiling then
+    elseif surfaceOrientation == 3 then
       hCon = Modelica.Fluid.Utilities.regStep(
         x=port_b.T - port_a.T,
         y1=1,

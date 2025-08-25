@@ -1,7 +1,7 @@
 within AixLib.BoundaryConditions.WeatherData.Old.WeatherTRY.RadiationOnTiltedSurface.BaseClasses;
 partial model PartialRadOnTiltedSurf
-  parameter Boolean WeatherFormat = false "Format weather file: If checked TMY, else TRY" annotation (Dialog(group=
-        "Properties of Weather Data",                                                                              descriptionLabel = true), choices(checkBox = true));
+  parameter Integer WeatherFormat = 1 "Format weather file" annotation (Dialog(group=
+        "Properties of Weather Data",                                                                              compact = true, descriptionLabel = true), choices(choice = 1 "TRY", choice= 2 "TMY", radioButtons = true));
   parameter Modelica.Units.NonSI.Angle_deg Latitude=49.5 "latitude of location"
     annotation (Dialog(group="Location Properties"));
   parameter Real GroundReflection=0.2 "ground reflection coefficient"

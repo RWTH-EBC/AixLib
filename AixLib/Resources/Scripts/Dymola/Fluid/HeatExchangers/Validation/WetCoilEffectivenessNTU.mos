@@ -1,4 +1,4 @@
-simulateModel("AixLib.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU",
+﻿simulateModel("AixLib.Fluid.HeatExchangers.Validation.WetCoilEffectivenessNTU",
     stopTime=1000,
     method="cvode",
     tolerance=1e-6,

@@ -26,32 +26,43 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
 
   //// Inner / Interior wall parameters
   // Heat convection
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface calcMethodIn=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.EN_ISO_6946_Appendix_A
+  parameter Integer calcMethodIn=1
     "Calculation method of convective heat transfer coefficient at inside surface"
     annotation (Dialog(
       tab="Inner walls",
       group="Heat convection",
       compact=true,
-      descriptionLabel=true));
+      descriptionLabel=true), choices(
+      choice=1 "EN ISO 6946 Appendix A >>Flat Surfaces<<",
+      choice=2 "By Bernd Glueck",
+      choice=3 "Custom hCon (constant)",
+      choice=4 "ASHRAE140-2017",
+      radioButtons=true));
 
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConIn_const=2.5
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
     annotation (Dialog(
       tab="Inner walls",
       group="Heat convection",
-      enable=(calcMethodIn == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Custom_hCon)));
+      enable=(calcMethodIn == 3)));
 
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for longwave radiation heat transfer"
+  parameter Integer radLongCalcMethod=1 "Calculation method for longwave radiation heat transfer"
     annotation (
     Evaluate=true,
-    Dialog(tab="Inner walls", group="Longwave radiation",   compact=true));
+    Dialog(tab="Inner walls", group="Longwave radiation",   compact=true),
+    choices(
+      choice=1 "No approx",
+      choice=2 "Linear approx at wall temp",
+      choice=3 "Linear approx at rad temp",
+      choice=4 "Linear approx at constant T_ref",
+      radioButtons=true));
   parameter Modelica.Units.SI.Temperature T_ref=
       Modelica.Units.Conversions.from_degC(16)
     "Reference temperature for optional linearization of longwave radiation"
     annotation (Dialog(
       tab="Inner walls",
       group="Longwave radiation",
-      enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
+      enable=radLongCalcMethod == 4));
 
   //// Outer / Exterior wall parameters
   //Window type
@@ -59,32 +70,34 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
   replaceable model WindowModel =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
     constrainedby
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow
-                                                                                                  annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.PartialWindow               annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
   replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
   replaceable model CorrSolarGainWin =
       AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
     constrainedby
-    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG
-                                                                                                                    "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
+    AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG               "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = withWindow and outside));
 
   // Solar absorptance
   parameter Real solar_absorptance_OW(min=0, max=1)=0.6 "Solar absoptance outer walls "
     annotation (Dialog(tab="Outer walls", group="Solar absorptance", descriptionLabel=true));
   // Heat convection
-  parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer calcMethodOut=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.DIN_6946 "Calculation method for convective heat transfer coefficient"
+  parameter Integer calcMethodOut=1 "Calculation method for convective heat transfer coefficient"
                                                                                                annotation (Dialog(
       tab="Outer walls",
       group="Heat convection",
       compact=true,
-      descriptionLabel=true));
-  replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)));
+      descriptionLabel=true), choices(
+      choice=1 "DIN 6946",
+      choice=2 "ASHRAE Fundamentals",
+      choice=3 "Custom hCon (constant)",
+      radioButtons=true));
+  replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == 2)));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConOut_const=25
     "Custom convective heat transfer coefficient (just for manual selection, not recommended)"
     annotation (Dialog(
       tab="Outer walls",
       group="Heat convection",
-      enable=(calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.Custom_hCon)));
+      enable=(calcMethodOut == 3)));
   // Sunblind
   parameter Boolean use_sunblind = false
     "Will sunblind become active automatically?"
@@ -137,6 +150,9 @@ partial model PartialRoomParams "Partial model with base parameters that are nec
       tab="Dynamic ventilation",
       descriptionLabel=true,
       enable=if withDynamicVentilation then true else false));
+
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a thermOutside
+    annotation (Placement(transformation(extent={{-110,90},{-90,110}}), iconTransformation(extent={{-110,88},{-90,108}})));
 
     annotation (Dialog(tab="Infiltration acc. to EN 12831 (building airtightness"),
               Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(coordinateSystem(preserveAspectRatio=false)),

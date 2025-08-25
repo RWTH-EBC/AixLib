@@ -24,29 +24,29 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Controls/Continuous/Examples/SignalRanker.mos"
         "Simulate and plot"),
     Documentation(info="<html>
-<p>
-Example that demonstrates the use of the signal ranker model.
-The figure below shows the input and output signals of the block.
-Note that
-<code>sigRan.y[1] &ge; sigRan.y[2] &ge; sigRan.y[3]</code>.
-</p>
-<p align=\"center\">
-<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/SignalRankerU.png\" border=\"1\" alt=\"Input to signal ranker.\"/><br/>
-<img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/SignalRankerY.png\" border=\"1\" alt=\"Output of signal ranker.\"/>
-</p>
-</html>", revisions="<html>
-<ul>
-<li>
-October 15, 2021, by Michael Wetter:<br/>
-Moved start time of sine input signal to avoid simultaneous state event and time event.<br/>
-This is for
-<a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">IBPSA, #1534</a>.
-</li>
-<li>
-November 21, 2011, by Michael Wetter:<br/>
-Added documentation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <p>
+ Example that demonstrates the use of the signal ranker model.
+ The figure below shows the input and output signals of the block.
+ Note that
+ <code>sigRan.y[1] &ge; sigRan.y[2] &ge; sigRan.y[3]</code>.
+ </p>
+ <p align=\"center\">
+ <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/SignalRankerU.png\" border=\"1\" alt=\"Input to signal ranker.\"/><br/>
+ <img src=\"modelica://AixLib/Resources/Images/Controls/Continuous/Examples/SignalRankerY.png\" border=\"1\" alt=\"Output of signal ranker.\"/>
+ </p>
+ </html>",revisions="<html>
+ <ul>
+ <li>
+ October 15, 2021, by Michael Wetter:<br/>
+ Moved start time of sine input signal to avoid simultaneous state event and time event.<br/>
+ This is for
+ <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1534\">IBPSA, #1534</a>.
+ </li>
+ <li>
+ November 21, 2011, by Michael Wetter:<br/>
+ Added documentation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end SignalRanker;

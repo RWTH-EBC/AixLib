@@ -31,10 +31,6 @@ model GFunction_SmallScaleValidation
   Real gFun_int "Interpolated value of g-function";
   Real lntts_int "Non-dimensional logarithmic time for interpolation";
 
-  parameter Integer nClu=1 "Number of clusters to be generated";
-  parameter Integer labels[nBor](each fixed=false) "Cluster label associated with each data point";
-  parameter Integer cluSiz[nClu](each fixed=false) "Size of the clusters";
-
   discrete Integer k "Current interpolation interval";
   discrete Modelica.Units.SI.Time t1 "Previous value of time for interpolation";
   discrete Modelica.Units.SI.Time t2 "Next value of time for interpolation";
@@ -45,13 +41,6 @@ model GFunction_SmallScaleValidation
 
 initial equation
   // Evaluate g-function for the specified bore field configuration
-  (labels, cluSiz) = AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.clusterBoreholes(
-    nBor = nBor,
-    cooBor = cooBor,
-    hBor = hBor,
-    dBor = dBor,
-    rBor = rBor,
-    nClu = nClu);
   (tGFun,gFun) =
     AixLib.Fluid.Geothermal.Borefields.BaseClasses.HeatTransfer.ThermalResponseFactors.gFunction(
       nBor = nBor,
@@ -63,10 +52,7 @@ initial equation
       nSeg = nSeg,
       nTimSho = nTimSho,
       nTimLon = nTimLon,
-      ttsMax = ttsMax,
-      nClu = nClu,
-      labels = labels,
-      cluSiz = cluSiz);
+      ttsMax = ttsMax);
   lntts = log(tGFun/ts .+ Modelica.Constants.small);
   // Initialize parameters for interpolation
   dspline = AixLib.Utilities.Math.Functions.splineDerivatives(
@@ -103,29 +89,24 @@ equation
 __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Geothermal/Borefields/BaseClasses/HeatTransfer/ThermalResponseFactors/Validation/GFunction_SmallScaleValidation.mos"
         "Simulate and plot"),
       Documentation(info="<html>
-<p>
-This example checks the implementation of functions that evaluate the
-g-function of the borehole used in the small-scale experiment of Cimmino and
-Bernier (2015).
-</p>
-<h4>References</h4>
-<p>
-Cimmino, M. and Bernier, M. 2015. <i>Experimental determination of the
-g-functions of a small-scale geothermal borehole</i>. Geothermics 56: 60-71.
-</p>
-</html>",
+ <p>
+ This example checks the implementation of functions that evaluate the
+ g-function of the borehole used in the small-scale experiment of Cimmino and
+ Bernier (2015).
+ </p>
+ <h4>References</h4>
+ <p>
+ Cimmino, M. and Bernier, M. 2015. <i>Experimental determination of the
+ g-functions of a small-scale geothermal borehole</i>. Geothermics 56: 60-71.
+ </p>
+ </html>",
 revisions="<html>
-<ul>
-<li>
-June 9, 2022, by Massimo Cimmino:<br/>
-Added parameters to define the number of clusters for the method of Prieto and
-Cimmino (2021).
-</li>
-<li>
-July 18, 2018, by Massimo Cimmino:<br/>
-First implementation.
-</li>
-</ul>
-</html>"),  
-   __Dymola_LockedEditing="Model from IBPSA");
+ <ul>
+ <li>
+ July 18, 2018, by Massimo Cimmino:<br/>
+ First implementation.
+ </li>
+ </ul>
+ </html>"),
+  __Dymola_LockedEditing="Model from IBPSA");
 end GFunction_SmallScaleValidation;
