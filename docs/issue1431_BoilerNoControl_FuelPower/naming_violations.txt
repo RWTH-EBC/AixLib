@@ -1,0 +1,53 @@
+
+
+
+AixLib/Fluid/BoilerCHP/BoilerNoControl.mo
+1: Name 'paramBoiler' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: param, Boiler. Affected line: parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition paramBoiler "Parameters for Boiler" annotation (Dialog(tab="General", group= "Boiler type"), choicesAllMatching=true);
+
+2: Name 'G' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G. Affected line: parameter Modelica.Units.SI.ThermalConductance G=0.003*Q_nom/50 "Constant thermal conductance to environment(G=Q_loss/dT)";
+
+3: Name 'Q_nom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q_nom. Affected line: parameter Modelica.Units.SI.Power Q_nom=paramBoiler.Q_flow_nominal "Nominal heating power";
+
+4: Name 'Q_flowFuel_nominal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fuel. Affected line: parameter Modelica.Units.SI.Power Q_flowFuel_nominal=paramBoiler.Q_flowFuel_nominal "Nominal firing power";
+
+5: Name 'internalCapacity' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: internal, Capacity. Affected line: Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity( final C=C, T(start=T_start)) "Boiler thermal capacity (dry weight)" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, rotation=90, origin={2,-40})));
+
+6: Name 'ConductanceToEnv' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Conductance. Affected line: Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv( final G=G) "Thermal resistance of the boiler casing" annotation ( Placement(transformation( extent={{10,-10},{-10,10}}, rotation=180, origin={-30,-20})));
+
+7: Name 'QgasCalculation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Qgas, Calculation. Affected line: Modelica.Blocks.Math.Product QgasCalculation "Calculate gas usage" annotation (Placement(transformation(extent={{-20,80},{0,100}})));
+
+8: Name 'limiter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=1, final uMin=0) "Limits the rel power between 0 and 1" annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+
+9: Name 'NominalGasConsumption' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Nominal, Consumption. Affected line: Modelica.Blocks.Sources.RealExpression NominalGasConsumption(final y= Q_flowFuel_nominal) "Nominal gas power" annotation (Placement(transformation(extent={{-62,88},{-34,104}})));
+
+10: Name 'fuelPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: fuel, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput fuelPower "Connector of Real output signal" annotation (Placement(transformation( extent={{100,90},{120,110}}), iconTransformation(extent={{-10,-10},{10, 10}}, rotation=0, origin={72,110})));
+
+11: Name 'thermalPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: thermal, Power. Affected line: Modelica.Blocks.Interfaces.RealOutput thermalPower "Value of Real output" annotation (Placement(transformation(extent={{100,70},{120,90}}), iconTransformation(extent={{62,74},{82,94}})));
+
+12: Name 'u_rel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: u_rel. Affected line: Modelica.Blocks.Interfaces.RealInput u_rel "Relative gas power [0,1]" annotation (Placement(transformation( extent={{-20,-20},{20,20}}, rotation=270, origin={-80,120}), iconTransformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-70,70})));
+
+13: Name 'T_amb' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_amb. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b T_amb "Heat port for heat losses to ambient" annotation ( Placement(transformation(extent={{30,-30},{50,-10}}), iconTransformation( extent={{58,-60},{78,-40}})));
+
+14: Name 'efficiencyTableLoadDepending' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: efficiency, Table, Load, Depending. Affected line: Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending( final tableOnFile=false, final table=etaLoadBased, final columns={2}, final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) "Table with efficiency parameters" annotation (Placement(transformation(extent={{-40,50},{-19,71}})));
+
+15: Name 'QflowCalculation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Qflow, Calculation. Affected line: Modelica.Blocks.Math.Product QflowCalculation "Calculation of the produced heatflow" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={-60,2})));
+
+16: Name 'etaLoadBased' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Load, Based. Affected line: parameter Real etaLoadBased[:,2]=paramBoiler.eta "Table matrix for part load based efficiency (e.g. [0,0.99; 0.5, 0.98; 1, 0,97])";
+
+17: Name 'etaTempBased' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Temp, Based. Affected line: parameter Real etaTempBased[:,2]=[293.15,1.09; 303.15,1.08; 313.15,1.05; 323.15,1.; 373.15,0.99] "Table matrix for temperature based efficiency";
+
+18: Name 'etaCalculation' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Calculation. Affected line: Modelica.Blocks.Math.Product etaCalculation "calculates the efficiency of the boiler" annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={10,50})));
+
+19: Name 'efficiencyTableLoadDepending1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: efficiency, Table, Load, Depending. Affected line: Modelica.Blocks.Tables.CombiTable1Dv efficiencyTableLoadDepending1( final tableOnFile=false, final table=etaTempBased, final columns={2}, final smoothness=Modelica.Blocks.Types.Smoothness.ContinuousDerivative) "Table with efficiency parameters" annotation (Placement(transformation(extent={{-40,20},{-19,41}})));
+
+
+AixLib/DataBase/Boiler/General/BoilerTwoPointBaseDataDefinition.mo
+1: Missing documentation. Affected line: import Modelica.Units.SI;
+
+2: Name 'name' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: name. Affected line: parameter String name "Name of boiler";
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Volume volume "Water volume of boiler";
+
+4: Name 'a' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a. Affected line: parameter Real a "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
+
+5: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: parameter SI.Power Q_flowFuel_nominal "Nominal fuel power / firing power, refering to net (inferior) calorific value";parameter SI.Power Q_flow_nominal "Nominal heat power / thermal load, refering to net (inferior) calorific value";parameter SI.Power Q_min "Minimal heat power / thermal load, refering to net (inferior) calorific value";parameter Real[:,2] eta "Normal supply level";

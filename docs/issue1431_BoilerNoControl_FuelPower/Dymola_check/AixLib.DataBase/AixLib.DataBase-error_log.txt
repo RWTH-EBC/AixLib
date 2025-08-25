@@ -1,0 +1,6 @@
+
+Error in model:  AixLib.DataBase.Boiler.General.Boiler_Vitodens300W_11kW 
+Check of <a href="Modelica://AixLib.DataBase.Boiler.General.Boiler_Vitodens300W_11kW">AixLib.DataBase.Boiler.General.Boiler_Vitodens300W_11kW</a>
+Did not find model AixLib.DataBase.Boiler.General.Boiler_Vitodens300W_11kW
+Error: ERRORS have been issued.
+

@@ -1,0 +1,268 @@
+
+Error in model:  AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>
+In value attribute for ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$ControlerHeater:h">ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#:ControlerHeater">ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text$ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$ControlerHeater:h">ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$QNormated:k">QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#:QNormated">QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text$QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#$QNormated:k">QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Boiler 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler">AixLib.Fluid.BoilerCHP.Boiler</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+In value attribute for internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.ControlerHeater:h">internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler">AixLib.Fluid.BoilerCHP.Boiler</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Boiler.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl:ControlerHeater">internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#text$internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.ControlerHeater:h">internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.QNormated:k">internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler">AixLib.Fluid.BoilerCHP.Boiler</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Boiler.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl:QNormated">internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#text$internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Boiler#$internalControl.QNormated:k">internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Check is assuming: m_flow_nominal = 0
+Check is assuming: paramBoiler.a = 0
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: boiler.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerStandAlone.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerStandAlone#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: boiler.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerExternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BoilerExternalControl.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BoilerExternalControl#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>
+Warning: Redeclaration requires a subtype.
+ But missing component dp_start.
+  In redeclaration of PeakLoadDeviceModel.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.BaseClasses.GeothermalHeatPumpBase.PeakLoadDeviceModel#text">20</a>
+  Context: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel</a>
+In value attribute for peaLoaDev.boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.ControlerHeater:h">peaLoaDev.boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl:ControlerHeater">peaLoaDev.boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#text$peaLoaDev.boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.ControlerHeater:h">peaLoaDev.boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for peaLoaDev.boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.QNormated:k">peaLoaDev.boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl:QNormated">peaLoaDev.boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#text$peaLoaDev.boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump#$peaLoaDev.boiler.internalControl.QNormated:k">peaLoaDev.boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerSystem 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+The model contained invalid expressions.
+Check aborted.
+Error: ERRORS have been issued.
+
