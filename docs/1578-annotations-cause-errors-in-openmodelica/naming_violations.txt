@@ -1,0 +1,97 @@
+
+
+
+AixLib/Fluid/Movers/PumpsPolynomialBased/PumpHeadControlled.mo
+1: Name 'pumpParam' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Param. Affected line: parameter AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord pumpParam= AixLib.DataBase.Pumps.PumpPolynomialBased.PumpBaseRecord() "pump parameter record" annotation (choicesAllMatching=true);
+
+2: Name 'Qnom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Qnom. Affected line: parameter Real Qnom( quantity="VolumeFlowRate", unit="m3/h", displayUnit="m3/h") = 0.67*max(pumpParam.maxMinSpeedCurves[:, 1]) "Nominal volume flow rate in m³/h (~0.67*Qmax). Qmax is taken from pumpParam.maxMinSpeedCurves." annotation (Dialog(tab="Nominal design point", group="Design point of pump. Used for start value calculation."));
+
+3: Name 'Nnom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Nnom. Affected line: parameter Modelica.Units.NonSI.AngularVelocity_rpm Nnom= Modelica.Math.Vectors.interpolate( x=pumpParam.maxMinSpeedCurves[:, 1], y=pumpParam.maxMinSpeedCurves[:, 2], xi=Qnom) "Pump speed in design point (Qnom,Hnom). Default is maximum speed at Qnom from pumpParam.maxMinSpeedCurves. Note that N is defined only on [nMin, nMax]. Due to power limitation N might be smaller than nMax for higher Q." annotation (Dialog(tab= "Nominal design point", group= "Design point of pump. Used for start value calculation."));
+
+4: Name 'Hnom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Hnom. Affected line: parameter Modelica.Units.SI.Height Hnom= AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.polynomial2D( pumpParam.cHQN, Qnom, Nnom) "Nominal pump head in m (water). Will by default be calculated automatically from Qnom and Nnom. If you change the value make sure to also set a feasible Qnom." annotation (Dialog(tab="Nominal design point", group= "Design point of pump. Used for start value calculation."));
+
+5: Name 'rho_default' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_default. Affected line: final parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX( p=Medium.p_default, T=Medium.T_default, X=Medium.X_default) "Default medium density";
+
+6: Name 'calculateEfficiency' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: calculate, Efficiency. Affected line: parameter Boolean calculateEfficiency=false "calc. efficency? (eta = f(H, Q, P))" annotation (Dialog( tab="General", group="Power and Efficiency", enable=calculatePower));
+
+7: Name 'efficiencyCharacteristic' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: efficiency, Characteristic. Affected line: replaceable function efficiencyCharacteristic = AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency constrainedby AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.baseEfficiency "eta = f(H, Q, P)" annotation (Dialog( tab="General", group="Power and Efficiency", enable=calculateEfficiency), choicesAllMatching=true);
+
+8: Name 'head' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: head. Affected line: Modelica.Blocks.Interfaces.RealOutput head( quantity="Length", unit="m") "Pump head";
+
+9: Name 'power' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: power. Affected line: Modelica.Blocks.Interfaces.RealOutput power(quantity="Power", unit="W") "electical power";
+
+10: Name 'Vflow_m3h' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Vflow_m3h. Affected line: Modelica.Blocks.Sources.RealExpression Vflow_m3h(y=m_flow/rho_default*3600) "conversion of mass flow rate to volume flow rate" annotation (Placement(transformation(extent={{-100,35},{-80,55}})));
+
+11: Name 'maxMinTable' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Table. Affected line: Modelica.Blocks.Tables.CombiTable1Dv maxMinTable( columns={2,3}, extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint, table=pumpParam.maxMinHeight, tableName="NoName", tableOnFile=false) "Outputs static head (H). Maximum, minimum and freely selectable pump curve" annotation (Placement(transformation(extent={{-75,10},{-55,30}}, rotation=0)));
+
+12: Name 'deMultiplex3_1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: de, Multiplex3_. Affected line: Modelica.Blocks.Routing.DeMultiplex2 deMultiplex3_1 "Seperate max/min pump head curve signal" annotation (Placement( transformation(extent={{-47,10},{-27,30}}, rotation=0)));
+
+13: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BaseClasses.VariableLimiter variableLimiter(strict=false) "Limit pump head to max/min curve" annotation (Placement(transformation( extent={{-10,10},{10,30}}, rotation=0)));BaseClasses.PumpBus pumpBus annotation (Placement(transformation(extent={{-19, 81},{20,120}}), iconTransformation(extent={{-20,80},{20,120}})));
+
+14: Name 'pumpPower' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Power. Affected line: protected Modelica.Blocks.Sources.RealExpression pumpPower(y=power) if calculatePower "implements a connectable object that can be cuppled with pumpBus." annotation (Placement(transformation(extent={{-100,66},{-80,86}})));
+
+15: Name 'pumpHead' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Head. Affected line: Modelica.Blocks.Sources.RealExpression pumpHead(y=head) "implements a connectable object that can be cuppled with pumpBus." annotation (Placement(transformation(extent={{73,-20},{93,0}})));
+
+16: Name 'pumpEfficiency' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pump, Efficiency. Affected line: Modelica.Blocks.Sources.RealExpression pumpEfficiency(y=eta) if calculateEfficiency "implements a connectable object that can be cuppled with pumpBus." annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
+
+17: Missing documentation. Affected line: Modelica.Blocks.Sources.Constant off(k=0) annotation (Placement(transformation(extent={{23,7},{33,17}})));
+
+18: Name 'pressure_difference' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pressure_difference. Affected line: Modelica.Blocks.Sources.RealExpression pressure_difference(y=-dp_pump) "implements a connectable object that can be cuppled with pumpBus." annotation (Placement(transformation(extent={{-71,-76},{-51,-56}})));
+
+19: Missing documentation, Name 'criticalDamping' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: critical, Damping. Affected line: Modelica.Blocks.Continuous.CriticalDamping criticalDamping( f=1/5, initType=Modelica.Blocks.Types.Init.InitialOutput, n=1, y_start=Hstart) annotation (Placement(transformation(extent={{50,-20},{70,0}})));
+
+20: Missing documentation. Affected line: public Modelica.Blocks.Logical.Switch onOff annotation (Placement(transformation(extent={{48,10},{68,30}})));
+
+21: Missing documentation, Name 'realExpression' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: real, Expression. Affected line: Modelica.Blocks.Sources.RealExpression realExpression(y=n) annotation (Placement(transformation(extent={{9,34},{29,54}})));
+
+22: Missing documentation, Name 'idealSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ideal, Source. Affected line: AixLib.Fluid.Movers.BaseClasses.IdealSource idealSource( redeclare package Medium = Medium, final allowFlowReversal=allowFlowReversal, final m_flow_small=1E-4*abs(m_flow_nominal), final control_m_flow=false) annotation (Placement(transformation(extent={{-31,-90},{-11,-70}})));
+
+
+AixLib/Utilities/HeatTransfer/HeatToRad.mo
+1: Name 'T_ref' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_ref. Affected line: parameter Modelica.Units.SI.Temperature T_ref= Modelica.Units.Conversions.from_degC(16) "Reference temperature for optional linearization" annotation (Dialog(enable=radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
+
+2: Name 'radCalcMethod' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Calc, Method. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for radiation heat transfer" annotation ( Evaluate=true, Dialog(group = "Radiation exchange equation", compact=true));
+
+3: Name 'convPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: conv, Port. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a convPort "Heat port for convective or conductive heat flow" annotation (Placement(transformation(extent={{-110,-10},{-90,10}}), iconTransformation(extent={{-110,-10},{-90,10}})));
+
+4: Name 'radPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Port. Affected line: AixLib.Utilities.Interfaces.RadPort radPort "Heat port for longwave radiative heat flow" annotation (Placement(transformation(extent={{91,-10},{111,10}}), iconTransformation(extent={{91,-10},{111,10}})));
+
+5: Name 'A_in_internal' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_in. Affected line: protected Modelica.Blocks.Interfaces.RealInput A_in_internal(final unit="m2") "Needed to connect to conditional connector";
+
+
+AixLib/ThermalZones/HighOrder/Rooms/BaseClasses/PartialRoomParams.mo
+1: Name 'wallTypes' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: wall, Types. Affected line: replaceable parameter AixLib.DataBase.Walls.Collections.BaseDataMultiWalls wallTypes constrainedby AixLib.DataBase.Walls.Collections.BaseDataMultiWalls "Types of walls (contains multiple records)" annotation(Dialog(group = "Structure of wall layers"), choicesAllMatching = true, Placement(transformation(extent={{-8,82},{8,98}})));
+
+2: Name 'energyDynamicsWalls' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: energy, Dynamics, Walls. Affected line: parameter Modelica.Fluid.Types.Dynamics energyDynamicsWalls=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial "Type of energy balance for wall capacities: dynamic (3 initialization options) or steady state" annotation(Evaluate=true, Dialog(tab="Dynamics"));
+
+3: Documentation too short, Name 'T0_air' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T0_air. Affected line: parameter Modelica.Units.SI.Temperature T0_air=295.11 "Air" annotation (Dialog(tab="Initialization", group="Air volume of room"));
+
+4: Name 'TWalls_start' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Walls. Affected line: parameter Modelica.Units.SI.Temperature TWalls_start= Modelica.Units.Conversions.from_degC(16) "Initial temperature of all walls" annotation (Dialog(tab="Initialization", group="Walls"));
+
+5: Name 'radLongCalcMethod' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Long, Calc, Method. Affected line: parameter AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer radLongCalcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.No_approx "Calculation method for longwave radiation heat transfer" annotation ( Evaluate=true, Dialog(tab="Inner walls", group="Longwave radiation", compact=true));
+
+6: Name 'T_ref' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: T_ref. Affected line: parameter Modelica.Units.SI.Temperature T_ref= Modelica.Units.Conversions.from_degC(16) "Reference temperature for optional linearization of longwave radiation" annotation (Dialog( tab="Inner walls", group="Longwave radiation", enable=radLongCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
+
+7: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple Type_Win "Window parametrization" annotation (Dialog(tab="Outer walls", group="Windows"), choicesAllMatching = true);
+
+8: Name 'CorrSolarGainWin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Corr, Solar. Affected line: replaceable model CorrSolarGainWin = AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG constrainedby AixLib.ThermalZones.HighOrder.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.PartialCorG "Correction model for solar irradiance as transmitted radiation" annotation (choicesAllMatching=true, Dialog(tab="Outer walls", group="Windows", enable = true));
+
+9: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook surfaceType=DataBase.Surfaces.RoughnessForHT.Brick_RoughPlaster() "Surface type of outside wall" annotation (Dialog(tab="Outer walls", group="Heat convection", enable=(calcMethodOut == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals)));
+
+10: Name 'ratioSunblind' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ratio, Sunblind. Affected line: parameter Real ratioSunblind(min=0.0, max=1.0) = 0.8 "Sunblind factor. 1 means total blocking of irradiation, 0 no sunblind" annotation(Dialog(tab="Outer walls", group = "Sunblind", enable=use_sunblind));
+
+11: Name 'solIrrThreshold' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Threshold. Affected line: parameter Modelica.Units.SI.Irradiance solIrrThreshold(min=0.0) = 350 "Threshold for global solar irradiation on this surface to enable sunblinding (see also TOutAirLimit)" annotation (Dialog( tab="Outer walls", group="Sunblind", enable=use_sunblind));
+
+12: Name 'TOutAirLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Limit. Affected line: parameter Modelica.Units.SI.Temperature TOutAirLimit=293.15 "Temperature at which sunblind closes (see also solIrrThreshold)" annotation (Dialog( tab="Outer walls", group="Sunblind", enable=use_sunblind));
+
+13: Name 'n50' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: n50. Affected line: parameter Real n50(unit="1/h") = 4 "Air exchange rate at 50 Pa pressure difference" annotation (Dialog(tab="Infiltration acc. to EN 12831 (airtightness)", enable=use_infiltEN12831));
+
+14: Name 'e' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: e. Affected line: parameter Real e=0.03 "Coefficient of windshield" annotation (Dialog(tab="Infiltration acc. to EN 12831 (airtightness)", enable=use_infiltEN12831));
+
+15: Name 'HeatingLimit' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heating, Limit. Affected line: parameter Modelica.Units.SI.Temperature HeatingLimit=288.15 "Outside temperature at which the heating activates" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
+
+16: Name 'Max_VR' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Max_. Affected line: parameter Real Max_VR=10 "Maximal ventilation rate" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
+
+17: Name 'Diff_toTempset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Diff_to, Tempset. Affected line: parameter Modelica.Units.SI.TemperatureDifference Diff_toTempset=2 "Difference to set temperature" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
+
+18: Documentation too short, Name 'Tset' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tset. Affected line: parameter Modelica.Units.SI.Temperature Tset=295.15 "Tset" annotation (Dialog( tab="Dynamic ventilation", descriptionLabel=true, enable=if withDynamicVentilation then true else false));
