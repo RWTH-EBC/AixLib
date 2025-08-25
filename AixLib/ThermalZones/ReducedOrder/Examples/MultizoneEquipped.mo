@@ -18,6 +18,8 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     use_moisture_balance=true,
     internalGainsMode=1,
     recOrSep=true,
+    dynamicVolumeFlowControlAHU=true,
+    dynamicSetTempControlAHU=true,
     redeclare model AHUMod =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU,
     heatAHU=true,
@@ -91,19 +93,23 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
         "modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_6Zone_SIA_4Columns.txt"))
     "Boundary conditions for air handling unit"
     annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
-  Modelica.Blocks.Sources.CombiTimeTable tableTSet(
+  Modelica.Blocks.Sources.CombiTimeTable tableTSetHeat(
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"),
-    columns=2:6)
-    "Set points for heater"
+        "modelica://AixLib/Resources/LowOrder_ExampleData/TsetHeat_5Zone.txt"),
+    columns=2:6) "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
-  Modelica.Blocks.Sources.Constant const[5](each k=0)
-    "Set point for cooler"
-    annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+  Modelica.Blocks.Sources.CombiTimeTable tableTSetCool(
+    tableOnFile=true,
+    tableName="Tset",
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    fileName=Modelica.Utilities.Files.loadResource(
+        "modelica://AixLib/Resources/LowOrder_ExampleData/TsetCool_5Zone.txt"),
+    columns=2:6) "Set points for cooler"
+    annotation (Placement(transformation(extent={{74,-90},{58,-74}})));
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
@@ -132,15 +138,15 @@ equation
                                                             color={191,0,0}));
   connect(tableAHU.y, multizone.AHU)
     annotation (Line(points={{-47.2,2},{14,2},{33,2}}, color={0,0,127}));
-  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
-          {36.8,-58},{36.8,-9}}, color={0,0,127}));
-  connect(const.y, multizone.TSetCool) annotation (Line(points={{55.2,-82},{
-          34.6,-82},{34.6,-9}}, color={0,0,127}));
+  connect(tableTSetHeat.y, multizone.TSetHeat) annotation (Line(points={{55.2,
+          -58},{36.8,-58},{36.8,-9}}, color={0,0,127}));
+  connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{57.2,
+          -82},{34.6,-82},{34.6,-9}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     experiment(
       StopTime=31536000,
-      Interval=3600,
+      Interval=60,
       Tolerance=1e-06,
       __Dymola_Algorithm="Cvode"),
     __Dymola_Commands(file=
