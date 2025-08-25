@@ -217,8 +217,9 @@ record ZoneBaseRecord "Base record definition for zone records"
   // Initialization
   parameter Modelica.Units.SI.Temperature T_start "Initial temperature" annotation(Dialog(tab="Initialization"));
                                                                                      annotation(Documentation(info="<html><p>
-        be used"),
-              Documentation(info="<html><p>
+  be used\"), Documentation(info=\"
+</p>
+<p>
   This is the base definition of zone records used in <a href=
   \"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a>.
   It aggregates all parameters at one record to enhance usability,
