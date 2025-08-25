@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model HeatRecoverySystem
 
   parameter Modelica.Units.SI.SpecificHeatCapacity cpAir = 1005
@@ -73,6 +73,7 @@ model HeatRecoverySystem
       Placement(transformation(extent={{140,60},{100,100}}), iconTransformation(
           extent={{120,70},{100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirInEta(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -94,6 +95,7 @@ model HeatRecoverySystem
       Placement(transformation(extent={{-140,50},{-100,90}}),
         iconTransformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirInOda(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -113,6 +115,7 @@ model HeatRecoverySystem
     "mass flow rate of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,-30},{-120,-10}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutEta(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -129,6 +132,7 @@ model HeatRecoverySystem
     "mass flow rate of outgoing outdoor air"
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutOda(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")

@@ -12,7 +12,7 @@ model ControlerHumidifier "controler for humidifier"
         iconTransformation(extent={{-120,-70},{-100,-50}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum x_pTphi if use_PhiSet
     annotation (Placement(transformation(extent={{-60,-24},{-40,-44}})));
-  Modelica.Blocks.Interfaces.RealInput Tset if use_PhiSet
+  Modelica.Blocks.Interfaces.RealInput Tset(start=293.15) if use_PhiSet
     "set value for temperature at cooler outlet"
     annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
         iconTransformation(extent={{-120,50},{-100,70}})));

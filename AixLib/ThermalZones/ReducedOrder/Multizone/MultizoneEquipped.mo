@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.Multizone;
+within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends
@@ -382,6 +382,10 @@ equation
   connect(dynamic_T_SUP_Control.TsetAHU_Out, AirHandlingUnit.TSupSet)
     annotation (Line(points={{-62,-30},{-68,-30},{-68,-6},{6.25,-6},{6.25,-0.8}},
         color={0,0,127}));
+  connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{-80,-72},
+          {30,-72},{30,78},{34,78},{34,77.7},{38.84,77.7}}, color={0,0,127}));
+  connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{-40,-74},
+          {32,-74},{32,72},{36,72},{36,71.96},{38.84,71.96}}, color={0,0,127}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},

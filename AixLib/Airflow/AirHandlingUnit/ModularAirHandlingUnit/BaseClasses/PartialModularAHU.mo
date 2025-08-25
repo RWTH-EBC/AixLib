@@ -84,7 +84,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
     "volume flow of outdoor air in m3/s"
     annotation (Placement(transformation(extent={{-174,66},{-146,94}}),
         iconTransformation(extent={{-168,56},{-160,64}})));
-  Modelica.Blocks.Interfaces.RealInput TOda(unit="K", start=288.15)
+  Modelica.Blocks.Interfaces.RealInput TOda(unit="K", start=293.15)
     "Temperature of outdoor air in K"
     annotation (Placement(transformation(extent={{-174,26},{-146,54}}),
         iconTransformation(extent={{-168,36},{-160,44}})));
@@ -100,7 +100,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
     "volume flow of extract air in m3/s"
     annotation (Placement(transformation(extent={{174,66},{146,94}}),
         iconTransformation(extent={{168,56},{160,64}})));
-  Modelica.Blocks.Interfaces.RealInput TEta(unit="K", start=288.15)
+  Modelica.Blocks.Interfaces.RealInput TEta(unit="K", start=293.15)
     "Temperature of extract air in K"
     annotation (Placement(transformation(extent={{174,26},{146,54}}),
         iconTransformation(extent={{168,36},{160,44}})));
@@ -111,7 +111,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
 
 
   // Set values
-  Modelica.Blocks.Interfaces.RealInput TSupSet(unit="K", start=295.15)
+  Modelica.Blocks.Interfaces.RealInput TSupSet(unit="K", start=293.15)
     "Set value for supply air temperature in K"
                         annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
@@ -140,7 +140,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={164,-40})));
-  Modelica.Blocks.Interfaces.RealOutput TSup(unit="K", start=295.15)
+  Modelica.Blocks.Interfaces.RealOutput TSup(unit="K", start=293.15)
     "supply air temperature in K"
                          annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},

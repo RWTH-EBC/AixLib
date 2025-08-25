@@ -6,18 +6,21 @@ model ControlerHeatRecovery
     "minimum temperature difference for which the hrs is switched off";
 
   Modelica.Blocks.Interfaces.RealInput TAirInEta(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of incoming exhaust air" annotation (
       Placement(transformation(extent={{-140,40},{-100,80}}),
         iconTransformation(extent={{-120,50},{-100,70}})));
   Modelica.Blocks.Interfaces.RealInput TAirInOda(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of incoming otudoor air" annotation (
       Placement(transformation(extent={{-140,-80},{-100,-40}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
   Modelica.Blocks.Interfaces.RealInput TSet(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -42,6 +45,7 @@ model ControlerHeatRecovery
     "opening of bypass (1: fully open, 0: fully closed)"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput TAirOut(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")

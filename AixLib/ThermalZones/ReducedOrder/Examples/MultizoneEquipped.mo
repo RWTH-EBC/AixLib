@@ -17,6 +17,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
         AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_Office()},
     use_moisture_balance=true,
     internalGainsMode=1,
+    recOrSep=true,
     redeclare model AHUMod =
         AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU,
     heatAHU=true,

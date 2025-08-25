@@ -1,6 +1,6 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model Cooler "Idealized model for cooler considering condensation"
-  extends BaseClasses.PartialCooler(TAirIn( start=291.15, fixed=false));
+  extends BaseClasses.PartialCooler;
 
   AixLib.Utilities.Psychrometrics.SaturationPressure pSat if use_T_set
     annotation (Placement(transformation(extent={{-24,26},{-4,46}})));
@@ -25,8 +25,8 @@ equation
           56.4},{48.8,56.4}}, color={0,0,127}));
   connect(XAirIn, minX.u1) annotation (Line(points={{-120,10},{-62,10},{-62,
           63.6},{48.8,63.6}}, color={0,0,127}));
-  connect(minT.y, pSat.TSat) annotation (Line(points={{-35.4,74},{-30,74},{-30,
-          36},{-25,36}}, color={0,0,127}));
+  connect(minT.y, pSat.TSat) annotation (Line(points={{-35.4,74},{-30,74},{-30,36},
+          {-25,36}}, color={0,0,127}));
   annotation (Icon(graphics={
         Line(
           points={{100,94},{-100,-94}},

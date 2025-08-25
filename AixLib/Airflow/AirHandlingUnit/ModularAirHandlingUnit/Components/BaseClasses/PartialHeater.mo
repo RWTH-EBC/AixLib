@@ -11,7 +11,7 @@ partial model PartialHeater
     annotation (Dialog(enable=not use_T_set));
 
   // Variables
-  Modelica.Blocks.Interfaces.RealInput T_set(start=288.15) if use_T_set
+  Modelica.Blocks.Interfaces.RealInput T_set(start=293.15) if use_T_set
     annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},

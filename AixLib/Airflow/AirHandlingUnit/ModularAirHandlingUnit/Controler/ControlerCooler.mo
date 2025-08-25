@@ -7,7 +7,7 @@ model ControlerCooler
     "max. set value for absolute humidity of supply air" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
            {{-120,50},{-100,70}})));
-  Modelica.Blocks.Interfaces.RealInput TsupSet(start=293.15)
+  Modelica.Blocks.Interfaces.RealInput TsupSet(unit="K", start=293.15)
     "set value for temperature at supply air outlet" annotation (Placement(
         transformation(extent={{-140,-40},{-100,0}}),   iconTransformation(
           extent={{-10,-10},{10,10}},
@@ -20,7 +20,7 @@ model ControlerCooler
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-60})));
-  Modelica.Blocks.Interfaces.RealOutput TcoolerSet
+  Modelica.Blocks.Interfaces.RealOutput TcoolerSet(unit="K", start=293.15)
     "Connector of Real output signal" annotation (Placement(transformation(
           extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,
             10}})));
@@ -40,8 +40,6 @@ model ControlerCooler
 equation
   connect(TsupSet, min_X.u2) annotation (Line(points={{-120,-20},{4,-20},{4,-8},
           {10,-8}},  color={0,0,127}));
-  connect(realPassThrough.y, TcoolerSet) annotation (Line(points={{73,-88},{82,
-          -88},{82,0},{110,0}},                   color={0,0,127}));
   connect(TsupSet, realPassThrough.u) annotation (Line(points={{-120,-20},{30,
           -20},{30,-88},{50,-88}}, color={0,0,127}));
   connect(xSupSet, pWat.X_w) annotation (Line(points={{-120,60},{-64,60},{-64,4},
@@ -61,8 +59,10 @@ equation
                                                           color={0,0,127}));
   connect(TsupSet, switch1.u3) annotation (Line(points={{-120,-20},{50,-20},{50,
           14},{56,14}}, color={0,0,127}));
-  connect(switch1.y, TcoolerSet) annotation (Line(points={{79,22},{82,22},{82,0},
-          {110,0}},        color={0,0,127}));
+  connect(switch1.y, TcoolerSet) annotation (Line(points={{79,22},{96,22},{96,0},
+          {110,0}}, color={0,0,127}));
+  connect(realPassThrough.y, TcoolerSet) annotation (Line(points={{73,-88},{96,-88},
+          {96,0},{110,0}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

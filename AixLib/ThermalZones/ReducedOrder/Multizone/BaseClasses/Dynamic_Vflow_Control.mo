@@ -53,7 +53,7 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
         extent={{10,10},{-10,-10}},
         rotation=90,
         origin={-20,30})));
-  Modelica.Blocks.Interfaces.RealInput TSetCool[numZones] annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](each unit="K", each start = 293.15) annotation (Placement(
         transformation(
         extent={{20,20},{-20,-20}},
         rotation=270,
@@ -61,7 +61,7 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
         extent={{20,-20},{-20,20}},
         rotation=270,
         origin={-40,-120})));
-  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones] annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](each unit="K", each start = 293.15) annotation (Placement(
         transformation(
         extent={{20,20},{-20,-20}},
         rotation=270,

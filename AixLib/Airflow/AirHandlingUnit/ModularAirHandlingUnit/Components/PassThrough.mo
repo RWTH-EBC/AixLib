@@ -8,9 +8,9 @@ model PassThrough
     annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
         iconTransformation(extent={{-120,40},{-100,60}})));
   Modelica.Blocks.Interfaces.RealInput T_airIn(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    start=288.15,
     displayUnit="degC")
     "Temperature of incoming air"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
@@ -25,9 +25,9 @@ model PassThrough
     annotation (Placement(transformation(extent={{100,-60},{120,-40}}),
         iconTransformation(extent={{100,-60},{120,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_airOut(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
-    start=288.15,
     displayUnit="degC") "Temperature of outgoing air"
      annotation (Placement(transformation(extent={{100,-10},{120,10}}),
         iconTransformation(extent={{100,-10},{120,10}})));

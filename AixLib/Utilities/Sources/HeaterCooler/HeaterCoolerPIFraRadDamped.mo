@@ -19,10 +19,12 @@ model HeaterCoolerPIFraRadDamped
       annotation (Dialog(tab="General", group = "PT1 Damper", enable=not recOrSep));
 
 protected
-  Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=K_PT1_Cooling, T=T_PT1_Cooling) if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
+  Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(k=K_PT1_Cooling, T=T_PT1_Cooling,
+    initType=Modelica.Blocks.Types.Init.InitialState)                                       if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Emulates the belayed cooling flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-16,-82},{4,-62}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=K_PT1_Heating, T=T_PT1_Heating) if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
+  Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(k=K_PT1_Heating, T=T_PT1_Heating,
+    initType=Modelica.Blocks.Types.Init.InitialState)                                       if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "Emulates the belayed heat flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-20,58},{0,78}})));
 

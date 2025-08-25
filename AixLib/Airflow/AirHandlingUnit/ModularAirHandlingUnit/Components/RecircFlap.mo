@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model RecircFlap "model for recirculating flap"
 
   // parameters
@@ -46,6 +46,7 @@ model RecircFlap "model for recirculating flap"
       Placement(transformation(extent={{140,60},{100,100}}), iconTransformation(
           extent={{120,70},{100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirInEta(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "mass flow rate of incoming exhaust air" annotation (
@@ -59,6 +60,7 @@ model RecircFlap "model for recirculating flap"
       final unit="kg/s") "mass flow rate of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,70},{-120,90}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutEta(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of outgoing exhaust air"
@@ -71,6 +73,7 @@ model RecircFlap "model for recirculating flap"
       Placement(transformation(extent={{-140,-100},{-100,-60}}),
         iconTransformation(extent={{-120,-90},{-100,-70}})));
   Modelica.Blocks.Interfaces.RealInput TAirInOda(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "Temperature of incoming outdoor air" annotation (
@@ -84,6 +87,7 @@ model RecircFlap "model for recirculating flap"
       final unit="kg/s") "mass flow rate of outgoing mixed air"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutOda(
+    start=293.15,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of outgoing mixed air" annotation (

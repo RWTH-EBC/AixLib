@@ -27,6 +27,7 @@ model FanSimple
         transformation(extent={{100,-90},{120,-70}}), iconTransformation(extent={{100,-90},
             {120,-70}})));
   Modelica.Blocks.Interfaces.RealOutput temIncFan(
+    start=0,
     final quantity="ThermodynamicTemperatureDifference",
     final unit="K")
     "temperature increase over fan"

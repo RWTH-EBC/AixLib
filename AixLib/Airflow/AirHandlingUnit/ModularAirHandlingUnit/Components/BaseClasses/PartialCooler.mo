@@ -11,7 +11,7 @@ partial model PartialCooler
     annotation(Dialog(enable=not use_T_set));
 
   // Variables
-  Modelica.Blocks.Interfaces.RealInput T_set(start=291.15)  if use_T_set annotation (Placement(
+  Modelica.Blocks.Interfaces.RealInput T_set(unit="K", start=293.15)  if use_T_set annotation (Placement(
         transformation(
         extent={{-20,-20},{20,20}},
         rotation=-90,
@@ -46,7 +46,7 @@ protected
     "mass flow over boundary";
   Modelica.Units.SI.HeatFlowRate Qb_flow
     "heat flow over boundary";
-  Modelica.Blocks.Interfaces.RealInput T_intern
+  Modelica.Blocks.Interfaces.RealInput T_intern(final unit="K")
     "internal temperature";
   Modelica.Blocks.Interfaces.RealInput X_intern
     "internal mass fraction";
