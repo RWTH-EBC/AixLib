@@ -1,121 +1,4 @@
 
-Error in model:  AixLib.Fluid.BoilerCHP.BoilerNoControl 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl">AixLib.Fluid.BoilerCHP.BoilerNoControl</a>
-Component type specifier BaseProperties is a partial type
-  It must be redeclared before being used.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
- Component context: vol.dynBal.medium
-  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
-Check is assuming: m_flow_nominal = 0
-Error: Detected when expanding paramBoiler.a did not find record element a at expansion, probably caused by heterogeneous arrays.
-Warning: Failed to expand the variable a
-and its definition equation:
-paramBoiler.a
-Error: For variable a
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl#:PartialHeatGenerator">PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  a = paramBoiler.a;
-Error: Could not find member a in record expression paramBoiler.
-Warning: Failed to expand the variable n
-and its definition equation:
-paramBoiler.n
-Error: For variable n
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl#:PartialHeatGenerator">PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  n = paramBoiler.n;
-Error: Could not find member n in record expression paramBoiler.
-In nominal attribute for preDro.dp.
-Modifier applied in class <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance">AixLib.Fluid.BaseClasses.PartialResistance</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/FixedResistances/PressureDrop.mo, line <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance#text:3">4</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl#$preDro:dp">preDro.dp</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/PartialTwoPortInterface.mo, line 23
-Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl">AixLib.Fluid.BoilerCHP.BoilerNoControl</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BoilerNoControl.mo, line 2
-Variable found in base-class preDro.PartialTwoPortInterface.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
-Ignoring nominal attribute.
-Error: For variable a
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl#:PartialHeatGenerator">PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  a = paramBoiler.a;
-Error: Could not find member a in record expression paramBoiler.
-Error: For variable n
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.BoilerNoControl#:PartialHeatGenerator">PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  n = paramBoiler.n;
-Error: Could not find member n in record expression paramBoiler.
-Basic type inconsistencies detected.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase 
-Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>
-In value attribute for boiler.internalControl.ControlerHeater.h.
-Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
-Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
-Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
-Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
-In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
-In value attribute for boiler.internalControl.QNormated.k.
-Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
-Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
-Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
-Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
-In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
-  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
-Error: Detected when expanding boiler.paramBoiler.a did not find record element a at expansion, probably caused by heterogeneous arrays.
-Warning: Failed to expand the variable boiler.a
-and its definition equation:
-boiler.paramBoiler.a
-Error: For variable boiler.a
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  boiler.a = boiler.paramBoiler.a;
-Error: Could not find member a in record expression boiler.paramBoiler.
-Warning: Failed to expand the variable boiler.rho_default
-and its definition equation:
-density_pTX_Unique29(101325, 293.15, {1.0})
-Warning: Failed to expand the variable boiler.n
-and its definition equation:
-boiler.paramBoiler.n
-Error: For variable boiler.n
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  boiler.n = boiler.paramBoiler.n;
-Error: Could not find member n in record expression boiler.paramBoiler.
-In nominal attribute for boiler.preDro.dp.
-Modifier applied in class <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance">AixLib.Fluid.BaseClasses.PartialResistance</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/FixedResistances/PressureDrop.mo, line <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance#text:3">4</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.preDro:dp">boiler.preDro.dp</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/PartialTwoPortInterface.mo, line 23
-Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
-Variable found in base-class boiler.preDro.PartialTwoPortInterface.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
-Ignoring nominal attribute.
-The model contained invalid expressions.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump 
 Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>
 Warning: Modifier for protected component use_busConOnl. This is not legal Modelica.
@@ -192,6 +75,72 @@ Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.Geother
 Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump">AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/GeothermalHeatPump.mo, line 2
 Variable found in base-class peaLoaDev.boiler.preDro.PartialTwoPortInterface.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
+Ignoring nominal attribute.
+The model contained invalid expressions.
+Check aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerSystem 
+Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>
+In value attribute for boiler.internalControl.ControlerHeater.h.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
+In value attribute for boiler.internalControl.QNormated.k.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
+Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+  File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
+Error: Detected when expanding boiler.paramBoiler.a did not find record element a at expansion, probably caused by heterogeneous arrays.
+Warning: Failed to expand the variable boiler.a
+and its definition equation:
+boiler.paramBoiler.a
+Error: For variable boiler.a
+ declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
+Type inconsistent definition equation:
+  boiler.a = boiler.paramBoiler.a;
+Error: Could not find member a in record expression boiler.paramBoiler.
+Warning: Failed to expand the variable boiler.rho_default
+and its definition equation:
+AixLib.Media.Specialized.Water.TemperatureDependentDensity.density_pTX_Unique24(  _GlobalScope.AixLib.Media.Specialized.Water.TemperatureDependentDensity.p_default,   _GlobalScope.AixLib.Media.Specialized.Water.TemperatureDependentDensity.T_default,   _GlobalScope.AixLib.Media.Specialized.Water.TemperatureDependentDensity.X_default)
+Warning: Failed to expand the variable boiler.n
+and its definition equation:
+boiler.paramBoiler.n
+Error: For variable boiler.n
+ declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
+Type inconsistent definition equation:
+  boiler.n = boiler.paramBoiler.n;
+Error: Could not find member n in record expression boiler.paramBoiler.
+In nominal attribute for boiler.preDro.dp.
+Modifier applied in class <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance">AixLib.Fluid.BaseClasses.PartialResistance</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/FixedResistances/PressureDrop.mo, line <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance#text:3">4</a>
+Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.preDro:dp">boiler.preDro.dp</a>.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/PartialTwoPortInterface.mo, line 23
+Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in base-class boiler.preDro.PartialTwoPortInterface.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Ignoring nominal attribute.
 The model contained invalid expressions.
@@ -340,54 +289,6 @@ Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem</a>
-Error: Detected when expanding boilerNoControl.paramBoiler.a did not find record element a at expansion, probably caused by heterogeneous arrays.
-Warning: Failed to expand the variable boilerNoControl.a
-and its definition equation:
-boilerNoControl.paramBoiler.a
-Error: For variable boilerNoControl.a
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem#$boilerNoControl:PartialHeatGenerator">boilerNoControl.PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  boilerNoControl.a = boilerNoControl.paramBoiler.a;
-Error: Could not find member a in record expression boilerNoControl.paramBoiler.
-Warning: Failed to expand the variable boilerNoControl.rho_default
-and its definition equation:
-AixLib.Media.Water.density_pTX_Unique27(_GlobalScope.AixLib.Media.Water.p_default,   _GlobalScope.AixLib.Media.Water.T_default, _GlobalScope.AixLib.Media.Water.X_default)
-Warning: Failed to expand the variable boilerNoControl.n
-and its definition equation:
-boilerNoControl.paramBoiler.n
-Error: For variable boilerNoControl.n
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem#$boilerNoControl:PartialHeatGenerator">boilerNoControl.PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  boilerNoControl.n = boilerNoControl.paramBoiler.n;
-Error: Could not find member n in record expression boilerNoControl.paramBoiler.
-In nominal attribute for boilerNoControl.preDro.dp.
-Modifier applied in class <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance">AixLib.Fluid.BaseClasses.PartialResistance</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/FixedResistances/PressureDrop.mo, line <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance#text:3">4</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem#$boilerNoControl.preDro:dp">boilerNoControl.preDro.dp</a>.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/PartialTwoPortInterface.mo, line 23
-Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerNoControlSystem.mo, line 2
-Variable found in base-class boilerNoControl.preDro.PartialTwoPortInterface.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
-Ignoring nominal attribute.
-Error: For variable boilerNoControl.a
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem#$boilerNoControl:PartialHeatGenerator">boilerNoControl.PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  boilerNoControl.a = boilerNoControl.paramBoiler.a;
-Error: Could not find member a in record expression boilerNoControl.paramBoiler.
-Error: For variable boilerNoControl.n
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerNoControlSystem#$boilerNoControl:PartialHeatGenerator">boilerNoControl.PartialHeatGenerator</a>.
-Type inconsistent definition equation:
-  boilerNoControl.n = boilerNoControl.paramBoiler.n;
-Error: Could not find member n in record expression boilerNoControl.paramBoiler.
-Basic type inconsistencies detected.
-Check aborted.
-Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl 
 Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>
 In value attribute for ControlerHeater.h.
@@ -423,63 +324,63 @@ Check aborted.
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Fluid.BoilerCHP.Examples.BoilerSystem 
-Check of <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>
+Error in model:  AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase 
+Check of <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>
 In value attribute for boiler.internalControl.ControlerHeater.h.
 Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
-Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
-Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:ControlerHeater">boiler.internalControl.ControlerHeater</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 66
-Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#text$boiler.internalControl.ControlerHeater:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
 In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.ControlerHeater:h">boiler.internalControl.ControlerHeater.h</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Controls/Continuous/PITemp.mo, line <a href="Modelica://AixLib.Controls.Continuous.PITemp#text:11">12</a>
 In value attribute for boiler.internalControl.QNormated.k.
 Modifier applied in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
   File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
-Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
-Variable found in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
+Variable found in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl:QNormated">boiler.internalControl.QNormated</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line 90
-Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
+Error: Use of undeclared variable: <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#text$boiler.internalControl.QNormated:paramBoiler.Q_nom">paramBoiler.Q_nom</a>
 In class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl">AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/Controllers/InternalControl.mo, line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.Controllers.InternalControl#text">2</a>
-Used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
+Used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.internalControl.QNormated:k">boiler.internalControl.QNormated.k</a>.
   File: /opt/dymola-2024xRefresh1-x86_64/Modelica/Library/Modelica 4.0.0/Blocks/Math.mo, line <a href="Modelica://Modelica.Blocks.Math.Gain#text:3">543</a>
 Error: Detected when expanding boiler.paramBoiler.a did not find record element a at expansion, probably caused by heterogeneous arrays.
 Warning: Failed to expand the variable boiler.a
 and its definition equation:
 boiler.paramBoiler.a
 Error: For variable boiler.a
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
+ declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:44">45</a>, and used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
 Type inconsistent definition equation:
   boiler.a = boiler.paramBoiler.a;
 Error: Could not find member a in record expression boiler.paramBoiler.
 Warning: Failed to expand the variable boiler.rho_default
 and its definition equation:
-AixLib.Media.Specialized.Water.TemperatureDependentDensity.density_pTX_Unique24(  _GlobalScope.AixLib.Media.Specialized.Water.TemperatureDependentDensity.p_default,   _GlobalScope.AixLib.Media.Specialized.Water.TemperatureDependentDensity.T_default,   _GlobalScope.AixLib.Media.Specialized.Water.TemperatureDependentDensity.X_default)
+density_pTX_Unique29(101325, 293.15, {1.0})
 Warning: Failed to expand the variable boiler.n
 and its definition equation:
 boiler.paramBoiler.n
 Error: For variable boiler.n
- declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
+ declared in class <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator">AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator</a>, /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/BaseClasses/PartialHeatGenerator.mo at line <a href="Modelica://AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator#text:46">47</a>, and used in component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler:PartialHeatGenerator">boiler.PartialHeatGenerator</a>.
 Type inconsistent definition equation:
   boiler.n = boiler.paramBoiler.n;
 Error: Could not find member n in record expression boiler.paramBoiler.
 In nominal attribute for boiler.preDro.dp.
 Modifier applied in class <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance">AixLib.Fluid.BaseClasses.PartialResistance</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/FixedResistances/PressureDrop.mo, line <a href="Modelica://AixLib.Fluid.BaseClasses.PartialResistance#text:3">4</a>
-Modifier applied for component <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem#$boiler.preDro:dp">boiler.preDro.dp</a>.
+Modifier applied for component <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase#$boiler.preDro:dp">boiler.preDro.dp</a>.
   File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/PartialTwoPortInterface.mo, line 23
-Variable found in class <a href="Modelica://AixLib.Fluid.BoilerCHP.Examples.BoilerSystem">AixLib.Fluid.BoilerCHP.Examples.BoilerSystem</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BoilerCHP/Examples/BoilerSystem.mo, line 2
+Variable found in class <a href="Modelica://AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase">AixLib.Fluid.Examples.GeothermalHeatPump.Components.BaseClasses.BoilerBase</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Examples/GeothermalHeatPump/Components/BaseClasses/BoilerBase.mo, line 2
 Variable found in base-class boiler.preDro.PartialTwoPortInterface.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/BaseClasses/PartialResistance.mo, line 3
 Ignoring nominal attribute.
