@@ -2,8 +2,9 @@ within AixLib.DataBase.Boiler.General;
 record Boiler_Vitogas200F_60kW "Gas-fired boiler Viessmann Vitogas200-F 60kW"
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitogas200F_60kW",
-    volume=0.0159,
-    pressureDrop=3240000000.0,
+    volume=0.0219,
+    a=3.3169E+9,
+    n=1.9986,
     Q_flowFuel_nominal=66200,
     Q_flow_nominal=60000,
     Q_min=19860,
@@ -27,7 +28,7 @@ record Boiler_Vitogas200F_60kW "Gas-fired boiler Viessmann Vitogas200-F 60kW"
   </li>
   <li>Manufacturer: Viessmann
   </li>
-  <li>Broschure: Vitogas 200-F; 5/2010
+  <li>Broschure: Vitogas 200-F; 4/2014; 541039
   </li>
 </ul>
 </html>"));

@@ -3,7 +3,8 @@ record Boiler_Vitogas200F_15kW "Gas-fired boiler Viessmann Vitogas200-F 15kW"
   extends BoilerTwoPointBaseDataDefinition(
     name="Vitogas200F_15kW",
     volume=0.0076,
-    pressureDrop=10218000000.0,
+    a=1.3819E+10,
+    n=2.0330,
     Q_flowFuel_nominal=16600,
     Q_flow_nominal=15000,
     Q_min=4980,

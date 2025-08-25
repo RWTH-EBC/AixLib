@@ -2,7 +2,6 @@
 model CHPNoControl
   "Table based CHP model without an internal controller"
   extends AixLib.Fluid.BoilerCHP.BaseClasses.PartialHeatGenerator(a=1e10, vol(
-      energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
       massDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
                      V=param.vol[1]));
 
@@ -138,9 +137,9 @@ equation
           {66,76},{66,50},{61,50}}, color={0,0,127}));
   connect(gain3.u, combiTable1Ds.y[3]) annotation (Line(points={{50,85.2},{50,76},
           {66,76},{66,50},{61,50}}, color={0,0,127}));
-  connect(senTHot.T,T_out)  annotation (Line(points={{40,-69},{40,-60},{84,-60},
+  connect(senTSup.T,T_out)  annotation (Line(points={{40,-69},{40,-60},{84,-60},
           {84,60},{110,60}},          color={0,0,127}));
-  connect(senTCold.T,T_in)  annotation (Line(points={{-70,-69},{-70,-100},{110,-100},
+  connect(senTRet.T, T_in) annotation (Line(points={{-70,-69},{-70,-100},{110,-100},
           {110,40}}, color={0,0,127}));
   connect(limiter.u, u_rel) annotation (Line(points={{-62,50},{-80,50},{-80,80},
           {-113,80}}, color={0,0,127}));

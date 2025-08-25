@@ -157,7 +157,7 @@ parameter DataBase.Surfaces.RoughnessForHT.PolynomialCoefficients_ASHRAEHandbook
   Sunblinds.Sunblind Sunblind(
     final n=1,
     final gsunblind={Blinding},
-    final Imax=LimitSolIrr,
+    final H_max=LimitSolIrr,
     final TOutAirLimit=TOutAirLimit)
                       if outside and withWindow and withSunblind
     annotation (Placement(transformation(extent={{-52,-44},{-36,-28}})));

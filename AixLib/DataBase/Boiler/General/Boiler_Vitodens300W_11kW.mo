@@ -2,9 +2,11 @@ within AixLib.DataBase.Boiler.General;
 record Boiler_Vitodens300W_11kW
   "Condesing boiler Viessmann Vitodens 300W 11kW, for Tv/Tr = 50/30 degC"
   extends BoilerTwoPointBaseDataDefinition(
+    volume=0.0076,
+    a=1.3819E+10,
+    n=2.0330,
+    Q_nom=16700,
     name="Vitodens300W_11kW",
-    volume=0.0042,
-    pressureDrop=17025510099,
     Q_flowFuel_nominal=10300,
     Q_flow_nominal=11000,
     Q_min=3600,

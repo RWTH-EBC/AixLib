@@ -1,9 +1,7 @@
 ActuatorFilter
 IndexMassFraction
 MassFlowRateMultiplier
-PartialInnerCycle
 PartialResistance
-PartialReversibleVapourCompressionMachine
 PartialThreeWayResistance
 FlowModels
 Validation

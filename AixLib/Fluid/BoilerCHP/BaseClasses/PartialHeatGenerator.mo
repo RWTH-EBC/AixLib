@@ -10,7 +10,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Units.SI.Temperature T_start=Medium.T_default
     "Initial or guess value of output (= state)"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Boolean transferHeat=false
     "If true, temperature T converges towards TAmb when no flow"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
@@ -22,16 +22,16 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     annotation (Dialog(tab="Advanced", group="Sensor Properties"));
   parameter Modelica.Units.SI.AbsolutePressure dp_start=0
     "Guess value of dp = port_a.p - port_b.p"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Modelica.Units.SI.MassFlowRate m_flow_start=0
     "Guess value of m_flow = port_a.m_flow"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
   parameter Modelica.Units.SI.AbsolutePressure p_start=Medium.p_default
     "Start value of pressure"
-    annotation (Dialog(tab="Advanced", group="Initialization"));
+    annotation (Dialog(tab="Initialization"));
 
-  parameter Modelica.Units.SI.PressureDifference dp_nominal=m_flow_nominal^2*a/
-      (rho_default^2) "Pressure drop at nominal mass flow rate"
+  parameter Modelica.Units.SI.PressureDifference dp_nominal=a*(m_flow_nominal/rho_default)^n
+      "Pressure drop at nominal mass flow rate"
     annotation (Dialog(group="Nominal condition"));
   parameter Boolean from_dp=false
     "= true, use m_flow = f(dp) else dp = f(m_flow)"
@@ -42,9 +42,19 @@ partial model PartialHeatGenerator "Partial model for heat generators"
   parameter Real deltaM=0.3
     "Fraction of nominal mass flow rate where transition to turbulent occurs"
     annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  parameter Real a "Coefficient of old approach from model Modelica.Fluid.Fittings.GenericResistances.VolumeFlowRate. Recalculated to dp_nominal based on IBPSA approach."
+  parameter Real a "Coefficient of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n."
   annotation (Dialog(tab="Advanced", group="Pressure drop"));
-  Sensors.TemperatureTwoPort senTCold(
+  parameter Real n=2 "Exponent of volume flow rate dependent nominal pressure drop, dp_nominal=a*V_flow_nominal^n."
+  annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
+      Medium.p_default,
+      Medium.T_default,
+      Medium.X_default) "Density used for parameterization of pressure curve"
+    annotation (Dialog(tab="Advanced", group="Pressure drop"));
+  parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
+    "Type of energy balance: dynamic (3 initialization options) or steady state"
+    annotation (Dialog(tab="Dynamics"));
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTRet(
     redeclare final package Medium = Medium,
     final tau=tau,
     final m_flow_nominal=m_flow_nominal,
@@ -57,7 +67,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final m_flow_small=m_flow_small)
     "Temperature sensor of cold side of heat generator (return)"
     annotation (Placement(transformation(extent={{-80,-90},{-60,-70}})));
-  Sensors.TemperatureTwoPort senTHot(
+  AixLib.Fluid.Sensors.TemperatureTwoPort senTSup(
     redeclare final package Medium = Medium,
     final tau=tau,
     final m_flow_nominal=m_flow_nominal,
@@ -70,7 +80,7 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final m_flow_small=m_flow_small)
     "Temperature sensor of hot side of heat generator (supply)"
     annotation (Placement(transformation(extent={{30,-90},{50,-70}})));
-  Sensors.MassFlowRate senMasFlo(
+  AixLib.Fluid.Sensors.MassFlowRate senMasFlo(
     redeclare final package Medium = Medium,
     final allowFlowReversal=allowFlowReversal)
     "Sensor for mass flwo rate"
@@ -81,8 +91,9 @@ partial model PartialHeatGenerator "Partial model for heat generators"
         extent={{-10,-10},{10,10}},
         rotation=-90,
         origin={-60,-50})));
-  MixingVolumes.MixingVolume vol(
+  AixLib.Fluid.MixingVolumes.MixingVolume vol(
     redeclare final package Medium = Medium,
+    final energyDynamics=energyDynamics,
     final m_flow_nominal=m_flow_nominal,
     final m_flow_small=m_flow_small,
     final allowFlowReversal=allowFlowReversal,
@@ -91,39 +102,39 @@ partial model PartialHeatGenerator "Partial model for heat generators"
     final T_start=T_start)
     "Fluid volume"
     annotation (Placement(transformation(extent={{-50,-80},{-30,-60}})));
-  FixedResistances.PressureDrop                             pressureDrop(
+
+  AixLib.Fluid.FixedResistances.PressureDrop preDro(
     redeclare final package Medium = Medium,
     final m_flow_nominal=m_flow_nominal,
     final show_T=false,
     final allowFlowReversal=allowFlowReversal,
-    final dp_nominal=dp_nominal)
-    "Pressure drop"
+    final dp_nominal=dp_nominal,
+    final deltaM=deltaM,
+    final from_dp=from_dp,
+    final linearized=linearized) "Pressure drop"
     annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
-  parameter Modelica.Units.SI.Density rho_default=Medium.density_pTX(
-      Medium.p_default,
-      Medium.T_default,
-      Medium.X_default) "Density used for parameterization of pressure curve"
-    annotation (Dialog(tab="Advanced", group="Pressure drop"));
 
 equation
-  connect(port_a, senTCold.port_a) annotation (Line(points={{-100,0},{-90,0},{-90,
-          -80},{-80,-80}}, color={0,127,255},
+  connect(port_a, senTRet.port_a) annotation (Line(
+      points={{-100,0},{-90,0},{-90,-80},{-80,-80}},
+      color={0,127,255},
       thickness=1));
-  connect(senTCold.port_b, vol.ports[1])
-    annotation (Line(points={{-60,-80},{-42,-80}}, color={0,127,255},
+  connect(senTRet.port_b, vol.ports[1]) annotation (Line(
+      points={{-60,-80},{-41,-80}},
+      color={0,127,255},
       thickness=1));
-  connect(vol.ports[2], pressureDrop.port_a) annotation (Line(
-      points={{-38,-80},{-38,-80},{-20,-80}},
+  connect(vol.ports[2], preDro.port_a) annotation (Line(
+      points={{-39,-80},{-39,-80},{-20,-80}},
       color={0,127,255},
       thickness=1));
   connect(senMasFlo.port_b, port_b) annotation (Line(points={{80,-80},{90,-80},{
           90,0},{100,0}}, color={0,127,255},
       thickness=1));
-  connect(pressureDrop.port_b, senTHot.port_a) annotation (Line(
+  connect(preDro.port_b,senTSup. port_a) annotation (Line(
       points={{0,-80},{0,-80},{30,-80}},
       color={0,127,255},
       thickness=1));
-  connect(senTHot.port_b, senMasFlo.port_a)
+  connect(senTSup.port_b, senMasFlo.port_a)
     annotation (Line(points={{50,-80},{55,-80},{60,-80}}, color={0,127,255},
       thickness=1));
   connect(heater.port, vol.heatPort) annotation (Line(points={{-60,-60},{-60,-60},

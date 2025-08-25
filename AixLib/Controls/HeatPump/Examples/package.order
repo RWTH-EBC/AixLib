@@ -1,1 +1,3 @@
-HeatPumpController
+InverterControlledHeatPump
+PartialHeatPumpController
+TwoPointControlledHeatPump

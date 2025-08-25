@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model Admix "Admix circuit with three way valve and pump"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule;
 
@@ -10,7 +10,6 @@ model Admix "Admix circuit with three way valve and pump"
                                                                            // = AixLib.Fluid.Actuators.Valves.Data.LinearEqualPercentage()
 
   Fluid.Actuators.Valves.ThreeWayTable valve(
-    order=1,
     init=Modelica.Blocks.Types.Init.InitialState,
     CvData=AixLib.Fluid.Types.CvTypes.Kv,
     redeclare package Medium = Medium,

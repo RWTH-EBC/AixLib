@@ -3,7 +3,7 @@ record Boiler_Virtual_1kW "Boiler virtual 1kW"
   extends BoilerTwoPointBaseDataDefinition(
     name="VirtualBoiler_1kW",
     volume=0.00076,
-    pressureDrop=10218000000.0,
+    a=10218000000.0,
     Q_flowFuel_nominal=1000,
     Q_flow_nominal=900,
     Q_min=100,
