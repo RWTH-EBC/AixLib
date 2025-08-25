@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
+within AixLib.Fluid.BoilerCHP.BaseClasses.Controllers;
 model InternalControl "Internal control model for boiler"
 
   parameter AixLib.DataBase.Boiler.General.BoilerTwoPointBaseDataDefinition
@@ -66,7 +66,7 @@ model InternalControl "Internal control model for boiler"
   Controls.Continuous.PITemp  ControlerHeater(
     final KR=KR,
     final TN=TN,
-    final h=paramBoiler.Q_nom,
+    final h=paramBoiler.Q_flow_nominal,
     final l=paramBoiler.Q_min,
     triggeredTrapezoid(final rising=riseTime, final falling=riseTime),
     final rangeSwitch=false)
@@ -88,7 +88,7 @@ model InternalControl "Internal control model for boiler"
     "Table with efficiency parameters"
     annotation (Placement(transformation(extent={{4.5,4.5},{15,15}})));
   Modelica.Blocks.Math.Gain QNormated(
-    final k=1/paramBoiler.Q_nom)
+    final k=1/paramBoiler.Q_flow_nominal)
     annotation (Placement(transformation(extent={{-13.5,6},{-4.5,15}})));
   Modelica.Blocks.Math.Product product
     annotation (Placement(transformation(extent={{21,24},{30,33}})));
