@@ -5,7 +5,8 @@ record Boiler_Vitogas200F_29kW "Gas-fired boiler Viessmann Vitogas200-F 29kW"
     volume=0.0117,
     a=3.3262E+9,
     n=1.9265,
-    Q_nom=32000,
+    Q_flowFuel_nominal=32000,
+    Q_flow_nominal=29000,
     Q_min=9600,
     eta=[0.3,0.93; 1.0,0.93]);
     annotation (Documentation(revisions="<html><ul>

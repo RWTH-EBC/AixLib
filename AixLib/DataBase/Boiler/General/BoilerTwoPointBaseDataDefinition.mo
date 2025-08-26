@@ -12,7 +12,9 @@ record BoilerTwoPointBaseDataDefinition
     "Pressure drop coefficient, dp_nominal[Pa] = a*V_flow_nominal[m^3/s]^n";
   parameter Real n=2
     "Pressure drop exponent (typical value is 2), dp_nominal[Pa] = a*V_flow_nominal[m^2/s]^n";
-  parameter SI.Power Q_nom
+      parameter SI.Power Q_flowFuel_nominal
+    "Nominal fuel power / firing power, refering to net (inferior) calorific value";
+  parameter SI.Power Q_flow_nominal
     "Nominal heat power / thermal load, refering to net (inferior) calorific value";
   parameter SI.Power Q_min
     "Minimal heat power / thermal load, refering to net (inferior) calorific value";
