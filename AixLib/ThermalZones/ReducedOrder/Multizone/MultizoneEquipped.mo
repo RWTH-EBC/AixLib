@@ -148,10 +148,9 @@ model MultizoneEquipped
   BaseClasses.Dynamic_Vflow_Control dynamic_Vflow_Control(numZones=numZones,
       zoneParam=zoneParam) if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
-  BaseClasses.Dynamic_T_SUP_Control dynamic_T_SUP_Control(
+  BaseClasses.Dynamic_T_SUP_Control_Cooling dynamic_T_SUP_Control(
     numZones=numZones,
     zoneParam=zoneParam,
-    dT_SUP_Heat_Max(displayUnit="K") = 7,
     dT_SUP_Cool_Max(displayUnit="K") = 4) if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 protected

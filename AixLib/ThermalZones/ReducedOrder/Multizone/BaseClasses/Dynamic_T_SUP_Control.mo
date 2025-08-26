@@ -9,6 +9,8 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     "max temperature difference of T_SUP for further heating power";
   parameter Modelica.Units.SI.Temperature dT_SUP_Cool_Max = 5
     "max temperature difference of T_SUP for further cooling power";
+  parameter Modelica.Units.SI.Time Delay_T_SUP_Control = 0
+    "Delay time of T_SUP_Control";
 
   Boolean HeatingCooling;
   Boolean OnOff;
@@ -33,7 +35,7 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     yMax=dT_SUP_Cool_Max,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=5*60,
+    Ti=2*3600,
     Td=0.1) annotation (Placement(transformation(extent={{40,-40},{20,-60}})));
   Modelica.Blocks.Math.Gain gainCool(k=-1)
     annotation (Placement(transformation(extent={{12,-56},{0,-44}})));
@@ -95,8 +97,6 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{40,-90},{20,-70}})));
   Modelica.Blocks.Logical.Hysteresis hysteresisHeating(uLow=-0.5, uHigh=0.25)
     annotation (Placement(transformation(extent={{40,70},{20,90}})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff(y=OnOff)
-    annotation (Placement(transformation(extent={{-8,-6},{-20,6}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeatingCooling(y=
         HeatingCooling)
     annotation (Placement(transformation(extent={{46,-6},{34,6}})));
@@ -111,6 +111,9 @@ model Dynamic_T_SUP_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{8,76},{0,84}})));
   Modelica.Blocks.Logical.Not not2
     annotation (Placement(transformation(extent={{8,-84},{0,-76}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff(y=
+        HeatingCooling)
+    annotation (Placement(transformation(extent={{28,-32},{16,-20}})));
 equation
 
   HeatingCooling = false;
@@ -181,17 +184,16 @@ equation
     annotation (Line(points={{-0.4,80},{-20,80},{-20,42}}, color={255,0,255}));
   connect(hysteresisCooling.y, not2.u)
     annotation (Line(points={{19,-80},{8.8,-80}}, color={255,0,255}));
-  connect(not2.y, switchCool.u2) annotation (Line(points={{-0.4,-80},{-14,-80},{
-          -14,-48},{-20,-48},{-20,-42}}, color={255,0,255}));
   connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{59,0},{50,0},{50,-22},
           {110,-22},{110,-44},{102,-44}}, color={0,0,127}));
   connect(TSetCool, dTZoneCool.u2) annotation (Line(points={{-30,-120},{-30,-96},
           {110,-96},{110,-56},{102,-56}}, color={0,0,127}));
-  connect(not2.y, switchOff.u2) annotation (Line(points={{-0.4,-80},{-6,-80},{
-          -6,-6},{-24,-6},{-24,0},{-28,0}},
-                                         color={255,0,255}));
   connect(gainCool.y, switchOff.u1) annotation (Line(points={{-0.6,-50},{-4,-50},
           {-4,8},{-28,8}}, color={0,0,127}));
+  connect(not2.y, switchCool.u2) annotation (Line(points={{-0.4,-80},{-20,-80},
+          {-20,-42}}, color={255,0,255}));
+  connect(not2.y, switchOff.u2) annotation (Line(points={{-0.4,-80},{-6,-80},{
+          -6,0},{-28,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
 end Dynamic_T_SUP_Control;
