@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Pipes;
+within AixLib.Fluid.DistrictHeatingCooling.Pipes;
 model DHCPipe "Generic pipe model for DHC applications"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(show_T=true);
 
@@ -36,7 +36,7 @@ model DHCPipe "Generic pipe model for DHC applications"
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small(min=0)=1E-4*abs(m_flow_nominal)
     "Small mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced"));
 
@@ -289,7 +289,7 @@ equation
         color={0,127,255}));
 
   connect(pipCor.port_b, vol.ports[1])
-    annotation (Line(points={{10,0},{70,0},{70,20}}, color={0,127,255}));
+    annotation (Line(points={{10,0},{69,0},{69,20}}, color={0,127,255}));
   connect(pipCor.heatPort, cylHeaTra1.port_a)
     annotation (Line(points={{0,10},{0,30}}, color={191,0,0},
       pattern=LinePattern.Dash));
