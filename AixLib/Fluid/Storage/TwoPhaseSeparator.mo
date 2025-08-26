@@ -109,8 +109,6 @@ model TwoPhaseSeparator
 
   // Definition of variables
   //
-  /* Medium.ThermodynamicState staTan
-  "Thermodynamic state of the medium in the tank"; */
   Medium.SaturationProperties satTan
     "Saturation properties of the medium in the tank";
 

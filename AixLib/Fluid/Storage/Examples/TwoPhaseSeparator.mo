@@ -36,7 +36,7 @@ model TwoPhaseSeparator
     m_flow=0.5,
     use_h_in=true,
     nPorts=1)
-    "Source of constant mass flow and variable temperature"
+    "Source of constant mass flow and variable enthalpy"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -58,7 +58,7 @@ model TwoPhaseSeparator
     use_p_in=true,
     h=hOut,
     nPorts=1)
-    "Sink of constant temperature and variable pressure" annotation (
+    "Sink of constant enthalpy and variable pressure" annotation (
       Placement(transformation(
         extent={{-10,10},{10,-10}},
         rotation=180,
