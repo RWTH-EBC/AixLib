@@ -1,6 +1,52 @@
 
 
 
+AixLib/Fluid/Storage/BaseClasses/HeatTransferLambdaDetailed.mo
+1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.HeatFlowRate[n - 1] qFlow "Heat flow rate from segment i+1 to i";
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.HeatFlowRate[n - 1] qFall "enthalpy flow as heat flow from falling water at storage wall";
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.HeatFlowRate[n - 1] qHC1lambda "Heat flow rate through steel HC1";
+
+4: Missing documentation. Affected line: Modelica.Units.SI.Temperature TOut=293.15;
+
+5: Name 'qFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: q, Fitting. Affected line: Modelica.Units.SI.HeatFlowRate[3] qFitting "enthalpy flow as heat flow from falling water at pipe fittings";
+
+6: Name 'enableFalling_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Falling_int. Affected line: parameter Integer enableFalling_int = 0 "Toggle falling-film mechanism (1=true, 0=false)";
+
+7: Name 'enableFitting_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Fitting_int. Affected line: parameter Integer enableFitting_int = 0 "Toggle heat entrainment at fittings mechanism (1=true, 0=false)";
+
+8: Missing documentation, Name 'enableFalling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Falling. Affected line: final Boolean enableFalling = (enableFalling_int == 1);
+
+9: Missing documentation, Name 'enableFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Fitting. Affected line: final Boolean enableFitting = (enableFitting_int == 1);
+
+10: Name 'kappa' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: kappa. Affected line: protected parameter Real kappa=0.41 "Karman constant";
+
+11: Name 'beta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: beta. Affected line: parameter Real beta=350e-6 "Thermal expansion coefficient in 1/K";
+
+12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.ThermalConductance[n - 1] k "Effective heat transfer coefficient";
+
+13: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.ThermalConductivity[n - 1] lambda "Effective heat conductivity";
+
+14: Name 'lambdaWater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Water. Affected line: parameter Modelica.Units.SI.ThermalConductivity lambdaWater=0.64 "Thermal conductivity of water";
+
+15: Name 'A_HC' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_. Affected line: parameter Modelica.Units.SI.Area A_HC=0.005112 "Area of heating coil in m2, here diameter of ~8 cm";
+
+16: Name 'dF' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: F. Affected line: Modelica.Units.SI.TemperatureDifference dF[n - 1] "Temperature difference layer[i]-layer[1]";
+
+17: Name 'dGr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gr. Affected line: Modelica.Units.SI.TemperatureDifference dGr[n - 1] "no zero Temperature difference layer[i]-layer[1]";
+
+18: Name 'pFall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer pFall=0.5013 "Heat loss rate at storage Wall [W/(m^2K)]";
+
+19: Name 'sFall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fall. Affected line: parameter Modelica.Units.SI.Length sFall=0.008 "Thickness of water fall at the storage wall";
+
+20: Name 'AFall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fall. Affected line: parameter Modelica.Units.SI.Area AFall=Modelica.Constants.pi*data.dTank*sFall "Area from water fall along the storage wall";
+
+21: Name 'pFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fitting. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer pFitting=3.5 "Heat loss at fittings";
+
+22: Name 'AFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fitting. Affected line: parameter Modelica.Units.SI.Area AFitting=0.0055 "Area of fittings";
+
+
 AixLib/Fluid/Storage/StorageDetailed.mo
 1: Name 'MediumHC1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumHC1 = Modelica.Media.Interfaces.PartialMedium "Medium model for HC1" annotation (choicesAllMatching = true, Dialog(group="Medium"));
 
@@ -121,49 +167,3 @@ AixLib/Fluid/Storage/Validation/HeatTransferModels.mo
 16: Missing documentation, Name 'Tbottom_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Tbottom. Affected line: Modelica.Blocks.Sources.Constant Tbottom_in(k=273.15 + 10) annotation ( Placement(transformation( extent={{-10,10},{10,-10}}, rotation=180, origin={90,-10})));
 
 17: Name 'mbottom_flow_in' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: mbottom_flow. Affected line: Modelica.Blocks.Sources.Trapezoid mbottom_flow_in( period=3720, amplitude=0.5, nperiod=1, offset=0, rising=60, width=3600, falling=60, startTime=6*3600) "Control signal for mass flow rate in heat exchanger" annotation (Placement(transformation(extent={{100,18},{80,38}})));
-
-
-AixLib/Fluid/Storage/BaseClasses/HeatTransferLambdaDetailed.mo
-1: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.HeatFlowRate[n - 1] qFlow "Heat flow rate from segment i+1 to i";
-
-2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.HeatFlowRate[n - 1] qFall "enthalpy flow as heat flow from falling water at storage wall";
-
-3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.HeatFlowRate[n - 1] qHC1lambda "Heat flow rate through steel HC1";
-
-4: Missing documentation. Affected line: Modelica.Units.SI.Temperature TOut=293.15;
-
-5: Name 'qFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: q, Fitting. Affected line: Modelica.Units.SI.HeatFlowRate[3] qFitting "enthalpy flow as heat flow from falling water at pipe fittings";
-
-6: Name 'enableFalling_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Falling_int. Affected line: parameter Integer enableFalling_int = 0 "Toggle falling-film mechanism (1=true, 0=false)";
-
-7: Name 'enableFitting_int' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Fitting_int. Affected line: parameter Integer enableFitting_int = 0 "Toggle heat entrainment at fittings mechanism (1=true, 0=false)";
-
-8: Missing documentation, Name 'enableFalling' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Falling. Affected line: final Boolean enableFalling = (enableFalling_int == 1);
-
-9: Missing documentation, Name 'enableFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: enable, Fitting. Affected line: final Boolean enableFitting = (enableFitting_int == 1);
-
-10: Name 'kappa' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: kappa. Affected line: protected parameter Real kappa=0.41 "Karman constant";
-
-11: Name 'beta' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: beta. Affected line: parameter Real beta=350e-6 "Thermal expansion coefficient in 1/K";
-
-12: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.ThermalConductance[n - 1] k "Effective heat transfer coefficient";
-
-13: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Modelica.Units.SI.ThermalConductivity[n - 1] lambda "Effective heat conductivity";
-
-14: Name 'lambdaWater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Water. Affected line: parameter Modelica.Units.SI.ThermalConductivity lambdaWater=0.64 "Thermal conductivity of water";
-
-15: Name 'A_HC' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: A_. Affected line: parameter Modelica.Units.SI.Area A_HC=0.005112 "Area of heating coil in m2, here diameter of ~8 cm";
-
-16: Name 'dF' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: F. Affected line: Modelica.Units.SI.TemperatureDifference dF[n - 1] "Temperature difference layer[i]-layer[1]";
-
-17: Name 'dGr' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Gr. Affected line: Modelica.Units.SI.TemperatureDifference dGr[n - 1] "no zero Temperature difference layer[i]-layer[1]";
-
-18: Name 'pFall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fall. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer pFall=0.5013 "Heat loss rate at storage Wall [W/(m^2K)]";
-
-19: Name 'sFall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fall. Affected line: parameter Modelica.Units.SI.Length sFall=0.008 "Thickness of water fall at the storage wall";
-
-20: Name 'AFall' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fall. Affected line: parameter Modelica.Units.SI.Area AFall=Modelica.Constants.pi*data.dTank*sFall "Area from water fall along the storage wall";
-
-21: Name 'pFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fitting. Affected line: parameter Modelica.Units.SI.CoefficientOfHeatTransfer pFitting=3.5 "Heat loss at fittings";
-
-22: Name 'AFitting' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Fitting. Affected line: parameter Modelica.Units.SI.Area AFitting=0.0055 "Area of fittings";
