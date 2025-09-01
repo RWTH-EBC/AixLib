@@ -86,8 +86,7 @@ model HeatTransferModels
         294.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15})
     annotation (Placement(transformation(extent={{-10,88},{10,112}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=283.15)
-                                                                                      annotation(Placement(transformation(extent={{42,94},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature1(T=283.15)  annotation(Placement(transformation(extent={{42,94},
             {22,114}})));
   Sources.Boundary_pT boundaryTop1(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(
@@ -143,8 +142,7 @@ model HeatTransferModels
         294.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,293.15,
         293.15})
     annotation (Placement(transformation(extent={{-10,-110},{10,-86}})));
-  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2(T=283.15)
-                                                                                      annotation(Placement(transformation(extent={{42,-104},
+  Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature2(T=283.15)  annotation(Placement(transformation(extent={{42,-104},
             {22,-84}})));
   Sources.Boundary_pT boundaryTop3(redeclare package Medium = Medium, nPorts=1)
     annotation (Placement(transformation(
@@ -210,8 +208,8 @@ equation
   connect(boundaryBottom2.ports[1], storageLambdaFall.fluidportBottom2)
     annotation (Line(points={{20,-30},{2.875,-30},{2.875,-12.12}}, color={0,127,
           255}));
-  connect(fixedTemperature.port, storageLambdaFall.heatportOutside) annotation
-    (Line(points={{22,4},{16,4},{16,0.72},{9.75,0.72}}, color={191,0,0}));
+  connect(fixedTemperature.port, storageLambdaFall.heatportOutside) annotation (
+     Line(points={{22,4},{16,4},{16,0.72},{9.75,0.72}}, color={191,0,0}));
   connect(boundaryHC1In.ports[1], storageLambdaFall.portHC1In) annotation (Line(
         points={{-28,18},{-14,18},{-14,6.84},{-10.25,6.84}}, color={0,127,255}));
   connect(boundaryHC1Out.ports[1], storageLambdaFall.portHC1Out) annotation (
@@ -225,8 +223,8 @@ equation
   connect(fixedTemperature1.port, storageBuoyancyWetter.heatportOutside)
     annotation (Line(points={{22,104},{16,104},{16,100.72},{9.75,100.72}},
         color={191,0,0}));
-  connect(boundaryHC1In1.ports[1], storageBuoyancyWetter.portHC1In) annotation
-    (Line(points={{-28,118},{-14,118},{-14,106.84},{-10.25,106.84}}, color={0,
+  connect(boundaryHC1In1.ports[1], storageBuoyancyWetter.portHC1In) annotation (
+     Line(points={{-28,118},{-14,118},{-14,106.84},{-10.25,106.84}}, color={0,
           127,255}));
   connect(boundaryHC1Out1.ports[1], storageBuoyancyWetter.portHC1Out)
     annotation (Line(points={{-30,99},{-16,99},{-16,103.12},{-10.125,103.12}},
@@ -240,8 +238,8 @@ equation
   connect(fixedTemperature2.port, storageLambdaDetailed.heatportOutside)
     annotation (Line(points={{22,-94},{16,-94},{16,-97.28},{9.75,-97.28}},
         color={191,0,0}));
-  connect(boundaryHC1In2.ports[1], storageLambdaDetailed.portHC1In) annotation
-    (Line(points={{-28,-80},{-14,-80},{-14,-91.16},{-10.25,-91.16}}, color={0,
+  connect(boundaryHC1In2.ports[1], storageLambdaDetailed.portHC1In) annotation (
+     Line(points={{-28,-80},{-14,-80},{-14,-91.16},{-10.25,-91.16}}, color={0,
           127,255}));
   connect(boundaryHC1Out2.ports[1], storageLambdaDetailed.portHC1Out)
     annotation (Line(points={{-30,-99},{-30,-100},{-16,-100},{-16,-94.88},{
@@ -284,26 +282,13 @@ equation
       Tolerance=1e-06,
       __Dymola_Algorithm="Dassl"),
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/Storage/Examples/StorageDetailedExample.mos" "Simulate and plot"),
-    Documentation(info="<html><p>
-  <b><span style=\"color: #008000;\">Overview</span></b>
-</p>
-<p>
-  This is a simple example of a buffer storage that is charged with a
-  mass flow with a higher temperature than the initial temperature.
-</p>
-<ul>
-  <li>November 14, 2022, by Laura Maier:<br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1223\">#1223</a>:
-    Parameter tuning and refactoring.
-  </li>
-  <li>November 27, 2019, by Philipp Mehrfeld:<br/>
-    <a href=\"https://github.com/RWTH-EBC/AixLib/issues/793\">#793</a>:
-    Add one heating coil to example.
-  </li>
-  <li>
-    <i>October 11,2016</i> by Sebastian Stinner:<br/>
-    implemented
-  </li>
-</ul>
+    Documentation(info="<html>
+<p><span style=\"font-family: Arial;\">This test model compares three heat transfer models. See each model for further details.</span></p>
+<p><br><span style=\"font-family: Arial;\">1. HeatTransferBuoyancyWetter</span></p>
+<p><span style=\"font-family: Arial;\">2. HeatTransferLambdaEffSmooth</span></p>
+<p><span style=\"font-family: Arial;\">3. HeatTransferLambdaDetailed</span></p>
+</html>", revisions="<html>
+<p>September 1, 2025 by Ben Kadereit:</p>
+<p>Implemented validation model for comparison. This is for #1600. </p>
 </html>"));
 end HeatTransferModels;
