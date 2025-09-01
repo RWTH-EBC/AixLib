@@ -5,6 +5,7 @@ HeatTransferLambdaEff
 HeatTransferLambdaEffSmooth
 HeatTransferLambdaSimple
 HeatTransferOnlyConduction
+HeatTransferLambdaDetailed
 HeatingCoil
 IndirectTankHeatExchanger
 PartialHeatTransferLayers
