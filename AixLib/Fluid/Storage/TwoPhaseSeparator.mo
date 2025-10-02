@@ -109,8 +109,6 @@ model TwoPhaseSeparator
 
   // Definition of variables
   //
-  Medium.ThermodynamicState staTan
-    "Thermodynamic state of the medium in the tank";
   Medium.SaturationProperties satTan
     "Saturation properties of the medium in the tank";
 
@@ -400,19 +398,21 @@ equation
   //
   satTan = Medium.setSat_p(pTan)
     "Saturation properties based on pressure of the tank's medium";
-  staTan = Medium.setState_ph(pTan,hTan)
-    "Mean thermodynamic state of the tank's medium";
 
-  dTan = Medium.density(staTan) "Mean density of the tank's medium";
-  TTan = Medium.temperature(staTan) "Mean temperature of the tank's medium";
+  dTan = Medium.density(Medium.setState_ph(pTan, hTan))
+  "Mean density of the tank's medium";
+  TTan = Medium.temperature(Medium.setState_ph(pTan, hTan))
+  "Mean temperature of the tank's medium";
 
   dLiq = Medium.bubbleDensity(satTan) "Liquid density";
   dVap = Medium.dewDensity(satTan) "Vapour density";
   hLiq = Medium.bubbleEnthalpy(satTan) "Liquid enthalpy";
   hVap = Medium.dewEnthalpy(satTan) "Vapour enthalpy";
 
-  ddhp = Medium.density_derh_p(staTan) "Density derivative wrt. hTan";
-  ddph = Medium.density_derp_h(staTan) "Density derivative wrt. pTan";
+  ddhp = Medium.density_derh_p(Medium.setState_ph(pTan, hTan))
+  "Density derivative wrt. hTan";
+  ddph = Medium.density_derp_h(Medium.setState_ph(pTan, hTan))
+  "Density derivative wrt. pTan";
 
   pTriCri = pTan/Medium.fluidConstants[1].criticalPressure
     "Trigger to check if tank's medium exceeds ciritical pressure (>=1)";
