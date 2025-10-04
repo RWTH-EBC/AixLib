@@ -1,0 +1,39 @@
+
+Error in model:  AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample 
+Check of <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample">AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample</a>
+The model has 18 scalar unknowns and 18 scalar equations.
+DAE with 18 unknown scalars and 18 scalar equations.
+
+Check of <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample">AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample</a> successful.
+Translation of <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample">AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample</a>
+Error:  model <a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample">AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample</a> is partial.
+The DAE has 18 scalar unknowns and 18 scalar equations.
+
+Statistics
+
+Original Model
+  Number of components: 14
+  Variables: 35
+  Parameters: 17 (17 scalars)
+  Unknowns: 18 (18 scalars)
+  Equations: 18
+  Nontrivial: 13
+Translated Model
+  Free parameters: 17 scalars
+  Parameter depending: 3 scalars
+  Time-varying variables: 5 scalars
+  Alias variables: 10 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: { }
+  Sizes after manipulation of the nonlinear systems: { }
+  Number of numerical Jacobians: 0
+
+Selected continuous time states
+Error detected when generating code.
+Translation aborted.
+Error: ERRORS have been issued.
+Error: Simulations failed for:
+<a href="Modelica://AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample">AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample</a>
+
