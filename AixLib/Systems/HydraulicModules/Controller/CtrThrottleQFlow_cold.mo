@@ -68,7 +68,7 @@ block CtrThrottleQFlow_cold "Volume Flow Set Point Controller for Throttles"
     annotation (Placement(transformation(extent={{32,48},{52,68}})));
   Modelica.Blocks.Logical.Not           pumpSwitchOff3
     annotation (Placement(transformation(extent={{72,48},{92,68}})));
-  Modelica.Blocks.Sources.Constant valveReference(final k=0.01)
+  Modelica.Blocks.Sources.Constant valveReference(final k=-0.01)
     annotation (Placement(transformation(extent={{0,78},{20,98}})));
   Modelica.Blocks.Math.Min min2 annotation (Placement(transformation(extent={{-52,-36},{-32,-16}})));
   Modelica.Blocks.Sources.Constant const1(k=0)

@@ -60,7 +60,7 @@ block CtrThrottleQFlow
     annotation (Placement(transformation(extent={{20,30},{40,50}})));
   Modelica.Blocks.Sources.Constant constPumpSet(final k=rpm_pump)
     annotation (Placement(transformation(extent={{20,-10},{40,10}})));
-  Modelica.Blocks.Sources.Constant valveReference(final k=0.01)
+  Modelica.Blocks.Sources.Constant valveReference(final k=-0.01)
     annotation (Placement(transformation(extent={{-10,70},{10,90}})));
   Modelica.Blocks.Logical.Not           pumpSwitchOff1
     annotation (Placement(transformation(extent={{60,30},{80,50}})));
