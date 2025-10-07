@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle;
 model TableData4DdTeva
   "4D data: condenser temperature, evaporator temperature, compressor speed, evaporator dT"
-  extends AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialTableData3D;
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpTableDataND(
     redeclare
@@ -11,6 +10,9 @@ model TableData4DdTeva
     final nDim=4);
   parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=10
     "Nominal evaporator temperature difference to calculate scaling factor";
+  parameter Real y_nominal(final min=0, final max=1, final unit="1")=1
+    "Nominal compressor speed"
+    annotation (Dialog(group="Nominal condition"));
   Modelica.Blocks.Math.Add dTEvaMea(final k2=-1, final k1=1)
     "Evaporator delta T"                                                         annotation (
       Placement(transformation(
