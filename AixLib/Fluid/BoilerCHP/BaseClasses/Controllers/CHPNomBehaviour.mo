@@ -9,7 +9,7 @@ parameter Real PLRMin=0.5;
   SDF.NDTable SDF1(
     nin=2,
     readFromFile=true,
-    filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf"),
+    filename=filename_PTHR,
     dataset="/PTHR",
     dataUnit="[-]",
     scaleUnits={"W","-"},
@@ -33,7 +33,7 @@ parameter Real PLRMin=0.5;
   SDF.NDTable SDF3(
     nin=2,
     readFromFile=true,
-    filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf"),
+    filename=filename_PTHR,
     dataset="/PTHR",
     dataUnit="[-]",
     scaleUnits={"W","-"},
@@ -46,7 +46,7 @@ parameter Real PLRMin=0.5;
     annotation (Placement(transformation(extent={{-18,-42},{-2,-58}})));
   Modelica.Blocks.Sources.RealExpression pelNom1(y=1)
     "Nominal electric Power"
-    annotation (Placement(transformation(extent={{-92,-56},{-76,-36}})));
+    annotation (Placement(transformation(extent={{-92,-54},{-76,-36}})));
   Modelica.Blocks.Interfaces.RealOutput MaxThermalPower "maximal thermal Power"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -54,6 +54,10 @@ parameter Real PLRMin=0.5;
         origin={110,-70})));
   Modelica.Blocks.Interfaces.RealInput Power
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+  parameter String filename_PTHR=
+      ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf")
+    "File name";
 equation
   connect(multiplex2_2.u2[1], pLRMin.y) annotation (Line(points={{-57.6,64.8},{-57.6,
           65},{-86,65}},              color={0,0,127}));
@@ -66,8 +70,8 @@ equation
           12},{10.6,10.8}}, color={0,0,127}));
   connect(heatMin.y, MinThermalPower)
     annotation (Line(points={{26.7,15},{110,16}}, color={0,0,127}));
-  connect(pelNom1.y,multiplex2_1. u2[1]) annotation (Line(points={{-75.2,-46},{-19.6,
-          -45.2}},                            color={0,0,127}));
+  connect(pelNom1.y,multiplex2_1. u2[1]) annotation (Line(points={{-75.2,-45},{
+          -19.6,-45.2}},                      color={0,0,127}));
   connect(multiplex2_1.y,SDF3. u) annotation (Line(points={{-1.2,-50},{18,-50}},
                                                    color={0,0,127}));
   connect(division2.y,MaxThermalPower)  annotation (Line(points={{84.7,-69},{96,

@@ -14,17 +14,17 @@ model GenericCHP
   constant Real Brennwert=46753;
 
 
-  BaseClasses.DesignOnOffCHP designOnOffCHP
+  BaseClasses.DesignOnOffCHP designOnOffCHP(filename=filename_etaEl,
+      filename_PTHR=filename_PTHR)
     annotation (Placement(transformation(extent={{-4,62},{16,82}})));
-  Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv(final G=
-        NomPower/(2.7088*log(NomPower) + 23.074)/100*0.0568/(85 - 20))
+  Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv(final G=G)
                  "Thermal resistance of the boiler casing" annotation (
       Placement(transformation(
         extent={{6,-6},{-6,6}},
         rotation=180,
         origin={-30,-24})));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=
-        500*(20.207*NomPower/1000 + 634.19), T(start=T_start))
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor internalCapacity(final C=C,
+                                             T(start=T_start))
                                                         "Engine dry weight"
     annotation (Placement(transformation(
         extent={{-10,10},{10,-10}},
@@ -59,7 +59,8 @@ model GenericCHP
     annotation (Placement(transformation(extent={{-11,-11},{11,11}},
         rotation=0,
         origin={-33,45})));
-  BaseClasses.Controllers.CHPNomBehaviour cHPNomBehaviour
+  BaseClasses.Controllers.CHPNomBehaviour cHPNomBehaviour(filename_PTHR=
+        filename_PTHR)
     annotation (Placement(transformation(extent={{-4,86},{16,106}})));
   Modelica.Blocks.Interfaces.RealOutput maxThermalPower "maximal thermal Power"
     annotation (Placement(transformation(
@@ -81,12 +82,26 @@ model GenericCHP
         iconTransformation(extent={{90,32},{110,56}})));
   Modelica.Blocks.Continuous.Integrator integrator2
     annotation (Placement(transformation(extent={{14,-2},{-6,18}})));
+
+
+  parameter String filename_PTHR=
+      ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf")
+    "File name";
+  parameter String filename_etaEl=
+      ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf")
+    "File name";
+protected
+  parameter Modelica.Units.SI.HeatCapacity C=500*(20.207*NomPower/1000 + 634.19)
+    "Heat capacity of element (= cp*m)";
+  parameter Modelica.Units.SI.ThermalConductance G=NomPower/(2.7088*log(
+      NomPower) + 23.074)/100*0.0568/(85 - 20)
+    "Constant thermal conductance of material";
 equation
 
 THotEngine=vol.T;
 
   connect(designOnOffCHP.Q_flow, heater.Q_flow) annotation (Line(points={{17,71.4},
-          {20,71.4},{20,70},{36,70},{36,-12},{-60,-12},{-60,-40}},
+          {20,71.4},{20,72},{36,72},{36,-12},{-60,-12},{-60,-40}},
                                                      color={0,0,127}));
   connect(vol.heatPort,internalCapacity. port)
     annotation (Line(points={{-50,-70},{-54,-70},{-54,-46},{-2,-46}},

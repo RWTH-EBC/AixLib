@@ -45,7 +45,7 @@ model ModularCHP_ElDriven
     redeclare package Medium = AixLib.Media.Water,
     m_flow_nominal=m_flow_nominalHC,
     initType=Modelica.Blocks.Types.Init.InitialState,
-    T_start=T_start)
+    T_start=T_start - 20)
     annotation (Placement(transformation(extent={{-94,-110},{-74,-90}})));
   Fluid.Sensors.TemperatureTwoPort TColdCoolingWater(
     redeclare package Medium = AixLib.Media.Water,
@@ -77,7 +77,7 @@ model ModularCHP_ElDriven
 
   Modelica.Blocks.Sources.RealExpression tHotCoolingWaterMax(y=
         THotCoolingWaterMax) "max. temperature cooling water"
-    annotation (Placement(transformation(extent={{-134,26},{-84,46}})));
+    annotation (Placement(transformation(extent={{-132,24},{-82,44}})));
   Fluid.Sources.Boundary_pT bou(redeclare package Medium = AixLib.Media.Water,
       nPorts=1)
     annotation (Placement(transformation(extent={{-6,-44},{-26,-24}})));
@@ -95,8 +95,10 @@ model ModularCHP_ElDriven
     m_flow_nominal=m_flow_nominalCC,
     T_start=T_start,
     NomPower=P_el_nom,
-    ElDriven=true)
-    annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
+    ElDriven=true,
+    filename_PTHR=filename_PTHR,
+    filename_etaEl=filename_etaEl)
+    annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Fluid.Movers.SpeedControlled_y fanCC(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -111,14 +113,14 @@ model ModularCHP_ElDriven
         origin={-36,-16})));
   Modelica.Blocks.Continuous.LimPID PID3(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=1/3,
+    k=0.05,
     Ti=(0.8265*P_el_nom/1000 + 7.8516)/m_flow_nominalCC,
     yMax=1,
     yMin=0)
     annotation (Placement(transformation(extent={{-84,-68},{-64,-48}})));
-  Modelica.Blocks.Sources.RealExpression t_cooling_setpoint(y=273.15 + 81)
+  Modelica.Blocks.Sources.RealExpression t_cooling_setpoint(y=81 + 273.15)
     "Soll-Kühlwassertemp"
-    annotation (Placement(transformation(extent={{-168,-66},{-130,-50}})));
+    annotation (Placement(transformation(extent={{-182,-66},{-144,-50}})));
 
   Fluid.Sensors.TemperatureTwoPort THotHeatCircuit1(
     redeclare package Medium = Media.Water,
@@ -128,9 +130,6 @@ model ModularCHP_ElDriven
     annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={118,-52})));
-  EnergyNeighborhoods.Components.Controls.OnOff onOff3(bandwidth_plus=2,
-      bandwidth_minus=2)
-    annotation (Placement(transformation(extent={{-64,20},{-44,40}})));
 protected
   parameter Modelica.Units.SI.Temperature THotCoolingWaterMax=273.15 + 95
                                                                        "Max. water temperature THot cooling water";
@@ -194,6 +193,16 @@ public
         extent={{8,8},{-8,-8}},
         rotation=180,
         origin={72,-100})));
+  Modelica.Blocks.Logical.OnOffController onOffController(bandwidth=4)
+    annotation (Placement(transformation(extent={{-44,18},{-24,38}})));
+  parameter String filename_PTHR=
+      ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf")
+    "File name";
+  parameter String filename_etaEl=
+      ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf")
+    "File name";
 equation
 
 //   if fromKelvin1.Celsius > THotHeatCircuitMax or  fromKelvin2.Celsius > THotCoolingWaterMax then
@@ -225,17 +234,17 @@ equation
   connect(TColdHeatCircuit.port_b, hex.port_a2)
     annotation (Line(points={{-74,-100},{-4,-100}},color={0,127,255}));
   connect(genericCHP.maxThermalPower, cHPControlBus.maxTermalPower) annotation (
-     Line(points={{10.8,11.8},{10.8,34},{18,34},{18,78},{0,78},{0,102}}, color={
+     Line(points={{8.8,11.8},{8.8,34},{18,34},{18,78},{0,78},{0,102}},   color={
           0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(genericCHP.Pel, integrator1.u) annotation (Line(points={{15,9.4},{20,
+  connect(genericCHP.Pel, integrator1.u) annotation (Line(points={{13,9.4},{20,
           9.4},{20,30},{78,30}},
                             color={0,0,127}));
   connect(switch3.y, genericCHP.PLR) annotation (Line(points={{5,35.1},{5,26},{
-          -14,26},{-14,8},{-8,8}},
+          -14,26},{-14,8},{-10,8}},
                                color={0,0,127}));
   connect(cHPControlBus.PLR, switch4.u1) annotation (Line(
       points={{0,102},{-136,102},{-136,82.2},{-113.8,82.2}},
@@ -257,7 +266,7 @@ equation
           -142,58},{-142,67.8},{-113.8,67.8}},
                                             color={0,0,127}));
   connect(fanCC.port_b, genericCHP.port_a)
-    annotation (Line(points={{-36,-6},{-36,0},{-6,0}}, color={0,127,255}));
+    annotation (Line(points={{-36,-6},{-36,0},{-8,0}}, color={0,127,255}));
   connect(bou.ports[1], fanCC.port_a) annotation (Line(points={{-26,-34},{-36,-34},
           {-36,-26}},           color={0,127,255}));
   connect(THotHeatCircuit.port_b, THotHeatCircuit1.port_a)
@@ -266,12 +275,6 @@ equation
   connect(THotHeatCircuit1.port_b, port_b)
     annotation (Line(points={{118,-42},{118,0},{100,0}},
                                                        color={0,127,255}));
-  connect(tHotCoolingWaterMax.y, onOff3.reference)
-    annotation (Line(points={{-81.5,36},{-66,36}}, color={0,0,127}));
-  connect(onOff3.y, switch3.u2) annotation (Line(points={{-43,30},{-36,30},{-36,
-          62},{5,62},{5,55.8}}, color={255,0,255}));
-  connect(genericCHP.THotEngine, onOff3.u) annotation (Line(points={{4,-11},{4,
-          0},{-82,0},{-82,24},{-66,24}},             color={0,0,127}));
   connect(switch4.y, switch3.u1) annotation (Line(points={{-93.1,75},{12.2,75},
           {12.2,55.8}},
                   color={0,0,127}));
@@ -279,7 +282,7 @@ equation
           -80,58},{-80,68},{-2,68},{-2,56},{-2.2,56},{-2.2,55.8}},
                                                        color={0,0,127}));
   connect(cHPControlBus, genericCHP.cHPControlBus) annotation (Line(
-      points={{0,102},{0,138},{56,138},{56,4.4},{14,4.4}},
+      points={{0,102},{0,138},{56,138},{56,4.4},{12,4.4}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -296,19 +299,19 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(genericCHP.powerDemand, cHPControlBus.PowerFuel) annotation (Line(
-        points={{15,4},{42,4},{42,102},{0,102}}, color={0,0,127}), Text(
+        points={{13,4},{42,4},{42,102},{0,102}}, color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
-  connect(genericCHP.Pel, cHPControlBus.PowerElec) annotation (Line(points={{15,
-          9.4},{15,102},{0,102}}, color={0,0,127}), Text(
+  connect(genericCHP.Pel, cHPControlBus.PowerElec) annotation (Line(points={{13,9.4},
+          {13,102},{0,102}},      color={0,0,127}), Text(
       string="%second",
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   connect(genericCHP.powerDemand, integrator2.u)
-    annotation (Line(points={{15,4},{42,4},{42,70},{78,70}},
+    annotation (Line(points={{13,4},{42,4},{42,70},{78,70}},
                                                      color={0,0,127}));
   connect(integrator2.y, cHPControlBus.EnergyFuel) annotation (Line(points={{101,70},
           {106,70},{106,102},{0,102}},                   color={0,0,127}), Text(
@@ -317,7 +320,7 @@ equation
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
   connect(genericCHP.minThermalPower, cHPControlBus.MinThermalPower)
-    annotation (Line(points={{7.6,11.8},{7.6,71.9},{0.1,71.9},{0.1,102.1}},
+    annotation (Line(points={{5.6,11.8},{5.6,71.9},{0.1,71.9},{0.1,102.1}},
         color={0,0,127}), Text(
       string="%second",
       index=1,
@@ -326,7 +329,7 @@ equation
   connect(setpoint.y, fanCC.y)
     annotation (Line(points={{-53.5,-16},{-48,-16}}, color={0,0,127}));
   connect(t_cooling_setpoint.y, gain2.u)
-    annotation (Line(points={{-128.1,-58},{-118,-58}}, color={0,0,127}));
+    annotation (Line(points={{-142.1,-58},{-118,-58}}, color={0,0,127}));
   connect(PID3.u_s, gain2.y)
     annotation (Line(points={{-86,-58},{-95,-58}}, color={0,0,127}));
   connect(PID3.y, val.y)
@@ -335,14 +338,12 @@ equation
           -70},{-74,-70}}, color={0,0,127}));
   connect(TColdCoolingWater.port_b, val.port_1) annotation (Line(points={{-28,
           -88},{-32,-88},{-32,-68},{-36,-68}}, color={0,127,255}));
-  connect(THotCoolingWater.port_a, genericCHP.port_b) annotation (Line(points={
-          {46,-88},{54,-88},{54,0},{14,0}}, color={0,127,255}));
-  connect(genericCHP.port_b, val.port_3) annotation (Line(points={{14,0},{22,0},
+  connect(THotCoolingWater.port_a, genericCHP.port_b) annotation (Line(points={{46,-88},
+          {54,-88},{54,0},{12,0}},          color={0,127,255}));
+  connect(genericCHP.port_b, val.port_3) annotation (Line(points={{12,0},{22,0},
           {22,-2},{40,-2},{40,-58},{-26,-58}}, color={0,127,255}));
   connect(val.port_2, fanCC.port_a)
     annotation (Line(points={{-36,-48},{-36,-26}}, color={0,127,255}));
-  connect(max1.y, fanHC.y)
-    annotation (Line(points={{-195,-22},{-112,-22}}, color={0,0,127}));
   connect(gain1.y, PID1.u_m) annotation (Line(points={{-203,-94},{-214,-94},{
           -214,-76},{-226,-76}}, color={0,0,127}));
   connect(gain.y, PID1.u_s) annotation (Line(points={{-177,-112},{-212,-112},{
@@ -358,12 +359,12 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(t_cooling_setpoint.y, gain.u) annotation (Line(points={{-128.1,-58},{
+  connect(t_cooling_setpoint.y, gain.u) annotation (Line(points={{-142.1,-58},{
           -132,-58},{-132,-110},{-154,-110},{-154,-112}}, color={0,0,127}));
-  connect(genericCHP.THotEngine, gain3.u) annotation (Line(points={{4,-11},{6,
+  connect(genericCHP.THotEngine, gain3.u) annotation (Line(points={{2,-11},{6,
           -11},{6,-82},{-42,-82}}, color={0,0,127}));
   connect(genericCHP.THotEngine, gain1.u)
-    annotation (Line(points={{4,-11},{4,-94},{-180,-94}}, color={0,0,127}));
+    annotation (Line(points={{2,-11},{2,-94},{-180,-94}}, color={0,0,127}));
   connect(hex.port_b2, senMasFloCHP.port_a)
     annotation (Line(points={{18,-100},{64,-100}}, color={0,127,255}));
   connect(senMasFloCHP.port_b, THotHeatCircuit.port_a)
@@ -374,4 +375,60 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(genericCHP.THotEngine, onOffController.u) annotation (Line(points={{2,-11},
+          {2,-20},{-70,-20},{-70,22},{-46,22}},              color={0,0,127}));
+  connect(tHotCoolingWaterMax.y, onOffController.reference)
+    annotation (Line(points={{-79.5,34},{-46,34}}, color={0,0,127}));
+  connect(onOffController.y, switch3.u2) annotation (Line(points={{-23,28},{-20,
+          28},{-20,62},{5,62},{5,55.8}}, color={255,0,255}));
+  connect(cHPControlBus.m_flow_set, fanHC.y) annotation (Line(
+      points={{0,102},{-54,102},{-54,128},{-162,128},{-162,-22},{-112,-22}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  annotation (Icon(graphics={
+        Rectangle(
+          extent={{-80,80},{80,-80}},
+          lineColor={0,0,0},
+          fillColor={95,95,95},
+          fillPattern=FillPattern.Solid),
+        Rectangle(
+          extent={{-10,20},{14,-22}},
+          lineColor={0,0,0},
+          fillColor={255,255,255},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-8,-2},{-8,-22},{-6,-16},{10,-16},{12,-22},{12,-2},{-8,-2}},
+          lineColor={0,0,0},
+          fillColor={215,215,215},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{0,-12},{6,-18}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Ellipse(
+          extent={{-16,-40},{-6,-50}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{0,-16},{-12,-40},{-8,-42},{2,-18},{0,-16}},
+          lineColor={0,0,0},
+          fillColor={135,135,135},
+          fillPattern=FillPattern.Solid),
+        Polygon(
+          points={{-2.5,-1.5},{-6,4},{2,18},{8,10},{12,10},{10,6},{10,2},{7.5,
+              -1.5},{-2.5,-1.5}},
+          lineColor={0,0,0},
+          fillPattern=FillPattern.Sphere,
+          fillColor={255,127,0}),
+        Polygon(
+          points={{-2.5,0.5},{2,10},{8,4},{4,0},{-2.5,0.5}},
+          lineColor={255,255,170},
+          fillColor={255,255,170},
+          fillPattern=FillPattern.Solid)}));
 end ModularCHP_ElDriven;

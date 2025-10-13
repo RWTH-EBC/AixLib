@@ -4,10 +4,12 @@ model DesignOnOffCHP
 
  parameter Real PLRMin=0.5;
 
+ parameter Real interneal_demand=0.9819 "Efficiency for internal electricity demand";
+
   SDF.NDTable pTHR(
     nin=2,
     readFromFile=true,
-    filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf"),
+    filename=filename_PTHR,
     dataset="/PTHR",
     dataUnit="[-]",
     scaleUnits={"W","-"},
@@ -18,7 +20,7 @@ model DesignOnOffCHP
     annotation (Placement(transformation(extent={{-56,32},{-42,46}})));
   Modelica.Blocks.Math.Division division
     annotation (Placement(transformation(extent={{48,28},{62,42}})));
-  Modelica.Blocks.Sources.RealExpression internalDemand(y=0.9819)
+  Modelica.Blocks.Sources.RealExpression internalDemand(y=interneal_demand)
     "Percentage of usable electrical power"
     annotation (Placement(transformation(extent={{-34,104},{34,130}})));
   Modelica.Blocks.Math.Product product2
@@ -30,7 +32,7 @@ model DesignOnOffCHP
   SDF.NDTable etaEl(
     nin=2,
     readFromFile=true,
-    filename=ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf"),
+    filename=filename,
     dataset="/EtaEL",
     dataUnit="-",
     scaleUnits={"W","-"},
@@ -63,6 +65,13 @@ model DesignOnOffCHP
   Modelica.Blocks.Sources.RealExpression zero1(y=0)
                                                    "Real"
     annotation (Placement(transformation(extent={{-236,12},{-216,32}})));
+  parameter String filename=ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf")
+    "File name";
+  parameter String filename_PTHR=
+      ModelicaServices.ExternalReferences.loadResource(
+      "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/Stromkennzahl.sdf")
+    "File name";
 equation
   connect(pTHR.y,division. u2) annotation (Line(points={{1,84},{14,84},{14,30.8},
           {46.6,30.8}},color={0,0,127}));
