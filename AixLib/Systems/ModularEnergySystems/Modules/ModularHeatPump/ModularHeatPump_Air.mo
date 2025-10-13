@@ -124,11 +124,11 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
   parameter Real eta_carnot;
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{44,60},{64,80}})));
-  Modelica.Blocks.Math.Gain gain
+  Modelica.Blocks.Math.Gain gain(k=1)
     annotation (Placement(transformation(extent={{40,128},{60,148}})));
   Modelica.Blocks.Continuous.Integrator integrator1
     annotation (Placement(transformation(extent={{40,168},{60,188}})));
-  Modelica.Blocks.Math.Gain gain1
+  Modelica.Blocks.Math.Gain gain1(k=1)
     annotation (Placement(transformation(extent={{40,208},{60,228}})));
 protected
  parameter Modelica.Units.SI.TemperatureDifference DeltaTEvap=7 "Temperature difference heat source evaporator"

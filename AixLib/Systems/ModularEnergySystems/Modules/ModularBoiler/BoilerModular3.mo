@@ -103,7 +103,7 @@ model BoilerModular3
     annotation (Placement(transformation(extent={{-44,-10},{-24,10}})));
   Modelica.Blocks.Continuous.Integrator integrator4
     annotation (Placement(transformation(extent={{30,30},{50,50}})));
-  Modelica.Blocks.Math.Gain gain1
+  Modelica.Blocks.Math.Gain gain1(k=1)
     annotation (Placement(transformation(extent={{32,64},{44,76}})));
 equation
 

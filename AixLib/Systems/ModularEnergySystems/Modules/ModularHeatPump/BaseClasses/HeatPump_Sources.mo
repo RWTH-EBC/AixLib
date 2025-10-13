@@ -221,8 +221,11 @@ package HeatPump_Sources
     AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
         Placement(transformation(extent={{-18,84},{18,116}}), iconTransformation(
             extent={{-16,88},{18,118}})));
+<<<<<<< Updated upstream
     Modelica.Blocks.Math.Gain gain
       annotation (Placement(transformation(extent={{-90,-90},{-78,-78}})));
+=======
+>>>>>>> Stashed changes
     Modelica.Blocks.Math.Product product1
       annotation (Placement(transformation(extent={{-6,-48},{-26,-28}})));
     Modelica.Blocks.Sources.RealExpression zero(y=1) annotation (Placement(
@@ -270,14 +273,6 @@ package HeatPump_Sources
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(sigBus.TEvaOutMea, gain.u) annotation (Line(
-        points={{0.09,100.08},{2,100.08},{2,-12},{-94,-12},{-94,-84},{-91.2,-84}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
 
     connect(zero.y, switch2.u1) annotation (Line(points={{-24.8,-96},{-16,-96},{-16,
             -80},{2,-80},{2,-78}}, color={0,0,127}));
