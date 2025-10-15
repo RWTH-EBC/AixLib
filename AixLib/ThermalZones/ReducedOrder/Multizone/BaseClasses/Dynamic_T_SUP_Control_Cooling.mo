@@ -5,7 +5,7 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
   parameter Integer numZones = 1 "Numer of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Records of zones";
-  parameter Modelica.Units.SI.Temperature dT_SUP_Cool_Max = 5
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Cool_Max = 5
     "max temperature difference of T_SUP for further cooling power";
 
 
@@ -59,7 +59,7 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
     annotation (Placement(transformation(extent={{-2,-10},{-22,10}})));
   Modelica.Blocks.Sources.Constant const6(k=0)
     annotation (Placement(transformation(extent={{-20,-26},{-8,-14}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresisCooling(uLow=-0.5, uHigh=0.25)
+  Modelica.Blocks.Logical.Hysteresis hysteresisCooling(uLow=-0.5, uHigh=0.5)
     annotation (Placement(transformation(extent={{40,-90},{20,-70}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TZone[numZones]
     "Air temperature of the zones which are supplied by the AHU"
@@ -68,7 +68,7 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
     annotation (Placement(transformation(extent={{68,-40},{56,-28}})));
   Modelica.Blocks.Logical.Not not2
     annotation (Placement(transformation(extent={{8,-84},{0,-76}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T(displayUnit="h") = 900)
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T(displayUnit="h") = 3600)
     annotation (Placement(transformation(extent={{-40,-6},{-52,6}})));
 equation
 

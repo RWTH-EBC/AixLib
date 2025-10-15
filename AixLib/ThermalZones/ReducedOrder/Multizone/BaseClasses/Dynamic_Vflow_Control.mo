@@ -6,9 +6,9 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Records of zones";
   parameter Real gain_Vflow_Heat_Max = 2
-    "max temperature difference of T_SUP for further heating power";
+    "max volume flow gain for further heating power";
   parameter Real gain_Vflow_Cool_Max = 2
-    "max temperature difference of T_SUP for further cooling power";
+    "max volume flow gain for further cooling power";
 
   Boolean OnOff[numZones];
 
@@ -28,8 +28,8 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{80,-20},{120,20}}),
         iconTransformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Continuous.LimPID PI_AHU_Cool[numZones](
-    k=0.25*gain_Vflow_Heat_Max,
-    yMax=gain_Vflow_Heat_Max,
+    k=0.25*gain_Vflow_Cool_Max,
+    yMax=gain_Vflow_Cool_Max,
     yMin=1,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=120,
@@ -86,10 +86,10 @@ model Dynamic_Vflow_Control "AHU T_Sup control"
   Modelica.Blocks.Sources.Constant const6[numZones](k=1)
     annotation (Placement(transformation(extent={{-50,-26},{-38,-14}})));
   Modelica.Blocks.Logical.Hysteresis hysteresisCooling[numZones](uLow=-0.25, uHigh=
-        0.1)
+        0.5)
     annotation (Placement(transformation(extent={{40,-90},{20,-70}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresisHeating[numZones](uLow=-0.25,
-      uHigh=0.2)
+  Modelica.Blocks.Logical.Hysteresis hysteresisHeating[numZones](uLow=-0.25, uHigh=
+        0.5)
     annotation (Placement(transformation(extent={{40,70},{20,90}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff[numZones](y=
         OnOff) annotation (Placement(transformation(extent={{-8,-6},{-20,6}})));
