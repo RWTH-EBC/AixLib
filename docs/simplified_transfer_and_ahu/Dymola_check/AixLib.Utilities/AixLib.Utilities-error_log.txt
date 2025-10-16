@@ -1,22 +1,4 @@
 
-Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light 
-Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light</a>
-Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem 
-Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem</a>
-Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
-Error: ERRORS have been issued.
-
-
-Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem 
-Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem">AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem</a>
-Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem
-Error: ERRORS have been issued.
-
-
 Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW100 
 Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW100">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW100</a>
 Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW100
@@ -29,15 +11,15 @@ Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSyste
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55 
-Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55</a>
-Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem</a>
+Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.TransferSystem
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40 
-Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40</a>
-Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70</a>
+Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70
 Error: ERRORS have been issued.
 
 
@@ -47,9 +29,27 @@ Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSyste
 Error: ERRORS have been issued.
 
 
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40</a>
+Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW40
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem">AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem</a>
+Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.BaseTransferSystem
+Error: ERRORS have been issued.
+
+
 Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.ConcreteCoreActivation 
 Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.ConcreteCoreActivation">AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.ConcreteCoreActivation</a>
 Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplyfiedTransferSystems.ConcreteCoreActivation
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55</a>
+Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW55
 Error: ERRORS have been issued.
 
 
@@ -65,8 +65,8 @@ Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSyste
 Error: ERRORS have been issued.
 
 
-Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70 
-Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70</a>
-Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_KfW70
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light">AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light</a>
+Did not find model AixLib.Utilities.Sources.HeaterCooler.SimplifiedTransferSystems.SimplifiedTransferSystem_IWU_Light
 Error: ERRORS have been issued.
 
