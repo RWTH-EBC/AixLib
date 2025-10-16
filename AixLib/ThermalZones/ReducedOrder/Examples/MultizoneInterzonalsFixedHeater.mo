@@ -1,9 +1,12 @@
 within AixLib.ThermalZones.ReducedOrder.Examples;
 model MultizoneInterzonalsFixedHeater
   "A single-family building with interzonal heat transfer, heated with the same power as in a real-world case. This is the example generated as var D by the TEASER example 11"
+  import AixLib;
+  extends Modelica.Icons.Example;
+  replaceable package Medium = AixLib.Media.Air;
 
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
-    buildingID=0,
+    buildingID=1,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     T_start=277.15,
     VAir=650.4175459028824,
@@ -27,7 +30,6 @@ model MultizoneInterzonalsFixedHeater
     huAHU=false,
     BPFDehuAHU=0.2,
     heatRecoveryAHU=false,
-    sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
     effHRSAHU_enabled=0.8,
@@ -42,7 +44,9 @@ model MultizoneInterzonalsFixedHeater
         izeRC(extWalRC(thermCapExt(each der_T(fixed=true)))))),
     redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
-    redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.NoAHU) "Multizone"
+    redeclare model AHUMod =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU)
+                                                                   "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
 
   AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
@@ -56,7 +60,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/InternalGains_MorschenichSfhFixedHeater.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"),
     columns=2:10)
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
@@ -74,7 +78,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/TsetHeat_MorschenichSfhFixedHeater.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/TsetHeat_5Zone.txt"),
     columns=2:4)
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
@@ -83,7 +87,7 @@ model MultizoneInterzonalsFixedHeater
     tableOnFile=true,
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/TsetCool_MorschenichSfhFixedHeater.txt"),
+    fileName=Modelica.Utilities.Files.loadResource("modelica://AixLib/Resources/LowOrder_ExampleData/TsetCool_5Zone.txt"),
     columns=2:4)
     "Set points for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
@@ -123,9 +127,6 @@ equation
   connect(tableAHU.y, multizone.AHU)
     annotation (Line(points={{-47.2,2},{14,2},{33,2}}, color={0,0,127}));
 
-  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
-          {36.8,-58},{36.8,-9}}, color={0,0,127}));
-
   connect(tableTSetCool.y, multizone.TSetCool) annotation (Line(points={{55.2,-82},
           {34.6,-82},{34.6,-9}}, color={0,0,127}));
 
@@ -141,6 +142,8 @@ equation
   connect(tableIntGainsConv.y, heatFlowConv.Q_flow)
     annotation (Line(points={{-47.2,-64},{-24,-64}}, color={0,0,127}));
 
+  connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},{
+          36.8,-58},{36.8,-9}}, color={0,0,127}));
   annotation (experiment(
       StartTime=2797200,
       StopTime=5155200,

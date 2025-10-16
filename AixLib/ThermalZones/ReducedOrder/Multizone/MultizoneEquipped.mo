@@ -348,12 +348,12 @@ equation
         points={{10.75,12},{18,12},{18,24},{10.75,24}}, color={0,0,127}));
   end if;
 
-
+  /*
   connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{-80,-72},
           {30,-72},{30,78},{34,78},{34,77.7},{38.84,77.7}}, color={0,0,127}));
   connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{-40,-74},
           {32,-74},{32,72},{36,72},{36,71.96},{38.84,71.96}}, color={0,0,127}));
-
+  */
   connect(TSetCool, dynamic_AHU_Control.TSetCool) annotation (Line(points={{-80,
           -100},{-80,-74},{-42,-74},{-42,-66},{-40,-66},{-40,-58}}, color={0,0,
           127}));
