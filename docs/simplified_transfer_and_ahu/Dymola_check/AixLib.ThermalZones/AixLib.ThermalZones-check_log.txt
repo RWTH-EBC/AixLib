@@ -1,12 +1,130 @@
 
-Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
-Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
-Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 9
- Component context: multizone
-  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
-  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
-  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.ROM.volAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.ROM.volMoiAir.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.airFlowMoistureToROM.AirLay.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: zone.airFlowMoistureToROM.sou.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Check is assuming: numZones = 1
+Check is assuming: ASurTot = 0
+Check is assuming: VAir = 0
+Check is assuming: zoneParam[1].nOrientations = 1
+Check is assuming: zoneParam[1].nExt = 1
+Check is assuming: zoneParam[1].nInt = 1
+Check is assuming: zoneParam[1].nFloor = 1
+Check is assuming: zoneParam[1].nRoof = 1
+Check is assuming: zoneParam[1].nOrientationsRoof = 1
+Warning: Failed to evaluate and check the size declaration of zone[1].ROM.AIze.
+The definition equation or start value requires a certain size.
+Warning: For dimension 1 the size declaration is zone[1].ROM.nIze, and the required size is 1.
+Warning: Automatically introducing 'each' in definition equation for variable:
+  dynamic_AHU_Control.dynamic_Vflow_SUP_Control.firstOrder[1].T.displayUnit
+Additional warnings of this type will not be written.
+Check is assuming: zoneParam[1].AExt = fill(0, 1)
+Check is assuming: zoneParam[1].AWin = fill(0, 1)
+Check is assuming: zoneParam[1].AInt = 0
+Check is assuming: zoneParam[1].ARoof = 0
+Check is assuming: zoneParam[1].AFloor = 0
+Check is assuming: zoneParam[1].VAir = 0
+Check is assuming: zoneParam[1].ATransparent = fill(0, 1)
+Check is assuming: zoneParam[1].ratioWinConRad = 0
+Check is assuming: internalGainsMode = 0
+Check is assuming: zoneParam[1].HeaterOn = false
+Warning: Automatically introducing 'each' in definition equation for variable:
+  dynamic_AHU_Control.dynamic_T_SUP_Control_Cooling.dTZoneCool[1].k1
+Additional warnings of this type will not be written.
+Error: The problem is structurally singular.
+
+It has 544 scalar unknowns and 544 scalar equations.
+  The Real part has 524 unknowns and 524 equations.
+  The Integer part has 0 unknowns and 0 equations.
+  The Boolean part has 20 unknowns and 20 equations.
+  The String part has 0 unknowns and 0 equations.
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 544
+Attempting to further localize singularity.
+
+Attempting to further localize singularity.
+
+The model has the same number of unknowns and equations:
+  14*zone[1].zoneParam.nOrientations
+The model has the same number of unknowns and equations
+for the given numerical settings of parameters: 13
+Attempting to further localize singularity.
+
+Singularity of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a> is in the component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped#diagram$zone:HDifTilWall">zone[1].HDifTilWall[1]</a>, class <a href="Modelica://AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez">AixLib.BoundaryConditions.SolarIrradiation.DiffusePerez</a>.
+Error: The model <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a> component <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped#diagram$zone:HDifTilWall">zone[1].HDifTilWall[1]</a> is structurally singular.
+when assuming inputs to be known.
+Warning: The problem is structurally singular for the element type Real.
+
+The number of scalar Real unknown elements are 86.
+The number of scalar Real equation elements are 102.
+Warning: There are no unknowns that can be solved from the equations:
+  zone[1].HDifTilWall[1].weaBus.HHorIR = zone[1].HDifTilWall[1].incAng.weaBus.HHorIR;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.HHorIR = zone[1].HDifTilWall[1].incAng.weaBus.HHorIR;
+  zone[1].HDifTilWall[1].weaBus.TBlaSky = zone[1].HDifTilWall[1].incAng.weaBus.TBlaSky;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.TBlaSky = zone[1].HDifTilWall[1].incAng.weaBus.TBlaSky;
+  zone[1].HDifTilWall[1].weaBus.TDewPoi = zone[1].HDifTilWall[1].incAng.weaBus.TDewPoi;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.TDewPoi = zone[1].HDifTilWall[1].incAng.weaBus.TDewPoi;
+  zone[1].HDifTilWall[1].weaBus.TDryBul = zone[1].HDifTilWall[1].incAng.weaBus.TDryBul;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.TDryBul = zone[1].HDifTilWall[1].incAng.weaBus.TDryBul;
+  zone[1].HDifTilWall[1].weaBus.TWetBul = zone[1].HDifTilWall[1].incAng.weaBus.TWetBul;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.TWetBul = zone[1].HDifTilWall[1].incAng.weaBus.TWetBul;
+  zone[1].HDifTilWall[1].weaBus.ceiHei = zone[1].HDifTilWall[1].incAng.weaBus.ceiHei;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.ceiHei = zone[1].HDifTilWall[1].incAng.weaBus.ceiHei;
+  zone[1].HDifTilWall[1].weaBus.lon = zone[1].HDifTilWall[1].incAng.weaBus.lon;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.lon = zone[1].HDifTilWall[1].incAng.weaBus.lon;
+  zone[1].HDifTilWall[1].weaBus.nOpa = zone[1].HDifTilWall[1].incAng.weaBus.nOpa;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.nOpa = zone[1].HDifTilWall[1].incAng.weaBus.nOpa;
+  zone[1].HDifTilWall[1].weaBus.nTot = zone[1].HDifTilWall[1].incAng.weaBus.nTot;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.nTot = zone[1].HDifTilWall[1].incAng.weaBus.nTot;
+  zone[1].HDifTilWall[1].weaBus.pAtm = zone[1].HDifTilWall[1].incAng.weaBus.pAtm;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.pAtm = zone[1].HDifTilWall[1].incAng.weaBus.pAtm;
+  zone[1].HDifTilWall[1].weaBus.relHum = zone[1].HDifTilWall[1].incAng.weaBus.relHum;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.relHum = zone[1].HDifTilWall[1].incAng.weaBus.relHum;
+  zone[1].HDifTilWall[1].weaBus.solAlt = zone[1].HDifTilWall[1].incAng.weaBus.solAlt;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.solAlt = zone[1].HDifTilWall[1].incAng.weaBus.solAlt;
+  zone[1].HDifTilWall[1].weaBus.solDec = zone[1].HDifTilWall[1].incAng.weaBus.solDec;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.solDec = zone[1].HDifTilWall[1].incAng.weaBus.solDec;
+  zone[1].HDifTilWall[1].weaBus.solHouAng = zone[1].HDifTilWall[1].incAng.weaBus.solHouAng;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.solHouAng = zone[1].HDifTilWall[1].incAng.weaBus.solHouAng;
+  zone[1].HDifTilWall[1].weaBus.winDir = zone[1].HDifTilWall[1].incAng.weaBus.winDir;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.winDir = zone[1].HDifTilWall[1].incAng.weaBus.winDir;
+  zone[1].HDifTilWall[1].weaBus.winSpe = zone[1].HDifTilWall[1].incAng.weaBus.winSpe;
+  which was derived from
+    zone[1].HDifTilWall[1].weaBus.winSpe = zone[1].HDifTilWall[1].incAng.weaBus.winSpe;
+Warning: WARNINGS have been issued.
 Error: ERRORS have been issued.
 
 
@@ -24,126 +142,126 @@ Error: ERRORS have been issued.
 Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater 
 Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
 Error: Class or component 'humidifying' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dehumidifying' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'heatRecovery' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'usePhiSet' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'limPhiOda' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'm_flow_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpHrs_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpCoo_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpHea_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpHum_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpFanOda_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpFanEta_nominal' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'effHrsOn' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'effHrsOff' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpFanOda' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'dpFanEta' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'etaFanOda' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 5
 Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">AixLib.Airflow.AirHandlingUnit.NoAHU</a>.
 Error: Class or component 'etaFanEta' not found in AHUMod AirHandlingUnit
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 115
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 111
  Component context: multizone.AirHandlingUnit
   Component declared as AHUMod AirHandlingUnit in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
@@ -152,7 +270,7 @@ Definition missing in <a href="Modelica://AixLib.Airflow.AirHandlingUnit.NoAHU">
 Warning: Redeclaration requires a subtype.
  But missing component humidifying.
   In redeclaration of AHUMod.
-  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped.AHUMod#text">107</a>
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped.AHUMod#text">103</a>
  Component context: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater.AHUMod
   Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
 Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
@@ -162,5 +280,16 @@ Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizo
   Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>.
   Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mo, line 2
 Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
+Error: Class or component 'sampleRateAHU' not found in MultizoneEquipped multizone
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 9
+ Component context: multizone
+  Component declared as MultizoneEquipped multizone in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone">AixLib.ThermalZones.ReducedOrder.Multizone</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mo, line 2
 Error: ERRORS have been issued.
 
