@@ -7,9 +7,7 @@ MultizonePostProcessing
 PartialMultizone
 RelToAbsHum
 SumCondition
-DynamicVolumeFlowControl
-DynamicAHUTemperatureControl
 Dynamic_T_SUP_Control
 Dynamic_Vflow_Control
-WeightedAvg
 Dynamic_T_SUP_Control_Cooling
+Dynamic_AHU_Control

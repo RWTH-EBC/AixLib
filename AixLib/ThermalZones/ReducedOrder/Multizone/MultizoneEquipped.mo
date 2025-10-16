@@ -18,9 +18,7 @@ model MultizoneEquipped
        else false
     "Status of humidification of AHU (Cooling and Heating must be enabled)"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
-  parameter Real BPFDehuAHU(
-    min=0,
-    max=1)
+  parameter Real BPFDehuAHU(max=1, min=0)
     "By-pass factor of cooling coil during dehumidification"
     annotation (Dialog(tab="AirHandlingUnit", group="Settings AHU Value"));
   parameter Boolean heatRecoveryAHU=true
@@ -35,23 +33,21 @@ model MultizoneEquipped
     "Status of dynamic AHU control depending on room temperature";
   parameter Boolean dynamicSetTempControlAHU=false
     "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS";
+
   parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
     "Temperature after HRS in AHU over which there should be no ahu heating
         for temperature reasons (humidifciation/dehumidifaction still possible)";
-  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU = 294.15
+  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
         for temperature reasons (humidifciation/dehumidifaction still possible)";
-  parameter Real effHRSAHU_enabled(
-    min=0,
-    max=1)
+
+  parameter Real effHRSAHU_enabled(max=1, min=0)
     "Efficiency of HRS when enabled"
     annotation (Dialog(
     tab="AirHandlingUnit",
     group="Settings AHU Value",
     enable=heatRecoveryAHU));
-  parameter Real effHRSAHU_disabled(
-    min=0,
-    max=1)
+  parameter Real effHRSAHU_disabled(max=1, min=0)
     "Efficiency of HRS when disabled"
     annotation (Dialog(
     tab="AirHandlingUnit",
@@ -145,14 +141,6 @@ model MultizoneEquipped
 
 
 
-  BaseClasses.Dynamic_Vflow_Control dynamic_Vflow_Control(numZones=numZones,
-      zoneParam=zoneParam) if ASurTot > 0 or VAir > 0
-    annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
-  BaseClasses.Dynamic_T_SUP_Control_Cooling dynamic_T_SUP_Control(
-    numZones=numZones,
-    zoneParam=zoneParam,
-    dT_SUP_Cool_Max(displayUnit="K") = 4) if ASurTot > 0 or VAir > 0
-    annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
     "Calculated zone factors";
@@ -228,6 +216,13 @@ protected
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{80,40},{100,60}})));
 
+public
+  BaseClasses.Dynamic_AHU_Control dynamic_AHU_Control(
+    numZones=numZones,
+    zoneParam=zoneParam,                              dynamicSetTempControlAHU=
+        dynamicSetTempControlAHU, dynamicVolumeFlowControlAHU=
+        dynamicVolumeFlowControlAHU)
+    annotation (Placement(transformation(extent={{-34,-56},{-54,-36}})));
 initial algorithm
   for i in 1:numZones loop
     if zoneParam[i].withAHU then
@@ -262,7 +257,7 @@ equation
   end for;
 
   connect(AHU[4], airFlowRate.profile) annotation (Line(
-      points={{-100,16.75},{-100,10},{-82,10},{-82,30},{-73.2,30},{-73.2,30.4}},
+      points={{-100,16.75},{-100,10},{-80,10},{-80,30},{-73.2,30},{-73.2,30.4}},
       color={0,0,127},
       smooth=Smooth.None));
 
@@ -354,37 +349,30 @@ equation
   end if;
 
 
-  connect(TSetHeat, dynamic_Vflow_Control.TSetHeat) annotation (Line(points={{-40,
-          -100},{-40,-74},{-6,-74},{-6,-62}}, color={0,0,127}));
-  connect(TSetCool, dynamic_Vflow_Control.TSetCool) annotation (Line(points={{-80,
-          -100},{-80,-72},{-14,-72},{-14,-62}}, color={0,0,127}));
-  connect(dynamic_Vflow_Control.AHUProfile, AHU[4]) annotation (Line(points={{-22,
-          -58},{-80,-58},{-80,16.75},{-100,16.75}}, color={0,0,127}));
-  connect(dynamic_Vflow_Control.Vflow_setAHU, airFlowRate.setAHU) annotation (
-      Line(points={{-22,-50},{-76,-50},{-76,20},{-74,20},{-74,22.6},{-73.2,22.6}},
-        color={0,0,127}));
-  connect(dynamic_Vflow_Control.Vflow_setAHU, airFlowRateSplit.setAHU)
-    annotation (Line(points={{-22,-50},{-32,-50},{-32,-6},{52,-6},{52,14},{54,14},
-          {54,20.8},{50,20.8}}, color={0,0,127}));
-  connect(splitterThermPercentAir.portOut, dynamic_Vflow_Control.roomHeatPort)
-    annotation (Line(points={{54,-28},{58,-28},{58,-38},{12,-38},{12,-50},{0,-50}},
-        color={191,0,0}));
-  connect(dynamic_Vflow_Control.roomHeatPort, dynamic_T_SUP_Control.roomHeatPort)
-    annotation (Line(points={{0,-50},{12,-50},{12,-30},{-40,-30}}, color={191,0,
-          0}));
-  connect(TSetHeat, dynamic_T_SUP_Control.TSetHeat) annotation (Line(points={{-40,
-          -100},{-40,-74},{-46,-74},{-46,-42}}, color={0,0,127}));
-  connect(TSetCool, dynamic_T_SUP_Control.TSetCool) annotation (Line(points={{-80,
-          -100},{-80,-72},{-54,-72},{-54,-42}}, color={0,0,127}));
-  connect(dynamic_T_SUP_Control.TsetAHU_In, AHU[1]) annotation (Line(points={{-62,
-          -38},{-80,-38},{-80,3.25},{-100,3.25}}, color={0,0,127}));
-  connect(dynamic_T_SUP_Control.TsetAHU_Out, AirHandlingUnit.TSupSet)
-    annotation (Line(points={{-62,-30},{-68,-30},{-68,-6},{6.25,-6},{6.25,-0.8}},
-        color={0,0,127}));
   connect(TSetCool, zone.TSetCool) annotation (Line(points={{-80,-100},{-80,-72},
           {30,-72},{30,78},{34,78},{34,77.7},{38.84,77.7}}, color={0,0,127}));
   connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{-40,-74},
           {32,-74},{32,72},{36,72},{36,71.96},{38.84,71.96}}, color={0,0,127}));
+  connect(dynamic_AHU_Control.Tset_AHU_Set, AirHandlingUnit.TSupSet)
+    annotation (Line(points={{-32,-40},{-10,-40},{-10,-6},{6.25,-6},{6.25,-0.8}},
+        color={0,0,127}));
+  connect(AHU, dynamic_AHU_Control.AHU_In) annotation (Line(points={{-100,10},{-98,
+          10},{-98,12},{-94,12},{-94,10},{-80,10},{-80,-40},{-56,-40}}, color={0,
+          0,127}));
+  connect(dynamic_AHU_Control.Vflow_AHU_Set, airFlowRateSplit.setAHU)
+    annotation (Line(points={{-32,-52},{-20,-52},{-20,-20},{50,-20},{50,20.8}},
+        color={0,0,127}));
+  connect(dynamic_AHU_Control.Vflow_AHU_Set, airFlowRate.setAHU) annotation (
+      Line(points={{-32,-52},{-20,-52},{-20,-20},{-76,-20},{-76,22},{-74,22},{-74,
+          22.6},{-73.2,22.6}}, color={0,0,127}));
+  connect(dynamic_AHU_Control.roomHeatPort, zone.intGainsConv) annotation (Line(
+        points={{-54,-51},{-54,-52},{-66,-52},{-66,-78},{86,-78},{86,70},{84,70},
+          {84,70.32},{80.42,70.32}}, color={191,0,0}));
+  connect(TSetCool, dynamic_AHU_Control.TSetCool) annotation (Line(points={{-80,
+          -100},{-80,-74},{-42,-74},{-42,-66},{-40,-66},{-40,-58}}, color={0,0,
+          127}));
+  connect(TSetHeat, dynamic_AHU_Control.TSetHeat) annotation (Line(points={{-40,
+          -100},{-40,-68},{-48,-68},{-48,-58}}, color={0,0,127}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},
