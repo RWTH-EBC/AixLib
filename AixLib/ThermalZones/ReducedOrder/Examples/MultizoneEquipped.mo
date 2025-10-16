@@ -33,7 +33,7 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     effFanAHU_eta=0.7,
     effHRSAHU_enabled=0.8,
     effHRSAHU_disabled=0.2,
-    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    redeclare package Medium = Medium,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))), intWallRC(
             thermCapInt(each der_T(fixed=true))))),
     T_start=293.15,
