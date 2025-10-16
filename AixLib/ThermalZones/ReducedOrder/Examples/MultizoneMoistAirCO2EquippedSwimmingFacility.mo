@@ -29,7 +29,6 @@ model MultizoneMoistAirCO2EquippedSwimmingFacility
     huAHU=true,
     BPFDehuAHU=0.2,
     heatRecoveryAHU=false,
-    sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
     effHRSAHU_enabled=0.8,
