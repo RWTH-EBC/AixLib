@@ -18,10 +18,10 @@ model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
     use_moisture_balance=true,
     internalGainsMode=1,
     recOrSep=true,
-    dynamicVolumeFlowControlAHU=true,
-    dynamicSetTempControlAHU=true,
+    dynamicVolumeFlowControlAHU=false,
+    dynamicSetTempControlAHU=false,
     redeclare model AHUMod =
-        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU,
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.NoModularAHU,
     heatAHU=true,
     coolAHU=true,
     dehuAHU=true,

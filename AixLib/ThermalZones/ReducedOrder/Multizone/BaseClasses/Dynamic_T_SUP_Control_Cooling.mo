@@ -77,8 +77,6 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
     annotation (Placement(transformation(extent={{30,-10},{10,10}})));
   Modelica.Blocks.Sources.Constant const6(k=0)
     annotation (Placement(transformation(extent={{-6,-18},{6,-6}})));
-  Modelica.Blocks.Logical.Hysteresis hysteresisCooling(uLow=-0.5, uHigh=0.25)
-    annotation (Placement(transformation(extent={{40,-90},{20,-70}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TZone[numZones]
     "Air temperature of the zones which are supplied by the AHU"
     annotation (Placement(transformation(extent={{80,-10},{60,10}})));
@@ -91,10 +89,10 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
   Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=
         dynamicSetTempControlAHU)
     annotation (Placement(transformation(extent={{20,20},{8,32}})));
-  Modelica.Blocks.Logical.Not not1
-    annotation (Placement(transformation(extent={{8,-84},{0,-76}})));
   Modelica.Blocks.Math.Gain gain_dT_max(k=-dT_SUP_Cool_Max)
     annotation (Placement(transformation(extent={{0,-54},{-8,-46}})));
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant2(k=true)
+    annotation (Placement(transformation(extent={{56,18},{44,30}})));
 equation
 
   connect(Tset_AHU_In, add.u2) annotation (Line(points={{100,100},{-60,100},{-60,
@@ -112,8 +110,6 @@ equation
   connect(minMax.yMin, PI_AHU_Cool.u_m) annotation (Line(points={{55.4,-37.6},{
           48,-37.6},{48,-32},{30,-32},{30,-38}},
                                               color={0,0,127}));
-  connect(minMax.yMin, hysteresisCooling.u) annotation (Line(points={{55.4,-37.6},
-          {48,-37.6},{48,-80},{42,-80}}, color={0,0,127}));
   connect(TZone.T, dTZoneCool.u1) annotation (Line(points={{59,0},{50,0},{50,-22},
           {110,-22},{110,-44},{102,-44}}, color={0,0,127}));
   connect(TSetCool, dTZoneCool.u2) annotation (Line(points={{-30,-120},{-30,-96},
@@ -128,14 +124,12 @@ equation
     annotation (Line(points={{9,0},{-2,0},{-2,8},{-6.8,8}}, color={0,0,127}));
   connect(switchOnOff.y, add.u1) annotation (Line(points={{-51,0},{-60,0},{-60,
           -6},{-68,-6}}, color={0,0,127}));
-  connect(hysteresisCooling.y, not1.u)
-    annotation (Line(points={{19,-80},{8.8,-80}}, color={255,0,255}));
-  connect(not1.y, switchHysteresis.u2) annotation (Line(points={{-0.4,-80},{-40,
-          -80},{-40,-24},{42,-24},{42,0},{32,0}}, color={255,0,255}));
   connect(PI_AHU_Cool.y, gain_dT_max.u)
     annotation (Line(points={{19,-50},{0.8,-50}}, color={0,0,127}));
   connect(gain_dT_max.y, switchHysteresis.u1) annotation (Line(points={{-8.4,
           -50},{-12,-50},{-12,-26},{44,-26},{44,8},{32,8}}, color={0,0,127}));
+  connect(booleanConstant2.y, switchHysteresis.u2) annotation (Line(points={{
+          43.4,24},{38,24},{38,0},{32,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

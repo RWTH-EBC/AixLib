@@ -353,6 +353,13 @@ equation
           {30,-72},{30,78},{34,78},{34,77.7},{38.84,77.7}}, color={0,0,127}));
   connect(TSetHeat, zone.TSetHeat) annotation (Line(points={{-40,-100},{-40,-74},
           {32,-74},{32,72},{36,72},{36,71.96},{38.84,71.96}}, color={0,0,127}));
+
+  connect(TSetCool, dynamic_AHU_Control.TSetCool) annotation (Line(points={{-80,
+          -100},{-80,-74},{-42,-74},{-42,-66},{-40,-66},{-40,-58}}, color={0,0,
+          127}));
+  connect(TSetHeat, dynamic_AHU_Control.TSetHeat) annotation (Line(points={{-40,
+          -100},{-40,-68},{-48,-68},{-48,-58}}, color={0,0,127}));
+
   connect(dynamic_AHU_Control.Tset_AHU_Set, AirHandlingUnit.TSupSet)
     annotation (Line(points={{-32,-40},{-10,-40},{-10,-6},{6.25,-6},{6.25,-0.8}},
         color={0,0,127}));
@@ -368,11 +375,7 @@ equation
   connect(dynamic_AHU_Control.roomHeatPort, zone.intGainsConv) annotation (Line(
         points={{-54,-51},{-54,-52},{-66,-52},{-66,-78},{86,-78},{86,70},{84,70},
           {84,70.32},{80.42,70.32}}, color={191,0,0}));
-  connect(TSetCool, dynamic_AHU_Control.TSetCool) annotation (Line(points={{-80,
-          -100},{-80,-74},{-42,-74},{-42,-66},{-40,-66},{-40,-58}}, color={0,0,
-          127}));
-  connect(TSetHeat, dynamic_AHU_Control.TSetHeat) annotation (Line(points={{-40,
-          -100},{-40,-68},{-48,-68},{-48,-58}}, color={0,0,127}));
+
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},
