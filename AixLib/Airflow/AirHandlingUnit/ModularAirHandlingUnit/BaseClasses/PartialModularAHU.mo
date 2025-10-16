@@ -51,7 +51,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
     max=1) = 0.2
     "taking a little heat transfer into account although HRS is disabled 
     (in case that a HRS is physically installed in the AHU)"
-    annotation (Dialog(group="Settings AHU Value", enable=heatReecovery));
+    annotation (Dialog(group="Settings AHU Value", enable=heatRecovery));
 
   // fan parameter
   parameter Modelica.Units.SI.Pressure dpFanOda=800
