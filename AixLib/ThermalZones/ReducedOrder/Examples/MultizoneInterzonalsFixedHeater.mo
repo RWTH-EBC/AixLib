@@ -26,7 +26,7 @@ model MultizoneInterzonalsFixedHeater
     dehuAHU=false,
     huAHU=false,
     BPFDehuAHU=0.2,
-    HRS=false,
+    heatRecoveryAHU=false,
     sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
@@ -144,7 +144,7 @@ equation
   annotation (experiment(
       StartTime=2797200,
       StopTime=5155200,
-	  Tolerance=1e-6,
+   Tolerance=1e-6,
       Interval=3600),
       __Dymola_Commands(file="Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneInterzonalsFixedHeater.mos"
         "Simulate and plot"),
