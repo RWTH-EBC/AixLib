@@ -2,7 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Examples;
 model MultizoneEquipped "Illustrates the use of MultizoneEquipped"
   import AixLib;
   extends Modelica.Icons.Example;
-  replaceable package Medium = Modelica.Media.Air.SimpleAir;
+  replaceable package Medium = AixLib.Media.Air;
 
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     buildingID=1,
