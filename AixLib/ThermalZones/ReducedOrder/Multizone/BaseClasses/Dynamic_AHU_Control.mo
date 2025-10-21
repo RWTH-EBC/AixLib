@@ -90,20 +90,17 @@ equation
   connect(TSetCool, dynamic_T_SUP_Control_Cooling.TSetCool) annotation (Line(
         points={{-30,-120},{-30,-48},{-32,-48},{-32,6},{-7.4,6},{-7.4,15.8}},
         color={0,0,127}));
-  connect(TSetHeat, dynamic_T_SUP_Control_Cooling.TSetHeat) annotation (Line(
-        points={{30,-120},{30,-36},{32,-36},{32,6},{9.4,6},{9.4,15.8}}, color={0,
-          0,127}));
-  connect(roomHeatPort, dynamic_T_SUP_Control_Cooling.roomHeatPort) annotation
-    (Line(points={{100,-50},{28,-50},{28,-40},{38,-40},{38,-22},{34,-22},{34,41},
-          {22,41}}, color={191,0,0}));
-  connect(roomHeatPort, dynamic_Vflow_SUP_Control.roomHeatPort) annotation (
-      Line(points={{100,-50},{28,-50},{28,-40},{20,-40}}, color={191,0,0}));
   connect(AHU_In[1], dynamic_T_SUP_Control_Cooling.Tset_AHU_In) annotation (
       Line(points={{120,42.5},{114,42.5},{114,42},{116,42},{116,53.6},{26.2,53.6}},
         color={0,0,127}));
   connect(AHU_In[4], dynamic_Vflow_SUP_Control.V_flow_AHU_In) annotation (Line(
         points={{120,57.5},{40,57.5},{40,48},{36,48},{36,-28},{24,-28}}, color={
           0,0,127}));
+  connect(roomHeatPort, dynamic_T_SUP_Control_Cooling.roomHeatPort) annotation
+    (Line(points={{100,-50},{100,-22},{34,-22},{34,41},{22,41}}, color={191,0,0}));
+  connect(roomHeatPort, dynamic_Vflow_SUP_Control.roomHeatPort) annotation (
+      Line(points={{100,-50},{100,-22},{34,-22},{34,-50},{28,-50},{28,-40},{20,
+          -40}}, color={191,0,0}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

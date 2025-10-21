@@ -55,18 +55,6 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
         extent={{20,-20},{-20,20}},
         rotation=270,
         origin={-40,-120})));
-  Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
-    each final quantity="ThermodynamicTemperature",
-    each final unit="K",
-    each displayUnit="degC",
-    each min=0)                                     annotation (Placement(
-        transformation(
-        extent={{20,20},{-20,-20}},
-        rotation=270,
-        origin={30,-120}), iconTransformation(
-        extent={{20,-20},{-20,20}},
-        rotation=270,
-        origin={40,-120})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-70,10},{-90,-10}})));
   Modelica.Blocks.Math.Add dTZoneCool[numZones](k1=-1, k2=+1)
