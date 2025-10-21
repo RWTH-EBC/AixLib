@@ -50,5 +50,15 @@ equation
       __Dymola_Algorithm="Dassl"),
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/SensitivityAnalysis/SimpleOpening.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    October 21, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1608\">issue 1608</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example shows how models of simple window opening respond to various inputs, including indoor-ambient temperature difference, wind speed, and wind direction.</p>
+</html>"));
 end SimpleOpening;

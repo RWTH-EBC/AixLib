@@ -196,5 +196,15 @@ equation
   connect(winDir, ashrae.winDir) annotation (Line(points={{-120,-60},{-20,-60},
           {-20,-96},{58,-96}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    October 21, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1608\">issue 1608</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This model is set up for sensitivity analysis and contains 11 different empirical expressions for bottom-hung window openings.</p>
+</html>"));
 end BottomHungOpening;

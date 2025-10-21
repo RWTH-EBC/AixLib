@@ -76,5 +76,16 @@ equation
       __Dymola_Algorithm="Dassl"),
       __Dymola_Commands(file=
         "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/SensitivityAnalysis/BottomHungOpening.mos"
-        "Simulate and plot"));
+        "Simulate and plot"),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    October 21, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1608\">issue 1608</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This example shows how models of bottom-hung window opening respond to various inputs, including opening width, indoor-ambient temperature difference, wind speed, and wind direction.</p>
+<p>More information about the comparison of these models can be found in this study: <a href=\"https://doi.org/10.1016/j.buildenv.2025.113253\">https://doi.org/10.1016/j.buildenv.2025.113253</a></p>
+</html>"));
 end BottomHungOpening;

@@ -52,4 +52,14 @@ equation
     annotation (Line(points={{-79,-60},{-62,-60}}, color={0,0,127}));
   connect(WinDirVar_deg.y, from_deg1.u)
     annotation (Line(points={{-79,-90},{-62,-90}}, color={0,0,127}));
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    October 21, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1608\">issue 1608</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This partial model provides settings for the boundary conditions used in examples of sensitivity analysis.</p>
+</html>"));
 end PartialSensitivityAnalysisExample;

@@ -126,4 +126,14 @@ equation
           {-20,-36},{-2,-36}}, color={0,0,127}));
   connect(winDir, ashrae.winDir) annotation (Line(points={{-120,-60},{-20,-60},
           {-20,-56},{38,-56}}, color={0,0,127}));
+  annotation (Documentation(revisions="<html>
+<ul>
+  <li>
+    October 21, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1608\">issue 1608</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This model is set up for sensitivity analysis and contains nine different empirical expressions for simple window openings (without sash).</p>
+</html>"));
 end SimpleOpening;

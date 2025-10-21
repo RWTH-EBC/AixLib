@@ -30,5 +30,15 @@ equation
   connect(winSpe10, winSpeProLoc.winSpeRef)
     annotation (Line(points={{-120,-20},{-82,-20}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(revisions="<html>
+<ul>
+  <li>
+    October 21, 2025, by Jun Jiang:<br/>
+    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1608\">issue 1608</a>)
+  </li>
+</ul>
+</html>", info="<html>
+<p>This partial model provides the common parameters and input connectors required for the sensitivity analysis.</p>
+</html>"));
 end PartialSensitivityAnalysis;
