@@ -2,6 +2,7 @@ within AixLib.Airflow.WindowVentilation.Examples.SensitivityAnalysis;
 model BottomHungOpening "Bottom-hung opening"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample;
+  extends Modelica.Icons.Example;
   AixLib.Airflow.WindowVentilation.SensitivityAnalysis.BottomHungOpening
     senAnaOpnWidth "Sensitivity analysis of opening width"
     annotation (Placement(transformation(extent={{60,60},{100,100}})));

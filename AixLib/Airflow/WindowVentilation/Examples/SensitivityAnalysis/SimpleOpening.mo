@@ -2,6 +2,7 @@ within AixLib.Airflow.WindowVentilation.Examples.SensitivityAnalysis;
 model SimpleOpening "Simple opening"
   extends
     AixLib.Airflow.WindowVentilation.BaseClasses.PartialSensitivityAnalysisExample;
+  extends Modelica.Icons.Example;
   AixLib.Airflow.WindowVentilation.SensitivityAnalysis.SimpleOpening senAnaTAmb
     "Sensitivity analysis of ambient temperature"
     annotation (Placement(transformation(extent={{60,60},{100,100}})));

@@ -1,7 +1,6 @@
 within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialSensitivityAnalysisExample
   "Input boundary conditions of sensitivity analysis"
-  extends Modelica.Icons.Example;
   Modelica.Blocks.Sources.Constant TRoomCon_degC(k=22)
     "Constant room temperature in degC"
     annotation (Placement(transformation(extent={{-100,80},{-80,100}})));
