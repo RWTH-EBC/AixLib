@@ -4,7 +4,7 @@ createPlot(
 	position={0, 0, 1200, 600},
 	x="TDif.y",
 	y={"senAnaTAmb.gidsPhaff.V_flow", "senAnaTAmb.warrenParkins.V_flow", "senAnaTAmb.larsenHeiselberg.V_flow", "senAnaTAmb.caciolo.V_flow", "senAnaTAmb.tang.V_flow", "senAnaTAmb.vdi2078.V_flow", "senAnaTAmb.din16798.V_flow", "senAnaTAmb.din4108.V_flow", "senAnaTAmb.ashrae.V_flow"},
-	heading="Ambient temperature",
+	heading="Temperature difference",
 	range={0.0, 10.0, 0.0, 500.0},
 	autoscale=false,
 	grid=true,

@@ -21,6 +21,8 @@ model BottomHungOpening "Bottom-hung opening"
     annotation (Placement(transformation(extent={{-100,140},{-80,160}})));
   Modelica.Blocks.Sources.Constant OpnWidthCon(k=0.2) "Constant opening width"
     annotation (Placement(transformation(extent={{-100,110},{-80,130}})));
+  Modelica.Blocks.Math.Feedback TDif "Temperature difference"
+    annotation (Placement(transformation(extent={{30,50},{50,70}})));
 equation
   connect(OpnWidthVar.y, senAnaOpnWidth.opnWidth_in)
     annotation (Line(points={{-79,150},{80,150},{80,104}}, color={0,0,127}));
@@ -62,10 +64,17 @@ equation
           30,-60},{30,-32},{56,-32}}, color={0,0,127}));
   connect(from_deg1.y, senAnaWinDir.winDir) annotation (Line(points={{-39,-90},
           {40,-90},{40,-82},{56,-82}}, color={0,0,127}));
-  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)),
-    experiment(
+  connect(from_degC.y, TDif.u1) annotation (Line(points={{-39,90},{-20,90},{-20,
+          46},{20,46},{20,60},{32,60}}, color={0,0,127}));
+  connect(from_degC2.y, TDif.u2) annotation (Line(points={{-39,30},{0,30},{0,38},
+          {40,38},{40,52}}, color={0,0,127}));
+  annotation (experiment(
+      StartTime=0,
       StopTime=10,
       Interval=0.01,
-      __Dymola_Algorithm="Dassl"));
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Dassl"),
+      __Dymola_Commands(file=
+        "Resources/Scripts/Dymola/Airflow/WindowVentilation/Examples/SensitivityAnalysis/BottomHungOpening.mos"
+        "Simulate and plot"));
 end BottomHungOpening;
