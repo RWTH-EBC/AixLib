@@ -2,7 +2,8 @@ within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
+      redeclare package Medium = AixLib.Media.Air "Moist air");
 
   parameter Boolean heatAHU=true
     "Status of heating of AHU"
