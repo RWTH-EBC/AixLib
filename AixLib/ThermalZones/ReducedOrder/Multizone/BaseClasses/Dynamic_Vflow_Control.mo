@@ -232,5 +232,9 @@ equation
   connect(booleanConstant2.y, switchHeat.u2) annotation (Line(points={{-29.4,70},
           {-20,70},{-20,42}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+<p>Model that may dynamically control the volume flow per thermal zone through the air handling unit to support heating or cooling in thermal zones in the <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
+<p>Control paramaters need to be adjusted accordingly.</p>
+</html>"));
 end Dynamic_Vflow_Control;

@@ -121,6 +121,7 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-
+<p>Model that may dynamically control the air supply temperature of the air handling unit to support cooling in thermal zones in the <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
+<p>Control paramaters need to be adjusted accordingly.</p>
 </html>"));
 end Dynamic_T_SUP_Control_Cooling;

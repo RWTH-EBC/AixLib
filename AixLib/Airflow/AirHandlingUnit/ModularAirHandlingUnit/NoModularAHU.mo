@@ -25,12 +25,8 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},
             {160,100}})),                                        Diagram(
         coordinateSystem(preserveAspectRatio=false, extent={{-160,-100},{160,100}})),
-    Documentation(info="<html><p>
-  This model represnts a central air handling unit.
-  It can be configured in modular way. Depending on the desired functionalities it will inherit a heat recovery system, a heater, a cooler and a humidifier.
-  The type of hmumidifier can be chosen by the user. It will be either steam or adiabatic humidification.
-  Dehumidification is realized by sub-cooling only. Hence, if no cooling and heating is implemented, dehumidification will be disabled.
-</p>
+    Documentation(info="<html>
+<p>Dummy class, when no modular air handling unit is used in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
 </html>", revisions="<html>
 <ul>
   <li>April, 2020 by Martin Kremer:<br/>

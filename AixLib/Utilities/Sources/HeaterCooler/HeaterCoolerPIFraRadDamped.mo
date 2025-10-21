@@ -41,4 +41,14 @@ equation
           -72},{10,-62},{18,-62}}, color={0,0,127}));
   connect(firstOrderCooling.y, gainCooRad.u) annotation (Line(points={{5,-72},{12,
           -72},{12,-84},{10,-84},{10,-92},{18,-92}}, color={0,0,127}));
+  annotation (Documentation(info="<html>
+<p><b><span style=\"color: #008000;\">Overview</span> </b></p>
+<p>This is a heater and/or cooler with a PI-controller and a PT1-damper. It can be used as a realistic source for heating and cooling applications, considering inert behaviour of thermal heat transfer. Parameters of the PT1-damper can be defined in the zone records.</p>
+<ul>
+<li><i>October, 2015&nbsp;</i> by Moritz Lauster:<br>Adapted to Annex60 and restructuring, combined V1 and V2 as well as seperate parameter and record from EBC Libs </li>
+<li><i>June, 2014&nbsp;</i> by Moritz Lauster:<br>Added some basic documentation </li>
+<li><i>October, 2025</i> by Jonatan H&ouml;pp:</li>
+</ul>
+<p>Added PT1-damper to consider inert behaviour of thermal heat transfer</p>
+</html>"));
 end HeaterCoolerPIFraRadDamped;
