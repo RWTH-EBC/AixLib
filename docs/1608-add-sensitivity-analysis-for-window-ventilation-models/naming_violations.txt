@@ -23,6 +23,10 @@ AixLib/Airflow/WindowVentilation/BaseClasses/PartialSensitivityAnalysisExample.m
 10: Missing documentation. Affected line: Modelica.Blocks.Math.UnitConversions.From_deg from_deg1 annotation (Placement(transformation(extent={{-60,-100},{-40,-80}})));
 
 
+AixLib/Airflow/WindowVentilation/BaseClasses/PartialSensitivityAnalysis.mo
+1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s") "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
+
+
 AixLib/Airflow/WindowVentilation/SensitivityAnalysis/BottomHungOpening.mo
 1: Name 'gidsPhaff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: gids, Phaff. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.GidsPhaff gidsPhaff( winClrWidth=winClrWidth, winClrHeight=winClrHeight, redeclare model OpeningArea = AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon ( opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward, opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric)) "Model de Gids Phaff" annotation (Placement(transformation(extent={{20,80},{40,100}})));
 
@@ -45,10 +49,6 @@ AixLib/Airflow/WindowVentilation/SensitivityAnalysis/BottomHungOpening.mo
 10: Name 'din4108' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: din4108. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.DIN4108 din4108( winClrWidth=winClrWidth, winClrHeight=winClrHeight, redeclare model OpeningArea = AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashDIN4108 ( opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward)) "Model DIN/TS 4108-8" annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
 
 11: Name 'ashrae' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: ashrae. Affected line: AixLib.Airflow.WindowVentilation.EmpiricalExpressions.ASHRAE ashrae( winClrWidth=winClrWidth, winClrHeight=winClrHeight, redeclare model OpeningArea = AixLib.Airflow.WindowVentilation.OpeningAreas.OpeningAreaSashCommon ( opnTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.WindowOpeningTypes.BottomHungInward, opnAreaTyp=AixLib.Airflow.WindowVentilation.BaseClasses.Types.OpeningAreaTypes.Geometric), aziRef=0) "Model ASHRAE" annotation (Placement(transformation(extent={{60,-100},{80,-80}})));
-
-
-AixLib/Airflow/WindowVentilation/BaseClasses/PartialSensitivityAnalysis.mo
-1: Name 'winSpe10' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Spe10. Affected line: Modelica.Blocks.Interfaces.RealInput winSpe10(unit="m/s") "Local wind speed at a height of 10 m" annotation (Placement(transformation(extent={{-140,-40},{-100,0}})));
 
 
 AixLib/Airflow/WindowVentilation/SensitivityAnalysis/SimpleOpening.mo
