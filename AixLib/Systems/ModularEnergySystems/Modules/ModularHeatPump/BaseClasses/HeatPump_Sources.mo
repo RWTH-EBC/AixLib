@@ -173,9 +173,7 @@ package HeatPump_Sources
     parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource"
      annotation (Dialog(group="Nominal condition"));
 
-      parameter Boolean TSourceInternal=true
-                                            "Use internal TSource?"
-      annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
+      parameter Boolean TSourceInternal=true "Use internal TSource?" annotation (Dialog(descriptionLabel=true, tab="Advanced",group="General machine information"));
 
      parameter Modelica.Units.SI.Temperature TSource=TSourceNom "Temperature of heat source"
      annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
@@ -221,21 +219,39 @@ package HeatPump_Sources
     AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
         Placement(transformation(extent={{-18,84},{18,116}}), iconTransformation(
             extent={{-16,88},{18,118}})));
-    Modelica.Blocks.Math.Gain gain
-      annotation (Placement(transformation(extent={{-90,-90},{-78,-78}})));
-    Modelica.Blocks.Math.Product product1
-      annotation (Placement(transformation(extent={{-6,-48},{-26,-28}})));
-    Modelica.Blocks.Sources.RealExpression zero(y=1) annotation (Placement(
-          transformation(
-          extent={{-12,-12},{12,12}},
-          rotation=0,
-          origin={-38,-96})));
-    Modelica.Blocks.Logical.Switch switch2
-      annotation (Placement(transformation(extent={{4,-96},{24,-76}})));
-    Modelica.Blocks.Sources.RealExpression mFlowEva2(y=QDes*10)
-                      "massflow heat source"
-      annotation (Placement(transformation(extent={{98,-50},{56,-26}})));
   equation
+    connect(port_a, bouEvap_b.ports[1])
+      annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
+    connect(bouEvap_a.ports[1], port_b)
+      annotation (Line(points={{44,0},{100,0}}, color={0,127,255}));
+    connect(switch1.y, bouEvap_a.T_in) annotation (Line(points={{1,50},{6,50},{6,-5.6},
+            {13.2,-5.6}}, color={0,0,127}));
+    connect(tSource.y, switch1.u1) annotation (Line(points={{-52.4,30},{-38,30},{-38,
+            42},{-22,42}}, color={0,0,127}));
+    connect(booleanExpression.y, switch1.u2)
+      annotation (Line(points={{-45.4,50},{-22,50}}, color={255,0,255}));
+    connect(sigBus.TSourceSet, switch1.u3) annotation (Line(
+        points={{0.09,100.08},{0.09,72},{-32,72},{-32,58},{-22,58}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(division1.y, bouEvap_a.m_flow_in) annotation (Line(points={{19,-50},{-10,
+            -50},{-10,-11.2},{13.2,-11.2}}, color={0,0,127}));
+    connect(mFlowEva.y, division1.u2)
+      annotation (Line(points={{53.9,-56},{42,-56}}, color={0,0,127}));
+    connect(sigBus.QEvapNom, division1.u1) annotation (Line(
+        points={{0.09,100.08},{58,100.08},{58,-44},{42,-44}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+  end Air;
+equation
     connect(port_a, bouEvap_b.ports[1])
       annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
     connect(bouEvap_a.ports[1], port_b)
@@ -270,14 +286,6 @@ package HeatPump_Sources
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
-    connect(sigBus.TEvaOutMea, gain.u) annotation (Line(
-        points={{0.09,100.08},{2,100.08},{2,-12},{-94,-12},{-94,-84},{-91.2,-84}},
-        color={255,204,51},
-        thickness=0.5), Text(
-        string="%first",
-        index=-1,
-        extent={{-6,3},{-6,3}},
-        horizontalAlignment=TextAlignment.Right));
 
     connect(zero.y, switch2.u1) annotation (Line(points={{-24.8,-96},{-16,-96},{-16,
             -80},{2,-80},{2,-78}}, color={0,0,127}));
@@ -297,5 +305,4 @@ package HeatPump_Sources
             color={255,255,255},
             smooth=Smooth.Bezier)}),                               Diagram(
           coordinateSystem(preserveAspectRatio=false)));
-  end Air;
 end HeatPump_Sources;
