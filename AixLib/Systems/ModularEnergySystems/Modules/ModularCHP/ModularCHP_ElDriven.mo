@@ -97,7 +97,8 @@ model ModularCHP_ElDriven
     NomPower=P_el_nom,
     ElDriven=true,
     filename_PTHR=filename_PTHR,
-    filename_etaEl=filename_etaEl)
+    filename_etaEl=filename_etaEl,
+    interneal_demand=interneal_demand)
     annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
   Fluid.Movers.SpeedControlled_y fanCC(
     redeclare package Medium = AixLib.Media.Water,
@@ -203,6 +204,8 @@ public
       ModelicaServices.ExternalReferences.loadResource(
       "modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf")
     "File name";
+  parameter Real interneal_demand=0.9819
+    "Efficiency for internal electricity demand";
 equation
 
 //   if fromKelvin1.Celsius > THotHeatCircuitMax or  fromKelvin2.Celsius > THotCoolingWaterMax then

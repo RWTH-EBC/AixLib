@@ -14,7 +14,8 @@ model GenericCHP
   constant Real Brennwert=46753;
 
 
-  BaseClasses.DesignOnOffCHP designOnOffCHP(filename=filename_etaEl,
+  BaseClasses.DesignOnOffCHP designOnOffCHP(
+    interneal_demand=interneal_demand,      filename=filename_etaEl,
       filename_PTHR=filename_PTHR)
     annotation (Placement(transformation(extent={{-4,62},{16,82}})));
   Modelica.Thermal.HeatTransfer.Components.ThermalConductor ConductanceToEnv(final G=G)
@@ -90,6 +91,8 @@ model GenericCHP
   parameter String filename_etaEl=
       ModelicaServices.ExternalReferences.loadResource("modelica://AixLib/Resources/Data/Fluid/BoilerCHP/NotManufacturer/CHP/EtaEL.sdf")
     "File name";
+  parameter Real interneal_demand=0.9819
+    "Efficiency for internal electricity demand";
 protected
   parameter Modelica.Units.SI.HeatCapacity C=500*(20.207*NomPower/1000 + 634.19)
     "Heat capacity of element (= cp*m)";

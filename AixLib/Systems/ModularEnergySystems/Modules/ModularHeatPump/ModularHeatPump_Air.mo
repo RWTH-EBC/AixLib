@@ -25,6 +25,8 @@ model ModularHeatPump_Air
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
 parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon;
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal_pump=m_flow_nominal;
+
 
 
 parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional system pressure difference";
@@ -92,9 +94,8 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     T_start=THotDes,
     allowFlowReversal=true,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
-        pressure(V_flow={0,heatPump.con.m_flow_nominal/1000,heatPump.con.m_flow_nominal
-            /1000/0.7}, dp={(dpInternal + dpExternal)/0.7,(dpInternal +
-            dpExternal),0})),
+        pressure(V_flow={0,m_flow_nominal_pump/1000,m_flow_nominal_pump/1000/
+            0.3}, dp={(dpInternal + dpExternal)/0.7,(dpInternal + dpExternal),0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
     use_inputFilter=false,
