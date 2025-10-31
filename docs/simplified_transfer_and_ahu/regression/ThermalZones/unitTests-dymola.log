@@ -15,11 +15,11 @@ Regression tests are only run for the following package:
            Absolute error = 1.258e+00 at t = 8640.0 for multizone.TAir[3]
            Absolute error = 1.258e+00 at t = 8640.0 for multizone.TAir[4]
            Absolute error = 1.258e+00 at t = 8640.0 for multizone.TAir[5]
-           Absolute error = 6.346e+04 at t = 34560.0 for multizone.PHeater[1]
-           Absolute error = 6.527e+04 at t = 34560.0 for multizone.PHeater[2]
-           Absolute error = 6.527e+04 at t = 34560.0 for multizone.PHeater[3]
-           Absolute error = 6.527e+04 at t = 34560.0 for multizone.PHeater[4]
-           Absolute error = 6.527e+04 at t = 34560.0 for multizone.PHeater[5]
+           Absolute error = 6.352e+04 at t = 34560.0 for multizone.PHeater[1]
+           Absolute error = 6.538e+04 at t = 34560.0 for multizone.PHeater[2]
+           Absolute error = 6.538e+04 at t = 34560.0 for multizone.PHeater[3]
+           Absolute error = 6.538e+04 at t = 34560.0 for multizone.PHeater[4]
+           Absolute error = 6.538e+04 at t = 34560.0 for multizone.PHeater[5]
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped: Translation statistics for initialization and results changed for linear.
  Old = 5, 5, 5, 5, 5
  New = 4, 4, 4, 4, 4
@@ -28,7 +28,7 @@ Regression tests are only run for the following package:
  New = 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped: Translation statistics for simulation and results changed for number of continuous time states.
  Old = 35
- New = 77
+ New = 78
 *** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizonePartlyCooled.txt: Errors during result verification.
            Absolute error = 4.708e-01 at t = 15431040.0 for multizone.TAir[1]
            Absolute error = 7.727e-01 at t = 15439680.0 for multizone.TAir[2]
@@ -42,31 +42,31 @@ Regression tests are only run for the following package:
  Old = 39
  New = 48
 *** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2EquippedSwimmingFacility.txt: Errors during result verification.
-           Absolute error = 5.272e-04 at t = 665280.0 for multizone.zone[1].X_w
+           Absolute error = 4.372e-04 at t = 665280.0 for multizone.zone[1].X_w
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility: Translation statistics for simulation and results changed for nonlinear.
  Old = 6, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
  New = 1, 3, 1, 6, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,   1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility: Translation statistics for simulation and results changed for number of continuous time states.
  Old = 83
- New = 109
+ New = 110
 *** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneInterzonalsFixedHeater.txt: Errors during result verification.
            Absolute error = 6.433e-01 at t = 3059280.0 for multizone.TAir[1]
            Absolute error = 4.609e+00 at t = 3079440.0 for multizone.TAir[2]
            Absolute error = 1.585e+01 at t = 2993760.0 for multizone.TAir[3]
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater: Translation statistics for simulation and results changed for number of continuous time states.
  Old = 23
- New = 35
+ New = 36
 *** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2Equipped.txt: Errors during result verification.
-           Absolute error = 2.857e+00 at t = 8640.0 for multizone.TAir[1]
-           Absolute error = 2.857e+00 at t = 8640.0 for multizone.TAir[2]
-           Absolute error = 2.857e+00 at t = 8640.0 for multizone.TAir[3]
-           Absolute error = 2.857e+00 at t = 8640.0 for multizone.TAir[4]
-           Absolute error = 2.857e+00 at t = 8640.0 for multizone.TAir[5]
+           Absolute error = 2.662e+00 at t = 8640.0 for multizone.TAir[1]
+           Absolute error = 2.662e+00 at t = 8640.0 for multizone.TAir[2]
+           Absolute error = 2.662e+00 at t = 8640.0 for multizone.TAir[3]
+           Absolute error = 2.662e+00 at t = 8640.0 for multizone.TAir[4]
+           Absolute error = 2.662e+00 at t = 8640.0 for multizone.TAir[5]
            Absolute error = 1.000e+05 at t = 129600.0 for multizone.PHeater[1]
-           Absolute error = 1.000e+05 at t = 129600.0 for multizone.PHeater[2]
-           Absolute error = 1.000e+05 at t = 129600.0 for multizone.PHeater[3]
-           Absolute error = 1.000e+05 at t = 129600.0 for multizone.PHeater[4]
-           Absolute error = 1.000e+05 at t = 129600.0 for multizone.PHeater[5]
+           Absolute error = 1.000e+05 at t = 207360.0 for multizone.PHeater[2]
+           Absolute error = 1.000e+05 at t = 207360.0 for multizone.PHeater[3]
+           Absolute error = 1.000e+05 at t = 207360.0 for multizone.PHeater[4]
+           Absolute error = 1.000e+05 at t = 207360.0 for multizone.PHeater[5]
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped: Translation statistics for initialization and results changed for linear.
  Old = 5, 5, 5, 5, 5
  New = 4, 4, 4, 4, 4
@@ -75,7 +75,7 @@ Regression tests are only run for the following package:
  New = 1, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1,   0, 1, 0, 1, 0, 1
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped: Translation statistics for simulation and results changed for number of continuous time states.
  Old = 45
- New = 77
+ New = 78
 *** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2.txt: Errors during result verification.
            Absolute error = 2.942e+01 at t = 2838240.0 for multizone.TAir[1]
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2: Translation statistics for initialization and results changed for linear.
