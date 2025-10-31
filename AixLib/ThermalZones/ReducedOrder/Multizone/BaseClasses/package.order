@@ -8,6 +8,6 @@ PartialMultizone
 RelToAbsHum
 SumCondition
 Dynamic_T_SUP_Control
-Dynamic_Vflow_Control
+Dynamic_V_flow_Control
 Dynamic_T_SUP_Control_Cooling
 Dynamic_AHU_Control

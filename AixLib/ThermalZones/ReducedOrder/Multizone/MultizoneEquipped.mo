@@ -12,6 +12,13 @@ model MultizoneEquipped
     VAir=33500,
     redeclare package Medium = AixLib.Media.Air "Moist air");
 
+  replaceable model AHUMod =
+      AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU
+    constrainedby
+    AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU
+    "Air handling unit model"
+    annotation(choicesAllMatching=true, Dialog(tab="AirHandlingUnit", group="AHU Modes"));
+
   parameter Boolean heatAHU=false
     "Status of heating of AHU"
     annotation (Dialog(tab="AirHandlingUnit", group="AHU Modes"));
@@ -38,16 +45,34 @@ model MultizoneEquipped
     annotation (
     Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
   parameter Boolean dynamicVolumeFlowControlAHU=false
-    "Status of dynamic AHU control depending on room temperature";
+    "Status of dynamic AHU control depending on room temperature" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
   parameter Boolean dynamicSetTempControlAHU=false
-    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS";
+    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Real gain_V_flow_Heat_Max = 2
+    "max volume flow gain for further heating power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Real gain_V_flow_Cool_Max = 2
+    "max volume flow gain for further cooling power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Heat = 1
+    "base air supply temperature increase when in heating mode" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Cool = 1
+    "base air supply temperature decrease when in cooling mode" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Heat_Max = 5
+    "max temperature difference of T_SUP for further heating power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Cool_Max = 5
+    "max temperature difference of T_SUP for further cooling power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.Time Ti_PI_Heat_V_flow = 300 "Time constant of heating PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool_V_flow = 300 "Time constant of cooling PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.Time Ti_PI_Heat_T_SUP = 3600 "Time constant of heating PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool_T_SUP = 3600 "Time constant of cooling PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
 
   parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
     "Temperature after HRS in AHU over which there should be no ahu heating
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
   parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
 
   parameter Real effHRSAHU_enabled(max=1, min=0)
     "Efficiency of HRS when enabled"
@@ -74,6 +99,8 @@ model MultizoneEquipped
   parameter Modelica.Units.SI.Efficiency effFanAHU_eta
     "Efficiency of extract fan"
     annotation (Dialog(tab="AirHandlingUnit", group="Fans"));
+
+
   Modelica.Blocks.Interfaces.RealInput AHU[4]
     "Input for AHU Conditions [1]: Desired Air Temperature in K [2]: Desired
     minimal relative humidity [3]: Desired maximal relative humidity [4]:
@@ -113,6 +140,12 @@ model MultizoneEquipped
     "Thermal power of AHU for humidification" annotation (Placement(
         transformation(extent={{100,-40},{120,-20}}), iconTransformation(extent=
            {{80,-60},{100,-40}})));
+
+  Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if (ASurTot > 0 or VAir > 0) and use_moisture_balance
+    "Absolute humidity in thermal zone"
+    annotation (Placement(transformation(extent={{100,30},{120,50}}),
+        iconTransformation(extent={{80,40},{100,60}})));
+
 
 
 protected
@@ -185,17 +218,8 @@ protected
         extent={{-5,-5},{5,5}},
         rotation=90,
         origin={65,37})));
-  Modelica.Blocks.Interfaces.RealOutput X_w[numZones] if (ASurTot > 0 or VAir > 0) and use_moisture_balance
-    "Absolute humidity in thermal zone"
-    annotation (Placement(transformation(extent={{100,30},{120,50}}),
-        iconTransformation(extent={{80,40},{100,60}})));
 
-  replaceable model AHUMod =
-      AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU
-    constrainedby
-    AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU
-    "Air handling unit model"
-    annotation(choicesAllMatching=true, Dialog(tab="AirHandlingUnit"));
+
 
 
   AHUMod AirHandlingUnit(
@@ -226,7 +250,19 @@ protected
     numZones=numZones,
     zoneParam=zoneParam,
     dynamicSetTempControlAHU=dynamicSetTempControlAHU,
-    dynamicVolumeFlowControlAHU=dynamicVolumeFlowControlAHU)
+    dynamicVolumeFlowControlAHU=dynamicVolumeFlowControlAHU,
+    gain_V_flow_Heat_Max=gain_V_flow_Heat_Max,
+    gain_V_flow_Cool_Max=gain_V_flow_Cool_Max,
+    dT_SUP_Offset_Heat=dT_SUP_Offset_Heat,
+    dT_SUP_Offset_Cool=dT_SUP_Offset_Cool,
+    Ti_PI_Heat_T_SUP=Ti_PI_Heat_T_SUP,
+    Ti_PI_Cool_T_SUP=Ti_PI_Cool_T_SUP,
+    Ti_PI_Heat_V_flow=Ti_PI_Heat_V_flow,
+    Ti_PI_Cool_V_flow=Ti_PI_Cool_V_flow,
+    dT_SUP_Heat_Max=dT_SUP_Heat_Max,
+    dT_SUP_Cool_Max=dT_SUP_Cool_Max,
+    T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
       if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-34,-56},{-54,-36}})));
 
@@ -369,10 +405,10 @@ equation
     annotation (Line(points={{-32,-40},{-10,-40},{-10,-6},{6.25,-6},{6.25,-0.8}},
         color={0,0,127}));
 
-  connect(dynamic_AHU_Control.Vflow_AHU_Set, airFlowRateSplit.setAHU)
+  connect(dynamic_AHU_Control.V_flow_AHU_Set, airFlowRateSplit.setAHU)
     annotation (Line(points={{-32,-52},{-20,-52},{-20,-20},{50,-20},{50,20.8}},
         color={0,0,127}));
-  connect(dynamic_AHU_Control.Vflow_AHU_Set, airFlowRate.setAHU) annotation (
+  connect(dynamic_AHU_Control.V_flow_AHU_Set, airFlowRate.setAHU) annotation (
       Line(points={{-32,-52},{-20,-52},{-20,-20},{-76,-20},{-76,22},{-74,22},{-74,
           22.6},{-73.2,22.6}}, color={0,0,127}));
 
