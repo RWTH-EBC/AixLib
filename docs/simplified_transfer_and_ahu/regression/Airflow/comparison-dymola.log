@@ -42,7 +42,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU",
     "simulation": {
-      "elapsed_time": 2.08,
+      "elapsed_time": 1.85,
       "final_time": 31536000.0,
       "jacobians": 36226,
       "start_time": 0,
@@ -165,7 +165,7 @@
     },
     "model": "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpening",
     "simulation": {
-      "elapsed_time": 0.0615,
+      "elapsed_time": 0.0494,
       "final_time": 180,
       "jacobians": 3866,
       "start_time": 0,
@@ -306,7 +306,7 @@
     },
     "model": "AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSashOpening",
     "simulation": {
-      "elapsed_time": 0.133,
+      "elapsed_time": 0.0835,
       "final_time": 180,
       "jacobians": 4176,
       "start_time": 0,
@@ -351,7 +351,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.Cooler",
     "simulation": {
-      "elapsed_time": 0.0225,
+      "elapsed_time": 0.021,
       "final_time": 14400,
       "jacobians": 120,
       "start_time": 0,
@@ -462,7 +462,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SprayHumidifier",
     "simulation": {
-      "elapsed_time": 0.0293,
+      "elapsed_time": 0.0368,
       "final_time": 14400,
       "jacobians": 121,
       "start_time": 0,
@@ -669,7 +669,7 @@
     },
     "model": "AixLib.Airflow.WindowVentilation.Examples.OpeningArea",
     "simulation": {
-      "elapsed_time": 0.00338,
+      "elapsed_time": 0.00205,
       "final_time": 60,
       "jacobians": 64,
       "start_time": 0,
@@ -744,7 +744,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.Heater",
     "simulation": {
-      "elapsed_time": 0.0169,
+      "elapsed_time": 0.02,
       "final_time": 14400,
       "jacobians": 121,
       "start_time": 0,
@@ -855,7 +855,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SteamHumidifier",
     "simulation": {
-      "elapsed_time": 0.0222,
+      "elapsed_time": 0.0213,
       "final_time": 14400,
       "jacobians": 121,
       "start_time": 0,
@@ -993,7 +993,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.Fan",
     "simulation": {
-      "elapsed_time": 0.0184,
+      "elapsed_time": 0.0205,
       "final_time": 14400,
       "jacobians": 140,
       "start_time": 0,
@@ -1140,7 +1140,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.Examples.AHU",
     "simulation": {
-      "elapsed_time": 0.126,
+      "elapsed_time": 0.0874,
       "final_time": 86400,
       "jacobians": 0,
       "start_time": 0,
@@ -1215,7 +1215,7 @@
     },
     "model": "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SensibleCooler",
     "simulation": {
-      "elapsed_time": 0.017,
+      "elapsed_time": 0.0233,
       "final_time": 14400,
       "jacobians": 121,
       "start_time": 0,
