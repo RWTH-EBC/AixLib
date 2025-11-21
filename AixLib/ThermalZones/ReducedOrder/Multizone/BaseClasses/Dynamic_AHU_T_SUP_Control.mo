@@ -1,5 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
-model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
+model Dynamic_AHU_T_SUP_Control
+  "Dynamic control of air supply temperature in AHU to control zone temperature"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Integer numZones = 1 "Numer of zones";
@@ -51,9 +52,6 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
         rotation=180,
         origin={120,60})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roomHeatPort[numZones]
-    annotation (Placement(transformation(extent={{80,-20},{120,20}}),
-        iconTransformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
@@ -68,9 +66,6 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
         origin={-40,-120})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-82,6},{-94,-6}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TZone[numZones]
-    "Air temperature of the zones which are supplied by the AHU"
-    annotation (Placement(transformation(extent={{80,-10},{60,10}})));
   Modelica.Blocks.Continuous.LimPID PI_AHU_Cool(
     k=0.1*dT_SUP_Cool_Max,
     yMax=0,
@@ -150,15 +145,15 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
         extent={{5,-5},{-5,5}},
         rotation=0,
         origin={39,29})));
-  Modelica.Blocks.Sources.RealExpression T_Max_Overheated_Zone(y=TZone[
-        dT_Cool_Max.iMax].T)
+  Modelica.Blocks.Sources.RealExpression T_Max_Overheated_Zone(y=Tmeasure[
+        dT_Cool_Max.iMax])
     annotation (Placement(transformation(extent={{120,-60},{100,-40}})));
   Utilities.Math.MinMax dT_Cool_Max(nu=1)
     annotation (Placement(transformation(extent={{4,-34},{-6,-24}})));
   Utilities.Math.MinMax dT_Heat_Max(nu=1)
     annotation (Placement(transformation(extent={{4,24},{-6,34}})));
-  Modelica.Blocks.Sources.RealExpression T_Max_Undercooled_Zone(y=TZone[
-        dT_Heat_Max.iMin].T)
+  Modelica.Blocks.Sources.RealExpression T_Max_Undercooled_Zone(y=Tmeasure[
+        dT_Heat_Max.iMin])
     annotation (Placement(transformation(extent={{120,40},{100,60}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{18,-54},{10,-46}})));
@@ -179,8 +174,18 @@ model Dynamic_T_SUP_Control_Cooling "AHU T_Sup control"
     annotation (Placement(transformation(extent={{24,24},{14,34}})));
   Modelica.Blocks.Routing.DeMultiplex demux1(n=numZones)
     annotation (Placement(transformation(extent={{24,-34},{14,-24}})));
+  Modelica.Blocks.Interfaces.RealInput Tmeasure[numZones](
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0) annotation (Placement(transformation(
+        extent={{20,20},{-20,-20}},
+        rotation=0,
+        origin={100,0}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=180,
+        origin={120,-48})));
 equation
-
 
   if not NotHysteresisHeating.y and not HysteresisCooling.y then
     OnOff = false;
@@ -202,15 +207,12 @@ equation
     HeatingCooling = false;
   end if;
 
-
   connect(Tset_AHU_In, add.u2) annotation (Line(points={{100,100},{100,98},{84,98},
           {84,100},{-78,100},{-78,4},{-80.8,4},{-80.8,3.6}},
                        color={0,0,127}));
   connect(add.y, Tset_AHU_Out)
     annotation (Line(points={{-94.6,0},{-120,0}},
                                                 color={0,0,127}));
-  connect(roomHeatPort, TZone.port)
-    annotation (Line(points={{100,0},{80,0}}, color={191,0,0}));
   connect(PI_AHU_Heat.y,gainHeat.u)
     annotation (Line(points={{-21,50},{-26.8,50}},
                                                 color={0,0,127}));
@@ -259,8 +261,6 @@ equation
           {59,50},{52,50},{52,58},{47.6,58}}, color={255,0,255}));
   connect(switchOnOff.y, add.u1) annotation (Line(points={{-74.8,0},{-78,0},{-78,
           -3.6},{-80.8,-3.6}}, color={0,0,127}));
-  connect(TZone.T, dT_Heat.u1)
-    annotation (Line(points={{59,0},{52,0},{52,32},{45,32}}, color={0,0,127}));
   connect(TSetHeat, dT_Heat.u2) annotation (Line(points={{30,-120},{30,-42},{50,
           -42},{50,26},{45,26}}, color={0,0,127}));
   connect(dT_Cool_Max.yMax, PI_AHU_Cool.u_m) annotation (Line(points={{-6.5,-26},
@@ -298,12 +298,14 @@ equation
           -29}},                                             color={0,0,127}));
   connect(TSetCool, dT_Cool.u2) annotation (Line(points={{-30,-120},{-30,-94},{
           28,-94},{28,-40},{48,-40},{48,-32},{45,-32}}, color={0,0,127}));
-  connect(TZone.T, dT_Cool.u1) annotation (Line(points={{59,0},{52,0},{52,-26},
+  connect(Tmeasure, dT_Cool.u1) annotation (Line(points={{100,0},{52,0},{52,-26},
           {45,-26}}, color={0,0,127}));
+  connect(Tmeasure, dT_Heat.u1) annotation (Line(points={{100,0},{52,0},{52,32},
+          {45,32}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>Model that may dynamically control the air supply temperature of the air handling unit to support cooling in thermal zones in the <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
 <p>Control paramaters need to be adjusted accordingly.</p>
 </html>"));
-end Dynamic_T_SUP_Control_Cooling;
+end Dynamic_AHU_T_SUP_Control;

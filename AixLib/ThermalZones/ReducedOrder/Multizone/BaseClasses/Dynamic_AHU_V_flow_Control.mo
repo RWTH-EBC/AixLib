@@ -1,5 +1,5 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
-model Dynamic_V_flow_Control "AHU T_Sup control"
+model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to control zone temperature"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Integer numZones = 1 "Numer of zones";
@@ -39,9 +39,6 @@ model Dynamic_V_flow_Control "AHU T_Sup control"
         rotation=180,
         origin={120,60})));
 
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roomHeatPort[numZones]
-    annotation (Placement(transformation(extent={{80,-20},{120,20}}),
-        iconTransformation(extent={{80,-20},{120,20}})));
   Modelica.Blocks.Continuous.LimPID PI_AHU_Cool[numZones](
     k=0.25*gain_V_flow_Cool_Max,
     yMax=-1,
@@ -88,9 +85,6 @@ model Dynamic_V_flow_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{-48,-30},{-40,-22}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff[numZones](y=
         OnOff) annotation (Placement(transformation(extent={{6,-14},{-4,-2}})));
-  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor TZone[numZones]
-    "Air temperature of the zones which are supplied by the AHU"
-    annotation (Placement(transformation(extent={{86,-8},{74,8}})));
   Modelica.Blocks.Math.Product product[numZones]
     annotation (Placement(transformation(extent={{-84,6},{-96,-6}})));
   Modelica.Blocks.Routing.Replicator replicator(nout=numZones)
@@ -132,6 +126,17 @@ model Dynamic_V_flow_Control "AHU T_Sup control"
     annotation (Placement(transformation(extent={{50,52},{42,60}})));
   Modelica.Blocks.Math.Gain gainCool[numZones](k=-1)
     annotation (Placement(transformation(extent={{-28,-56},{-40,-44}})));
+  Modelica.Blocks.Interfaces.RealInput Tmeasure[numZones](
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0) annotation (Placement(transformation(
+        extent={{20,20},{-20,-20}},
+        rotation=0,
+        origin={100,0}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=180,
+        origin={120,-50})));
 equation
 
   for i in 1:numZones loop
@@ -154,8 +159,6 @@ equation
   connect(PI_AHU_Heat.y,gainHeat.u)
     annotation (Line(points={{-21,50},{-26.8,50}},
                                                 color={0,0,127}));
-  connect(roomHeatPort, TZone.port)
-    annotation (Line(points={{100,0},{86,0}}, color={191,0,0}));
   connect(const6.y, switchOff.u3)
     annotation (Line(points={{-39.6,-26},{-34,-26},{-34,-14},{-14,-14},{-14,-8},
           {-12,-8},{-12,-6.4},{-10.4,-6.4}},       color={0,0,127}));
@@ -192,14 +195,8 @@ equation
     annotation (Line(points={{46.6,80},{64,80},{64,77}},    color={0,0,127}));
   connect(realExpression.y, add3.u1) annotation (Line(points={{139,0},{130,0},{130,
           80},{70,80},{70,77}},   color={0,0,127}));
-  connect(TZone.T, PI_AHU_Cool.u_m) annotation (Line(points={{73.4,0},{46,0},{46,
-          -28},{-10,-28},{-10,-38}},
-                                   color={0,0,127}));
   connect(TSetCool, PI_AHU_Cool.u_s) annotation (Line(points={{-30,-120},{-30,-80},
           {12,-80},{12,-50},{2,-50}},  color={0,0,127}));
-  connect(TZone.T, PI_AHU_Heat.u_m) annotation (Line(points={{73.4,0},{46,0},{46,
-          28},{-10,28},{-10,38}},
-                                color={0,0,127}));
   connect(TSetHeat, PI_AHU_Heat.u_s) annotation (Line(points={{30,-120},{30,-34},
           {50,-34},{50,50},{2,50}},    color={0,0,127}));
   connect(booleanExpressionHeatingCooling.y, switchHeatingCooling.u2)
@@ -209,10 +206,6 @@ equation
   connect(gainHeat.y, switchHeatingCooling.u1) annotation (Line(points={{-40.6,50},
           {-44,50},{-44,20},{28,20},{28,6},{23.6,6},{23.6,6.4}},
                                                    color={0,0,127}));
-  connect(TZone.T, HysteresisCooling.u) annotation (Line(points={{73.4,0},{68,0},
-          {68,-20},{90,-20},{90,-50},{82,-50}}, color={0,0,127}));
-  connect(TZone.T,HysteresisHeating. u) annotation (Line(points={{73.4,0},{68,0},
-          {68,20},{90,20},{90,50},{82,50}}, color={0,0,127}));
   connect(HysteresisHeating.y, NotHysteresisHeating.u)
     annotation (Line(points={{59,50},{51.6,50},{51.6,56}}, color={255,0,255}));
   connect(const7.y, HysteresisCooling.uHigh) annotation (Line(points={{58.6,-86},
@@ -228,10 +221,18 @@ equation
   connect(gainCool.y, switchHeatingCooling.u3) annotation (Line(points={{-40.6,-50},
           {-44,-50},{-44,-34},{-18,-34},{-18,-18},{23.6,-18},{23.6,-6.4}},
         color={0,0,127}));
+  connect(Tmeasure, HysteresisHeating.u)
+    annotation (Line(points={{100,0},{100,50},{82,50}}, color={0,0,127}));
+  connect(Tmeasure, HysteresisCooling.u)
+    annotation (Line(points={{100,0},{100,-50},{82,-50}}, color={0,0,127}));
+  connect(Tmeasure, PI_AHU_Heat.u_m) annotation (Line(points={{100,0},{100,28},
+          {-10,28},{-10,38}}, color={0,0,127}));
+  connect(Tmeasure, PI_AHU_Cool.u_m) annotation (Line(points={{100,0},{100,-28},
+          {-10,-28},{-10,-38}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
 <p>Model that may dynamically control the volume flow per thermal zone through the air handling unit to support heating or cooling in thermal zones in the <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
 <p>Control paramaters need to be adjusted accordingly.</p>
 </html>"));
-end Dynamic_V_flow_Control;
+end Dynamic_AHU_V_flow_Control;

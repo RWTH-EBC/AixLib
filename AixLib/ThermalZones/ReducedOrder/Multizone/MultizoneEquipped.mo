@@ -146,7 +146,52 @@ model MultizoneEquipped
     annotation (Placement(transformation(extent={{100,30},{120,50}}),
         iconTransformation(extent={{80,40},{100,60}})));
 
+  AHUMod AirHandlingUnit(
+    humidifying=huAHU,
+    cooling=coolAHU,
+    dehumidifying=dehuAHU,
+    heating=heatAHU,
+    heatRecovery=heatRecoveryAHU,
+    usePhiSet=relOrAbsHumAHU,
+    limPhiOda=false,
+    m_flow_nominal=0.1,
+    dpHrs_nominal(displayUnit="Pa") = 1,
+    dpCoo_nominal(displayUnit="Pa") = 1,
+    dpHea_nominal(displayUnit="Pa") = 1,
+    dpHum_nominal(displayUnit="Pa") = 1,
+    dpFanOda_nominal(displayUnit="Pa") = dpAHU_sup,
+    dpFanEta_nominal(displayUnit="Pa") = dpAHU_eta,
+    effHrsOn=effHRSAHU_enabled,
+    effHrsOff=effHRSAHU_disabled,
+    dpFanOda=dpAHU_sup,
+    dpFanEta=dpAHU_eta,
+    etaFanOda=effFanAHU_sup,
+    etaFanEta=effFanAHU_eta)
+    if ASurTot > 0 or VAir > 0
+    annotation (Placement(transformation(extent={{-50,0},{10,40}})));
 
+  BaseClasses.Dynamic_AHU_Control dynamic_AHU_Control(
+    numZones=numZones,
+    zoneParam=zoneParam,
+    dynamicSetTempControlAHU=dynamicSetTempControlAHU,
+    dynamicVolumeFlowControlAHU=dynamicVolumeFlowControlAHU,
+    gain_V_flow_Heat_Max=gain_V_flow_Heat_Max,
+    gain_V_flow_Cool_Max=gain_V_flow_Cool_Max,
+    dT_SUP_Offset_Heat=dT_SUP_Offset_Heat,
+    dT_SUP_Offset_Cool=dT_SUP_Offset_Cool,
+    Ti_PI_Heat_T_SUP=Ti_PI_Heat_T_SUP,
+    Ti_PI_Cool_T_SUP=Ti_PI_Cool_T_SUP,
+    Ti_PI_Heat_V_flow=Ti_PI_Heat_V_flow,
+    Ti_PI_Cool_V_flow=Ti_PI_Cool_V_flow,
+    dT_SUP_Heat_Max=dT_SUP_Heat_Max,
+    dT_SUP_Cool_Max=dT_SUP_Cool_Max,
+    T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
+      if ASurTot > 0 or VAir > 0
+    annotation (Placement(transformation(extent={{-34,-56},{-54,-36}})));
+  Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tmeasure[numZones]
+    if ASurTot > 0 or VAir > 0
+    annotation (Placement(transformation(extent={{-76,-56},{-66,-46}})));
 
 protected
   parameter Real zoneFactor[numZones,1](each fixed=false)
@@ -220,53 +265,6 @@ protected
         origin={65,37})));
 
 
-
-
-  AHUMod AirHandlingUnit(
-    humidifying=huAHU,
-    cooling=coolAHU,
-    dehumidifying=dehuAHU,
-    heating=heatAHU,
-    heatRecovery=heatRecoveryAHU,
-    usePhiSet=relOrAbsHumAHU,
-    limPhiOda=false,
-    m_flow_nominal=0.1,
-    dpHrs_nominal(displayUnit="Pa") = 1,
-    dpCoo_nominal(displayUnit="Pa") = 1,
-    dpHea_nominal(displayUnit="Pa") = 1,
-    dpHum_nominal(displayUnit="Pa") = 1,
-    dpFanOda_nominal(displayUnit="Pa") = dpAHU_sup,
-    dpFanEta_nominal(displayUnit="Pa") = dpAHU_eta,
-    effHrsOn=effHRSAHU_enabled,
-    effHrsOff=effHRSAHU_disabled,
-    dpFanOda=dpAHU_sup,
-    dpFanEta=dpAHU_eta,
-    etaFanOda=effFanAHU_sup,
-    etaFanEta=effFanAHU_eta)
-    if ASurTot > 0 or VAir > 0
-    annotation (Placement(transformation(extent={{-50,0},{10,40}})));
-
-  BaseClasses.Dynamic_AHU_Control dynamic_AHU_Control(
-    numZones=numZones,
-    zoneParam=zoneParam,
-    dynamicSetTempControlAHU=dynamicSetTempControlAHU,
-    dynamicVolumeFlowControlAHU=dynamicVolumeFlowControlAHU,
-    gain_V_flow_Heat_Max=gain_V_flow_Heat_Max,
-    gain_V_flow_Cool_Max=gain_V_flow_Cool_Max,
-    dT_SUP_Offset_Heat=dT_SUP_Offset_Heat,
-    dT_SUP_Offset_Cool=dT_SUP_Offset_Cool,
-    Ti_PI_Heat_T_SUP=Ti_PI_Heat_T_SUP,
-    Ti_PI_Cool_T_SUP=Ti_PI_Cool_T_SUP,
-    Ti_PI_Heat_V_flow=Ti_PI_Heat_V_flow,
-    Ti_PI_Cool_V_flow=Ti_PI_Cool_V_flow,
-    dT_SUP_Heat_Max=dT_SUP_Heat_Max,
-    dT_SUP_Cool_Max=dT_SUP_Cool_Max,
-    T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
-      if ASurTot > 0 or VAir > 0
-    annotation (Placement(transformation(extent={{-34,-56},{-54,-36}})));
-
-
 initial algorithm
   for i in 1:numZones loop
     if zoneParam[i].withAHU then
@@ -305,12 +303,6 @@ equation
                                                             color={0,0,127}));
     connect(splitterThermPercentAir.portOut[i], zone[i].intGainsConv) annotation (Line(
       points={{54,-28},{86,-28},{86,70.32},{80.42,70.32}}, color={191,0,0}));
-    connect(replicatorHumidityVentilation.y[i], zone[i].ventHum) annotation (Line(
-        points={{65,42.5},{65,44},{38,44},{38,54.535},{38.21,54.535}}, color={0,
-          0,127}));
-    connect(zone[i].X_w, moistSplitter.portIn[i]) annotation (Line(points={{82.1,55.15},
-          {94,55.15},{94,100},{-76,100},{-76,82},{-68,82}},
-                                                          color={0,0,127}));
   end for;
 
   connect(zone.CO2Con, CO2Con) annotation (Line(points={{82.1,51.05},{82.1,20},
@@ -343,9 +335,11 @@ equation
     extent={{6,3},{6,3}},
     horizontalAlignment=TextAlignment.Left));
   connect(AHU[2], AirHandlingUnit.phiSupSet[1]) annotation (Line(points={{-100,7.75},
-        {-98,7.75},{-98,10},{-58,10},{-58,-4},{2.5,-4},{2.5,-1}}, color={0,0,127}));
+          {-98,7.75},{-98,10},{-58,10},{-58,-4},{2.5,-4},{2.5,-1}},
+                                                                  color={0,0,127}));
   connect(AHU[3], AirHandlingUnit.phiSupSet[2]) annotation (Line(points={{-100,12.25},
-        {-94,12.25},{-94,10},{-58,10},{-58,-4},{2.5,-4},{2.5,-0.6}}, color={0,
+          {-94,12.25},{-94,10},{-58,10},{-58,-4},{2.5,-4},{2.5,-0.6}},
+                                                                     color={0,
         0,127}));
   connect(AirHandlingUnit.TSup, replicatorTemperatureVentilation.u) annotation (Line(points={{10.75,
         16},{22,16},{22,46.8}},                                                                                           color={0,0,127}));
@@ -356,8 +350,9 @@ equation
       points={{-58.8,28},{-56,28},{-56,-12},{44,-12},{44,20.8}},
                                                                color={0,0,127}));
   connect(airFlowRateSplit.profile, AHU[4]) annotation (Line(points={{40.4,20.8},
-        {40.4,20},{40,20},{40,-4},{-64,-4},{-64,10},{-98,10},{-98,14},{-100,14},
-        {-100,16.75}}, color={0,0,127}));
+          {40.4,20},{40,20},{40,-4},{-64,-4},{-64,10},{-98,10},{-98,14},{-100,14},
+          {-100,16.75}},
+                       color={0,0,127}));
   connect(AirHandlingUnit.QHea_flow, PHeatAHU) annotation (Line(points={{-22.0625,
         -1},{-22.0625,-6},{-20,-6},{-20,-14},{94,-14},{94,-10},{110,-10}},
       color={0,0,127}));
@@ -395,9 +390,17 @@ equation
           10},{-98,12},{-94,12},{-94,10},{-80,10},{-80,-40},{-56,-40}}, color={0,
           0,127}));
     for i in 1:numZones loop
-      connect(dynamic_AHU_Control.roomHeatPort[i], intGainsConv[i]) annotation (Line(
-          points={{-54,-51},{-54,-52},{-80,-52},{-80,-70},{-100,-70}}, color={191,
-            0,0}));
+    end for;
+  end if;
+
+  if (ASurTot > 0 or VAir > 0) and use_moisture_balance then
+    for i in 1:numZones loop
+      connect(replicatorHumidityVentilation.y[i], zone[i].ventHum) annotation (Line(
+          points={{65,42.5},{65,44},{38,44},{38,54.535},{38.21,54.535}}, color={0,
+            0,127}));
+      connect(zone[i].X_w, moistSplitter.portIn[i]) annotation (Line(points={{82.1,55.15},
+            {94,55.15},{94,100},{-76,100},{-76,82},{-68,82}},
+                                                            color={0,0,127}));
     end for;
   end if;
 
@@ -418,9 +421,15 @@ equation
         points={{10.75,12},{18,12},{18,24},{10.75,24}}, color={0,0,127}));
   end if;
 
+  if coolAHU then
+  end if;
 
 
-
+  connect(Tmeasure.port, zone.intGainsConv) annotation (Line(points={{-76,-51},
+          {-86,-51},{-86,-78},{86,-78},{86,70.32},{80.42,70.32}}, color={191,0,
+          0}));
+  connect(Tmeasure.T, dynamic_AHU_Control.Tmeasure) annotation (Line(points={{
+          -65.5,-51},{-64,-51},{-64,-50.8},{-56,-50.8}}, color={0,0,127}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},
@@ -479,5 +488,4 @@ equation
 <h4>Examples </h4>
 <p>See <a href=\"AixLib.ThermalZones.ReducedOrder.Examples.Multizone\">AixLib.ThermalZones.ReducedOrder.Examples.Multizone</a>. </p>
 </html>"));
-
 end MultizoneEquipped;

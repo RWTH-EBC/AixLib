@@ -1,6 +1,6 @@
 within AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses;
 model Dynamic_AHU_Control
-  "Dynamic controller for volume flow and supply temperature of modular AHU"
+  "Dynamic controller for volume flow and supply temperature of modular AHU to regulate zone temperature"
   extends Modelica.Blocks.Icons.Block;
 
   parameter Integer numZones = 1 "Numer of zones";
@@ -80,8 +80,9 @@ model Dynamic_AHU_Control
         extent={{20,-20},{-20,20}},
         rotation=270,
         origin={40,-120})));
-  Dynamic_T_SUP_Control_Cooling dynamic_T_SUP_Control_Cooling(numZones=numZones,
-      zoneParam=zoneParam,
+  Dynamic_AHU_T_SUP_Control dynamic_T_SUP_Control_Cooling(
+    numZones=numZones,
+    zoneParam=zoneParam,
     dynamicSetTempControlAHU=dynamicSetTempControlAHU,
     Ti_PI_Heat=Ti_PI_Heat_T_SUP,
     Ti_PI_Cool=Ti_PI_Cool_T_SUP,
@@ -92,7 +93,7 @@ model Dynamic_AHU_Control
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
     T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
     annotation (Placement(transformation(extent={{-20,20},{22,62}})));
-  Dynamic_V_flow_Control dynamic_V_flow_SUP_Control(
+  Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control(
     numZones=numZones,
     zoneParam=zoneParam,
     dynamicVolumeFlowControlAHU=dynamicVolumeFlowControlAHU,
@@ -106,9 +107,17 @@ model Dynamic_AHU_Control
   Modelica.Blocks.Interfaces.RealOutput V_flow_AHU_Set[numZones] annotation (
       Placement(transformation(extent={{-100,-60},{-140,-20}}),
         iconTransformation(extent={{-100,-80},{-140,-40}})));
-  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a roomHeatPort[numZones]
-    annotation (Placement(transformation(extent={{80,-70},{120,-30}}),
-        iconTransformation(extent={{80,-70},{120,-30}})));
+  Modelica.Blocks.Interfaces.RealInput Tmeasure[numZones](
+    each final quantity="ThermodynamicTemperature",
+    each final unit="K",
+    each displayUnit="degC",
+    each min=0) annotation (Placement(transformation(
+        extent={{20,20},{-20,-20}},
+        rotation=0,
+        origin={120,-44}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=180,
+        origin={120,-48})));
 equation
 
   connect(dynamic_T_SUP_Control_Cooling.Tset_AHU_Out, Tset_AHU_Set) annotation
@@ -128,14 +137,14 @@ equation
   connect(AHU_In[4], dynamic_V_flow_SUP_Control.V_flow_AHU_In) annotation (Line(
         points={{120,57.5},{40,57.5},{40,48},{36,48},{36,-28},{24,-28}}, color={
           0,0,127}));
-  connect(roomHeatPort, dynamic_T_SUP_Control_Cooling.roomHeatPort) annotation
-    (Line(points={{100,-50},{100,-22},{34,-22},{34,41},{22,41}}, color={191,0,0}));
-  connect(roomHeatPort, dynamic_V_flow_SUP_Control.roomHeatPort) annotation (
-      Line(points={{100,-50},{100,-22},{34,-22},{34,-50},{28,-50},{28,-40},{20,-40}},
-        color={191,0,0}));
   connect(TSetHeat, dynamic_T_SUP_Control_Cooling.TSetHeat) annotation (Line(
         points={{30,-120},{30,-74},{46,-74},{46,8},{9.4,8},{9.4,15.8}}, color={0,
           0,127}));
+  connect(Tmeasure, dynamic_T_SUP_Control_Cooling.Tmeasure) annotation (Line(
+        points={{120,-44},{56,-44},{56,30},{42,30},{42,30.92},{26.2,30.92}},
+        color={0,0,127}));
+  connect(Tmeasure, dynamic_V_flow_SUP_Control.Tmeasure) annotation (Line(
+        points={{120,-44},{56,-44},{56,-50},{24,-50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
