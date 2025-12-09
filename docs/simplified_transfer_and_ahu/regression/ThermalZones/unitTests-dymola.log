@@ -9,17 +9,10 @@ Regression tests are only run for the following package:
 *** Warning: Unspecified initial conditions in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mos");'.
 
 *** Error: Simulation failed for 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/Multizone.mos");'.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizoneEquipped.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizonePartlyCooled.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2EquippedSwimmingFacility.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizoneInterzonalsFixedHeater.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2Equipped.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2.txt.
-Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_ThermalZones_ReducedOrder_Examples_Multizone.txt.
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
  Old = 22
  New = 23
-Comparison files output by funnel are stored in the directory 'funnel_comp' of size 2.5 MB.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 3.0 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
