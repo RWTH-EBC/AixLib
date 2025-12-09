@@ -18,25 +18,25 @@ partial model PartialModularAHU "Partial model for modular ahu"
     "set to true if outdoor air humidity is limited to saturation";
 
   // Nominal values
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal(start=3000/3600*1.2)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal=3000/3600*1.2
     "nominal mass flow rate in air handling unit"
     annotation(Dialog(group="Nominal values"));
-  parameter Modelica.Units.SI.PressureDifference dpHrs_nominal(start=120)
+  parameter Modelica.Units.SI.PressureDifference dpHrs_nominal=120
     "nominal pressure drop of heat recovery system"
     annotation(Dialog(group="Nominal values", enable=heatRecovery));
-  parameter Modelica.Units.SI.PressureDifference dpCoo_nominal(start=80)
+  parameter Modelica.Units.SI.PressureDifference dpCoo_nominal=80
     "nominal pressure drop of cooler"
     annotation(Dialog(group="Nominal values", enable=cooling or dehumidifying));
-  parameter Modelica.Units.SI.PressureDifference dpHea_nominal(start=40)
+  parameter Modelica.Units.SI.PressureDifference dpHea_nominal=40
     "nominal pressure drop of heater"
     annotation(Dialog(group="Nominal values", enable=heating or dehumidifying));
-  parameter Modelica.Units.SI.PressureDifference dpHum_nominal(start=20)
+  parameter Modelica.Units.SI.PressureDifference dpHum_nominal=20
     "nominal pressure drop of humidifier"
     annotation(Dialog(group="Nominal values", enable=humidifying));
-  parameter Modelica.Units.SI.PressureDifference dpFanOda_nominal(start=800)
+  parameter Modelica.Units.SI.PressureDifference dpFanOda_nominal=800
     "nominal pressure increase of outdoor air fan"
     annotation(Dialog(group="Nominal values"));
-  parameter Modelica.Units.SI.PressureDifference dpFanEta_nominal(start=800)
+  parameter Modelica.Units.SI.PressureDifference dpFanEta_nominal=800
     "nominal pressure increase of extract air fan"
     annotation(Dialog(group="Nominal values"));
 
