@@ -16,7 +16,7 @@ model PartialHumidifier
   parameter Modelica.Units.SI.Temperature TWatIn=293.15
     "temperature of liquid water added to humidifier";
 
-  parameter Modelica.Units.SI.Temperature TSteam=373.15
+  parameter Modelica.Units.SI.Temperature TSteam=363.15
     "Temperature of steam in steam humidifier"
     annotation (Dialog(
       tab="Advanced",
