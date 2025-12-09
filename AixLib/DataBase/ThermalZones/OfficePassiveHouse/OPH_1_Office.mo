@@ -86,7 +86,7 @@ record OPH_1_Office "Office zone of office building"
     heaLoadFacGrd=0,
     KRCool=1000,
     TNCool=5*60,
-    CoolerOn=true,
+    CoolerOn=false,
     TThresholdHeater=273.15 + 15,
     TThresholdCooler=273.15 + 22,
     withIdealThresholds=false,
