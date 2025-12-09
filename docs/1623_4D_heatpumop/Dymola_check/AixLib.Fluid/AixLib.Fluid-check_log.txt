@@ -1,0 +1,40 @@
+
+Error in model:  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.Li 
+Check of <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.Li">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.Li</a>
+Error: Component type specifier BESRules.Components.Frosting.BaseClasses.ZhuFrostingZone not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/Frosting/Li.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.Li#text:11">12</a>
+ Component context: zhuFroZon
+  Component declared as BESRules.Components.Frosting.BaseClasses.ZhuFrostingZone zhuFroZon in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.Li">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.Li</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl 
+Check of <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl">AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl</a>
+Error: Component type specifier BESRules.Components.Frosting.HysteresisVariableLowerBound not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Controls/Defrost/OptimalDefrostTimeWangEtAl.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl#text:7">8</a>
+ Component context: hys
+  Component declared as BESRules.Components.Frosting.HysteresisVariableLowerBound hys in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl">AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl</a>
+Error: Component type specifier AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.OptimalDefrostWuEtAl not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Controls/Defrost/OptimalDefrostTimeWangEtAl.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl#text:20">21</a>
+ Component context: optDefWuEtAl
+  Component declared as AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.OptimalDefrostWuEtAl optDefWuEtAl in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl">AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl</a>
+Error: Component type specifier BESRules.Components.Frosting.BaseClasses.ZhuFrostingZone not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Controls/Defrost/OptimalDefrostTimeWangEtAl.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl#text:44">45</a>
+ Component context: froZon
+  Component declared as BESRules.Components.Frosting.BaseClasses.ZhuFrostingZone froZon in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl">AixLib.Fluid.HeatPumps.ModularReversible.Controls.Defrost.OptimalDefrostTimeWangEtAl</a>
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT 
+Check of <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT</a>
+Error: Component type specifier BESRules.RecordsCollection.VCLibPy4D.GenericVCLibPy4D not found
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData4DDeltaT.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT#text:10">11</a>
+ Component context: datTab
+  Component declared as BESRules.RecordsCollection.VCLibPy4D.GenericVCLibPy4D datTab in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT</a>
+Error: Class or component 'datTab' not found in PartialHeatPumpTableDataND
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData4DDeltaT.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpTableDataND#text:4">5</a>
+  Context: <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpTableDataND">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpTableDataND</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DDeltaT</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/TableData4DDeltaT.mo, line 2
+Error: ERRORS have been issued.
+
