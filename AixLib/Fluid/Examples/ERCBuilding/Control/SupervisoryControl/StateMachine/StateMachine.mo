@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Examples.ERCBuilding.Control.SupervisoryControl.StateMachine;
+within AixLib.Fluid.Examples.ERCBuilding.Control.SupervisoryControl.StateMachine;
 model StateMachine
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -301,8 +301,11 @@ Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample_avColdStorageTemp
       __Dymola_state=true,
       showDiagram=true,
       singleInstance=true,
-      Documentation(info="<html> In these subsystem the differentiation between heating and cooling demand is made. Every Simulation starts with this procedure. 
-    When the condition to end a mode is satisfied while the simulation is running the measuring is replayed.     </html>"));
+      Documentation(info="<html>In these subsystem the differentiation between heating and cooling
+demand is made. Every Simulation starts with this procedure. When the
+condition to end a mode is satisfied while the simulation is running
+the measuring is replayed.
+</html>"));
   end Start1;
   Modelica.Blocks.Interfaces.RealInput LTCFlowTemp(
     final unit="K",
@@ -782,18 +785,26 @@ public
       __Dymola_state=true,
       showDiagram=true,
       singleInstance=true,
-      Documentation(info="<html>  
-  
-  If the heatingmode is activated the heatpump will work in heating mode. It starts when the mean temperature of the upper temperaturesensors in the hotstorage sinks below a certain value.
-  The heatpump is active until a bordertemperature at the lowest temperature sensor is reached. As Source for the heatpump the cold storage and the geothermal field are used. If the temperature 
-  of the geothermic field is to low it is deactivated and only waste heat from the building is used. The geothermic field can be used as source if it's flow temperature is above 7 degree Celcius 
-  and if the flow temperature is higher than the mean tmperature of the coldstorage. Is one of these border conditions violated the geothermal field is turned off.  
-  Decreases the flow temperature of the evaporator lower than 6.5 degree Celsius the heatpump is deactivated for safety reasons.
-  The following picture shows the valve and damper positions in these mode.
-  
-  <p><img src=\"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanHeatingMode1.jpg\"/></p>
-  
-  </html>"));
+      Documentation(info="<html>If the heatingmode is activated the heatpump will work in heating mode.
+It starts when the mean temperature of the upper temperaturesensors in
+the hotstorage sinks below a certain value. The heatpump is active
+until a bordertemperature at the lowest temperature sensor is reached.
+As Source for the heatpump the cold storage and the geothermal field
+are used. If the temperature of the geothermic field is to low it is
+deactivated and only waste heat from the building is used. The
+geothermic field can be used as source if it's flow temperature is
+above 7 degree Celcius and if the flow temperature is higher than the
+mean tmperature of the coldstorage. Is one of these border conditions
+violated the geothermal field is turned off. Decreases the flow
+temperature of the evaporator lower than 6.5 degree Celsius the
+heatpump is deactivated for safety reasons. The following picture shows
+the valve and damper positions in these mode.
+<p>
+  <img src=
+  \"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanHeatingMode1.jpg\"
+  alt=\"1\">
+</p>
+</html>"));
     end HeatingMode1;
 equation
     transition(
@@ -963,16 +974,25 @@ public
       __Dymola_state=true,
       showDiagram=true,
       singleInstance=true,
-        Documentation(info="<html>
-   <p> 
-   If the cooling demand prevails the first checked cooling mode is the freecooling using the glycol cooler. Necessary for these mode is an outdoor temperature below 8 degree Celsius. 
-   A hysteresis is implemented which alows the freecooler to be activated until 10 degree Celsius are reached. An additional Condition for using the freecooling is that ther is no heatdemand in the building. 
-   These cindition is proved by checkin the mean temperature of the heat storage. If it is getting to low the freecooling will be terminate and the heatpump is started in heating mode, until a set temperature 
-   is reached. After that 'switching mode' the freecooling is continued. The following picture shows the valve and damper positions in these mode.
-    </p>
-    
-    
-<p><img src=\"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode1.jpg\"/></p>
+        Documentation(info="<html><p>
+  If the cooling demand prevails the first checked cooling mode is the
+  freecooling using the glycol cooler. Necessary for these mode is an
+  outdoor temperature below 8 degree Celsius. A hysteresis is
+  implemented which alows the freecooler to be activated until 10
+  degree Celsius are reached. An additional Condition for using the
+  freecooling is that ther is no heatdemand in the building. These
+  cindition is proved by checkin the mean temperature of the heat
+  storage. If it is getting to low the freecooling will be terminate
+  and the heatpump is started in heating mode, until a set temperature
+  is reached. After that 'switching mode' the freecooling is continued.
+  The following picture shows the valve and damper positions in these
+  mode.
+</p>
+<p>
+  <img src=
+  \"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode1.jpg\"
+  alt=\"1\">
+</p>
 </html>"));
     end CoolingMode1;
 equation
@@ -1246,16 +1266,28 @@ public
       __Dymola_state=true,
       showDiagram=true,
       singleInstance=true,
-      Documentation(info="<html>
-  
-  <p> If a freecooling using the glycol cooler is not possible the freecooling using the geothermic field (CoolingMode2_1) ist checked. The field can be used for cooling if the flow temperature
-  is below 12 degree Celsius and the delta Temperature between flow and return is bigger than 0.5 degree Celsius. Since no heating energy is generated in this case it is checked that there is 
-  no heatdemand by checking the mean temperature of the hotstorage. If there is heatdemand at the run time of CoolingMode2_1 the freecooling is interrupted and the heatpump is activated in heating mode
-  until the heat demand is satisfied. After this the CoolingMode2_1 is continued.If the field flow temperature reaches 12 degree Celsius the field can not be used to satisfy the need of all cooling consumers
-  and the heatpump is activated in cooling mode (see coolingMode2_2). The position of the valves and the dampers during the freecoling using geothermic field are shown in the following picture.  <p>
-  
-  
-<p><img src=\"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode2_1.jpg\"/></p>
+      Documentation(info="<html><p>
+  If a freecooling using the glycol cooler is not possible the
+  freecooling using the geothermic field (CoolingMode2_1) ist checked.
+  The field can be used for cooling if the flow temperature is below 12
+  degree Celsius and the delta Temperature between flow and return is
+  bigger than 0.5 degree Celsius. Since no heating energy is generated
+  in this case it is checked that there is no heatdemand by checking
+  the mean temperature of the hotstorage. If there is heatdemand at the
+  run time of CoolingMode2_1 the freecooling is interrupted and the
+  heatpump is activated in heating mode until the heat demand is
+  satisfied. After this the CoolingMode2_1 is continued.If the field
+  flow temperature reaches 12 degree Celsius the field can not be used
+  to satisfy the need of all cooling consumers and the heatpump is
+  activated in cooling mode (see coolingMode2_2). The position of the
+  valves and the dampers during the freecoling using geothermic field
+  are shown in the following picture.
+</p>
+<p>
+  <img src=
+  \"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode2_1.jpg\"
+  alt=\"1\">
+</p>
 </html>"));
     end CoolingMode2_1;
 equation
@@ -1444,17 +1476,31 @@ public
       __Dymola_state=true,
       showDiagram=true,
       singleInstance=true,
-      Documentation(info="<html> 
-  
-  <p>
-  If a freecooling using the glycol cooler or the geothermic field not possible and the geothermal field is not able to satisfy all cooling demand the heatpump is acitvated. 
-  In this case the geothermal field is used to serve the medium low temperature circuit (17 degree Celsius) and the heatpump serve the lowtemperature consumers (12 degree Celsius).
-  During the cooling activity of the heatpump also heating energy is produced. If the mean temperature of the hotstorage reaches 33 degree Celsius the recooling of the hotside of the heatpump using the glycol cooler 
-  is activated. If the geothermic flow temperature reaches 17 degree Celsius and the delta temperature between flow and return temperature drops under 0.5 degree Celsius
-  the geothermal field has to be deactivated and a switch to CoolingMode3_1 is necessary. Decreases the flow temperature of the evaporator lower than 6.5 degree Celsius the heatpump is deactivated for safety reasons.
-  The position of the valves and the dampers during the freecoling using geothermic field are shown in the following picture. 
-  
-  <p><img src=\"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode2_2.jpg\"/></p> </html>"));
+      Documentation(info="<html><p>
+  If a freecooling using the glycol cooler or the geothermic field not
+  possible and the geothermal field is not able to satisfy all cooling
+  demand the heatpump is acitvated. In this case the geothermal field
+  is used to serve the medium low temperature circuit (17 degree
+  Celsius) and the heatpump serve the lowtemperature consumers (12
+  degree Celsius). During the cooling activity of the heatpump also
+  heating energy is produced. If the mean temperature of the hotstorage
+  reaches 33 degree Celsius the recooling of the hotside of the
+  heatpump using the glycol cooler is activated. If the geothermic flow
+  temperature reaches 17 degree Celsius and the delta temperature
+  between flow and return temperature drops under 0.5 degree Celsius
+  the geothermal field has to be deactivated and a switch to
+  CoolingMode3_1 is necessary. Decreases the flow temperature of the
+  evaporator lower than 6.5 degree Celsius the heatpump is deactivated
+  for safety reasons. The position of the valves and the dampers during
+  the freecoling using geothermic field are shown in the following
+  picture.
+</p>
+<p>
+  <img src=
+  \"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode2_2.jpg\"
+  alt=\"1\">
+</p>
+</html>"));
     end CoolingMode2_2;
 equation
   transition( coolingMode2_2,
@@ -1628,17 +1674,21 @@ CoolingMode3_1 coolingMode3_1 annotation (Placement(transformation(
       __Dymola_state=true,
       showDiagram=true,
       singleInstance=true,
-      Documentation(info="<html> 
-  
-  <p>
-  In CoolingMode3_1 the geothermic field cannot be used for cooling. The heatpump is actived in cooling mode. If the mean hotstorage temperature reaches 33 degree 
-  Celsius the reecooling using the glycol cooler is used. Decreases the flow temperature of the evaporator lower than 6.5 degree Celsius the heatpump is deactivated for safety reasons.
-  The following picture shows the valve and damper positions in these mode.
-  
-  </P>
-  
-  
-  <p><img src=\"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode3_1.jpg\"/></p> </html>"));
+      Documentation(info="<html><p>
+  In CoolingMode3_1 the geothermic field cannot be used for cooling.
+  The heatpump is actived in cooling mode. If the mean hotstorage
+  temperature reaches 33 degree Celsius the reecooling using the glycol
+  cooler is used. Decreases the flow temperature of the evaporator
+  lower than 6.5 degree Celsius the heatpump is deactivated for safety
+  reasons. The following picture shows the valve and damper positions
+  in these mode.
+</p>
+<p>
+  <img src=
+  \"modelica://ExergyBasedControl/Subsystems/LTC_CC/PlanCoolingMode3_1.jpg\"
+  alt=\"1\">
+</p>
+</html>"));
     end CoolingMode3_1;
 equation
 
