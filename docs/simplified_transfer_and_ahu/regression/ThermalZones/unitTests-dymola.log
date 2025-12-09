@@ -8,13 +8,73 @@ Regression tests are only run for the following package:
 
 *** Warning: Unspecified initial conditions in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/MultizoneMoistAirCO2Equipped.mos");'.
 
-*** Error: Simulation failed for 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/ThermalZones/ReducedOrder/Examples/Multizone.mos");'.
+*** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneEquipped.txt: Errors during result verification.
+           Absolute error = 2.243e-02 at t = 216000.0 for multizone.PHeater[1]
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped: Translation statistics for initialization and results changed for linear.
+ Old = 4, 4, 4, 4, 4
+ New = 5, 5, 5, 5, 5
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped: Translation statistics for simulation and results changed for number of continuous time states.
+ Old = 78
+ New = 68
+*** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2Equipped.txt: Errors during result verification.
+           Absolute error = 2.232e+00 at t = 25920.0 for multizone.TAir[1]
+           Absolute error = 2.174e+00 at t = 25920.0 for multizone.TAir[2]
+           Absolute error = 2.174e+00 at t = 25920.0 for multizone.TAir[3]
+           Absolute error = 2.174e+00 at t = 25920.0 for multizone.TAir[4]
+           Absolute error = 2.174e+00 at t = 25920.0 for multizone.TAir[5]
+           Absolute error = 9.990e+04 at t = 129600.0 for multizone.PHeater[1]
+           Absolute error = 9.990e+04 at t = 155520.0 for multizone.PHeater[2]
+           Absolute error = 9.990e+04 at t = 155520.0 for multizone.PHeater[3]
+           Absolute error = 9.990e+04 at t = 155520.0 for multizone.PHeater[4]
+           Absolute error = 9.990e+04 at t = 155520.0 for multizone.PHeater[5]
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped: Translation statistics for initialization and results changed for linear.
+ Old = 4, 4, 4, 4, 4
+ New = 5, 5, 5, 5, 5
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped: Translation statistics for simulation and results changed for number of continuous time states.
+ Old = 78
+ New = 68
+*** Error: AixLib_ThermalZones_ReducedOrder_Examples_MultizoneMoistAirCO2.txt: Errors during result verification.
+           Absolute error = 2.866e+01 at t = 2838240.0 for multizone.TAir[1]
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2: Translation statistics for initialization and results changed for linear.
+ Old = 4, 4, 4, 4, 4
+ New = 5, 5, 5, 5, 5
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2: Translation statistics for simulation and results changed for linear.
+ Old = 4, 0, 4, 0, 4, 0, 4, 0, 4, 0
+ New = 3, 0, 3, 0, 3, 0, 3, 0, 3, 0
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2: Translation statistics for simulation and results changed for number of continuous time states.
+ Old = 60
+ New = 50
+*** Error: AixLib_ThermalZones_ReducedOrder_Examples_Multizone.txt: Errors during result verification.
+           While processing file AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat for variable multizone.TAir[1]: Different end time between reference and test data.
+           tNew = [0.0, 864000.0]
+           tOld = [0.0, 359025.6875]
+           While processing file AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat for variable multizone.TAir[2]: Different end time between reference and test data.
+           tNew = [0.0, 864000.0]
+           tOld = [0.0, 359025.6875]
+           While processing file AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat for variable multizone.TAir[3]: Different end time between reference and test data.
+           tNew = [0.0, 864000.0]
+           tOld = [0.0, 359025.6875]
+           While processing file AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat for variable multizone.TAir[4]: Different end time between reference and test data.
+           tNew = [0.0, 864000.0]
+           tOld = [0.0, 359025.6875]
+           While processing file AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat for variable multizone.TAir[5]: Different end time between reference and test data.
+           tNew = [0.0, 864000.0]
+           tOld = [0.0, 359025.6875]
+           While processing file AixLib.ThermalZones.ReducedOrder.Examples.Multizone.mat for variable weaDat.weaBus.TDryBul: Different end time between reference and test data.
+           tNew = [0.0, 864000.0]
+           tOld = [0.0, 359025.6875]
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.Multizone: Translation statistics for initialization and results changed for linear.
+ Old = 4, 4, 4, 4, 4
+ New = 5, 5, 5, 5, 5
+*** Warning: AixLib.ThermalZones.ReducedOrder.Examples.Multizone: Translation statistics for simulation and results changed for number of continuous time states.
+ Old = 50
+ New = 40
 *** Warning: AixLib.ThermalZones.ReducedOrder.Examples.ThermalZoneMoistAirSwimmingPool: Translation statistics for simulation changed for number of continuous time states, but results are unchanged.
  Old = 22
  New = 23
-Comparison files output by funnel are stored in the directory 'funnel_comp' of size 3.0 MB.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 2.9 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 5 warnings and 1 errors.
+Script that runs unit tests had 14 warnings and 4 errors.
 
