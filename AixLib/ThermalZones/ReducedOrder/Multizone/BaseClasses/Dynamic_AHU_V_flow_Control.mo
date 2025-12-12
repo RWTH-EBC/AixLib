@@ -40,20 +40,20 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
         origin={120,60})));
 
   Modelica.Blocks.Continuous.LimPID PI_AHU_Cool[numZones](
-    k=0.25*gain_V_flow_Cool_Max,
-    yMax=-1,
-    yMin=-gain_V_flow_Cool_Max,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=Ti_PI_Cool,
-    Td=0.1) annotation (Placement(transformation(extent={{0,-40},{-20,-60}})));
+    each k=0.25*gain_V_flow_Cool_Max,
+    each yMax=-1,
+    each yMin=-gain_V_flow_Cool_Max,
+    each controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    each Ti=Ti_PI_Cool,
+    each Td=0.1) annotation (Placement(transformation(extent={{0,-40},{-20,-60}})));
   Modelica.Blocks.Continuous.LimPID PI_AHU_Heat[numZones](
-    k=0.25*gain_V_flow_Heat_Max,
-    yMax=gain_V_flow_Heat_Max,
-    yMin=1,
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=Ti_PI_Heat,
-    Td=0.1) annotation (Placement(transformation(extent={{0,40},{-20,60}})));
-  Modelica.Blocks.Math.Gain gainHeat[numZones](k=1)
+    each k=0.25*gain_V_flow_Heat_Max,
+    each yMax=gain_V_flow_Heat_Max,
+    each yMin=1,
+    each controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    each Ti=Ti_PI_Heat,
+    each Td=0.1) annotation (Placement(transformation(extent={{0,40},{-20,60}})));
+  Modelica.Blocks.Math.Gain gainHeat[numZones](each k=1)
     annotation (Placement(transformation(extent={{-28,44},{-40,56}})));
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
     each final quantity="ThermodynamicTemperature",
@@ -81,10 +81,10 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
         origin={40,-120})));
   Modelica.Blocks.Logical.Switch switchOff[numZones]
     annotation (Placement(transformation(extent={{-12,-8},{-28,8}})));
-  Modelica.Blocks.Sources.Constant const6[numZones](k=1)
+  Modelica.Blocks.Sources.Constant const6[numZones](each k=1)
     annotation (Placement(transformation(extent={{-48,-30},{-40,-22}})));
-  Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff[numZones](y=
-        OnOff) annotation (Placement(transformation(extent={{6,-14},{-4,-2}})));
+  Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff[numZones](
+    y=OnOff) annotation (Placement(transformation(extent={{6,-14},{-4,-2}})));
   Modelica.Blocks.Math.Product product[numZones]
     annotation (Placement(transformation(extent={{-84,6},{-96,-6}})));
   Modelica.Blocks.Routing.Replicator replicator(nout=numZones)
@@ -93,28 +93,28 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
     annotation (Placement(transformation(extent={{22,-8},{6,8}})));
   Modelica.Blocks.Logical.Switch switchOnOff[numZones]
     annotation (Placement(transformation(extent={{-58,-8},{-74,8}})));
-  Modelica.Blocks.Sources.BooleanConstant booleanConstant[numZones](k=
-        dynamicVolumeFlowControlAHU)
+  Modelica.Blocks.Sources.BooleanConstant booleanConstant[numZones](
+    each k=dynamicVolumeFlowControlAHU)
     annotation (Placement(transformation(extent={{-70,-34},{-58,-22}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder[numZones](T(displayUnit="s")
+  Modelica.Blocks.Continuous.FirstOrder firstOrder[numZones](each T(displayUnit="s")
        = 2*60) annotation (Placement(transformation(extent={{-36,-4},{-44,4}})));
   Utilities.Logical.DynamicHysteresis HysteresisHeating[numZones]
     annotation (Placement(transformation(extent={{80,60},{60,40}})));
-  Modelica.Blocks.Sources.Constant const5[numZones](k=T_Treshold_Heating_AHU)
+  Modelica.Blocks.Sources.Constant const5[numZones](each k=T_Treshold_Heating_AHU)
     annotation (Placement(transformation(extent={{34,74},{46,86}})));
   Utilities.Logical.DynamicHysteresis HysteresisCooling[numZones]
     annotation (Placement(transformation(extent={{80,-60},{60,-40}})));
-  Modelica.Blocks.Sources.Constant const7[numZones](k=T_Treshold_Cooling_AHU)
+  Modelica.Blocks.Sources.Constant const7[numZones](each k=T_Treshold_Cooling_AHU)
     annotation (Placement(transformation(extent={{46,-92},{58,-80}})));
-  Modelica.Blocks.Math.Add add2[numZones](k1=+1, k2=-1) annotation (Placement(
+  Modelica.Blocks.Math.Add add2[numZones](each k1=+1, each k2=-1) annotation (Placement(
         transformation(
         extent={{5,5},{-5,-5}},
         rotation=-90,
         origin={75,-71})));
-  Modelica.Blocks.Sources.RealExpression realExpression[numZones](y=(
+  Modelica.Blocks.Sources.RealExpression realExpression[numZones](each y=(
         T_Treshold_Cooling_AHU - T_Treshold_Heating_AHU)/4)
     annotation (Placement(transformation(extent={{160,-10},{140,10}})));
-  Modelica.Blocks.Math.Add add3[numZones](k1=+1, k2=+1) annotation (Placement(
+  Modelica.Blocks.Math.Add add3[numZones](each k1=+1, each k2=+1) annotation (Placement(
         transformation(
         extent={{-5,-5},{5,5}},
         rotation=-90,
@@ -124,7 +124,7 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
     annotation (Placement(transformation(extent={{40,-6},{30,6}})));
   Modelica.Blocks.MathBoolean.Not NotHysteresisHeating[numZones]
     annotation (Placement(transformation(extent={{50,52},{42,60}})));
-  Modelica.Blocks.Math.Gain gainCool[numZones](k=-1)
+  Modelica.Blocks.Math.Gain gainCool[numZones](each k=-1)
     annotation (Placement(transformation(extent={{-28,-56},{-40,-44}})));
   Modelica.Blocks.Interfaces.RealInput Tmeasure[numZones](
     each final quantity="ThermodynamicTemperature",

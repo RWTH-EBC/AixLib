@@ -135,12 +135,12 @@ model Dynamic_AHU_T_SUP_Control
         origin={40,-120})));
   Modelica.Blocks.MathBoolean.Not NotHysteresisHeating
     annotation (Placement(transformation(extent={{46,54},{38,62}})));
-  Modelica.Blocks.Math.Add dT_Cool[numZones](k1=+1, k2=-1) annotation (
+  Modelica.Blocks.Math.Add dT_Cool[numZones](each k1=+1, each k2=-1) annotation (
       Placement(transformation(
         extent={{5,-5},{-5,5}},
         rotation=0,
         origin={39,-29})));
-  Modelica.Blocks.Math.Add dT_Heat[numZones](k1=+1, k2=-1) annotation (
+  Modelica.Blocks.Math.Add dT_Heat[numZones](each k1=+1, each k2=-1) annotation (
       Placement(transformation(
         extent={{5,-5},{-5,5}},
         rotation=0,
