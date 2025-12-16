@@ -39,7 +39,11 @@ model Dynamic_AHU_Control
   parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
         for temperature reasons (humidifciation/dehumidifaction still possible)";
-
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
+    "Type of initialization (1: no init, 2: steady state, 3/4: initial output)"
+    annotation(Dialog(tab="Initialization", group="Control"));
+  parameter Real y_start=0 "Initial or guess value of output (= state)"
+    annotation(Dialog(tab="Initialization", group="Control"));
   Modelica.Blocks.Interfaces.RealOutput Tset_AHU_Set(
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
@@ -91,7 +95,9 @@ model Dynamic_AHU_Control
     dT_SUP_Cool_Max=dT_SUP_Cool_Max,
     dT_SUP_Heat_Max=dT_SUP_Heat_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU,
+    final initType=initType,
+    final y_start=y_start)
     annotation (Placement(transformation(extent={{-20,20},{22,62}})));
   Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control(
     numZones=numZones,
@@ -102,7 +108,9 @@ model Dynamic_AHU_Control
     gain_V_flow_Heat_Max=gain_V_flow_Heat_Max,
     gain_V_flow_Cool_Max=gain_V_flow_Cool_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU,
+    final initType=initType,
+    final y_start=y_start)
     annotation (Placement(transformation(extent={{-20,-60},{20,-20}})));
   Modelica.Blocks.Interfaces.RealOutput V_flow_AHU_Set[numZones] annotation (
       Placement(transformation(extent={{-100,-60},{-140,-20}}),
@@ -118,6 +126,7 @@ model Dynamic_AHU_Control
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={120,-48})));
+
 equation
 
   connect(dynamic_T_SUP_Control_Cooling.Tset_AHU_Out, Tset_AHU_Set) annotation
