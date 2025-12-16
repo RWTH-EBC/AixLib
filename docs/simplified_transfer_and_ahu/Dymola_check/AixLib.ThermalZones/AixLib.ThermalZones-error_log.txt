@@ -1,0 +1,102 @@
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>
+Error: Class or component 'initType' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: Class or component 'y_start' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2Equipped</a>
+Error: Class or component 'initType' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: Class or component 'y_start' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneInterzonalsFixedHeater</a>
+Error: Class or component 'initType' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: Class or component 'y_start' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneMoistAirCO2EquippedSwimmingFacility</a>
+Error: Class or component 'initType' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: Class or component 'y_start' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>
+Error: Class or component 'initType' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 2
+Error: Class or component 'y_start' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 2
+Error: ERRORS have been issued.
+
+
+Error in model:  AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped 
+Check of <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped">AixLib.ThermalZones.ReducedOrder.Examples.MultizoneEquipped</a>
+Error: Class or component 'initType' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: Class or component 'y_start' not found in Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/BaseClasses/Dynamic_AHU_Control.mo, line 102
+ Component context: multizone.dynamic_AHU_Control.dynamic_V_flow_SUP_Control
+  Component declared as Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses</a>
+  Attempted modification in <a href="Modelica://AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/ThermalZones/ReducedOrder/Multizone/MultizoneEquipped.mo, line 173
+Error: ERRORS have been issued.
+
