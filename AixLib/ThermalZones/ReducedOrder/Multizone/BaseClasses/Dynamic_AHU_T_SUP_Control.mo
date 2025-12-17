@@ -95,7 +95,9 @@ model Dynamic_AHU_T_SUP_Control
   Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=
         dynamicSetTempControlAHU)
     annotation (Placement(transformation(extent={{-70,-34},{-58,-22}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T(displayUnit="s") = 2*60)
+  Modelica.Blocks.Continuous.FirstOrder firstOrder(T(displayUnit="s") = 2*60,
+    final initType=initType,
+    final y_start=y_start)
     annotation (Placement(transformation(extent={{-36,-4},{-44,4}})));
   Utilities.Logical.DynamicHysteresis HysteresisHeating
     annotation (Placement(transformation(extent={{80,60},{60,40}})));
@@ -185,6 +187,9 @@ model Dynamic_AHU_T_SUP_Control
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={120,-48})));
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
+    "Type of initialization (1: no init, 2: steady state, 3/4: initial output)";
+  parameter Real y_start=0 "Initial or guess value of output (= state)";
 equation
 
   if not NotHysteresisHeating.y and not HysteresisCooling.y then

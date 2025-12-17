@@ -97,7 +97,10 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
     each k=dynamicVolumeFlowControlAHU)
     annotation (Placement(transformation(extent={{-70,-34},{-58,-22}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrder[numZones](each T(displayUnit="s")
-       = 2*60) annotation (Placement(transformation(extent={{-36,-4},{-44,4}})));
+       = 2*60,
+    each final initType=initType,
+    each final y_start=y_start)
+               annotation (Placement(transformation(extent={{-36,-4},{-44,4}})));
   Utilities.Logical.DynamicHysteresis HysteresisHeating[numZones]
     annotation (Placement(transformation(extent={{80,60},{60,40}})));
   Modelica.Blocks.Sources.Constant const5[numZones](each k=T_Treshold_Heating_AHU)
@@ -137,6 +140,9 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={120,-50})));
+  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
+    "Type of initialization (1: no init, 2: steady state, 3/4: initial output)";
+  parameter Real y_start=0 "Initial or guess value of output (= state)";
 equation
 
   for i in 1:numZones loop

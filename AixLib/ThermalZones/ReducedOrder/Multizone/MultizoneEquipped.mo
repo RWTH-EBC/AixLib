@@ -186,7 +186,8 @@ model MultizoneEquipped
     dT_SUP_Heat_Max=dT_SUP_Heat_Max,
     dT_SUP_Cool_Max=dT_SUP_Cool_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU,
+    initType=Modelica.Blocks.Types.Init.InitialOutput)
       if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-34,-56},{-54,-36}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tmeasure[numZones]
