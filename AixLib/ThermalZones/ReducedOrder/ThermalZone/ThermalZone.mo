@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
@@ -72,6 +72,13 @@ model ThermalZone "Thermal zone containing moisture balance"
       group="Pools"));
   replaceable parameter AixLib.DataBase.Walls.WallBaseDataDefinition poolWallParam[nPools] = fill(DataBase.Walls.ASHRAE140.DummyDefinition(), nPools) if use_pools "Setup for swimming pool walls"
                                                                                                                                                                                                   annotation(Dialog(enable=use_pools,tab="Moisture", group="Pools"));
+
+  replaceable parameter Boolean use_ideHeaExc_pools=true
+      "Use ideal heat exchanger for pools or an external source via a water connection." annotation (Dialog(
+      enable=use_pools,
+      tab="Moisture",
+      group="Pools"));
+
 
   replaceable parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
@@ -352,7 +359,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools
     annotation (Placement(transformation(extent={{-54,-82},{-40,-70}})));
   Modelica.Blocks.Math.MultiSum SumQPool(nu=nPools) if (ATot > 0 or zoneParam.VAir >
-    0) and use_moisture_balance and use_pools
+    0) and use_moisture_balance and use_pools and use_ideHeaExc_pools
     annotation (Placement(transformation(extent={{-28,-82},{-20,-74}})));
   Modelica.Blocks.Math.MultiSum SumPPool(nu=nPools) if (ATot > 0 or zoneParam.VAir >
     0) and use_moisture_balance  and use_pools
@@ -365,13 +372,10 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Input profiles for opening hours for pools" annotation (Placement(
         transformation(extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-58,-108}),
+        origin={-68,-108}),
         iconTransformation(extent={{-12,-12},{12,12}},
         rotation=90,
-        origin={-70,-84})));
-
-
-  // protected: ThermalZone
+        origin={-84,-84})));
 
   Fluid.Pools.BaseClasses.AirFlowMoistureToROM airFlowMoistureToROM(
     redeclare package AirMedium = Medium,
@@ -381,6 +385,20 @@ model ThermalZone "Thermal zone containing moisture balance"
     VAirLay=zoneParam.VAir)
     if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools
     annotation (Placement(transformation(extent={{-66,-76},{-60,-70}})));
+  Modelica.Fluid.Interfaces.FluidPort_a portPool_a1[nPools](redeclare package
+      Medium = MediumPoolWater) if use_pools and not use_ideHeaExc_pools
+    "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{-58,-106},{-48,-96}}),
+        iconTransformation(extent={{-74,-88},{-62,-76}})));
+  Modelica.Fluid.Interfaces.FluidPort_b portPool_b1[nPools](redeclare package
+      Medium = MediumPoolWater) if use_pools and not use_ideHeaExc_pools
+    "Fluid connector b1 (positive design flow direction is from port_a1 to port_b1)"
+    annotation (Placement(transformation(extent={{-42,-106},{-32,-96}}),
+        iconTransformation(extent={{-60,-88},{-48,-76}})));
+
+
+// protected: ThermalZone
+
 protected
     Modelica.Blocks.Sources.Constant hConRoof(final k=(zoneParam.hConRoofOut + zoneParam.hRadRoof)*zoneParam.ARoof)
     "Outdoor coefficient of heat transfer for roof" annotation (Placement(transformation(extent={{-14,68},
@@ -907,8 +925,6 @@ end if;
       connect(TSoi.TGroOut, indoorSwimmingPool[i].TSoil) annotation (Line(
             points={{4.4,0},{46,0},{46,-8},{36,-8},{36,-84},{-16,-84},{-16,-68},
               {-34,-68},{-34,-73.18},{-39.79,-73.18}}, color={0,0,127}));
-      connect(indoorSwimmingPool[i].QPool, SumQPool.u[i]) annotation (Line(points={{-39.44,
-              -76.36},{-39.44,-78},{-28,-78}},                color={0,0,127}));
       connect(indoorSwimmingPool[i].PPool, SumPPool.u[i]) annotation (Line(points={{-39.44,
               -80.56},{-32,-80.56},{-32,-78},{-28,-78}},
                                                    color={0,0,127}));
@@ -919,7 +935,7 @@ end if;
               -106.667},{80,-94},{-62,-94},{-62,-77.62},{-54.49,-77.62}},
                                         color={0,0,127}));
       connect(indoorSwimmingPool[i].timeOpe, timeOpe) annotation (Line(points={{-54.42,
-              -79.48},{-54.42,-78},{-58,-78},{-58,-108}},
+              -79.48},{-54.42,-80},{-68,-80},{-68,-108}},
                                                      color={0,0,127}));
       connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Line(points={{-19.6,
           -48},{-18,-48},{-18,-64},{-49.03,-64},{-49.03,-69.82}}, color={0,0,127}));
@@ -929,6 +945,13 @@ end if;
       connect(airFlowMoistureToROM.port_a, ROM.ports[2+nPorts]) annotation (Line(
             points={{-66,-72.28},{-72,-72.28},{-72,8},{58,8},{58,50},{77,50},{
               77,56.05}}, color={0,127,255}));
+      if not use_ideHeaExc_pools then
+        connect(portPool_a1[i], indoorSwimmingPool[i].port_a1);
+        connect(portPool_b1[i], indoorSwimmingPool[i].port_b1);
+      else
+        connect(indoorSwimmingPool[i].QPool, SumQPool.u[i]) annotation (Line(points={{-39.44,
+              -76.36},{-39.44,-78},{-28,-78}},                color={0,0,127}));
+      end if;
     end for;
   end if;
 
@@ -938,6 +961,8 @@ end if;
   connect(indoorSwimmingPool.m_flow_eva, airFlowMoistureToROM.m_flow_eva)
     annotation (Line(points={{-54.42,-73.24},{-57.25,-73.24},{-57.25,-74.11},{-60.15,
           -74.11}}, color={0,0,127}));
+  connect(portPool_a1, portPool_a1)
+    annotation (Line(points={{-53,-101},{-53,-101}}, color={0,127,255}));
    annotation (Documentation(revisions="<html><ul>
   <li>April 20, 2023, by Philip Groesdonk:<br/>
   Added five element RC model (for heat exchange with neighboured zones) and
