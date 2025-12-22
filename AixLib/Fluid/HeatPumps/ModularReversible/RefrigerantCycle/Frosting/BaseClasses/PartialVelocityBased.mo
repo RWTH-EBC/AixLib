@@ -189,40 +189,50 @@ equation
           {50,90},{50,56},{58,56}},       color={0,0,127}));
   connect(gaiADen2.y, swi.u1) annotation (Line(points={{73,-54},{80,-54},{80,-34},
           {46,-34},{46,8},{58,8}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
+  annotation (Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1623</a>)
   </li>
 </ul>
-</html>", info="<html>
+</html>", info="<html><p>
+  Partial model to estimate the icing factor based on ice mass and a
+  frost-growth velocity. Using the maximal ice mass and the current
+  mass, the ice factor is calculated using:
+</p><code>iceFac=1 - mIce/mIceMax</code>.
 <p>
-Partial model to estimate the icing factor based on ice mass and a frost-growth velocity.
-Using the maximal ice mass and the current mass, the ice factor is calculated using:
-</p>
-<code>iceFac=1 - mIce/mIceMax</code>.
-<p>
-The concept was first used by Vering et al. and further developed during the PhD from Fabian Roemer and published in the paper Roemer et al.
-</p>
-<p>
-Note, it is important to add the <code>QEva_flow</code> and <code>relHum</code> to the signal bus in order for the frosting models to work properly.
+  The concept was first used by Vering et al. and further developed
+  during the PhD from Fabian Roemer and published in the paper Roemer
+  et al.
 </p>
 <p>
-Density of the frost layer can be constant or dynamic using 
-<a href=\\\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.FrostDensityKorn\\\">
-AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.FrostDensityKorn
-</a>.
-</p>
-<h4>References</h4>
-<p>
-Römer, Fabian and Fuchs, Nico and Fuchs, Nico and Müller, Dirk, Practical, Near-Optimal Design Rule Extraction for Heat Pumps in Single-Family Buildings (September 03, 2025). Available at SSRN: 
-<a href=\\\"https://ssrn.com/abstract=5633891\\\">https://ssrn.com/abstract=5633891</a>
+  Note, it is important to add the <code>QEva_flow</code> and
+  <code>relHum</code> to the signal bus in order for the frosting
+  models to work properly.
 </p>
 <p>
-Vering, C., Wüllhorst, F., Mehrfeld, P., and Müller, D. (2021). Towards an integrated design of heat pump systems: Application of process intensification using two-stage optimization. Energy Conversion and Management, 250, 114888.
-<a href=\\\"https://doi.org/10.1016/j.apenergy.2024.123225\\\">https://doi.org/10.1016/j.apenergy.2024.123225</a>
+  Density of the frost layer can be constant or dynamic using <a href=
+  \"//&quot;modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.FrostDensityKorn//&quot;\">
+  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.FrostDensityKorn</a>
+  .
+</p>
+<h4>
+  References
+</h4>
+<p>
+  Römer, Fabian and Fuchs, Nico and Fuchs, Nico and Müller, Dirk,
+  Practical, Near-Optimal Design Rule Extraction for Heat Pumps in
+  Single-Family Buildings (September 03, 2025). Available at SSRN:
+  <a href=
+  \"//&quot;https://ssrn.com/abstract=5633891//&quot;\">https://ssrn.com/abstract=5633891</a>
+</p>
+<p>
+  Vering, C., Wüllhorst, F., Mehrfeld, P., and Müller, D. (2021).
+  Towards an integrated design of heat pump systems: Application of
+  process intensification using two-stage optimization. Energy
+  Conversion and Management, 250, 114888. <a href=
+  \"//&quot;https://doi.org/10.1016/j.apenergy.2024.123225//&quot;\">https://doi.org/10.1016/j.apenergy.2024.123225</a>
 </p>
 </html>"));
 end PartialVelocityBased;

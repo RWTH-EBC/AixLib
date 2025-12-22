@@ -62,20 +62,27 @@ equation
         textString="%name",
         textColor={0,0,255})}),                                  Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
+    Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1623</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>This model outputs the current frosting zone from Zhu et al. The three zones depend outdoor air temperature and humidity. 
-<h4>References</h4>
+</html>", info="<html><p>
+  This model outputs the current frosting zone from Zhu et al. The
+  three zones depend outdoor air temperature and humidity.
+</p>
+<h4>
+  References
+</h4>
 <p>
-J.H. Zhu, Y.Y. Sun, W. Wang, S.M. Deng, Y.J. Ge, and L.T. Li. Developing a new frosting map to guide defrosting control for air-source heat pump units. Applied Thermal Engineering, November 2015
-  <a href=\\\"https://doi.org/10.1016/j.applthermaleng.2015.06.076\\\">doi:10.1016/j.applthermaleng.2015.06.076</a>.
+  J.H. Zhu, Y.Y. Sun, W. Wang, S.M. Deng, Y.J. Ge, and L.T. Li.
+  Developing a new frosting map to guide defrosting control for
+  air-source heat pump units. Applied Thermal Engineering, November
+  2015 <a href=
+  \"//&quot;https://doi.org/10.1016/j.applthermaleng.2015.06.076//&quot;\">
+  doi:10.1016/j.applthermaleng.2015.06.076</a>.
 </p>
 </html>"));
 end ZhuFrostingZone;

@@ -55,42 +55,55 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(timeOn.u, and1.y) annotation (Line(points={{-42,100},{-50,100},{-50,
           60},{-59,60}},                             color={255,0,255}));
-  annotation (Documentation(revisions="<html>
-<ul>
+  annotation (Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1623</a>)
   </li>
 </ul>
-</html>", info="<html>
-<p>
-This model calibrates the growth velocities from Liang et al., who base their work on the zones from Zhu et al., 
-onto dynamic frost densities and a custom build heat pump at the Institute for Energy Efficient Buildings and Indoor Climate.
+</html>", info="<html><p>
+  This model calibrates the growth velocities from Liang et al., who
+  base their work on the zones from Zhu et al., onto dynamic frost
+  densities and a custom build heat pump at the Institute for Energy
+  Efficient Buildings and Indoor Climate.
 </p>
 <p>
-The calibration was performed and used for Römer et al.
-In addition to Liang et al., a time-delay after the last defrost is used before the frost starts to grow again.
-This was added based observed data from dynamic tests and is grounded in the fact that fins are warm after defrost, and, thus, don't directly accumulate frost.
+  The calibration was performed and used for Römer et al. In addition
+  to Liang et al., a time-delay after the last defrost is used before
+  the frost starts to grow again. This was added based observed data
+  from dynamic tests and is grounded in the fact that fins are warm
+  after defrost, and, thus, don't directly accumulate frost.
 </p>
 <p>
-For more information, see the base-model:
-<a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.PartialVelocityBased\">
-AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.PartialVelocityBased
-</a>.
+  For more information, see the base-model: <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.PartialVelocityBased\">
+  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.Frosting.BaseClasses.PartialVelocityBased</a>
+  .
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Römer, Fabian and Fuchs, Nico and Fuchs, Nico and Müller, Dirk, Practical, Near-Optimal Design Rule Extraction for Heat Pumps in Single-Family Buildings (September 03, 2025). Available at SSRN: 
-<a href=\\\"https://ssrn.com/abstract=5633891\\\">https://ssrn.com/abstract=5633891</a>
+  Römer, Fabian and Fuchs, Nico and Fuchs, Nico and Müller, Dirk,
+  Practical, Near-Optimal Design Rule Extraction for Heat Pumps in
+  Single-Family Buildings (September 03, 2025). Available at SSRN:
+  <a href=
+  \"//&quot;https://ssrn.com/abstract=5633891//&quot;\">https://ssrn.com/abstract=5633891</a>
 </p>
 <p>
-J.H. Zhu, Y.Y. Sun, W. Wang, S.M. Deng, Y.J. Ge, and L.T. Li. Developing a new frosting map to guide defrosting control for air-source heat pump units. Applied Thermal Engineering, November 2015
-  <a href=\"https://doi.org/10.1016/j.applthermaleng.2015.06.076\">doi:10.1016/j.applthermaleng.2015.06.076</a>.
+  J.H. Zhu, Y.Y. Sun, W. Wang, S.M. Deng, Y.J. Ge, and L.T. Li.
+  Developing a new frosting map to guide defrosting control for
+  air-source heat pump units. Applied Thermal Engineering, November
+  2015 <a href=
+  \"https://doi.org/10.1016/j.applthermaleng.2015.06.076\">doi:10.1016/j.applthermaleng.2015.06.076</a>.
 </p>
 <p>
-Liang, S., Wang, W., Sun, Y., Li, Z., Zhao, J., Lin, Y., and Deng, S. (2020). A novel characteristic index for frosting suppression based on the configuration and operation of air source heat pumps. International Journal of Refrigeration, 109, 161-171.
-<a href=\"https://doi.org/10.1016/j.ijrefrig.2019.10.009\">https://doi.org/10.1016/j.ijrefrig.2019.10.009</a>.
+  Liang, S., Wang, W., Sun, Y., Li, Z., Zhao, J., Lin, Y., and Deng, S.
+  (2020). A novel characteristic index for frosting suppression based
+  on the configuration and operation of air source heat pumps.
+  International Journal of Refrigeration, 109, 161-171. <a href=
+  \"https://doi.org/10.1016/j.ijrefrig.2019.10.009\">https://doi.org/10.1016/j.ijrefrig.2019.10.009</a>.
 </p>
 </html>"));
 end LiangAndZhuCalibrated;
