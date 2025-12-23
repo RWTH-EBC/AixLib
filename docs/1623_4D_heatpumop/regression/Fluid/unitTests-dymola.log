@@ -1,10 +1,13 @@
 Regression tests are only run for the following package:
   AixLib.Fluid
-*** Warning: Unspecified initial conditions in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/VCLib4DAirToWater_OneRoomRadiator.mos");'.
-
+*** Error: AixLib_Fluid_HeatPumps_ModularReversible_Examples_VCLib4DAirToWater_OneRoomRadiator.txt: Errors during result verification.
+           Absolute error = 4.245e+00 at t = 31104.0 for vol.T
+           Absolute error = 1.011e+01 at t = 30240.0 for temSup.T
+           Absolute error = 6.294e+00 at t = 31104.0 for temRet.T
+           Absolute error = 1.592e-01 at t = 1728.0 for heaPum.refCyc.sigBus.iceFacHPMea
 Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.3 MB.
 Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
 to access a summary of the comparison results.
 
-Script that runs unit tests had 1 warnings and 0 errors.
+Script that runs unit tests had 0 warnings and 1 errors.
 

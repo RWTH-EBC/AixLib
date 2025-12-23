@@ -249,7 +249,7 @@ Check of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump
 Warning: Redeclaration requires a subtype.
  But missing component dp_start.
   In redeclaration of PeakLoadDeviceModel.
-  File: /tmp/tmp-AixLib-0-yb9dx8_i/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 20
+  File: /tmp/tmp-AixLib-0-59mhkz7l/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 20
   Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel
 The model has the same number of unknowns and equations: 4686
 Check of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump successful.
@@ -269,7 +269,7 @@ Translation of AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump
 Warning: Redeclaration requires a subtype.
  But missing component dp_start.
   In redeclaration of PeakLoadDeviceModel.
-  File: /tmp/tmp-AixLib-0-yb9dx8_i/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 20
+  File: /tmp/tmp-AixLib-0-59mhkz7l/AixLib/Fluid/Examples/GeothermalHeatPump/BaseClasses/GeothermalHeatPumpBase.mo, line 20
   Context: AixLib.Fluid.Examples.GeothermalHeatPump.GeothermalHeatPump.PeakLoadDeviceModel
 The DAE has 4686 scalar unknowns and 4686 scalar equations.
  
@@ -2532,12 +2532,6 @@ rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/Mo
 simulateModel("AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLib4DAirToWater_OneRoomRadiator", stopTime=86400, method="CVode", tolerance=1e-08, resultFile="AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLib4DAirToWater_OneRoomRadiator");
 Translation of AixLib.Fluid.HeatPumps.ModularReversible.Examples.VCLib4DAirToWater_OneRoomRadiator
 The DAE has 1827 scalar unknowns and 1827 scalar equations.
-Warning: The initial conditions are not fully specified.
-Dymola has selected default initial conditions.
-Warning: Assuming fixed start value for the continuous states:
-    heaPum.refCyc.refCycHeaPumHea.iceFacCal.froDenKornPT1.y_internal(start = 0)
-    heaPum.refCyc.refCycHeaPumHea.iceFacCal.iceMassIntegrator.mIce(start = 0)
- 
 Redundant consistent initial conditions.
 Removed the following equations which are redundant and consistent: 
   heaPum.eva.p_start = heaPum.pEva_start;
@@ -2567,7 +2561,6 @@ Translated Model
   Continuous time states: 16 scalars
   Time-varying variables: 410 scalars
   Alias variables: 1119 scalars
-  Assumed default initial conditions: 2
   Number of mixed real/discrete systems of equations: 1
   Sizes of linear systems of equations: {2, 2, 2, 2, 2, 4}
   Sizes after manipulation of the linear systems: {0, 0, 0, 0, 0, 0}
