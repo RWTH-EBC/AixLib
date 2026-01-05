@@ -99,11 +99,8 @@ annotation (
 </ul>
 </html>",
     revisions="<html><ul>
-  <li>April 24, 2020, by Konstantina Xanthopoulou:<br/>
-    Removed parameter <code>g</code>.
-  </li>
-  <li style=\"list-style: none\">This is for <a href=
-  \"https://github.com/RWTH-EBC/AixLib/issues/899\">issue 899</a>.
+    <li>January 5, 2025, by Hendrik van der Stok:<br/>
+    Add missing parameter <code>g</code> which was removed in the parent window model.
   </li>
   <li>
     <p>
