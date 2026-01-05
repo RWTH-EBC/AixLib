@@ -4,10 +4,6 @@ model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
 
   import Modelica.Units.Conversions.to_deg;
 
-//  parameter Real coeff=0.6 "Weight coefficient";
- // parameter Modelica.SIunits.Area A=6 "Area of surface";
-//  parameter Real A = 10 "Area of surface";
-
 // parameters for calculating the transmission correction factor based on VDI_6007 Part-3
   // A0 to A6 are experimental constants VDI 6007 Part-3 page 20
 protected
@@ -68,7 +64,7 @@ equation
 
     //calculating the input thermal energy due to solar radiation
     solarRadWinTrans[i] =((SR_input[i].HDir*CorG_dir[i]) + (SR_input[i].HDif*
-      CorG_diff) + (SR_input[i].HGrd*CorG_gr));
+      CorG_diff) + (SR_input[i].HGrd*CorG_gr))*g;
   end for;
 
 annotation (
