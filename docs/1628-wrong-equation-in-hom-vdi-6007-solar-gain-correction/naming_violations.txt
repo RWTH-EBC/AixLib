@@ -1,0 +1,71 @@
+
+
+
+AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/PartialWindow.mo
+1: Name 'use_solarRadWinTrans' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: use_solar, Trans. Affected line: parameter Boolean use_solarRadWinTrans=true "Enable transmitted solar radiation output connector" annotation (Dialog(tab="Connector usage", group="Outputs"));
+
+2: Name 'windowarea' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: windowarea. Affected line: parameter Modelica.Units.SI.Area windowarea "Total fenestration area";
+
+3: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: replaceable parameter DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple WindowType constrainedby DataBase.WindowsDoors.Simple.OWBaseDataDefinition_Simple "Window record / type" annotation (Dialog(group="Window type", descriptionLabel=true), choicesAllMatching=true);replaceable model CorrSolGain = CorrectionSolarGain.PartialCorG constrainedby CorrectionSolarGain.PartialCorG( final n=1, final Uw=WindowType.Uw, final g=WindowType.g) "Class / Model for correction of transimtted solar irradiance (shortwave radiation) through window" annotation (choicesAllMatching=true);CorrSolGain corrSolGain "Instance for correction of transimtted solar irradiance (shortwave radiation) through window" annotation (Placement(transformation(extent={{-50,50},{-30,70}})));Utilities.Interfaces.SolarRad_in solarRad_in annotation (Placement(transformation(extent={{-100,50},{-80,70}}), iconTransformation(extent={{-100,50},{-80,70}})));Utilities.Interfaces.RadPort radPort annotation (Placement(transformation(extent={{80,50},{100,70}}), iconTransformation(extent={{80,50},{100,70}})));
+
+4: Missing documentation, Name 'port_inside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_inside. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_inside annotation (Placement(transformation(extent={{80,-20},{100,0}}), iconTransformation(extent={{80,-20},{100,0}})));
+
+5: Missing documentation, Name 'port_outside' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: port_outside. Affected line: Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_outside annotation (Placement(transformation(extent={{-100,-20},{-80,0}}), iconTransformation(extent={{-100,-20},{-80,0}})));
+
+6: Missing documentation, Name 'WindSpeedPort' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Wind, Speed, Port. Affected line: Modelica.Blocks.Interfaces.RealInput WindSpeedPort if use_windSpeedPort annotation (Placement( transformation(extent={{-116,-76},{-82,-42}}), iconTransformation(extent={{-100,-60},{-80,-40}}), visible=use_windSpeedPort));
+
+7: Missing documentation. Affected line: Modelica.Blocks.Math.Gain A(final k=(1 - WindowType.frameFraction)*windowarea) annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
+
+
+AixLib/ThermalZones/HighOrder/Components/WindowsDoors/WindowSimple.mo
+1: Missing documentation, Name 'HeatTrans' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Heat, Trans. Affected line: Modelica.Thermal.HeatTransfer.Components.ThermalConductor HeatTrans( final G=windowarea*WindowType.Uw) annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
+
+2: Missing documentation, Name 'prescribedHeatFlow' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: prescribed, Heat. Affected line: Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow prescribedHeatFlow annotation (Placement(transformation(extent={{28,50},{48,70}})));
+
+
+AixLib/ThermalZones/HighOrder/Components/WindowsDoors/BaseClasses/CorrectionSolarGain/CorG_VDI6007.mo
+1: Missing documentation. Affected line: import Modelica.Units.Conversions.to_deg;
+
+2: Missing documentation. Affected line: parameter Real A1=2.21*10^(-4);
+
+3: Missing documentation. Affected line: parameter Real A2=-2.75*10^(-5);
+
+4: Missing documentation. Affected line: parameter Real A3=-3.82*10^(-7);
+
+5: Missing documentation. Affected line: parameter Real A4=5.83*10^(-8);
+
+6: Missing documentation. Affected line: parameter Real A5=-1.15*10^(-9);
+
+7: Missing documentation. Affected line: parameter Real A6=4.74*10^(-12);
+
+8: Missing documentation, Name 'g_dir0' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: g_dir0. Affected line: parameter Real g_dir0=0.7537; // reference value for 2 Panels window parameter Real Ta_diff = 0.84; // energetic degree of transmission for diffuse solar irradiation parameter Real Tai_diff=0.903; //Pure degree of transmission parameter Real Ta1_diff= Ta_diff*Tai_diff;
+
+9: Missing documentation, Name 'rho_T1_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_, T1_diff. Affected line: parameter Real rho_T1_diff=1-(Ta_diff);
+
+10: Missing documentation, Name 'rho_11_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_11_diff. Affected line: parameter Real rho_11_diff=rho_T1_diff/(2-(rho_T1_diff));
+
+11: Missing documentation, Name 'rho_1_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: rho_1_diff. Affected line: parameter Real rho_1_diff= rho_11_diff+(((1-rho_11_diff)*Tai_diff)^2*rho_11_diff)/(1-(rho_11_diff*Tai_diff)^2); //degree of reflection for single panel clear glass parameter Real XN2_diff=1-rho_1_diff^2;
+
+12: Missing documentation, Name 'Ta2_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Ta2_diff. Affected line: parameter Real Ta2_diff=(Ta1_diff^2)/XN2_diff;
+
+13: Missing documentation, Name 'a1_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: a1_diff. Affected line: parameter Real a1_diff=1-Ta1_diff-rho_1_diff; // degree of absorption for single panel clear glass parameter Real Q21_diff=a1_diff*(1+(Ta1_diff*rho_1_diff/XN2_diff))*Uw/25;
+
+14: Missing documentation, Name 'Q22_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Q22_diff. Affected line: parameter Real Q22_diff=a1_diff*(Ta1_diff/XN2_diff)*(1-(Uw/7.7));
+
+15: Missing documentation, Name 'Qsek2_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Qsek2_diff. Affected line: parameter Real Qsek2_diff=Q21_diff+Q22_diff;
+
+16: Missing documentation, Name 'CorG_diff' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: G_diff. Affected line: parameter Real CorG_diff=(Ta2_diff+Qsek2_diff)/g_dir0; // transmission coefficient correction factor for diffuse irradiations parameter Real CorG_gr=(Ta2_diff+Qsek2_diff)/g_dir0; // transmission coefficient correction factor for irradiations from ground //calculating the correction factor for direct solar radiation Real[n] theta; // solar incident angle Real[n] Ta_dir; // energetic degree of transmission for direct solar irradiation Real[n] Tai_dir; //Pure degree of transmission Real[n] Ta1_dir;
+
+
+AixLib/ThermalZones/HighOrder/Components/WindowsDoors/Window_ASHRAE140.mo
+1: Name 'winPaneRec' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Pane. Affected line: replaceable parameter AixLib.DataBase.WindowsDoors.ASHRAE140WithPanes.Default winPaneRec constrainedby AixLib.DataBase.Walls.WallBaseDataDefinition "Record containing parameters of window pane(s)" annotation (choicesAllMatching=true, Placement(transformation(extent={{-8,82},{8,98}})));
+
+2: Missing documentation. Affected line: Modelica.Thermal.HeatTransfer.Components.ThermalConductor AirGap(G=windowarea*6.297) annotation ( Placement(transformation(extent={{-10,-20},{10,0}})));
+
+3: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.HeatTransfer.HeatConvOutside heatConv_outside( final A=windowarea, calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransfer.ASHRAE_Fundamentals, surfaceType=AixLib.DataBase.Surfaces.RoughnessForHT.Glass()) annotation (Placement(transformation(extent={{-66,-20},{-46,0}})));Utilities.HeatTransfer.HeatConvInside heatConv_inside( calcMethod=AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodConvectiveHeatTransferInsideSurface.Bernd_Glueck, hCon_const=2, final A=windowarea) annotation (Placement(transformation(extent={{68,-20},{48,2}})));
+
+4: Missing documentation, Name 'pane1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pane. Affected line: AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane1( final wallRec=winPaneRec, final T_start=fill(T0, winPaneRec.n), final energyDynamics=energyDynamics, final A=windowarea) annotation (Placement(transformation(extent={{-38,-18},{-18,2}})));
+
+5: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Utilities.HeatTransfer.HeatToRad twoStar_RadEx(final eps=winPaneRec.eps, final A=windowarea) annotation (Placement(transformation(extent={{44,22},{64,42}})));
+
+6: Missing documentation, Name 'pane2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: pane. Affected line: AixLib.ThermalZones.HighOrder.Components.Walls.BaseClasses.SimpleNLayer pane2( final wallRec=winPaneRec, final T_start=fill(T0, winPaneRec.n), final A=windowarea, final energyDynamics=energyDynamics) annotation (Placement(transformation(extent={{18,-18},{38,2}})));
