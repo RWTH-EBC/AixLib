@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Fluid.HeatPumps;
+within AixLib.Obsolete.Year2024.Fluid.HeatPumps;
 model HeatPump
   "Grey-box model for reversible heat pumps using a black-box to simulate the refrigeration cycle"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

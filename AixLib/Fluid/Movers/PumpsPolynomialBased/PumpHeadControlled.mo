@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased;
+within AixLib.Fluid.Movers.PumpsPolynomialBased;
 model PumpHeadControlled
   "Pump model with pump head control, an onOff-Switch and limitation of pump head."
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface;
@@ -68,7 +68,7 @@ model PumpHeadControlled
     "calc. efficency? (eta = f(H, Q, P))" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",
-      enable=calculate_Power));
+      enable=calculatePower));
   replaceable function efficiencyCharacteristic =
       AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic.Wilo_Formula_efficiency
     constrainedby
@@ -76,7 +76,7 @@ model PumpHeadControlled
     "eta = f(H, Q, P)" annotation (Dialog(
       tab="General",
       group="Power and Efficiency",
-      enable=calculate_Efficiency), choicesAllMatching=true);
+      enable=calculateEfficiency), choicesAllMatching=true);
 
 // Variables
   Modelica.Units.SI.Pressure dp_pump "Pressure increase";

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Media.Refrigerants.R134a;
+within AixLib.DataBase.Media.Refrigerants.R134a;
 record EoS_IIR_P1_395_T233_370
   "Record with fitting coefficients calculated for first implementation"
   extends AixLib.DataBase.Media.Refrigerants.HelmholtzEquationOfStateBaseDateDefinition(

@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Controller;
+within AixLib.Systems.HydraulicModules.Controller;
 block CtrPumpVFlow
   "Volume Flow Set Point Controller for variable Speed pumps"
          Modelica.Blocks.Interfaces.RealInput vFlowAct

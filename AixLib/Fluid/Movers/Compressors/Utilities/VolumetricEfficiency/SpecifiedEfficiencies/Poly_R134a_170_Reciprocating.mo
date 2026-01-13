@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
+within AixLib.Fluid.Movers.Compressors.Utilities.VolumetricEfficiency.SpecifiedEfficiencies;
 model Poly_R134a_170_Reciprocating
   "Reciporating Compressor - R134a - 170 cm³ - Polynomial"
   extends PolynomialVolumetricEfficiency(

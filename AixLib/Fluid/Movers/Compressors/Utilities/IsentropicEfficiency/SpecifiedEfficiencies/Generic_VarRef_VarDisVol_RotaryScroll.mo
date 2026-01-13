@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies;
+within AixLib.Fluid.Movers.Compressors.Utilities.IsentropicEfficiency.SpecifiedEfficiencies;
 model Generic_VarRef_VarDisVol_RotaryScroll
   "Generic overall isentropic efficiency based on literature review for 
   various compressors"

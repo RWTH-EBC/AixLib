@@ -25,7 +25,8 @@ partial model PartialWindow "Partial model for windows"
       transformation(extent={{-116,-76},{-82,-42}}),
       iconTransformation(extent={{-100,-60},{-80,-40}}),
       visible=use_windSpeedPort));
-  Modelica.Blocks.Math.Gain Ag(final k=(1 - WindowType.frameFraction)*windowarea) annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
+  Modelica.Blocks.Math.Gain A(final k=(1 - WindowType.frameFraction)*windowarea)
+    annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
   Utilities.Interfaces.ShortRadSurf shortRadWin if use_solarRadWinTrans
     annotation (Placement(transformation(extent={{80,78},{100,98}})));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,

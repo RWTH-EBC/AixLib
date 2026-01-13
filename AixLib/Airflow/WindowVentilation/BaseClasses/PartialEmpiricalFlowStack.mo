@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses;
+within AixLib.Airflow.WindowVentilation.BaseClasses;
 partial model PartialEmpiricalFlowStack
   "Partial model for empirical expressions with stack effect considered"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialEmpiricalFlow;

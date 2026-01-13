@@ -1,4 +1,4 @@
-﻿within AixLib.BoundaryConditions.GroundTemperature;
+within AixLib.BoundaryConditions.GroundTemperature;
 model Options
   "A model that provides different options for ground temperature output"
   import Modelica.Constants.pi;

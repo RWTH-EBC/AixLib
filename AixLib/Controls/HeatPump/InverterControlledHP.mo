@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump;
+within AixLib.Controls.HeatPump;
 model InverterControlledHP
   "Converter model for an inverter / speed controlled HP modulating between 0 and 1"
   extends BaseClasses.PartialTSetToNSet;

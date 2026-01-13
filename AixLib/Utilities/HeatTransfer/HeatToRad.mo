@@ -1,10 +1,10 @@
-﻿within AixLib.Utilities.HeatTransfer;
+within AixLib.Utilities.HeatTransfer;
 model HeatToRad "Adaptor for approximative longwave radiation exchange with variable surface Area"
   parameter Modelica.Units.SI.Emissivity eps=0.95 "Emissivity";
   parameter Modelica.Units.SI.Temperature T_ref=
       Modelica.Units.Conversions.from_degC(16)
     "Reference temperature for optional linearization"
-    annotation (Dialog(enable=radCalcMethod == 4));
+    annotation (Dialog(enable=radCalcMethod == AixLib.ThermalZones.HighOrder.Components.Types.CalcMethodRadiativeHeatTransfer.Linear_constant_T_ref));
   parameter Boolean use_A_in = false
     "Get the area from the input connector"
     annotation(Evaluate=true, HideResult=true, choices(checkBox=true));

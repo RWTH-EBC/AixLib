@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.CHPDataSimple;
+within AixLib.DataBase.CHP.CHPDataSimple;
 record CHP_XRGI_9kWel "Eco Power: mini BHKW XRGI 9 (12-20 kW thermal)"
   extends CHPDataSimple.CHPBaseDataDefinition(
     vol={3e-3},

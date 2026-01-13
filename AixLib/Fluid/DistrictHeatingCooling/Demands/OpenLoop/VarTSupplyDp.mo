@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
+within AixLib.Fluid.DistrictHeatingCooling.Demands.OpenLoop;
 model VarTSupplyDp
   "Substation with variable dT for fixed return temperature"
   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(

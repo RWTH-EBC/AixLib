@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.ModularCHPEngineData;
+within AixLib.DataBase.CHP.ModularCHPEngineData;
 record CHPEngDataBaseRecord "Base record for CHP engine data"
   extends Modelica.Icons.Record;
 

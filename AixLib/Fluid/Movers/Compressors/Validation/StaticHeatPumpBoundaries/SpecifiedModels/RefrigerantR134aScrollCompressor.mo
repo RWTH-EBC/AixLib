@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedModels;
+within AixLib.Fluid.Movers.Compressors.Validation.StaticHeatPumpBoundaries.SpecifiedModels;
 model RefrigerantR134aScrollCompressor
   "Static boundaries of a scroll-compressor using R134a"
   extends BaseModelStaticBoundaries(

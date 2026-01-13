@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions;
 package IcingFactor "Package with functions to calculate current icing factor on evaporator"
 annotation (Documentation(revisions="<html><ul>
   <li>

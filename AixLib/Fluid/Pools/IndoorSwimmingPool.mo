@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Pools;
+within AixLib.Fluid.Pools;
 model IndoorSwimmingPool
   parameter AixLib.DataBase.Pools.IndoorSwimmingPoolBaseDataDefinition
     poolParam "Choose setup for this pool" annotation (choicesAllMatching=true);

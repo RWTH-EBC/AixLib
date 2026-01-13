@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 partial model PartialCostFunction
 
   Modelica.Blocks.Interfaces.RealInput capacity

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.CHP.CHPDataSimple;
+within AixLib.DataBase.CHP.CHPDataSimple;
 record CHP_mini_ECO_POWER_5 "Vaillant: mini BHKW eco Power 4.7 (Natural Gas)"
   extends CHPDataSimple.CHPBaseDataDefinition(
     vol={2.72e-3},

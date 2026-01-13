@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.WSchV1984.Ceiling;
+within AixLib.DataBase.Walls.WSchV1984.Ceiling;
 record CEpartition_WSchV1984_SM_loHalf
   "Ceiling partition after WSchV1984, for building of type S (schwer) and M (mittel), lower half"
   extends WallBaseDataDefinition(n(min = 1) = 3 "Number of wall layers", d = {0.02, 0.16, 0.015}

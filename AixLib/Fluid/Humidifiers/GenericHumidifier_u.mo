@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Humidifiers;
+within AixLib.Fluid.Humidifiers;
 model GenericHumidifier_u
   "Steam or adiabatic humidifier with relative mass flow rate as input"
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(

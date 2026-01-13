@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.IcingFactor;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.IcingFactor;
 function WetterAfjei1996
   "Correction of CoP (Icing, Defrost) according to Wetter,Afjei 1996"
   extends AixLib.Obsolete.Year2024.DataBase.HeatPump.Functions.IcingFactor.PartialBaseFct;

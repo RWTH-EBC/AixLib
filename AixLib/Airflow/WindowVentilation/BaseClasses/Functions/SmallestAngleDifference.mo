@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.BaseClasses.Functions;
+within AixLib.Airflow.WindowVentilation.BaseClasses.Functions;
 function SmallestAngleDifference
   "Smallest difference between two angles around a point"
   input AixLib.Airflow.WindowVentilation.BaseClasses.Types.SmallestAngleDifferenceTypes

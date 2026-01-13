@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.BaseClasses;
+within AixLib.Fluid.BoilerCHP.BaseClasses;
 model CondensingBoilerEfficiency
   "Model for temperature depending efficiency of a condensing boiler"
   parameter Real lambda=0.01 "Offset variable of weighting coefficients sigmas";

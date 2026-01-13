@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data;
+within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data;
 record ThermalGlazedWithoutLowEmissionCoating
   "Glazed PVT Collector without low emission coating"
   extends PhotovoltaicThermalBaseDataDefinition(

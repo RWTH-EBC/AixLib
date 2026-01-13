@@ -1,4 +1,4 @@
-﻿within AixLib.Utilities.MassTransfer;
+within AixLib.Utilities.MassTransfer;
 model MassDiffusion
   "Lumped element transporting mass without storing it"
 
