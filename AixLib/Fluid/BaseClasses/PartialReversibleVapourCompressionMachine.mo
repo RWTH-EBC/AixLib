@@ -412,7 +412,7 @@ partial model PartialReversibleVapourCompressionMachine
     redeclare final package Medium = Medium_con,
     final allowFlowReversal=allowFlowReversalCon,
     final m_flow_small=1E-4*mFlow_conNominal_final,
-    final T_start=TCon_start,
+    final T_start=TCon_start - 5,
     final TAmb=TAmbCon_nominal,
     final tau=tauSenT,
     final m_flow_nominal=mFlow_conNominal_final*scalingFactor,
