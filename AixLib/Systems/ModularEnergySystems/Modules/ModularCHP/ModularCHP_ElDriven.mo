@@ -93,7 +93,7 @@ model ModularCHP_ElDriven
         origin={-100,-22})));
   Fluid.BoilerCHP.GenericCHP genericCHP(
     m_flow_nominal=m_flow_nominalCC,
-    T_start=T_start,
+    T_start=354.15,
     NomPower=P_el_nom,
     ElDriven=true,
     filename_PTHR=filename_PTHR,
@@ -114,8 +114,8 @@ model ModularCHP_ElDriven
         origin={-36,-16})));
   Modelica.Blocks.Continuous.LimPID PID3(
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.05,
-    Ti=(0.8265*P_el_nom/1000 + 7.8516)/m_flow_nominalCC,
+    k=0.1,
+    Ti=50,
     yMax=1,
     yMin=0)
     annotation (Placement(transformation(extent={{-84,-68},{-64,-48}})));
@@ -160,9 +160,6 @@ protected
 public
   Modelica.Blocks.Continuous.Integrator integrator2
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
-  Modelica.Blocks.Sources.RealExpression setpoint(y=1)
-    "Setpoint Kühlwasserpumpe"
-    annotation (Placement(transformation(extent={{-64,-24},{-54,-8}})));
   Fluid.Actuators.Valves.ThreeWayLinear        val(
     redeclare package Medium = Media.Water,
     T_start=T_start,
@@ -172,19 +169,6 @@ public
     fraK=1) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-36,-58})));
-  Modelica.Blocks.Math.Max max1
-    annotation (Placement(transformation(extent={{-216,-32},{-196,-12}})));
-  Modelica.Blocks.Continuous.LimPID PID1(
-    controllerType=Modelica.Blocks.Types.SimpleController.P,
-    k=1/3,
-    Ti=(0.8265*P_el_nom/1000 + 7.8516)/m_flow_nominalCC,
-    yMax=1,
-    yMin=0)
-    annotation (Placement(transformation(extent={{-236,-74},{-216,-54}})));
-  Modelica.Blocks.Math.Gain gain(k=-1)
-    annotation (Placement(transformation(extent={{-156,-122},{-176,-102}})));
-  Modelica.Blocks.Math.Gain gain1(k=-1)
-    annotation (Placement(transformation(extent={{-182,-104},{-202,-84}})));
   Modelica.Blocks.Math.Gain gain2(k=-1)
     annotation (Placement(transformation(extent={{-116,-68},{-96,-48}})));
   Modelica.Blocks.Math.Gain gain3(k=-1)
@@ -329,8 +313,6 @@ equation
       index=1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(setpoint.y, fanCC.y)
-    annotation (Line(points={{-53.5,-16},{-48,-16}}, color={0,0,127}));
   connect(t_cooling_setpoint.y, gain2.u)
     annotation (Line(points={{-142.1,-58},{-118,-58}}, color={0,0,127}));
   connect(PID3.u_s, gain2.y)
@@ -347,27 +329,8 @@ equation
           {22,-2},{40,-2},{40,-58},{-26,-58}}, color={0,127,255}));
   connect(val.port_2, fanCC.port_a)
     annotation (Line(points={{-36,-48},{-36,-26}}, color={0,127,255}));
-  connect(gain1.y, PID1.u_m) annotation (Line(points={{-203,-94},{-214,-94},{
-          -214,-76},{-226,-76}}, color={0,0,127}));
-  connect(gain.y, PID1.u_s) annotation (Line(points={{-177,-112},{-212,-112},{
-          -212,-100},{-250,-100},{-250,-64},{-238,-64}}, color={0,0,127}));
-  connect(PID1.y, max1.u2) annotation (Line(points={{-215,-64},{-208,-64},{-208,
-          -62},{-202,-62},{-202,-42},{-228,-42},{-228,-28},{-218,-28}}, color={
-          0,0,127}));
-  connect(cHPControlBus.m_flow_set, max1.u1) annotation (Line(
-      points={{0,102},{-118,102},{-118,94},{-236,94},{-236,-16},{-218,-16}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(t_cooling_setpoint.y, gain.u) annotation (Line(points={{-142.1,-58},{
-          -132,-58},{-132,-110},{-154,-110},{-154,-112}}, color={0,0,127}));
   connect(genericCHP.THotEngine, gain3.u) annotation (Line(points={{2,-11},{6,
           -11},{6,-82},{-42,-82}}, color={0,0,127}));
-  connect(genericCHP.THotEngine, gain1.u)
-    annotation (Line(points={{2,-11},{2,-94},{-180,-94}}, color={0,0,127}));
   connect(hex.port_b2, senMasFloCHP.port_a)
     annotation (Line(points={{18,-100},{64,-100}}, color={0,127,255}));
   connect(senMasFloCHP.port_b, THotHeatCircuit.port_a)
@@ -391,6 +354,14 @@ equation
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHPControlBus.PLR, fanCC.y) annotation (Line(
+      points={{0,102},{-4,102},{-4,82},{-48,82},{-48,-16}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
   annotation (Icon(graphics={
         Rectangle(
