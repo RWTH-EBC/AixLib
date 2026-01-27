@@ -104,7 +104,7 @@ model Dynamic_AHU_Control
     zoneParam=zoneParam,
     dynamicVolumeFlowControlAHU=dynamicVolumeFlowControlAHU,
     Ti_PI_Heat=Ti_PI_Heat_V_flow,
-    Ti_PI_Cool=Ti_PI_Heat_V_flow,
+    Ti_PI_Cool=Ti_PI_Cool_V_flow,
     gain_V_flow_Heat_Max=gain_V_flow_Heat_Max,
     gain_V_flow_Cool_Max=gain_V_flow_Cool_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
