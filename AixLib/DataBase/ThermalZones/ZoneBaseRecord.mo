@@ -21,67 +21,67 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Modelica.Units.SI.Area AWin[nOrientations]
     "Areas of windows by orientations" annotation(Dialog(group="Windows"));
   parameter Modelica.Units.SI.Area ATransparent[nOrientations]
-    "Areas of transparent (solar radiation transmittend) elements by orientations" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Areas of transparent (solar radiation transmittend) elements by orientations" annotation(Dialog(group="Windows"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWin
-    "Convective coefficient of heat transfer of windows (indoor)" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
-  parameter Modelica.Units.SI.ThermalResistance RWin "Resistor for windows" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Convective coefficient of heat transfer of windows (indoor)" annotation(Dialog(group="Windows"));
+  parameter Modelica.Units.SI.ThermalResistance RWin "Resistor for windows" annotation(Dialog(group="Windows"));
   parameter Modelica.Units.SI.TransmissionCoefficient gWin
-    "Total energy transmittance of windows" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Total energy transmittance of windows" annotation(Dialog(group="Windows"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer UWin
-    "Thermal transmission coefficient of windows" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Thermal transmission coefficient of windows" annotation(Dialog(group="Windows"));
   parameter Real ratioWinConRad
-    "Ratio for windows between convective and radiative heat emission" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Ratio for windows between convective and radiative heat emission" annotation(Dialog(group="Windows"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWinOut
-    "Windows' convective coefficient of heat transfer (outdoor)" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Windows' convective coefficient of heat transfer (outdoor)" annotation(Dialog(group="Windows"));
   parameter Real wfWin[nOrientations]
-    "Weight factors of the windows" annotation(Dialog(group="Windows", enable=integer(AWin)>0));
+    "Weight factors of the windows" annotation(Dialog(group="Windows"));
 
   // Exterior Walls
   parameter Modelica.Units.SI.Area AExt[nOrientations]
     "Areas of exterior walls by orientations" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConExt
-    "Convective coefficient of heat transfer for exterior walls (indoor)" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
-  parameter Integer nExt(min=1) "Number of RC-elements of exterior walls" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Convective coefficient of heat transfer for exterior walls (indoor)" annotation(Dialog(group="Exterior Walls"));
+  parameter Integer nExt(min=1) "Number of RC-elements of exterior walls" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.ThermalResistance RExt[nExt]
-    "Resistances of exterior walls, from inside to outside" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Resistances of exterior walls, from inside to outside" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.ThermalResistance RExtRem
-    "Resistance of remaining resistor RExtRem between capacity n and outside" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Resistance of remaining resistor RExtRem between capacity n and outside" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.HeatCapacity CExt[nExt]
-    "Heat capacities of exterior walls, from inside to outside" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Heat capacities of exterior walls, from inside to outside" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.Emissivity aExt
-    "Coefficient of absorption of exterior walls (outdoor)" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Coefficient of absorption of exterior walls (outdoor)" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.Angle tiltExtWalls[nOrientations]
-    "Tilts of exterior walls" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Tilts of exterior walls" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.Angle aziExtWalls[nOrientations]
-    "Azimuths of exterior walls" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Azimuths of exterior walls" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConWallOut
-    "Exterior walls convective coefficient of heat transfer (outdoor)" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Exterior walls convective coefficient of heat transfer (outdoor)" annotation(Dialog(group="Exterior Walls"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadWall
-    "Coefficient of heat transfer for linearized radiation for exterior walls" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Coefficient of heat transfer for linearized radiation for exterior walls" annotation(Dialog(group="Exterior Walls"));
   parameter Real wfWall[nOrientations]
-    "Weight factors of the exterior walls" annotation(Dialog(group="Exterior Walls", enable=integer(AExt)>0));
+    "Weight factors of the exterior walls" annotation(Dialog(group="Exterior Walls"));
 
   // Interior Walls
   parameter Modelica.Units.SI.Area AInt "Area of interior walls" annotation(Dialog(group="Interior Walls"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConInt
-    "Convective coefficient of heat transfer of interior walls (indoor)" annotation(Dialog(group="Interior Walls", enable=integer(AInt)>0));
-  parameter Integer nInt(min=1) "Number of RC-elements of interior walls" annotation(Dialog(group="Interior Walls", enable=integer(AInt)>0));
+    "Convective coefficient of heat transfer of interior walls (indoor)" annotation(Dialog(group="Interior Walls"));
+  parameter Integer nInt(min=1) "Number of RC-elements of interior walls" annotation(Dialog(group="Interior Walls"));
   parameter Modelica.Units.SI.ThermalResistance RInt[nInt]
-    "Resistances of interior wall, from port to center" annotation(Dialog(group="Interior Walls", enable=integer(AInt)>0));
+    "Resistances of interior wall, from port to center" annotation(Dialog(group="Interior Walls"));
   parameter Modelica.Units.SI.HeatCapacity CInt[nInt]
-    "Heat capacities of interior walls, from port to center" annotation(Dialog(group="Interior Walls", enable=integer(AInt)>0));
+    "Heat capacities of interior walls, from port to center" annotation(Dialog(group="Interior Walls"));
 
   // Floor Plate
   parameter Modelica.Units.SI.Area AFloor "Area of floor plate" annotation(Dialog(group="Floor Plate"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConFloor
-    "Convective coefficient of heat transfer of floor plate (indoor)" annotation(Dialog(group="Floor Plate", enable=integer(AFloor)>0));
-  parameter Integer nFloor(min=1) "Number of RC-elements of floor plate" annotation(Dialog(group="Floor Plate", enable=integer(AFloor)>0));
+    "Convective coefficient of heat transfer of floor plate (indoor)" annotation(Dialog(group="Floor Plate"));
+  parameter Integer nFloor(min=1) "Number of RC-elements of floor plate" annotation(Dialog(group="Floor Plate"));
   parameter Modelica.Units.SI.ThermalResistance RFloor[nFloor]
-    "Resistances of floor plate, from inside to outside" annotation(Dialog(group="Floor Plate", enable=integer(AFloor)>0));
+    "Resistances of floor plate, from inside to outside" annotation(Dialog(group="Floor Plate"));
   parameter Modelica.Units.SI.ThermalResistance RFloorRem
-    "Resistance of remaining resistor RFloorRem between capacity n and outside" annotation(Dialog(group="Floor Plate", enable=integer(AFloor)>0));
+    "Resistance of remaining resistor RFloorRem between capacity n and outside" annotation(Dialog(group="Floor Plate"));
   parameter Modelica.Units.SI.HeatCapacity CFloor[nFloor]
-    "Heat capacities of floor plate, from inside to outside" annotation(Dialog(group="Floor Plate", enable=integer(AFloor)>0));
+    "Heat capacities of floor plate, from inside to outside" annotation(Dialog(group="Floor Plate"));
 
   // Soil
   parameter Modelica.Units.SI.Temperature TSoil
@@ -101,26 +101,26 @@ record ZoneBaseRecord "Base record definition for zone records"
   // Roof
   parameter Modelica.Units.SI.Area ARoof "Area of roof" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoof
-    "Convective coefficient of heat transfer of roof (indoor)" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
-  parameter Integer nRoof(min=1) "Number of RC-elements of roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Convective coefficient of heat transfer of roof (indoor)" annotation(Dialog(group="Roof"));
+  parameter Integer nRoof(min=1) "Number of RC-elements of roof" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.ThermalResistance RRoof[nRoof]
-    "Resistances of roof, from inside to outside" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Resistances of roof, from inside to outside" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.ThermalResistance RRoofRem
-    "Resistance of remaining resistor RRoofRem between capacity n and outside" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Resistance of remaining resistor RRoofRem between capacity n and outside" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.HeatCapacity CRoof[nRoof]
-    "Heat capacities of roof, from inside to outside" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
-  parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
-  parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Heat capacities of roof, from inside to outside" annotation(Dialog(group="Roof"));
+  parameter Integer nOrientationsRoof(min=1) "Number of orientations for roof" annotation(Dialog(group="Roof"));
+  parameter Modelica.Units.SI.Angle tiltRoof[nOrientationsRoof] "Tilts of roof" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.Angle aziRoof[nOrientationsRoof]
-    "Azimuths of roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Azimuths of roof" annotation(Dialog(group="Roof"));
   parameter Real wfRoof[nOrientationsRoof]
-    "Weight factors of the roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Weight factors of the roof" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.Emissivity aRoof
-    "Coefficient of absorption of roof (outdoor)" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Coefficient of absorption of roof (outdoor)" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hConRoofOut
-    "Roof's convective coefficient of heat transfer (outdoor)" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Roof's convective coefficient of heat transfer (outdoor)" annotation(Dialog(group="Roof"));
   parameter Modelica.Units.SI.CoefficientOfHeatTransfer hRadRoof
-    "Coefficient of heat transfer for linearized radiation for roof" annotation(Dialog(group="Roof", enable=integer(ARoof)>0));
+    "Coefficient of heat transfer for linearized radiation for roof" annotation(Dialog(group="Roof"));
 
   // Connection to other zones
   parameter Integer nIze(min=1)=1 "Number of interzonal elements to consider" annotation(Dialog(group="Connection to other zones"));
@@ -160,7 +160,7 @@ record ZoneBaseRecord "Base record definition for zone records"
   parameter Real shadingFactor[nOrientations]
   "Fc-Value: Factor representing how much of the actual solar irradiation goes through the sunblind and enters the window element, for the case, that the sunblind is activated. Defaults to 1, i.e. no shading is active. External sunblinds."
   annotation(Dialog(tab="Gains", group="External gains"));
-  parameter Real maxIrr[nOrientations](unit="W/m2")
+  parameter Real maxIrr[nOrientations](each unit="W/m2")
   "Threshold value above which the sunblind (external) becomes active for the whole zone. Threshold regards to the incoming irradiation level with the window direction. This value does not account for heat flux due to the outside temperature."
   annotation(Dialog(tab="Gains", group="External gains"));
 
