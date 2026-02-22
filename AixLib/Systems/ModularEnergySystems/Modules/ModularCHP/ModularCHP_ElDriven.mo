@@ -86,7 +86,11 @@ model ModularCHP_ElDriven
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     per(pressure(V_flow={0,V_flow_HC,V_flow_HC*2}, dp={(2500)/0.8,(2500),0})),
     addPowerToMedium=false,
-    use_inputFilter=false)  "pump heating circuit" annotation (Placement(
+    tau=1,
+    use_inputFilter=true,
+    riseTime=10,
+    init=Modelica.Blocks.Types.Init.InitialState,
+    y_start=1)              "pump heating circuit" annotation (Placement(
         transformation(
         extent={{10,-10},{-10,10}},
         rotation=90,

@@ -91,7 +91,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
   Fluid.Movers.SpeedControlled_y fan(
     redeclare package Medium = AixLib.Media.Water,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    T_start=THotDes,
+    T_start=THotDes - 5,
     allowFlowReversal=true,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
         pressure(V_flow={0,m_flow_nominal_pump/1000,m_flow_nominal_pump/1000/

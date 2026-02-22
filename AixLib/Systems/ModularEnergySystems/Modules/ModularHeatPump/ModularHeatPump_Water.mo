@@ -94,9 +94,9 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
             dpExternal),0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
-    use_inputFilter=false,
+    use_inputFilter=true,
     riseTime=10,
-    init=Modelica.Blocks.Types.Init.SteadyState,
+    init=Modelica.Blocks.Types.Init.InitialState,
     y_start=1)
     annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
 
