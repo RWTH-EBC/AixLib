@@ -119,16 +119,15 @@ equation
   used:
 </p>
 <p>
-<code>eta=etaEle_zero - mEle * dT/G</code>
+  <code>eta=etaEle_zero - mEle * dT/G</code>
 </p>
 <p>
-  Values for the linear and quadratic coefficients for the
-  thermal efficiency as well as the coefficients for the linear
-  approximation are derived from <a href=
+  Values for the linear and quadratic coefficients for the thermal
+  efficiency as well as the coefficients for the linear approximation
+  are derived from <a href=
   \"https://www.researchgate.net/publication/327882787_Thermal_management_of_PVT_collectors_development_and_modelling_of_highly_efficient_glazed_flat_plate_PVT_collectors_with_low_emissivity_coatings_and_overheating_protection\">
-  this thesis</a> by Markus Lämmle, p.43
-  Figure 3.12. The underlying data was validated with the following
-  assumptions:
+  this thesis</a> by Markus Lämmle, p.43 Figure 3.12. The underlying
+  data was validated with the following assumptions:
 </p>
 <ul>
   <li>solar irradiation G=1000 W/m^2
@@ -142,14 +141,13 @@ equation
   Known Limitations
 </h4>
 <ul>
-  <li>
-   No empirical validation has been carried out with the model, only with the 
-   parameters in the recrods from the PhD thesis for a single operating point.
-   So, always questions results outside of the operating conditions 
-   stated above.
+  <li>No empirical validation has been carried out with the model, only
+  with the parameters in the recrods from the PhD thesis for a single
+  operating point. So, always questions results outside of the
+  operating conditions stated above.
   </li>
-  <li>The parameters for pressure losses and capacities inside the 
-   records are based on the solar thermal model, not on the PhD thesis.
+  <li>The parameters for pressure losses and capacities inside the
+  records are based on the solar thermal model, not on the PhD thesis.
   </li>
   <li>With the standard BaseParameters, this model uses water as
   working fluid
@@ -164,13 +162,11 @@ equation
   Therefore the parameters can be found in the base model.
 </p>
 </html>", revisions="<html><ul>
-  <li>
-    <i>January 23, 2024</i> by Philipp Schmitz and Fabian Wuellhorst:<br/>
-    First implementation. This is for
- <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1451\">
- issue 1451</a>.
-  </li>
-</ul>
+<li>
+  <i>January 23, 2024</i> by Philipp Schmitz and Fabian Wuellhorst:<br/>
+  First implementation. This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/1451\">issue 1451</a>.
+</li>
 </html>"), Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                              Polygon(points={{-20,-100},{8,4},{84,4},{60,-100},{
               -20,-100}}, lineColor={0,0,0},
