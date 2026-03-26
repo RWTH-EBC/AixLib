@@ -116,8 +116,7 @@ equation
           lineColor={0,0,0},
           textString="Wang et al.")}),
                                    experiment(StopTime=2592000, Interval=500),
-    Documentation(revisions="<html>
-<ul>
+    Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
@@ -126,13 +125,19 @@ equation
 </ul>
 </html>", info="<html>
 <p>
-This defrost control uses the optimal defrost icing factor by Wang et al.
-Every time the current icing factor is lower than the optimal icing factor to start the defrost, defrost is performed.
+  This defrost control uses the optimal defrost icing factor by Wang et
+  al. Every time the current icing factor is lower than the optimal
+  icing factor to start the defrost, defrost is performed.
 </p>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Wang, W., Zhang, S., Li, Z., Sun, Y., Deng, S., and Wu, X. (2020). Determination of the optimal defrosting initiating time point for an ASHP unit based on the minimum loss coefficient in the nominal output heating energy. Energy, 191, 116505.
-  <a href=\"https://doi.org/10.1016/j.energy.2019.116505\">https://doi.org/10.1016/j.energy.2019.116505</a>.
+  Wang, W., Zhang, S., Li, Z., Sun, Y., Deng, S., and Wu, X. (2020).
+  Determination of the optimal defrosting initiating time point for an
+  ASHP unit based on the minimum loss coefficient in the nominal output
+  heating energy. Energy, 191, 116505. <a href=
+  \"https://doi.org/10.1016/j.energy.2019.116505\">https://doi.org/10.1016/j.energy.2019.116505</a>.
 </p>
 </html>"));
 end OptimalDefrostTimeWangEtAl;

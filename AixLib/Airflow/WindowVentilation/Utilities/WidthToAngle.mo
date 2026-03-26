@@ -17,14 +17,15 @@ equation
           textString="s"),               Text(
               extent={{100,-20},{20,-100}},
           textColor={0,0,0},
-          textString="α")}), Documentation(revisions="<html>
-<ul>
-  <li>
-    June 13, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
+          textString="α")}), Documentation(revisions="<html><ul>
+  <li>June 13, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
   </li>
 </ul>
 </html>", info="<html>
-<p>Convert from window opening width to opening angle.</p>
+<p>
+  Convert from window opening width to opening angle.
+</p>
 </html>"));
 end WidthToAngle;

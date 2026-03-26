@@ -1,7 +1,6 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.Controls;
 package Defrost
-  annotation (Documentation(revisions="<html>
-<ul>
+  annotation (Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
@@ -9,6 +8,8 @@ package Defrost
   </li>
 </ul>
 </html>", info="<html>
-<p>Package with defrost controls.</p>
+<p>
+  Package with defrost controls.
+</p>
 </html>"));
 end Defrost;

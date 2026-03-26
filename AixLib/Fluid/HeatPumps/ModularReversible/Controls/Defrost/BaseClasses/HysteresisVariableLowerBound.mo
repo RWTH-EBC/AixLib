@@ -96,29 +96,30 @@ equation
         Line(points={{-49,-29},{-49,-49}}, color={192,192,192}),
         Rectangle(extent={{2,-49},{91,-92}}, lineColor={192,192,192}),
         Line(points={{41,-29},{41,-49}}, color={192,192,192})}),
-    Documentation(info="<html>
-<p>
-This block transforms a <strong>Real</strong> input signal <strong>u</strong> into a <strong>Boolean</strong>
-output signal <strong>y</strong>:
+    Documentation(info="<html><p>
+  This block transforms a <strong>Real</strong> input signal
+  <strong>u</strong> into a <strong>Boolean</strong> output signal
+  <strong>y</strong>:
 </p>
-
 <p>
-<img src=\"modelica://Modelica/Resources/Images/Blocks/Logical/Hysteresis.png\"
-     alt=\"Hysteresis.png\">
+  <img src=
+  \"modelica://Modelica/Resources/Images/Blocks/Logical/Hysteresis.png\"
+  alt=\"Hysteresis.png\">
 </p>
-
 <ul>
-<li> When the output was <strong>false</strong> and the input becomes
-     <strong>greater</strong> than parameter <strong>uHigh</strong>, the output
-     switches to <strong>true</strong>.</li>
-<li> When the output was <strong>true</strong> and the input becomes
-     <strong>less</strong> than parameter <strong>uLow</strong>, the output
-     switches to <strong>false</strong>.</li>
+  <li>When the output was <strong>false</strong> and the input becomes
+  <strong>greater</strong> than parameter <strong>uHigh</strong>, the
+  output switches to <strong>true</strong>.
+  </li>
+  <li>When the output was <strong>true</strong> and the input becomes
+  <strong>less</strong> than parameter <strong>uLow</strong>, the
+  output switches to <strong>false</strong>.
+  </li>
 </ul>
 <p>
-The start value of the output is defined via parameter
-<strong>pre_y_start</strong> (= value of pre(y) at initial time).
-The default value of this parameter is <strong>false</strong>.
+  The start value of the output is defined via parameter
+  <strong>pre_y_start</strong> (= value of pre(y) at initial time). The
+  default value of this parameter is <strong>false</strong>.
 </p>
 </html>", revisions="<html>
 <ul>
