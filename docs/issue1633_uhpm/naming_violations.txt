@@ -1,0 +1,127 @@
+
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/UHPM.mo
+1: Missing documentation, Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: BaseClasses.UHPM.offdesignparameter offdesignparameter annotation (Placement(transformation(extent={{-42,60},{-22,80}})));BaseClasses.UHPM.design design annotation (Placement(transformation(extent={{42,56},{82,88}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/UHPM/design.mo
+1: Name 'TSourceNom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source. Affected line: parameter Modelica.Units.SI.Temperature TSourceNom=278.15 "Nominal temperature of TSource" annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+2: Name 'DeltaTCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Delta. Affected line: parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=7 "Temperature difference heat sink condenser" annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+3: Missing documentation. Affected line: Modelica.Blocks.Math.Add add(k2=-1) annotation (Placement(transformation(extent={{178,68},{198,88}})));
+
+4: Missing documentation, Name 'tSourceNom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: t, Source. Affected line: Modelica.Blocks.Sources.RealExpression tSourceNom(y=TSourceNom) annotation (Placement(transformation(extent={{-100,80},{-74,104}})));
+
+5: Missing documentation, Name 'fromKelvin3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: from, Kelvin3. Affected line: Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin3 annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={-36,92})));
+
+6: Missing documentation, Name 'fromKelvin2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: from, Kelvin. Affected line: Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin2 annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={-56,34})));
+
+7: Missing documentation, Name 'qNom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: q. Affected line: Modelica.Blocks.Sources.RealExpression qNom(y=QNom) annotation (Placement(transformation(extent={{66,72},{100,94}})));
+
+8: Missing documentation, Name 'deltaTCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta. Affected line: Modelica.Blocks.Sources.RealExpression deltaTCon(y=DeltaTCon) annotation (Placement(transformation(extent={{12,11},{-12,-11}}, rotation=180, origin={-100,57})));
+
+9: Missing documentation, Name 'multiplex4_1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multiplex4_. Affected line: Modelica.Blocks.Routing.Multiplex4 multiplex4_1 annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={0,70})));
+
+10: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable SDFCOPDesign( final nin=4, final readFromFile=true, final filename=filename_COP, final dataset="\COP", final dataUnit="-", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "SDF-Table data for COP" annotation (Placement(transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={36,70})));
+
+11: Name 'NomFrequency' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Frequency. Affected line: Modelica.Blocks.Sources.RealExpression NomFrequency(y=100) "Frequency if Modulating=true" annotation (Placement(transformation( extent={{11,12},{-11,-12}}, rotation=180, origin={-189,92})));
+
+12: Missing documentation, Name 'tHotNom' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: t. Affected line: Modelica.Blocks.Sources.RealExpression tHotNom(y=THotNom) annotation ( Placement(transformation( extent={{12,10},{-12,-10}}, rotation=180, origin={-100,34})));
+
+13: Missing documentation, Name 'multiplex4_2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multiplex4_. Affected line: Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-32,-28})));
+
+14: Missing documentation, Name 'fromKelvin1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: from, Kelvin. Affected line: Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin1 annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={-78,-38})));
+
+15: Name 'PelFullLoadSetPoint' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Full, Load, Point. Affected line: Modelica.Blocks.Interfaces.RealOutput PelFullLoadSetPoint(final unit="W", final displayUnit="kW") "maximal electric power at operating point" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={224,-28})));
+
+16: Missing documentation, Name 'division3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: division3. Affected line: Modelica.Blocks.Math.Division division3 annotation (Placement(transformation(extent={{124,-44},{144,-24}})));
+
+17: Missing documentation, Name 'product1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: product. Affected line: Modelica.Blocks.Math.Product product1 annotation (Placement(transformation(extent={{168,-38},{188,-18}})));
+
+18: Missing documentation. Affected line: Modelica.Blocks.Math.Log log annotation (Placement(transformation(extent={{42,-38},{62,-18}})));
+
+19: Missing documentation. Affected line: Modelica.Blocks.Math.Log log1 annotation (Placement(transformation(extent={{66,14},{86,34}})));
+
+20: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable SDF_PI_Design( final nin=4, final readFromFile=true, final filename=filename_PI, final dataset="\PI", final dataUnit="-", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "SDF-Table data for PressureRatio" annotation (Placement(transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={38,24})));SDF.NDTable SDF_PI_FullLoad( final nin=4, final readFromFile=true, final filename=filename_PI, final dataset="\PI", final dataUnit="-", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "SDF-Table data for PressureRatio" annotation (Placement(transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={10,-28})));
+
+21: Missing documentation, Name 'FrequencyDependency' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Frequency, Dependency. Affected line: Modelica.Blocks.Sources.BooleanExpression FrequencyDependency(y=FreDep) annotation (Placement(transformation(extent={{-200,62},{-166,86}})));
+
+22: Missing documentation, Name 'switch1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch. Affected line: Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={-138,74})));
+
+23: Name 'NomFrequency1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Frequency. Affected line: Modelica.Blocks.Sources.RealExpression NomFrequency1(y=50) "Frequency if Modulating=false" annotation (Placement(transformation( extent={{11,12},{-11,-12}}, rotation=180, origin={-189,50})));
+
+24: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable SDFCOPNominal1( final nin=4, final readFromFile=true, final filename=filename_COP, final dataset="\COP", final dataUnit="-", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "SDF-Table data for COP" annotation (Placement(transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={12,-68})));
+
+25: Missing documentation, Name 'product2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: product. Affected line: Modelica.Blocks.Math.Product product2 annotation (Placement(transformation(extent={{80,-84},{100,-64}})));
+
+26: Missing documentation. Affected line: Modelica.Blocks.Math.Add add1(k1=-1) annotation (Placement(transformation(extent={{160,-78},{180,-58}})));
+
+27: Missing documentation, Name 'greater' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: greater. Affected line: Modelica.Blocks.Logical.Greater greater annotation (Placement(transformation(extent={{256,10},{276,30}})));
+
+28: Missing documentation, Name 'switch2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch. Affected line: Modelica.Blocks.Logical.Switch switch2 annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={332,20})));
+
+29: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable SDF_T_FullLoad( final nin=4, final readFromFile=true, final filename=filename_T_Design, final dataset="\T_mean_comp", final dataUnit="K", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "SDF-Table data for mean compressor temperature" annotation (Placement( transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={12,-104})));SDF.NDTable SDF_T_Design( final nin=4, final readFromFile=true, final filename=filename_T_Design, final dataset="\T_mean_comp", final dataUnit="K", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Hold) "SDF-Table data for mean compressor temperature" annotation (Placement( transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={36,110})));
+
+30: Missing documentation, Name 'product3' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: product3. Affected line: Modelica.Blocks.Math.Product product3 annotation (Placement(transformation(extent={{104,20},{124,40}})));
+
+31: Missing documentation, Name 'product4' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: product4. Affected line: Modelica.Blocks.Math.Product product4 annotation (Placement(transformation(extent={{80,-44},{100,-24}})));
+
+32: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename=ModelicaServices.ExternalReferences.loadResource( "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf") "File name" annotation (Dialog(tab="NotManufacturer"));
+
+33: Name 'filename_T_Design' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename_, T_, Design. Affected line: parameter String filename_T_Design= ModelicaServices.ExternalReferences.loadResource( "modelica://AixLib/DataBase/HeatPump/PerformanceData/TEMP_COMP_MEAN_Scroll_R410A.sdf") "File name" annotation (Dialog(tab="NotManufacturer"));
+
+34: Name 'filename_COP' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename_. Affected line: parameter String filename_COP= ModelicaServices.ExternalReferences.loadResource( "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf") "File name" annotation (Dialog(tab="NotManufacturer"));
+
+35: Name 'filename_PI' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename_. Affected line: parameter String filename_PI=ModelicaServices.ExternalReferences.loadResource( "modelica://AixLib/DataBase/HeatPump/PerformanceData/PI_Scroll_R410A.sdf") "File name" annotation (Dialog(tab="NotManufacturer"));
+
+36: Missing documentation, Name 'toKelvin' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Kelvin. Affected line: Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin annotation (Placement(transformation(extent={{72,98},{92,118}})));
+
+37: Missing documentation, Name 'toKelvin1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Kelvin. Affected line: Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1 annotation (Placement(transformation(extent={{82,-116},{102,-96}})));
+
+
+AixLib/Fluid/HeatPumps/ModularReversible/RefrigerantCycle/BaseClasses/UHPM/offdesignparameter.mo
+1: Name 'TSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Source. Affected line: parameter Modelica.Units.SI.Temperature TSource=280 "temperature of heat source" annotation (Dialog(tab="NotManufacturer", group="General machine information"));
+
+2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: SDF.NDTable sDF_COP( final nin=4, final readFromFile=true, final filename=filename, final dataset="/COP", final dataUnit="-", final scaleUnits={"degC","Hz","K","degC"}, final interpMethod=SDF.Types.InterpolationMethod.Linear, final extrapMethod=SDF.Types.ExtrapolationMethod.Linear) "SDF-Table data for COP" annotation (Placement(transformation( extent={{-12,-12},{12,12}}, rotation=0, origin={82,0})));
+
+3: Missing documentation, Name 'fromKelvin1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: from, Kelvin. Affected line: Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin1 annotation (Placement(transformation(extent={{-8,-8},{8,8}}, rotation=0, origin={18,70})));
+
+4: Missing documentation, Name 'multiplex4_2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: multiplex4_. Affected line: Modelica.Blocks.Routing.Multiplex4 multiplex4_2 annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={48,0})));
+
+5: Missing documentation, Name 'fromKelvin5' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: from, Kelvin5. Affected line: Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin5 annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=180, origin={-76,-90})));
+
+6: Missing documentation, Name 'deltaTCon' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: delta. Affected line: Modelica.Blocks.Math.Add deltaTCon(k1=-1) annotation (Placement( transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-30,-36})));
+
+7: Missing documentation, Name 'booleanExpression1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: boolean, Expression. Affected line: Modelica.Blocks.Sources.BooleanExpression booleanExpression1(y= TSourceInternal) annotation (Placement(transformation(extent={{-98,62},{-68,84}})));
+
+8: Name 'tSource1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: t, Source. Affected line: Modelica.Blocks.Sources.RealExpression tSource1(y=TSource) "TSource" annotation (Placement(transformation(extent={{-72,48},{-36,70}})));
+
+9: Missing documentation, Name 'switch1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch. Affected line: Modelica.Blocks.Logical.Switch switch1 annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=180, origin={-10,70})));
+
+10: Missing documentation, Name 'fromKelvin4' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: from, Kelvin4. Affected line: Modelica.Thermal.HeatTransfer.Celsius.FromKelvin fromKelvin4 annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={-72,-30})));
+
+11: Missing documentation, Name 'frequency' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: frequency. Affected line: Modelica.Blocks.Interfaces.RealInput frequency annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=0, origin={-120,8})));
+
+12: Missing documentation. Affected line: Modelica.Blocks.Interfaces.RealOutput COP annotation ( Placement(transformation( extent={{12,-12},{-12,12}}, rotation=180, origin={112,0})));
+
+13: Missing documentation, Name 'tConIn' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: t. Affected line: Modelica.Blocks.Interfaces.RealInput tConIn annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=0, origin={-120,-30})));
+
+14: Missing documentation, Name 'tSource' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: t, Source. Affected line: Modelica.Blocks.Interfaces.RealInput tSource annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=0, origin={-120,90})));
+
+15: Missing documentation, Name 'tConOut' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: t. Affected line: Modelica.Blocks.Interfaces.RealInput tConOut annotation (Placement( transformation( extent={{-20,-20},{20,20}}, rotation=0, origin={-120,-90})));
+
+16: Missing documentation, Name 'limiter' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter(uMax=100, uMin=20) annotation (Placement(transformation(extent={{-44,-8},{-24,12}})));
+
+17: Missing documentation, Name 'switch2' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: switch. Affected line: Modelica.Blocks.Logical.Switch switch2 annotation (Placement(transformation(extent={{10,-10},{-10,10}}, rotation=180, origin={4,28})));
+
+18: Missing documentation, Name 'FrequencyDependency' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Frequency, Dependency. Affected line: Modelica.Blocks.Sources.BooleanExpression FrequencyDependency(y=FreDep) annotation (Placement(transformation(extent={{-52,18},{-30,38}})));
+
+19: Missing documentation, Name 'productPel' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: product. Affected line: Modelica.Blocks.Math.Product productPel annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={-64,2})));
+
+20: Missing documentation, Name 'hundret' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: hundret. Affected line: Modelica.Blocks.Sources.RealExpression hundret(y=100) annotation (Placement(transformation(extent={{-102,-18},{-84,0}})));
+
+21: Missing documentation, Name 'limiter1' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: limiter. Affected line: Modelica.Blocks.Nonlinear.Limiter limiter1(uMax=100, uMin=0) annotation (Placement(transformation(extent={{-52,-100},{-32,-80}})));
+
+22: Name 'filename' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: filename. Affected line: parameter String filename=ModelicaServices.ExternalReferences.loadResource( "modelica://AixLib/DataBase/HeatPump/PerformanceData/COP_Scroll_R410A.sdf") "File name" annotation (Dialog(tab="Advanced"));
