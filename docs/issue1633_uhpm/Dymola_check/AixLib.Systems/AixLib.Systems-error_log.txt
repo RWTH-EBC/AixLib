@@ -1,0 +1,214 @@
+
+Error in model:  AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM 
+Check of <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM</a>
+Error: Missing base class AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.UHPM
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as Modular modular in <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM</a>
+Warning: Class or component 'useInHeaPum' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'QHea_flow_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'TCon_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'TEva_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'cpCon' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'cpEva' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'useInHeaPum' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'QHea_flow_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'TCon_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'TEva_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'cpCon' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'cpEva' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycleHeatPumpHeating refCycHeaPumHea in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Missing base class AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.UHPM
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as Modular modular in <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM</a>
+Warning: Class or component 'useInHeaPum' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'QHea_flow_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'TCon_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'TEva_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'cpCon' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'cpEva' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'useInHeaPum' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'QHea_flow_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'TCon_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'TEva_nominal' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'cpCon' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Error: Class or component 'cpEva' not found in RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text:13">16</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Redeclaration requires a subtype.
+ But missing component PEle_nominal.
+  In redeclaration of RefrigerantCycleHeatPumpHeating.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/BaseClasses/RefrigerantCycle.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle.RefrigerantCycleHeatPumpHeating#text">10</a>
+ Component context: AixLib.Fluid.HeatPumps.ModularReversible.Modular.RefrigerantCycleHeatPumpHeating
+  Component declared as RefrigerantCycle refCyc in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine">AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.PartialReversibleRefrigerantMachine</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: modular.con.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Component type specifier BaseProperties is a partial type
+  It must be redeclared before being used.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/Interfaces/ConservationEquation.mo, line <a href="Modelica://AixLib.Fluid.Interfaces.ConservationEquation#text:80">81</a>
+ Component context: modular.eva.vol.dynBal.medium
+  Component declared as BaseProperties medium in <a href="Modelica://Modelica.Media.Interfaces.PartialMedium">Modelica.Media.Interfaces.PartialMedium</a>
+Error: Missing base class AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.UHPM
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as Modular modular in <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM</a>
+Warning: Class or component 'useInHeaPum' not found in model RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+  Context: <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'QHea_flow_nominal' not found in model RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+  Context: <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'TCon_nominal' not found in model RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+  Context: <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'TEva_nominal' not found in model RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+  Context: <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'cpCon' not found in model RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+  Context: <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Class or component 'cpEva' not found in model RefrigerantCycleHeatPumpHeating
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating#text">4</a>
+  Context: <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating</a>
+  Attempted modification in <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Systems/ScalableGenerationModules/HeatPump/Modular_UHPM.mo, line 3
+Warning: Redeclaration requires a subtype.
+ But missing component PEle_nominal.
+  In redeclaration of RefrigerantCycleHeatPumpHeating.
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Fluid/HeatPumps/ModularReversible/Modular.mo, line <a href="Modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular.RefrigerantCycleHeatPumpHeating#text">27</a>
+ Component context: AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM.RefrigerantCycleHeatPumpHeating
+  Component declared as Modular modular in <a href="Modelica://AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM">AixLib.Systems.ScalableGenerationModules.HeatPump.Modular_UHPM</a>
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
