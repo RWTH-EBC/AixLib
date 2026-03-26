@@ -4,10 +4,6 @@ model CorG_VDI6007 "correction of the solar gain factor according to VDI6007"
 
   import Modelica.Units.Conversions.to_deg;
 
-//  parameter Real coeff=0.6 "Weight coefficient";
- // parameter Modelica.SIunits.Area A=6 "Area of surface";
-//  parameter Real A = 10 "Area of surface";
-
 // parameters for calculating the transmission correction factor based on VDI_6007 Part-3
   // A0 to A6 are experimental constants VDI 6007 Part-3 page 20
 protected
@@ -67,7 +63,8 @@ equation
     CorG_dir[i]= (Ta2_dir[i]+Qsek2_dir[i])/g_dir0;
 
     //calculating the input thermal energy due to solar radiation
-    solarRadWinTrans[i] = ((SR_input[i].I_dir*CorG_dir[i])+(SR_input[i].I_diff*CorG_diff)+(SR_input[i].I_gr*CorG_gr));
+    solarRadWinTrans[i] =((SR_input[i].HDir*CorG_dir[i]) + (SR_input[i].HDif*
+      CorG_diff) + (SR_input[i].HGrd*CorG_gr))*g;
   end for;
 
 annotation (
@@ -102,11 +99,8 @@ annotation (
 </ul>
 </html>",
     revisions="<html><ul>
-  <li>April 24, 2020, by Konstantina Xanthopoulou:<br/>
-    Removed parameter <code>g</code>.
-  </li>
-  <li style=\"list-style: none\">This is for <a href=
-  \"https://github.com/RWTH-EBC/AixLib/issues/899\">issue 899</a>.
+    <li>January 5, 2026, by Hendrik van der Stok:<br/>
+    Add missing parameter <code>g</code> which was removed in the parent window model.
   </li>
   <li>
     <p>
