@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Media.Refrigerants;
+within AixLib.DataBase.Media.Refrigerants;
 record ThermodynamicStatePropertiesBaseDataDefinition
   "Base data definition for fitting coefficients of thermodynamic state
   properties"

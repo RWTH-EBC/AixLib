@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples;
+within AixLib.Obsolete.Year2024.Fluid.HeatPumps.Examples;
 model HeatPump "Example for the reversible heat pump model."
  extends Modelica.Icons.Example;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

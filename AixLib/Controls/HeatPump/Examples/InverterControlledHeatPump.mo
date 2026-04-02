@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HeatPump.Examples;
+within AixLib.Controls.HeatPump.Examples;
 model InverterControlledHeatPump
   extends Modelica.Icons.Example;
   extends PartialHeatPumpController(redeclare InverterControlledHP hPController(

@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.Examples;
+within AixLib.Airflow.WindowVentilation.Examples;
 model VentilationFlowRateSashOpening
   "Use different empirical expressions to determine the window ventilation flow rate by sash opening"
   extends Modelica.Icons.Example;

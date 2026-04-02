@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.Examples;
+within AixLib.Airflow.WindowVentilation.Examples;
 model VentilationFlowRateSimpleOpening
   "Use different empirical expressions to determine the window ventilation flow rate by simple opening"
   extends Modelica.Icons.Example;

@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.Utilities;
+within AixLib.Airflow.WindowVentilation.Utilities;
 model AngleToWidth
   "Convert from window opening angle to opening width"
   extends Modelica.Blocks.Interfaces.PartialConversionBlock(

@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
+within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls.BaseClasses;
 partial block BoundaryMapIcon "PartialModel for the icon of a boundary map"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;
 

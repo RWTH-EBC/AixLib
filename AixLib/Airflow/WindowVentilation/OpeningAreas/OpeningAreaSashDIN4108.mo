@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.OpeningAreas;
+within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashDIN4108
   "Specified DIN/TS 4108-8: Valid for different opening types"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash;

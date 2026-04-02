@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.Chiller;
+within AixLib.Obsolete.Year2024.DataBase.Chiller;
 record ChillerBaseDataDefinition "Basic chiller data"
     extends AixLib.Obsolete.Year2024.DataBase.HeatPump.HeatPumpBaseDataDefinition(tableQdot_con = tableQdot_eva);
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
+within AixLib.ThermalZones.HighOrder.Validation.ASHRAE140;
 model Case220
   extends AixLib.ThermalZones.HighOrder.Validation.ASHRAE140.Case600(
     redeclare model CorrSolarGainWin =

@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump.PerformanceData;
 model calcCOP
   "To calculate the COP or EER of a device, this model ensures no integration failure will happen"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

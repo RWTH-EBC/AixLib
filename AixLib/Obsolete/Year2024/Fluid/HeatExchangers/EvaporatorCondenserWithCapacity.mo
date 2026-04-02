@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Fluid.HeatExchangers;
+within AixLib.Obsolete.Year2024.Fluid.HeatExchangers;
 model EvaporatorCondenserWithCapacity
   extends AixLib.Fluid.Interfaces.TwoPortHeatMassExchanger(
     redeclare final AixLib.Fluid.MixingVolumes.MixingVolume vol(

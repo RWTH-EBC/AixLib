@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase;
+within AixLib.Obsolete.Year2024.DataBase;
 package Chiller "Collection of Chiller Database Records"
    extends Modelica.Icons.Package;
 

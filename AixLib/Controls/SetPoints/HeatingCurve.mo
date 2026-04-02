@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.SetPoints;
+within AixLib.Controls.SetPoints;
 model HeatingCurve "Model of a heating curve"
   //General
   parameter Boolean use_tableData=true "Choose between tables or function to calculate TSet" annotation (

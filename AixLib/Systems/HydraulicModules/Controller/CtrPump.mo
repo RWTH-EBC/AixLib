@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.Controller;
+within AixLib.Systems.HydraulicModules.Controller;
 block CtrPump "controller for pump circuit"
   //Boolean choice;
 

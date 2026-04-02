@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem.BaseClasses;
+within AixLib.Electrical.PVSystem.BaseClasses;
 partial model PartialIVCharacteristics
 "Partial model for IV Characteristic of a PV module"
 

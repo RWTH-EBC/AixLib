@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data;
+within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal.Data;
 record Unglazed "Unglazed PVT collector"
   extends PhotovoltaicThermalBaseDataDefinition(
     etaEle_zero=0.1052,

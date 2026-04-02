@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
+within AixLib.Controls.HVACAgentBasedControl.CostFunctions.Economic;
 model PV_Variable_Economic_Cost
   extends HVACAgentBasedControl.BaseClasses.PartialCostFunction;
   parameter Real p = 0.30 "Price per kWh of fuel";

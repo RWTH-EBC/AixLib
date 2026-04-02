@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.DataBase.HeatPump;
+within AixLib.Obsolete.Year2024.DataBase.HeatPump;
 record HeatPumpBaseDataDefinition "Basic heat pump data"
     extends Modelica.Icons.Record;
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

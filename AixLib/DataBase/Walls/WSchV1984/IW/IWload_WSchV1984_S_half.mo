@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.WSchV1984.IW;
+within AixLib.DataBase.Walls.WSchV1984.IW;
 record IWload_WSchV1984_S_half
   "Inner wall load-bearing after WSchV1984, for building of type S (schwer), only half"
   extends WallBaseDataDefinition(n(min = 1) = 2 "Number of wall layers", d = {0.0875, 0.015}

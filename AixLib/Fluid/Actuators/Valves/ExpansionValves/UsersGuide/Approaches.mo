@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Actuators.Valves.ExpansionValves.UsersGuide;
+within AixLib.Fluid.Actuators.Valves.ExpansionValves.UsersGuide;
 class Approaches
   "Approaches implemented in the library"
   extends Modelica.Icons.Information;
