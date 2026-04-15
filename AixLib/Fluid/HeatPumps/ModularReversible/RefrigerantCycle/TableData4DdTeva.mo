@@ -4,9 +4,9 @@ model TableData4DdTeva
   extends
     AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.BaseClasses.PartialHeatPumpTableDataND(
     redeclare
-      AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData4D.VCLibPy.VCLibStandardPropaneDeltaTeva
+      AixLib.Fluid.HeatPumps.ModularReversible.Data.TableDataSDF.TableData4DDeltaTEva.VCLibPy.StandardPropane
       datTab,
-    final u_nominal={TCon_nominal,TEva_nominal,y_nominal, dTEva_nominal},
+    final u_nominal={TCon_nominal,TEva_nominal,y_nominal,dTEva_nominal},
     final nDim=4);
   parameter Modelica.Units.SI.TemperatureDifference dTEva_nominal=10
     "Nominal evaporator temperature difference to calculate scaling factor";
@@ -43,39 +43,17 @@ equation
       horizontalAlignment=TextAlignment.Right));
   annotation (                                 Documentation(revisions="<html>
 <ul>
-  <li>
-    <i>August 27, 2024</i> by Fabian Wuellhorst:<br/>
-    First implementation (see issue <a href=
-    \"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1520</a>)
-  </li>
+<li>October 09, 2025, by Hannah Vering:<br>Adapted to include dt Evaporator (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1602\">AixLib #1602</a>) </li>
+<li><i>August 27, 2024</i> by Fabian Wuellhorst:<br>First implementation (see issue <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1520\">AixLib #1520</a>) </li>
 </ul>
 </html>", info="<html>
-<p>
-  This model uses three-dimensional table data possibly given
-  by manufacturers or estimated using other tools, such as VCLibPy, to calculate
-  <code>QCon_flow</code> and <code>PEle</code>.
-</p>
-<p>
-  Note that losses are often implicitly included in measured data.
-  In this case, the frosting modules should be disabled.
-</p>
-
+<p>This model uses four-dimensional table data estimated using tools, such as VCLibPy, to calculate <span style=\"font-family: Courier New;\">QCon_flow</span> and <span style=\"font-family: Courier New;\">PEle</span>. In addition to <a href=\"AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D\">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>, this model uses the secondary side&apos;s temperature spread at the evaporator to estimate efficiency and power. This is mainly relevant for heat pumps with large temperature difference over the heat source such asfor example exhaust air heat pumps due to limited exhaust air flow.</p>
+<p>Note that losses are often implicitly included in measured data. In this case, the frosting modules should be disabled. </p>
 <h4>Scaling factor</h4>
-<p>
-For the scaling factor, the table data for condenser heat flow rate (<code>QConTabDat_flow</code>)
-is evaluated at nominal conditions. Hence, the scaling factor is
-</p>
-<pre>
-scaFac = QCon_flow_nominal/QConTabDat_flow(TCon_nominal, TEva_nominal, y_nominal).
-
-</pre>
-<p>
-Using <code>scaFac</code>, the table data is scaled linearly.
-This implies a constant COP over different design sizes:
-</p>
-<p><code>QCon_flow = scaFac * tabQCon_flow.y</code> </p>
-<p><code>PEle = scaFac * tabPel.y</code></p>
-
-
+<p>For the scaling factor, the table data for condenser heat flow rate (<span style=\"font-family: Courier New;\">QConTabDat_flow</span>) is evaluated at nominal conditions. Hence, the scaling factor is </p>
+<p><span style=\"font-family: Courier New;\">scaFac = QCon_flow_nominal/QConTabDat_flow(TCon_nominal, TEva_nominal, y_nominal, dTEva_nominal).</span></p>
+<p><br>Using <span style=\"font-family: Courier New;\">scaFac</span>, the table data is scaled linearly. This implies a constant COP over different design sizes: </p>
+<p><span style=\"font-family: Courier New;\">QCon_flow = scaFac * tabQCon_flow.y</span> </p>
+<p><span style=\"font-family: Courier New;\">PEle = scaFac * tabPel.y</span> </p>
 </html>"));
 end TableData4DdTeva;

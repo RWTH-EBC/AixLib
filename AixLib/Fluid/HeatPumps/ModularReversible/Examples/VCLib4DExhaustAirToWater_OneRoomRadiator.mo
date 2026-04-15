@@ -1,6 +1,6 @@
 within AixLib.Fluid.HeatPumps.ModularReversible.Examples;
-model VCLibExhaustAirToWater_OneRoomRadiator
-  "Air to water heat pump with 4D data based on VCLib"
+model VCLib4DExhaustAirToWater_OneRoomRadiator
+  "Air to water heat pump with 4D data based on VCLib for exhaust air heat pump."
   extends Modelica.Icons.Example;
   extends BaseClasses.PartialOneRoomRadiator(
     Q_flow_nominal=8000,
@@ -70,7 +70,7 @@ equation
           {60,-200}}, color={0,127,255}));
   annotation (
      __Dymola_Commands(file=
-     "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/VCLibAirToWater_OneRoomRadiator.mos"
+     "modelica://AixLib/Resources/Scripts/Dymola/Fluid/HeatPumps/ModularReversible/Examples/VCLib4DExhaustAirToWater_OneRoomRadiator.mos"
         "Simulate and plot"),
   experiment(
       StartTime=0,
@@ -78,29 +78,14 @@ equation
       Tolerance=1e-08),
   Documentation(
    info="<html>
-<p>
-  This example demonstrates how to use the
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D\">
-  AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData3D</a>
-  refrigerant cycle model. Please check the associated documentation for
-  further information.
-</p>
-
-<p>
-  Please check the documentation of
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.Examples.BaseClasses.PartialOneRoomRadiator\">
-  AixLib.Fluid.HeatPumps.ModularReversible.Examples.BaseClasses.PartialOneRoomRadiator</a>
-  for further information on the example.
-</p>
+<p>This example demonstrates how to use the <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DdTeva\">AixLib.Fluid.HeatPumps.ModularReversible.RefrigerantCycle.TableData4DdTeva</a> refrigerant cycle model. Please check the associated documentation for further information. </p>
+<p>Please check the documentation of <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.Examples.BaseClasses.PartialOneRoomRadiator\">AixLib.Fluid.HeatPumps.ModularReversible.Examples.BaseClasses.PartialOneRoomRadiator</a> for further information on the example. </p>
 </html>", revisions="<html>
 <ul>
-<li>
-  <i>August 27, 2024</i> by Fabian Wuellhorst:<br/>
-  First implementation (see issue <a href=
-  \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>)
-</li>
+<li><i>October 09, 2025</i>, by Hannah Vering:<br>Adjust to 4D data exhaust air HP (see issue&nbsp;<a href=\"https://github.com/RWTH-EBC/AixLib/issues/1602\">AixLib #1602</a>)</li>
+<li><i>August 27, 2024</i> by Fabian Wuellhorst:<br>First implementation (see issue <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">#1576</a>) </li>
 </ul>
 </html>"),
     Diagram(coordinateSystem(extent={{-240,-220},{100,100}})),
     Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
-end VCLibExhaustAirToWater_OneRoomRadiator;
+end VCLib4DExhaustAirToWater_OneRoomRadiator;
