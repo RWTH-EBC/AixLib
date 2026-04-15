@@ -7,15 +7,15 @@ AixLib/Fluid/HeatPumps/ModularReversible/Examples/VCLib4DExhaustAirToWater_OneRo
 2: Could not extract name from line and check correctness, is your type specification correct (full library path)?. Affected line: Sensors.TemperatureTwoPort temOut( redeclare package Medium = AixLib.Media.Air "Moist air", m_flow_nominal=mEva_flow_nominal, T_start=sou.T - heaPum.dTEva_nominal) "Outgoing air temperature of exhaust air system as heat pump source." annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=270, origin={38,-176})));
 
 
+AixLib/Fluid/HeatPumps/ModularReversible/Examples/BaseClasses/PartialOneRoomRadiator.mo
+1: Name 'MediumWat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumWat = AixLib.Media.Water "Medium model for water";
+
+2: Name 'MediumEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumEva = AixLib.Media.Water constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model for evaporator-side fluid";
+
+
 AixLib/Fluid/HeatPumps/ModularReversible/Examples/BaseClasses/OneRoomRadiatorHeatPumpControl.mo
 1: Name 'swiHeaCooYSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Logical.Switch swiHeaCooYSet if witCoo "Switch ySet for heating and cooling" annotation (Placement(transformation( extent={{-10,10},{10,-10}}, origin={30,70}, rotation=0)));
 
 2: Name 'constYSetZer' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Sources.Constant constYSetZer(final k=0) "ySet equals zero" annotation (Placement(transformation(extent={{-10,-10},{10,10}}, rotation=0, origin={30,-18})));
 
 3: Name 'swiYSet' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Y. Affected line: Modelica.Blocks.Logical.Switch swiYSet "If no demand, switch heat pump off" annotation (Placement(transformation( extent={{-10,-10},{10,10}}, rotation=0, origin={70,50})));
-
-
-AixLib/Fluid/HeatPumps/ModularReversible/Examples/BaseClasses/PartialOneRoomRadiator.mo
-1: Name 'MediumWat' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumWat = AixLib.Media.Water "Medium model for water";
-
-2: Name 'MediumEva' contains parts with more/less than 3 characters or which are not part of special cases. Affected parts: Medium. Affected line: replaceable package MediumEva = AixLib.Media.Water constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model for evaporator-side fluid";
