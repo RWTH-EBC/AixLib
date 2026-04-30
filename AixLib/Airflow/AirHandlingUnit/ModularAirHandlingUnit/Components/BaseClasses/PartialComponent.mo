@@ -12,12 +12,18 @@ partial model PartialComponent
   parameter Modelica.Units.SI.Density rhoAir=1.2
     "Density of air"
     annotation(Dialog(tab="Advanced"));
-  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal = 0.01
+  parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
     "nominal mass flow rate"
     annotation(Dialog(group="Nominal conditions"));
-  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")=1
+  parameter Modelica.Units.SI.PressureDifference dp_nominal(displayUnit="Pa")
     "pressure drop at nominal mass flow rate"
     annotation(Dialog(group="Nominal conditions"));
+
+  //Initialization
+  parameter Modelica.Units.SI.Temperature T_start
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
 
   // Variables
   Modelica.Units.SI.SpecificEnthalpy hAirIn
@@ -30,28 +36,29 @@ partial model PartialComponent
         transformation(extent={{-140,50},{-100,90}}), iconTransformation(extent=
            {{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirIn(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "Temperature of incoming air" annotation (Placement(
         transformation(extent={{-140,20},{-100,60}}), iconTransformation(extent=
            {{-120,40},{-100,60}})));
   Modelica.Blocks.Interfaces.RealInput XAirIn(final quantity="MassFraction",
-      final unit="kg/kg") "absolute humidity of incoming air" annotation (
+     final unit="kg/kg") "absolute humidity of incoming air" annotation (
       Placement(transformation(extent={{-140,-10},{-100,30}}),
         iconTransformation(extent={{-120,10},{-100,30}})));
   Modelica.Blocks.Interfaces.RealOutput mAirOut_flow(final quantity="MassFlowRate",
-      final unit="kg/s") "mass flow rate of outgoing air"
+     final unit="kg/s") "mass flow rate of outgoing air"
     annotation (Placement(transformation(extent={{100,70},{120,90}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOut(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of outgoing air" annotation (Placement(
         transformation(extent={{100,40},{120,60}}), iconTransformation(extent={{
             100,40},{120,60}})));
-  Modelica.Blocks.Interfaces.RealOutput XAirOut(final quantity="MassFraction",
-      final unit="kg/kg") "absolute humidity of outgoing air" annotation (
+  Modelica.Blocks.Interfaces.RealOutput XAirOut(
+    final quantity="MassFraction",
+    final unit="kg/kg") "absolute humidity of outgoing air" annotation (
       Placement(transformation(extent={{100,10},{120,30}}), iconTransformation(
           extent={{100,10},{120,30}})));
 

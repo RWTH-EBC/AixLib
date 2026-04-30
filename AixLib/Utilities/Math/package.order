@@ -16,6 +16,7 @@ Interpolate
 InverseXRegularized
 Max
 Min
+MinMax
 MovingAverage
 Polynomial
 PowerLinearized
@@ -30,4 +31,4 @@ Splice
 TrapezoidalIntegration
 Functions
 Examples
-MinMax
+

@@ -78,7 +78,7 @@ equation
   connect(InternalGains_radiative_dyn.port, Room_dyn.starRoom) annotation (Line(points={{-4,112},{18,112},{18,158},{92,158},
           {92,180},{83.36,180},{83.36,201.5}}, color={191,0,0}));
   connect(outsideTemp_dyn.port, Room_dyn.thermOutside)
-    annotation (Line(points={{9,210.5},{31,210.5},{31,221.59},{59,221.59}}, color={191,0,0}));
+    annotation (Line(points={{9,210.5},{31,210.5},{31,222},{59,222}},       color={191,0,0}));
   connect(Room_dyn.AirExchangePort, AirExchangeRate_dyn.y) annotation (Line(points={{56.9,
           215.748},{52,215.748},{52,216},{46,216},{46,120.5},{41.65,120.5}},
                                               color={0,0,127}));

@@ -168,55 +168,55 @@ record ZoneBaseRecord "Base record definition for zone records"
   // Air Exchange
   parameter Boolean useConstantACHrate=false
     "Choose if a constant infiltration rate is used" annotation(Dialog(tab="Air exchange"));
-  parameter Real baseACH "Base ACH rate for ventilation controller" annotation(Dialog(tab="Air exchange"));
-  parameter Real maxUserACH "Additional ACH value for max. user activity" annotation(Dialog(tab="Air exchange", enable=useConstantACHrate==false));
+  parameter Real baseACH "Base ACH rate for ventilation controller" annotation(Dialog(tab="Air exchange", group="Natural air exchange"));
+  parameter Real maxUserACH "Additional ACH value for max. user activity" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));
   parameter Real maxOverheatingACH[2]
-    "Additional ACH value when overheating appears, transition range" annotation(Dialog(tab="Air exchange", enable=useConstantACHrate==false));
+    "Additional ACH value when overheating appears, transition range" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));
   parameter Real maxSummerACH[3]
-    "Additional ACH in summer, Tmin, Tmax" annotation(Dialog(tab="Air exchange", enable=useConstantACHrate==false));
+    "Additional ACH in summer, Tmin, Tmax" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));
   parameter Real winterReduction[3]
-    "Reduction factor of userACH for cold weather";
+    "Reduction factor of userACH for cold weather" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));
   parameter Boolean withAHU
-    "Zone is connected to central air handling unit";
+    "Zone is connected to central air handling unit" annotation(Dialog(tab="Air exchange", group="Mechanical air exchange", enable=useConstantACHrate==false));
   parameter Real minAHU(unit="m3/(h.m2)")
-    "Minimum specific air flow supplied by the AHU";
+    "Minimum specific air flow supplied by the AHU" annotation(Dialog(tab="Air exchange", group="Mechanical air exchange", enable=useConstantACHrate==false));
   parameter Real maxAHU(unit="m3/(h.m2)")
-    "Maximum specific air flow supplied by the AHU";
+    "Maximum specific air flow supplied by the AHU" annotation(Dialog(tab="Air exchange", group="Mechanical air exchange", enable=useConstantACHrate==false));
+
+  // Heating and Cooling
+  parameter Boolean withIdealThresholds=false
+    "Sets if the threshold temperatures for ideal heater and cooler should be used" annotation(Dialog(tab="Energy Supply"));
+  parameter Boolean withFraRadConvHeatTransfer=false
+    "Sets if the heat transfer is seperated into radiative and convective heat transfer" annotation(Dialog(tab="Energy Supply"));
+  parameter Boolean withDampedHeatTransfer=false
+    "Sets if inert behaviour of thermal heat transfer is considered" annotation(Dialog(tab="Energy Supply"));
 
   // Heating
-  parameter Real hHeat "Upper limit controller output";
-  parameter Real lHeat "Lower limit controller output";
-  parameter Real KRHeat "Gain of the controller";
-  parameter Modelica.Units.SI.Time TNHeat "Time constant of the controller";
-  parameter Boolean HeaterOn "Use heater component";
-  parameter Modelica.Units.SI.Temperature TThresholdHeater
-    "Threshold temperature below ideal heater is used" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true and withIdealThresholds==true));
+  parameter Boolean HeaterOn=true "Use heater component" annotation(Dialog(tab="Energy Supply", group="Heating"));
+  parameter Real hHeat "Upper limit of heating controller output" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true));
+  parameter Real lHeat "Lower limit of heating controller output" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true));
+  parameter Real KRHeat "Gain of heating controller" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true));
+  parameter Modelica.Units.SI.Time TNHeat "Time constant of the heating controller" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true));
+  parameter Modelica.Units.SI.Temperature TThresholdHeater "Threshold temperature below ideal heater is used" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true and withIdealThresholds==true));
+  parameter Real FraRadHea(min=0,max=1)=0 "Fraction of heating transfer to radiation" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true and withFraRadConvHeatTransfer==true));
+  parameter Real kDampedTransferHea=1 "Gain of PT1 for damped heating transfer" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true and withDampedHeatTransfer==true));
+  parameter Modelica.Units.SI.Time TauDampedTransferHea=1 "Time constant of PT1 for damped heating transfer" annotation(Dialog(tab="Energy Supply", group="Heating", enable=HeaterOn==true and withDampedHeatTransfer==true));
 
   // Cooling
-  parameter Boolean CoolerOn=true
-                             "Use chiller component" annotation(Dialog(tab="Energy Supply", group="Cooling"));
-  parameter Real hCool "Upper limit controller output" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
-  parameter Real lCool "Lower limit controller output" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
-  parameter Real KRCool "Gain of the controller" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
-  parameter Modelica.Units.SI.Time TNCool "Time constant of the controller" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
-  parameter Modelica.Units.SI.Temperature TThresholdCooler
-    "Threshold temperature above ideal cooler is used" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true and withIdealThresholds==true));
-
-  // Heating & Cooling
-  parameter Boolean withIdealThresholds=false
-    "Sets if the threshold temperatures for ideal heater and cooler should be used";
-  parameter Real traSysHeatK "Gain for PT1 for damped heating transfer";
-  parameter Modelica.Units.SI.Time traSysHeatT
-    "Time Constant for PT1 for damped heating transfer";
-  parameter Real traSysCoolK "Gain for PT1 for damped cooling transfer";
-  parameter Modelica.Units.SI.Time traSysCoolT
-    "Time Constant for PT1 for damped cooling transfer";
-  parameter Real traSysFraHeaRad "Fraction of heat transfer to radiation";
-  parameter Real traSysFraCooRad "Fraction of cool transfer to radiation";
+  parameter Boolean CoolerOn=true "Use chiller component" annotation(Dialog(tab="Energy Supply", group="Cooling"));
+  parameter Real hCool "Upper limit cooling controller output" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
+  parameter Real lCool "Lower limit cooling controller output" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
+  parameter Real KRCool "Gain of the cooling controller" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
+  parameter Modelica.Units.SI.Time TNCool "Time constant of the cooling controller" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true));
+  parameter Modelica.Units.SI.Temperature TThresholdCooler "Threshold temperature above ideal cooler is used" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true and withIdealThresholds==true));
+  parameter Real FraRadCoo(min=0,max=1)=0 "Fraction of cooling transfer to radiation" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true and withFraRadConvHeatTransfer==true));
+  parameter Real kDampedTransferCoo=1 "Gain of PT1 for damped cooling transfer" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true and withDampedHeatTransfer==true));
+  parameter Modelica.Units.SI.Time TauDampedTransferCoo=1 "Time Constant of PT1 for damped cooling transfer" annotation(Dialog(tab="Energy Supply", group="Cooling", enable=CoolerOn==true and withDampedHeatTransfer==true));
 
   // Initialization
   parameter Modelica.Units.SI.Temperature T_start "Initial temperature" annotation(Dialog(tab="Initialization"));
-                                                                                     annotation(Documentation(info="<html><p>
+
+annotation(Documentation(info="<html><p>
   be used\"), Documentation(info=\"
 </p>
 <p>
@@ -235,6 +235,9 @@ record ZoneBaseRecord "Base record definition for zone records"
   \"https://github.com/RWTH-EBC/TEASER\">https://github.com/RWTH-EBC/TEASER</a>
 </p>
 <ul>
+  <li>January, 2026, by Jonatan Höpp:<br/>
+    Added parameters for inert heat transfer and mechanical ventilation via AHU.
+  </li>
   <li>May 5, 2023, by Philip Groesdonk:<br/>
     Additional soil temperature and neighboured zone border parameters.
   </li>

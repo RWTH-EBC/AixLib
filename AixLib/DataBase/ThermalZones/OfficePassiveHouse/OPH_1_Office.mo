@@ -75,27 +75,20 @@ record OPH_1_Office "Office zone of office building"
     maxAHU=12,
     maxIrr={100,100,100,100,0},
     shadingFactor={0.7,0.7,0.7,0.7,0},
-    hHeat=100000,
+    hHeat=167500,
     lHeat=0,
     KRHeat=1000,
-    TNHeat=5*60,
+    TNHeat=1,
     HeaterOn=true,
     hCool=0,
-    lCool=-100000,
+    lCool=-1,
     heaLoadFacOut=0,
     heaLoadFacGrd=0,
     KRCool=1000,
-    TNCool=5*60,
+    TNCool=1,
     CoolerOn=false,
     TThresholdHeater=273.15 + 15,
-    TThresholdCooler=273.15 + 22,
-    withIdealThresholds=false,
-    traSysHeatK=1,
-    traSysHeatT=0.5*3600,
-    traSysCoolK=1,
-    traSysCoolT=0.5*3600,
-    traSysFraHeaRad=0.5,
-    traSysFraCooRad=0.5);
+    TThresholdCooler=273.15 + 22);
 
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>

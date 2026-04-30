@@ -261,5 +261,15 @@ partial model PartialModularAHU "Partial model for modular ahu"
         Line(points={{64,-20},{72,-24},{64,-28}}, color={0,0,0}),
         Line(points={{80,-40},{72,-44},{80,-48}}, color={0,0,0}),
         Line(points={{64,-40},{72,-44},{64,-48}}, color={0,0,0})}), Diagram(
-        coordinateSystem(preserveAspectRatio=false)));
+        coordinateSystem(preserveAspectRatio=false)),
+    Documentation(info="<html>
+    <p>Partial model of modular air handling unit (AHU).
+    </p>
+  </html>", revisions="<html>
+  <ul>
+    <li>January, 2026 by Jonatan Höpp:<br/>
+    First implementation
+    </li>
+  </ul>
+</html>"));
 end PartialModularAHU;

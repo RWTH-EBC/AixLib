@@ -10,19 +10,11 @@ model PartialHumidifier
   parameter Boolean use_X_set = false
     "if true, a set humidity is used to calculate the necessary mass flow rate";
 
-  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal=0.001
+  parameter Modelica.Units.SI.MassFlowRate mWat_flow_nominal
     "nominal water/steam flow rate of humidifier"
     annotation(Dialog(enable=not use_X_set,group="Nominal conditions"));
-  parameter Modelica.Units.SI.Temperature TWatIn=293.15
+  parameter Modelica.Units.SI.Temperature TWatIn
     "temperature of liquid water added to humidifier";
-
-  parameter Modelica.Units.SI.Temperature TSteam=373.15
-    "Temperature of steam in steam humidifier"
-    annotation (Dialog(
-      tab="Advanced",
-      group="Vaporization"));
-
-  parameter Real k = 500 "exponent for humidification degree  in spray humidifier";
 
   // Variables
   Modelica.Blocks.Interfaces.RealInput u(min=0, max=1) if not use_X_set

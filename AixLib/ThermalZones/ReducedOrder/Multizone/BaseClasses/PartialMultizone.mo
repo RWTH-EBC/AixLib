@@ -62,7 +62,7 @@ partial model PartialMultizone "Partial model for multizone models"
     rotation=90,
     origin={60,-110})));
   Modelica.Blocks.Interfaces.RealOutput TAir[numZones](
-    each start = 293.15,
+    each start = T_start,
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
     each displayUnit="degC") if ASurTot > 0 or VAir > 0
@@ -70,7 +70,7 @@ partial model PartialMultizone "Partial model for multizone models"
     annotation (Placement(transformation(extent={{100,71},{120,91}}),
         iconTransformation(extent={{80,19},{100,40}})));
   Modelica.Blocks.Interfaces.RealOutput TRad[numZones](
-    each start = 293.15,
+    each start = T_start,
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
     each displayUnit="degC") if ASurTot > 0
@@ -166,7 +166,7 @@ partial model PartialMultizone "Partial model for multizone models"
               "Water")), Dialog(enable=use_pools_tot,tab="Moisture", group="Pools"));
 
   Modelica.Blocks.Interfaces.RealInput TSetHeat[numZones](
-    each start = 293.15,
+    each start = T_start,
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
     each displayUnit="degC",
@@ -181,7 +181,7 @@ partial model PartialMultizone "Partial model for multizone models"
 
 
   Modelica.Blocks.Interfaces.RealInput TSetCool[numZones](
-    each start = 293.15,
+    each start = T_start,
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
     each displayUnit="degC",

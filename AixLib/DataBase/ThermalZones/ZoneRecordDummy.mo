@@ -108,22 +108,21 @@ record ZoneRecordDummy "This is a dummy record with non-physical parameter value
     CoolerOn=false,
     TThresholdHeater=Modelica.Constants.eps,
     TThresholdCooler=2*Modelica.Constants.eps,
-    withIdealThresholds=false,
-    traSysHeatK=1,
-    traSysHeatT=1,
-    traSysCoolK=1,
-    traSysCoolT=1,
-    traSysFraHeaRad=0,
-    traSysFraCooRad=0);
+    withIdealThresholds=false);
 
   annotation (Documentation(revisions="<html><ul>
+  <li>January, 2026, by Jonatan Höpp:<br/>
+    Added parameters for inert heat transfer and mechanical ventilation via AHU.
+  </li>
   <li>May 5, 2023, by Philip Groesdonk:<br/>
     Additional soil temperature and neighboured zone border parameters.
-  </li><i>March 20, 2020 by Philipp Mehrfeld:</i><br/>
+  </li>
+  <li>March 20, 2020 by Philipp Mehrfeld:</i><br/>
   <a href=
   \"https://github.com/RWTH-EBC/AixLib/issues/879\">#879</a>Implement
   dummy zone record to assign this record as default parameter value,
   where unavoidable.
+  </li>  
 </ul>
 </html>"));
 end ZoneRecordDummy;

@@ -1,6 +1,10 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit;
 model ModularAHU "Modular AHU"
-  extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU;
+  extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU(
+    etaFanEta=0.7,
+    etaFanOda=0.7,
+    dpFanEta=800,
+    dpFanOda=800);
 
   // Components
   Components.HeatRecoverySystem heaRecSys(
@@ -359,6 +363,9 @@ equation
   </li>
   <li>February, 2025 by Martin Kremer:<br/>
     Impleted some controler and minor bug fixes.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+  Moved parts of the model to partial model
   </li>
 </ul>
 </html>"));

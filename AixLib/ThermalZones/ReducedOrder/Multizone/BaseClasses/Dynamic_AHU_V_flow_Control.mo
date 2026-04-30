@@ -238,7 +238,15 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>Model that may dynamically control the volume flow per thermal zone through the air handling unit to support heating or cooling in thermal zones in the <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
+    <p>Model that may dynamically control the volume flow per thermal zone through 
+    air handling unit to support heating or cooling in thermal zones in the 
+    <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
 <p>Control paramaters need to be adjusted accordingly.</p>
+</html>", revisions="<html>
+<ul>
+<li>January, 2026 by Jonatan Höpp:<br/>
+    First Implementation.
+  </li>
+</ul>
 </html>"));
 end Dynamic_AHU_V_flow_Control;

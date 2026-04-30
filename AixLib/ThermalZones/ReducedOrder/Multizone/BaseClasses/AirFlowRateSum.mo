@@ -103,6 +103,9 @@ m3/s")}),
   \"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
 </p>
 <ul>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Adapted to new AHU and associated dynamic AHU control
+  </li>
   <li>September 27, 2016, by Moritz Lauster:<br/>
     Moved to fit to new Annex60 structure.
   </li>

@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model Heater
   "Idealized model for heater containing heat capacity of heat exchanger"
   extends Components.BaseClasses.PartialHeater;
@@ -32,6 +32,9 @@ equation
 <ul>
   <li>April, 2019, by Martin Kremer:<br/>
     First implementation.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"));

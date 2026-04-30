@@ -1,26 +1,39 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerCooler
   "Controler for cooler"
+
+  // Initialization
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+  // Initialization
+  parameter Modelica.Blocks.Interfaces.RealInput X_start = 0.01
+    "Initial absolute humidity" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+
+  // Parameters
   parameter Boolean activeDehumidifying=false
     "true if active dehumidifying is done in cooler";
-  Modelica.Blocks.Interfaces.RealInput xSupSet(start=0.007)
+  Modelica.Blocks.Interfaces.RealInput xSupSet(start=X_start)
     "max. set value for absolute humidity of supply air" annotation (Placement(
         transformation(extent={{-140,40},{-100,80}}), iconTransformation(extent=
            {{-120,50},{-100,70}})));
-  Modelica.Blocks.Interfaces.RealInput TsupSet(unit="K", start=293.15)
+  Modelica.Blocks.Interfaces.RealInput TsupSet(unit="K", start=T_start)
     "set value for temperature at supply air outlet" annotation (Placement(
         transformation(extent={{-140,-40},{-100,0}}),   iconTransformation(
           extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-20})));
-  Modelica.Blocks.Interfaces.RealInput XIn(start=0.01)
+  Modelica.Blocks.Interfaces.RealInput XIn(start=X_start)
     "measured value for absolute humidity at cooler inlet" annotation (
       Placement(transformation(extent={{-140,-80},{-100,-40}}),
         iconTransformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
         origin={-110,-60})));
-  Modelica.Blocks.Interfaces.RealOutput TcoolerSet(unit="K", start=293.15)
+  Modelica.Blocks.Interfaces.RealOutput TcoolerSet(unit="K", start=T_start)
     "Connector of Real output signal" annotation (Placement(transformation(
           extent={{100,-10},{120,10}}), iconTransformation(extent={{100,-10},{120,
             10}})));
@@ -91,6 +104,9 @@ If acitve dehumidification is implemented, it chooses between the minimum temper
 <ul>
   <li>February, 2025 by Martin Kremer:<br/>
     Implemented.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"));

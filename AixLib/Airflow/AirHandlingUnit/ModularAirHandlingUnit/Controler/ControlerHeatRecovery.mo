@@ -2,25 +2,33 @@ within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerHeatRecovery
   "controler for heat recovery system with fixed efficiency"
 
+  // Initialization
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+
+  // Parameters
   parameter Modelica.Units.SI.TemperatureDifference dT_min
     "minimum temperature difference for which the hrs is switched off";
 
+  // Interfaces
   Modelica.Blocks.Interfaces.RealInput TAirInEta(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of incoming exhaust air" annotation (
       Placement(transformation(extent={{-140,40},{-100,80}}),
         iconTransformation(extent={{-120,50},{-100,70}})));
   Modelica.Blocks.Interfaces.RealInput TAirInOda(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of incoming otudoor air" annotation (
       Placement(transformation(extent={{-140,-80},{-100,-40}}),
         iconTransformation(extent={{-120,-70},{-100,-50}})));
   Modelica.Blocks.Interfaces.RealInput TSet(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -45,7 +53,7 @@ model ControlerHeatRecovery
     "opening of bypass (1: fully open, 0: fully closed)"
     annotation (Placement(transformation(extent={{100,-10},{120,10}})));
   Modelica.Blocks.Interfaces.RealInput TAirOut(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -119,6 +127,9 @@ The output is the bypass opening value between zero (closed) and and one (fully 
 <ul>
   <li>February, 2025 by Martin Kremer:<br/>
     Implemented.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"));

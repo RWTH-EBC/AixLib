@@ -59,20 +59,21 @@ equation
 annotation (defaultComponentName="max",
 Documentation(info="<html>
 <p>
-Outputs the maximum of the vector.
+Outputs the minimum and maximum of a vector input including the
+respective vetcor indices of the min/max value.
 </p>
 </html>",
 revisions="<html>
 <ul>
-<li>
-April 3, 2009, by Michael Wetter:<br/>
-First implementation.
-</li>
+
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    First implementation
+  </li>
 </ul>
 </html>"), Icon(graphics={Text(
           extent={{-74,90},{70,-70}},
           textColor={0,0,255},
           textString="max
-min")}),
-    __Dymola_LockedEditing="Locked");
+          min")}),
+          __Dymola_LockedEditing="Locked");
 end MinMax;

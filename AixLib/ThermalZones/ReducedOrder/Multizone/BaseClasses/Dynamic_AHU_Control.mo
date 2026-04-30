@@ -157,6 +157,13 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
-<p>Model that combines dynamic volume flow and air supply temperature control of the air handling unit in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
+    <p>Model that combines dynamic volume flow and air supply temperature control 
+    of the air handling unit in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
+</html>", revisions="<html>
+<ul>
+<li>January, 2026 by Jonatan Höpp:<br/>
+    First Implementation.
+  </li>
+</ul>
 </html>"));
 end Dynamic_AHU_Control;

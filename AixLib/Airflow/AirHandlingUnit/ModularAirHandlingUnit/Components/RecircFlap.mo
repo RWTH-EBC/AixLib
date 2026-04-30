@@ -1,7 +1,13 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model RecircFlap "model for recirculating flap"
 
-  // parameters
+  // Initialization
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+
+  // Parameters
   parameter Modelica.Units.SI.SpecificHeatCapacity cpAir = 1005
     "specific heat capacity of dry air"
     annotation(Dialog(tab="Advanced"));
@@ -33,6 +39,7 @@ model RecircFlap "model for recirculating flap"
     final m_flow_nominal = m_flow_nominal,
     final dp_nominal = dp_nominal);
 
+  // Interfaces
   Modelica.Blocks.Interfaces.RealInput flapPos "position of recirculating flap"
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
@@ -41,12 +48,13 @@ model RecircFlap "model for recirculating flap"
         extent={{-10,-10},{10,10}},
         rotation=90,
         origin={-50,-100})));
-  Modelica.Blocks.Interfaces.RealInput mAirInEta_flow(final quantity="MassFlowRate",
-      final unit="kg/s") "mass flow rate of incoming exhaust air" annotation (
+  Modelica.Blocks.Interfaces.RealInput mAirInEta_flow(
+    final quantity="MassFlowRate",
+    final unit="kg/s") "mass flow rate of incoming exhaust air" annotation (
       Placement(transformation(extent={{140,60},{100,100}}), iconTransformation(
           extent={{120,70},{100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirInEta(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "mass flow rate of incoming exhaust air" annotation (
@@ -60,7 +68,7 @@ model RecircFlap "model for recirculating flap"
       final unit="kg/s") "mass flow rate of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,70},{-120,90}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutEta(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of outgoing exhaust air"
@@ -73,7 +81,7 @@ model RecircFlap "model for recirculating flap"
       Placement(transformation(extent={{-140,-100},{-100,-60}}),
         iconTransformation(extent={{-120,-90},{-100,-70}})));
   Modelica.Blocks.Interfaces.RealInput TAirInOda(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "Temperature of incoming outdoor air" annotation (
@@ -87,7 +95,7 @@ model RecircFlap "model for recirculating flap"
       final unit="kg/s") "mass flow rate of outgoing mixed air"
     annotation (Placement(transformation(extent={{100,-90},{120,-70}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutOda(
-    start=293.15,
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "temperature of outgoing mixed air" annotation (
@@ -180,6 +188,9 @@ annotation (
   <li>May 2019, by Martin Kremer:<br/>
     Changing variable names. Adding possibility for other relation
     between flap position and volume flow through flap than linear.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),

@@ -29,11 +29,8 @@ equation
 <p>Dummy class, when no modular air handling unit is used in <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.</p>
 </html>", revisions="<html>
 <ul>
-  <li>April, 2020 by Martin Kremer:<br/>
+<li>January, 2026 by Jonatan Höpp:<br/>
     First Implementation.
-  </li>
-  <li>February, 2025 by Martin Kremer:<br/>
-    Impleted some controler and minor bug fixes.
   </li>
 </ul>
 </html>"));

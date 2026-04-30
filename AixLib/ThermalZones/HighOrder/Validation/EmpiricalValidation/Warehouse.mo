@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
+within AixLib.ThermalZones.HighOrder.Validation.EmpiricalValidation;
 model Warehouse
   import ModelicaServices;
     extends Modelica.Icons.Example;
@@ -136,8 +136,8 @@ equation
         points={{15.65,-81.5},{37.6,-81.5},{37.6,-67.2}}, color={0,0,127}));
   connect(Source_TsetH.y, idealHeaterCooler.setPointHeat) annotation (Line(
         points={{66.35,-81.5},{42.2,-81.5},{42.2,-67.2}}, color={0,0,127}));
-  connect(outsideTemp.port, room.thermOutside) annotation (Line(points={{-27,
-          90.5},{2,90.5},{2,41.28}},     color={191,0,0}));
+  connect(outsideTemp.port, room.thermOutside) annotation (Line(points={{-27,90.5},
+          {2,90.5},{2,42}},              color={191,0,0}));
   connect(roomTempExpression.y, to_degC.u) annotation (Line(points={{106.7,90},{110,90},{110,91},{127,91}}, color={0,0,127}));
   connect(roomTemp, to_degC.y) annotation (Line(points={{158,92},{142,92},{142,91},{138.5,91}}, color={0,0,127}));
   connect(ambientTempExpression.y, to_degC1.u) annotation (Line(points={{106.7,74},{110,74},{110,75},{127,75}}, color={0,0,127}));

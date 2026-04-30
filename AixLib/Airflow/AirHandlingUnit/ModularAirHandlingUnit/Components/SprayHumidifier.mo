@@ -1,7 +1,10 @@
-﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SprayHumidifier "Idealized model of a spray humidifier"
   extends
     AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
+
+  // Parameters
+  parameter Real k = 500 "exponent for humidification degree  in spray humidifier";
 
   // Variables
   Modelica.Units.SI.SpecificEnthalpy hWatIn "specific enthalpy of incoming water";

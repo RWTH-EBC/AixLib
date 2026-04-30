@@ -2,15 +2,7 @@ within AixLib.ThermalZones.ReducedOrder.Multizone;
 model MultizoneEquipped
   "Multizone model with ideal heater and cooler and AHU"
   extends
-    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone(
-    redeclare AixLib.DataBase.ThermalZones.ZoneRecordDummy zoneParam,
-    use_moisture_balance=true,
-    internalGainsMode=1,
-    numZones=1,
-    ASurTot=12744.27,
-    ABuilding=8375,
-    VAir=33500,
-    redeclare package Medium = AixLib.Media.Air "Moist air");
+    AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.PartialMultizone;
 
   replaceable model AHUMod =
       AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU
@@ -390,8 +382,6 @@ equation
     connect(AHU, dynamic_AHU_Control.AHU_In) annotation (Line(points={{-100,10},{-98,
           10},{-98,12},{-94,12},{-94,10},{-80,10},{-80,-40},{-56,-40}}, color={0,
           0,127}));
-    for i in 1:numZones loop
-    end for;
   end if;
 
   if (ASurTot > 0 or VAir > 0) and use_moisture_balance then
@@ -422,10 +412,6 @@ equation
         points={{10.75,12},{18,12},{18,24},{10.75,24}}, color={0,0,127}));
   end if;
 
-  if coolAHU then
-  end if;
-
-
   connect(Tmeasure.port, zone.intGainsConv) annotation (Line(points={{-76,-51},
           {-86,-51},{-86,-78},{86,-78},{86,70.32},{80.42,70.32}}, color={191,0,
           0}));
@@ -455,6 +441,10 @@ equation
           fillColor={212,221,253},
           fillPattern=FillPattern.Solid,
           textString="AHU")}), Documentation(revisions="<html><ul>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Changed AHU to new modular AHU model. 
+    Integrated associated dynamic AHU control models.
+  </li>
   <li>November 20, 2020, by Katharina Breuer:<br/>
     Combine thermal zone models
   </li>
@@ -475,7 +465,7 @@ equation
   </li>
 </ul>
 </html>", info="<html>
-<p>This is a ready-to-use multizone model with a variable number of thermal zones. It adds heater/cooler devices and an air handling unit to <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>. </p>
+<p>This is a ready-to-use multizone model with a variable number of thermal zones. It adds heater/cooler devices and a dynamic air handling unit to <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.Multizone\">AixLib.ThermalZones.ReducedOrder.Multizone.Multizone</a>. It defines connectors and a replaceable vector of <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> models. Most connectors are conditional to allow conditional modifications according to parameters or to pass-through conditional removements in <a href=\"AixLib.ThermalZones.ReducedOrder.ThermalZone\">AixLib.ThermalZones.ReducedOrder.ThermalZone</a> and subsequently in <a href=\"AixLib.ThermalZones.ReducedOrder.RC.FourElements\">AixLib.ThermalZones.ReducedOrder.RC.FourElements</a>. </p>
 <p>The volume flow per zone and overall air supply temperature of the air handling unit may be dynamically controlled via <a href=\"AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control\">AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.Dynamic_AHU_Control</a> to control air heating and cooling of thermal zones. </p>
 <p>Moisture and CO2 balances are conditional submodels which can be activated by setting use_moisture_balance or use_C_flow true. </p>
 <h4>Typical use and important parameters </h4>

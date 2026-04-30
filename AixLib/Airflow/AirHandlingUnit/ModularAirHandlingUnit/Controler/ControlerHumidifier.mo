@@ -1,7 +1,16 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Controler;
 model ControlerHumidifier "controler for humidifier"
+    // Initialization
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+
+  // Parameters
   parameter Boolean use_PhiSet = false
     "true if relative humidity is controlled, otherwise absolute humidity is controlled";
+
+  // Interfaces
   Modelica.Blocks.Interfaces.RealInput Xset if not use_PhiSet
     "set value for absolute humidity at cooler outlet"
     annotation (Placement(transformation(extent={{-140,-30},{-100,10}}),
@@ -12,7 +21,7 @@ model ControlerHumidifier "controler for humidifier"
         iconTransformation(extent={{-120,-70},{-100,-50}})));
   AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.RelToAbsHum x_pTphi if use_PhiSet
     annotation (Placement(transformation(extent={{-60,-24},{-40,-44}})));
-  Modelica.Blocks.Interfaces.RealInput Tset(start=293.15) if use_PhiSet
+  Modelica.Blocks.Interfaces.RealInput Tset(start=T_start) if use_PhiSet
     "set value for temperature at cooler outlet"
     annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
         iconTransformation(extent={{-120,50},{-100,70}})));
@@ -62,6 +71,9 @@ equation
 <ul>
   <li>February, 2025 by Martin Kremer:<br/>
     Implemented.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"));

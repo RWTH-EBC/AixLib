@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.ReducedOrder.ThermalZone;
+within AixLib.ThermalZones.ReducedOrder.ThermalZone;
 model ThermalZone "Thermal zone containing moisture balance"
   extends
     AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.PartialThermalZone;
@@ -164,8 +164,7 @@ model ThermalZone "Thermal zone containing moisture balance"
     "Calculates direct solar radiation on titled surface for roof"
     annotation (Placement(transformation(extent={{-84,82},{-68,98}})));
 
-  Utilities.Sources.HeaterCooler.HeaterCoolerPIFraRadDamped
-                                                heaterCooler(
+  Utilities.Sources.HeaterCooler.HeaterCoolerPI heaterCooler(
     each h_heater=h_heater,
     each l_heater=l_heater,
     each KR_heater=KR_heater,
@@ -943,6 +942,9 @@ end if;
   connect(heaterCooler.heaPorRad, ROM.intGainsRad) annotation (Line(points={{82.9,
           33},{92,33},{92,82},{86,82}}, color={191,0,0}));
    annotation (Documentation(revisions="<html><ul>
+   <li>October, 2024, by Jonatan Höpp:<br/>
+   Changed ideal heater/cooler model to consider inert behaviour of thermal heat transfer.
+  </li>    
   <li>April 20, 2023, by Philip Groesdonk:<br/>
   Added five element RC model (for heat exchange with neighboured zones) and
   an option choice for set temperatures of soil, i.e. floor element outdoor 
