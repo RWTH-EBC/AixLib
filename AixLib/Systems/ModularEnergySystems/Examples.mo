@@ -3,19 +3,6 @@ package Examples "Holds examples for the modular energy system units"
   extends Modelica.Icons.ExamplesPackage;
   model HeatPump
 
-    Modules.ModularHeatPump.ModularHeatPump_Water_old modularHeatPumpNew(
-      THotDes=591.65,
-      TSourceDes=551.3,
-      QDes=3*QNom,
-      DeltaTCon=DeltaTCon,
-      TCon_start=313.15,
-      TSourceInternal=true,
-      redeclare package MediumEvap = AixLib.Media.Water,
-      use_non_manufacturer=true,
-      redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water_R410A,
-      FreDep=false)
-      annotation (Placement(transformation(extent={{40,-16},{60,4}})));
     .AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus
       annotation (Placement(transformation(extent={{-20,-30},{10,4}}),
           iconTransformation(extent={{-8,-22},{10,4}})));
@@ -387,16 +374,6 @@ package Examples "Holds examples for the modular energy system units"
   end Test;
 
   model HeatPump_Basic
-    Modules.ModularHeatPump.ModularHeatPump_Water_old modularHeatPump(
-      THotDes(displayUnit="K") = 308.15,
-      TSourceDes(displayUnit="K") = 283.15,
-      QDes=54730,
-      DeltaTCon=5,
-      TSourceInternal=false,
-      dpInternal=10000,
-      redeclare model PerDataMainHP =
-          AixLib.DataBase.HeatPump.PerformanceData.Generic_Water_R410A)
-      annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
     Fluid.Sources.Boundary_pT        bou(
       redeclare package Medium = AixLib.Media.Water,
       T=303.15,
