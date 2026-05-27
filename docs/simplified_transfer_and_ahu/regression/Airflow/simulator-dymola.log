@@ -314,13 +314,23 @@ savelog("AixLib.Airflow.WindowVentilation.Examples.VentilationFlowRateSimpleOpen
 
 rCheck = checkModel("AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU");
 Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU
-Error: Class or component 'TSteam' not found in humidifier hum
-  File: /tmp/tmp-AixLib-1-1q3kx7ke/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/ModularAHU.mo, line 37
- Component context: modularAHU.hum
-  Component declared as humidifier hum in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU
-  Attempted modification in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU.
-  Near file: /tmp/tmp-AixLib-1-1q3kx7ke/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 45
-Definition missing in Components.SprayHumidifier.
+Warning: The following parameters don't have any value, only a start value:
+    modularAHU.coo.T_start(start = 288.15)
+    modularAHU.fanEta.T_start(start = 288.15)
+    modularAHU.fanOda.T_start(start = 288.15)
+    modularAHU.hea.T_start(start = 288.15)
+ 
+The model has the same number of unknowns and equations: 454
+The model could not be deduced to be symbolically well-posed.
+The model has
+  436+2*ahu.sample.n
+scalar unknowns and
+  435+(if  not ahu.use_Vflow_in_extractAir then 1 else 0)+ahu.sample.n+(if  not   modularAHU.coo.humRat.use_p_in then 1 else 0)+(if modularAHU.conHeaRecSys.conPID.reset   <> AixLib.Types.Reset.Input then 1 else 0)+(if modularAHU.conHeaRecSys.conPID1.reset   <> AixLib.Types.Reset.Input then 1 else 0)+(if  not modularAHU.conCoo.pWat.use_p_in   then 1 else 0)+(if  not modularAHU.cooling and  not modularAHU.dehumidifying   then 1 else 0)+(if  not modularAHU.heating and  not modularAHU.dehumidifying   then 1 else 0)+(if  not modularAHU.humidifying then 1 else 0)+(if (if   modularAHU.conHeaRecSys.conPID.reset == AixLib.Types.Reset.Disabled then   modularAHU.conHeaRecSys.conPID.reset else AixLib.Types.Reset.Input) <>   AixLib.Types.Reset.Input then 1 else 0)+(if (if modularAHU.conHeaRecSys.conPID.reset   == AixLib.Types.Reset.Disabled then modularAHU.conHeaRecSys.conPID.reset   else AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)+  (if (if modularAHU.conHeaRecSys.conPID1.reset == AixLib.Types.Reset.Disabled   then modularAHU.conHeaRecSys.conPID1.reset else AixLib.Types.Reset.Input) <>   AixLib.Types.Reset.Input then 1 else 0)+(if (if modularAHU.conHeaRecSys.conPID1.reset   == AixLib.Types.Reset.Disabled then modularAHU.conHeaRecSys.conPID1.reset   else AixLib.Types.Reset.Input) == AixLib.Types.Reset.Disabled then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  454
+Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU successful.
+Warning: WARNINGS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mos\",", "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU.statistics.log");
@@ -335,15 +345,72 @@ rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlin
 simulateModel( "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU", startTime=0, method="Dassl", tolerance=1e-4, 
                            stopTime=86400, numberOfIntervals=0, outputInterval=1, resultFile="AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU");
 Translation of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Verification.ComparisonToAHU
-Error: Class or component 'TSteam' not found in humidifier hum
-  File: /tmp/tmp-AixLib-1-1q3kx7ke/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/ModularAHU.mo, line 37
- Component context: modularAHU.hum
-  Component declared as humidifier hum in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU
-  Attempted modification in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU.
-  Near file: /tmp/tmp-AixLib-1-1q3kx7ke/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mo, line 45
-Definition missing in Components.SprayHumidifier.
-Error: ERRORS have been issued.
- = false
+The DAE has 454 scalar unknowns and 454 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 93
+  Variables: 684
+  Constants: 16 (16 scalars)
+  Parameters: 232 (232 scalars)
+  Unknowns: 434 (499 scalars)
+  Differentiated variables: 2 scalars
+  Equations: 542
+  Nontrivial: 459
+Translated Model
+  Constants: 93 scalars
+  Free parameters: 123 scalars
+  Parameter depending: 66 scalars
+  Continuous time states: 2 scalars
+  Time-varying variables: 255 scalars
+  Alias variables: 210 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {27, 6, 6, 1}
+  Sizes after manipulation of the nonlinear systems: {4, 1, 1, 0}
+  Number of numerical Jacobians: 0
+  Initialization problem
+    Sizes of nonlinear systems of equations: {1}
+    Sizes after manipulation of the nonlinear systems: {1}
+    Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+modularAHU.conHeaRecSys.conPID.I.y
+modularAHU.conHeaRecSys.conPID1.I.y
+Warning: The following parameters don't have any value, only a start value:
+    modularAHU.coo.T_start(start = 288.15)
+    modularAHU.fanEta.T_start(start = 288.15)
+    modularAHU.fanOda.T_start(start = 288.15)
+    modularAHU.hea.T_start(start = 288.15)
+ 
+Warning: Some variables are iteration variables of the initialization problem:
+but they are not given any explicit start values. Zero will be used.
+Iteration variables:
+modularAHU.fanOda.mDryAirIn_flow
+Warning: Conflicting start values
+The iteration variable modularAHU.heaRecSys.TAirOutOda has been selected to have the guess value modularAHU.heaRecSys.T_start.
+However, the start value has been selected from a set of alias variables having conflicting start values of the same precedence.
+293.15, the start value of modularAHU.heaRecSys.TAirOutOda given as modularAHU.heaRecSys.T_start. At level 3. Original start-value at level 3.
+288.15, the start value of modularAHU.coo.TAirIn given as modularAHU.coo.T_start. At level 3. Original start-value at level 3.
+293.15, the start value of modularAHU.conHeaRecSys.TAirOut given as modularAHU.conHeaRecSys.T_start. At level 3. Original start-value at level 3.
+The iteration variable modularAHU.add1.y has been selected to have the guess value modularAHU.coo.T_start.
+However, the start value has been selected from a set of alias variables having conflicting start values of the same precedence.
+288.15, the start value of modularAHU.coo.T_set given as modularAHU.coo.T_start. At level 3. Original start-value at level 3.
+293.15, the start value of modularAHU.conCoo.TcoolerSet given as modularAHU.conCoo.T_start. At level 3. Original start-value at level 3.
+293.15, the start value of modularAHU.conCoo.TsupSet given as modularAHU.conCoo.T_start. At level 3. Original start-value at level 3.
+The iteration variable modularAHU.fanOda.TAirOut has been selected to have the guess value modularAHU.fanOda.T_start.
+However, the start value has been selected from a set of alias variables having conflicting start values of the same precedence.
+288.15, the start value of modularAHU.fanOda.TAirOut given as modularAHU.fanOda.T_start. At level 3. Original start-value at level 3.
+293.15, the start value of modularAHU.passThroughHum.T_airOut given as modularAHU.passThroughHum.T_start. At level 3. Original start-value at level 3.
+288.15, the start value of modularAHU.hea.TAirIn given as modularAHU.hea.T_start. At level 3. Original start-value at level 3.
+293.15, the start value of modularAHU.passThroughHum.T_airIn given as modularAHU.passThroughHum.T_start. At level 3. Original start-value at level 3.
+Finished
+Warning: WARNINGS have been issued.
+Finished
+ = true
 
 
 Declaring variable: Boolean rScript ;
@@ -442,13 +509,24 @@ savelog("AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Valida
 
 rCheck = checkModel("AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU");
 Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU
-Error: Class or component 'TSteam' not found in humidifier hum
-  File: /tmp/tmp-AixLib-2-v7mgmduh/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/ModularAHU.mo, line 37
- Component context: modularAHU.hum
-  Component declared as humidifier hum in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU
-  Attempted modification in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU.
-  Near file: /tmp/tmp-AixLib-2-v7mgmduh/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Examples/ExampleAHU.mo, line 4
-Definition missing in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SprayHumidifier.
+Warning: The following parameters don't have any value, only a start value:
+    modularAHU.coo.T_start(start = 288.15)
+    modularAHU.fanEta.T_start(start = 288.15)
+    modularAHU.fanOda.T_start(start = 288.15)
+    modularAHU.hea.T_start(start = 288.15)
+    modularAHU.hum.T_start(start = 288.15)
+ 
+The model has the same number of unknowns and equations: 526
+The model could not be deduced to be symbolically well-posed.
+The model has
+  522+max([size(tableAhu.columns, 1); size(tableAhu.offset, 1)])
+scalar unknowns and
+  509+(if  not modularAHU.coo.humRat.use_p_in then 1 else 0)+(if  not   modularAHU.hum.humRat.use_p_in then 1 else 0)+(if modularAHU.conHeaRecSys.conPID.reset   <> AixLib.Types.Reset.Input then 1 else 0)+(if modularAHU.conHeaRecSys.conPID1.reset   <> AixLib.Types.Reset.Input then 1 else 0)+(if  not modularAHU.conCoo.pWat.use_p_in   then 1 else 0)+(if  not modularAHU.cooling and  not modularAHU.dehumidifying   then 1 else 0)+(if  not modularAHU.heating and  not modularAHU.dehumidifying   then 1 else 0)+(if  not modularAHU.humidifying then 1 else 0)+(if   weaDat.pAtmSou == AixLib.BoundaryConditions.Types.DataSource.Parameter then 1   else 0)+(if weaDat.TDewPoiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TDryBulSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.TBlaSkySou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.relHumSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.opaSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.ceiHeiSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.totSkyCovSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winSpeSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.winDirSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HInfHorSou == AixLib.BoundaryConditions.Types.DataSource.  Parameter then 1 else 0)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HDifHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HDirNor_HGloHor then 2 else 1)+(if weaDat.HSou == AixLib.BoundaryConditions.Types.RadiationDataSource.  Input_HGloHor_HDifHor then 2 else 1)+max([size(tableAhu.columns, 1); size(  tableAhu.offset, 1)])+(if (if modularAHU.conHeaRecSys.conPID.reset ==   AixLib.Types.Reset.Disabled then modularAHU.conHeaRecSys.conPID.reset else   AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(if (if   modularAHU.conHeaRecSys.conPID.reset == AixLib.Types.Reset.Disabled then   modularAHU.conHeaRecSys.conPID.reset else AixLib.Types.Reset.Input) ==   AixLib.Types.Reset.Disabled then 1 else 0)+(if (if modularAHU.conHeaRecSys.conPID1.reset   == AixLib.Types.Reset.Disabled then modularAHU.conHeaRecSys.conPID1.reset   else AixLib.Types.Reset.Input) <> AixLib.Types.Reset.Input then 1 else 0)+(  if (if modularAHU.conHeaRecSys.conPID1.reset == AixLib.Types.Reset.Disabled   then modularAHU.conHeaRecSys.conPID1.reset else AixLib.Types.Reset.Input) ==   AixLib.Types.Reset.Disabled then 1 else 0)
+scalar equations.
+However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
+  526
+Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU successful.
+Warning: WARNINGS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Examples/ExampleAHU.mos\",", "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU.statistics.log");
@@ -462,15 +540,59 @@ Modelica.Utilities.Streams.print("      },", "AixLib.Airflow.AirHandlingUnit.Mod
 rScript=RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Examples/ExampleAHU.mos");
 simulateModel("AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU", startTime=0, method="Dassl", tolerance=1e-4, stopTime=31536000.0, outputInterval=3600, resultFile="AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU");
 Translation of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU
-Error: Class or component 'TSteam' not found in humidifier hum
-  File: /tmp/tmp-AixLib-2-v7mgmduh/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/ModularAHU.mo, line 37
- Component context: modularAHU.hum
-  Component declared as humidifier hum in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Examples.ExampleAHU
-  Attempted modification in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.ModularAHU.
-  Near file: /tmp/tmp-AixLib-2-v7mgmduh/AixLib/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Examples/ExampleAHU.mo, line 4
-Definition missing in AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SprayHumidifier.
-Error: ERRORS have been issued.
- = false
+The DAE has 526 scalar unknowns and 526 scalar equations.
+ 
+Statistics
+ 
+Original Model
+  Number of components: 129
+  Variables: 876
+  Constants: 26 (26 scalars)
+  Parameters: 353 (414 scalars)
+  Unknowns: 497 (526 scalars)
+  Differentiated variables: 2 scalars
+  Equations: 602
+  Nontrivial: 543
+Translated Model
+  Constants: 207 scalars
+  Free parameters: 169 scalars
+  Parameter depending: 96 scalars
+  Outputs: 23 scalars
+  Continuous time states: 2 scalars
+  Time-varying variables: 171 scalars
+  Alias variables: 323 scalars
+  Number of mixed real/discrete systems of equations: 0
+  Sizes of linear systems of equations: { }
+  Sizes after manipulation of the linear systems: { }
+  Sizes of nonlinear systems of equations: {1, 29, 6}
+  Sizes after manipulation of the nonlinear systems: {1, 4, 1}
+  Number of numerical Jacobians: 0
+ 
+Selected continuous time states
+Statically selected continuous time states
+modularAHU.conHeaRecSys.conPID.I.y
+modularAHU.conHeaRecSys.conPID1.I.y
+Warning: The following parameters don't have any value, only a start value:
+    modularAHU.coo.T_start(start = 288.15)
+    modularAHU.fanEta.T_start(start = 288.15)
+    modularAHU.fanOda.T_start(start = 288.15)
+    modularAHU.hea.T_start(start = 288.15)
+    modularAHU.hum.T_start(start = 288.15)
+ 
+Warning: Some variables are iteration variables of the initialization problem:
+but they are not given any explicit start values. Zero will be used.
+Iteration variables:
+modularAHU.fanOda.mDryAirIn_flow
+Warning: Conflicting start values
+The iteration variable modularAHU.heaRecSys.TAirOutOda has been selected to have the guess value modularAHU.heaRecSys.T_start.
+However, the start value has been selected from a set of alias variables having conflicting start values of the same precedence.
+293.15, the start value of modularAHU.heaRecSys.TAirOutOda given as modularAHU.heaRecSys.T_start. At level 3. Original start-value at level 3.
+293.15, the start value of modularAHU.conHeaRecSys.TAirOut given as modularAHU.conHeaRecSys.T_start. At level 3. Original start-value at level 3.
+288.15, the start value of modularAHU.coo.TAirIn given as modularAHU.coo.T_start. At level 3. Original start-value at level 3.
+Finished
+Warning: WARNINGS have been issued.
+Finished
+ = true
 
 
 Declaring variable: Boolean rScript ;
@@ -482,8 +604,6 @@ rCheck = checkModel("AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Compo
 Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SprayHumidifier
 Warning: The quantity of adiHum.XAirIn is "MassFraction" and the quantity of sou.Xi_in[1] is "water".
 The variables are indirectly connected.
-Error: The following parameter doesn't have any value:
-  adiHum1.mWat_flow_nominal
 Warning: The following parameters don't have any value, only a start value:
     adiHum.T_start(start = 288.15)
     adiHum1.T_start(start = 288.15)
@@ -497,8 +617,8 @@ scalar unknowns and
 scalar equations.
 However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
   360
+Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SprayHumidifier successful.
 Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/SprayHumidifier.mos\",", "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SprayHumidifier.statistics.log");
@@ -575,17 +695,14 @@ senMasFra.X
 senMasFra1.X
 senTem.T
 senTem1.T
-Error: The following parameter doesn't have any value:
-  adiHum1.mWat_flow_nominal
 Warning: The following parameters don't have any value, only a start value:
     adiHum.T_start(start = 288.15)
     adiHum1.T_start(start = 288.15)
  
-Error detected when generating code.
-Translation aborted.
+Finished
 Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
- = false
+Finished
+ = true
 
 
 Declaring variable: Boolean rScript ;
@@ -656,8 +773,6 @@ rCheck = checkModel("AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Compo
 Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SteamHumidifier
 Warning: The quantity of sou.Xi_in[1] is "water" and the quantity of steHum.XAirIn is "MassFraction".
 The variables are indirectly connected.
-Error: The following parameter doesn't have any value:
-  steHum1.mWat_flow_nominal
 Warning: The following parameters don't have any value, only a start value:
     steHum.T_start(start = 288.15)
     steHum1.T_start(start = 288.15)
@@ -671,8 +786,8 @@ scalar unknowns and
 scalar equations.
 However, exploiting the given numerical settings of parameters gives the same number of unknowns and equations:
   339
+Check of AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SteamHumidifier successful.
 Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
 Declaring variable: Boolean rCheck ;
 
 Modelica.Utilities.Streams.print("    { \"file\" :  \"AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/SteamHumidifier.mos\",", "AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.Validation.SteamHumidifier.statistics.log");
@@ -749,17 +864,14 @@ senMasFra.X
 senMasFra1.X
 senTem.T
 senTem1.T
-Error: The following parameter doesn't have any value:
-  steHum1.mWat_flow_nominal
 Warning: The following parameters don't have any value, only a start value:
     steHum.T_start(start = 288.15)
     steHum1.T_start(start = 288.15)
  
-Error detected when generating code.
-Translation aborted.
+Finished
 Warning: WARNINGS have been issued.
-Error: ERRORS have been issued.
- = false
+Finished
+ = true
 
 
 Declaring variable: Boolean rScript ;
