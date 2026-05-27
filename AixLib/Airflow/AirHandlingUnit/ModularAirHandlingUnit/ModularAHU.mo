@@ -1,6 +1,8 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit;
 model ModularAHU "Modular AHU"
   extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.BaseClasses.PartialModularAHU(
+    redeclare model humidifier =
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SprayHumidifier,
     etaFanEta=0.7,
     etaFanOda=0.7,
     dpFanEta=800,
@@ -39,8 +41,6 @@ model ModularAHU "Modular AHU"
     dp_nominal=dpHum_nominal,
     final use_X_set=true,
     final TWatIn=TWat,
-    final TSteam = TSteam,
-    final k = k,
     redeclare model PartialPressureDrop =
         Components.PressureDrop.PressureDropSimple)
       if humidifying
