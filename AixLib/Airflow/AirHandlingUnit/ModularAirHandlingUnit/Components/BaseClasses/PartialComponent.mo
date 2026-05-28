@@ -20,7 +20,7 @@ partial model PartialComponent
     annotation(Dialog(group="Nominal conditions"));
 
   //Initialization
-  parameter Modelica.Units.SI.Temperature T_start
+  parameter Modelica.Units.SI.Temperature T_start=293.15
     "Initial temperature" annotation (Dialog(
       tab="Initialization",
       group="Parameters"));
