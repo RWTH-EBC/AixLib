@@ -1,4 +1,4 @@
-﻿within AixLib.Electrical.PVSystem;
+within AixLib.Electrical.PVSystem;
 model PVSystem
   "Model that determines the DC performance of a Silicium-based PV array"
 

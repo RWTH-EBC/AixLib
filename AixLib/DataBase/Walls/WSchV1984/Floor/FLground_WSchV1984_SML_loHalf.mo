@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.WSchV1984.Floor;
+within AixLib.DataBase.Walls.WSchV1984.Floor;
 record FLground_WSchV1984_SML_loHalf "Floor towards ground (lower part) after WSchV1984, for building of type S (schwer), M (mittel) and L (leicht)"
   extends WallBaseDataDefinition(
     n(min=1) = 3 "Number of wall layers",

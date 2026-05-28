@@ -1,4 +1,4 @@
-﻿within AixLib.Airflow.WindowVentilation.OpeningAreas;
+within AixLib.Airflow.WindowVentilation.OpeningAreas;
 model OpeningAreaSashVDI2078
   "Specified VDI 2078: Only valid for bottom-hung inwards opening"
   extends AixLib.Airflow.WindowVentilation.BaseClasses.PartialOpeningAreaSash(

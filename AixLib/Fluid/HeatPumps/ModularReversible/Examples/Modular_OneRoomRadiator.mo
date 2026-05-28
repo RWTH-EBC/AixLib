@@ -136,6 +136,6 @@ This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1981\">#198
   experiment(
       StartTime=0,
       StopTime=86400,
-      Tolerance=1e-08), 
+      Tolerance=1e-08),
    __Dymola_LockedEditing="Model from IBPSA");
 end Modular_OneRoomRadiator;

@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.Collections;
+within AixLib.DataBase.Walls.Collections;
 partial record BaseDataMultiWalls "Base class of record containing multiple wall type records"
   extends Modelica.Icons.Record;
 

@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
+within AixLib.Obsolete.Year2024.Controls.HeatPump.SafetyControls;
 block DefrostControl
   "Control block to ensure no frost limits heat flow at the evaporator"
   extends AixLib.Obsolete.BaseClasses.ObsoleteModel;

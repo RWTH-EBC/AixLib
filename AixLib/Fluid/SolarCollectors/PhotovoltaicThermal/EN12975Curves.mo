@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal;
+within AixLib.Fluid.SolarCollectors.PhotovoltaicThermal;
 model EN12975Curves
   "Collector approach based on EN12975, efficiency based on curves"
   extends AixLib.Fluid.SolarCollectors.EN12975(

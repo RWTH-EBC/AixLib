@@ -1,6 +1,8 @@
 ConstantCarnotEffectiveness
 TableData2D
 TableData3D
+TableData4DdTeva
+TableData4DDeltaT
 Frosting
 Inertias
 BaseClasses

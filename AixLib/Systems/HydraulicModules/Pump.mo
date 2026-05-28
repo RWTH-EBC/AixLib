@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules;
+within AixLib.Systems.HydraulicModules;
 model Pump "Unmixed circuit with pump"
   extends AixLib.Systems.HydraulicModules.BaseClasses.PartialHydraulicModule(final Kv = 0);
 

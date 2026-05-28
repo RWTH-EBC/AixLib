@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
+within AixLib.Fluid.BoilerCHP.ModularCHP.BaseClasses;
 model ModularCHP_PowerUnit "Model of modular CHP power unit"
   import AixLib;
 

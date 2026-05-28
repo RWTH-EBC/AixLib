@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Pumps.PumpPolynomialBased;
+within AixLib.DataBase.Pumps.PumpPolynomialBased;
 record PumpBaseRecord "Definition of pump data"
   extends Modelica.Icons.Record;
   // *****************************************************

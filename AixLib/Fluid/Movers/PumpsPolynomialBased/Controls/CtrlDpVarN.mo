@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.Controls;
 model CtrlDpVarN "'dp variable' for PumpSpeedControlled"
   extends BaseClasses.PumpController;
 

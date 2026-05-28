@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.HydraulicModules.BaseClasses;
+within AixLib.Systems.HydraulicModules.BaseClasses;
 partial model PartialHydraulicModule "Base class for hydraulic module."
   extends AixLib.Fluid.Interfaces.PartialFourPort(
     redeclare package Medium1 = Medium,

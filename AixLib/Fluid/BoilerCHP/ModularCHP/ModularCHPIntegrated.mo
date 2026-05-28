@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.BoilerCHP.ModularCHP;
+within AixLib.Fluid.BoilerCHP.ModularCHP;
 model ModularCHPIntegrated
   "Modular combined heat and power system model integrated into a heating circuit"
   import AixLib;

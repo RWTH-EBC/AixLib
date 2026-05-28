@@ -1,4 +1,4 @@
-﻿within AixLib.DataBase.Walls.EnEV2009.Ceiling;
+within AixLib.DataBase.Walls.EnEV2009.Ceiling;
 record CEpartition_EnEV2009_L_loHalf
   "Ceiling partition after EnEV 2009, for building of type L (leicht), lower half"
   // New Walls for Dymola 2012, the same number of layers as other mass clases

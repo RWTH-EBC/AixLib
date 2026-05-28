@@ -1,4 +1,4 @@
-﻿within AixLib.Systems.ModularAHU.BaseClasses;
+within AixLib.Systems.ModularAHU.BaseClasses;
 expandable connector GenericAHUBus
   "Data bus for generic air-handling unit"
   extends Modelica.Icons.SignalBus;

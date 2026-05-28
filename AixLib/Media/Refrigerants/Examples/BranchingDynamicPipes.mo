@@ -1,9 +1,9 @@
 within AixLib.Media.Refrigerants.Examples;
 model BranchingDynamicPipes
   "Example model to test dynamic mass and energy equations"
-  extends Modelica.Fluid.Examples.BranchingDynamicPipes(
-    redeclare package Medium =
-        AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner,
+  extends Modelica.Fluid.Examples.BranchingDynamicPipes(redeclare package
+      Medium = AixLib.Media.Refrigerants.R134a.R134a_IIR_P1_395_T233_455_Horner
+        (ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph),
         system(energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial));
 
 annotation (Documentation(revisions="<html><ul>

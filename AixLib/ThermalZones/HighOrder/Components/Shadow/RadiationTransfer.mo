@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
+within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model RadiationTransfer "Radiation transformer for weather bus"
   parameter Modelica.Units.NonSI.Angle_deg aziDeg = -54 "Surface azimuth, S=0°, W=90°, N=180°, E=-90°";
 

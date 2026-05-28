@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses;
 function powerInt "Computes the power x^n for the real x and the integer n."
   extends Modelica.Icons.Function;
   input Real x "base";

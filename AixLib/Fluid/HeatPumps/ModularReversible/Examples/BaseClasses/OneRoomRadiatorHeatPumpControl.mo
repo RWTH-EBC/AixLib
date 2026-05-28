@@ -216,6 +216,6 @@ equation
           extent={{-120,120},{120,-120}},
           lineColor={0,0,0},
           fillColor={255,255,255},
-          fillPattern=FillPattern.Solid)}), 
+          fillPattern=FillPattern.Solid)}),
    __Dymola_LockedEditing="Model from IBPSA");
 end OneRoomRadiatorHeatPumpControl;

@@ -1,4 +1,4 @@
-﻿within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
+within AixLib.Controls.HVACAgentBasedControl.BaseClasses;
 model SendSample
 
   Modelica.Blocks.MathBoolean.Or or1(nu=4)

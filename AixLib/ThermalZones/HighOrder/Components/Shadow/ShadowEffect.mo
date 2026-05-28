@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
+within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model ShadowEffect
   "Shadow effect of horizotal shield, reducing the solar radiation through the window"
   parameter AixLib.ThermalZones.HighOrder.Components.Shadow.Types.selectorShadowEffectMode calMod

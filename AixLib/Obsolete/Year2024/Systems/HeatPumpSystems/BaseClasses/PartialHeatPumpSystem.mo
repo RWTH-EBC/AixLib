@@ -1,4 +1,4 @@
-﻿within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
+within AixLib.Obsolete.Year2024.Systems.HeatPumpSystems.BaseClasses;
 partial model PartialHeatPumpSystem
   "Partial model containing the basic heat pump block and different control blocks(optional)"
     extends AixLib.Fluid.Interfaces.PartialFourPortInterface(

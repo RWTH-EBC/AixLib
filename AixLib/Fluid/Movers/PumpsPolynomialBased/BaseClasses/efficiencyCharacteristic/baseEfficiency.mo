@@ -1,4 +1,4 @@
-﻿within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic;
+within AixLib.Fluid.Movers.PumpsPolynomialBased.BaseClasses.efficiencyCharacteristic;
 partial function baseEfficiency
   "Base class: efficiency characteristic (eta = f(Q,H,P))"
   extends Modelica.Icons.Function;

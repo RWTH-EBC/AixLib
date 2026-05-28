@@ -1,4 +1,4 @@
-﻿within AixLib.ThermalZones.HighOrder.Components.Shadow;
+within AixLib.ThermalZones.HighOrder.Components.Shadow;
 model ShadowLength
   "Calculate the shadow length on the vertical surface by a horizontal shield"
   parameter Modelica.Units.NonSI.Angle_deg aziDeg = -54
