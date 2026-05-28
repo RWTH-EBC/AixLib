@@ -1,0 +1,24 @@
+Regression tests are only run for the following package:
+  AixLib.Airflow
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Examples/ExampleAHU.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/Cooler.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/SprayHumidifier.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/Heater.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/SteamHumidifier.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Verification/ComparisonToAHU.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/Fan.mos");'.
+
+*** Warning: Parameter with start value only in 'RunScript("modelica://AixLib/Resources/Scripts/Dymola/Airflow/AirHandlingUnit/ModularAirHandlingUnit/Components/Validation/SensibleCooler.mos");'.
+
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 1.2 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 8 warnings and 0 errors.
+
