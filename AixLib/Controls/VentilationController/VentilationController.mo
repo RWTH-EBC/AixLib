@@ -6,15 +6,25 @@ model VentilationController
   parameter Real baseACH=0.2 "baseline air changes per hour"   annotation (Dialog(enable=true));
   parameter Real maxUserACH=1.0 "additional ACH value for max. user activity"   annotation (Dialog(enable=not
                                                                                                 (useConstantOutput)));
-  parameter Real[2] maxOverheatingACH={3.0,2.0}
-    "additional ACH value when overheating appears, transition range in K" annotation (Dialog(enable=not
-                                                                                                (useConstantOutput)));
+  parameter Real[3] maxOverheatingACH={1.0, 3.0, 5.0}
+    "additional ACH value when overheating appears 
+      (1: max ACH with occupation, 
+       2: max ACH rate without occupation (e.g. night ventilation),
+       3: difference between zone and medium comfort temperature at max ACH rate)"
+                                                                                   annotation (Dialog(enable=not                (useConstantOutput)));
   parameter Real[3] maxSummerACH={1.0,273.15 + 10,273.15 + 17}
-    "additional ACH in summer, Tmin, Tmax" annotation (Dialog(enable=not
-                                                                        (useConstantOutput)));
+    "additional ACH in summer
+      (1: max ACH for additional summer infiltration, 
+       2: minimum ambient temperature for summer period,
+       3: maximum ambient temperature for summer period at max summer ACH rate)"
+                                                                                annotation (Dialog(enable=not
+                                                                                                             (useConstantOutput)));
   parameter Real[3] winterReduction={0.2,maxSummerACH[2] - 10,maxSummerACH[2]}
-    "reduction factor of userACH for cold weather." annotation (Dialog(enable=not
-                                                                                 (useConstantOutput)));
+    "reduction factor of userACH for cold weather.
+      (1: relative reduction of userACH for additional summer infiltration, 
+       2: maximum of ambient temperature for reduced infiltration,
+       3: minimum of ambient temperature for reduced infiltration)" annotation (Dialog(enable=not
+                                                                                                 (useConstantOutput)));
 
   Real userACH "additional ACH value for max. user window opening activity";
   Real dToh "relative overheating";
@@ -28,18 +38,17 @@ model VentilationController
   Real summerACH "additional ACH due to summer temperature";
 
   Modelica.Blocks.Interfaces.RealInput relOccupation "relative occupation"
-    annotation (Placement(transformation(extent={{-120,-80},{-80,-40}}),
-        iconTransformation(extent={{-120,-80},{-80,-40}})));
-  output Modelica.Blocks.Interfaces.RealOutput
-                                        y
+    annotation (Placement(transformation(extent={{-120,-100},{-80,-60}}),
+        iconTransformation(extent={{-120,-100},{-80,-60}})));
+  output Modelica.Blocks.Interfaces.RealOutput y
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
 
   Modelica.Blocks.Interfaces.RealInput Tambient "ambient Temperature"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}),
         iconTransformation(extent={{-120,-20},{-80,20}})));
   Modelica.Blocks.Interfaces.RealInput Tzone "zone temperature"
-    annotation (Placement(transformation(extent={{-120,40},{-80,80}}),
-        iconTransformation(extent={{-120,40},{-80,80}})));
+    annotation (Placement(transformation(extent={{-120,-60},{-80,-20}}),
+        iconTransformation(extent={{-120,-60},{-80,-20}})));
   BaseClasses.OptimalTempDeCarliHumidity optimalTemp(cat=2)
     "optimal temperature according to investigations from deCarli"
     annotation (Placement(transformation(extent={{0,-10},{20,10}})));
@@ -52,10 +61,40 @@ model VentilationController
   output Modelica.Blocks.Interfaces.RealOutput Top "optimal temperature"
     annotation (Placement(transformation(extent={{80,50},{100,70}}),
         iconTransformation(extent={{80,50},{100,70}})));
+
+  Modelica.Blocks.Interfaces.RealInput TSetHeat "Heating set point for zone"
+    annotation (Placement(transformation(extent={{-120,20},{-80,60}}),
+        iconTransformation(extent={{-120,-50},{-80,-10}})));
+  Modelica.Blocks.Interfaces.RealInput TSetCool "Cooling set point for zone"
+    annotation (Placement(transformation(extent={{-120,60},{-80,100}}),
+        iconTransformation(extent={{-120,-50},{-80,-10}})));
+  Modelica.Blocks.Sources.Constant relHumidity(k=0.5)
+    "assuming constant relative humidity in zone"
+    annotation (Placement(transformation(extent={{-32,20},{-20,32}})));
 equation
   assert(relOccupation < 1.01,
     "Error in ventilation model. Relative occupation must not exceed 1.0!");
-  optimalTemp.u[2] = 0.5 "assuming constant relative humidity in zone";
+
+
+  connect(Tambient, dEMA.u) annotation (Line(
+      points={{-100,0},{-62,0}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(dEMA.y[2], optimalTemp.u[1]) annotation (Line(
+      points={{-39,0},{-34.75,0},{-34.75,-0.5},{-2,-0.5},{-2,0}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(relHumidity.y, optimalTemp.u[2]) annotation (Line(points={{-19.4,26},{
+          -12,26},{-12,0},{-2,0}}, color={0,0,127}));
+  connect(dEMA.y[2], Tamb_mean) annotation (Line(
+      points={{-39,0},{-16,0},{-16,-60},{90,-60}},
+      color={0,0,127},
+      smooth=Smooth.None));
+  connect(optimalTemp.y[3], Top) annotation (Line(
+      points={{21,0},{40,0},{40,60},{90,60}},
+      color={0,0,127},
+      smooth=Smooth.None));
+
   if useConstantOutput then
     userACH = 0;
     dToh = 0;
@@ -68,41 +107,47 @@ equation
 
     userACH = relOccupation*maxUserACH "user induced ventilation";
 
-    dToh = (Tzone - optimalTemp.y[2])/maxOverheatingACH[2]
+    dToh = (Tzone - optimalTemp.y[3])/maxOverheatingACH[3]
       "relative overheating";
-    overheatingACH = if dToh > 0 then min(dToh*maxOverheatingACH[1],
-      maxOverheatingACH[1]) else 0;
-
     dTamb = (dEMA.y[2] - maxSummerACH[2])/(maxSummerACH[3] - maxSummerACH[2])
-      "determine when transition period occurs";
+      "relative behavior of the ambient temperature, determines when transition period occurs";
     dTmin = (dEMA.y[2] - winterReduction[2])/(winterReduction[3] -
       winterReduction[2]);
     redFac = if dTmin > 0 then min(dTmin*(1 - winterReduction[1]), 1 -
       winterReduction[1]) + winterReduction[1] else winterReduction[1];
 
-    summerACH = if dTamb > 0 then min(dTamb*maxSummerACH[1], maxSummerACH[1])
-       else 0;
+    if Tzone > Tambient then
+
+      if dToh > 0 and dTamb > 0 then
+        if dTamb > 0 then
+          if relOccupation > 0 then
+            overheatingACH = min(dToh*dTamb*maxOverheatingACH[1], maxOverheatingACH[1]);
+          else
+            overheatingACH = min(dToh*dTamb*maxOverheatingACH[2], maxOverheatingACH[2]);
+          end if;
+        else
+          if relOccupation > 0 then
+            overheatingACH = min(dToh*maxOverheatingACH[1], maxOverheatingACH[1]);
+          else
+            overheatingACH = min(dToh*maxOverheatingACH[2], maxOverheatingACH[2]);
+          end if;
+        end if;
+      else
+        overheatingACH = 0;
+      end if;
+
+      summerACH = if dTamb > 0 then min(dTamb*maxSummerACH[1], maxSummerACH[1])
+        else 0;
+    else
+      overheatingACH = 0;
+      summerACH = 0;
+    end if;
+
   end if;
 
   y = baseACH + userACH*redFac + overheatingACH + summerACH;
-  connect(Tambient, dEMA.u) annotation (Line(
-      points={{-100,0},{-62,0}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(dEMA.y[2], optimalTemp.u[1]) annotation (Line(
-      points={{-39,0},{-34.75,0},{-34.75,-0.5},{-2,-0.5},{-2,0}},
-      color={0,0,127},
-      smooth=Smooth.None));
 
-  connect(dEMA.y[2], Tamb_mean) annotation (Line(
-      points={{-39,0},{-16,0},{-16,-60},{90,-60}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  connect(optimalTemp.y[3], Top) annotation (Line(
-      points={{21,0},{40,0},{40,60},{90,60}},
-      color={0,0,127},
-      smooth=Smooth.None));
-  annotation (
+   annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
             graphics={Text(
