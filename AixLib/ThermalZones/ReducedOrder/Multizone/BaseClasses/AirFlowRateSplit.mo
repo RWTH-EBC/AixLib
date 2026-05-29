@@ -3,7 +3,7 @@ block AirFlowRateSplit
   "Air flow rate ratios and unit conversion"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer dimension "Number of Zones";
+  parameter Integer dimension(min=1) "Number of Zones";
   parameter Boolean withProfile = false
     "Profile or occupancy as control value for AHU" annotation(choices(
     choice =  false "Relative Occupation",choice = true "Profile",
@@ -14,13 +14,13 @@ block AirFlowRateSplit
     "Records of zones";
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
-    iconTransformation(extent={{-140,40},{-100,80}})));
+    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
+    iconTransformation(extent={{-140,20},{-100,60}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"
      annotation (
-     Placement(transformation(extent={{-140,-74},{-100,-34}}),
-     iconTransformation(extent={{-140,-74},{-100,-34}})));
+     Placement(transformation(extent={{-140,-60},{-100,-20}}),
+     iconTransformation(extent={{-140,-60},{-100,-20}})));
   Modelica.Blocks.Interfaces.RealInput airFlowIn(final quantity=
     "VolumeFlowRate", final unit="m3/s") "Aggregated air flow rate"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
@@ -35,7 +35,14 @@ block AirFlowRateSplit
     annotation (Placement(transformation(
         extent={{-20,-20},{20,20}},
         rotation=0,
-        origin={-120,-100}),iconTransformation(extent={{-140,-120},{-100,-80}})));
+        origin={-120,-80}), iconTransformation(extent={{-140,-100},{-100,-60}})));
+  Modelica.Blocks.Math.BooleanToReal AHU_Zonal_OnOff_Real[dimension](realTrue=0,
+      realFalse=1)
+    annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
+  Modelica.Blocks.Interfaces.BooleanInput AHU_Zonal_OnOffOverride[dimension]
+    "Control override per zone from passive ventilation controller" annotation
+    (Placement(transformation(extent={{-120,70},{-80,110}}), iconTransformation(
+          extent={{-140,60},{-100,100}})));
 protected
   Real airFlowShare[dimension] "Share of zones at air flow";
   Real airFlowVector[dimension]
@@ -45,21 +52,23 @@ protected
     "Default value to prevent division by zero";
 equation
   if dynamicControl then
-    airFlowVector * 3600 = zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
+    airFlowVector * 3600 =zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
    elseif withProfile then
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
-    zoneParam.minAHU) * profile) .* zoneParam.AZone);
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+      *profile) .* zoneParam.AZone);
   else
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
-    zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+       .* relOccupation) .* zoneParam.AZone);
   end if;
 
   (airFlowRateOutput,airFlowShare) =
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
-      airFlowVector,
+      airFlowVector .* AHU_Zonal_OnOff_Real.y,
       zoneParam.withAHU,
       dimension);
   airFlowOut .* (zoneParam.VAir+defVal) = airFlowShare*airFlowIn*3600;
+  connect(AHU_Zonal_OnOffOverride, AHU_Zonal_OnOff_Real.u)
+    annotation (Line(points={{-100,90},{-62,90}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

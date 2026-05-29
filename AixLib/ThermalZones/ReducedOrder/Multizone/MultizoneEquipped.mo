@@ -280,13 +280,12 @@ equation
 
   for i in 1:numZones loop
     connect(intGains[(i*3) - 2], airFlowRate.relOccupation[i]) annotation (Line(
-        points={{76,-100},{74,-100},{74,-10},{-78,-10},{-78,26},{-73.2,26},{-73.2,
-            25.6}},
+        points={{76,-100},{74,-100},{74,-10},{-78,-10},{-78,26},{-73.2,26},{
+            -73.2,26.2}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(intGains[(i*3) - 2], airFlowRateSplit.relOccupation[i]) annotation (
-       Line(points={{76,-100},{74,-100},{74,0},{47.24,0},{47.24,20.8}},
-                                                                     color={0,0,
+       Line(points={{76,-100},{74,-100},{74,0},{46.4,0},{46.4,20.8}},color={0,0,
             127}));
 
     connect(replicatorTemperatureVentilation.y[i], zone[i].ventTemp) annotation (Line(
@@ -305,7 +304,7 @@ equation
              color={0,0,127}));
 
   connect(AHU[4], airFlowRate.profile) annotation (Line(
-      points={{-100,16.75},{-100,10},{-80,10},{-80,30},{-73.2,30},{-73.2,30.4}},
+      points={{-100,16.75},{-100,10},{-80,10},{-80,30},{-73.2,30},{-73.2,29.8}},
       color={0,0,127},
       smooth=Smooth.None));
 
@@ -342,9 +341,9 @@ equation
   connect(airFlowRate.airFlow, airFlowRateSplit.airFlowIn) annotation (Line(
       points={{-58.8,28},{-56,28},{-56,-12},{44,-12},{44,20.8}},
                                                                color={0,0,127}));
-  connect(airFlowRateSplit.profile, AHU[4]) annotation (Line(points={{40.4,20.8},
-          {40.4,20},{40,20},{40,-4},{-64,-4},{-64,10},{-98,10},{-98,14},{-100,14},
-          {-100,16.75}},
+  connect(airFlowRateSplit.profile, AHU[4]) annotation (Line(points={{41.6,20.8},
+          {41.6,20},{40,20},{40,-4},{-64,-4},{-64,10},{-98,10},{-98,14},{-100,
+          14},{-100,16.75}},
                        color={0,0,127}));
   connect(AirHandlingUnit.QHea_flow, PHeatAHU) annotation (Line(points={{-22.0625,
         -1},{-22.0625,-6},{-20,-6},{-20,-14},{94,-14},{94,-10},{110,-10}},
@@ -360,7 +359,7 @@ equation
   connect(AirHandlingUnit.TEta, minTemp.y) annotation (Line(points={{10.75,28},{
         16,28},{16,-28},{19.5,-28}}, color={0,0,127}));
   connect(AirHandlingUnit.phiEta, absToRelHum.relHum) annotation (Line(points={{10.75,
-        24},{18,24},{18,44},{12,44},{12,78},{-24.8,78}},       color={0,0,127}));
+          24},{18,24},{18,38},{12,38},{12,78},{-24.8,78}},     color={0,0,127}));
 
 
   connect(TAirAHUAvg.T, minTemp.u) annotation (Line(points={{33.6,-28},{33.6,-28},{31,-28}},
@@ -400,11 +399,13 @@ equation
         color={0,0,127}));
 
   connect(dynamic_AHU_Control.V_flow_AHU_Set, airFlowRateSplit.setAHU)
-    annotation (Line(points={{-32,-52},{-20,-52},{-20,-20},{50,-20},{50,20.8}},
+    annotation (Line(points={{-32,-52},{-20,-52},{-20,-20},{48.8,-20},{48.8,
+          20.8}},
         color={0,0,127}));
   connect(dynamic_AHU_Control.V_flow_AHU_Set, airFlowRate.setAHU) annotation (
-      Line(points={{-32,-52},{-20,-52},{-20,-20},{-76,-20},{-76,22},{-74,22},{-74,
-          22.6},{-73.2,22.6}}, color={0,0,127}));
+      Line(points={{-32,-52},{-20,-52},{-20,-20},{-76,-20},{-76,22},{-74,22},{
+          -74,23.2},{-73.2,23.2}},
+                               color={0,0,127}));
 
 
   if not use_moisture_balance then
@@ -417,6 +418,12 @@ equation
           0}));
   connect(Tmeasure.T, dynamic_AHU_Control.Tmeasure) annotation (Line(points={{
           -65.5,-51},{-64,-51},{-64,-50.8},{-56,-50.8}}, color={0,0,127}));
+  connect(zone.AHU_Zonal_OnOffOverride, airFlowRateSplit.AHU_Zonal_OnOffOverride)
+    annotation (Line(points={{46.4,52.28},{46.4,46},{46,46},{46,38},{34,38},{34,
+          18},{39.2,18},{39.2,20.8}}, color={255,0,255}));
+  connect(zone.AHU_Zonal_OnOffOverride, airFlowRate.AHU_Zonal_OnOffOverride)
+    annotation (Line(points={{46.4,52.28},{46.4,48},{46,48},{46,44},{-80,44},{
+          -80,32.8},{-73.2,32.8}}, color={255,0,255}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},
