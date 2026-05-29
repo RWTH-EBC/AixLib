@@ -25,11 +25,9 @@ model HeaterCoolerPI
   parameter Real k_dampedTransfer_cooler = 1 "Gain of PT1 for damped heating transfer" annotation(Dialog(tab = "Cooler", group = "Transfer system", enable=not recOrSep));
   parameter Modelica.Units.SI.Time Tau_dampedTransfer_cooler = 1 "Time Constant of PT1 for damped heating transfer" annotation (Dialog(tab="Cooler", group = "Transfer system", enable=not recOrSep));
 
-  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam(
-    heaLoadFacGrd=0,
-    heaLoadFacOut=0) =  AixLib.DataBase.ThermalZones.ZoneRecordDummy()
-    "Zone definition"
-                     annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
+  parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam
+    = AixLib.DataBase.ThermalZones.ZoneRecordDummy() "Zone definition"
+                                                                      annotation(choicesAllMatching=true,Dialog(enable=recOrSep));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatCoolRoom
     "Heat port to thermal zone"
