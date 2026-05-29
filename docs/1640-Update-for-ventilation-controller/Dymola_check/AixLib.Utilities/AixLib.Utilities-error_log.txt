@@ -1,0 +1,147 @@
+
+Error in model:  AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI 
+Check of <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI</a>
+Warning: Record has a value, and attempt to modify specific elements.
+The element modification of e.g. heaLoadFacGrd will be ignored.
+  Near file: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Sources/HeaterCooler/HeaterCoolerPI.mo, line 28
+Attempted overriding found at:
+ Component context: AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI.zoneParam.heaLoadFacGrd
+  Component declared as AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam in <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI">AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI</a>
+  File: /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Utilities/Sources/HeaterCooler/HeaterCoolerPI.mo, line <a href="Modelica://AixLib.Utilities.Sources.HeaterCooler.HeaterCoolerPI.zoneParam#text:2">29</a>
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Error: Size mismatch in equation:
+_out.maxOverheatingACH = {1E+60, 1E-15};
+
+Size 1 of the left operand is 3 whereas size 1 of right operand is 2.
+Warning: Incompatible sizes for variable and its definition equation;
+  zoneParam.maxOverheatingACH = {1E+60, 1E-15}
+They have for dimension 1 the sizes 3 and 2.
+Failure to expand could be due to unknown sizes, which is not an error 
+if the sizes are given when using the component.
+Check of class aborted.
+Warning: WARNINGS have been issued.
+Error: ERRORS have been issued.
+
