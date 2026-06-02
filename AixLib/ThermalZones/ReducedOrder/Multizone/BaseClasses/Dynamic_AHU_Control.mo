@@ -7,38 +7,47 @@ model Dynamic_AHU_Control
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Records of zones";
 
-  parameter Boolean dynamicSetTempControlAHU=false
-    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS";
+  // Volume flow controller
   parameter Boolean dynamicVolumeFlowControlAHU=false
-    "Status of dynamic AHU control depending on room temperature";
+    "Status of dynamic AHU control depending on room temperature" annotation(Dialog(group="Volume Flow Controller"));
 
   parameter Real gain_V_flow_Heat_Max = 2
-    "max volume flow gain for further heating power";
+    "max volume flow gain for further heating power" annotation(Dialog(group="Volume Flow Controller", enable=dynamicVolumeFlowControlAHU));
   parameter Real gain_V_flow_Cool_Max = 2
-    "max volume flow gain for further cooling power";
+    "max volume flow gain for further cooling power" annotation(Dialog(group="Volume Flow Controller", enable=dynamicVolumeFlowControlAHU));
+
+  parameter Modelica.Units.SI.Time Ti_PI_Heat_V_flow = 300
+    "Time constant of heating PI controller" annotation(Dialog(group="Volume Flow Controller", enable=dynamicVolumeFlowControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool_V_flow = 300
+    "Time constant of cooling PI controller" annotation(Dialog(group="Volume Flow Controller", enable=dynamicVolumeFlowControlAHU));
+
+  // Supply temperature controller
+  parameter Boolean dynamicSetTempControlAHU=false
+    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS" annotation(Dialog(group="Supply Temperature Controller"));
 
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Heat = 1
-    "base air supply temperature increase when in heating mode";
+    "base air supply temperature increase when in heating mode" annotation(Dialog(group="Supply Temperature Controller", enable=dynamicSetTempControlAHU));
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Cool = 1
-    "base air supply temperature decrease when in cooling mode";
+    "base air supply temperature decrease when in cooling mode" annotation(Dialog(group="Supply Temperature Controller", enable=dynamicSetTempControlAHU));
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Heat_Max = 5
-    "max temperature difference of T_SUP for further heating power";
+    "max temperature difference of T_SUP for further heating power" annotation(Dialog(group="Supply Temperature Controller", enable=dynamicSetTempControlAHU));
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Cool_Max = 5
-    "max temperature difference of T_SUP for further cooling power";
+    "max temperature difference of T_SUP for further cooling power" annotation(Dialog(group="Supply Temperature Controller", enable=dynamicSetTempControlAHU));
 
-  parameter Modelica.Units.SI.Time Ti_PI_Heat_T_SUP = 3600 "Time constant of heating PI controller";
-  parameter Modelica.Units.SI.Time Ti_PI_Cool_T_SUP = 3600 "Time constant of cooling PI controller";
-  parameter Modelica.Units.SI.Time Ti_PI_Heat_V_flow = 300 "Time constant of heating PI controller";
-  parameter Modelica.Units.SI.Time Ti_PI_Cool_V_flow = 300 "Time constant of cooling PI controller";
+  parameter Modelica.Units.SI.Time Ti_PI_Heat_T_SUP = 3600
+  "Time constant of heating PI controller" annotation(Dialog(group="Supply Temperature Controller", enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool_T_SUP = 3600
+  "Time constant of cooling PI controller" annotation(Dialog(group="Supply Temperature Controller", enable=dynamicSetTempControlAHU));
 
-
-
+  // Temperature Tresholds
   parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
     "Temperature after HRS in AHU over which there should be no ahu heating
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(enable=dynamicSetTempControlAHU or dynamicVolumeFlowControlAHU));
   parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(enable=dynamicSetTempControlAHU or dynamicVolumeFlowControlAHU));
 
   Modelica.Blocks.Interfaces.RealOutput Tset_AHU_Set(
     each final quantity="ThermodynamicTemperature",

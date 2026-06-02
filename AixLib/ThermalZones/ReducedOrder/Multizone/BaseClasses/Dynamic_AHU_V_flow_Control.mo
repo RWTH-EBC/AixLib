@@ -9,20 +9,24 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
   parameter Boolean dynamicVolumeFlowControlAHU=false
     "Status of dynamic AHU control depending on room temperature";
 
-  parameter Modelica.Units.SI.Time Ti_PI_Heat = 300 "Time constant of heating PI controller";
-  parameter Modelica.Units.SI.Time Ti_PI_Cool = 300 "Time constant of cooling PI controller";
+  parameter Modelica.Units.SI.Time Ti_PI_Heat(min=1) = 300
+  "Time constant of heating PI controller" annotation (Dialog(enable=dynamicVolumeFlowControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool(min=1) = 300
+  "Time constant of cooling PI controller" annotation (Dialog(enable=dynamicVolumeFlowControlAHU));
 
-  parameter Real gain_V_flow_Heat_Max = 2
-    "max volume flow gain for further heating power";
-  parameter Real gain_V_flow_Cool_Max = 2
-    "max volume flow gain for further cooling power";
+  parameter Real gain_V_flow_Heat_Max(min=Modelica.Constants.eps) = 2
+    "max volume flow gain for further heating power" annotation (Dialog(enable=dynamicVolumeFlowControlAHU));
+  parameter Real gain_V_flow_Cool_Max(min=Modelica.Constants.eps) = 2
+    "max volume flow gain for further cooling power" annotation (Dialog(enable=dynamicVolumeFlowControlAHU));
 
-  parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
+  parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU(min=273.15)=290.15
     "Temperature after HRS in AHU over which there should be no ahu heating
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
-  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(enable=dynamicVolumeFlowControlAHU));
+  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU(min=273.15)=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(enable=dynamicVolumeFlowControlAHU));
 
   Boolean OnOff[numZones];
   Boolean HeatingCooling[numZones];
@@ -40,21 +44,21 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
         origin={120,60})));
 
   AixLib.Controls.Continuous.LimPID PI_AHU_Cool[numZones](
-    each k=0.25*gain_V_flow_Cool_Max,
+    each k=max(0.25*gain_V_flow_Cool_Max, Modelica.Constants.eps),
     each yMax=max(gain_V_flow_Cool_Max, 1),
     each yMin=1,
     each controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    each Ti=Ti_PI_Cool,
+    each Ti=max(Ti_PI_Cool, 1),
     each Td=0.1,
     each reverseActing=false,
     each reset=AixLib.Types.Reset.Parameter,
     each y_reset=1)   annotation (Placement(transformation(extent={{0,-40},{-20,-60}})));
   AixLib.Controls.Continuous.LimPID PI_AHU_Heat[numZones](
-    each k=0.25*gain_V_flow_Heat_Max,
+    each k=max(0.25*gain_V_flow_Heat_Max, Modelica.Constants.eps),
     each yMax=max(gain_V_flow_Heat_Max, 1),
     each yMin=1,
     each controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    each Ti=Ti_PI_Heat,
+    each Ti=max(Ti_PI_Heat, 1),
     each Td=0.1,
     each reverseActing=true,
     each reset=AixLib.Types.Reset.Parameter,

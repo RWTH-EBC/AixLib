@@ -3,31 +3,33 @@ model Dynamic_AHU_T_SUP_Control
   "Dynamic control of air supply temperature in AHU to control zone temperature"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer numZones = 1 "Numer of zones";
+  parameter Integer numZones(min=1) = 1 "Numer of zones";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[numZones]
     "Records of zones";
 
   parameter Boolean dynamicSetTempControlAHU=false
     "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS";
 
-  parameter Modelica.Units.SI.Time Ti_PI_Heat = 3600 "Time constant of heating PI controller";
-  parameter Modelica.Units.SI.Time Ti_PI_Cool = 3600 "Time constant of cooling PI controller";
+  parameter Modelica.Units.SI.Time Ti_PI_Heat(min=1) = 3600 "Time constant of heating PI controller" annotation (Dialog(enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool(min=1) = 3600 "Time constant of cooling PI controller" annotation (Dialog(enable=dynamicSetTempControlAHU));
 
-  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Heat = 1
-    "base air supply temperature increase when in heating mode";
-  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Cool = 1
-    "base air supply temperature decrease when in cooling mode";
-  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Heat_Max = 5
-    "max temperature difference of T_SUP for further heating power";
-  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Cool_Max = 5
-    "max temperature difference of T_SUP for further cooling power";
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Heat(min=Modelica.Constants.eps) = 1
+    "base air supply temperature increase when in heating mode" annotation (Dialog(enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Cool(min=Modelica.Constants.eps) = 1
+    "base air supply temperature decrease when in cooling mode" annotation (Dialog(enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Heat_Max(min=Modelica.Constants.eps) = 5
+    "max temperature difference of T_SUP for further heating power" annotation (Dialog(enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Cool_Max(min=Modelica.Constants.eps) = 5
+    "max temperature difference of T_SUP for further cooling power" annotation (Dialog(enable=dynamicSetTempControlAHU));
 
-  parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
+  parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU(min=273.15)=290.15
     "Temperature after HRS in AHU over which there should be no ahu heating
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
-  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU(min=273.15)=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
-        for temperature reasons (humidifciation/dehumidifaction still possible)";
+        for temperature reasons (humidifciation/dehumidifaction still possible)"
+                                                                                 annotation (Dialog(enable=dynamicSetTempControlAHU));
 
   Boolean OnOff;
   Boolean HeatingCooling;
@@ -67,22 +69,22 @@ model Dynamic_AHU_T_SUP_Control
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-82,6},{-94,-6}})));
   AixLib.Controls.Continuous.LimPID PI_AHU_Cool(
-    k=0.1*dT_SUP_Cool_Max,
-    yMax=(dT_SUP_Cool_Max - dT_SUP_Offset_Cool),
+    k=max(0.1*dT_SUP_Cool_Max, Modelica.Constants.eps),
+    yMax=max((dT_SUP_Cool_Max - dT_SUP_Offset_Cool), Modelica.Constants.eps),
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=Ti_PI_Cool,
+    Ti=max(Ti_PI_Cool, 1),
     Td=0.1,
     reverseActing=false,
     reset=AixLib.Types.Reset.Parameter,
     y_reset=0)
             annotation (Placement(transformation(extent={{0,-40},{-20,-60}})));
   AixLib.Controls.Continuous.LimPID PI_AHU_Heat(
-    k=0.1*dT_SUP_Heat_Max,
-    yMax=dT_SUP_Heat_Max - dT_SUP_Offset_Heat,
+    k=max(0.1*dT_SUP_Heat_Max, Modelica.Constants.eps),
+    yMax=max(dT_SUP_Heat_Max - dT_SUP_Offset_Heat, Modelica.Constants.eps),
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    Ti=Ti_PI_Heat,
+    Ti=max(Ti_PI_Heat, 1),
     Td=0.1,
     reset=AixLib.Types.Reset.Parameter,
     y_reset=0)

@@ -37,34 +37,36 @@ model MultizoneEquipped
     annotation (
     Dialog(tab="AirHandlingUnit", group="AHU Modes"), choices(checkBox=true));
   parameter Boolean dynamicVolumeFlowControlAHU=false
-    "Status of dynamic AHU control depending on room temperature" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "Status of dynamic AHU control depending on room temperature" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Volume Flow Control"));
   parameter Boolean dynamicSetTempControlAHU=false
-    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
-  parameter Real gain_V_flow_Heat_Max = 2
-    "max volume flow gain for further heating power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "Status of dynamic set Temperature control in AHU control depending on temperature in AHU after HRS" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control"));
+
+  parameter Real gain_V_flow_Heat_Max=2
+    "max volume flow gain for further heating power" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Volume Flow Control", enable=dynamicVolumeFlowControlAHU));
   parameter Real gain_V_flow_Cool_Max = 2
-    "max volume flow gain for further cooling power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "max volume flow gain for further cooling power" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Volume Flow Control", enable=dynamicVolumeFlowControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Heat_V_flow = 300 "Time constant of heating PI controller" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Volume Flow Control", enable=dynamicVolumeFlowControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool_V_flow = 300 "Time constant of cooling PI controller" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Volume Flow Control", enable=dynamicVolumeFlowControlAHU));
+
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Heat = 1
-    "base air supply temperature increase when in heating mode" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "base air supply temperature increase when in heating mode" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control", enable=dynamicSetTempControlAHU));
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Offset_Cool = 1
-    "base air supply temperature decrease when in cooling mode" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "base air supply temperature decrease when in cooling mode" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control", enable=dynamicSetTempControlAHU));
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Heat_Max = 5
-    "max temperature difference of T_SUP for further heating power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "max temperature difference of T_SUP for further heating power" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control", enable=dynamicSetTempControlAHU));
   parameter Modelica.Units.SI.TemperatureDifference dT_SUP_Cool_Max = 5
-    "max temperature difference of T_SUP for further cooling power" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
-  parameter Modelica.Units.SI.Time Ti_PI_Heat_V_flow = 300 "Time constant of heating PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
-  parameter Modelica.Units.SI.Time Ti_PI_Cool_V_flow = 300 "Time constant of cooling PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
-  parameter Modelica.Units.SI.Time Ti_PI_Heat_T_SUP = 3600 "Time constant of heating PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
-  parameter Modelica.Units.SI.Time Ti_PI_Cool_T_SUP = 3600 "Time constant of cooling PI controller" annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+    "max temperature difference of T_SUP for further cooling power" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control", enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Heat_T_SUP = 3600 "Time constant of heating PI controller" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control", enable=dynamicSetTempControlAHU));
+  parameter Modelica.Units.SI.Time Ti_PI_Cool_T_SUP = 3600 "Time constant of cooling PI controller" annotation (Dialog(tab="AirHandlingUnit", group="AHU - Dynamic Supply Temperature Control", enable=dynamicSetTempControlAHU));
 
   parameter Modelica.Units.SI.Temperature T_Treshold_Heating_AHU=290.15
     "Temperature after HRS in AHU over which there should be no ahu heating
         for temperature reasons (humidifciation/dehumidifaction still possible)"
-                                                                                 annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+                                                                                 annotation (Dialog(tab="AirHandlingUnit"));
   parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
         for temperature reasons (humidifciation/dehumidifaction still possible)"
-                                                                                 annotation (Dialog(tab="AirHandlingUnit", group="Dynamic AHU Control"));
+                                                                                 annotation (Dialog(tab="AirHandlingUnit"));
 
   parameter Real effHRSAHU_enabled(max=1, min=0)
     "Efficiency of HRS when enabled"
