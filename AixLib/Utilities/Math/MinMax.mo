@@ -3,11 +3,11 @@ block MinMax
   "MinMax element for vector input"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer nu(min=0) = 0 "Number of input connections"
-    annotation (Dialog(connectorSizing=true), HideResult=true);
+  parameter Integer nu(min=1)=1 "Number of input connections";
 
-  Modelica.Blocks.Interfaces.RealVectorInput u[nu]
-    annotation (Placement(transformation(extent={{-120,70},{-80,-70}})));
+  Modelica.Blocks.Interfaces.RealInput u[nu]
+    annotation (Placement(transformation(extent={{-140,20},{-100,-20}}),
+        iconTransformation(extent={{-140,20},{-100,-20}})));
   Modelica.Blocks.Interfaces.RealOutput yMax annotation (Placement(
         transformation(extent={{100,50},{120,70}})));
   Modelica.Blocks.Interfaces.RealOutput yMin annotation (Placement(
@@ -18,42 +18,22 @@ block MinMax
     annotation (Placement(transformation(extent={{100,-104},{120,-84}})));
 
 
-equation
+algorithm
 
-  if nu > 0 then
-    yMax =  u[1];
-    iMax =  1;
-    for i in 2:size(u, 1) loop
-      if u[i] > yMax then
-        yMax =  u[i];
-        iMax =  i;
-      else
-        yMax = yMax;
-        iMax = iMax;
-      end if;
-
-    end for;
-
-
-    yMin =  u[1];
-    iMin =  1;
-    for i in 2:size(u, 1) loop
-      if u[i] < yMin then
-        yMin =  u[i];
-        iMin =  i;
-      else
-        yMin = yMin;
-        iMin = iMin;
-      end if;
-    end for;
-
-
-  else
-    yMax = max(u);
-    yMin = min(u);
-    iMax = 1;
-    iMin = 1;
-  end if;
+  yMax := u[1];
+  iMax := 1;
+  yMin := u[1];
+  iMin := 1;
+  for i in 2:nu loop
+    if u[i] > yMax then
+      yMax := u[i];
+      iMax := i;
+    end if;
+    if u[i] < yMin then
+      yMin := u[i];
+      iMin := i;
+    end if;
+  end for;
 
 
 annotation (defaultComponentName="max",
@@ -74,6 +54,5 @@ revisions="<html>
           extent={{-74,90},{70,-70}},
           textColor={0,0,255},
           textString="max
-          min")}),
-          __Dymola_LockedEditing="Locked");
+          min")}));
 end MinMax;

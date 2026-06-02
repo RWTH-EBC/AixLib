@@ -39,11 +39,7 @@ model Dynamic_AHU_Control
   parameter Modelica.Units.SI.Temperature T_Treshold_Cooling_AHU=294.15
         "Temperature after HRS in AHU under which there should be no ahu cooling
         for temperature reasons (humidifciation/dehumidifaction still possible)";
-  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
-    "Type of initialization (1: no init, 2: steady state, 3/4: initial output)"
-    annotation(Dialog(tab="Initialization", group="Control"));
-  parameter Real y_start=0 "Initial or guess value of output (= state)"
-    annotation(Dialog(tab="Initialization", group="Control"));
+
   Modelica.Blocks.Interfaces.RealOutput Tset_AHU_Set(
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
@@ -95,9 +91,7 @@ model Dynamic_AHU_Control
     dT_SUP_Cool_Max=dT_SUP_Cool_Max,
     dT_SUP_Heat_Max=dT_SUP_Heat_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU,
-    final initType=initType,
-    final y_start=y_start)
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
     annotation (Placement(transformation(extent={{-20,20},{22,62}})));
   Dynamic_AHU_V_flow_Control dynamic_V_flow_SUP_Control(
     numZones=numZones,
@@ -108,9 +102,7 @@ model Dynamic_AHU_Control
     gain_V_flow_Heat_Max=gain_V_flow_Heat_Max,
     gain_V_flow_Cool_Max=gain_V_flow_Cool_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU,
-    final initType=initType,
-    final y_start=y_start)
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
     annotation (Placement(transformation(extent={{-20,-60},{20,-20}})));
   Modelica.Blocks.Interfaces.RealOutput V_flow_AHU_Set[numZones] annotation (
       Placement(transformation(extent={{-100,-60},{-140,-20}}),
@@ -127,6 +119,10 @@ model Dynamic_AHU_Control
         rotation=180,
         origin={120,-48})));
 
+  Modelica.Blocks.Interfaces.BooleanInput AHU_Zonal_OnOffOverride[numZones]
+    "Control override per zone from passive ventilation controller. True: AHU off in respective zone"
+    annotation (Placement(transformation(extent={{140,-20},{100,20}}),
+        iconTransformation(extent={{140,-20},{100,20}})));
 equation
 
   connect(dynamic_T_SUP_Control_Cooling.Tset_AHU_Out, Tset_AHU_Set) annotation
@@ -144,7 +140,8 @@ equation
       Line(points={{120,42.5},{114,42.5},{114,42},{116,42},{116,53.6},{26.2,53.6}},
         color={0,0,127}));
   connect(AHU_In[4], dynamic_V_flow_SUP_Control.V_flow_AHU_In) annotation (Line(
-        points={{120,57.5},{40,57.5},{40,48},{36,48},{36,-28},{24,-28}}, color={
+        points={{120,57.5},{120,58},{118,58},{118,54},{40,54},{40,-28},{24,-28}},
+                                                                         color={
           0,0,127}));
   connect(TSetHeat, dynamic_T_SUP_Control_Cooling.TSetHeat) annotation (Line(
         points={{30,-120},{30,-74},{46,-74},{46,8},{9.4,8},{9.4,15.8}}, color={0,
@@ -153,7 +150,11 @@ equation
         points={{120,-44},{56,-44},{56,30},{42,30},{42,30.92},{26.2,30.92}},
         color={0,0,127}));
   connect(Tmeasure, dynamic_V_flow_SUP_Control.Tmeasure) annotation (Line(
-        points={{120,-44},{56,-44},{56,-50},{24,-50}}, color={0,0,127}));
+        points={{120,-44},{56,-44},{56,-52},{23.6,-52}},
+                                                       color={0,0,127}));
+  connect(AHU_Zonal_OnOffOverride, dynamic_V_flow_SUP_Control.AHU_Zonal_OnOffOverride)
+    annotation (Line(points={{120,0},{80,0},{80,-40},{24,-40}}, color={255,0,
+          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

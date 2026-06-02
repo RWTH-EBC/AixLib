@@ -657,16 +657,17 @@ equation
   connect(hConWin.y, theConWin.Gc)
     annotation (Line(points={{22,43.6},{22,40},{21,40}}, color={0,0,127}));
   connect(heaterCoolerController.heaterActive, heaterCooler.heaterActive)
-    annotation (Line(points={{77.1,19.6},{80,19.6},{80,28},{80.48,28},{80.48,34.8}},
+    annotation (Line(points={{77.1,19.6},{80,19.6},{80,28},{80.48,28},{80.48,32}},
         color={255,0,255}));
   connect(heaterCoolerController.coolerActive, heaterCooler.coolerActive)
-    annotation (Line(points={{77.1,16.4},{77.1,16},{78,16},{78,26},{65.3,26},{65.3,
-          34.8}},      color={255,0,255}));
-  connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-108,-16},
-          {-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,34.8}}, color={0,0,
+    annotation (Line(points={{77.1,16.4},{77.1,16},{78,16},{78,26},{65.3,26},{
+          65.3,32}},   color={255,0,255}));
+  connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-108,
+          -16},{-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,32}},
+                                                                     color={0,0,
           127}));
   connect(TSetCool, heaterCooler.setPointCool) annotation (Line(points={{-108,8},
-          {70,8},{70,16},{70.36,16},{70.36,34.8}}, color={0,0,127}));
+          {70,8},{70,16},{70.36,16},{70.36,32}},   color={0,0,127}));
   connect(heaterCooler.coolingPower, PCooler) annotation (Line(points={{84,41.4},
           {84,-2},{98,-2},{98,-20},{110,-20}}, color={0,0,127}));
   connect(heaterCooler.heatingPower, PHeater) annotation (Line(points={{84,46},{
@@ -955,14 +956,14 @@ end if;
           -74.11}}, color={0,0,127}));
   connect(heaterCooler.heaPorRad, ROM.intGainsRad) annotation (Line(points={{82.9,
           33},{92,33},{92,82},{86,82}}, color={191,0,0}));
-  connect(ventCont.Active_HVAC_Override, heaterCoolerController.HeaterCooler_OnOffOverride)
-    annotation (Line(points={{-50.8,-28.4},{-48,-28.4},{-48,-38},{38,-38},{38,2},
-          {54,2},{54,18},{60.9,18}}, color={255,0,255}));
   connect(TSetCool, ventCont.TSetCool) annotation (Line(points={{-108,8},{-82,8},
           {-82,-20},{-70,-20},{-70,-20.4},{-65.2,-20.4}}, color={0,0,127}));
   connect(AHU_Zonal_OnOffOverride, ventCont.Active_HVAC_Override) annotation (
       Line(points={{-44,-110},{-44,-66},{-56,-66},{-56,-38},{-48,-38},{-48,-28.4},
           {-50.8,-28.4}}, color={255,0,255}));
+  connect(ventCont.Active_HVAC_Override, heaterCooler.HeaterCooler_OnOffOverride)
+    annotation (Line(points={{-50.8,-28.4},{-48,-28.4},{-48,-38},{32,-38},{32,2},
+          {56,2},{56,36},{62,36}}, color={255,0,255}));
    annotation (Documentation(revisions="<html><ul>
    <li>October, 2024, by Jonatan Höpp:<br/>
    Changed ideal heater/cooler model to consider inert behaviour of thermal heat transfer.

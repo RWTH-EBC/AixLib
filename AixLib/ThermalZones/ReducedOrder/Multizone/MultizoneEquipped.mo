@@ -70,14 +70,12 @@ model MultizoneEquipped
     "Efficiency of HRS when enabled"
     annotation (Dialog(
     tab="AirHandlingUnit",
-    group="Settings AHU Value",
-    enable=heatRecoveryAHU));
+    group="Settings AHU Value"));
   parameter Real effHRSAHU_disabled(max=1, min=0)
     "Efficiency of HRS when disabled"
     annotation (Dialog(
     tab="AirHandlingUnit",
-    group="Settings AHU Value",
-    enable=not heatRecoveryAHU));
+    group="Settings AHU Value"));
 
   parameter Modelica.Units.SI.Pressure dpAHU_sup
     "Pressure difference over supply fan"
@@ -178,8 +176,7 @@ model MultizoneEquipped
     dT_SUP_Heat_Max=dT_SUP_Heat_Max,
     dT_SUP_Cool_Max=dT_SUP_Cool_Max,
     T_Treshold_Heating_AHU=T_Treshold_Heating_AHU,
-    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU,
-    initType=Modelica.Blocks.Types.Init.InitialOutput)
+    T_Treshold_Cooling_AHU=T_Treshold_Cooling_AHU)
       if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-34,-56},{-54,-36}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor Tmeasure[numZones]
@@ -418,12 +415,9 @@ equation
           0}));
   connect(Tmeasure.T, dynamic_AHU_Control.Tmeasure) annotation (Line(points={{
           -65.5,-51},{-64,-51},{-64,-50.8},{-56,-50.8}}, color={0,0,127}));
-  connect(zone.AHU_Zonal_OnOffOverride, airFlowRateSplit.AHU_Zonal_OnOffOverride)
-    annotation (Line(points={{46.4,52.28},{46.4,46},{46,46},{46,38},{34,38},{34,
-          18},{39.2,18},{39.2,20.8}}, color={255,0,255}));
-  connect(zone.AHU_Zonal_OnOffOverride, airFlowRate.AHU_Zonal_OnOffOverride)
-    annotation (Line(points={{46.4,52.28},{46.4,48},{46,48},{46,44},{-80,44},{
-          -80,32.8},{-73.2,32.8}}, color={255,0,255}));
+  connect(zone.AHU_Zonal_OnOffOverride, dynamic_AHU_Control.AHU_Zonal_OnOffOverride)
+    annotation (Line(points={{46.4,52.28},{46.4,46},{52,46},{52,-64},{-62,-64},
+          {-62,-46},{-56,-46}}, color={255,0,255}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},

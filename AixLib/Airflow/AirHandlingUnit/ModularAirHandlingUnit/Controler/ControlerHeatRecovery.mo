@@ -43,11 +43,13 @@ model ControlerHeatRecovery
   Controls.Continuous.LimPID conPID(
     k=200,
     Ti=20,
-    reverseActing=false)
+    reverseActing=false,
+    y_reset=0)
     annotation (Placement(transformation(extent={{-24,34},{-4,54}})));
   Controls.Continuous.LimPID conPID1(
     k=200,
-    Ti=20,                           reverseActing=true)
+    Ti=20,                           reverseActing=true,
+    y_reset=1)
     annotation (Placement(transformation(extent={{-26,-52},{-6,-32}})));
   Modelica.Blocks.Interfaces.RealOutput bypOpe
     "opening of bypass (1: fully open, 0: fully closed)"
@@ -67,20 +69,24 @@ model ControlerHeatRecovery
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-86,-120})));
+  Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
+        extent={{6,-6},{-6,6}},
+        rotation=90,
+        origin={4,-26})));
 protected
   Utilities.Logical.SmoothSwitch switch1
     annotation (Placement(transformation(extent={{36,-10},{56,10}})));
   Modelica.Blocks.Logical.LessEqual lessEqual
-    annotation (Placement(transformation(extent={{-6,-10},{14,10}})));
+    annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
   Modelica.Blocks.Math.Add add(k1=-1)
     annotation (Placement(transformation(extent={{-76,-10},{-56,10}})));
 equation
-  connect(TAirInOda, lessEqual.u1) annotation (Line(points={{-120,-60},{-40,-60},
-          {-40,0},{-8,0}}, color={0,0,127}));
-  connect(TAirInEta, lessEqual.u2) annotation (Line(points={{-120,60},{-40,60},
-          {-40,-8},{-8,-8}}, color={0,0,127}));
+  connect(TAirInOda, lessEqual.u1) annotation (Line(points={{-120,-60},{-38,-60},
+          {-38,0},{-22,0}},color={0,0,127}));
+  connect(TAirInEta, lessEqual.u2) annotation (Line(points={{-120,60},{-36,60},
+          {-36,-8},{-22,-8}},color={0,0,127}));
   connect(lessEqual.y, switch1.u2)
-    annotation (Line(points={{15,0},{34,0}}, color={255,0,255}));
+    annotation (Line(points={{1,0},{34,0}},  color={255,0,255}));
   connect(conPID.y, switch1.u1)
     annotation (Line(points={{-3,44},{24,44},{24,8},{34,8}}, color={0,0,127}));
   connect(conPID1.y, switch1.u3) annotation (Line(points={{-5,-42},{22,-42},{22,
@@ -99,6 +105,8 @@ equation
           -40,-68},{-40,24},{-14,24},{-14,32}}, color={0,0,127}));
   connect(add.u1, dTFan)
     annotation (Line(points={{-78,6},{-86,6},{-86,-120}}, color={0,0,127}));
+  connect(lessEqual.y, not1.u)
+    annotation (Line(points={{1,0},{4,0},{4,-18.8}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

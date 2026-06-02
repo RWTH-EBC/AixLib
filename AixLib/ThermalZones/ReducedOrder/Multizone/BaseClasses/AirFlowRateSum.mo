@@ -33,13 +33,6 @@ block AirFlowRateSum
         rotation=180,
         origin={-120,-90}), iconTransformation(extent={{-140,-100},{-100,-60}})));
 
-  Modelica.Blocks.Interfaces.BooleanInput AHU_Zonal_OnOffOverride[dimension]
-    "Control override per zone from passive ventilation controller" annotation
-    (Placement(transformation(extent={{-120,70},{-80,110}}), iconTransformation(
-          extent={{-140,60},{-100,100}})));
-  Modelica.Blocks.Math.BooleanToReal AHU_Zonal_OnOff_Real[dimension](realTrue=0,
-      realFalse=1)
-    annotation (Placement(transformation(extent={{-60,80},{-40,100}})));
 protected
   Real airFlowVector[dimension]
     "Sum of air flow in the zones";
@@ -56,11 +49,9 @@ equation
 
   (airFlow) =
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
-    airFlowVector .* AHU_Zonal_OnOff_Real.y,
+    airFlowVector,
     zoneParam.withAHU,
     dimension);
-  connect(AHU_Zonal_OnOffOverride, AHU_Zonal_OnOff_Real.u)
-    annotation (Line(points={{-100,90},{-62,90}}, color={255,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}})),           Icon(coordinateSystem(
           preserveAspectRatio=false, extent={{-100,-100},{100,100}}),

@@ -67,7 +67,7 @@ record OPH_1_Office "Office zone of office building"
     useConstantACHrate=false,
     baseACH=0.2,
     maxUserACH=1,
-    maxOverheatingACH={3.0,2.0},
+    maxOverheatingACH={1.0, 3.0, 5.0},
     maxSummerACH={1.0,273.15 + 10,273.15 + 17},
     winterReduction={0.2,273.15,273.15 + 10},
     withAHU=true,
