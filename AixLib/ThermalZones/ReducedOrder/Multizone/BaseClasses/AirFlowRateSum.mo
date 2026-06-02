@@ -3,7 +3,7 @@ block AirFlowRateSum
   "Air flow rate for AHU and unit conversion"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer dimension "Number of Zones";
+  parameter Integer dimension(min=1) "Number of Zones";
   parameter Boolean withProfile = false
     "Profile or occupancy as control value for AHU" annotation(choices(
     choice =  false "Relative Occupation",choice = true "Profile",
@@ -15,13 +15,13 @@ block AirFlowRateSum
 
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
-    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
-    iconTransformation(extent={{-140,20},{-100,60}})));
+    annotation (Placement(transformation(extent={{-140,10},{-100,50}}),
+    iconTransformation(extent={{-140,10},{-100,50}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"
     annotation (
-    Placement(transformation(extent={{-140,-60},{-100,-20}}),
-    iconTransformation(extent={{-140,-60},{-100,-20}})));
+    Placement(transformation(extent={{-140,-50},{-100,-10}}),
+    iconTransformation(extent={{-140,-50},{-100,-10}})));
   Modelica.Blocks.Interfaces.RealOutput airFlow(final quantity="VolumeFlowRate",
     final unit="m3/s") "Air flow rate"
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
@@ -31,7 +31,7 @@ block AirFlowRateSum
     annotation (Placement(transformation(
         extent={{20,-20},{-20,20}},
         rotation=180,
-        origin={-120,-90}), iconTransformation(extent={{-140,-110},{-100,-70}})));
+        origin={-120,-90}), iconTransformation(extent={{-140,-100},{-100,-60}})));
 
 protected
   Real airFlowVector[dimension]
@@ -40,11 +40,11 @@ equation
   if dynamicControl then
     airFlowVector * 3600 = zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
   elseif withProfile then
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
-    zoneParam.minAHU) * profile) .* zoneParam.AZone);
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+      *profile) .* zoneParam.AZone);
   else
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
-    zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+       .* relOccupation) .* zoneParam.AZone);
   end if;
 
   (airFlow) =

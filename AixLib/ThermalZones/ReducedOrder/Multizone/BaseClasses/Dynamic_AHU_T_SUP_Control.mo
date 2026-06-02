@@ -66,28 +66,35 @@ model Dynamic_AHU_T_SUP_Control
         origin={-40,-120})));
   Modelica.Blocks.Math.Add add
     annotation (Placement(transformation(extent={{-82,6},{-94,-6}})));
-  Modelica.Blocks.Continuous.LimPID PI_AHU_Cool(
+  AixLib.Controls.Continuous.LimPID PI_AHU_Cool(
     k=0.1*dT_SUP_Cool_Max,
-    yMax=0,
-    yMin=-(dT_SUP_Cool_Max - dT_SUP_Offset_Cool),
+    yMax=(dT_SUP_Cool_Max - dT_SUP_Offset_Cool),
+    yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=Ti_PI_Cool,
-    Td=0.1) annotation (Placement(transformation(extent={{0,-40},{-20,-60}})));
-  Modelica.Blocks.Continuous.LimPID PI_AHU_Heat(
+    Td=0.1,
+    reverseActing=false,
+    reset=AixLib.Types.Reset.Parameter,
+    y_reset=0)
+            annotation (Placement(transformation(extent={{0,-40},{-20,-60}})));
+  AixLib.Controls.Continuous.LimPID PI_AHU_Heat(
     k=0.1*dT_SUP_Heat_Max,
     yMax=dT_SUP_Heat_Max - dT_SUP_Offset_Heat,
     yMin=0,
     controllerType=Modelica.Blocks.Types.SimpleController.PI,
     Ti=Ti_PI_Heat,
-    Td=0.1) annotation (Placement(transformation(extent={{0,40},{-20,60}})));
+    Td=0.1,
+    reset=AixLib.Types.Reset.Parameter,
+    y_reset=0)
+            annotation (Placement(transformation(extent={{0,40},{-20,60}})));
   Modelica.Blocks.Math.Gain gainHeat(k=1)
     annotation (Placement(transformation(extent={{-28,44},{-40,56}})));
   Modelica.Blocks.Logical.Switch switchOff
     annotation (Placement(transformation(extent={{-12,-8},{-28,8}})));
-  Modelica.Blocks.Sources.Constant const6(k=1)
-    annotation (Placement(transformation(extent={{-48,-30},{-40,-22}})));
+  Modelica.Blocks.Sources.Constant const6(k=0)
+    annotation (Placement(transformation(extent={{-44,-12},{-36,-4}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff(y=OnOff)
-    annotation (Placement(transformation(extent={{6,-14},{-4,-2}})));
+    annotation (Placement(transformation(extent={{86,-20},{76,-8}})));
   Modelica.Blocks.Logical.Switch switchHeatingCooling
     annotation (Placement(transformation(extent={{22,-8},{6,8}})));
   Modelica.Blocks.Logical.Switch switchOnOff
@@ -95,10 +102,6 @@ model Dynamic_AHU_T_SUP_Control
   Modelica.Blocks.Sources.BooleanConstant booleanConstant(k=
         dynamicSetTempControlAHU)
     annotation (Placement(transformation(extent={{-70,-34},{-58,-22}})));
-  Modelica.Blocks.Continuous.FirstOrder firstOrder(T(displayUnit="s") = 2*60,
-    final initType=initType,
-    final y_start=y_start)
-    annotation (Placement(transformation(extent={{-36,-4},{-44,4}})));
   Utilities.Logical.DynamicHysteresis HysteresisHeating
     annotation (Placement(transformation(extent={{80,60},{60,40}})));
   Modelica.Blocks.Sources.Constant const5(k=T_Treshold_Heating_AHU)
@@ -150,9 +153,9 @@ model Dynamic_AHU_T_SUP_Control
   Modelica.Blocks.Sources.RealExpression T_Max_Overheated_Zone(y=Tmeasure[
         dT_Cool_Max.iMax])
     annotation (Placement(transformation(extent={{120,-60},{100,-40}})));
-  Utilities.Math.MinMax dT_Cool_Max(nu=1)
+  Utilities.Math.MinMax dT_Cool_Max(nu=numZones)
     annotation (Placement(transformation(extent={{4,-34},{-6,-24}})));
-  Utilities.Math.MinMax dT_Heat_Max(nu=1)
+  Utilities.Math.MinMax dT_Heat_Max(nu=numZones)
     annotation (Placement(transformation(extent={{4,24},{-6,34}})));
   Modelica.Blocks.Sources.RealExpression T_Max_Undercooled_Zone(y=Tmeasure[
         dT_Heat_Max.iMin])
@@ -172,10 +175,6 @@ model Dynamic_AHU_T_SUP_Control
         extent={{4,-4},{-4,4}},
         rotation=0,
         origin={-2,12})));
-  Modelica.Blocks.Routing.DeMultiplex demux(n=numZones)
-    annotation (Placement(transformation(extent={{24,24},{14,34}})));
-  Modelica.Blocks.Routing.DeMultiplex demux1(n=numZones)
-    annotation (Placement(transformation(extent={{24,-34},{14,-24}})));
   Modelica.Blocks.Interfaces.RealInput Tmeasure[numZones](
     each final quantity="ThermodynamicTemperature",
     each final unit="K",
@@ -187,9 +186,18 @@ model Dynamic_AHU_T_SUP_Control
         extent={{-20,-20},{20,20}},
         rotation=180,
         origin={120,-48})));
-  parameter Modelica.Blocks.Types.Init initType=Modelica.Blocks.Types.Init.NoInit
-    "Type of initialization (1: no init, 2: steady state, 3/4: initial output)";
-  parameter Real y_start=0 "Initial or guess value of output (= state)";
+  Modelica.Blocks.Logical.Or OrResetHeat
+    annotation (Placement(transformation(extent={{46,38},{36,48}})));
+  Modelica.Blocks.Logical.Or OrResetCool
+    annotation (Placement(transformation(extent={{36,-48},{26,-58}})));
+  Modelica.Blocks.MathBoolean.RisingEdge rising2
+    annotation (Placement(transformation(extent={{66,6},{58,14}})));
+  Modelica.Blocks.MathBoolean.RisingEdge rising1
+    annotation (Placement(transformation(extent={{32,54},{24,62}})));
+  Modelica.Blocks.MathBoolean.RisingEdge rising3
+    annotation (Placement(transformation(extent={{54,-58},{46,-50}})));
+  Modelica.Blocks.Math.Gain gainHeat1(k=-1)
+    annotation (Placement(transformation(extent={{-28,-56},{-40,-44}})));
 equation
 
   if not NotHysteresisHeating.y and not HysteresisCooling.y then
@@ -212,6 +220,12 @@ equation
     HeatingCooling = false;
   end if;
 
+  for i in 1:numZones loop
+    connect(dT_Heat[i].y, dT_Heat_Max.u[i]);
+    connect(dT_Cool[i].y, dT_Cool_Max.u[i]);
+  end for;
+
+
   connect(Tset_AHU_In, add.u2) annotation (Line(points={{100,100},{100,98},{84,98},
           {84,100},{-78,100},{-78,4},{-80.8,4},{-80.8,3.6}},
                        color={0,0,127}));
@@ -222,22 +236,17 @@ equation
     annotation (Line(points={{-21,50},{-26.8,50}},
                                                 color={0,0,127}));
   connect(const6.y,switchOff. u3)
-    annotation (Line(points={{-39.6,-26},{-34,-26},{-34,-14},{-14,-14},{-14,-8},
-          {-12,-8},{-12,-6.4},{-10.4,-6.4}},       color={0,0,127}));
+    annotation (Line(points={{-35.6,-8},{-32,-8},{-32,-12},{-6,-12},{-6,-6.4},{
+          -10.4,-6.4}},                            color={0,0,127}));
   connect(booleanExpressionOnOff.y,switchOff. u2)
-    annotation (Line(points={{-4.5,-8},{-10,-8},{-10,0},{-10.4,0}},
+    annotation (Line(points={{75.5,-14},{-4,-14},{-4,0},{-10.4,0}},
                                                  color={255,0,255}));
-  connect(const6.y,switchOnOff. u3) annotation (Line(points={{-39.6,-26},{-34,-26},
-          {-34,-14},{-48,-14},{-48,-6},{-52,-6},{-52,-6.4},{-56.4,-6.4}},
+  connect(const6.y,switchOnOff. u3) annotation (Line(points={{-35.6,-8},{-32,-8},
+          {-32,-16},{-54,-16},{-54,-6.4},{-56.4,-6.4}},
                                            color={0,0,127}));
   connect(booleanConstant.y,switchOnOff. u2) annotation (Line(points={{-57.4,-28},
           {-52,-28},{-52,0},{-56.4,0}},
         color={255,0,255}));
-  connect(firstOrder.y,switchOnOff. u1) annotation (Line(points={{-44.4,0},{-48,
-          0},{-48,6.4},{-56.4,6.4}},
-                               color={0,0,127}));
-  connect(switchOff.y,firstOrder. u)
-    annotation (Line(points={{-28.8,0},{-35.2,0}}, color={0,0,127}));
   connect(const7.y,add2. u1) annotation (Line(points={{58.6,-86},{72,-86},{72,-77}},
                  color={0,0,127}));
   connect(realExpression.y,add2. u2) annotation (Line(points={{139,0},{130,0},{130,
@@ -251,9 +260,6 @@ equation
   connect(gainHeat.y,switchHeatingCooling. u1) annotation (Line(points={{-40.6,50},
           {-44,50},{-44,22},{28,22},{28,6},{23.6,6},{23.6,6.4}},
                                                    color={0,0,127}));
-  connect(PI_AHU_Cool.y,switchHeatingCooling. u3) annotation (Line(points={{-21,-50},
-          {-24,-50},{-24,-20},{28,-20},{28,-6},{23.6,-6},{23.6,-6.4}},
-                                                            color={0,0,127}));
   connect(add3.y, HysteresisHeating.uHigh)
     annotation (Line(points={{67,65.5},{67,62}}, color={0,0,127}));
   connect(const5.y, HysteresisHeating.uLow) annotation (Line(points={{46.6,80},{
@@ -281,7 +287,7 @@ equation
   connect(const2.y, PI_AHU_Heat.u_s)
     annotation (Line(points={{9.6,50},{2,50}}, color={0,0,127}));
   connect(booleanExpressionHeatingCooling.y, switchHeatingCoolingOffset.u2)
-    annotation (Line(points={{35.5,0},{30,0},{30,58},{22,58},{22,80},{-4.4,80}},
+    annotation (Line(points={{35.5,0},{30,0},{30,50},{20,50},{20,80},{-4.4,80}},
         color={255,0,255}));
   connect(dT_SUP_Cool.y, switchHeatingCoolingOffset.u3)
     annotation (Line(points={{5.6,74},{6,73.6},{-4.4,73.6}}, color={0,0,127}));
@@ -293,20 +299,38 @@ equation
           {-8,6.4},{-10.4,6.4}}, color={0,0,127}));
   connect(switchHeatingCoolingOffset.y, dT_Offset.u1) annotation (Line(points={{
           -22.8,80},{-48,80},{-48,20},{8,20},{8,14.4},{2.8,14.4}}, color={0,0,127}));
-  connect(dT_Heat.y, demux.u) annotation (Line(points={{33.5,29},{25,29}},
-                                                                    color={0,0,127}));
-  connect(demux.y[1], dT_Heat_Max.u[1]) annotation (Line(points={{14,29},{4,29}},
-                color={0,0,127}));
-  connect(dT_Cool.y, demux1.u) annotation (Line(points={{33.5,-29},{25,-29}},
-                                                           color={0,0,127}));
-  connect(demux1.y[1], dT_Cool_Max.u[1]) annotation (Line(points={{14,-29},{4,
-          -29}},                                             color={0,0,127}));
-  connect(TSetCool, dT_Cool.u2) annotation (Line(points={{-30,-120},{-30,-94},{
-          28,-94},{28,-40},{48,-40},{48,-32},{45,-32}}, color={0,0,127}));
+  connect(TSetCool, dT_Cool.u2) annotation (Line(points={{-30,-120},{-30,-94},{28,
+          -94},{28,-40},{48,-40},{48,-32},{45,-32}},    color={0,0,127}));
   connect(Tmeasure, dT_Cool.u1) annotation (Line(points={{100,0},{52,0},{52,-26},
           {45,-26}}, color={0,0,127}));
   connect(Tmeasure, dT_Heat.u1) annotation (Line(points={{100,0},{52,0},{52,32},
           {45,32}}, color={0,0,127}));
+  connect(switchOff.y, switchOnOff.u1) annotation (Line(points={{-28.8,0},{-40,0},
+          {-40,6.4},{-56.4,6.4}}, color={0,0,127}));
+  connect(OrResetHeat.y, PI_AHU_Heat.trigger) annotation (Line(points={{35.5,43},
+          {22,43},{22,38},{-2,38}}, color={255,0,255}));
+  connect(OrResetCool.y, PI_AHU_Cool.trigger) annotation (Line(points={{25.5,
+          -53},{25.5,-52},{22,-52},{22,-38},{-2,-38}}, color={255,0,255}));
+  connect(booleanExpressionOnOff.y, rising2.u) annotation (Line(points={{75.5,
+          -14},{72,-14},{72,10},{67.6,10}}, color={255,0,255}));
+  connect(NotHysteresisHeating.y, rising1.u)
+    annotation (Line(points={{37.2,58},{33.6,58}}, color={255,0,255}));
+  connect(rising1.y, OrResetHeat.u1) annotation (Line(points={{23.2,58},{22,58},
+          {22,52},{50,52},{50,42},{47,42},{47,43}}, color={255,0,255}));
+  connect(HysteresisCooling.y, rising3.u) annotation (Line(points={{59,-50},{
+          55.6,-50},{55.6,-54}}, color={255,0,255}));
+  connect(rising3.y, OrResetCool.u1) annotation (Line(points={{45.2,-54},{44,
+          -54},{44,-53},{37,-53}}, color={255,0,255}));
+  connect(rising2.y, OrResetHeat.u2) annotation (Line(points={{57.2,10},{54,10},
+          {54,39},{47,39}}, color={255,0,255}));
+  connect(rising2.y, OrResetCool.u2) annotation (Line(points={{57.2,10},{54,10},
+          {54,-46},{42,-46},{42,-49},{37,-49}}, color={255,0,255}));
+  connect(gainHeat1.y, switchHeatingCooling.u3) annotation (Line(points={{-40.6,
+          -50},{-44,-50},{-44,-20},{28,-20},{28,-6.4},{23.6,-6.4}}, color={0,0,
+          127}));
+  connect(PI_AHU_Cool.y, gainHeat1.u)
+    annotation (Line(points={{-21,-50},{-26.8,-50}}, color={0,0,127}));
+
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
