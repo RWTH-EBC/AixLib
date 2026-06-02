@@ -231,17 +231,6 @@ model ThermalZone "Thermal zone containing moisture balance"
     final gValues=zoneParam.shadingFactor)
     annotation (Placement(transformation(extent={{4,44},{10,50}})));
 
-  Modelica.Blocks.Interfaces.BooleanOutput AHU_Zonal_OnOffOverride
-   if (ATot > 0 or zoneParam.VAir > 0) and use_NaturalAirExchange
-    "Switch off active AHU, when passive cooling via overheatingACH and summerACH exceeds 0.5/h"
-    annotation (Placement(transformation(
-        extent={{-20,-20},{20,20}},
-        rotation=270,
-        origin={-44,-110}), iconTransformation(
-        extent={{-12,-12},{12,12}},
-        rotation=270,
-        origin={-60,-84})));
-
   // Air Exchange
   Controls.VentilationController.VentilationController ventCont(
     final useConstantOutput=zoneParam.useConstantACHrate,
@@ -699,8 +688,7 @@ equation
       color={0,0,127},
       smooth=Smooth.None));
   connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
-          -106.667},{80,-92},{46,-92},{46,-36},{-65.2,-36},{-65.2,-31.6}},
-                                                                         color=
+          -106.667},{80,-92},{46,-92},{46,-36},{-66,-36},{-66,-30.8}},   color=
           {0,0,127}));
   connect(ventRate, addInfVen.u2) annotation (Line(points={{-108,-64},{-76,-64},
           {-76,-34},{-44,-34},{-44,-30},{-41,-30}},
@@ -710,8 +698,9 @@ equation
                                              color={0,0,127}));
   connect(ventTemp, mixedTemp.temperature_flow1) annotation (Line(points={{-108,
           -40},{-78,-40},{-78,3.12},{-55.84,3.12}},  color={0,0,127}));
-  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{87,90},{56,90},{56,
-          0},{-2,0},{-2,-16},{-72,-16},{-72,-28.4},{-65.2,-28.4}},color={0,0,
+  connect(ROM.TAir, ventCont.Tzone) annotation (Line(points={{87,90},{56,90},{
+          56,0},{-2,0},{-2,-16},{-72,-16},{-72,-21.2},{-66,-21.2}},
+                                                                  color={0,0,
           127}));
   connect(preTemVen.port, airExc.port_a)
     annotation (Line(points={{-32,-1},{-26,-1},{-26,-6},{-22,-6}},
@@ -729,7 +718,7 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}}));
   connect(weaBus.TDryBul, ventCont.Tambient) annotation (Line(
-      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-23.6},{-65.2,-23.6}},
+      points={{-99.915,34.08},{-86,34.08},{-86,10},{-80,10},{-80,-26},{-66,-26}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -806,8 +795,7 @@ elseif use_MechanicalAirExchange and not use_NaturalAirExchange then
               {-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-else
-     connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
+else connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-34},{12,-34},{12,-63.6},{16,-63.6}},
                                                             color={0,0,127}));
      connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},
@@ -958,12 +946,6 @@ end if;
           33},{92,33},{92,82},{86,82}}, color={191,0,0}));
   connect(TSetCool, ventCont.TSetCool) annotation (Line(points={{-108,8},{-82,8},
           {-82,-20},{-70,-20},{-70,-20.4},{-65.2,-20.4}}, color={0,0,127}));
-  connect(AHU_Zonal_OnOffOverride, ventCont.Active_HVAC_Override) annotation (
-      Line(points={{-44,-110},{-44,-66},{-56,-66},{-56,-38},{-48,-38},{-48,-28.4},
-          {-50.8,-28.4}}, color={255,0,255}));
-  connect(ventCont.Active_HVAC_Override, heaterCooler.HeaterCooler_OnOffOverride)
-    annotation (Line(points={{-50.8,-28.4},{-48,-28.4},{-48,-38},{32,-38},{32,2},
-          {56,2},{56,36},{62,36}}, color={255,0,255}));
    annotation (Documentation(revisions="<html><ul>
    <li>October, 2024, by Jonatan Höpp:<br/>
    Changed ideal heater/cooler model to consider inert behaviour of thermal heat transfer.

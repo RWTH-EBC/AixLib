@@ -415,9 +415,6 @@ equation
           0}));
   connect(Tmeasure.T, dynamic_AHU_Control.Tmeasure) annotation (Line(points={{
           -65.5,-51},{-64,-51},{-64,-50.8},{-56,-50.8}}, color={0,0,127}));
-  connect(zone.AHU_Zonal_OnOffOverride, dynamic_AHU_Control.AHU_Zonal_OnOffOverride)
-    annotation (Line(points={{46.4,52.28},{46.4,46},{52,46},{52,-64},{-62,-64},
-          {-62,-46},{-56,-46}}, color={255,0,255}));
     annotation (Line(points={{33.6,-28},{31,-28}},        color={0,0,127}),
                Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,ERROR,
                     dynamicVolumeFlowControl.TSetHeat}},

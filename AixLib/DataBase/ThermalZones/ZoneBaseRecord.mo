@@ -170,7 +170,7 @@ record ZoneBaseRecord "Base record definition for zone records"
     "Choose if a constant infiltration rate is used" annotation(Dialog(tab="Air exchange"));
   parameter Real baseACH "Base ACH rate for ventilation controller" annotation(Dialog(tab="Air exchange", group="Natural air exchange"));
   parameter Real maxUserACH "Additional ACH value for max. user activity" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));
-  parameter Real maxOverheatingACH[3]
+  parameter Real maxOverheatingACH[2]
     "Additional ACH value when overheating appears, transition range" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));
   parameter Real maxSummerACH[3]
     "Additional ACH in summer, Tmin, Tmax" annotation(Dialog(tab="Air exchange", group="Natural air exchange", enable=useConstantACHrate==false));

@@ -113,7 +113,7 @@ model HeaterCoolerPI
         iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-24,-100})));
+        origin={-24,-72})));
   Modelica.Blocks.Interfaces.RealInput setPointHeat(
     final quantity="ThermodynamicTemperature",
     final unit="K",
@@ -122,26 +122,26 @@ model HeaterCoolerPI
       Placement(transformation(extent={{-120,20},{-80,60}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={22,-100})));
+        origin={22,-72})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionHeater(y=if not
-        recOrSep then Heater_on else zoneParam.HeaterOn) if staOrDyn annotation (Placement(transformation(extent={{-80,20},
-            {-61,36}})));
+        recOrSep then Heater_on else zoneParam.HeaterOn) if staOrDyn annotation (Placement(transformation(extent={{-52,14},{-33,30}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionCooler(y=if not
-        recOrSep then Cooler_on else zoneParam.CoolerOn) if staOrDyn annotation (Placement(transformation(extent={{-80,-36},
-            {-60,-20}})));
+        recOrSep then Cooler_on else zoneParam.CoolerOn) if staOrDyn annotation (Placement(transformation(extent={{-52,-30},{-32,-14}})));
   Modelica.Blocks.Interfaces.BooleanInput heaterActive if not staOrDyn
     "Switches Controler on and off" annotation (Placement(transformation(extent=
            {{-120,-6},{-80,34}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={68,-100})));
+        origin={68,-72})));
   Modelica.Blocks.Interfaces.BooleanInput coolerActive if not staOrDyn
     "Switches Controler on and off" annotation (Placement(transformation(extent=
            {{-120,-34},{-80,6}}), iconTransformation(
         extent={{-20,-20},{20,20}},
         rotation=90,
-        origin={-70,-100})));
+        origin={-70,-72})));
 
+
+protected
   Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(
     k=if not recOrSep then k_dampedTransfer_heater else zoneParam.kDampedTransferHea,
     T=if not recOrSep then Tau_dampedTransfer_heater else zoneParam.TauDampedTransferHea,
@@ -157,16 +157,6 @@ model HeaterCoolerPI
     "Emulates the belayed heat flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-20,58},{0,78}})));
 
-  Modelica.Blocks.Interfaces.BooleanInput HeaterCooler_OnOffOverride
-    "Control override from passive ventilation controller" annotation (
-      Placement(transformation(extent={{-120,60},{-80,100}}),
-        iconTransformation(extent={{-120,-80},{-80,-40}})));
-  Modelica.Blocks.Logical.Not HVAC_OnOff
-    annotation (Placement(transformation(extent={{-66,74},{-54,86}})));
-  Modelica.Blocks.Logical.And andOnOffHeat
-    annotation (Placement(transformation(extent={{-40,20},{-28,8}})));
-  Modelica.Blocks.Logical.And andOnOffCool
-    annotation (Placement(transformation(extent={{-40,-20},{-28,-8}})));
 equation
 
   connect(heaCon.port, heatCoolRoom) annotation (Line(
@@ -201,19 +191,18 @@ equation
           {90,-40}},          color={191,0,0}));
 
   if staOrDyn then
-    connect(booleanExpressionHeater.y, andOnOffHeat.u1) annotation (Line(points={{-60.05,
-            28},{-50,28},{-50,14},{-41.2,14}},
-                                           color={255,0,255},
+    connect(booleanExpressionHeater.y, pITempHeat.onOff) annotation (Line(points={{-32.05,
+          22},{-24,22},{-24,15},{-19,15}}, color={255,0,255},
         pattern=LinePattern.Dash));
-    connect(booleanExpressionCooler.y, andOnOffCool.u1) annotation (Line(points={{-59,-28},
-            {-50,-28},{-50,-14},{-41.2,-14}},  color={255,0,255},
+    connect(booleanExpressionCooler.y, pITempCool.onOff) annotation (Line(points={{-31,
+          -22},{-24,-22},{-24,-15},{-19,-15}}, color={255,0,255},
         pattern=LinePattern.Dash));
   else
-    connect(heaterActive, andOnOffHeat.u1) annotation (Line(points={{-100,14},{
-            -41.2,14}},            color={255,0,255},
+    connect(heaterActive, pITempHeat.onOff) annotation (Line(points={{-100,14},{-60,
+           14},{-60,15},{-19,15}}, color={255,0,255},
         pattern=LinePattern.Dash));
-    connect(andOnOffCool.u1, coolerActive) annotation (Line(points={{-41.2,-14},
-            {-100,-14}},              color={255,0,255},
+    connect(pITempCool.onOff, coolerActive) annotation (Line(points={{-19,-15},{-24,
+          -15},{-24,-14},{-100,-14}}, color={255,0,255},
         pattern=LinePattern.Dash));
   end if;
   connect(setPointHeat, pITempHeat.setPoint)
@@ -233,16 +222,6 @@ equation
           -72},{10,-62},{18,-62}}, color={0,0,127}));
   connect(firstOrderCooling.y, gainCooRad.u) annotation (Line(points={{5,-72},{12,
           -72},{12,-84},{10,-84},{10,-92},{18,-92}}, color={0,0,127}));
-  connect(andOnOffCool.y, pITempCool.onOff) annotation (Line(points={{-27.4,-14},
-          {-28,-15},{-19,-15}}, color={255,0,255}));
-  connect(andOnOffHeat.y, pITempHeat.onOff) annotation (Line(points={{-27.4,14},
-          {-28,15},{-19,15}}, color={255,0,255}));
-  connect(HVAC_OnOff.y, andOnOffHeat.u2) annotation (Line(points={{-53.4,80},{
-          -48,80},{-48,18.8},{-41.2,18.8}}, color={255,0,255}));
-  connect(HeaterCooler_OnOffOverride, HVAC_OnOff.u)
-    annotation (Line(points={{-100,80},{-67.2,80}}, color={255,0,255}));
-  connect(HVAC_OnOff.y, andOnOffCool.u2) annotation (Line(points={{-53.4,80},{
-          -48,80},{-48,-18.8},{-41.2,-18.8}}, color={255,0,255}));
   annotation (Documentation(info="<html>
 <p>This is a heater and/or cooler with a PI-controller and a PT1-damper. It can be used as a realistic source for heating and cooling applications, considering inert behaviour of thermal heat transfer. Parameters of the PT1-damper can be defined in the zone records.</p>
 <ul>

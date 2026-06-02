@@ -88,7 +88,7 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
   Modelica.Blocks.Sources.Constant const6[numZones](each k=1)
     annotation (Placement(transformation(extent={{-48,-30},{-40,-22}})));
   Modelica.Blocks.Sources.BooleanExpression booleanExpressionOnOff[numZones](
-    y=OnOff) annotation (Placement(transformation(extent={{108,-24},{98,-12}})));
+    y=OnOff) annotation (Placement(transformation(extent={{80,-20},{70,-8}})));
   Modelica.Blocks.Math.Product product[numZones]
     annotation (Placement(transformation(extent={{-84,6},{-96,-6}})));
   Modelica.Blocks.Routing.Replicator replicator(nout=numZones)
@@ -139,17 +139,6 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
         rotation=180,
         origin={118,-60})));
 
-  Modelica.Blocks.Interfaces.BooleanInput AHU_Zonal_OnOffOverride[numZones]
-    "Control override per zone from passive ventilation controller. True: AHU off in respective zone"
-                                                                    annotation
-    (Placement(transformation(
-        extent={{20,-20},{-20,20}},
-        rotation=0,
-        origin={120,0}),   iconTransformation(extent={{140,-20},{100,20}})));
-  Modelica.Blocks.Logical.And AndOnOff[numZones]
-    annotation (Placement(transformation(extent={{76,-20},{64,-8}})));
-  Modelica.Blocks.Logical.Not notOverride[numZones]
-    annotation (Placement(transformation(extent={{88,-18},{80,-10}})));
   Modelica.Blocks.Logical.Or OrResetHeat[numZones]
     annotation (Placement(transformation(extent={{20,30},{10,40}})));
   Modelica.Blocks.Logical.Or OrResetCool[numZones]
@@ -157,7 +146,7 @@ model Dynamic_AHU_V_flow_Control "Dynamic control of air volume flow in AHU to c
   Modelica.Blocks.MathBoolean.RisingEdge rising1[numZones]
     annotation (Placement(transformation(extent={{34,38},{26,46}})));
   Modelica.Blocks.MathBoolean.RisingEdge rising2[numZones]
-    annotation (Placement(transformation(extent={{66,2},{58,10}})));
+    annotation (Placement(transformation(extent={{64,2},{56,10}})));
   Modelica.Blocks.MathBoolean.RisingEdge rising3[numZones]
     annotation (Placement(transformation(extent={{44,-54},{36,-46}})));
 equation
@@ -240,14 +229,6 @@ equation
   connect(Tmeasure, PI_AHU_Cool.u_m) annotation (Line(points={{118,-60},{90,-60},
           {90,-30},{-10,-30},{-10,-38}},
                                 color={0,0,127}));
-  connect(AndOnOff.y, switchOff.u2) annotation (Line(points={{63.4,-14},{-4,-14},
-          {-4,0},{-10.4,0}}, color={255,0,255}));
-  connect(AHU_Zonal_OnOffOverride, notOverride.u) annotation (Line(points={{120,0},
-          {94,0},{94,-14},{88.8,-14}},    color={255,0,255}));
-  connect(booleanExpressionOnOff.y, AndOnOff.u2) annotation (Line(points={{97.5,
-          -18},{77.2,-18},{77.2,-18.8}}, color={255,0,255}));
-  connect(notOverride.y, AndOnOff.u1)
-    annotation (Line(points={{79.6,-14},{77.2,-14}}, color={255,0,255}));
   connect(switchOff.y, switchOnOff.u1) annotation (Line(points={{-28.8,0},{-40,0},
           {-40,6.4},{-56.4,6.4}}, color={0,0,127}));
   connect(OrResetHeat.y, PI_AHU_Heat.trigger)
@@ -262,16 +243,18 @@ equation
           {40,56},{40,42},{35.6,42}}, color={255,0,255}));
   connect(rising1.y, OrResetHeat.u1)
     annotation (Line(points={{25.2,42},{21,42},{21,35}}, color={255,0,255}));
-  connect(AndOnOff.y, rising2.u) annotation (Line(points={{63.4,-14},{60,-14},{
-          60,-2},{74,-2},{74,6},{67.6,6}}, color={255,0,255}));
-  connect(rising2.y, OrResetCool.u2) annotation (Line(points={{57.2,6},{46,6},{
+  connect(rising2.y, OrResetCool.u2) annotation (Line(points={{55.2,6},{46,6},{
           46,-31},{21,-31}}, color={255,0,255}));
   connect(HysteresisCooling.y, rising3.u)
     annotation (Line(points={{59,-50},{45.6,-50}}, color={255,0,255}));
   connect(rising3.y, OrResetCool.u1) annotation (Line(points={{35.2,-50},{26,
           -50},{26,-35},{21,-35}}, color={255,0,255}));
-  connect(rising2.y, OrResetHeat.u2) annotation (Line(points={{57.2,6},{46,6},{
+  connect(rising2.y, OrResetHeat.u2) annotation (Line(points={{55.2,6},{46,6},{
           46,31},{21,31}}, color={255,0,255}));
+  connect(booleanExpressionOnOff.y, rising2.u) annotation (Line(points={{69.5,
+          -14},{66,-14},{66,-4},{74,-4},{74,6},{65.6,6}}, color={255,0,255}));
+  connect(booleanExpressionOnOff.y, switchOff.u2) annotation (Line(points={{
+          69.5,-14},{-4,-14},{-4,0},{-10.4,0}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

@@ -119,10 +119,6 @@ model Dynamic_AHU_Control
         rotation=180,
         origin={120,-48})));
 
-  Modelica.Blocks.Interfaces.BooleanInput AHU_Zonal_OnOffOverride[numZones]
-    "Control override per zone from passive ventilation controller. True: AHU off in respective zone"
-    annotation (Placement(transformation(extent={{140,-20},{100,20}}),
-        iconTransformation(extent={{140,-20},{100,20}})));
 equation
 
   connect(dynamic_T_SUP_Control_Cooling.Tset_AHU_Out, Tset_AHU_Set) annotation
@@ -152,9 +148,6 @@ equation
   connect(Tmeasure, dynamic_V_flow_SUP_Control.Tmeasure) annotation (Line(
         points={{120,-44},{56,-44},{56,-52},{23.6,-52}},
                                                        color={0,0,127}));
-  connect(AHU_Zonal_OnOffOverride, dynamic_V_flow_SUP_Control.AHU_Zonal_OnOffOverride)
-    annotation (Line(points={{120,0},{80,0},{80,-40},{24,-40}}, color={255,0,
-          255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>

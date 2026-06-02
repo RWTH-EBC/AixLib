@@ -19,10 +19,10 @@ Modelica.Blocks.Sources.Constant TAirThresholdHeating(k=zoneParam.TThresholdHeat
         origin={-2,20})));
   Modelica.Blocks.Interfaces.BooleanOutput heaterActive
     "true if heater is active" annotation (Placement(transformation(extent={{100,10},
-          {120,30}}),      iconTransformation(extent={{80,10},{100,30}})));
+          {120,30}}),      iconTransformation(extent={{72,10},{92,30}})));
   Modelica.Blocks.Interfaces.BooleanOutput coolerActive
     "true if cooler is active" annotation (Placement(transformation(extent={{100,-30},
-          {120,-10}}),       iconTransformation(extent={{80,-30},{100,-10}})));
+          {120,-10}}),       iconTransformation(extent={{72,-30},{92,-10}})));
   Modelica.Blocks.Logical.Greater greater
   "check if outside temperature above threshold"
                                           annotation (Placement(transformation(
@@ -38,6 +38,8 @@ equation
     annotation (Line(points={{-43.4,12},{-14,12}}, color={0,0,127}));
   connect(TAirThresholdCooling.y, greater.u2)
     annotation (Line(points={{-43.4,-28},{-14,-28}}, color={0,0,127}));
+  connect(less.y, heaterActive)
+    annotation (Line(points={{9,20},{110,20}},color={255,0,255}));
   connect(weaBus.TDryBul, less.u1) annotation (Line(
       points={{-97.915,67.08},{-20,67.08},{-20,20},{-14,20}},
       color={255,204,51},
@@ -54,10 +56,8 @@ equation
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(less.y, heaterActive)
-    annotation (Line(points={{9,20},{110,20}}, color={255,0,255}));
-  connect(greater.y, coolerActive)
-    annotation (Line(points={{9,-20},{110,-20}}, color={255,0,255}));
+  connect(greater.y, coolerActive) annotation (Line(points={{9,-20},{56,-20},{
+          56,-20},{110,-20}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
                               Rectangle(extent = {{-80, 80}, {80, -80}}, lineColor = {135, 135, 135}, fillColor = {255, 255, 170},
             fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-58, 32}, {62, -20}}, lineColor = {175, 175, 175}, textString = "%name")}),
