@@ -1,0 +1,16 @@
+Regression tests are only run for the following package:
+  AixLib.Systems
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Systems_ModularAHU_Validation_AHU2_Cooler.txt.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Systems_ModularAHU_Validation_AHU2_Heater.txt.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Systems_ModularAHU_Validation_AHU2_Preheater.txt.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Systems_ModularAHU_Examples_Heater.txt.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Systems_ModularAHU_Examples_DemandControlledAHU.txt.
+Wrote new reference file /builds/EBC/EBC_all/github_ci/AixLib/AixLib/Resources/ReferenceResults/Dymola/AixLib_Systems_ModularAHU_Examples_GenericAHU.txt.
+Comparison files output by funnel are stored in the directory 'funnel_comp' of size 0.5 MB.
+Run 'python -c "import buildingspy.development.regressiontest as t; t.Tester(tool=\"dymola\").report()"'
+to access a summary of the comparison results.
+
+Script that runs unit tests had 0 warnings and 0 errors.
+
+Unit tests completed successfully.
+
