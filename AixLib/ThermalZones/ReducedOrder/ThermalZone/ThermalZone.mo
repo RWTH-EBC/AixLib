@@ -646,17 +646,16 @@ equation
   connect(hConWin.y, theConWin.Gc)
     annotation (Line(points={{22,43.6},{22,40},{21,40}}, color={0,0,127}));
   connect(heaterCoolerController.heaterActive, heaterCooler.heaterActive)
-    annotation (Line(points={{77.1,19.6},{80,19.6},{80,28},{80.48,28},{80.48,32}},
+    annotation (Line(points={{76.38,19.6},{80,19.6},{80,28},{80.48,28},{80.48,34.8}},
         color={255,0,255}));
   connect(heaterCoolerController.coolerActive, heaterCooler.coolerActive)
-    annotation (Line(points={{77.1,16.4},{77.1,16},{78,16},{78,26},{65.3,26},{
-          65.3,32}},   color={255,0,255}));
-  connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-108,
-          -16},{-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,32}},
-                                                                     color={0,0,
+    annotation (Line(points={{76.38,16.4},{76.38,16},{78,16},{78,26},{65.3,26},{
+          65.3,34.8}}, color={255,0,255}));
+  connect(TSetHeat, heaterCooler.setPointHeat) annotation (Line(points={{-108,-16},
+          {-86,-16},{-86,6},{74,6},{74,18},{75.42,18},{75.42,34.8}}, color={0,0,
           127}));
   connect(TSetCool, heaterCooler.setPointCool) annotation (Line(points={{-108,8},
-          {70,8},{70,16},{70.36,16},{70.36,32}},   color={0,0,127}));
+          {70,8},{70,16},{70.36,16},{70.36,34.8}}, color={0,0,127}));
   connect(heaterCooler.coolingPower, PCooler) annotation (Line(points={{84,41.4},
           {84,-2},{98,-2},{98,-20},{110,-20}}, color={0,0,127}));
   connect(heaterCooler.heatingPower, PHeater) annotation (Line(points={{84,46},{
@@ -683,8 +682,8 @@ equation
   connect(simpleExternalShading.corrIrr, ROM.solRad) annotation (Line(points={{9.94,
           47.24},{9.94,52},{26,52},{26,89},{37,89}}, color={0,0,127}));
 
-  connect(ventCont.totalACH, addInfVen.u1) annotation (Line(
-      points={{-50.8,-23.6},{-46,-23.6},{-46,-24},{-41,-24}},
+  connect(ventCont.y, addInfVen.u1) annotation (Line(
+      points={{-50.8,-26},{-46,-26},{-46,-24},{-41,-24}},
       color={0,0,127},
       smooth=Smooth.None));
   connect(intGains[1], ventCont.relOccupation) annotation (Line(points={{80,
@@ -757,17 +756,17 @@ if use_NaturalAirExchange and not use_MechanicalAirExchange then
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-    connect(ventCont.totalACH, cO2Balance.airExc) annotation (Line(
-      points={{-50.8,-23.6},{-46,-23.6},{-46,-34},{12,-34},{12,-63.6},{16,-63.6}},
+    connect(ventCont.y, cO2Balance.airExc) annotation (Line(
+      points={{-50.8,-26},{-46,-26},{-46,-34},{12,-34},{12,-63.6},{16,-63.6}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-    connect(ventCont.totalACH, airExcMoi.ventRate) annotation (Line(
-      points={{-50.8,-23.6},{-46,-23.6},{-46,-12},{-30,-12},{-30,-11.12},{-21.2,
+    connect(ventCont.y, airExcMoi.ventRate) annotation (Line(
+      points={{-50.8,-26},{-46,-26},{-46,-12},{-30,-12},{-30,-11.12},{-21.2,
             -11.12}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-    connect(ventCont.totalACH, airExc.ventRate) annotation (Line(
-      points={{-50.8,-23.6},{-46,-23.6},{-46,-12},{-30,-12},{-30,-11.12},{-21.2,
+    connect(ventCont.y, airExc.ventRate) annotation (Line(
+      points={{-50.8,-26},{-46,-26},{-46,-12},{-30,-12},{-30,-11.12},{-21.2,
             -11.12}},
       color={0,0,127},
       pattern=LinePattern.Dash));
@@ -795,7 +794,8 @@ elseif use_MechanicalAirExchange and not use_NaturalAirExchange then
               {-21.2,-10}},
       color={0,0,127},
       pattern=LinePattern.Dash));
-else connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
+else
+     connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-34},{12,-34},{12,-63.6},{16,-63.6}},
                                                             color={0,0,127}));
      connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},
@@ -851,12 +851,12 @@ end if;
           -88},{-74,-88},{-74,-4.88},{-55.84,-4.88}}, color={0,0,127}));
   connect(ventRate, mixedHumidity.flowRate_flow1) annotation (Line(points={{-108,
           -64},{-76,-64},{-76,-6.8},{-55.84,-6.8}}, color={0,0,127}));
-  connect(ventCont.totalACH, mixedHumidity.flowRate_flow2) annotation (Line(points={{-50.8,
-          -23.6},{-46,-23.6},{-46,-12},{-60,-12},{-60,-10.8},{-55.84,-10.8}},
+  connect(ventCont.y, mixedHumidity.flowRate_flow2) annotation (Line(points={{-50.8,
+          -26},{-46,-26},{-46,-12},{-60,-12},{-60,-10.8},{-55.84,-10.8}},
                                                                         color={0,
           0,127}));
-  connect(ventCont.totalACH, mixedTemp.flowRate_flow2) annotation (Line(points={{-50.8,
-          -23.6},{-46,-23.6},{-46,-12},{-60,-12},{-60,-2.8},{-55.84,-2.8}},
+  connect(ventCont.y, mixedTemp.flowRate_flow2) annotation (Line(points={{-50.8,
+          -26},{-46,-26},{-46,-12},{-60,-12},{-60,-2.8},{-55.84,-2.8}},
                                                                    color={0,0,127}));
   connect(x_pTphi.X[1], mixedHumidity.humidity_flow2) annotation (Line(points={{-63.7,
           -11},{-62,-11},{-62,-8.8},{-55.84,-8.8}},     color={0,0,127}));
@@ -944,8 +944,7 @@ end if;
           -74.11}}, color={0,0,127}));
   connect(heaterCooler.heaPorRad, ROM.intGainsRad) annotation (Line(points={{82.9,
           33},{92,33},{92,82},{86,82}}, color={191,0,0}));
-  connect(TSetCool, ventCont.TSetCool) annotation (Line(points={{-108,8},{-82,8},
-          {-82,-20},{-70,-20},{-70,-20.4},{-65.2,-20.4}}, color={0,0,127}));
+
    annotation (Documentation(revisions="<html><ul>
    <li>October, 2024, by Jonatan Höpp:<br/>
    Changed ideal heater/cooler model to consider inert behaviour of thermal heat transfer.
