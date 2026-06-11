@@ -69,23 +69,34 @@ partial model PartialModularAHU "Partial model for modular ahu"
     annotation (Dialog(tab="Fans", group="Constant Assumptions"));
 
   // Humidifier parameter
-  parameter Modelica.Units.SI.Temperature TWat=293.15
+  parameter Modelica.Units.SI.Temperature TWat = T_start
     "water temperature of humidifier"
     annotation(Dialog(group="Settings AHU Value",enable=humidifying));
+
+  // Initialization
+  parameter Modelica.Units.SI.Pressure p_start = 100000
+    "Start value of pressure"
+    annotation(Dialog(tab = "Initialization"));
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Start value of temperature"
+    annotation(Dialog(tab = "Initialization"));
+  parameter Real phi_start = 0.5
+    "Start value of relative humditiy"
+    annotation (Dialog(tab="Initialization"));
 
   // Interfaces
   Modelica.Blocks.Interfaces.RealInput VOda_flow(unit="m3/s")
     "volume flow of outdoor air in m3/s"
     annotation (Placement(transformation(extent={{-174,66},{-146,94}}),
         iconTransformation(extent={{-168,56},{-160,64}})));
-  Modelica.Blocks.Interfaces.RealInput TOda(unit="K", start=293.15)
+  Modelica.Blocks.Interfaces.RealInput TOda(unit="K", start=T_start)
     "Temperature of outdoor air in K"
     annotation (Placement(transformation(extent={{-174,26},{-146,54}}),
         iconTransformation(extent={{-168,36},{-160,44}})));
   Modelica.Blocks.Interfaces.RealInput phiOda(
     min=0,
     max=1,
-    start=0.5)
+    start=phi_start)
     "relative humidity of outdoor air 0...1]"
     annotation (Placement(
         transformation(extent={{-174,-14},{-146,14}}), iconTransformation(
@@ -94,18 +105,18 @@ partial model PartialModularAHU "Partial model for modular ahu"
     "volume flow of extract air in m3/s"
     annotation (Placement(transformation(extent={{174,66},{146,94}}),
         iconTransformation(extent={{168,56},{160,64}})));
-  Modelica.Blocks.Interfaces.RealInput TEta(unit="K", start=293.15)
+  Modelica.Blocks.Interfaces.RealInput TEta(unit="K", start=T_start)
     "Temperature of extract air in K"
     annotation (Placement(transformation(extent={{174,26},{146,54}}),
         iconTransformation(extent={{168,36},{160,44}})));
-  Modelica.Blocks.Interfaces.RealInput phiEta(start=0.5)
+  Modelica.Blocks.Interfaces.RealInput phiEta(start=phi_start)
     "relative humidity of extract air [0...1]"
     annotation (Placement(transformation(extent={{174,
             -14},{146,14}}), iconTransformation(extent={{168,16},{160,24}})));
 
 
   // Set values
-  Modelica.Blocks.Interfaces.RealInput TSupSet(unit="K", start=293.15)
+  Modelica.Blocks.Interfaces.RealInput TSupSet(unit="K", start=T_start)
     "Set value for supply air temperature in K"
                         annotation (Placement(transformation(
         extent={{14,-14},{-14,14}},
@@ -114,7 +125,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         extent={{4,-4},{-4,4}},
         rotation=-90,
         origin={140,-104})));
-  Modelica.Blocks.Interfaces.RealInput phiSupSet[2](start={0.4,0.6})
+  Modelica.Blocks.Interfaces.RealInput phiSupSet[2](start={phi_start-0.1,phi_start+0.1})
     "set value for supply air relative humidity [Range: 0...1] (Vector: [1] min, [2] max)"
                                                                  annotation (
       Placement(transformation(
@@ -126,7 +137,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         origin={120,-104})));
 
   // Outputs
-  Modelica.Blocks.Interfaces.RealOutput phiSup(start=0.8)
+  Modelica.Blocks.Interfaces.RealOutput phiSup(start=phi_start)
     "supply air relative humidity"    annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=0,
@@ -134,7 +145,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         extent={{4,-4},{-4,4}},
         rotation=180,
         origin={164,-40})));
-  Modelica.Blocks.Interfaces.RealOutput TSup(unit="K", start=293.15)
+  Modelica.Blocks.Interfaces.RealOutput TSup(unit="K", start=T_start)
     "supply air temperature in K"
                          annotation (Placement(transformation(
         extent={{-9,-9},{9,9}},
@@ -146,8 +157,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
 
   Modelica.Blocks.Interfaces.RealOutput QCoo_flow(
     unit="W",
-    min=0,
-    start=0.01)
+    min=0)
     "The absorbed cooling power supplied from a cooling circuit [W]"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -158,8 +168,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         origin={-51,-105})));
   Modelica.Blocks.Interfaces.RealOutput QHea_flow(
     unit="W",
-    min=0,
-    start=0.01)
+    min=01)
     "The absorbed heating power supplied from a heating circuit [W]"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -170,8 +179,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         origin={-11,-105})));
   Modelica.Blocks.Interfaces.RealOutput Pel(
     unit="W",
-    min=0,
-    start=1e-3)
+    min=0)
     "The consumed electrical power supplied from the mains [W]" annotation (
       Placement(transformation(
         extent={{-10,-10},{10,10}},
@@ -183,8 +191,7 @@ partial model PartialModularAHU "Partial model for modular ahu"
         origin={9,-105})));
   Modelica.Blocks.Interfaces.RealOutput QHum_flow(
     unit="W",
-    min=0,
-    start=0.01) "The humidification power supplied from a humidifier [W]"
+    min=01) "The humidification power supplied from a humidifier [W]"
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,

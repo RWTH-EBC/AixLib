@@ -156,7 +156,9 @@ model MultizoneEquipped
     dpFanOda=dpAHU_sup,
     dpFanEta=dpAHU_eta,
     etaFanOda=effFanAHU_sup,
-    etaFanEta=effFanAHU_eta)
+    etaFanEta=effFanAHU_eta,
+    p_start=p_start,
+    T_start=T_start)
     if ASurTot > 0 or VAir > 0
     annotation (Placement(transformation(extent={{-50,0},{10,40}})));
 

@@ -120,7 +120,7 @@ equation
         overheatingACH = 0;
       end if;
 
-      if dTamb > 0 then
+      if dTamb > 0 and Tambient > maxSummerACH[2] then
         summerACH =  min(dTamb*maxSummerACH[1], maxSummerACH[1]);
       else
         summerACH = 0;
