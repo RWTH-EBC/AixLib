@@ -68,6 +68,17 @@ model VentilationController
     "Switch off active HVAC components (AHU and IdealHeaterCooler), 
      when passive cooling via overheatingACH and summerACH exceeds 0.5/h" annotation (Placement(transformation(extent={{80,-40},{100,-20}})));
 
+  Utilities.Logical.DynamicHysteresis HysteresisOverheatingSummerACH
+    annotation (Placement(transformation(extent={{-20,50},{0,70}})));
+  Modelica.Blocks.Math.Add dTZoneAmbient(k1=-1, k2=+1) annotation (Placement(
+        transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=0,
+        origin={-40,60})));
+  Modelica.Blocks.Sources.Constant const5(k=3)
+    annotation (Placement(transformation(extent={{12,20},{0,32}})));
+  Modelica.Blocks.Sources.Constant const1(k=2)
+    annotation (Placement(transformation(extent={{-32,20},{-20,32}})));
 equation
   assert(relOccupation < 1.01,
     "Error in ventilation model. Relative occupation must not exceed 1.0!");
@@ -100,7 +111,8 @@ equation
     redFac = if dTmin > 0 then min(dTmin*(1 - winterReduction[1]), 1 -
       winterReduction[1]) + winterReduction[1] else winterReduction[1];
 
-    if Tzone > Tambient then
+    // if Tzone > Tambient + 3 then
+    if HysteresisOverheatingSummerACH.y and TSetCool > Tambient + 3 then
 
       if dToh > 0 then
         if dTamb > 0 then
@@ -135,7 +147,7 @@ equation
 
   end if;
 
-  if overheatingACH + summerACH > 0.5 then
+  if overheatingACH + summerACH > 1 then
     Active_HVAC_Override = true;
   else
     Active_HVAC_Override = false;
@@ -143,6 +155,16 @@ equation
 
   totalACH = baseACH + userACH*redFac + overheatingACH + summerACH;
 
+  connect(Tzone, dTZoneAmbient.u2) annotation (Line(points={{-90,-30},{-70,-30},
+          {-70,56.4},{-47.2,56.4}}, color={0,0,127}));
+  connect(Tambient, dTZoneAmbient.u1) annotation (Line(points={{-90,30},{-74,30},
+          {-74,63.6},{-47.2,63.6}}, color={0,0,127}));
+  connect(dTZoneAmbient.y, HysteresisOverheatingSummerACH.u)
+    annotation (Line(points={{-33.4,60},{-22,60}}, color={0,0,127}));
+  connect(const5.y, HysteresisOverheatingSummerACH.uHigh)
+    annotation (Line(points={{-0.6,26},{-7,26},{-7,48}}, color={0,0,127}));
+  connect(const1.y, HysteresisOverheatingSummerACH.uLow)
+    annotation (Line(points={{-19.4,26},{-15,26},{-15,48}}, color={0,0,127}));
    annotation (
     Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
             100,100}}),
