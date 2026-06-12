@@ -1,6 +1,6 @@
 
-Error in model:  AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_attic 
-Check of <a href="Modelica://AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_attic">AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_attic</a>
+Error in model:  AixLib.DataBase.ThermalZones.SwimmingFacility.Supervisory 
+Check of <a href="Modelica://AixLib.DataBase.ThermalZones.SwimmingFacility.Supervisory">AixLib.DataBase.ThermalZones.SwimmingFacility.Supervisory</a>
 Warning: Incompatible sizes for variable and its definition equation;
   maxOverheatingACH = {3.0, 2.0}
 They have for dimension 1 the sizes 3 and 2.
@@ -12,17 +12,6 @@ Warning: WARNINGS have been issued.
 
 Error in model:  AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_basement 
 Check of <a href="Modelica://AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_basement">AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_basement</a>
-Warning: Incompatible sizes for variable and its definition equation;
-  maxOverheatingACH = {3.0, 2.0}
-They have for dimension 1 the sizes 3 and 2.
-Failure to expand could be due to unknown sizes, which is not an error 
-if the sizes are given when using the component.
-Check of class aborted.
-Warning: WARNINGS have been issued.
-
-
-Error in model:  AixLib.DataBase.ThermalZones.SwimmingFacility.Technichal 
-Check of <a href="Modelica://AixLib.DataBase.ThermalZones.SwimmingFacility.Technichal">AixLib.DataBase.ThermalZones.SwimmingFacility.Technichal</a>
 Warning: Incompatible sizes for variable and its definition equation;
   maxOverheatingACH = {3.0, 2.0}
 They have for dimension 1 the sizes 3 and 2.
@@ -65,28 +54,6 @@ Check of class aborted.
 Warning: WARNINGS have been issued.
 
 
-Error in model:  AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler 
-Check of <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler</a>
-Warning: Incompatible sizes for variable and its definition equation;
-  maxOverheatingACH = {3.0, 2.0}
-They have for dimension 1 the sizes 3 and 2.
-Failure to expand could be due to unknown sizes, which is not an error 
-if the sizes are given when using the component.
-Check of class aborted.
-Warning: WARNINGS have been issued.
-
-
-Error in model:  AixLib.DataBase.ThermalZones.SwimmingFacility.Supervisory 
-Check of <a href="Modelica://AixLib.DataBase.ThermalZones.SwimmingFacility.Supervisory">AixLib.DataBase.ThermalZones.SwimmingFacility.Supervisory</a>
-Warning: Incompatible sizes for variable and its definition equation;
-  maxOverheatingACH = {3.0, 2.0}
-They have for dimension 1 the sizes 3 and 2.
-Failure to expand could be due to unknown sizes, which is not an error 
-if the sizes are given when using the component.
-Check of class aborted.
-Warning: WARNINGS have been issued.
-
-
 Error in model:  AixLib.DataBase.ThermalZones.SwimmingFacility.Showers 
 Check of <a href="Modelica://AixLib.DataBase.ThermalZones.SwimmingFacility.Showers">AixLib.DataBase.ThermalZones.SwimmingFacility.Showers</a>
 Warning: Incompatible sizes for variable and its definition equation;
@@ -109,8 +76,30 @@ Check of class aborted.
 Warning: WARNINGS have been issued.
 
 
+Error in model:  AixLib.DataBase.ThermalZones.SwimmingFacility.Technichal 
+Check of <a href="Modelica://AixLib.DataBase.ThermalZones.SwimmingFacility.Technichal">AixLib.DataBase.ThermalZones.SwimmingFacility.Technichal</a>
+Warning: Incompatible sizes for variable and its definition equation;
+  maxOverheatingACH = {3.0, 2.0}
+They have for dimension 1 the sizes 3 and 2.
+Failure to expand could be due to unknown sizes, which is not an error 
+if the sizes are given when using the component.
+Check of class aborted.
+Warning: WARNINGS have been issued.
+
+
 Error in model:  AixLib.DataBase.ThermalZones.Office_1995_1000 
 Check of <a href="Modelica://AixLib.DataBase.ThermalZones.Office_1995_1000">AixLib.DataBase.ThermalZones.Office_1995_1000</a>
+Warning: Incompatible sizes for variable and its definition equation;
+  maxOverheatingACH = {3.0, 2.0}
+They have for dimension 1 the sizes 3 and 2.
+Failure to expand could be due to unknown sizes, which is not an error 
+if the sizes are given when using the component.
+Check of class aborted.
+Warning: WARNINGS have been issued.
+
+
+Error in model:  AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler 
+Check of <a href="Modelica://AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler">AixLib.DataBase.ThermalZones.OfficePassiveHouse.OPH_1_OfficeNoHeaterCooler</a>
 Warning: Incompatible sizes for variable and its definition equation;
   maxOverheatingACH = {3.0, 2.0}
 They have for dimension 1 the sizes 3 and 2.
@@ -124,6 +113,17 @@ Error in model:  AixLib.DataBase.ThermalZones.ZoneRecordDummy
 Check of <a href="Modelica://AixLib.DataBase.ThermalZones.ZoneRecordDummy">AixLib.DataBase.ThermalZones.ZoneRecordDummy</a>
 Warning: Incompatible sizes for variable and its definition equation;
   maxOverheatingACH = {_GlobalScope.Modelica.Constants.inf, _GlobalScope.Modelica.Constants.eps}
+They have for dimension 1 the sizes 3 and 2.
+Failure to expand could be due to unknown sizes, which is not an error 
+if the sizes are given when using the component.
+Check of class aborted.
+Warning: WARNINGS have been issued.
+
+
+Error in model:  AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_attic 
+Check of <a href="Modelica://AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_attic">AixLib.DataBase.ThermalZones.MultizoneInterzonalsFixedHeater.MorschenichSfhFixedHeater_attic</a>
+Warning: Incompatible sizes for variable and its definition equation;
+  maxOverheatingACH = {3.0, 2.0}
 They have for dimension 1 the sizes 3 and 2.
 Failure to expand could be due to unknown sizes, which is not an error 
 if the sizes are given when using the component.
