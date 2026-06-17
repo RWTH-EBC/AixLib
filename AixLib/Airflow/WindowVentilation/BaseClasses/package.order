@@ -3,5 +3,7 @@ PartialEmpiricalFlowStack
 PartialEmpiricalFlowStackWindIncidence
 PartialOpeningArea
 PartialOpeningAreaSash
+PartialSensitivityAnalysis
+PartialSensitivityAnalysisExample
 Functions
 Types
