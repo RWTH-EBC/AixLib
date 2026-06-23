@@ -152,14 +152,14 @@ model Dynamic_AHU_T_SUP_Control
         origin={39,29})));
   Modelica.Blocks.Sources.RealExpression T_Max_Overheated_Zone(y=Tmeasure[
         dT_Cool_Max.iMax])
-    annotation (Placement(transformation(extent={{120,-60},{100,-40}})));
+    annotation (Placement(transformation(extent={{130,-60},{110,-40}})));
   Utilities.Math.MinMax dT_Cool_Max(nu=numZones)
-    annotation (Placement(transformation(extent={{4,-34},{-6,-24}})));
+    annotation (Placement(transformation(extent={{26,-34},{16,-24}})));
   Utilities.Math.MinMax dT_Heat_Max(nu=numZones)
-    annotation (Placement(transformation(extent={{4,24},{-6,34}})));
+    annotation (Placement(transformation(extent={{26,24},{16,34}})));
   Modelica.Blocks.Sources.RealExpression T_Max_Undercooled_Zone(y=Tmeasure[
         dT_Heat_Max.iMin])
-    annotation (Placement(transformation(extent={{120,40},{100,60}})));
+    annotation (Placement(transformation(extent={{132,40},{112,60}})));
   Modelica.Blocks.Sources.Constant const1(k=0)
     annotation (Placement(transformation(extent={{18,-54},{10,-46}})));
   Modelica.Blocks.Sources.Constant const2(k=0)
@@ -198,6 +198,14 @@ model Dynamic_AHU_T_SUP_Control
     annotation (Placement(transformation(extent={{54,-58},{46,-50}})));
   Modelica.Blocks.Math.Gain gainHeat1(k=-1)
     annotation (Placement(transformation(extent={{-28,-56},{-40,-44}})));
+  Utilities.Math.SmoothHeaviside smooth_dT_Cool_Max(delta=3600)
+    annotation (Placement(transformation(extent={{10,-34},{0,-24}})));
+  Utilities.Math.SmoothHeaviside smooth_dT_Heat_Max(delta=3600)
+    annotation (Placement(transformation(extent={{10,24},{0,34}})));
+  Utilities.Math.SmoothHeaviside smooth_T_Max_Overheated_Zone(delta=3600)
+    annotation (Placement(transformation(extent={{100,-56},{90,-46}})));
+  Utilities.Math.SmoothHeaviside smooth_T_Max_Undercooled_Zone(delta=3600)
+    annotation (Placement(transformation(extent={{100,44},{90,54}})));
 equation
 
   if not NotHysteresisHeating.y and not HysteresisCooling.y then
@@ -274,14 +282,6 @@ equation
           -3.6},{-80.8,-3.6}}, color={0,0,127}));
   connect(TSetHeat, dT_Heat.u2) annotation (Line(points={{30,-120},{30,-42},{50,
           -42},{50,26},{45,26}}, color={0,0,127}));
-  connect(dT_Cool_Max.yMax, PI_AHU_Cool.u_m) annotation (Line(points={{-6.5,-26},
-          {-10,-26},{-10,-38}}, color={0,0,127}));
-  connect(dT_Heat_Max.yMin, PI_AHU_Heat.u_m)
-    annotation (Line(points={{-6.5,26},{-10,26},{-10,38}}, color={0,0,127}));
-  connect(T_Max_Undercooled_Zone.y, HysteresisHeating.u)
-    annotation (Line(points={{99,50},{82,50}}, color={0,0,127}));
-  connect(T_Max_Overheated_Zone.y, HysteresisCooling.u)
-    annotation (Line(points={{99,-50},{82,-50}}, color={0,0,127}));
   connect(const1.y, PI_AHU_Cool.u_s)
     annotation (Line(points={{9.6,-50},{2,-50}}, color={0,0,127}));
   connect(const2.y, PI_AHU_Heat.u_s)
@@ -331,6 +331,22 @@ equation
   connect(PI_AHU_Cool.y, gainHeat1.u)
     annotation (Line(points={{-21,-50},{-26.8,-50}}, color={0,0,127}));
 
+  connect(dT_Cool_Max.yMax, smooth_dT_Cool_Max.u) annotation (Line(points={{
+          15.5,-26},{14,-26},{14,-29},{11,-29}}, color={0,0,127}));
+  connect(smooth_dT_Cool_Max.y, PI_AHU_Cool.u_m) annotation (Line(points={{-0.5,
+          -29},{-0.5,-30},{-10,-30},{-10,-38}}, color={0,0,127}));
+  connect(dT_Heat_Max.yMin, smooth_dT_Heat_Max.u) annotation (Line(points={{
+          15.5,26},{14,26},{14,28},{12,28},{12,29},{11,29}}, color={0,0,127}));
+  connect(smooth_dT_Heat_Max.y, PI_AHU_Heat.u_m)
+    annotation (Line(points={{-0.5,29},{-10,29},{-10,38}}, color={0,0,127}));
+  connect(T_Max_Overheated_Zone.y, smooth_T_Max_Overheated_Zone.u)
+    annotation (Line(points={{109,-50},{110,-51},{101,-51}}, color={0,0,127}));
+  connect(smooth_T_Max_Overheated_Zone.y, HysteresisCooling.u) annotation (Line(
+        points={{89.5,-51},{89.5,-50},{82,-50}}, color={0,0,127}));
+  connect(smooth_T_Max_Undercooled_Zone.u, T_Max_Undercooled_Zone.y)
+    annotation (Line(points={{101,49},{100,50},{111,50}}, color={0,0,127}));
+  connect(smooth_T_Max_Undercooled_Zone.y, HysteresisHeating.u)
+    annotation (Line(points={{89.5,49},{89.5,50},{82,50}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(info="<html>
