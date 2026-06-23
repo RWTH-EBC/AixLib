@@ -9,8 +9,8 @@ Check of class aborted.
 Warning: WARNINGS have been issued.
 
 
-Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating 
-Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating</a>
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV</a>
 Warning: Incompatible sizes for variable and its definition equation;
   thermalZone.zoneParam.maxOverheatingACH = {3.0, 2.0}
 They have for dimension 1 the sizes 3 and 2.
@@ -19,8 +19,8 @@ Check of class aborted.
 Warning: WARNINGS have been issued.
 
 
-Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV 
-Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingWithPV</a>
+Error in model:  AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating 
+Check of <a href="Modelica://AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating">AixLib.Controls.HVACAgentBasedControl.Examples.BuildingHeatingSystems.BuildingHeating</a>
 Warning: Incompatible sizes for variable and its definition equation;
   thermalZone.zoneParam.maxOverheatingACH = {3.0, 2.0}
 They have for dimension 1 the sizes 3 and 2.
