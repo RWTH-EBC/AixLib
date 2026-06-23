@@ -198,13 +198,13 @@ model Dynamic_AHU_T_SUP_Control
     annotation (Placement(transformation(extent={{54,-58},{46,-50}})));
   Modelica.Blocks.Math.Gain gainHeat1(k=-1)
     annotation (Placement(transformation(extent={{-28,-56},{-40,-44}})));
-  Utilities.Math.SmoothHeaviside smooth_dT_Cool_Max(delta=3600)
+  Modelica.Blocks.Continuous.FirstOrder smooth_dT_Cool_Max(T=600)
     annotation (Placement(transformation(extent={{10,-34},{0,-24}})));
-  Utilities.Math.SmoothHeaviside smooth_dT_Heat_Max(delta=3600)
+  Modelica.Blocks.Continuous.FirstOrder smooth_dT_Heat_Max(T=600)
     annotation (Placement(transformation(extent={{10,24},{0,34}})));
-  Utilities.Math.SmoothHeaviside smooth_T_Max_Overheated_Zone(delta=3600)
+  Modelica.Blocks.Continuous.FirstOrder smooth_T_Max_Overheated_Zone(T=600)
     annotation (Placement(transformation(extent={{100,-56},{90,-46}})));
-  Utilities.Math.SmoothHeaviside smooth_T_Max_Undercooled_Zone(delta=3600)
+  Modelica.Blocks.Continuous.FirstOrder smooth_T_Max_Undercooled_Zone(T=600)
     annotation (Placement(transformation(extent={{100,44},{90,54}})));
 equation
 
@@ -331,12 +331,12 @@ equation
   connect(PI_AHU_Cool.y, gainHeat1.u)
     annotation (Line(points={{-21,-50},{-26.8,-50}}, color={0,0,127}));
 
-  connect(dT_Cool_Max.yMax, smooth_dT_Cool_Max.u) annotation (Line(points={{
-          15.5,-26},{14,-26},{14,-29},{11,-29}}, color={0,0,127}));
+  connect(dT_Cool_Max.yMax, smooth_dT_Cool_Max.u) annotation (Line(points={{15.5,
+          -26},{14,-26},{14,-29},{11,-29}}, color={0,0,127}));
   connect(smooth_dT_Cool_Max.y, PI_AHU_Cool.u_m) annotation (Line(points={{-0.5,
           -29},{-0.5,-30},{-10,-30},{-10,-38}}, color={0,0,127}));
-  connect(dT_Heat_Max.yMin, smooth_dT_Heat_Max.u) annotation (Line(points={{
-          15.5,26},{14,26},{14,28},{12,28},{12,29},{11,29}}, color={0,0,127}));
+  connect(dT_Heat_Max.yMin, smooth_dT_Heat_Max.u) annotation (Line(points={{15.5,
+          26},{14,26},{14,28},{12,28},{12,29},{11,29}}, color={0,0,127}));
   connect(smooth_dT_Heat_Max.y, PI_AHU_Heat.u_m)
     annotation (Line(points={{-0.5,29},{-10,29},{-10,38}}, color={0,0,127}));
   connect(T_Max_Overheated_Zone.y, smooth_T_Max_Overheated_Zone.u)
