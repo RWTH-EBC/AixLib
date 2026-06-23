@@ -69,10 +69,6 @@ model ControlerHeatRecovery
         extent={{-20,-20},{20,20}},
         rotation=90,
         origin={-86,-120})));
-  Modelica.Blocks.Logical.Not not1 annotation (Placement(transformation(
-        extent={{6,-6},{-6,6}},
-        rotation=90,
-        origin={4,-26})));
 protected
   Utilities.Logical.SmoothSwitch switch1
     annotation (Placement(transformation(extent={{36,-10},{56,10}})));
@@ -105,8 +101,6 @@ equation
           -40,-68},{-40,24},{-14,24},{-14,32}}, color={0,0,127}));
   connect(add.u1, dTFan)
     annotation (Line(points={{-78,6},{-86,6},{-86,-120}}, color={0,0,127}));
-  connect(lessEqual.y, not1.u)
-    annotation (Line(points={{1,0},{4,0},{4,-18.8}}, color={255,0,255}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-100,100},{100,-100}},

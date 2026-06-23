@@ -6,7 +6,8 @@ model VentilationController
   parameter Real relHum_start=0.5 "Start value of EMA_relHum";
 
   parameter Boolean useConstantOutput=false
-    "provide constant ACH(=baseACH), false = no user induced infiltration (window opening)";
+    "true: provide constant ACH(=baseACH), 
+     false: user induced infiltration (window opening), summer, and overheating infiltration";
   parameter Real baseACH=0.2 "baseline air changes per hour"   annotation (Dialog(enable=true));
   parameter Real maxUserACH=1.0 "additional ACH value for max. user activity"   annotation (Dialog(enable=not
                                                                                                 (useConstantOutput)));

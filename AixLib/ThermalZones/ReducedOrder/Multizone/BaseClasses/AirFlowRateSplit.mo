@@ -14,13 +14,13 @@ block AirFlowRateSplit
     "Records of zones";
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
-    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
-    iconTransformation(extent={{-140,20},{-100,60}})));
+    annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
+    iconTransformation(extent={{-140,40},{-100,80}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"
      annotation (
-     Placement(transformation(extent={{-140,-60},{-100,-20}}),
-     iconTransformation(extent={{-140,-60},{-100,-20}})));
+     Placement(transformation(extent={{-140,-74},{-100,-34}}),
+     iconTransformation(extent={{-140,-74},{-100,-34}})));
   Modelica.Blocks.Interfaces.RealInput airFlowIn(final quantity=
     "VolumeFlowRate", final unit="m3/s") "Aggregated air flow rate"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
@@ -48,10 +48,12 @@ equation
   if dynamicControl then
     airFlowVector * 3600 =zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
    elseif withProfile then
-    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU -
+    zoneParam.minAHU)
       *profile) .* zoneParam.AZone);
   else
-    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU -
+    zoneParam.minAHU)
        .* relOccupation) .* zoneParam.AZone);
   end if;
 

@@ -22,7 +22,7 @@ model PITemp "PI controller that can switch the output range of the controller"
   Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{26, -34}, {46, -54}})));
   AixLib.Controls.Continuous.LimPID PI(k = KR, yMax = if rangeSwitch then -l else h, yMin = if rangeSwitch then -h else l, controllerType = Modelica.Blocks.Types.SimpleController.PI, Ti = TN, Td = 0.1,
     reset=AixLib.Types.Reset.Parameter,
-    y_reset=if rangeSwitch then -h else l)                                                                                                                                                                annotation(Placement(transformation(extent = {{-18, 30}, {2, 50}})));
+    y_reset=0)                                                                                                                                                                                            annotation(Placement(transformation(extent = {{-18, 30}, {2, 50}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation(Placement(transformation(origin = {-60, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Blocks.Logical.Switch switch1
     annotation (Placement(transformation(extent={{-54,8},{-34,28}})));
