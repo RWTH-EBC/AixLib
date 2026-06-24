@@ -31,8 +31,8 @@ model FanSimple
     final unit="K")
     "temperature increase over fan"
     annotation (Placement(
-        transformation(extent={{100,-50},{120,-30}}), iconTransformation(extent
-          ={{100,-60},{120,-40}})));
+        transformation(extent={{100,-50},{120,-30}}), iconTransformation(extent=
+           {{100,-60},{120,-40}})));
 equation
   // mass balance
   mAirIn_flow - mAirOut_flow = 0;
@@ -75,6 +75,9 @@ equation
 <ul>
   <li>April, 2020 by Martin Kremer:<br/>
     Implemented.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"));

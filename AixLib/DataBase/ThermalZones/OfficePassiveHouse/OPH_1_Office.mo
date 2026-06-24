@@ -62,7 +62,7 @@ record OPH_1_Office "Office zone of office building"
     internalGainsMoistureNoPeople=0.5,
     internalGainsMachinesSpecific=7.0,
     ratioConvectiveHeatMachines=0.6,
-    lightingPowerSpecific=12.5,
+    lightingPowerSpecific=5,
     ratioConvectiveHeatLighting=0.6,
     useConstantACHrate=false,
     baseACH=0.2,
@@ -88,8 +88,7 @@ record OPH_1_Office "Office zone of office building"
     TNCool=1,
     CoolerOn=false,
     TThresholdHeater=273.15 + 15,
-    TThresholdCooler=273.15 + 22,
-    withIdealThresholds=false);
+    TThresholdCooler=273.15 + 22);
 
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>

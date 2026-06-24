@@ -167,9 +167,9 @@ partial model PartialCase "This is the base class from which the base cases will
     annotation (Dialog(tab="Results check", group=
           "Cooling load or min. temperature"));
   parameter Boolean activeHeatingOutput=true
-  "Activates blocks connected with HeaterCoolerPI.heatingPower";
+  "Activates blocks connected with HeaterCooler.heatingPower";
   parameter Boolean activeCoolingOutput=true
-  "Activates blocks connected with HeaterCoolerPI.coolingPower";
+  "Activates blocks connected with HeaterCooler.coolingPower";
   Modelica.Blocks.Math.UnitConversions.To_degC to_degCRoomConvTemp annotation (Placement(transformation(extent={{92,31},{102,41}})));
   Modelica.Blocks.Interfaces.RealOutput FreeFloatRoomTemperature annotation (Placement(transformation(extent={{130,26},{150,46}})));
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temperatureSensor annotation (Placement(transformation(extent={{72,30},{84,42}})));

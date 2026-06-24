@@ -1280,19 +1280,19 @@ equation
   //stateToHuCHRS_false==false,
 
   connect(T_outdoorAir, sample.u[1]) annotation (Line(points={{-100,56},{-100,
-          56},{-67.7778,56},{-67.7778,26}},
+          56},{-66.8889,56},{-66.8889,26}},
                                     color={0,0,127}));
   connect(X_outdoorAir, sample.u[2]) annotation (Line(points={{-100,36},{-100,
-          36},{-67.3333,36},{-67.3333,26}},
+          36},{-66.6667,36},{-66.6667,26}},
                                     color={0,0,127}));
   connect(T_supplyAir, sample.u[3]) annotation (Line(points={{100,36},{100,42},
-          {-66.8889,42},{-66.8889,26}},
+          {-66.4444,42},{-66.4444,26}},
                             color={0,0,127}));
   connect(T_extractAir, sample.u[4]) annotation (Line(points={{100,78},{-60,78},
-          {-60,60},{-66.4444,60},{-66.4444,26}},
+          {-60,60},{-66.2222,60},{-66.2222,26}},
                             color={0,0,127}));
-  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-64.6667,
-          82},{-64.6667,26}},
+  connect(Vflow_in, sample.u[8]) annotation (Line(points={{-100,82},{-65.3333,
+          82},{-65.3333,26}},
                        color={0,0,127}));
   connect(Vflow_in_extractAir_internal, sample.u[9]);
   connect(hold_phi_sup.y, phi_supply) annotation (Line(points={{79,9},{99,9},{99,

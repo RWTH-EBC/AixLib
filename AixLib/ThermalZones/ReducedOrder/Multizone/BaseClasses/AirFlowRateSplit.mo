@@ -3,22 +3,24 @@ block AirFlowRateSplit
   "Air flow rate ratios and unit conversion"
   extends Modelica.Blocks.Icons.Block;
 
-  parameter Integer dimension "Number of Zones";
+  parameter Integer dimension(min=1) "Number of Zones";
   parameter Boolean withProfile = false
     "Profile or occupancy as control value for AHU" annotation(choices(
     choice =  false "Relative Occupation",choice = true "Profile",
     radioButtons = true));
+  parameter Boolean dynamicControl = false
+    "Wether to use dynamic ventilation control depending on room temperature";
   parameter AixLib.DataBase.ThermalZones.ZoneBaseRecord zoneParam[dimension]
     "Records of zones";
   Modelica.Blocks.Interfaces.RealInput profile
     "Input profile for AHU operation"
-    annotation (Placement(transformation(extent={{-140,40},{-100,80}}),
-    iconTransformation(extent={{-140,40},{-100,80}})));
+    annotation (Placement(transformation(extent={{-140,20},{-100,60}}),
+    iconTransformation(extent={{-140,20},{-100,60}})));
   Modelica.Blocks.Interfaces.RealInput relOccupation[dimension]
     "Input for relative occupation"
      annotation (
-     Placement(transformation(extent={{-140,-74},{-100,-34}}),
-     iconTransformation(extent={{-140,-74},{-100,-34}})));
+     Placement(transformation(extent={{-140,-60},{-100,-20}}),
+     iconTransformation(extent={{-140,-60},{-100,-20}})));
   Modelica.Blocks.Interfaces.RealInput airFlowIn(final quantity=
     "VolumeFlowRate", final unit="m3/s") "Aggregated air flow rate"
     annotation (Placement(transformation(extent={{-140,-20},{-100,20}}),
@@ -28,6 +30,13 @@ block AirFlowRateSplit
     annotation (Placement(transformation(extent={{100,-20},{140,20}}),
     iconTransformation(extent={{100,-20},{140,20}})));
 
+  Modelica.Blocks.Interfaces.RealInput setAHU[dimension]
+    "Input for volume flow per room if dynamic ventilation control is used"
+    annotation (Placement(transformation(
+        extent={{-20,-20},{20,20}},
+        rotation=0,
+        origin={-120,-80}), iconTransformation(extent={{-140,-100},{-100,-60}})));
+
 protected
   Real airFlowShare[dimension] "Share of zones at air flow";
   Real airFlowVector[dimension]
@@ -35,15 +44,17 @@ protected
   Real airFlowRateOutput "Sum of air flow rates";
   parameter Real defVal[dimension]={if VAir > 0 then 0 else 0.000001 for VAir in zoneParam.VAir}
     "Default value to prevent division by zero";
-
 equation
-  if withProfile then
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
-    zoneParam.minAHU) * profile) .* zoneParam.AZone);
+  if dynamicControl then
+    airFlowVector * 3600 =zoneParam.maxAHU .* setAHU .* zoneParam.AZone;
+   elseif withProfile then
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+      *profile) .* zoneParam.AZone);
   else
-    airFlowVector * 3600 = ((zoneParam.minAHU + (zoneParam.maxAHU -
-    zoneParam.minAHU) .* relOccupation) .* zoneParam.AZone);
+    airFlowVector * 3600 =((zoneParam.minAHU + (zoneParam.maxAHU - zoneParam.minAHU)
+       .* relOccupation) .* zoneParam.AZone);
   end if;
+
   (airFlowRateOutput,airFlowShare) =
     AixLib.ThermalZones.ReducedOrder.Multizone.BaseClasses.SumCondition(
       airFlowVector,
@@ -107,6 +118,9 @@ equation
   \"AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped\">AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped</a>.
 </p>
 <ul>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Adapted to new AHU and associated dynamic AHU control
+  </li>
   <li>September 27, 2016, by Moritz Lauster:<br/>
     Moved to fit to new Annex60 structure.
   </li>

@@ -22,7 +22,7 @@ model ExampleAHU "Comparative simulation with existing AHU model"
     etaFanOda=0.54,
     etaFanEta=0.54,
     redeclare model humidifier =
-        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SteamHumidifier)
+        AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.SprayHumidifier)
     annotation (Placement(transformation(extent={{-58,-22},{48,42}})));
   BoundaryConditions.WeatherData.ReaderTMY3        weaDat(
     calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,

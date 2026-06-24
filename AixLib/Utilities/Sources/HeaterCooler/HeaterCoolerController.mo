@@ -41,7 +41,7 @@ equation
   connect(less.y, heaterActive)
     annotation (Line(points={{9,20},{110,20}},color={255,0,255}));
   connect(weaBus.TDryBul, less.u1) annotation (Line(
-      points={{-98,67},{-20,67},{-20,20},{-14,20}},
+      points={{-97.915,67.08},{-20,67.08},{-20,20},{-14,20}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -49,7 +49,7 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   connect(weaBus.TDryBul, greater.u1) annotation (Line(
-      points={{-98,67},{-20,67},{-20,-20},{-14,-20}},
+      points={{-97.915,67.08},{-20,67.08},{-20,-20},{-14,-20}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",

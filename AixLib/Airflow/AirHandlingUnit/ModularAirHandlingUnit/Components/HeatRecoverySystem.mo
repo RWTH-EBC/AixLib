@@ -1,6 +1,13 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model HeatRecoverySystem
 
+  // Initialization
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+
+  // Parameters
   parameter Modelica.Units.SI.SpecificHeatCapacity cpAir = 1005
     "specific heat capacity of dry air"
     annotation(Dialog(tab="Advanced"));
@@ -22,6 +29,7 @@ model HeatRecoverySystem
     "pressure drop at nominal mass flow rate"
     annotation(Dialog(group="Nominal conditions"));
 
+  // Interfaces
   Modelica.Units.SI.MassFlowRate mDryAirInOda_flow
     "mass flow rate of incoming dry outdoor air";
   Modelica.Units.SI.MassFlowRate mDryAirInEta_flow
@@ -73,6 +81,7 @@ model HeatRecoverySystem
       Placement(transformation(extent={{140,60},{100,100}}), iconTransformation(
           extent={{120,70},{100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirInEta(
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -94,6 +103,7 @@ model HeatRecoverySystem
       Placement(transformation(extent={{-140,50},{-100,90}}),
         iconTransformation(extent={{-120,70},{-100,90}})));
   Modelica.Blocks.Interfaces.RealInput TAirInOda(
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -113,6 +123,7 @@ model HeatRecoverySystem
     "mass flow rate of outgoing exhaust air"
     annotation (Placement(transformation(extent={{-100,-30},{-120,-10}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutEta(
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -129,6 +140,7 @@ model HeatRecoverySystem
     "mass flow rate of outgoing outdoor air"
     annotation (Placement(transformation(extent={{100,-30},{120,-10}})));
   Modelica.Blocks.Interfaces.RealOutput TAirOutOda(
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -266,6 +278,9 @@ equation
   <li>April 2020, by Martin Kremer:<br/>
     Added efficiency for bypassed HRS. Changed limitation of
     temperature at outdoor outlet.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"),                  Icon(coordinateSystem(preserveAspectRatio=false),
