@@ -794,8 +794,6 @@ else
      connect(addInfVen.y, cO2Balance.airExc) annotation (Line(points={{-29.5,-27},
             {-24,-27},{-24,-34},{12,-34},{12,-63.6},{16,-63.6}},
                                                             color={0,0,127}));
-     connect(addInfVen.y, airExc.ventRate) annotation (Line(points={{-29.5,-27},
-            {-24,-27},{-24,-11.12},{-21.2,-11.12}},  color={0,0,127}));
      connect(addInfVen.y, airExcMoi.ventRate) annotation (Line(points={{-29.5,
             -27},{-24,-27},{-24,-11.12},{-21.2,-11.12}},
                                                      color={0,0,127}));

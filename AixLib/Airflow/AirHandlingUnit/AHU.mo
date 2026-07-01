@@ -89,8 +89,7 @@ model AHU
   Modelica.Units.SI.Temperature TsupplyAirOut(start=295.15);
 
   // Sampler (time-continous to time-discrete variables)
-
-  Modelica.Clocked.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=9)
+  Modelica.Clocked.RealSignals.Sampler.SampleVectorizedAndClocked sample(n=9, u(unit={"K", "1", "K", "K", "1", "1", "1", "m3/s", "m3/s"}), y(unit={"K", "1", "K", "K", "1", "1", "1", "m3/s", "m3/s"}))
     annotation (Placement(transformation(
         extent={{-10,-10},{10,10}},
         rotation=-90,
@@ -820,25 +819,25 @@ equation
   stateToOnlyHeatingHRS_true = if
      choiceX
      and
-     (previous(T_5) >= pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
+     (previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
      and heating and HRS then true else false;
 
   stateToOnlyHeatingHRS_false = if
      choiceX
      and
-     (previous(T_5) >= pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
+     (previous(T_5) >= previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
      and heating and not HRS then true else false;
 
   stateToOnlyCoolingHRS_true = if
      choiceX
      and
-     (previous(T_5) < pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
+     (previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
      and cooling and HRS then true else false;
 
   stateToOnlyCoolingHRS_false = if
      choiceX
      and
-     (previous(T_5) < pre(T_oda) + phi_t_withoutHRS*(pre(T_6) - pre(T_oda)))
+     (previous(T_5) < previous(T_oda) + phi_t_withoutHRS*(previous(T_6) - previous(T_oda)))
      and cooling and not HRS then true else false;
 
   X_supplyMin = (molarMassRatio*phi_supplyAir[1]*
