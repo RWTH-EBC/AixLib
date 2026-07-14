@@ -1,0 +1,42 @@
+simulateModel("AixLib.Airflow.WindowVentilation.Examples.SensitivityAnalysis.SimpleOpening", startTime=0, stopTime=10, outputInterval=0.01, method="dassl", tolerance=1e-6, resultFile="SimpleOpening");
+createPlot(
+	id=1,
+	position={0, 0, 1200, 600},
+	x="TDif.y",
+	y={"senAnaTAmb.gidsPhaff.V_flow", "senAnaTAmb.warrenParkins.V_flow", "senAnaTAmb.larsenHeiselberg.V_flow", "senAnaTAmb.caciolo.V_flow", "senAnaTAmb.tang.V_flow", "senAnaTAmb.vdi2078.V_flow", "senAnaTAmb.din16798.V_flow", "senAnaTAmb.din4108.V_flow", "senAnaTAmb.ashrae.V_flow"},
+	heading="Temperature difference",
+	range={0.0, 10.0, 0.0, 500.0},
+	autoscale=false,
+	grid=true,
+	subPlot=101,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}, {162,29,33}, {244,125,35}, {102,44,145}, {28,108,200}},
+	patterns={LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Dash},
+	timeUnit="K",
+	displayUnits={"m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h"});
+createPlot(
+	id=1,
+	position={0, 0, 1200, 600},
+	x="WinSpeVar.y",
+	y={"senAnaWinSpe.gidsPhaff.V_flow", "senAnaWinSpe.warrenParkins.V_flow", "senAnaWinSpe.larsenHeiselberg.V_flow", "senAnaWinSpe.caciolo.V_flow", "senAnaWinSpe.tang.V_flow", "senAnaWinSpe.vdi2078.V_flow", "senAnaWinSpe.din16798.V_flow", "senAnaWinSpe.din4108.V_flow", "senAnaWinSpe.ashrae.V_flow"},
+	heading="Wind speed",
+	range={0.0, 10.0, 200.0, 1000.0},
+	autoscale=false,
+	grid=true,
+	subPlot=102,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}, {162,29,33}, {244,125,35}, {102,44,145}, {28,108,200}},
+	patterns={LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Dash},
+	timeUnit="m/s",
+	displayUnits={"m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h"});
+createPlot(
+	id=1,
+	position={0, 0, 1200, 600},
+	x="WinDirVar_deg.y", y={"senAnaWinDir.gidsPhaff.V_flow", "senAnaWinDir.warrenParkins.V_flow", "senAnaWinDir.larsenHeiselberg.V_flow", "senAnaWinDir.caciolo.V_flow", "senAnaWinDir.tang.V_flow", "senAnaWinDir.vdi2078.V_flow", "senAnaWinDir.din16798.V_flow", "senAnaWinDir.din4108.V_flow", "senAnaWinDir.ashrae.V_flow"},
+	heading="Wind direction",
+	range={0.0, 360.0, 0.0, 1500.0},
+	autoscale=false,
+	grid=true,
+	subPlot=103,
+	colors={{28,108,200}, {238,46,47}, {0,140,72}, {217,67,180}, {0,0,0}, {162,29,33}, {244,125,35}, {102,44,145}, {28,108,200}},
+	patterns={LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Solid, LinePattern.Dash},
+	timeUnit="deg",
+	displayUnits={"m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h", "m3/h"});
