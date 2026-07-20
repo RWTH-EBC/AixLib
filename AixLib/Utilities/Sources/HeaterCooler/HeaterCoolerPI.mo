@@ -143,15 +143,15 @@ model HeaterCoolerPI
 
 protected
   Modelica.Blocks.Continuous.FirstOrder firstOrderCooling(
-    k=if not recOrSep then k_dampedTransfer_heater else zoneParam.kDampedTransferHea,
-    T=if not recOrSep then Tau_dampedTransfer_heater else zoneParam.TauDampedTransferHea,
+    k=if not recOrSep then k_dampedTransfer_cooler else zoneParam.kDampedTransferCoo,
+    T=if not recOrSep then Tau_dampedTransfer_cooler else zoneParam.TauDampedTransferCoo,
     initType=Modelica.Blocks.Types.Init.InitialState)
       if ((recOrSep and zoneParam.CoolerOn) or (not recOrSep and Cooler_on))
     "Emulates the belayed cooling flow into the building due to thermal activated building systems"
     annotation (Placement(transformation(extent={{-16,-82},{4,-62}})));
   Modelica.Blocks.Continuous.FirstOrder firstOrderHeating(
-    k=if not recOrSep then k_dampedTransfer_cooler else zoneParam.kDampedTransferCoo,
-    T=if not recOrSep then Tau_dampedTransfer_cooler else zoneParam.TauDampedTransferCoo,
+    k=if not recOrSep then k_dampedTransfer_heater else zoneParam.kDampedTransferHea,
+    T=if not recOrSep then Tau_dampedTransfer_heater else zoneParam.TauDampedTransferHea,
     initType=Modelica.Blocks.Types.Init.InitialState)
       if ((recOrSep and zoneParam.HeaterOn) or (not recOrSep and Heater_on))
     "Emulates the belayed heat flow into the building due to thermal activated building systems"
