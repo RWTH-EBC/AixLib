@@ -1,4 +1,4 @@
-within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
+﻿within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SensibleCooler
   "Idealized model for cooler (not considering condensation)"
   extends BaseClasses.PartialCooler;

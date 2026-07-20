@@ -99,6 +99,9 @@ equation
   <li>April, 2019, by Martin Kremer:<br/>
     First implementation.
   </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
+  </li>
 </ul>
 </html>"));
 end Cooler;

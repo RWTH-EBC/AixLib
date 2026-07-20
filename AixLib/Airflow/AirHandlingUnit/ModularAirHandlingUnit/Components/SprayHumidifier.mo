@@ -1,8 +1,10 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model SprayHumidifier "Idealized model of a spray humidifier"
-  extends AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
+  extends
+    AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components.BaseClasses.PartialHumidifier;
 
-  parameter Real k = 500 "exponent for humidification degree";
+  // Parameters
+  parameter Real k = 500 "exponent for humidification degree  in spray humidifier";
 
   // Variables
   Modelica.Units.SI.SpecificEnthalpy hWatIn "specific enthalpy of incoming water";
@@ -32,7 +34,7 @@ protected
   Modelica.Blocks.Sources.RealExpression realExpression1(y=X_intern)
     annotation (Placement(transformation(extent={{-20,-8},{0,12}})));
 equation
-  T_intern =TAirOut;
+  T_intern = TAirOut;
   mDryAirIn_flow * (1 + XAirIn) = mAirIn_flow;
 
   // mass balance

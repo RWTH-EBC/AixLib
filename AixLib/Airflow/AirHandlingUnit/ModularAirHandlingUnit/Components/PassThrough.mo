@@ -1,6 +1,14 @@
 within AixLib.Airflow.AirHandlingUnit.ModularAirHandlingUnit.Components;
 model PassThrough
   "model representing an empty part of an air handling unit (used for modularity)"
+
+  // Initialization
+  parameter Modelica.Units.SI.Temperature T_start = 293.15
+    "Initial temperature" annotation (Dialog(
+      tab="Initialization",
+      group="Parameters"));
+
+  // Interfaces
   Modelica.Blocks.Interfaces.RealInput m_flow_airIn(
     final quantity="MassFlowRate",
     final unit="kg/s")
@@ -8,6 +16,7 @@ model PassThrough
     annotation (Placement(transformation(extent={{-140,30},{-100,70}}),
         iconTransformation(extent={{-120,40},{-100,60}})));
   Modelica.Blocks.Interfaces.RealInput T_airIn(
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC")
@@ -24,6 +33,7 @@ model PassThrough
     annotation (Placement(transformation(extent={{100,-60},{120,-40}}),
         iconTransformation(extent={{100,-60},{120,-40}})));
   Modelica.Blocks.Interfaces.RealOutput T_airOut(
+    start=T_start,
     final quantity="ThermodynamicTemperature",
     final unit="K",
     displayUnit="degC") "Temperature of outgoing air"
@@ -54,6 +64,9 @@ equation
 <ul>
   <li>April, 2020 by Martin Kremer:<br/>
     Implemented.
+  </li>
+  <li>January, 2026 by Jonatan Höpp:<br/>
+    Added start temperature
   </li>
 </ul>
 </html>"));
