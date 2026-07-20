@@ -1,7 +1,7 @@
 within AixLib.DataBase.ThermalZones.OfficePassiveHouse;
-record OPH_1_OfficeHeaterCoolerWithThresholds "Office zone of office building"
+record OPH_1_OfficeHeaterCoolerWithThresholds "Office zone of office building with ideal heater and cooler"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
-    TauDampedTransferHea=60,
+    TauDampedTransferHea=300,
     FraRadHea=0.35,
     withDampedHeatTransfer=true,
     withFraRadConvHeatTransfer=true,
@@ -93,7 +93,7 @@ record OPH_1_OfficeHeaterCoolerWithThresholds "Office zone of office building"
     TNCool=1,
     CoolerOn=true,
     TThresholdHeater=273.15 + 15,
-    TThresholdCooler=273.15 + 22);
+    TThresholdCooler=273.15 + 20);
 
   annotation (Documentation(revisions="<html><ul>
   <li>May 5, 2023, by Philip Groesdonk:<br/>
