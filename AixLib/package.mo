@@ -6,7 +6,7 @@ package AixLib
  SDF(version="0.4.4"),
  Modelica_DeviceDrivers(version="2.1.1"),
     Modelica(version="4.0.0")),
-  version="3.0.1",
+  version="3.1.0",
   conversion(conversion(
   from(
     version="0.3.2",
