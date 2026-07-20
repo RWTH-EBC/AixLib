@@ -1,5 +1,5 @@
 within AixLib.Utilities.HeatTransfer;
-class CylindricLoad "Model for a cylindric heat capacity"
+model CylindricLoad "Model for a cylindric heat capacity"
   // Assumptions
   parameter Modelica.Fluid.Types.Dynamics energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial
     "Type of energy balance: dynamic (3 initialization options) or steady state"

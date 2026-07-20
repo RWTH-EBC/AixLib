@@ -3,19 +3,19 @@ model PrescribedSolarRad "Prescribed solar radiation conditions"
   parameter Integer n=1 "number of output vector length";
   AixLib.Utilities.Interfaces.SolarRad_out solRadOut[n]
     annotation (Placement(transformation(extent={{80,-10},{100,10}})));
-  Modelica.Blocks.Interfaces.RealInput H[n](unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput H[n](each unit="W/m2")
     "Total radiation (W/m2)"
     annotation (Placement(transformation(extent={{-120,60},{-80,100}})));
-  Modelica.Blocks.Interfaces.RealInput HDir[n](unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput HDir[n](each unit="W/m2")
     "Direct radiation (W/m2)"
     annotation (Placement(transformation(extent={{-120,20},{-80,60}})));
-  Modelica.Blocks.Interfaces.RealInput HDif[n](unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput HDif[n](each unit="W/m2")
     "Diffuse radiation(W/m2)"
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}})));
-  Modelica.Blocks.Interfaces.RealInput HGrd[n](unit="W/m2")
+  Modelica.Blocks.Interfaces.RealInput HGrd[n](each unit="W/m2")
     "Ground reflected radiation (W/m2)"
     annotation (Placement(transformation(extent={{-120,-60},{-80,-20}})));
-  Modelica.Blocks.Interfaces.RealInput incAng[n](unit="rad")
+  Modelica.Blocks.Interfaces.RealInput incAng[n](each unit="rad")
     "Incidence angle"
     annotation (Placement(transformation(extent={{-120,-100},{-80,-60}})));
 equation

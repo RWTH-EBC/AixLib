@@ -3,10 +3,10 @@ package AixLib
 
   annotation (
   uses(
-	SDF(version="0.4.2"),
-	Modelica_DeviceDrivers(version="2.1.1"),
+ SDF(version="0.4.4"),
+ Modelica_DeviceDrivers(version="2.1.1"),
     Modelica(version="4.0.0")),
-  version="3.0.0",
+  version="3.0.1",
   conversion(conversion(
   from(
     version="0.3.2",
