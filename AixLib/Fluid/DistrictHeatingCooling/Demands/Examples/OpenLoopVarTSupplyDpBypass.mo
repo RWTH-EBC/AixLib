@@ -23,10 +23,10 @@ model OpenLoopVarTSupplyDpBypass
     Q_flow_nominal=78239.1,
     dTDesign=15,
     TReturn=283.15,
-    m_flo_bypass=0.00)      "Simple demand model" annotation (Placement(
+    m_flo_bypass=0)         "Simple demand model" annotation (Placement(
         transformation(
-        extent={{-10,-10},{10,10}},
-        rotation=180,
+        extent={{10,-10},{-10,10}},
+        rotation=0,
         origin={0,-60})));
   FixedResistances.PlugFlowPipe pipeSupply(
     redeclare package Medium = Medium,
@@ -86,10 +86,6 @@ model OpenLoopVarTSupplyDpBypass
 equation
   connect(sourceIdeal.port_b, pipeSupply.port_a)
     annotation (Line(points={{10,60},{60,60},{60,10}}, color={0,127,255}));
-  connect(pipeSupply.port_b, demand.port_a)
-    annotation (Line(points={{60,-10},{60,-60},{10,-60}}, color={0,127,255}));
-  connect(demand.port_b, pipeReturn.port_a) annotation (Line(points={{-10,-60},{
-          -60,-60},{-60,-10}}, color={0,127,255}));
   connect(pipeReturn.port_b, sourceIdeal.port_a)
     annotation (Line(points={{-60,10},{-60,60},{-10,60}}, color={0,127,255}));
   connect(TSet.y, sourceIdeal.TIn)
@@ -100,20 +96,23 @@ equation
     annotation (Line(points={{-80,-30},{-80,0},{-70,0}}, color={191,0,0}));
   connect(TGround.port, pipeSupply.heatPort) annotation (Line(points={{-80,-30},
           {-80,-20},{80,-20},{80,0},{70,0}}, color={191,0,0}));
-  connect(demand.Q_flow_input, sine.y)
-    annotation (Line(points={{10.8,-68},{60,-68},{60,-75}}, color={0,0,127}));
   connect(dpSet.y, pControl.u_s)
     annotation (Line(points={{-30,9},{-30,18}}, color={0,0,127}));
-  connect(demand.dpOut, pControl.u_m) annotation (Line(points={{-10.8,-68},{-20,
-          -68},{-20,-40},{0,-40},{0,30},{-18,30}}, color={0,0,127}));
   connect(pControl.y, sourceIdeal.dpIn)
     annotation (Line(points={{-30,41},{-30,53},{-10.6,53}}, color={0,0,127}));
+  connect(pControl.u_m, demand.dpOut) annotation (Line(points={{-18,30},{-12,30},{-12,-52},{-10.8,-52}}, color={0,0,127}));
+  connect(demand.Q_flow_input, sine.y) annotation (Line(points={{10.8,-52},{60,-52},{60,-75}}, color={0,0,127}));
+  connect(demand.port_a, pipeSupply.port_b) annotation (Line(points={{10,-60},{60,-60},{60,-10}}, color={0,127,255}));
+  connect(pipeReturn.port_a, demand.port_b) annotation (Line(points={{-60,-10},{-60,-60},{-10,-60}}, color={0,127,255}));
   annotation (
     __Dymola_Commands(file="modelica://AixLib/Resources/Scripts/Dymola/Fluid/DistrictHeatingCooling/Demands/Examples/OpenLoopVarTSupplyDpBypass.mos"
                       "Simulate and plot"),
     Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
     coordinateSystem(preserveAspectRatio=false)),
-    experiment(StopTime=10000, Tolerance=1e-006, __Dymola_Algorithm="Cvode"),
+    experiment(
+      StopTime=100000,
+      Tolerance=1e-06,
+      __Dymola_Algorithm="Cvode"),
     Documentation(revisions="<html><ul>
   <li>March 17, 2018, by Marcus Fuchs:<br/>
     First implementation.
