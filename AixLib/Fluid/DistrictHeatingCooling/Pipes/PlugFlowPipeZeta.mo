@@ -33,7 +33,7 @@ model PlugFlowPipeZeta
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominal
     "Nominal mass flow rate" annotation (Dialog(group="Nominal condition"));
 
-  parameter Modelica.Units.SI.MassFlowRate m_flow_small=1E-4*abs(m_flow_nominal)
+  parameter Modelica.Units.SI.MassFlowRate m_flow_small(min=0)=1E-4*abs(m_flow_nominal)
     "Small mass flow rate for regularization of zero flow"
     annotation (Dialog(tab="Advanced"));
 
