@@ -29,8 +29,7 @@ model LookUpTable2D "Performance data coming from manufacturer"
     final u1(unit="degC"),
     final u2(unit="degC"),
     final y(unit="W", displayUnit="kW"),
-    final table=dataTable.tableP_ele)
-                    "Electrical power table"
+    final table=dataTable.tableP_ele) "Electrical power table"
     annotation (extent=[-60,-20; -40,0], Placement(transformation(extent={{-14,-14},
             {14,14}},
         rotation=-90,

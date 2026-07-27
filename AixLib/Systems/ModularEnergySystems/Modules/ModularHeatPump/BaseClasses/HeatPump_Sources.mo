@@ -250,6 +250,15 @@ package HeatPump_Sources
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    annotation (Icon(graphics={Rectangle(
+            extent={{-88,92},{90,-88}},
+            lineColor={28,108,200},
+            fillColor={85,255,255},
+            fillPattern=FillPattern.Solid), Text(
+            extent={{-48,8},{50,-4}},
+            textColor={255,255,255},
+            textString="Air",
+            fontSize=72)}));
   end Air;
 equation
     connect(port_a, bouEvap_b.ports[1])

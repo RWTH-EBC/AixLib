@@ -624,4 +624,89 @@ package Examples "Holds examples for the modular energy system units"
       Diagram(coordinateSystem(preserveAspectRatio=false)),
       experiment(StopTime=10000, __Dymola_Algorithm="Dassl"));
   end HeatPump_Basic_Air;
+
+  model Chiller
+    Modules.ModularHeatPump.ModularChiller_Air modularChiller_Air(
+      THotDes=291.15,
+      TSourceDes=298.15,
+      QDes=QDes,
+      DeltaTCon=3,
+      m_flow_nominal_pump=QDes/4184/3,
+      eta_carnot=0.5)
+      annotation (Placement(transformation(extent={{-14,16},{6,36}})));
+    Fluid.Sources.Boundary_pT        bouEvap_b(redeclare package Medium =
+          AixLib.Media.Water "Water", nPorts=1)
+      annotation (Placement(transformation(extent={{74,16},{54,36}})));
+    Fluid.Sources.Boundary_pT        bouEvap_b1(
+      redeclare package Medium = AixLib.Media.Water "Water",
+      T=294.15,
+      nPorts=1)
+      annotation (Placement(transformation(extent={{-80,16},{-60,36}})));
+    AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
+        Placement(transformation(extent={{-48,68},{-18,102}}),
+          iconTransformation(extent={{-108,-52},{-90,-26}})));
+    Modelica.Blocks.Sources.RealExpression m_flow_set(y=1) "[0.1 ... 1]"
+                                                           annotation (
+        Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-95,74})));
+    Modelica.Blocks.Sources.BooleanExpression booleanExpression(y=true)
+      annotation (Placement(transformation(extent={{-86,108},{-66,128}})));
+    Modelica.Blocks.Sources.RealExpression n_set(y=1) "[0.1 ... 1]" annotation
+      (Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-109,98})));
+    Modelica.Blocks.Sources.RealExpression n_set1(y=273.15 + 30) "[0.1 ... 1]"
+      annotation (Placement(transformation(
+          extent={{-9,-12},{9,12}},
+          rotation=0,
+          origin={-73,138})));
+    parameter Modelica.Units.SI.HeatFlowRate QDes=15000
+      "Design heat flow rate of heat pump";
+  equation
+    connect(bouEvap_b1.ports[1], modularChiller_Air.port_a)
+      annotation (Line(points={{-60,26},{-14,26}}, color={0,127,255}));
+    connect(modularChiller_Air.sigBus, sigBus) annotation (Line(
+        points={{-13.9,22.1},{-44,22.1},{-44,58},{-2,58},{-2,85},{-33,85}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%second",
+        index=1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(m_flow_set.y, sigBus.mFlowSet) annotation (Line(points={{-85.1,74},
+            {-32.925,74},{-32.925,85.085}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(n_set.y, sigBus.nSet) annotation (Line(points={{-99.1,98},{-54,98},
+            {-54,85.085},{-32.925,85.085}}, color={0,0,127}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(modularChiller_Air.port_b, bouEvap_b.ports[1])
+      annotation (Line(points={{6,26},{54,26}}, color={0,127,255}));
+    connect(n_set1.y, sigBus.TSourceSet) annotation (Line(points={{-63.1,138},{
+            -48,138},{-48,136},{-32.925,136},{-32.925,85.085}}, color={0,0,127}),
+        Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    connect(booleanExpression.y, sigBus.OnOff) annotation (Line(points={{-65,
+            118},{-52,118},{-52,116},{-32.925,116},{-32.925,85.085}}, color={
+            255,0,255}), Text(
+        string="%second",
+        index=1,
+        extent={{6,3},{6,3}},
+        horizontalAlignment=TextAlignment.Left));
+    annotation (
+      Icon(coordinateSystem(preserveAspectRatio=false)),
+      Diagram(coordinateSystem(preserveAspectRatio=false)),
+      experiment(StopTime=1000, __Dymola_Algorithm="Dassl"));
+  end Chiller;
 end Examples;

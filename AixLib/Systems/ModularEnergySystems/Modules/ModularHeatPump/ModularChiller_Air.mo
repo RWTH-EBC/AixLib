@@ -1,9 +1,9 @@
 within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump;
-model ModularHeatPump_Air
+model ModularChiller_Air
 
-   extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
+extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = AixLib.Media.Water,
-                           final m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
+                           final m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon);
 
   parameter Modelica.Units.SI.Temperature THotDes=313.15 "Design temperature of THot"
    annotation (Evaluate=false,Dialog(group="Design condition"));
@@ -13,9 +13,6 @@ model ModularHeatPump_Air
    annotation (Evaluate=false,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
    annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
-
-    parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow rate"
-   annotation (Evaluate=false,Dialog(group="Design condition"));
 
     parameter Modelica.Units.SI.Temperature TCon_start=THotDes
                                                               "Initial temperature condenser"
@@ -27,7 +24,7 @@ model ModularHeatPump_Air
       parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon;
 parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal_pump=m_flow_nominal;
 
 
@@ -39,29 +36,26 @@ parameter Modelica.Units.SI.Pressure dpInternal(displayUnit="Pa")=10000
 
 package MediumCon = AixLib.Media.Water "Medium heat sink";
 
- AixLib.Fluid.HeatPumps.HeatPump heatPump(
-    redeclare package Medium_con =
-        AixLib.Media.Water,
-    redeclare package Medium_eva =
-        AixLib.Media.Air,
+  AixLib.Fluid.HeatPumps.HeatPump chiller(
+    redeclare package Medium_con = AixLib.Media.Air,
+    redeclare package Medium_eva = AixLib.Media.Water,
     refIneFre_constant=0.02,
     nthOrder=3,
     final useBusConnectorOnly=true,
-    mFlow_conNominal=m_flow_nominal,
-    VCon=max(0.0000001*QDes - 0.0094, 0.003),
-    mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),
-    VEva=max(0.0000001*QDes - 0.0075, 0.003),
-    TCon_start=TCon_start - 5,
+    mFlow_conNominal=max(0.00004*QDes - 0.3177, 0.3),
+    VCon=max(0.0000001*QDes - 0.0075, 0.003),
+    mFlow_evaNominal=m_flow_nominal,
+    VEva=max(0.0000001*QDes - 0.0094, 0.003),
+    TCon_start=TCon_start,
     TEva_start=TSourceDes,
-    redeclare model PerDataMainHP = PerDataMainHP,
     use_non_manufacturer=false,
     use_rev=false,
     use_autoCalc=false,
     Q_useNominal=QDes,
     use_refIne=false,
-    dpCon_nominal=dpInternal,
+    dpCon_nominal=25000,
     use_conCap=false,
-    dpEva_nominal=25000,
+    dpEva_nominal=dpInternal,
     use_evaCap=false,
     tauSenT=1,
     transferHeat=false,
@@ -71,6 +65,8 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     massDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     show_TPort=false,
+    redeclare model PerDataMainHP =
+        AixLib.DataBase.HeatPump.PerformanceData.Chiller2,
     THotMax=343.15,
     THotNom=THotDes,
     TSourceNom=TSourceDes,
@@ -87,7 +83,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
         Media.Water)        annotation (Placement(transformation(
         extent={{8,8},{-8,-8}},
         rotation=180,
-        origin={32,0})));
+        origin={32,-12})));
   AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
       Placement(transformation(extent={{-14,84},{16,118}}),
         iconTransformation(extent={{-108,-52},{-90,-26}})));
@@ -105,7 +101,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     riseTime=10,
     init=Modelica.Blocks.Types.Init.SteadyState,
     y_start=1)
-    annotation (Placement(transformation(extent={{-52,-10},{-32,10}})));
+    annotation (Placement(transformation(extent={{-52,-22},{-32,-2}})));
 
   BaseClasses.HeatPump_Sources.Air air(
     TSourceNom=TSourceDes,
@@ -114,17 +110,14 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     QDes=QDes,                         redeclare package MediumEvap =
         AixLib.Media.Air,
     DeltaTEvap=7)
-    annotation (Placement(transformation(extent={{-16,-54},{4,-34}})));
+    annotation (Placement(transformation(extent={{14,18},{-6,38}})));
   Modelica.Blocks.Sources.RealExpression zero3(y=1)
     annotation (Placement(transformation(extent={{-88,94},{-60,112}})));
 
 
-  Modelica.Blocks.Sources.BooleanExpression mode(y=true) "true for heat pump"
+  Modelica.Blocks.Sources.BooleanExpression mode(y=true)  "false for chiller"
     annotation (Placement(transformation(extent={{162,60},{126,86}})));
-  replaceable model PerDataMainHP =
-      AixLib.DataBase.HeatPump.PerformanceData.Vitocal250A constrainedby
-    DataBase.HeatPump.PerformanceData.BaseClasses.PartialPerformanceData
-    annotation (choicesAllMatching=true);
+
   parameter Real eta_carnot;
   Modelica.Blocks.Continuous.Integrator integrator
     annotation (Placement(transformation(extent={{44,60},{64,80}})));
@@ -142,37 +135,30 @@ equation
 
   connect(port_a, port_a)
     annotation (Line(points={{-100,0},{-100,0}}, color={0,127,255}));
-  connect(sigBus, heatPump.sigBus) annotation (Line(
-      points={{1,101},{1,52},{-22,52},{-22,-9.9},{-5.9,-9.9}},
+  connect(sigBus, chiller.sigBus) annotation (Line(
+      points={{1,101},{1,90},{-22,90},{-22,-9.9},{-5.9,-9.9}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(fan.port_b, heatPump.port_a1) annotation (Line(points={{-32,0},{-6,0}},
-                                color={0,127,255}));
-  connect(heatPump.port_b1, senMasFloHP.port_a)
-    annotation (Line(points={{14,0},{19,0},{19,8.88178e-16},{24,8.88178e-16}},
-                                             color={0,127,255}));
   connect(port_a, fan.port_a)
-    annotation (Line(points={{-100,0},{-52,0}}, color={0,127,255}));
+    annotation (Line(points={{-100,0},{-76,0},{-76,-12},{-52,-12}},
+                                                color={0,127,255}));
   connect(senMasFloHP.port_b, port_b)
-    annotation (Line(points={{40,0},{100,0}}, color={0,127,255}));
+    annotation (Line(points={{40,-12},{70,-12},{70,0},{100,0}},
+                                              color={0,127,255}));
   connect(sigBus.mFlowSet, fan.y) annotation (Line(
-      points={{1.075,101.085},{1.075,28},{-42,28},{-42,12}},
+      points={{1.075,101.085},{1.075,90},{-42,90},{-42,0}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
-  connect(air.port_b, heatPump.port_a2)
-    annotation (Line(points={{4,-44},{14,-44},{14,-12}}, color={0,127,255}));
-  connect(heatPump.port_b2, air.port_a) annotation (Line(points={{-6,-12},{-32,-12},
-          {-32,-44},{-16,-44}}, color={0,127,255}));
   connect(sigBus, air.sigBus) annotation (Line(
-      points={{1,101},{64,101},{64,-33.7},{-5.9,-33.7}},
+      points={{1,101},{4,101},{4,38},{3.9,38},{3.9,38.3}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -191,32 +177,8 @@ equation
       index=1,
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.PelMea,integrator. u) annotation (Line(
-      points={{1.075,101.085},{1.075,70},{42,70}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(sigBus.PelMea,gain. u) annotation (Line(
       points={{1.075,101.085},{1.075,138},{38,138}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.QCon,integrator1. u) annotation (Line(
-      points={{1.075,101.085},{1.075,178},{38,178}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
-  connect(sigBus.QCon,gain1. u) annotation (Line(
-      points={{1.075,101.085},{1.075,218},{38,218}},
       color={255,204,51},
       thickness=0.5), Text(
       string="%first",
@@ -247,6 +209,27 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(fan.port_b, chiller.port_a2) annotation (Line(points={{-32,-12},{-30,
+          -12},{-30,-14},{-24,-14},{-24,-26},{14,-26},{14,-12}}, color={0,127,
+          255}));
+  connect(senMasFloHP.port_a, chiller.port_b2) annotation (Line(points={{24,-12},
+          {24,-20},{-10,-20},{-10,-12},{-6,-12}}, color={0,127,255}));
+  connect(chiller.port_b1, air.port_a) annotation (Line(points={{14,0},{24,0},{
+          24,28},{14,28}}, color={0,127,255}));
+  connect(air.port_b, chiller.port_a1) annotation (Line(points={{-6,28},{-14,28},
+          {-14,0},{-6,0}}, color={0,127,255}));
+  connect(sigBus.QEva, gain1.u) annotation (Line(
+      points={{1.075,101.085},{1.075,218},{38,218}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(gain1.y, integrator1.u) annotation (Line(points={{61,218},{66,218},{
+          66,212},{72,212},{72,200},{16,200},{16,178},{38,178}}, color={0,0,127}));
+  connect(gain.y, integrator.u) annotation (Line(points={{61,138},{66,138},{66,
+          102},{26,102},{26,70},{42,70}}, color={0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
         Rectangle(
           extent={{-17,83},{17,-83}},
@@ -316,4 +299,5 @@ equation
   point as a function of COP and electrical power.
 </p>
 </html>"));
-end ModularHeatPump_Air;
+
+end ModularChiller_Air;

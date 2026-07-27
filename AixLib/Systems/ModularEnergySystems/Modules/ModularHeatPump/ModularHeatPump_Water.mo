@@ -2,14 +2,17 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump;
 model ModularHeatPump_Water
 
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
-      Medium = AixLib.Media.Water,
-                           final m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon);
+      Medium = AixLib.Media.Water, final m_flow_nominal=QNom/MediumCon.cp_const
+        /DeltaTCon);
 
   parameter Modelica.Units.SI.Temperature THotDes=313.15 "Design temperature of THot"
    annotation (Evaluate=false,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.Temperature TSourceDes=278.15 "Design temperature of heat source"
    annotation (Evaluate=false,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.HeatFlowRate QDes=150000 "Design heat flow rate of heat pump"
+   annotation (Evaluate=false,Dialog(group="Design condition"));
+
+     parameter Modelica.Units.SI.HeatFlowRate QNom=150000 "Nominal heat flow rate"
    annotation (Evaluate=false,Dialog(group="Design condition"));
   parameter Modelica.Units.SI.TemperatureDifference DeltaTCon=5 "Temperature difference heat sink condenser"
    annotation (Evaluate=false,Dialog(tab="Advanced",group="General machine information"));
@@ -23,7 +26,7 @@ model ModularHeatPump_Water
       parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QDes/MediumCon.cp_const/DeltaTCon;
+parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
 
 parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional system pressure difference";
 
@@ -47,7 +50,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     TCon_start=TCon_start,
     redeclare model PerDataMainHP = PerDataMainHP,
     use_non_manufacturer=false,
-    use_rev=false,
+    final use_rev=false,
     use_autoCalc=false,
     Q_useNominal=QDes,
     use_refIne=false,
@@ -90,7 +93,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     allowFlowReversal=true,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
         pressure(V_flow={0,heatPump.con.m_flow_nominal/1000,heatPump.con.m_flow_nominal
-            /1000/0.7}, dp={(dpInternal + dpExternal)/0.7,(dpInternal +
+            /1000/0.2}, dp={(dpInternal + dpExternal)/0.2,(dpInternal +
             dpExternal),0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
