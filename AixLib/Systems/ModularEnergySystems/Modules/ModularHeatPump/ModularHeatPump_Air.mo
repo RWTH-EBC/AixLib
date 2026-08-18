@@ -3,7 +3,7 @@ model ModularHeatPump_Air
 
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
       Medium = AixLib.Media.Water,
-                           final m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
+                           m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
 
   parameter Modelica.Units.SI.Temperature THotDes=313.15 "Design temperature of THot"
    annotation (Evaluate=false,Dialog(group="Design condition"));
@@ -27,8 +27,6 @@ model ModularHeatPump_Air
       parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
-parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal_pump=m_flow_nominal;
 
 
 
@@ -48,7 +46,7 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     nthOrder=3,
     final useBusConnectorOnly=true,
     mFlow_conNominal=m_flow_nominal,
-    VCon=max(0.0000001*QDes - 0.0094, 0.003),
+    VCon=max(QNom/1000/1000*0.1 + 0.005, 0.003),
     mFlow_evaNominal=max(0.00004*QDes - 0.3177, 0.3),
     VEva=max(0.0000001*QDes - 0.0075, 0.003),
     TCon_start=TCon_start - 5,
@@ -97,8 +95,8 @@ package MediumCon = AixLib.Media.Water "Medium heat sink";
     T_start=THotDes - 5,
     allowFlowReversal=true,
     redeclare AixLib.Fluid.Movers.Data.Pumps.Wilo.Stratos25slash1to4 per(
-        pressure(V_flow={0,m_flow_nominal_pump/1000,m_flow_nominal_pump/1000/
-            0.3}, dp={(dpInternal + dpExternal)/0.7,(dpInternal + dpExternal),0})),
+        pressure(V_flow={0,m_flow_nominal/1000,m_flow_nominal/1000/0.3}, dp={(
+            dpInternal + dpExternal)/0.7,(dpInternal + dpExternal),0})),
     inputType=AixLib.Fluid.Types.InputType.Continuous,
     addPowerToMedium=false,
     use_inputFilter=false,

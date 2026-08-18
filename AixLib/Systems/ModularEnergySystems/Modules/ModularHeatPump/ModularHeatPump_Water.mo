@@ -2,8 +2,7 @@ within AixLib.Systems.ModularEnergySystems.Modules.ModularHeatPump;
 model ModularHeatPump_Water
 
    extends AixLib.Fluid.Interfaces.PartialTwoPortInterface(redeclare package
-      Medium = AixLib.Media.Water, final m_flow_nominal=QNom/MediumCon.cp_const
-        /DeltaTCon);
+      Medium = AixLib.Media.Water, m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon);
 
   parameter Modelica.Units.SI.Temperature THotDes=313.15 "Design temperature of THot"
    annotation (Evaluate=false,Dialog(group="Design condition"));
@@ -26,7 +25,6 @@ model ModularHeatPump_Water
       parameter Modelica.Units.SI.Temperature TSource=TSourceDes "Temperature of heat source"
    annotation (Dialog(enable=TSourceInternal,tab="Advanced",group="General machine information"));
 
-parameter  Modelica.Units.SI.MassFlowRate m_flow_nominal=QNom/MediumCon.cp_const/DeltaTCon;
 
 parameter Modelica.Units.SI.Pressure dpExternal=0               "Additional system pressure difference";
 

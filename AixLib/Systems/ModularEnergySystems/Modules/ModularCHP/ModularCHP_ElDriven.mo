@@ -367,6 +367,13 @@ equation
       index=-1,
       extent={{-3,6},{-3,6}},
       horizontalAlignment=TextAlignment.Right));
+  connect(genericCHP.THotEngine, cHPControlBus.THotEngine) annotation (Line(
+        points={{2,-11},{6,-11},{6,-24},{76,-24},{76,102},{0,102}}, color={0,0,
+          127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-80,80},{80,-80}},

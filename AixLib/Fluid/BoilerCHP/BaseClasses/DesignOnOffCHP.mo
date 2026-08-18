@@ -96,8 +96,9 @@ equation
           {12,-39.2},{24.4,-39.2}},                   color={0,0,127}));
   connect(product1.y, division.u1) annotation (Line(points={{-41.3,39},{2.65,39},
           {2.65,39.2},{46.6,39.2}},  color={0,0,127}));
-  connect(Power, product1.u2) annotation (Line(points={{-120,-20},{-104,-20},{-104,
-          -22},{-82,-22},{-82,34.8},{-57.4,34.8}}, color={0,0,127}));
+  connect(Power, product1.u2) annotation (Line(points={{-120,-20},{-102,-20},{
+          -102,-22},{-80,-22},{-80,34.8},{-57.4,34.8}},
+                                                   color={0,0,127}));
   connect(Power, multiplex2_2.u1[1]) annotation (Line(points={{-120,-20},{-102,-20},
           {-102,-22},{-82,-22},{-82,76},{-53.6,76},{-53.6,77.2}}, color={0,0,127}));
   connect(greaterEqualThreshold.y, and1.u1) annotation (Line(points={{-59,-50},
