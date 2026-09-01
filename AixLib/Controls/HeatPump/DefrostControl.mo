@@ -165,8 +165,8 @@ equation
 </p>
 <ul>
   <li>
-  <i>August 27, 2024</i> by Fabian Wüllhorst:<br/>
-  Adapted to new heat pump approach (see issue <a href=
+    <i>August 27, 2024</i> by Fabian Wüllhorst:<br/>
+    Adapted to new heat pump approach (see issue <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1520\">#1520</a>)
   </li>
   <li>

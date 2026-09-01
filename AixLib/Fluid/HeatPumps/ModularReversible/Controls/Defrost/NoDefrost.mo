@@ -11,8 +11,7 @@ equation
   annotation (Icon(graphics={Text(
           extent={{-68,-50},{80,48}},
           lineColor={0,0,0},
-          textString="hea")}), Documentation(revisions="<html>
-<ul>
+          textString="hea")}), Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=

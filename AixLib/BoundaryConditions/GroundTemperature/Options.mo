@@ -109,49 +109,48 @@ equation
           textString="%name")}), Diagram(
         coordinateSystem(preserveAspectRatio=false)),
     Documentation(revisions="<html><ul>
-    <li>April 23, 2023, by Philip Groesdonk:<br/>
+  <li>April 23, 2023, by Philip Groesdonk:<br/>
     First implementation (see <a href=
     \"https://github.com/RWTH-EBC/AixLib/issues/1080\">issue 1080</a>).
   </li>
 </ul>
 </html>", info="<html>
-This model provides a block to choose from different options to model ground temperature:
+This model provides a block to choose from different options to model
+ground temperature:
 <ul>
-<li>
-a constant value
+  <li>a constant value
   </li>
-<li>
-a sine curve (yearly)
+  <li>a sine curve (yearly)
   </li>
-  <li>
-  a table stored in a file
+  <li>a table stored in a file
   </li>
-  <li>a simple model (called Kusuda here) that was originally created for use with district heating grids or LTN in order to model
-  thermal pipe losses
+  <li>a simple model (called Kusuda here) that was originally created
+  for use with district heating grids or LTN in order to model thermal
+  pipe losses
   </li>
 </ul>
 <h4>
   Assumption and limitations
 </h4>
 <p>
-The model does not model any influence on the ground temperature. 
-The ground temperature is only dependent on the set parameters.
+  The model does not model any influence on the ground temperature. The
+  ground temperature is only dependent on the set parameters.
 </p>
 <h4>
   Typical use and important parameters
 </h4>
 <p>
-The model is used as a boundary condition for ROM model floors outside surfaces.
+  The model is used as a boundary condition for ROM model floors
+  outside surfaces.
 </p>
 <p>
-<b>Differently then stated in the parameter description below for Kusuda,
-  α needs to be declared in m2/day! (The Modelica SI unit diffusivity does not
-  support m2/day as a display unit.)</b>
+  <b>Differently then stated in the parameter description below for
+  Kusuda, α needs to be declared in m2/day! (The Modelica SI unit
+  diffusivity does not support m2/day as a display unit.)</b>
 </p>
 <p>
   A typical value for α is bewteen 0.03 and 0.05 m2/day.
 </p>
-
 </html>
 "));
 end Options;

@@ -149,12 +149,25 @@ equation
       extent={{-6,3},{-6,3}},
       horizontalAlignment=TextAlignment.Right));
   annotation (                     experiment(StopTime=2592000, Interval=500),
-    Documentation(info="<html>
-<p>This defrost control uses a time-based approach from Zhu et al. coupled with their three frosting zones. The three zones depend outdoor air temperature and humidity. Depending on the zone, a different time-interval for defrost is applied, taken from Table 4 in Zhu et al: 30, 60 and 165 min for severe, moderate and mild zones, respectively. Contrary to Zhu et al, moderate and mild frosting zones are not further seperated. The 60 and 135 min defrost time are the average value for those zones reported in Zhu et al. </p>
-<h4>References</h4>
+    Documentation(info="<html><p>
+  This defrost control uses a time-based approach from Zhu et al.
+  coupled with their three frosting zones. The three zones depend
+  outdoor air temperature and humidity. Depending on the zone, a
+  different time-interval for defrost is applied, taken from Table 4 in
+  Zhu et al: 30, 60 and 165 min for severe, moderate and mild zones,
+  respectively. Contrary to Zhu et al, moderate and mild frosting zones
+  are not further seperated. The 60 and 135 min defrost time are the
+  average value for those zones reported in Zhu et al.
+</p>
+<h4>
+  References
+</h4>
 <p>
-J.H. Zhu, Y.Y. Sun, W. Wang, S.M. Deng, Y.J. Ge, and L.T. Li. Developing a new frosting map to guide defrosting control for air-source heat pump units. Applied Thermal Engineering, November 2015
-  <a href=\"https://doi.org/10.1016/j.applthermaleng.2015.06.076\">doi:10.1016/j.applthermaleng.2015.06.076</a>.
+  J.H. Zhu, Y.Y. Sun, W. Wang, S.M. Deng, Y.J. Ge, and L.T. Li.
+  Developing a new frosting map to guide defrosting control for
+  air-source heat pump units. Applied Thermal Engineering, November
+  2015 <a href=
+  \"https://doi.org/10.1016/j.applthermaleng.2015.06.076\">doi:10.1016/j.applthermaleng.2015.06.076</a>.
 </p>
 </html>", revisions="<html>
 <ul>

@@ -212,22 +212,35 @@ equation
           -30},{-30,-30},{-30,-92},{58,-92}}, color={0,0,127}));
   connect(winDirSet.y, ashrae.winDir) annotation (Line(points={{-79,0},{-20,0},
           {-20,-96},{58,-96}}, color={0,0,127}));
-  annotation (Documentation(revisions="<html>
-<ul>
-  <li>
-    June 14, 2024, by Jun Jiang:<br/>
-    First implementation (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
+  annotation (Documentation(revisions="<html><ul>
+  <li>June 14, 2024, by Jun Jiang:<br/>
+    First implementation (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1492\">issue 1492</a>)
   </li>
-  <li>
-    Dec. 16, 2024, by Jun Jiang:<br/>
-    Update due to model update (see <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
+  <li>Dec. 16, 2024, by Jun Jiang:<br/>
+    Update due to model update (see <a href=
+    \"https://github.com/RWTH-EBC/AixLib/issues/1561\">issue 1561</a>)
   </li>
 </ul>
 </html>", info="<html>
-<p>This example checks the models that simulate the window ventilation flow rate with the simple opening.</p>
-<p>The result shows that the estimated volume flow can be quite different when using different models.</p>
-<p>Warnings are triggered when boundary conditions for an empirical expression are out of range. This could lead to inaccurate calculation results.</p>
-<p>This example is a stress test with a wide range of boundary conditions. These conditions can cause a lot of events and slow down the simulation. In practice, the warning will rarely be triggered.</p>
+<p>
+  This example checks the models that simulate the window ventilation
+  flow rate with the simple opening.
+</p>
+<p>
+  The result shows that the estimated volume flow can be quite
+  different when using different models.
+</p>
+<p>
+  Warnings are triggered when boundary conditions for an empirical
+  expression are out of range. This could lead to inaccurate
+  calculation results.
+</p>
+<p>
+  This example is a stress test with a wide range of boundary
+  conditions. These conditions can cause a lot of events and slow down
+  the simulation. In practice, the warning will rarely be triggered.
+</p>
 </html>"), experiment(
       StartTime=0,
       StopTime=180,
