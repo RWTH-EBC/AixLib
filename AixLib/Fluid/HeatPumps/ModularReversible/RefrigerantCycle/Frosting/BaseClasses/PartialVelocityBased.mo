@@ -101,19 +101,21 @@ model PartialVelocityBased
                      if use_varDen
     "Frost density according to Korn"
     annotation (Placement(transformation(extent={{20,80},{40,100}})));
+  Modelica.Blocks.MathBoolean.Not notDef annotation (Placement(transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={-82,20})));
+  Modelica.Blocks.MathBoolean.And andHeaNotDef(nu=2) annotation (Placement(
+        transformation(
+        extent={{-6,-6},{6,6}},
+        rotation=90,
+        origin={-92,44})));
 equation
 
   connect(groRatNat_internal.y, switchGrowthRate.u3) annotation (Line(points={{-39,40},
           {-30,40},{-30,42},{-22,42}},     color={0,0,127}));
   connect(groRatFor_internal.y, switchGrowthRate.u1) annotation (Line(points={{-39,80},
           {-30,80},{-30,58},{-22,58}},     color={0,0,127}));
-  connect(swiMFloIce.u2, sigBus.hea) annotation (Line(points={{-62,-10},{-82,-10},
-          {-82,8},{-96,8},{-96,0},{-101,0}},
-                               color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(gaiADen.u, switchGrowthRate.y)
     annotation (Line(points={{18,50},{1,50}}, color={0,0,127}));
   connect(gaiWatFus.y, gaiDenCoeff.u1) annotation (Line(points={{-59,-50},{-52,-50},
@@ -130,13 +132,6 @@ equation
   connect(and1.y, switchGrowthRate.u2)
     annotation (Line(points={{-59,60},{-34,60},{-34,50},{-22,50}},
                                                  color={255,0,255}));
-  connect(and1.u2, sigBus.hea) annotation (Line(points={{-82,52},{-96,52},{-96,0},
-          {-101,0}},
-        color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(and1.u1, sigBus.onOffMea) annotation (Line(points={{-82,60},{-101,60},
           {-101,0}}, color={255,0,255}), Text(
       string="%second",
@@ -171,8 +166,9 @@ equation
   connect(iceMassIntegrator.mIce, divIceMax.u)
     annotation (Line(points={{2,-10},{12,-10},{12,-60},{18,-60}},
                                             color={0,0,127}));
-  connect(iceMassIntegrator.reset, sigBus.hea) annotation (Line(points={{-10,-22},
-          {-10,-28},{-101,-28},{-101,0}},      color={255,0,255}), Text(
+  connect(iceMassIntegrator.reset, andHeaNotDef.y) annotation (Line(points={{-10,-22},
+          {-10,-32},{-72,-32},{-72,52},{-92,52},{-92,50.9}},
+                                               color={255,0,255}), Text(
       string="%second",
       index=1,
       extent={{-3,-6},{-3,-6}},
@@ -180,17 +176,30 @@ equation
 
   connect(froDenKornPT1.groRat, switchGrowthRate.y) annotation (Line(points={{18,87},
           {8,87},{8,50},{1,50}},          color={0,0,127}));
-  connect(froDenKornPT1.hea, sigBus.hea) annotation (Line(points={{18,95},{-32,95},
-          {-32,-28},{-102,-28},{-102,0},{-101,0}},
-                          color={255,0,255}), Text(
-      string="%second",
-      index=1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(froDenKornPT1.froDen, proAGroRatDen.u1) annotation (Line(points={{41,90},
           {50,90},{50,56},{58,56}},       color={0,0,127}));
   connect(gaiADen2.y, swi.u1) annotation (Line(points={{73,-54},{80,-54},{80,-34},
           {46,-34},{46,8},{58,8}}, color={0,0,127}));
+  connect(notDef.u, sigBus.def) annotation (Line(points={{-82,11.6},{-82,0},{-101,
+          0}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(andHeaNotDef.u[1], sigBus.hea) annotation (Line(points={{-90.95,38},{-94,
+          38},{-94,0},{-101,0}}, color={255,0,255}), Text(
+      string="%second",
+      index=1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(notDef.y, andHeaNotDef.u[2]) annotation (Line(points={{-82,27.2},{-86,
+          27.2},{-86,34},{-93.05,34},{-93.05,38}}, color={255,0,255}));
+  connect(andHeaNotDef.y, and1.u2) annotation (Line(points={{-92,50.9},{-92,52},
+          {-82,52}}, color={255,0,255}));
+  connect(andHeaNotDef.y, froDenKornPT1.hea)
+    annotation (Line(points={{-92,50.9},{-92,95},{18,95}}, color={255,0,255}));
+  connect(andHeaNotDef.y, swiMFloIce.u2) annotation (Line(points={{-92,50.9},{-92,
+          52},{-72,52},{-72,-10},{-62,-10}}, color={255,0,255}));
   annotation (Documentation(revisions="<html>
 <ul>
   <li>
