@@ -12,6 +12,8 @@ model DesignGenericHP
 
      parameter Boolean FreDep=true "COP=f(compressor frequency)?";
 
+     Modelica.Units.SI.HeatFlowRate QEvapNom;
+
   Modelica.Blocks.Math.Division NomPel "Nominal electric Power"
     annotation (Placement(transformation(extent={{116,66},{136,86}})));
 
@@ -151,12 +153,6 @@ model DesignGenericHP
     annotation (Placement(transformation(extent={{80,-84},{100,-64}})));
   Modelica.Blocks.Math.Add add1(k1=-1)
     annotation (Placement(transformation(extent={{160,-78},{180,-58}})));
-  Modelica.Blocks.Logical.Greater greater
-    annotation (Placement(transformation(extent={{256,10},{276,30}})));
-  Modelica.Blocks.Logical.Switch switch2
-    annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-        rotation=0,
-        origin={332,20})));
   SDF.NDTable SDF_T_FullLoad(
     final nin=4,
     final readFromFile=true,
@@ -209,7 +205,16 @@ model DesignGenericHP
     annotation (Placement(transformation(extent={{72,98},{92,118}})));
   Modelica.Thermal.HeatTransfer.Celsius.ToKelvin toKelvin1
     annotation (Placement(transformation(extent={{82,-116},{102,-96}})));
+  Modelica.Blocks.Sources.RealExpression q_eva(
+  y(quantity="Power",
+    unit="W") = QEvapNom)
+    annotation (Placement(transformation(extent={{242,16},{262,36}})));
 equation
+
+  QEvapNom =
+  noEvent(max(add.y, add1.y));
+
+
   connect(tSourceNom.y, fromKelvin3.Kelvin)
     annotation (Line(points={{-72.7,92},{-48,92}}, color={0,0,127}));
   connect(qNom.y, NomPel.u1) annotation (Line(points={{101.7,83},{101.7,82},{
@@ -279,22 +284,6 @@ equation
     annotation (Line(points={{101,-74},{158,-74}}, color={0,0,127}));
   connect(product1.y, add1.u1) annotation (Line(points={{189,-28},{194,-28},{
           194,-48},{130,-48},{130,-62},{158,-62}}, color={0,0,127}));
-  connect(add.y, greater.u1) annotation (Line(points={{199,78},{216,78},{216,20},
-          {254,20}}, color={0,0,127}));
-  connect(add1.y, greater.u2) annotation (Line(points={{181,-68},{242,-68},{242,
-          12},{254,12}}, color={0,0,127}));
-  connect(greater.y, switch2.u2)
-    annotation (Line(points={{277,20},{320,20}}, color={255,0,255}));
-  connect(add.y, switch2.u1) annotation (Line(points={{199,78},{296,78},{296,28},
-          {320,28}}, color={0,0,127}));
-  connect(add1.y, switch2.u3) annotation (Line(points={{181,-68},{296,-68},{296,
-          12},{320,12}},                     color={0,0,127}));
-  connect(switch2.y, sigBus.QEvapNom) annotation (Line(points={{343,20},{368,20},
-          {368,0.07},{201.075,0.07}},                   color={0,0,127}), Text(
-      string="%second",
-      index=1,
-      extent={{6,3},{6,3}},
-      horizontalAlignment=TextAlignment.Left));
   connect(fromKelvin1.Celsius, multiplex4_2.u4[1]) annotation (Line(points={{
           -67,-38},{-52,-38},{-52,-46},{-44,-46},{-44,-37}}, color={0,0,127}));
   connect(multiplex4_1.y, SDF_T_Design.u) annotation (Line(points={{11,70},{12,
@@ -325,6 +314,13 @@ equation
           -104},{52,-104},{52,-106},{80,-106}}, color={0,0,127}));
   connect(toKelvin1.Kelvin, product4.u2) annotation (Line(points={{103,-106},{
           110,-106},{110,-104},{78,-104},{78,-40}}, color={0,0,127}));
+  connect(q_eva.y, sigBus.QEvapNom) annotation (Line(points={{263,26},{280,26},{
+          280,24},{296,24},{296,6},{201.075,6},{201.075,0.07}}, color={0,0,127}),
+      Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}},
+      horizontalAlignment=TextAlignment.Left));
   annotation (
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-200,-160},{200,
             160}})),

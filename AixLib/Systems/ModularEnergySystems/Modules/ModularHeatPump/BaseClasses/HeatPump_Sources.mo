@@ -52,20 +52,10 @@ package HeatPump_Sources
       annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
     Modelica.Blocks.Sources.RealExpression mFlowEva(y=MediumEvap.cp_const*
           DeltaTEvap) "massflow heat source"
-      annotation (Placement(transformation(extent={{98,-68},{56,-44}})));
+      annotation (Placement(transformation(extent={{124,-68},{56,-44}})));
     AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
         Placement(transformation(extent={{-18,84},{18,116}}), iconTransformation(
             extent={{-16,88},{18,118}})));
-    AixLib.Controls.Continuous.LimPID conPID(
-      controllerType=Modelica.Blocks.Types.SimpleController.PI,
-      k=0.1,
-      Ti=20,
-      yMax=1,
-      Td=1,
-      yMin=0.1,
-      initType=Modelica.Blocks.Types.Init.InitialOutput,
-      y_start=1)
-      annotation (Placement(transformation(extent={{-66,-68},{-46,-48}})));
     Modelica.Blocks.Math.Add add(k2=-1)
       annotation (Placement(transformation(extent={{-130,-68},{-110,-48}})));
     Modelica.Blocks.Sources.RealExpression mFlowEva1(y=DeltaTEvap)
@@ -77,7 +67,7 @@ package HeatPump_Sources
       annotation (Placement(transformation(extent={{-94,-64},{-82,-52}})));
     Modelica.Blocks.Math.Product product1
       annotation (Placement(transformation(extent={{-6,-48},{-26,-28}})));
-    Modelica.Blocks.Sources.RealExpression zero(y=0.1)
+    Modelica.Blocks.Sources.RealExpression zero(y=0.0)
                                                      annotation (Placement(
           transformation(
           extent={{-12,-12},{12,12}},
@@ -85,13 +75,19 @@ package HeatPump_Sources
           origin={-38,-96})));
     Modelica.Blocks.Logical.Switch switch2
       annotation (Placement(transformation(extent={{4,-96},{24,-76}})));
+    Modelica.Blocks.Sources.RealExpression zero1(y=1)
+                                                     annotation (Placement(
+          transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=0,
+          origin={-26,-76})));
   equation
     connect(port_a, bouEvap_b.ports[1])
       annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
     connect(bouEvap_a.ports[1], port_b)
       annotation (Line(points={{44,0},{100,0}}, color={0,127,255}));
     connect(mFlowEva.y, division1.u2)
-      annotation (Line(points={{53.9,-56},{42,-56}}, color={0,0,127}));
+      annotation (Line(points={{52.6,-56},{42,-56}}, color={0,0,127}));
     connect(booleanExpression.y, switch1.u2)
       annotation (Line(points={{-45.4,50},{-22,50}}, color={255,0,255}));
     connect(tSource.y, switch1.u1) annotation (Line(points={{-52.4,30},{-32,30},{-32,
@@ -121,8 +117,6 @@ package HeatPump_Sources
         index=-1,
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
-    connect(conPID.y, switch2.u1) annotation (Line(points={{-45,-58},{-30,-58},
-            {-30,-78},{2,-78}}, color={0,0,127}));
     connect(switch2.y, product1.u2) annotation (Line(points={{25,-86},{34,-86},
             {34,-64},{4,-64},{4,-44},{-4,-44}}, color={0,0,127}));
     connect(zero.y, switch2.u3) annotation (Line(points={{-24.8,-96},{-12,-96},
@@ -144,14 +138,12 @@ package HeatPump_Sources
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
 
-    connect(gain.y, conPID.u_m) annotation (Line(points={{-77.4,-84},{-56,-84},
-            {-56,-70}},                     color={0,0,127}));
     connect(mFlowEva1.y, add.u2)
       annotation (Line(points={{-146.8,-64},{-132,-64}}, color={0,0,127}));
     connect(add.y, gain1.u)
       annotation (Line(points={{-109,-58},{-95.2,-58}}, color={0,0,127}));
-    connect(gain1.y, conPID.u_s)
-      annotation (Line(points={{-81.4,-58},{-68,-58}}, color={0,0,127}));
+    connect(zero1.y, switch2.u1) annotation (Line(points={{-12.8,-76},{-12,-78},
+            {2,-78}}, color={0,0,127}));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
             Ellipse(
             extent={{-74,78},{74,-78}},
@@ -219,6 +211,22 @@ package HeatPump_Sources
     AixLib.Controls.Interfaces.VapourCompressionMachineControlBus sigBus annotation (
         Placement(transformation(extent={{-18,84},{18,116}}), iconTransformation(
             extent={{-16,88},{18,118}})));
+    Modelica.Blocks.Sources.RealExpression zero1(y=1.0)
+                                                     annotation (Placement(
+          transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=0,
+          origin={-76,-42})));
+    Modelica.Blocks.Sources.RealExpression zero(y=0.1)
+                                                     annotation (Placement(
+          transformation(
+          extent={{-12,-12},{12,12}},
+          rotation=0,
+          origin={-88,-62})));
+    Modelica.Blocks.Logical.Switch switch2
+      annotation (Placement(transformation(extent={{-46,-62},{-26,-42}})));
+    Modelica.Blocks.Math.Product product1
+      annotation (Placement(transformation(extent={{-6,-38},{-26,-18}})));
   equation
     connect(port_a, bouEvap_b.ports[1])
       annotation (Line(points={{-100,0},{-58,0}}, color={0,127,255}));
@@ -238,8 +246,6 @@ package HeatPump_Sources
         index=-1,
         extent={{-6,3},{-6,3}},
         horizontalAlignment=TextAlignment.Right));
-    connect(division1.y, bouEvap_a.m_flow_in) annotation (Line(points={{19,-50},{-10,
-            -50},{-10,-11.2},{13.2,-11.2}}, color={0,0,127}));
     connect(mFlowEva.y, division1.u2)
       annotation (Line(points={{53.9,-56},{42,-56}}, color={0,0,127}));
     connect(sigBus.QEvapNom, division1.u1) annotation (Line(
@@ -250,6 +256,24 @@ package HeatPump_Sources
         index=-1,
         extent={{6,3},{6,3}},
         horizontalAlignment=TextAlignment.Left));
+    connect(zero1.y, switch2.u1) annotation (Line(points={{-62.8,-42},{-62,-44},
+            {-48,-44}}, color={0,0,127}));
+    connect(zero.y, switch2.u3) annotation (Line(points={{-74.8,-62},{-56,-62},
+            {-56,-60},{-48,-60}}, color={0,0,127}));
+    connect(product1.u1, division1.y) annotation (Line(points={{-4,-22},{0,-22},
+            {0,-28},{19,-28},{19,-50}}, color={0,0,127}));
+    connect(product1.y, bouEvap_a.m_flow_in) annotation (Line(points={{-27,-28},
+            {-27,-11.2},{13.2,-11.2}}, color={0,0,127}));
+    connect(sigBus.onOffMea, switch2.u2) annotation (Line(
+        points={{0.09,100.08},{-144,100.08},{-144,-52},{-48,-52}},
+        color={255,204,51},
+        thickness=0.5), Text(
+        string="%first",
+        index=-1,
+        extent={{-6,3},{-6,3}},
+        horizontalAlignment=TextAlignment.Right));
+    connect(switch2.y, product1.u2) annotation (Line(points={{-25,-52},{-6,-52},
+            {-6,-48},{12,-48},{12,-34},{-4,-34}}, color={0,0,127}));
     annotation (Icon(graphics={Rectangle(
             extent={{-88,92},{90,-88}},
             lineColor={28,108,200},

@@ -18,6 +18,10 @@ model ModularCHP_ElDriven
   parameter Modelica.Units.SI.Temperature T_start=THotNom  "T start"
    annotation (Dialog(tab="Advanced"));
 
+     parameter Modelica.Units.SI.TemperatureDifference deltaT_HC=10 "Nominal temperature difference heat circuit";
+     parameter Modelica.Units.SI.Pressure dp_external =  6000;
+
+
   inner Modelica.Fluid.System system(p_start=system.p_ambient)
     annotation (Placement(transformation(extent={{-240,140},{-220,160}})));
 
@@ -83,8 +87,9 @@ model ModularCHP_ElDriven
     annotation (Placement(transformation(extent={{-6,-44},{-26,-24}})));
   Fluid.Movers.SpeedControlled_y fanHC(
     redeclare package Medium = AixLib.Media.Water,
-    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
-    per(pressure(V_flow={0,V_flow_HC,V_flow_HC*2}, dp={(2500)/0.8,(2500),0})),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.DynamicFreeInitial,
+    per(pressure(V_flow={0,V_flow_HC,V_flow_HC*2}, dp={(2500 + dp_external)/0.8,
+            (2500 + dp_external),0})),
     addPowerToMedium=false,
     tau=1,
     use_inputFilter=true,
@@ -116,14 +121,8 @@ model ModularCHP_ElDriven
         extent={{10,10},{-10,-10}},
         rotation=270,
         origin={-36,-16})));
-  Modelica.Blocks.Continuous.LimPID PID3(
-    controllerType=Modelica.Blocks.Types.SimpleController.PI,
-    k=0.1,
-    Ti=50,
-    yMax=1,
-    yMin=0)
-    annotation (Placement(transformation(extent={{-84,-68},{-64,-48}})));
-  Modelica.Blocks.Sources.RealExpression t_cooling_setpoint(y=81 + 273.15)
+  Modelica.Blocks.Sources.RealExpression t_cooling_setpoint(y=
+        deltaTCoolingWater + 81 + 273.15)
     "Soll-Kühlwassertemp"
     annotation (Placement(transformation(extent={{-182,-66},{-144,-50}})));
 
@@ -146,7 +145,6 @@ protected
 
 
   parameter Modelica.Units.SI.Temperature THotHeatCircuitMax=92+273.15;
-  parameter Modelica.Units.SI.TemperatureDifference deltaT_HC=THotNom-TColdNom "Nominal temperature difference heat circuit";
   parameter Modelica.Units.SI.MassFlowRate m_flow_nominalHC=Q_flow_nom/Medium.cp_const/deltaT_HC;
 
   //parameter Modelica.Units.SI.MassFlowRate m_flow_nominalCC=0.0641977628513021*P_el_nom/1000 + 0.5371814977365220;
@@ -166,8 +164,11 @@ public
     annotation (Placement(transformation(extent={{80,60},{100,80}})));
   Fluid.Actuators.Valves.ThreeWayLinear        val(
     redeclare package Medium = Media.Water,
+    energyDynamics=Modelica.Fluid.Types.Dynamics.SteadyState,
     T_start=T_start,
-    use_inputFilter=false,
+    use_inputFilter=true,
+    riseTime=20,
+    init=Modelica.Blocks.Types.Init.SteadyState,
     m_flow_nominal=m_flow_nominal,
     dpValve_nominal=6000,
     fraK=1) annotation (Placement(transformation(extent={{-10,-10},{10,10}},
@@ -194,6 +195,18 @@ public
     "File name";
   parameter Real interneal_demand=0.9819
     "Efficiency for internal electricity demand";
+  AixLib.Controls.Continuous.LimPID MFC(
+    reset=AixLib.Types.Reset.Parameter,
+    y_reset=1,
+    controllerType=Modelica.Blocks.Types.SimpleController.PI,
+    k=0.33,
+    Ti=30,
+    yMin=0,
+    yMax=1,
+    Td=1,
+    initType=Modelica.Blocks.Types.Init.InitialOutput,
+    y_start=1) "mass flow control"
+    annotation (Placement(transformation(extent={{-82,-68},{-62,-48}})));
 equation
 
 //   if fromKelvin1.Celsius > THotHeatCircuitMax or  fromKelvin2.Celsius > THotCoolingWaterMax then
@@ -319,12 +332,6 @@ equation
       horizontalAlignment=TextAlignment.Right));
   connect(t_cooling_setpoint.y, gain2.u)
     annotation (Line(points={{-142.1,-58},{-118,-58}}, color={0,0,127}));
-  connect(PID3.u_s, gain2.y)
-    annotation (Line(points={{-86,-58},{-95,-58}}, color={0,0,127}));
-  connect(PID3.y, val.y)
-    annotation (Line(points={{-63,-58},{-48,-58}}, color={0,0,127}));
-  connect(gain3.y, PID3.u_m) annotation (Line(points={{-65,-82},{-70,-82},{-70,
-          -70},{-74,-70}}, color={0,0,127}));
   connect(TColdCoolingWater.port_b, val.port_1) annotation (Line(points={{-28,
           -88},{-32,-88},{-32,-68},{-36,-68}}, color={0,127,255}));
   connect(THotCoolingWater.port_a, genericCHP.port_b) annotation (Line(points={{46,-88},
@@ -351,14 +358,6 @@ equation
     annotation (Line(points={{-79.5,34},{-46,34}}, color={0,0,127}));
   connect(onOffController.y, switch3.u2) annotation (Line(points={{-23,28},{-20,
           28},{-20,62},{5,62},{5,55.8}}, color={255,0,255}));
-  connect(cHPControlBus.m_flow_set, fanHC.y) annotation (Line(
-      points={{0,102},{-54,102},{-54,128},{-162,128},{-162,-22},{-112,-22}},
-      color={255,204,51},
-      thickness=0.5), Text(
-      string="%first",
-      index=-1,
-      extent={{-6,3},{-6,3}},
-      horizontalAlignment=TextAlignment.Right));
   connect(cHPControlBus.PLR, fanCC.y) annotation (Line(
       points={{0,102},{-4,102},{-4,82},{-48,82},{-48,-16}},
       color={255,204,51},
@@ -374,6 +373,28 @@ equation
       index=1,
       extent={{6,3},{6,3}},
       horizontalAlignment=TextAlignment.Left));
+  connect(gain2.y, MFC.u_s)
+    annotation (Line(points={{-95,-58},{-84,-58}}, color={0,0,127}));
+  connect(MFC.y, val.y)
+    annotation (Line(points={{-61,-58},{-48,-58}}, color={0,0,127}));
+  connect(gain3.y, MFC.u_m)
+    annotation (Line(points={{-65,-82},{-72,-82},{-72,-70}}, color={0,0,127}));
+  connect(cHPControlBus.OnOff, MFC.trigger) annotation (Line(
+      points={{0,102},{-104,102},{-104,96},{-204,96},{-204,-82},{-80,-82},{-80,-70}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-3,-6},{-3,-6}},
+      horizontalAlignment=TextAlignment.Right));
+  connect(cHPControlBus.m_flow_set, fanHC.y) annotation (Line(
+      points={{0,102},{-88,102},{-88,98},{-146,98},{-146,-22},{-112,-22}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%first",
+      index=-1,
+      extent={{-6,3},{-6,3}},
+      horizontalAlignment=TextAlignment.Right));
   annotation (Icon(graphics={
         Rectangle(
           extent={{-80,80},{80,-80}},
