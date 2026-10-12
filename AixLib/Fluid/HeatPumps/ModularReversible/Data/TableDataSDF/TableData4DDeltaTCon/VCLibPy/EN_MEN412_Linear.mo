@@ -8,8 +8,7 @@ record EN_MEN412_Linear "Calibrated on OptiHorst heat pump"
     refrigerant="R410A",
     flowsheet="OptiHorst",
     filename="modelica://AixLib/Resources/Data/Fluid/HeatPumps/ModularReversible/Data/VCLibMap/EN_MEN412_Linear_4D_dT.sdf");
-  annotation (Documentation(revisions="<html>
-<ul>
+  annotation (Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
@@ -17,10 +16,15 @@ record EN_MEN412_Linear "Calibrated on OptiHorst heat pump"
   </li>
 </ul>
 </html>", info="<html>
-<h4>References</h4>
+<h4>
+  References
+</h4>
 <p>
-Römer, Fabian and Fuchs, Nico and Fuchs, Nico and Müller, Dirk, Practical, Near-Optimal Design Rule Extraction for Heat Pumps in Single-Family Buildings (September 03, 2025). Available at SSRN: 
-<a href=\"https://ssrn.com/abstract=5633891\">https://ssrn.com/abstract=5633891</a>
+  Römer, Fabian and Fuchs, Nico and Fuchs, Nico and Müller, Dirk,
+  Practical, Near-Optimal Design Rule Extraction for Heat Pumps in
+  Single-Family Buildings (September 03, 2025). Available at SSRN:
+  <a href=
+  \"https://ssrn.com/abstract=5633891\">https://ssrn.com/abstract=5633891</a>
 </p>
 </html>"));
 end EN_MEN412_Linear;

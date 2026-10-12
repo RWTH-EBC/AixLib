@@ -45,14 +45,11 @@ record R245fa "Data record for R245fa"
   annotation (
   defaultComponentPrefixes = "parameter",
   defaultComponentName = "pro",
-  Documentation(info="<html>
-<p>
-Record containing properties of R245fa.
-Its name in CoolProp is \"R245fa\".
-A figure in the documentation of
-<a href=\"Modelica://AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation\">
-AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation</a>
-shows which lines these arrays represent.
+  Documentation(info="<html><p>
+  Record containing properties of R245fa. Its name in CoolProp is
+  \"R245fa\". A figure in the documentation of <a href=
+  \"Modelica://AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation\">AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation</a>
+  shows which lines these arrays represent.
 </p>
 </html>"),  
    __Dymola_LockedEditing="Model from IBPSA");

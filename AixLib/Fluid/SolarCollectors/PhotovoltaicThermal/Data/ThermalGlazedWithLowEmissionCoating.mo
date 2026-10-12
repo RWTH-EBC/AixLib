@@ -31,12 +31,10 @@ record ThermalGlazedWithLowEmissionCoating
   </li>
 </ul>
 </html>", revisions="<html><ul>
-  <li>
-    <i>January 23, 2024</i> by Philipp Schmitz and Fabian Wuellhorst:<br/>
-    First implementation. This is for
- <a href=\"https://github.com/RWTH-EBC/AixLib/issues/1451\">
- issue 1451</a>.
-  </li>
-</ul>
+<li>
+  <i>January 23, 2024</i> by Philipp Schmitz and Fabian Wuellhorst:<br/>
+  First implementation. This is for <a href=
+  \"https://github.com/RWTH-EBC/AixLib/issues/1451\">issue 1451</a>.
+</li>
 </html>"));
 end ThermalGlazedWithLowEmissionCoating;

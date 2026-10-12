@@ -7,8 +7,7 @@ partial record GenericVCLibPy4D
     final scaleUnitsQCon_flow={"","K","K","K"},
     final outOrd={3,1,2,4},
     final scaleUnitsPEle={"","K","K","K"});
-  annotation (Documentation(revisions="<html>
-<ul>
+  annotation (Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=

@@ -19,8 +19,7 @@ partial model PartialDefrost "Partial model for defrost control"
           extent={{-148,97},{152,137}},
           textString="%name")}),                                 Diagram(
         coordinateSystem(preserveAspectRatio=false)),
-    Documentation(revisions="<html>
-<ul>
+    Documentation(revisions="<html><ul>
   <li>
     <i>December 22, 2025</i> by Fabian Roemer:<br/>
     First implementation (see issue <a href=
@@ -28,6 +27,7 @@ partial model PartialDefrost "Partial model for defrost control"
   </li>
 </ul>
 </html>", info="<html>
-Partial model to decide whether to heat or cool with the heat pump, depeneding on the signal bus information.
+Partial model to decide whether to heat or cool with the heat pump,
+depeneding on the signal bus information.
 </html>"));
 end PartialDefrost;

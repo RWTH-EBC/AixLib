@@ -44,14 +44,11 @@ record R123 "Data record for R123"
   annotation (
   defaultComponentPrefixes = "parameter",
   defaultComponentName = "pro",
-  Documentation(info="<html>
-<p>
-Record containing properties of R123.
-Its name in CoolProp is \"R123\".
-A figure in the documentation of
-<a href=\"Modelica://AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation\">
-AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation</a>
-shows which lines these arrays represent.
+  Documentation(info="<html><p>
+  Record containing properties of R123. Its name in CoolProp is \"R123\".
+  A figure in the documentation of <a href=
+  \"Modelica://AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation\">AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation</a>
+  shows which lines these arrays represent.
 </p>
 </html>"),  
    __Dymola_LockedEditing="Model from IBPSA");

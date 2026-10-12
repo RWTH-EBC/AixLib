@@ -43,14 +43,11 @@ record Ethanol "Data record for ethanol"
   annotation (
   defaultComponentPrefixes = "parameter",
   defaultComponentName = "pro",
-  Documentation(info="<html>
-<p>
-Record containing properties of ethanol.
-Its name in CoolProp is \"Ethanol\".
-A figure in the documentation of
-<a href=\"Modelica://AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation\">
-AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation</a>
-shows which lines these arrays represent.
+  Documentation(info="<html><p>
+  Record containing properties of ethanol. Its name in CoolProp is
+  \"Ethanol\". A figure in the documentation of <a href=
+  \"Modelica://AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation\">AixLib.Fluid.CHPs.OrganicRankine.ConstantEvaporation</a>
+  shows which lines these arrays represent.
 </p>
 </html>"),  
    __Dymola_LockedEditing="Model from IBPSA");

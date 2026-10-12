@@ -680,30 +680,35 @@ equation
   <li>
     <i>February 27, 2025</i> by Jianjun Hu:<br/>
     Corrected conditions for removing COP and EER output connector.<br/>
-    This is for
-    <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1979\">IBPSA #1979</a>.
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1979\">IBPSA
+    #1979</a>.
   </li>
   <li>
     <i>February 25, 2025</i> by Antoine Gautier:<br/>
     Removed hysteresis.<br/>
-    This is for
-    <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1977\">IBPSA #1977</a>.
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1977\">IBPSA
+    #1977</a>.
   </li>
   <li>
     <i>August 19, 2024</i> by Michael Wetter:<br/>
     Changed markup commands for code merge.<br/>
-    This is for
-    <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1919\">IBPSA #1919</a>.
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1919\">IBPSA
+    #1919</a>.
   </li>
   <li>
     <i>July 15, 2024</i> by Fabian Wuellhorst:<br/>
-    Adjust hysteresis bandwidth (see issue
-    <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1908\">IBPSA #1908</a>)
+    Adjust hysteresis bandwidth (see issue <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1908\">IBPSA
+    #1908</a>)
   </li>
-  <li>
-    May 2, 2024, by Michael Wetter:<br/>
+  <li>May 2, 2024, by Michael Wetter:<br/>
     Refactored check for device identifiers.<br/>
-    This is for <a href=\"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">IBPSA, #1576</a>.
+    This is for <a href=
+    \"https://github.com/ibpsa/modelica-ibpsa/issues/1576\">IBPSA,
+    #1576</a>.
   </li>
   <li>
     <i>October 2, 2022</i> by Fabian Wuellhorst:<br/>
@@ -728,25 +733,30 @@ equation
   for heat pump and chillers. This encompasses
 </p>
 <ul>
-<li>the heat exchangers (evaporator and condenser),</li>
-<li>sensors for temperature and mass flow rates,</li>
-<li>the replaceable model for refrigerant inertia,</li>
-<li>safety controls,</li>
-<li>connectors and parameters,</li>
-<li>and the replaceable refrigerant cycle model <code>refCyc</code></li>
+  <li>the heat exchangers (evaporator and condenser),
+  </li>
+  <li>sensors for temperature and mass flow rates,
+  </li>
+  <li>the replaceable model for refrigerant inertia,
+  </li>
+  <li>safety controls,
+  </li>
+  <li>connectors and parameters,
+  </li>
+  <li>and the replaceable refrigerant cycle model <code>refCyc</code>
+  </li>
 </ul>
 <p>
   The model <code>refCyc</code> is replaced in the ModularReversible
-  model for heat pumps and chillers, e.g. by
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle\">
+  model for heat pumps and chillers, e.g. by <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle\">
   AixLib.Fluid.HeatPumps.ModularReversible.BaseClasses.RefrigerantCycle</a>
-  in <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular\">
-  AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
+  in <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.ModularReversible.Modular\">AixLib.Fluid.HeatPumps.ModularReversible.Modular</a>.
 </p>
 <p>
-  For more information on the approach, please read the
-  <a href=\"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">
-  UsersGuide</a>.
+  For more information on the approach, please read the <a href=
+  \"modelica://AixLib.Fluid.HeatPumps.ModularReversible.UsersGuide\">UsersGuide</a>.
 </p>
 </html>"),  
    __Dymola_LockedEditing="Model from IBPSA");
