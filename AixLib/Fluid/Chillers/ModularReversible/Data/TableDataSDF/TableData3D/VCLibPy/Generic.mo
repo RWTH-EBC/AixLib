@@ -4,6 +4,6 @@ partial record Generic
   extends GenericVCLibPy(
     final nDim=3,
     final scaleUnitsQEva_flow={"","K","K"},
-    final outOrd={3,1,2},
+    final outOrd={3,2,1},
     final scaleUnitsPEle={"","K","K"});
 end Generic;
