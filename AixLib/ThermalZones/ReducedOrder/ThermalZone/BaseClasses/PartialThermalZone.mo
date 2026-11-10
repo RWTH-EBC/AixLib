@@ -13,7 +13,25 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     "If true, pool model and corresponding connections are enabled"
   annotation(Dialog(tab="Moisture", group="Pools"));
 
-   final parameter Integer nPortsROM = if use_pools then nPorts + 2 else nPorts
+  // Stratification parameters
+  parameter Boolean use_stratification = false
+    "If true, the zone air is vertically stratified (swimming hall with downward air distribution). Requires use_moisture_balance and use_pools"
+    annotation (Evaluate=true, Dialog(tab="Moisture", group="Stratification"));
+  parameter Integer nLay(min=2) = 2
+    "Number of vertical air layers (1: lowest layer, nLay: top layer, represented by the air volume of the RC model)"
+    annotation (Evaluate=true, Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+  parameter Modelica.Units.SI.Length hLay[nLay]=
+    if not use_stratification then fill(1.0, nLay)
+    elseif nLay == 2 then {2.0, zoneParam.VAir/zoneParam.AFloor - 2.0}
+    else fill(zoneParam.VAir/zoneParam.AFloor/nLay, nLay)
+    "Height of each air layer from bottom to top. Default for nLay=2: occupied zone of 2 m and the remaining height. For nLay>2 the heights should be specified explicitly"
+    annotation (Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+  parameter Integer layPort[nPorts](each min=1, each max=nLay) = fill(nLay, nPorts)
+    "Layer each fluid port is connected to (1: lowest layer, nLay: top layer). Default: all ports in the top layer, so set the extract air port to 1"
+    annotation (Evaluate=true, Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+
+   final parameter Integer nPortsROM = nPorts + (if use_stratification then 2
+     else if use_pools then 2 else 0)
     "Number of fluid ports"
     annotation(Evaluate=true,
     Dialog(connectorSizing=true, tab="General",group="Ports"));
@@ -74,7 +92,8 @@ partial model PartialThermalZone "Partial model for thermal zone models"
     final use_moisture_balance=use_moisture_balance,
     final use_C_flow=use_C_flow,
     final nPorts=nPortsROM,
-    final VAir=if zoneParam.withAirCap then zoneParam.VAir else 0.0,
+    final VAir=if use_stratification then zoneParam.AFloor*hLay[nLay] elseif
+        zoneParam.withAirCap then zoneParam.VAir else 0.0,
     final hRad=zoneParam.hRad,
     final nOrientations=size(zoneParam.AExt, 1),
     final AWin=zoneParam.AWin,
@@ -149,8 +168,11 @@ equation
                            color={191,0,0}));
 
   for i in 1:nPorts loop
+    // with stratification, only ports of the top layer are connected to the RC model
+    if not use_stratification or layPort[i] == nLay then
       connect(ROM.ports[i], ports[i]) annotation (Line(points={{77,56.05},{78,56.05},{78,
           52},{58,52},{58,4},{0,4},{0,-96}},    color={0,127,255}));
+    end if;
   end for;
 
   annotation(Icon(coordinateSystem(preserveAspectRatio=false,  extent={{-100,-100},

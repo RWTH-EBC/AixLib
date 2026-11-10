@@ -80,6 +80,20 @@ model ThermalZone "Thermal zone containing moisture balance"
       group="Pools"));
 
 
+  // Stratification parameters (use_stratification, nLay, hLay and layPort are defined in PartialThermalZone)
+  parameter Integer layPerson(min=1, max=nLay - 1) = 1
+    "Layer that receives the convective gains of persons, lights and machines (1: lowest layer)"
+    annotation (Evaluate=true, Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+  parameter Integer layPool(min=1, max=nLay - 1) = 1
+    "Layer that receives evaporation and convective heat of the pools and in which the pools see the air state (1: lowest layer)"
+    annotation (Evaluate=true, Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+  parameter Real kappaStab(unit="kg/(s.m2)", min=0) = 1e-3
+    "Specific mass exchange between two layers if the stratification is stable. Uncalibrated placeholder"
+    annotation (Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+  parameter Real kappaMix(unit="kg/(s.m2)", min=0) = 0.01
+    "Specific mass exchange between two layers if the stratification is unstable. Uncalibrated placeholder, strongly influences the magnitude of the stratification"
+    annotation (Dialog(tab="Moisture", group="Stratification", enable=use_stratification));
+
   replaceable parameter DataBase.ThermalZones.ZoneBaseRecord zoneParam
     "Choose setup for this zone" annotation (choicesAllMatching=true);
 
@@ -383,8 +397,51 @@ model ThermalZone "Thermal zone containing moisture balance"
     nPools=nPools,
     m_flow_air_nominal=5,
     VAirLay=zoneParam.VAir)
-    if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools
+    if (ATot > 0 or zoneParam.VAir > 0) and use_moisture_balance and use_pools and not use_stratification
     annotation (Placement(transformation(extent={{-66,-76},{-60,-70}})));
+
+  // Stratification
+  BaseClasses.StratifiedAirVolume stratAir(
+    redeclare package Medium = Medium,
+    energyDynamics=energyDynamics,
+    massDynamics=massDynamics,
+    p_start=p_start,
+    T_start=T_start,
+    X_start=X_start,
+    nLay=nLay,
+    useExternalTop=true,
+    AFloor=zoneParam.AFloor,
+    hLay=hLay,
+    nPorts=nPorts,
+    layPort=layPort,
+    m_flow_nominal=max(1e-3, zoneParam.VAir*6/3600*1.2),
+    kappaStab=kappaStab,
+    kappaMix=kappaMix) if use_stratification
+    "Vertically stratified air volume; its top layer is the air volume of the RC model"
+    annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+  Modelica.Blocks.Math.MultiSum SumQEvaStrat(nu=nPools) if use_stratification
+    and use_pools
+    "Sum of heat flow due to evaporation of all pools"
+    annotation (Placement(transformation(extent={{-84,-98},{-76,-90}})));
+  Modelica.Blocks.Math.MultiSum SumMEvaStrat(nu=nPools) if use_stratification
+    and use_pools
+    "Sum of evaporation mass flow of all pools"
+    annotation (Placement(transformation(extent={{-84,-112},{-76,-104}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow heaEvaStrat
+    if use_stratification and use_pools
+    "Heat flow due to evaporation into the pool layer"
+    annotation (Placement(transformation(extent={{-70,-98},{-62,-90}})));
+  Modelica.Blocks.Sources.RealExpression mWatLayStrat[nLay - 1](y={if i == layPool
+         then SumMEvaStrat.y else 0 for i in 1:nLay - 1})
+    if use_stratification and use_pools
+    "Water mass flow into each own layer: all evaporation into the pool layer"
+    annotation (Placement(transformation(extent={{-70,-84},{-62,-76}})));
+  Modelica.Blocks.Interfaces.RealOutput TLay[nLay] if use_stratification
+    "Air temperature of each layer, from bottom to top"
+    annotation (Placement(transformation(extent={{100,-110},{120,-90}})));
+  Modelica.Blocks.Interfaces.RealOutput X_wLay[nLay] if use_stratification
+    "Water mass fraction of each layer, from bottom to top"
+    annotation (Placement(transformation(extent={{100,-130},{120,-110}})));
   Modelica.Fluid.Interfaces.FluidPort_a portPool_a1[nPools](redeclare package
       Medium = MediumPoolWater) if use_pools and not use_ideHeaExc_pools
     "Fluid connector a1 (positive design flow direction is from port_a1 to port_b1)"
@@ -508,6 +565,12 @@ protected
      and use_NaturalAirExchange and use_moisture_balance
     annotation (Placement(transformation(extent={{-70,-14},{-64,-8}})));
 
+initial equation
+  assert(not use_stratification or (use_moisture_balance and use_pools and nPools >= 1),
+    "Stratification is only available for swimming halls: it requires use_moisture_balance=true, use_pools=true and at least one pool.");
+  assert(not use_stratification or abs(sum(hLay)*zoneParam.AFloor - zoneParam.VAir) <= 0.01*zoneParam.VAir,
+    "The layer heights hLay must add up to the hall height VAir/AFloor (within 1 %).");
+
 equation
   connect(intGains[2], machinesSenHea.uRel) annotation (Line(points={{80,-100},{
           80,-94},{78,-94},{78,-88},{48,-88},{48,-46.5},{56,-46.5}}, color={0,0,
@@ -515,23 +578,36 @@ equation
   connect(intGains[3], lights.uRel) annotation (Line(points={{80,-93.3333},{80,
           -86},{50,-86},{50,-68.5},{56,-68.5}},
                                            color={0,0,127}));
-  connect(lights.convHeat, ROM.intGainsConv) annotation (Line(points={{75,-62.8},
-          {92,-62.8},{92,78},{86,78}}, color={191,0,0}));
-  connect(machinesSenHea.convHeat, ROM.intGainsConv) annotation (Line(points={{75,
-          -40.8},{92,-40.8},{92,78},{86,78}}, color={191,0,0}));
+  if use_stratification then
+    connect(lights.convHeat, stratAir.heatPort[layPerson]);
+    connect(machinesSenHea.convHeat, stratAir.heatPort[layPerson]);
+  else
+    connect(lights.convHeat, ROM.intGainsConv) annotation (Line(points={{75,-62.8},
+            {92,-62.8},{92,78},{86,78}}, color={191,0,0}));
+    connect(machinesSenHea.convHeat, ROM.intGainsConv) annotation (Line(points={{75,
+            -40.8},{92,-40.8},{92,78},{86,78}}, color={191,0,0}));
+  end if;
   connect(intGains[1], humanSenHeaDependent.uRel) annotation (Line(points={{80,
           -106.667},{80,-92},{46,-92},{46,-24},{56,-24}},
                                                 color={0,0,127}));
-  connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
-        points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
+  if use_stratification then
+    connect(humanSenHeaDependent.convHeat, stratAir.heatPort[layPerson]);
+  else
+    connect(humanSenHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
+          points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
+  end if;
   connect(ROM.intGainsConv, humanSenHeaDependent.TRoom) annotation (Line(points=
          {{86,78},{92,78},{92,-10},{57,-10},{57,-15}}, color={191,0,0}));
   connect(humanSenHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(
         points={{75,-30},{94,-30},{94,82},{86,82}}, color={95,95,95}));
   connect(intGains[1], humanSenHeaIndependent.uRel) annotation (Line(points={{80,
           -106.667},{80,-92},{46,-92},{46,-24},{56,-24}}, color={0,0,127}));
-  connect(humanSenHeaIndependent.convHeat, ROM.intGainsConv) annotation (Line(
-        points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
+  if use_stratification then
+    connect(humanSenHeaIndependent.convHeat, stratAir.heatPort[layPerson]);
+  else
+    connect(humanSenHeaIndependent.convHeat, ROM.intGainsConv) annotation (Line(
+          points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
+  end if;
   connect(ROM.intGainsConv, humanSenHeaIndependent.TRoom) annotation (Line(
         points={{86,78},{92,78},{92,-10},{57,-10},{57,-15}}, color={191,0,0}));
   connect(humanSenHeaIndependent.radHeat, ROM.intGainsRad) annotation (Line(
@@ -539,8 +615,12 @@ equation
   connect(intGains[1], humanTotHeaDependent.uRel) annotation (Line(points={{80,
           -106.667},{80,-92},{46,-92},{46,-24},{56,-24}},
                                                 color={0,0,127}));
-  connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
-        points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
+  if use_stratification then
+    connect(humanTotHeaDependent.convHeat, stratAir.heatPort[layPerson]);
+  else
+    connect(humanTotHeaDependent.convHeat, ROM.intGainsConv) annotation (Line(
+          points={{75,-18},{92,-18},{92,78},{86,78}}, color={191,0,0}));
+  end if;
   connect(ROM.intGainsConv, humanTotHeaDependent.TRoom) annotation (Line(points=
          {{86,78},{92,78},{92,-10},{57,-10},{57,-15}}, color={191,0,0}));
   connect(humanTotHeaDependent.radHeat, ROM.intGainsRad) annotation (Line(
@@ -914,14 +994,19 @@ end if;
       connect(indoorSwimmingPool[i].radPool, ROM.intGainsRad) annotation (Line(points={{-44.9,
               -70},{-44,-70},{-44,-68},{-36,-68},{-36,-88},{96,-88},{96,82},{86,
               82}},color={0,0,0}));
-      connect(indoorSwimmingPool[i].convPool, ROM.intGainsConv) annotation (Line(
-        points={{-41.82,-69.76},{-41.82,-70},{-42,-70},{-42,-66},{-10,-66},{-10,
-              -40},{20,-40},{20,-6},{58,-6},{58,78},{86,78}},
-                        color={191,0,0}));
-      connect(indoorSwimmingPool[i].TAir, ROM.TAir) annotation (Line(points={{-51.69,
-              -69.82},{-51.69,-62},{-16,-62},{-16,-52},{26,-52},{26,0},{98,0},{98,
-              90},{87,90}},
-        color={0,0,127}));
+      if use_stratification then
+        connect(indoorSwimmingPool[i].convPool, stratAir.heatPort[layPool]);
+        connect(indoorSwimmingPool[i].TAir, stratAir.TLay[layPool]);
+      else
+        connect(indoorSwimmingPool[i].convPool, ROM.intGainsConv) annotation (Line(
+          points={{-41.82,-69.76},{-41.82,-70},{-42,-70},{-42,-66},{-10,-66},{-10,
+                -40},{20,-40},{20,-6},{58,-6},{58,78},{86,78}},
+                          color={191,0,0}));
+        connect(indoorSwimmingPool[i].TAir, ROM.TAir) annotation (Line(points={{-51.69,
+                -69.82},{-51.69,-62},{-16,-62},{-16,-52},{26,-52},{26,0},{98,0},{98,
+                90},{87,90}},
+          color={0,0,127}));
+      end if;
       connect(TSoi.TGroOut, indoorSwimmingPool[i].TSoil) annotation (Line(
             points={{4.4,0},{46,0},{46,-8},{36,-8},{36,-84},{-16,-84},{-16,-68},
               {-34,-68},{-34,-73.18},{-39.79,-73.18}}, color={0,0,127}));
@@ -937,14 +1022,18 @@ end if;
       connect(indoorSwimmingPool[i].timeOpe, timeOpe) annotation (Line(points={{-54.42,
               -79.48},{-54.42,-80},{-68,-80},{-68,-108}},
                                                      color={0,0,127}));
-      connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Line(points={{-19.6,
-          -48},{-18,-48},{-18,-64},{-49.03,-64},{-49.03,-69.82}}, color={0,0,127}));
-      connect(airFlowMoistureToROM.port_b, ROM.ports[1+nPorts]) annotation (Line(
-            points={{-65.94,-73.72},{-65.94,-74},{-72,-74},{-72,8},{58,8},{58,
-              50},{77,50},{77,56.05}}, color={0,127,255}));
-      connect(airFlowMoistureToROM.port_a, ROM.ports[2+nPorts]) annotation (Line(
-            points={{-66,-72.28},{-72,-72.28},{-72,8},{58,8},{58,50},{77,50},{
-              77,56.05}}, color={0,127,255}));
+      if use_stratification then
+        connect(stratAir.X_wLay[layPool], indoorSwimmingPool[i].X_w);
+      else
+        connect(humVolAirROM.y, indoorSwimmingPool[i].X_w) annotation (Line(points={{-19.6,
+            -48},{-18,-48},{-18,-64},{-49.03,-64},{-49.03,-69.82}}, color={0,0,127}));
+        connect(airFlowMoistureToROM.port_b, ROM.ports[1+nPorts]) annotation (Line(
+              points={{-65.94,-73.72},{-65.94,-74},{-72,-74},{-72,8},{58,8},{58,
+                50},{77,50},{77,56.05}}, color={0,127,255}));
+        connect(airFlowMoistureToROM.port_a, ROM.ports[2+nPorts]) annotation (Line(
+              points={{-66,-72.28},{-72,-72.28},{-72,8},{58,8},{58,50},{77,50},{
+                77,56.05}}, color={0,127,255}));
+      end if;
       if not use_ideHeaExc_pools then
         connect(portPool_a1[i], indoorSwimmingPool[i].port_a1);
         connect(portPool_b1[i], indoorSwimmingPool[i].port_b1);
@@ -955,12 +1044,38 @@ end if;
     end for;
   end if;
 
-  connect(indoorSwimmingPool.QEva, airFlowMoistureToROM.QEva) annotation (Line(
-        points={{-54.28,-71.8},{-57.23,-71.8},{-57.23,-71.92},{-60.18,-71.92}},
-        color={0,0,127}));
-  connect(indoorSwimmingPool.m_flow_eva, airFlowMoistureToROM.m_flow_eva)
-    annotation (Line(points={{-54.42,-73.24},{-57.25,-73.24},{-57.25,-74.11},{-60.15,
-          -74.11}}, color={0,0,127}));
+  if use_stratification then
+    // evaporation of the pools acts on the pool layer
+    connect(indoorSwimmingPool.QEva, SumQEvaStrat.u);
+    connect(indoorSwimmingPool.m_flow_eva, SumMEvaStrat.u);
+    connect(SumQEvaStrat.y, heaEvaStrat.Q_flow);
+    connect(heaEvaStrat.port, stratAir.heatPort[layPool]);
+    connect(mWatLayStrat.y, stratAir.mWat_flow);
+
+    // coupling of the stratified air volume to the RC model (top layer)
+    connect(stratAir.portsTop[1], ROM.ports[nPorts + 1]);
+    connect(stratAir.portsTop[2], ROM.ports[nPorts + 2]);
+    connect(ROM.TAir, stratAir.TTop);
+    connect(humVolAirROM.y, stratAir.X_wTop);
+    for i in 1:nPorts loop
+      if layPort[i] < nLay then
+        connect(ports[i], stratAir.ports[i]);
+      end if;
+    end for;
+    for i in 1:nLay - 1 loop
+      connect(stratAir.TLay[i], TLay[i]);
+      connect(stratAir.X_wLay[i], X_wLay[i]);
+    end for;
+    connect(ROM.TAir, TLay[nLay]);
+    connect(humVolAirROM.y, X_wLay[nLay]);
+  else
+    connect(indoorSwimmingPool.QEva, airFlowMoistureToROM.QEva) annotation (Line(
+          points={{-54.28,-71.8},{-57.23,-71.8},{-57.23,-71.92},{-60.18,-71.92}},
+          color={0,0,127}));
+    connect(indoorSwimmingPool.m_flow_eva, airFlowMoistureToROM.m_flow_eva)
+      annotation (Line(points={{-54.42,-73.24},{-57.25,-73.24},{-57.25,-74.11},{-60.15,
+            -74.11}}, color={0,0,127}));
+  end if;
   connect(portPool_a1, portPool_a1)
     annotation (Line(points={{-53,-101},{-53,-101}}, color={0,127,255}));
    annotation (Documentation(revisions="<html><ul>
