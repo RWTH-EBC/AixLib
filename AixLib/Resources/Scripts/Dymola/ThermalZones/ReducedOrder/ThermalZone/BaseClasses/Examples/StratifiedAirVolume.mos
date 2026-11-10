@@ -1,0 +1,21 @@
+simulateModel("AixLib.ThermalZones.ReducedOrder.ThermalZone.BaseClasses.Examples.StratifiedAirVolume",
+ tolerance=1e-06,
+ stopTime=86400,
+ resultFile="StratifiedAirVolume");
+createPlot(id=1,
+ position={15, 10, 700, 600},
+ y={"stratAir.TLay[1]", "stratAir.TLay[2]", "stratAir.TLay[3]"},
+ autoscale=true,
+ grid=true,
+ color=true,
+ leftTitleType=1,
+ bottomTitleType=1);
+createPlot(id=1,
+ position={15, 10, 700, 300},
+ y={"stratAir.X_wLay[1]", "stratAir.X_wLay[2]", "stratAir.X_wLay[3]"},
+ autoscale=true,
+ grid=true,
+ color=true,
+ subPlot=2,
+ leftTitleType=1,
+ bottomTitleType=1);
