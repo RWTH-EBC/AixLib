@@ -16,4 +16,5 @@ ThermalZone
 ThermalZoneAirExchange
 ThermalZoneMoistAir
 ThermalZoneMoistAirSwimmingPool
+ThermalZoneMoistAirSwimmingPoolStratified
 ThermalZoneMoistCO2AirExchange
